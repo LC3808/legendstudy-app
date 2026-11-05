@@ -957,3 +957,6 @@ Owner는 [기존 종합 수치 금지](final-feedback-ux-refinement-20261031.md)
 
 ## 2026-11-04 — TASK16-L 학습 완성도 저장·비교
 [기존 5단계 정책](learning-completeness-policy-20261104.md)을 새 평가 저장·History까지 연결한다. 과거 소급 생성 금지, 같은 공식 기준/정책의 실제 최초·재첨삭 관계만 비교. 관리자 전면 UI는 후속. [검증·운영 승인 경계](task16l-learning-persistence-history-20261104.md).
+
+## 2026-11-05 — TASK19 등급컷 원점수 우선·기존 게시글 우선
+Owner는 기존 LegendStudy 게시글을 우선 구조화하고 부족한 경우만 외부 공식 자료를 보완하도록 확정했다. 원점수(범위 포함) → 표준점수 → 자료 없음 순서, 원점수/표준점수 필드 및 추정/확정 상태 분리, 미확인값 NULL. 기존 시험/과목 Registry 재사용, 자료·학습 탭 동일 조회, 과거 채점 결과 소급 변경 금지. 학년도2024~26의6·9·수능 및2027의6·9 총11시험. 2027수능 제외. [기존 Mock 기준](day-8-d3-grade-result.md)을 변경하지 않는 [구현·보존 검토](task19-lab-ux-grade-cutoff-20261105.md). 운영 DB 적용과 Store 제출은 별도 승인이다.

@@ -1,0 +1,38 @@
+[
+  {
+    "academic_year": 2024,
+    "url": "https://baro.cbe.go.kr/upload/cbe/na/bbs_1762/2023/12/CDE5CD15-0274-4A1C-0B84-4F5835F0F7E7.pdf",
+    "sha256": "a805c017b8468be154e153ff001a4d21af654594f09733e549fbd1e8a5a59e58",
+    "fetched_at": "2026-11-05T03:34:38.553165+00:00",
+    "verified_at": "2026-11-05T03:38:29.689184+00:00",
+    "page": 1,
+    "scope": "영어·한국사·제2외국어/한문"
+  },
+  {
+    "academic_year": 2026,
+    "url": "https://www.ice.go.kr/upload/ice/na/bbs_1482/2025/11/e3f31e049782a7a092a9906450451041.pdf",
+    "sha256": "666cfae5397a9622b1845337637fa7d89b8861a28edf9804a81efa569095f523",
+    "fetched_at": "2026-11-05T03:34:38.625260+00:00",
+    "verified_at": "2026-11-05T03:38:29.689184+00:00",
+    "page": 1,
+    "scope": "영어·한국사·제2외국어/한문"
+  },
+  {
+    "academic_year": 2027,
+    "url": "https://www.ice.go.kr/upload/ice/na/bbs_1482/2026/04/a9620d369e3d03ffaa7e1e2b0a069a0f.pdf",
+    "sha256": "b5a825afa484edd21078c86c51b5afcef911ddf33c66ced268586c906f7cef4e",
+    "fetched_at": "2026-11-05T03:34:38.899550+00:00",
+    "verified_at": "2026-11-05T03:38:29.689184+00:00",
+    "page": 9,
+    "scope": "영어·한국사·제2외국어/한문"
+  },
+  {
+    "academic_year": 2025,
+    "url": "https://ent.wsu.ac.kr/site/ent/popup/2ndAdd2025.pdf",
+    "sha256": "a46c93dd1fd9ca6f5aa2ece7042c394236a22f59d89bfa81ae0d1320c511fef2",
+    "fetched_at": "2026-11-05T03:37:30.442348+00:00",
+    "verified_at": "2026-11-05T03:38:29.689184+00:00",
+    "page": 5,
+    "scope": "영어"
+  }
+]

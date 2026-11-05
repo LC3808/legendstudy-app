@@ -1,3 +1,5 @@
+import '../../exams/cutoffs/grade_cutoff_panel.dart';
+import '../../exams/cutoffs/grade_cutoff.dart';
 import 'material_display_title.dart';
 
 import 'dart:async';
@@ -219,6 +221,17 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                           ],
                         ),
                         const SizedBox(height: 16),
+                        if (item.contentType == 'exam' &&
+                            supportsGradeCutoff(
+                              ref
+                                  .watch(examMetadataProvider(item.id))
+                                  .asData
+                                  ?.value[item.id],
+                            ))
+                          GradeCutoffPanel(
+                            contentItemId: item.id,
+                            source: 'materials',
+                          ),
                         ResourceSection(
                           contentItemId: item.id,
                           isEssay: item.contentType == 'university_essay',

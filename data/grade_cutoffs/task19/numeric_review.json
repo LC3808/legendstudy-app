@@ -1,0 +1,3892 @@
+[
+  {
+    "image": "1516-03.png",
+    "grade": 2,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 63
+  },
+  {
+    "image": "1516-04.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "2",
+      "22"
+    ],
+    "reviewed": 22
+  },
+  {
+    "image": "1516-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1516-05.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 53
+  },
+  {
+    "image": "1516-05.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1516-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-06.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1516-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-07.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "h)",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1516-07.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1516-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "⑥",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1516-08.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 53
+  },
+  {
+    "image": "1516-09.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "라",
+      null
+    ],
+    "reviewed": 12
+  },
+  {
+    "image": "1516-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-11.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "17"
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1516-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1516-12.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㅎ",
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1516-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-13.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1516-13.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1516-14.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "6",
+      "67"
+    ],
+    "reviewed": 67
+  },
+  {
+    "image": "1516-14.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1516-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-15.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "하",
+      null
+    ],
+    "reviewed": 19
+  },
+  {
+    "image": "1516-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1516-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1516-17.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㅎ",
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1516-17.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1516-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1516-19.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1516-19.png",
+    "grade": 2,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 26
+  },
+  {
+    "image": "1516-19.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "2",
+      null
+    ],
+    "reviewed": 22
+  },
+  {
+    "image": "1516-19.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1516-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1525-03.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "g",
+      null
+    ],
+    "reviewed": 66
+  },
+  {
+    "image": "1525-03.png",
+    "grade": 2,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 62
+  },
+  {
+    "image": "1525-03.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 58
+  },
+  {
+    "image": "1525-03.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "나",
+      null
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1525-03.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1525-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-07.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 40
+  },
+  {
+    "image": "1525-07.png",
+    "grade": 7,
+    "field": "std",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1525-08.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 60
+  },
+  {
+    "image": "1525-08.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-09.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1525-10.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "67"
+    ],
+    "reviewed": 67
+  },
+  {
+    "image": "1525-10.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄺ7",
+      "27"
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1525-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-12.png",
+    "grade": 5,
+    "field": "std",
+    "ocr_candidates": [
+      "4",
+      null
+    ],
+    "reviewed": 45
+  },
+  {
+    "image": "1525-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-12.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      "30",
+      null
+    ],
+    "reviewed": 36
+  },
+  {
+    "image": "1525-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1525-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-15.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1525-15.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 51
+  },
+  {
+    "image": "1525-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1525-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1525-16.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 29
+  },
+  {
+    "image": "1525-16.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 53
+  },
+  {
+    "image": "1525-16.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "2",
+      "22"
+    ],
+    "reviewed": 22
+  },
+  {
+    "image": "1525-16.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1525-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 39
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 2,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 28
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 57
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1525-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1525-19.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1525-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1574-03.png",
+    "grade": 4,
+    "field": "pct",
+    "ocr_candidates": [
+      "이",
+      null
+    ],
+    "reviewed": 61
+  },
+  {
+    "image": "1574-03.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-04.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-05.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1574-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1574-06.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-06.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-07.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-07.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-09.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 69
+  },
+  {
+    "image": "1574-09.png",
+    "grade": 1,
+    "field": "pct",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 96
+  },
+  {
+    "image": "1574-09.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1574-09.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-10.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1574-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1574-11.png",
+    "grade": 4,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 61
+  },
+  {
+    "image": "1574-11.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-11.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-12.png",
+    "grade": 4,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 61
+  },
+  {
+    "image": "1574-12.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1574-14.png",
+    "grade": 1,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 96
+  },
+  {
+    "image": "1574-14.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-14.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-15.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1574-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1574-16.png",
+    "grade": 2,
+    "field": "pct",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 90
+  },
+  {
+    "image": "1574-16.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "78",
+      null
+    ],
+    "reviewed": 78
+  },
+  {
+    "image": "1574-16.png",
+    "grade": 6,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 23
+  },
+  {
+    "image": "1574-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1574-16.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1574-17.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1574-17.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1574-18.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      "1",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1574-19.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1574-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1618-04.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 29
+  },
+  {
+    "image": "1618-04.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      "s1",
+      "51"
+    ],
+    "reviewed": 51
+  },
+  {
+    "image": "1618-04.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1618-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-06.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1618-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-07.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-07.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1618-08.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1618-08.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-08.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-09.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 51
+  },
+  {
+    "image": "1618-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-10.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "러",
+      null
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1618-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-12.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1618-12.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-14.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㅎ",
+      null
+    ],
+    "reviewed": 19
+  },
+  {
+    "image": "1618-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-15.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 68
+  },
+  {
+    "image": "1618-15.png",
+    "grade": 2,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 65
+  },
+  {
+    "image": "1618-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1618-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-16.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1618-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-17.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1618-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1618-18.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄺ1",
+      "21"
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1618-18.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1618-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1618-19.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "거",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1618-19.png",
+    "grade": 2,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 65
+  },
+  {
+    "image": "1618-19.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1618-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1618-19.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1634-03.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1634-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-05.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 13
+  },
+  {
+    "image": "1634-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1634-06.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 50
+  },
+  {
+    "image": "1634-06.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "서",
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1634-06.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-07.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 35
+  },
+  {
+    "image": "1634-07.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1634-07.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "타",
+      null
+    ],
+    "reviewed": 13
+  },
+  {
+    "image": "1634-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-08.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 47
+  },
+  {
+    "image": "1634-08.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 39
+  },
+  {
+    "image": "1634-08.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "6",
+      "60"
+    ],
+    "reviewed": 60
+  },
+  {
+    "image": "1634-08.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "3",
+      null
+    ],
+    "reviewed": 31
+  },
+  {
+    "image": "1634-08.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-09.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-10.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1634-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-13.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "6",
+      "60"
+    ],
+    "reviewed": 60
+  },
+  {
+    "image": "1634-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-14.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 39
+  },
+  {
+    "image": "1634-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-15.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1634-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-16.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1634-16.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄺ1",
+      "21"
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1634-17.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 50
+  },
+  {
+    "image": "1634-17.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1634-17.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄺ1",
+      "21"
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1634-17.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "나",
+      null
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1634-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "⑥",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1634-18.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "거",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1634-18.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1634-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1634-19.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "7",
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1634-19.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1634-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1634-20.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "거",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1634-20.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1649-03.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-04.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1649-04.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1649-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-06.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "67"
+    ],
+    "reviewed": 67
+  },
+  {
+    "image": "1649-07.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1649-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1649-08.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1649-09.png",
+    "grade": 2,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 65
+  },
+  {
+    "image": "1649-09.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1649-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1649-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-11.png",
+    "grade": 5,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 47
+  },
+  {
+    "image": "1649-11.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      "서",
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1649-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1649-11.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 35
+  },
+  {
+    "image": "1649-12.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 39
+  },
+  {
+    "image": "1649-12.png",
+    "grade": 7,
+    "field": "std",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1649-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-13.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 59
+  },
+  {
+    "image": "1649-13.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1649-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1649-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1649-16.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "67"
+    ],
+    "reviewed": 67
+  },
+  {
+    "image": "1649-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1649-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1649-18.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 66
+  },
+  {
+    "image": "1649-18.png",
+    "grade": 7,
+    "field": "std",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1649-19.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1649-19.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 2,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      "\"",
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 12
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1665-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-05.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "거",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1665-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-06.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "7",
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1665-07.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1665-07.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1665-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1665-08.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-12.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1665-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-13.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "67"
+    ],
+    "reviewed": 67
+  },
+  {
+    "image": "1665-13.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1665-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-14.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      "서",
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1665-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "나",
+      null
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1665-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-16.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1665-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1665-17.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1665-17.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1665-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1665-18.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1665-19.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "나",
+      null
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-03.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "90"
+    ],
+    "reviewed": 90
+  },
+  {
+    "image": "1686-03.png",
+    "grade": 2,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      "80"
+    ],
+    "reviewed": 80
+  },
+  {
+    "image": "1686-03.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1686-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1686-05.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-06.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      "47",
+      "41"
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1686-06.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1686-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-08.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      "6",
+      "60"
+    ],
+    "reviewed": 60
+  },
+  {
+    "image": "1686-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-10.png",
+    "grade": 1,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      "50"
+    ],
+    "reviewed": 50
+  },
+  {
+    "image": "1686-10.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-11.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1686-12.png",
+    "grade": 3,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "60"
+    ],
+    "reviewed": 60
+  },
+  {
+    "image": "1686-12.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1686-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1686-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1686-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-18.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1686-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1686-19.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1686-20.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1686-20.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 4
+  },
+  {
+    "image": "1686-21.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "7",
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1686-21.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1686-21.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-03.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1700-04.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1700-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-05.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1700-05.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1700-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1700-06.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1700-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1700-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-08.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1700-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1700-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-11.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "17"
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1700-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1700-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1700-18.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "거",
+      null
+    ],
+    "reviewed": 21
+  },
+  {
+    "image": "1700-18.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1700-19.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ1",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1700-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-03.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1706-04.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1706-04.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1706-05.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1706-05.png",
+    "grade": 4,
+    "field": "std",
+    "ocr_candidates": [
+      "s",
+      null
+    ],
+    "reviewed": 51
+  },
+  {
+    "image": "1706-05.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-05.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1706-06.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ7",
+      "17"
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1706-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-06.png",
+    "grade": 8,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 37
+  },
+  {
+    "image": "1706-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1706-08.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1706-08.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "17"
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1706-08.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1706-09.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "70"
+    ],
+    "reviewed": 70
+  },
+  {
+    "image": "1706-09.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-09.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1706-10.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1706-10.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-11.png",
+    "grade": 5,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 15
+  },
+  {
+    "image": "1706-11.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "다",
+      null
+    ],
+    "reviewed": 12
+  },
+  {
+    "image": "1706-12.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄲ",
+      "17"
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1706-12.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 12
+  },
+  {
+    "image": "1706-13.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "ㄱ",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-14.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "거",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1706-14.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1706-15.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "15",
+      null
+    ],
+    "reviewed": 15
+  },
+  {
+    "image": "1706-15.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "아",
+      null
+    ],
+    "reviewed": 10
+  },
+  {
+    "image": "1706-16.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1706-16.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-17.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      "서",
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1706-17.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1706-17.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1706-18.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "="
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1706-18.png",
+    "grade": 7,
+    "field": "raw",
+    "ocr_candidates": [
+      "기",
+      "7"
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-19.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1706-20.png",
+    "grade": 3,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      "27"
+    ],
+    "reviewed": 27
+  },
+  {
+    "image": "1706-20.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "5",
+      null
+    ],
+    "reviewed": 5
+  },
+  {
+    "image": "1710-03.png",
+    "grade": 4,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 61
+  },
+  {
+    "image": "1710-03.png",
+    "grade": 6,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 17
+  },
+  {
+    "image": "1710-03.png",
+    "grade": 6,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 24
+  },
+  {
+    "image": "1710-03.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1710-03.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1710-04.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-05.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-05.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1710-06.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-06.png",
+    "grade": 5,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 40
+  },
+  {
+    "image": "1710-06.png",
+    "grade": 6,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 41
+  },
+  {
+    "image": "1710-06.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1710-06.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "4",
+      null
+    ],
+    "reviewed": 4
+  },
+  {
+    "image": "1710-07.png",
+    "grade": 1,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 97
+  },
+  {
+    "image": "1710-07.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-07.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1710-09.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-10.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-10.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1710-11.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      "1",
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1710-11.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1710-12.png",
+    "grade": 2,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 89
+  },
+  {
+    "image": "1710-12.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-12.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "8",
+      null
+    ],
+    "reviewed": 8
+  },
+  {
+    "image": "1710-12.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "4",
+      null
+    ],
+    "reviewed": 4
+  },
+  {
+    "image": "1710-13.png",
+    "grade": 2,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 89
+  },
+  {
+    "image": "1710-13.png",
+    "grade": 6,
+    "field": "pct",
+    "ocr_candidates": [
+      "2",
+      null
+    ],
+    "reviewed": 22
+  },
+  {
+    "image": "1710-14.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-14.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "7",
+      null
+    ],
+    "reviewed": 7
+  },
+  {
+    "image": "1710-15.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      "ㄱ",
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1710-15.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-15.png",
+    "grade": 8,
+    "field": "pct",
+    "ocr_candidates": [
+      "6",
+      null
+    ],
+    "reviewed": 6
+  },
+  {
+    "image": "1710-16.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-16.png",
+    "grade": 7,
+    "field": "pct",
+    "ocr_candidates": [
+      null,
+      "11"
+    ],
+    "reviewed": 11
+  },
+  {
+    "image": "1710-16.png",
+    "grade": 8,
+    "field": "raw",
+    "ocr_candidates": [
+      "9",
+      null
+    ],
+    "reviewed": 9
+  },
+  {
+    "image": "1710-17.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1710-17.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ",
+      "77"
+    ],
+    "reviewed": 77
+  },
+  {
+    "image": "1710-18.png",
+    "grade": 4,
+    "field": "raw",
+    "ocr_candidates": [
+      null,
+      null
+    ],
+    "reviewed": 28
+  },
+  {
+    "image": "1710-19.png",
+    "grade": 1,
+    "field": "std",
+    "ocr_candidates": [
+      null,
+      "71"
+    ],
+    "reviewed": 71
+  },
+  {
+    "image": "1710-19.png",
+    "grade": 3,
+    "field": "pct",
+    "ocr_candidates": [
+      "ㄲ7",
+      "77"
+    ],
+    "reviewed": 77
+  }
+]

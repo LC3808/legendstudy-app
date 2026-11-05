@@ -1,0 +1,9219 @@
+[
+  {
+    "image": "1516-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 35
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1516-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 46,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 41,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 36
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1516-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1516-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1516-07.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1516-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 37
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1516-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1516-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1516-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 42,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 35,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 26,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1516-12.png",
+    "title": "물리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1516-13.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 37,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 29,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 24,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 15,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 11,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 8,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 39
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1516-14.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1516-15.png",
+    "title": "화학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 35,
+        "std": 74
+      },
+      {
+        "grade": 2,
+        "raw": 25,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 19,
+        "std": 54
+      },
+      {
+        "grade": 4,
+        "raw": 16,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 44
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1516-16.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 35,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 27,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 19,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1516-17.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 40,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 28,
+        "std": 61
+      },
+      {
+        "grade": 3,
+        "raw": 23,
+        "std": 55
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1516-18.png",
+    "title": "지구과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1516-19.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 37,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 26,
+        "std": 60
+      },
+      {
+        "grade": 3,
+        "raw": 22,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 44
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1525-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 43,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 35
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1525-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1525-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1525-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 36
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1525-07.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 43,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 10,
+        "std": 36
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1525-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1525-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 23,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1525-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1525-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 33
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1525-12.png",
+    "title": "물리학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1525-13.png",
+    "title": "물리학 1I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 74
+      },
+      {
+        "grade": 2,
+        "raw": 32,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 22,
+        "std": 55
+      },
+      {
+        "grade": 4,
+        "raw": 17,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1525-14.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1525-15.png",
+    "title": "화학 1I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 34,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 25,
+        "std": 55
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1525-16.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1525-17.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 39,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 28,
+        "std": 61
+      },
+      {
+        "grade": 3,
+        "raw": 24,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 12,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 9,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1525-18.png",
+    "title": "지구과학 I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 42,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1525-19.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 34,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 24,
+        "std": 60
+      },
+      {
+        "grade": 3,
+        "raw": 21,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 17,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 45
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1574-03.png",
+    "title": "생활과윤리 평균: 30.50 표준편차: 12.20",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66,
+        "pct": 98
+      },
+      {
+        "grade": 2,
+        "raw": 46,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 42,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 36,
+        "std": 55,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 27,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 21,
+        "std": 42,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 14,
+        "std": 36,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 32,
+        "pct": 4
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1574-04.png",
+    "title": "윤리와사상 평균: 29.17 표준편차: 13.89",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 65,
+        "pct": 98
+      },
+      {
+        "grade": 2,
+        "raw": 48,
+        "std": 64,
+        "pct": 92
+      },
+      {
+        "grade": 3,
+        "raw": 45,
+        "std": 61,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 35,
+        "std": 54,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35,
+        "pct": 5
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1574-05.png",
+    "title": "한국지리 평균: 27.64 표준편차: 13.16",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67,
+        "pct": 98
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 65,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 53,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 4
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1574-06.png",
+    "title": "세계사 평균: 28.58 표준편차: 14.29",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 65,
+        "pct": 98
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 63,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 44,
+        "std": 61,
+        "pct": 79
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35,
+        "pct": 5
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1574-07.png",
+    "title": "세계지리 평균:28.06 표준편차: 12.20",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 47,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 18,
+        "std": 42,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34,
+        "pct": 5
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1574-08.png",
+    "title": "동아시아사 평균: 26.32 표준편차: 13.16",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 45,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35,
+        "pct": 5
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1574-09.png",
+    "title": "정치와 법 평균: 23.33 표준편차: 11.11",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 69,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 42,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35,
+        "pct": 5
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1574-10.png",
+    "title": "경제 평균: 23.26 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 69,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 58,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36,
+        "pct": 5
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1574-11.png",
+    "title": "사회•문화 평균: 25.59 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 55,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 48,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 5
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1574-12.png",
+    "title": "물리학 | 평균: 26.25 표준편차: 12.50",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 67,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35,
+        "pct": 5
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1574-13.png",
+    "title": "물리학 |I 평균: 18.89 표준편차: 11.11",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 73,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 35,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 23,
+        "std": 54,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 18,
+        "std": 49,
+        "pct": 59
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 46,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37,
+        "pct": 5
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1574-14.png",
+    "title": "화학 | 평균: 26.18 표준편차: 11.90",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 67,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 55,
+        "pct": 62
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 36,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 5
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1574-15.png",
+    "title": "화학 || 평균: 18.09 표준편차: 10.64",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 72,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 34,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 26,
+        "std": 57,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 43,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 41,
+        "pct": 13
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38,
+        "pct": 5
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1574-16.png",
+    "title": "생명과학 | 평균: 27.37 표준편차: 11.90",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 63,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 48,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 36,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 33,
+        "pct": 5
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1574-17.png",
+    "title": "생명과학 || 평균: 19.15 표준편차: 10.64",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 71,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 35,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 26,
+        "std": 56,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 50,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39,
+        "pct": 13
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37,
+        "pct": 5
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1574-18.png",
+    "title": "지구과학 | 평균: 28.06 표준편차: 12.20",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 53,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 46,
+        "pct": 41
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34,
+        "pct": 5
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1574-19.png",
+    "title": "지구과학 |I 평균: 16.67 표준편차: 10.42",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 74,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 30,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 24,
+        "std": 57,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 16,
+        "std": 49,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 12,
+        "std": 46,
+        "pct": 42
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 44,
+        "pct": 25
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 42,
+        "pct": 13
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 39,
+        "pct": 4
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1618-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1618-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1618-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1618-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 46,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1618-07.png",
+    "title": "등아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1618-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1618-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1618-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1618-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1618-12.png",
+    "title": "물리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1618-13.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1618-14.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 27,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 19,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 13,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 33
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1618-15.png",
+    "title": "지구과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1618-16.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 74
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 27,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1618-17.png",
+    "title": "화학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 34,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 24,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 15,
+        "std": 48
+      },
+      {
+        "grade": 5,
+        "raw": 12,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 44
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 39
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1618-18.png",
+    "title": "생명과학 11",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 28,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 36
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1618-19.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1634-03.png",
+    "title": "한국사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 40
+      },
+      {
+        "grade": 2,
+        "raw": 35
+      },
+      {
+        "grade": 3,
+        "raw": 30
+      },
+      {
+        "grade": 4,
+        "raw": 25
+      },
+      {
+        "grade": 5,
+        "raw": 20
+      },
+      {
+        "grade": 6,
+        "raw": 15
+      },
+      {
+        "grade": 7,
+        "raw": 10
+      },
+      {
+        "grade": 8,
+        "raw": 5
+      }
+    ],
+    "subject_label": "한국사"
+  },
+  {
+    "image": "1634-04.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 41,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 35,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 27,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 20,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 32
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1634-05.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1634-06.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 46,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 41,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1634-07.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1634-08.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1634-09.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1634-10.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1634-11.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1634-12.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1634-13.png",
+    "title": "물리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 64
+      },
+      {
+        "grade": 2,
+        "raw": 48,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 45,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 38,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 29,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 20,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 35
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 33
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1634-14.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 33
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1634-15.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 34
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1634-16.png",
+    "title": "지구과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1634-17.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1634-18.png",
+    "title": "화학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 39
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1634-19.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 67
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 39
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1634-20.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 38
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1649-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 41,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 36,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 31,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1649-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 43,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1649-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1649-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1649-07.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1649-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1649-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 36
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1649-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1649-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1649-12.png",
+    "title": "물리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1649-13.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1649-14.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 42,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1649-15.png",
+    "title": "화학 !I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 22,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1649-16.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 35
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1649-17.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1649-18.png",
+    "title": "지구과학 I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 34
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1649-19.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 4,
+        "std": 37
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1665-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1665-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1665-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 23,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1665-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 31,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 23,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1665-07.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 22,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1665-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 26,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1665-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 23,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1665-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1665-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1665-12.png",
+    "title": "물리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1665-13.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1665-14.png",
+    "title": "생명과학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 26,
+        "std": 49
+      },
+      {
+        "grade": 6,
+        "raw": 18,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 35
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 33
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1665-15.png",
+    "title": "지구과학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1665-16.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1665-17.png",
+    "title": "화학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 22,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1665-18.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 68
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 22,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 37
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1665-19.png",
+    "title": "지구과학 \"I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 26,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 16,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 11,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 8,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 6,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 4,
+        "std": 39
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1686-03.png",
+    "title": "영어",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 90
+      },
+      {
+        "grade": 2,
+        "raw": 80
+      },
+      {
+        "grade": 3,
+        "raw": 70
+      },
+      {
+        "grade": 4,
+        "raw": 60
+      },
+      {
+        "grade": 5,
+        "raw": 50
+      },
+      {
+        "grade": 6,
+        "raw": 40
+      },
+      {
+        "grade": 7,
+        "raw": 30
+      },
+      {
+        "grade": 8,
+        "raw": 20
+      }
+    ],
+    "subject_label": "영어"
+  },
+  {
+    "image": "1686-04.png",
+    "title": "한국사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 40
+      },
+      {
+        "grade": 2,
+        "raw": 35
+      },
+      {
+        "grade": 3,
+        "raw": 30
+      },
+      {
+        "grade": 4,
+        "raw": 25
+      },
+      {
+        "grade": 5,
+        "raw": 20
+      },
+      {
+        "grade": 6,
+        "raw": 15
+      },
+      {
+        "grade": 7,
+        "raw": 10
+      },
+      {
+        "grade": 8,
+        "raw": 5
+      }
+    ],
+    "subject_label": "한국사"
+  },
+  {
+    "image": "1686-05.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1686-06.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 36,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1686-07.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1686-08.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1686-09.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 44,
+        "std": 61
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1686-10.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1686-11.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1686-12.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 35
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1686-13.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 32
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1686-14.png",
+    "title": "물리학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1686-15.png",
+    "title": "화학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1686-16.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 18,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 13,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 32
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1686-17.png",
+    "title": "지구과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1686-18.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 9,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1686-19.png",
+    "title": "화학 \"I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 41,
+        "std": 61
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1686-20.png",
+    "title": "생명과학 \"",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 32,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 9,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 4,
+        "std": 37
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1686-21.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 67
+      },
+      {
+        "grade": 3,
+        "raw": 31,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 17,
+        "std": 48
+      },
+      {
+        "grade": 5,
+        "raw": 11,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 8,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 4,
+        "std": 39
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1700-03.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 18,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1700-04.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1700-05.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1700-06.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1700-07.png",
+    "title": "동아시아사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1700-08.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1700-09.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1700-10.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 55
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1700-11.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 36
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1700-12.png",
+    "title": "물리학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1700-13.png",
+    "title": "몰리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1700-14.png",
+    "title": "화학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1700-15.png",
+    "title": "화학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1700-16.png",
+    "title": "생명과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 22,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1700-17.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1700-18.png",
+    "title": "지구과학 I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 65
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 32,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 40
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 35
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1700-19.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 38
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1706-03.png",
+    "title": "영어",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 90
+      },
+      {
+        "grade": 2,
+        "raw": 80
+      },
+      {
+        "grade": 3,
+        "raw": 70
+      },
+      {
+        "grade": 4,
+        "raw": 60
+      },
+      {
+        "grade": 5,
+        "raw": 50
+      },
+      {
+        "grade": 6,
+        "raw": 40
+      },
+      {
+        "grade": 7,
+        "raw": 30
+      },
+      {
+        "grade": 8,
+        "raw": 20
+      }
+    ],
+    "subject_label": "영어"
+  },
+  {
+    "image": "1706-04.png",
+    "title": "생활과윤리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1706-05.png",
+    "title": "윤리와사상",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 43,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 37,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 22,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 16,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1706-06.png",
+    "title": "한국지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 37
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1706-07.png",
+    "title": "세계지리",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 35
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1706-08.png",
+    "title": "동아시아ㅅ",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 60
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1706-09.png",
+    "title": "세계사",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 70
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 23,
+        "std": 50
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 38
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1706-10.png",
+    "title": "경제",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 28,
+        "std": 57
+      },
+      {
+        "grade": 4,
+        "raw": 18,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 12,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 9,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 4,
+        "std": 38
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1706-11.png",
+    "title": "정치와법",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 69
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 65
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 44
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 37
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1706-12.png",
+    "title": "사회문화",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 47
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 34
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1706-13.png",
+    "title": "몰리학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1706-14.png",
+    "title": "물리학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 71
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 31,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1706-15.png",
+    "title": "생명과학 I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 67
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 62
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 58
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 53
+      },
+      {
+        "grade": 5,
+        "raw": 26,
+        "std": 48
+      },
+      {
+        "grade": 6,
+        "raw": 20,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 15,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 10,
+        "std": 32
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1706-16.png",
+    "title": "생명과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 72
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 67
+      },
+      {
+        "grade": 3,
+        "raw": 26,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 17,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 12,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 8,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 39
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1706-17.png",
+    "title": "지구과학 |",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 63
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 54
+      },
+      {
+        "grade": 5,
+        "raw": 20,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 14,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 37
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 34
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1706-18.png",
+    "title": "지구과학 II",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 43,
+        "std": 68
+      },
+      {
+        "grade": 3,
+        "raw": 27,
+        "std": 55
+      },
+      {
+        "grade": 4,
+        "raw": 19,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 43
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "지구과학2"
+  },
+  {
+    "image": "1706-19.png",
+    "title": "화학 1",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68
+      },
+      {
+        "grade": 2,
+        "raw": 42,
+        "std": 64
+      },
+      {
+        "grade": 3,
+        "raw": 36,
+        "std": 59
+      },
+      {
+        "grade": 4,
+        "raw": 27,
+        "std": 52
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1706-20.png",
+    "title": "화학 |I",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 73
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 66
+      },
+      {
+        "grade": 3,
+        "raw": 27,
+        "std": 56
+      },
+      {
+        "grade": 4,
+        "raw": 18,
+        "std": 49
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 45
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 41
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1710-03.png",
+    "title": "생활과윤리 평균: 26.75 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 66,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 62,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 37,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 31,
+        "std": 54,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 42,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 36,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 34,
+        "pct": 5
+      }
+    ],
+    "subject_label": "생활과윤리"
+  },
+  {
+    "image": "1710-04.png",
+    "title": "윤리와사상 평균: 23.26 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 44,
+        "std": 68,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 64,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 26,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 39,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36,
+        "pct": 4
+      }
+    ],
+    "subject_label": "윤리와사상"
+  },
+  {
+    "image": "1710-05.png",
+    "title": "한국지리 평균: 27.64 표준편차: 13.16",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 65,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 63,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 39,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 4
+      }
+    ],
+    "subject_label": "한국지리"
+  },
+  {
+    "image": "1710-06.png",
+    "title": "세계사 평균:24.36 표준편차: 12.82",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 48,
+        "std": 68,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 61,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 29,
+        "std": 54,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 19,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 41,
+        "pct": 22
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36,
+        "pct": 4
+      }
+    ],
+    "subject_label": "세계사"
+  },
+  {
+    "image": "1710-07.png",
+    "title": "세계지리 평균: 28.95 표준편차: 13.16",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66,
+        "pct": 97
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 64,
+        "pct": 90
+      },
+      {
+        "grade": 3,
+        "raw": 41,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 16,
+        "std": 40,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 36,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 33,
+        "pct": 4
+      }
+    ],
+    "subject_label": "세계지리"
+  },
+  {
+    "image": "1710-08.png",
+    "title": "동아시아사 평균: 28.37 표준편차: 13.51",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66,
+        "pct": 97
+      },
+      {
+        "grade": 2,
+        "raw": 47,
+        "std": 64,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 42,
+        "std": 60,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 40,
+        "pct": 22
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 4
+      }
+    ],
+    "subject_label": "동아시아사"
+  },
+  {
+    "image": "1710-09.png",
+    "title": "정치와 법 평균: 22.22 표준편차: 11.11",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 68,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 64,
+        "pct": 88
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 60,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 18,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 13,
+        "std": 42,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 9,
+        "std": 38,
+        "pct": 10
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 36,
+        "pct": 4
+      }
+    ],
+    "subject_label": "정치와법"
+  },
+  {
+    "image": "1710-10.png",
+    "title": "경제 평균: 22.10 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 45,
+        "std": 70,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 39,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 25,
+        "std": 52,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 46,
+        "pct": 39
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 41,
+        "pct": 21
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 36,
+        "pct": 5
+      }
+    ],
+    "subject_label": "경제"
+  },
+  {
+    "image": "1710-11.png",
+    "title": "사회•문화 평균: 25.54 표준편차: 10.64",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 41,
+        "std": 65,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 62,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 35,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 30,
+        "std": 54,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 25,
+        "std": 49,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 17,
+        "std": 42,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 12,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 33,
+        "pct": 4
+      }
+    ],
+    "subject_label": "사회문화"
+  },
+  {
+    "image": "1710-12.png",
+    "title": "물리학 | 평균: 29.49 표준편차: 12.82",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 50,
+        "std": 66,
+        "pct": 97
+      },
+      {
+        "grade": 2,
+        "raw": 45,
+        "std": 62,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 58,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 34,
+        "std": 54,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 24,
+        "std": 46,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 39,
+        "pct": 22
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 36,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 8,
+        "std": 33,
+        "pct": 4
+      }
+    ],
+    "subject_label": "물리학1"
+  },
+  {
+    "image": "1710-13.png",
+    "title": "물리학 |I 평균: 22.50 표준편차: 12.50",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 69,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 41,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 24,
+        "std": 51,
+        "pct": 59
+      },
+      {
+        "grade": 5,
+        "raw": 17,
+        "std": 46,
+        "pct": 39
+      },
+      {
+        "grade": 6,
+        "raw": 12,
+        "std": 42,
+        "pct": 22
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 40,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 38,
+        "pct": 5
+      }
+    ],
+    "subject_label": "물리학2"
+  },
+  {
+    "image": "1710-14.png",
+    "title": "화학 | 평균: 26.92 표준편차: 12.82",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 66,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 63,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 38,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 33,
+        "std": 55,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 23,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 10,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 4
+      }
+    ],
+    "subject_label": "화학1"
+  },
+  {
+    "image": "1710-15.png",
+    "title": "화학 || 평균:21.25 표준편차: 12.50",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 71,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 65,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 33,
+        "std": 59,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 21,
+        "std": 50,
+        "pct": 59
+      },
+      {
+        "grade": 5,
+        "raw": 15,
+        "std": 45,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 42,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 6,
+        "std": 38,
+        "pct": 6
+      }
+    ],
+    "subject_label": "화학2"
+  },
+  {
+    "image": "1710-16.png",
+    "title": "생명과학 1 평균: 30.24 표준편차: 11.63",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 47,
+        "std": 64,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 44,
+        "std": 62,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 40,
+        "std": 58,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 35,
+        "std": 54,
+        "pct": 61
+      },
+      {
+        "grade": 5,
+        "raw": 27,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 20,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 15,
+        "std": 37,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 9,
+        "std": 32,
+        "pct": 4
+      }
+    ],
+    "subject_label": "생명과학1"
+  },
+  {
+    "image": "1710-17.png",
+    "title": "생명과학 || 평균: 21.42 표준편차: 11.90",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 71,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 64,
+        "pct": 88
+      },
+      {
+        "grade": 3,
+        "raw": 29,
+        "std": 56,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 20,
+        "std": 49,
+        "pct": 59
+      },
+      {
+        "grade": 5,
+        "raw": 14,
+        "std": 44,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 11,
+        "std": 41,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 8,
+        "std": 39,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 36,
+        "pct": 4
+      }
+    ],
+    "subject_label": "생명과학2"
+  },
+  {
+    "image": "1710-18.png",
+    "title": "지구과학 | 평균: 24.44 표준편차: 11.11",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 42,
+        "std": 66,
+        "pct": 95
+      },
+      {
+        "grade": 2,
+        "raw": 38,
+        "std": 62,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 34,
+        "std": 59,
+        "pct": 78
+      },
+      {
+        "grade": 4,
+        "raw": 28,
+        "std": 53,
+        "pct": 60
+      },
+      {
+        "grade": 5,
+        "raw": 21,
+        "std": 47,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 15,
+        "std": 42,
+        "pct": 23
+      },
+      {
+        "grade": 7,
+        "raw": 11,
+        "std": 38,
+        "pct": 11
+      },
+      {
+        "grade": 8,
+        "raw": 7,
+        "std": 34,
+        "pct": 4
+      }
+    ],
+    "subject_label": "지구과학1"
+  },
+  {
+    "image": "1710-19.png",
+    "title": "지구과학 |I 평균: 20.00 표준편차: 12.50",
+    "rows": [
+      {
+        "grade": 1,
+        "raw": 46,
+        "std": 71,
+        "pct": 96
+      },
+      {
+        "grade": 2,
+        "raw": 40,
+        "std": 66,
+        "pct": 89
+      },
+      {
+        "grade": 3,
+        "raw": 30,
+        "std": 58,
+        "pct": 77
+      },
+      {
+        "grade": 4,
+        "raw": 18,
+        "std": 48,
+        "pct": 59
+      },
+      {
+        "grade": 5,
+        "raw": 13,
+        "std": 44,
+        "pct": 40
+      },
+      {
+        "grade": 6,
+        "raw": 10,
+        "std": 42,
+        "pct": 24
+      },
+      {
+        "grade": 7,
+        "raw": 7,
+        "std": 40,
+        "pct": 12
+      },
+      {
+        "grade": 8,
+        "raw": 5,
+        "std": 38,
+        "pct": 5
+      }
+    ],
+    "subject_label": "지구과학2"
+  }
+]

@@ -1,8 +1,8 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
-## TASK19 후속 업데이트 — 진행 중
-[LAB 안내·등급컷](task19-lab-ux-grade-cutoff-20261105.md): Owner iOS1.0.1 심사 통과 보고. A 안내/standalone Math 상태 수정·43회귀/analyze PASS, 실기기 미검증. B 기존11시험·게시글 확보, 데이터 검수/API/UI 진행 중. APP58·운영 보존. [이전 품질 상태](task19-prior-status-snapshot-20261105.md).
+## TASK19 후속 업데이트 — PARTIAL
+[LAB 안내·11시험 등급컷](task19-lab-ux-grade-cutoff-20261105.md): A 독립 커밋·43회귀 PASS. B Native 자료/학습 공통 조회·원점수 우선·SQL 후보 구현. 2,457행 중 점수2,212/미확인NULL245. 전체1,500 PASS/7 SKIP, 로컬DB 권한·원복 PASS. 운영/실기기·GA4 미검증. [SQL 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). APP58·승인 버전·운영·다른 PDF 브랜치 보존. [이전 품질 상태](task19-prior-status-snapshot-20261105.md).
 
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL
 [실제 검증·품질 P0](task16m-evaluation-finalization-20261104.md): 신규 수리5→4/혼합4→4 저장·비교·History 및 WEB RPC↔Simulator 4결과 PASS. 수리 동일 표준화 표현의 판정 중요도 불일치 발견, 품질 마감 불가. 과거 INVALID_OUTPUT 원본 부재로 실제 원인 미확정; 검증 유지·고정 진단 보완. TEST 이용권 이전1+승인추가1 사용/무료0/예약0·과거27평가29원장 해시 동일. WEB260PASS/1SKIP·TypeScript·Simulator PASS, 실기기/새 WEB UI E2E 미검증. Math12호출162,026토큰, 비용/동일입력 절감률 미확인. TEST6b25e1bf/WEB432ab37, 운영·APP58 변경0. [이전L](task16l-learning-persistence-history-20261104.md).
