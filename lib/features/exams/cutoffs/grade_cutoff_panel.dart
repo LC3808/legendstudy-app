@@ -152,6 +152,29 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
                   padding: const EdgeInsets.only(top: 16),
                   child: _ComparisonTable(subjects: table, rows: chosen),
                 ),
+              if (chosen.any((r) => r.historicalReference != null)) ...[
+                const SizedBox(height: 20),
+                Text(
+                  '유사 시험 참고 원점수',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const Text(
+                  '같은 선택과목·등급의 이전 시험 범위입니다. '
+                  '이 시험의 예상 등급컷이나 등급 판정 기준이 아닙니다.',
+                ),
+                for (final basis
+                    in chosen
+                        .map((r) => r.historicalReference?['basis'])
+                        .whereType<String>()
+                        .toSet())
+                  Text('기준: $basis'),
+                for (final table in tables)
+                  _ComparisonTable(
+                    subjects: table,
+                    rows: chosen,
+                    historical: true,
+                  ),
+              ],
               ExpansionTile(
                 title: const Text('출처'),
                 children: [
@@ -171,6 +194,7 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
                               r.data['raw_source_url'],
                               r.data['standard_source_url'],
                               r.data['estimated_raw_source_url'],
+                              ...?r.historicalReference?['urls'] as List?,
                             ],
                           )
                           .whereType<String>()
@@ -188,8 +212,13 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
 }
 
 class _ComparisonTable extends StatelessWidget {
-  const _ComparisonTable({required this.subjects, required this.rows});
+  const _ComparisonTable({
+    required this.subjects,
+    required this.rows,
+    this.historical = false,
+  });
   final List<GradeCutoff> subjects, rows;
+  final bool historical;
   @override
   Widget build(BuildContext context) {
     final raw = {
@@ -230,7 +259,11 @@ class _ComparisonTable extends StatelessWidget {
                   cell('등급', heading: true),
                   for (final s in subjects)
                     cell(
-                      '${(s.data['elective_label'] as String?)?.isNotEmpty == true ? s.data['elective_label'] : s.data['subject_label']}\n${raw[s.key] == true ? '원점수' : '표준점수 / 추정 원점수'}',
+                      '${(s.data['elective_label'] as String?)?.isNotEmpty == true ? s.data['elective_label'] : s.data['subject_label']}\n${historical
+                          ? '참고 원점수'
+                          : raw[s.key] == true
+                          ? '원점수'
+                          : '표준점수 / 추정 원점수'}',
                       heading: true,
                     ),
                 ],
@@ -241,7 +274,9 @@ class _ComparisonTable extends StatelessWidget {
                     cell('$grade'),
                     for (final s in subjects)
                       cell(
-                        raw[s.key] == true
+                        historical
+                            ? (indexed['${s.key}:$grade']?.historicalRaw ?? '—')
+                            : raw[s.key] == true
                             ? (indexed['${s.key}:$grade']?.hasRaw == true
                                   ? indexed['${s.key}:$grade']!.score
                                   : '—')

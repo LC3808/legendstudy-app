@@ -1,3 +1,4 @@
+import 'package:legendstudy_app/features/exams/cutoffs/historical_cutoff_references.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,6 +30,52 @@ Map<String, dynamic> row({
   'source_name': '레전드스터디 원본',
 };
 void main() {
+  test(
+    'historical envelopes stay separate from actual scores and estimates',
+    () {
+      expect(historicalCutoffReferences.length, 120);
+      for (final entry in historicalCutoffReferences.entries) {
+        final ids = entry.key.split(':');
+        final data = {
+          ...row(standard: 130),
+          'content_item_id': ids[0],
+          'exam_subject_id': ids[1],
+          'elective_key': ids[2],
+          'grade': int.parse(ids[3]),
+        };
+        final cutoff = GradeCutoff(data);
+        expect(cutoff.hasRaw, false);
+        expect(cutoff.score, '130');
+        expect(cutoff.estimatedRaw, '—');
+        expect(
+          cutoff.historicalRaw,
+          '${entry.value['low']}~${entry.value['high']}',
+        );
+        expect(entry.value['low'], lessThanOrEqualTo(entry.value['high'] as int));
+        expect(
+          GradeCutoff({...data, 'raw_score': 90}).historicalReference,
+          isNull,
+        );
+        expect(
+          GradeCutoff({
+            ...data,
+            'estimated_raw_score': 91,
+            'estimated_raw_source_url': 'https://example.org/source',
+          }).historicalReference,
+          isNull,
+        );
+        expect(GradeCutoff({...data, 'grade': 9}).historicalReference, isNull);
+        expect(
+          GradeCutoff({...data, 'content_item_id': 'other'})
+              .historicalReference,
+          isNull,
+        );
+      }
+      expect(historicalCutoffReferences.values.first['low'], 91);
+      expect(historicalCutoffReferences.values.first['high'], 98);
+    },
+  );
+
   test(
     'raw first, preserve range, standard fallback, no invented missing score',
     () {

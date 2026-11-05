@@ -1,3 +1,5 @@
+import 'historical_cutoff_references.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
@@ -79,6 +81,15 @@ class GradeCutoff {
       return '$low~$high';
     }
     return '—';
+  }
+
+  /// Historical envelope is not a target-exam estimate or scoring input.
+  Map<String, dynamic>? get historicalReference => hasRaw || estimatedRaw != '—'
+      ? null
+      : historicalCutoffReferences['${data['content_item_id']}:$key:$grade'];
+  String get historicalRaw {
+    final r = historicalReference;
+    return r == null ? '—' : '${r['low']}~${r['high']}';
   }
 
   String get certainty => scoreType == '자료 없음'

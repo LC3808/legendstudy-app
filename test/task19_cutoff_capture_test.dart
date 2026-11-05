@@ -193,6 +193,14 @@ void main() {
           isTrue,
         );
         await preview.capture(tester, 'task19-cutoff-$source');
+        if (source == 'study') {
+          expect(find.text('유사 시험 참고 원점수'), findsOneWidget);
+          expect(find.text('91~98'), findsOneWidget);
+          expect(find.textContaining('2024학년도 9월 모의평가'), findsOneWidget);
+          await tester.ensureVisible(find.text('유사 시험 참고 원점수'));
+          await tester.pumpAndSettle();
+          await preview.capture(tester, 'task19-historical-reference');
+        }
         if (source == 'materials') {
           await tester.tap(find.text('등급컷 확인'));
           await tester.pumpAndSettle();
@@ -209,7 +217,12 @@ void main() {
           await tester.tap(find.text(group).last);
           await tester.pumpAndSettle();
           final expected = group == '사회탐구' ? 3 : (group == '과학탐구' ? 2 : 1);
-          expect(find.byType(Table), findsNWidgets(expected));
+          expect(
+            find.byType(Table),
+            findsNWidgets(
+              expected + (source == 'study' && group == '수학' ? 1 : 0),
+            ),
+          );
           await preview.capture(
             tester,
             'task19-group-$source-${cutoffGroups.indexOf(group)}',
