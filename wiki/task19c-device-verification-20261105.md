@@ -42,7 +42,7 @@
 |11시험 등급컷 서버 연결|PASS|실제 HTTP 전 행 대조|
 |11시험 실기기 표 조회|PARTIAL|Owner는 요청한 2024·6월 원점수/2026·9월 표준점수·추정 — 및 과목/접기 확인 완료. 나머지 9시험 실기기 전체 확인 아님|
 |자료·학습 동일 표시/과목 변경/접기|PARTIAL|TEST62 Owner 2026학년도9월 수학 자료·학습 동일 확인 PASS. 과목군/출처 앞선 PASS, 11시험 전수 비교 아님|
-|작은 화면/PDF Viewer|PARTIAL|TEST62 PDF 열기 Owner FAIL 확인 → TEST 구성 복구·실제 PDF 응답 PASS, 실기기 재검수 대기. Android 기기 없음|
+|작은 화면/PDF Viewer|PARTIAL|TEST62 최초FAIL→복구 후 2026·9월 목록·PDF 열기/복귀 Owner PASS. 전체11시험/Android 미검증|
 
 ## 후속·운영 경계
 TEST 적용은 운영 적용 승인이 아니다. 운영 SQL은 아직 미적용. 등급컷 운영 공개 및 후속 Store 후보는 별도 승인·실기기 QA 후 진행한다. 건국 TEST 공개 fixture 부재를 화면 문구 강제 삭제로 감추지 않는다. 기존 제품 전체 공개 범위는 기존 서버 계약을 따른다.
@@ -101,3 +101,6 @@ Owner는 PDF가 열리지 않고 국어 문제1건만 보이며 ‘자료를 바
 - Deno 계약38PASS. 최초 실행2회는 테스트의 설정/소스 읽기 권한 미지정 실패였으며 allow-read=supabase로 명시한 후 통과.
 
 APP 소스/빌드 변경 없음. TEST62를 재실행하면 새 목록을 조회한다. 실기기 PDF 열기·복귀는 재확인 대기. 나머지10시험의 전체 첨부 fixture는 미보완이며 이번2건 성공으로11시험 전체PASS 처리하지 않는다. 운영 앱/DB/Store 변경0. 후보SQL·조회결과·API 요약은 `/private/tmp/task19c/pdf-expanded-seed.sql`, `pdf-resources-expanded.json`, `pdf-runtime-check.json`에 보존.
+
+### TEST62 PDF 복구 후 실기기 PASS
+Owner는 앱 완전종료·재실행 후2026학년도9월 국어 외 수학 등 문제/정답해설 목록과 PDF 열기→뒤로 복귀 요청에 “완료”로 응답했다. 해당 시험의 목록·PDF 열기/복귀 **실기기 PASS**. 최초 FAIL과 복구 과정은 위에 보존한다. 열었던 구체 과목은 응답에 명시되지 않았으므로 국어·수학 양쪽 전체 실기기 PASS로 확대하지 않는다. 운영/다른10시험/Android 검증은 별도다.
