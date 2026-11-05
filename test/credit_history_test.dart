@@ -69,10 +69,10 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('논술 첨삭 · -1개'), findsOneWidget);
+      expect(find.text('첨삭 이용권 사용 완료 · -1개'), findsOneWidget);
       expect(find.textContaining('사용 대기'), findsNothing);
-      expect(find.text('환불 · +1개'), findsOneWidget);
-      expect(find.text('이용권 회수 · -1개'), findsOneWidget);
+      expect(find.text('이용권 복구 · +1개'), findsOneWidget);
+      expect(find.text('이용권 조정 · -1개'), findsOneWidget);
     },
   );
   testWidgets(

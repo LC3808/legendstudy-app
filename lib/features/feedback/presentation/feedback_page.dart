@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../feedback_providers.dart';
+import 'feedback_history.dart';
 import '../domain/feedback_models.dart';
 
 class FeedbackPage extends ConsumerStatefulWidget {
@@ -22,6 +23,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
   final _body = TextEditingController();
   FeedbackCategory _category = FeedbackCategory.inquiry;
   bool _submitting = false;
+  int _historyGeneration = 0;
 
   @override
   void dispose() {
@@ -62,6 +64,8 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
             ),
           );
       if (!mounted) return;
+      ref.invalidate(supportHistoryProvider);
+      setState(() => _historyGeneration++);
       _title.clear();
       _body.clear();
       ScaffoldMessenger.of(context)
@@ -86,6 +90,8 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
   @override
   Widget build(BuildContext context) => ShellPage(
     children: [
+      FeedbackHistory(key: ValueKey('${ref.watch(authStateProvider).value?.userId}:$_historyGeneration')),
+      const SizedBox(height: 24),
       const SectionHeader('문의·건의사항'),
       const EssayFeedback(bugOnly: true),
       const Text('비밀번호, 주민등록번호 등 민감한 개인정보는 입력하지 마세요.'),

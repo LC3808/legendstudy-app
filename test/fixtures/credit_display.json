@@ -1,0 +1,122 @@
+[
+  [
+    "signup_bonus",
+    "signup_bonus_v1",
+    3,
+    "신규가입 무료 이용권 지급"
+  ],
+  [
+    "promotion",
+    "essay_beta_daily",
+    1,
+    "베타 무료 첨삭 이용권 지급"
+  ],
+  [
+    "promotion",
+    "operational_promotion",
+    1,
+    "이벤트 이용권 지급"
+  ],
+  [
+    "admin_grant",
+    "manual_support: 오류",
+    3,
+    "관리자 지급"
+  ],
+  [
+    "admin_grant",
+    "{\"operation\":\"admin_grant_v2\",\"kind\":\"other\"}",
+    1,
+    "기타 지급"
+  ],
+  [
+    "purchase",
+    "iap_apple_v1",
+    1,
+    "이용권 구매"
+  ],
+  [
+    "purchase",
+    "iap_google_v1",
+    1,
+    "이용권 구매"
+  ],
+  [
+    "compensation",
+    "customer_compensation",
+    1,
+    "이용권 복구 또는 보상 지급"
+  ],
+  [
+    "b2b_program",
+    "program_allocation",
+    1,
+    "학교 단체 이용권 지급"
+  ],
+  [
+    "reserve",
+    "essay_exam_initial",
+    0,
+    "첨삭 이용권 사용 대기"
+  ],
+  [
+    "consume",
+    "essay_exam_finalization",
+    -1,
+    "첨삭 이용권 사용 완료"
+  ],
+  [
+    "release",
+    "evaluation_failed",
+    0,
+    "이용권 예약 취소"
+  ],
+  [
+    "refund",
+    "manual_refund",
+    1,
+    "이용권 복구"
+  ],
+  [
+    "adjustment",
+    "purchase_cancel_v1",
+    -1,
+    "환불에 따른 이용권 조정"
+  ],
+  [
+    "adjustment",
+    "iap_refund_apple",
+    -1,
+    "환불에 따른 이용권 조정"
+  ],
+  [
+    "adjustment",
+    "iap_refund_reversal_google",
+    1,
+    "이용권 복구"
+  ],
+  [
+    "adjustment",
+    "unknown",
+    1,
+    "이용권 조정"
+  ],
+  [
+    "expiration",
+    "expiry",
+    -1,
+    "이용권 만료"
+  ],
+  [
+    "future",
+    "essay_beta_daily",
+    1,
+    "이용권 조정"
+  ],
+  [
+    "admin_grant",
+    "{bad",
+    1,
+    "관리자 지급"
+  ]
+]

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
+import 'credit_display.dart';
 
 /// Calendar dates follow the Korean Credit policy, regardless of device zone.
 String creditDate(String value) {
@@ -58,7 +59,7 @@ final creditHistoryProvider =
       final rows = await client
           .from('credit_transactions')
           .select(
-            'id,decision_id,created_at,transaction_type,balance_delta,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)',
+            'id,decision_id,created_at,transaction_type,reason_code,balance_delta,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)',
           )
           .eq('account_id', account['id'] as String)
           .not('transaction_type', 'in', '(reserve,release)')
@@ -82,7 +83,7 @@ final creditHistoryProvider =
           : await client
                 .from('credit_transactions')
                 .select(
-                  'id,decision_id,created_at,transaction_type,balance_delta',
+                  'id,decision_id,created_at,transaction_type,reason_code,balance_delta',
                 )
                 .eq('account_id', account['id'] as String)
                 .eq('transaction_type', 'consume')
@@ -138,15 +139,11 @@ class CreditHistory extends ConsumerWidget {
 
   Widget _entry(Map<String, dynamic> row) {
     final type = row['transaction_type'];
-    final label = switch (type) {
-      'purchase' => '이용권 구매',
-      'signup_bonus' => '신규가입 무료',
-      'consume' => '논술 첨삭',
-      'refund' => '환불',
-      'expiration' => '만료',
-      'adjustment' => (row['balance_delta'] as num) < 0 ? '이용권 회수' : '이용권 지급',
-      _ => '이용권 지급',
-    };
+    final label = creditEntryLabel(
+      type as String,
+      row['reason_code'] as String?,
+      row['balance_delta'] as num,
+    );
     final amount = row['balance_delta'] as num;
     final grant = row['credit_grants'] as Map<String, dynamic>?;
     final expiry = grant?['expires_at'] as String?;

@@ -18,6 +18,33 @@ class _Recording implements AnalyticsService {
 
 void main() {
   group('sanitizeAnalyticsParams', () {
+    test(
+      'PDF context accepts public identifiers and rejects arbitrary text',
+      () {
+        const context = {
+          'post_id': '1700',
+          'resource_id': '11111111-1111-4111-8111-111111111111',
+          'resource_type': 'question',
+        };
+        expect(sanitizeAnalyticsParams(context), context);
+        expect(
+          sanitizeAnalyticsParams({
+            'post_id': 'email@example.com',
+            'resource_id': 'token',
+            'resource_type': 'student answer',
+          }),
+          isEmpty,
+        );
+        expect(
+          sanitizeAnalyticsParams({
+            'post_id': 1700,
+            'resource_id': true,
+            'resource_type': 1,
+          }),
+          isEmpty,
+        );
+      },
+    );
     test('keeps allowlisted primitive values', () {
       final out = sanitizeAnalyticsParams({
         AnalyticsParamKeys.platform: 'ios',
