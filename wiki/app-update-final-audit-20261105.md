@@ -72,3 +72,16 @@ Git ancestry: APP58, math mobile d7d5bb1, 최신 수리 UI13ef69a/f53fb1d, learn
 ## Owner 검수
 
 63에서 로그인4종/복귀 → 자료·PDF기존열람 → 자료/학습 등급컷 미연결안내 → LAB베타문구/자연상태 → 기존수리·상경 결과/History → MY문의답변·이용권원인표시. 실제 평가/금융작업은 별도 승인 없이는 실행하지 않는다. 서버 연결 이후 PDF OS저장·등급컷실조회와 최종63 GA4(Android포함) 수신을 검증한다. 학습5단계는 기존 품질P0를 해결했다고 주장하지 않는다. Store 제출은 Owner 검수 후 별도다.
+
+## 최종 릴리스 산출물 — 완료
+
+빌드 소스 `9fb4ea3cfb7aacb9294f0177b26cbc51ccbb2320`, 버전1.0.2(63). [파일해시·검증 receipt](app-update-final-build63-receipt.json). 경로 `/Users/woojinchang/development/legendstudy-private-backups/app-update-final-20261105/release63/`.
+
+| 산출물 | 빌드 | 서명 | SHA256 |
+| --- | --- | --- | --- |
+| legendstudy-1.0.2-63.ipa | PASS, 34,086,936bytes | codesign deep/strict PASS, App Store profile, get-task-allow=false, Apple 로그인 entitlement | 6bbc12537315353b84a5625aabde9e713a3810753be540e5b9dc3aacfa5bed61 |
+| legendstudy-1.0.2-63.aab | PASS, 100,053,983bytes | jarsigner PASS, APP58과 동일 upload certificate, debuggable=false | 7d4e8f95fbe2ff55fc3200095086e36895ede493a3193f10bd2c7a646724793f |
+
+실제 IPA/AAB manifest의 bundle/version/build 대조PASS. 양OS AOT바이너리에서 기존Supabase/Google인증과 플랫폼별Firebase 설정 존재 확인; 값은출력/커밋하지 않음. APP58 IPA에 같은 backend/Google설정 존재 확인. Android AD_ID권한없음. 기존APP58에서도 발생한 CupertinoIcons font경고 및 기존SDK지원예고는 남아 있으며 새 source오류로 보고하지 않음.
+
+별도 Archive/IPA/AAB·로그·receipt 보존. 작업후 APP58 IPA/AAB 해시 재계산도동일. 코드/락파일 빌드중변경0. 전체코드포함 INCLUDED, 최종출시 PARTIAL/Owner검수대기: 운영PDF권한·등급컷RPC 미설치, 5단계운영/품질미확정, 최종63 양OS실기기·GA4수신 NOT_VERIFIED. 운영DB/WEB배포/Store제출0.
