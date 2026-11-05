@@ -79,3 +79,34 @@ GA4는 최초 미수신 화면 이후 지연 반영됐다. 00:32~00:34 KST Debug
 비공개 스크린샷 `/tmp/task21-ios64-ga4-material.png`, `/tmp/task21-ios64-ga4-menu.png` 보관. 이 증거는 iOS64 실제 수신 PASS이며 Android 수신 및 관리자 운영 집계 화면 PASS를 의미하지 않는다. DebugView의 상단 기기 수0과 실제 수신 이벤트 목록이 함께 보였으므로 상단 숫자만으로 미수신 판정하지 않는다. 이전 초기 미수신 관측은 당시 시점 기록으로 보존한다.
 
 Owner는 Android AAB 준비 후 Play 내부 테스트 직접 업로드 예정. 추가 안내 수정 때문에 최종 후속 버전은1.0.2(65), 64 산출물 유지. 앱 Analytics 수집 코드·SDK설정은64와 동일하다. Android본앱58 삭제0, 새평가/지급/차감/결제/환불0.
+
+
+## Owner 의도 정정: 부분 공개는 완료 정책이 아님
+
+Owner는 APP65 건국 Q1 단독/다른 문항 동시 선택의 새 안내를 확인한 뒤 “왜 하나만 가능하지? 우리의 의도와 다르잖아”라고 지적했다. **Q1만 제공하는 것을 최종 정책으로 승인한 것이 아니다.** 표시 회귀 PASS는 전체 문항 연결 완료를 뜻하지 않는다. [기존 확대 연결 범위](app58-expanded-production-connection-20261104.md)와 [기존 TASK19 단일 leaf 관측](task19-lab-ux-grade-cutoff-20261105.md)을 구분한다.
+
+TASK20 2026-11-06 조사 스냅샷을 대조했다: 건국2026자연 기존4문항/legacy Math set1, 시험 단위 평가 policy 없음; 경희2026수시자연 기존3문항/Math set0/평가 policy 없음. 공식 자료 참조 및 문항 등록은 존재하지만 패키지 검수·Math 연결이 미완료다. 건국 Q1~Q4 기준이 같은 페이지에 있어 문항별 분리가 필요하다는 TASK20 근거가 있다. 수치·상태는 해당 조사 시점 기준이며 이번 Agent가 운영 DB를 변경하지 않았다.
+
+현재 TASK20 채팅은 숙명 및 한양/중앙/광운 비공개 Registry 복구와 원본 평가자료 분리를 진행 중이다. 등록 승인은 공개/평가 활성화 승인이 아니므로 결과를 혼동하지 않는다. 기존 agent 작업을 덮어쓰거나 이 채팅에서 별도 운영 공개를 실행하지 않는다. 등록된 전체 대상 문항의 연결·검수·정확한 공개 적용이 충족돼야 출시 판정할 수 있다. **APP65는 안내를 보완한 검수 빌드이며 최종 출시 완료 아님. RELEASE_READY=NO.**
+
+## 후속65 산출물
+
+소스234368b, 1.0.2(65). Android AAB 실제 manifest versionCode65/versionName1.0.2, 기존 업로드 인증서 동일. iOS Archive/IPA64 별도 보존 후65 생성·App Store 프로파일/get-task-allow=false·서명검사 PASS, iPhone12ProMax 유지설치/실행 PASS. Owner는 건국 문제1 단독·문제2 동시선택의 새 안내 정상 표시를 확인했다. 경희 새 문구 직접 확인은 응답에 포함되지 않아 미확인으로 남긴다.
+
+- AAB SHA256 `43c3a8e54447167e4830d4c7ce50c8059fabaca92aa8b8e497c8a672cb65909d`
+- IPA SHA256 `ee4ee00e3edf7c42a85b8eb22fd1d177198f1538294866f0b47d309260695a71`
+- 비공개 백업 `development/legendstudy-private-backups/task21-release65-20261106/`
+- 정적분석0/집중15PASS. 디스크 부족으로 중단된 전체검사를 성공으로 계산하지 않고 빌드 완료·공간 정리 후 단독 재실행한다.
+
+Android 합성 PDF TEST는 기존 TASK18 fixture를 재사용하여 별도package `com.legendstudy.app.task18qa`/LS PDF TEST로 생성·서명확인·설치했다. Supabase/Firebase 초기화0, Analytics Noop. tracked Android 프로젝트 수정 없이 로컬 Gradle finalizeDsl/별도 Manifest override만 사용했다. 본앱58은 유지. 실제 저장/파일 열기는 Owner 확인 대기.
+
+
+## 최종 확인 보충 — 2026-11-06
+
+- APP65 소스234368b: 정적분석0, 집중15PASS, 공간 복구 후 단독 전체 **1,555 PASS / 7 SKIP / 0 FAIL** (`task21-65-full-tests-final.log`). 디스크 부족 중단 두 실행은 검증 수치에서 제외했다.
+- Android LS PDF TEST 합성 파일 저장·파일 앱 열기: Owner “합성 PDF 저장·열기 성공” 응답 **PASS**. Android 최종 본앱65/GA4 수신·운영 실제PDF 공개 성공을 뜻하지 않는다. 실패·취소·재시도 Android 실기기 매트릭스는 별도 미확인.
+- 운영 DB 재조회(SELECT만): 건국2026자연4문항과 경희2026자연3문항 모두 기존 Registry is_published=false. 건국 기존 ACTIVE Math set `9551ff08-3c17-550d-b745-1ebf20dba1ec` 아래 ACTIVE problem1개/leaf `3bab07d3-c047-53c2-89ad-9fa20ec7b3f3`(leaf_key=q1) 존재, legacy leaf의 essay_question_id는 null이다. 경희 해당시험 Math set0. 따라서 단순 직접FK조인으로 건국Q1이 없다고 단정하면 안 되며 기존 server release binding을 함께 본다. 기존 Q1 연결과 나머지 미연결 구분을 재확인했다.
+- 이번 운영 쓰기0, 실제 평가·지급·차감·결제·환불0. TASK20의 별도 승인/실행과 이 채팅의 실행을 혼동하지 않는다.
+- 판정 **PARTIAL / RELEASE_READY=NO**: 전체 대상 문항 Package/Math 연결·운영 적용 검증, Android Play 최종본 실기기/GA4, 관리자 운영 집계 확인이 남는다. 문의/History iOS 기존 Owner PASS 및65 부분공개 안내 PASS만 해당 범위에 기록한다.
+
+- 00:57 KST GA4 DebugView에서 APP65 설치 이후 00:47:11~00:47:35 Owner 검수의 university_select/exam_select/question_select 5이벤트 도착도 확인했다. 이는 최종65 전송 경로의 추가 근거다. 메뉴/자료 Registry 상세 증거는64에서 확인한 범위로 별도 보존한다. `/tmp/task21-ios65-ga4-selection.png`. 검수 종료 시 iOS FIRDebugDisabled로 재실행하고 필터 로그 수집을 종료했다.

@@ -5771,3 +5771,7 @@ Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/
 - 최종 실기기·GA4 및 TASK20 공개 범위 검증 대기, RELEASE_READY=NO. [근거·해시](task21-final-release-readiness-20261105.md).
 
 - APP64 iOS Owner 주요기능 PASS, GA4 실수신(menu/screen/material·Registry ID) 지연 후 확인. 건국 복수문항/경희 제한 안내 후속 정정15검사PASS; 65로 분리, 64 보존.
+
+- Owner는 Q1만 공개된 상태가 최종 의도와 다르다고 정정. 표시 PASS와 전체 문항 서비스 복구를 분리하고65 출시 확정 보류. TASK20의 자료/Package 연결 미완료를 재확인했다. 운영 변경0.
+
+- APP65 전체1555PASS/7SKIP·Analyze0, iOS 설치/서명 및 Android AAB 서명 PASS. Android 별도 합성PDF 저장/열기 Owner PASS. 건국/경희 운영 SELECT로 실제 Math 연결 부족 재확인, RELEASE_READY=NO 유지.
