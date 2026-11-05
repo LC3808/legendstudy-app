@@ -4,7 +4,7 @@
 
 ## 현재 판정
 
-RELEASE_READY=NO (TASK18 기반 완료 / TASK19 운영 권한 차이로 수정안 승인 대기 / APP63 설치 완료·기능 실검수 대기).
+RELEASE_READY=NO (TASK18 기반·TASK19 운영 완료 / Owner 기존 조회 PASS / 자연계 준비중 안내 불일치·GA4 최종 수신 미검증).
 
 - TASK18 resource_download_policy 및 material_download_private 없음.
 - TASK19 grade_cutoff_lookup/grade_cutoff_references 없음. 기존 대상시험11개, exam_subjects(id,content_item_id) UNIQUE 존재, 기존 grade_cutoff_versions0행. 수치 후보2457행/11시험/273과목조합 검증 재실행 PASS.
@@ -56,3 +56,17 @@ iPhone12ProMax의 com.legendstudy.app을 기존58→63으로 **삭제없이 업�
 
 ### 다음 검수
 수정 SQL 승인 후 TASK19 신규 객체만 적용·후보행 등록/공개·anon/auth HTTP조회·권한차단/운영통계 대조. Owner 실기기 기존 로그인/자료/PDF/등급컷/문의답변/History 확인 및63 GA4 이벤트 대조 후 RELEASE_READY 재판정. TASK18 실제 파일 다운로드는 별도 Edge/파일허용 전까지 PENDING으로 유지한다.
+
+## TASK19 수정안 승인·운영 완료 / Owner 실기기 후속
+
+Owner가 scoped SECURITY DEFINER 수정 SQL을 명시 승인했다. `app63_task19_scoped_cutoff_lookup` 운영 migration 성공 → draft/non-current2457행 확인 → 승인 후보 정확일치 publish 성공. 최초 publish 도구 호출은 catalog 변경으로 실행 거절되었으며 draft2457 상태 재확인 후 재호출했다. 중복등록0. [실제 적용 SQL](../supabase/candidates/task19_grade_cutoff/app63-production.sql).
+
+- 공개2457행/11시험, 원점수2092/표준점수대체120/미확인245. anon·authenticated 역할 모두11시험 조회 PASS(10시험216행+1시험297행).
+- 실제 production HTTP RPC 공개키 조회11시험/2457행 PASS. 검수 JSON과 각 행의 점수·출처·Registry·revision 등 필드 대조일치; status/current는 승인된 공개 변경, timestamp 표기는 비교에서 제외. 공개 SQL 내부 정밀 후보 일치 조건을 통과했다.
+- 기존 exams/exam_subjects/content_items 및 신규 grade_cutoff_references 직접 SELECT/쓰기 모두 anon/authenticated=false. RPC stable/definer/search_path빈값 확인. 기존 보호16테이블 변경통계 전후 동일; 전체행 내용해시는 이전 검토 차단으로 미검증 유지. 지급·차감·결제·환불·평가 실행0.
+- Owner는 기존 로그인·자료/PDF·내 문의답변·History 조회 요청에 ‘조회잘 됨’으로 확인했다. 해당 경로 Owner PASS, 모든 사례/Android까지 확장하지 않는다. 등급컷 공개 직후 실기기 표시는 별도 확인 대상.
+- Owner가 건국/경희/고려/동국/서강/서울여자/숙명여자/숭실/중앙/한양/인하/항공 등 연결된 모든 대학 자연계에서 붉은 준비중 안내가 남지만 첨삭 작성에 진입한다고 보고했다. **표시 정합성 FAIL**, 제출/평가 성공을 의미하지 않는다.
+- APP 소스 source_catalog_page.dart의 feedbackPreparing는 Essay service-status에 시험이 없고 standaloneMathReady가 false일 때 표시한다. standaloneMathReady는 availability true+math_catalog(최대50) 문항일치가 필요하다. Math 로딩/실패를 완료된 미공개와 구분하지 않는 점, 제한 목록 누락 가능성은 코드상 확인했다. 실제 계정 응답은 미확보이므로 전체대학 공통 현상의 단일 원인은 아직 NOT_VERIFIED. 현재 WEB 작업트리 파일이 실제 배포 코드와 같다고 추정하지 않았다.
+- GA4 HTTP200이나 appVersion별 집계행은 여전히 없음. 최종63 수신 NOT_VERIFIED. 빌드9fb4ea3 코드 변경/재빌드0, APP58 보존, WEB/Store0.
+
+다음 단계는 자연계 안내의 인증된 실제 응답 대조와 수정 범위 확정, APP63 등급컷 화면 확인, GA4 최종 버전 수신 확인이다. 앱 코드 수정이 필요하면 현재 고정SHA를 보존하고 별도 후속 빌드로 검증해야 한다.

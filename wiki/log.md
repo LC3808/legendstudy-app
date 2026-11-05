@@ -5757,3 +5757,6 @@ Owner 재실행 후2026·9월 목록/PDF 열기/뒤로 복귀 “완료”. 해�
 
 ## 2026-11-05 APP63 출시 전 점검
 Owner 승인 TASK18 기반 운영 적용/PENDING PASS, APP63 iPhone 설치·실행 완료. TASK19 invoker의 운영 Registry SELECT 부재로 적용 보류; scoped definer 수정안 격리2457행 PASS/재승인 대기. 기존16테이블 변경통계 동일(내용해시 검토차단),63/58 산출물 보존·소스9fb4ea3 불변. GA4 보고서 행없음/실기기 문의·History 확인대기, RELEASE_READY=NO. [근거·다음 단계](app63-prelaunch-readiness-20261105.md).
+
+### APP63 TASK19 운영 후속
+Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/11시험 및 실제HTTP2457행 원본대조 PASS. 기존16테이블 변경통계 동일. Owner 기존 조회 PASS, 자연계 모든 연결대학 준비중 배너 불일치 보고로 RELEASE_READY=NO 유지.9fb4ea3 제품코드 불변. [근거](app63-prelaunch-readiness-20261105.md).
