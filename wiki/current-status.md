@@ -2,8 +2,7 @@
 # Current Status
 
 ## TASK19 후속 업데이트 — PARTIAL
-[Owner 표시 정정](task19-owner-ui-followup-20261105.md): 자료 상태·보조 표준점수 제거. 원점수/표준점수 전용 표 분리, 추정 원점수 출처·DB 연결은 미완료. 대학 공통 Math 공개 판별이며 등록 시험 전체 무조건 해제는 아님.
-[LAB 안내·11시험 등급컷](task19-lab-ux-grade-cutoff-20261105.md): A 독립 커밋·43회귀 PASS. B Native 자료/학습 공통 조회·원점수 우선·SQL 후보 구현. 2,457행 중 점수2,212/미확인NULL245. 전체1,500 PASS/7 SKIP, 로컬DB 권한·원복 PASS. 운영/실기기·GA4 미검증. [SQL 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). APP58·승인 버전·운영·다른 PDF 브랜치 보존. [이전 품질 상태](task19-prior-status-snapshot-20261105.md).
+[TASK19-C TEST60 실기기](task19c-device-verification-20261105.md): 소스9138593 iOS Release 설치·실행/Android 별도 APK 빌드 PASS. iPhone12ProMax26.6.1 베타 문구 Owner PASS. TEST11시험2,457행 실제 HTTP 대조 PASS·보호5테이블 동일. 등급컷 사용자 조작 대기, 건국 TEST scope 미연결 PARTIAL, Android 기기 없음. 운영SQL/Store0. [UI 정정](task19-owner-ui-followup-20261105.md), [A/B 데이터·기존 회귀](task19-lab-ux-grade-cutoff-20261105.md), [운영 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). 추정 원점수 추가 연결 미완료, APP58 보존.
 
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL
 [실제 검증·품질 P0](task16m-evaluation-finalization-20261104.md): 신규 수리5→4/혼합4→4 저장·비교·History 및 WEB RPC↔Simulator 4결과 PASS. 수리 동일 표준화 표현의 판정 중요도 불일치 발견, 품질 마감 불가. 과거 INVALID_OUTPUT 원본 부재로 실제 원인 미확정; 검증 유지·고정 진단 보완. TEST 이용권 이전1+승인추가1 사용/무료0/예약0·과거27평가29원장 해시 동일. WEB260PASS/1SKIP·TypeScript·Simulator PASS, 실기기/새 WEB UI E2E 미검증. Math12호출162,026토큰, 비용/동일입력 절감률 미확인. TEST6b25e1bf/WEB432ab37, 운영·APP58 변경0. [이전L](task16l-learning-persistence-history-20261104.md).

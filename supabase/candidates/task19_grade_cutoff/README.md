@@ -9,7 +9,7 @@ Owner TASK19 §15에 따라 **승인 전 운영 적용 금지**. 기존 시험·
 - [상세 조사·한계](../../../wiki/task19-lab-ux-grade-cutoff-20261105.md).
 
 ## 사전 확인 (읽기 전용)
-`preflight.sql` 실행 결과를 저장한다. 테이블/RPC가 이미 있으면 자동 덮어쓰기하지 않는다. 기존 `exam_subjects(id,content_item_id)` UNIQUE와 public SELECT 권한, 과목 active 상태를 확인한다. 연결 프로젝트를 반드시 확인한다. 운영·TEST 모두 이번 작업에서 미적용.
+`preflight.sql` 실행 결과를 저장한다. 테이블/RPC가 이미 있으면 자동 덮어쓰기하지 않는다. 기존 `exam_subjects(id,content_item_id)` UNIQUE와 public SELECT 권한, 과목 active 상태를 확인한다. 연결 프로젝트를 반드시 확인한다. 운영은 미적용. 2026-11-05 TASK19-C Owner 승인으로 격리 TEST 적용·실제 HTTP 검증 완료: [실기기/TEST 보고서](../../../wiki/task19c-device-verification-20261105.md). TEST에는 대상 Registry가 없어 같은 공개 ID의 최소 fixture를 먼저 추가했으며 generated 열은 제외했다.
 
 ## 승인 후 적용 순서
 1. 정확한 프로젝트/대상 11시험과 데이터 누락·추정 정책을 검토한다. `python3 tool/check_task19_cutoffs.py` 통과 확인.
