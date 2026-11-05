@@ -81,13 +81,11 @@ String betaEndDate(DateTime end) {
 }
 
 String betaPolicyText(DateTime end, [int limit = 1]) =>
-    '인문논술 서비스를 매일 무료 첨삭 $limit회 이용할 수 있어요.\n\n'
-    '매일 0시(자정, 한국 시간)에 무료 첨삭 이용 횟수가 갱신되며 미사용분은 소멸돼요.\n\n'
-    '베타 서비스는 ${betaEndDate(end)}까지 운영돼요. '
-    '베타 무료 첨삭권과 무료 재첨삭은 베타 서비스 기간 동안만 이용할 수 있어요.\n\n'
-    '가입 축하 무료 이용권(3개)과 구매 이용권은 기존 정책대로 이용할 수 있어요.\n\n'
-    '사용 중 불편한 점은 MY 설정의 문의·건의사항으로 알려주세요. '
-    '공지사항에서 안내를 다시 확인할 수 있어요.';
+    '논술 LAB에서는 인문·사회·상경·자연계열 논술 첨삭 서비스를 이용할 수 있습니다.\n\n'
+    '베타 기간에는 매일 무료 첨삭 $limit회를 제공합니다.\n\n'
+    '무료 이용 횟수는 매일 00시(자정, 한국 시간)에 갱신되며, 사용하지 않은 횟수는 이월되지 않습니다.\n\n'
+    '베타 서비스는 ${betaEndDate(end)}까지 운영됩니다.\n\n'
+    '가입 축하 무료 이용권 3개와 구매 이용권은 기존 정책에 따라 이용할 수 있습니다.';
 
 final essayBetaCreditProvider = FutureProvider.autoDispose<EssayBetaCredit?>((
   ref,
@@ -214,7 +212,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
                         }
                       }
                     },
-              child: Text(busy ? '확인 중…' : '무료 첨삭 이용하러 가기'),
+              child: Text(busy ? '확인 중…' : '무료 첨삭 시작하기'),
             ),
           ],
         ),

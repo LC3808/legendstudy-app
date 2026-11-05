@@ -422,6 +422,14 @@ String? releasedMathSelection(
       : null;
 }
 
+/// A released standalone question is not a whole-exam completion claim.
+/// Provider enablement is checked separately by the caller.
+bool hasReleasedMathQuestion(
+  List<Map<String, dynamic>> rows,
+  String? examId,
+  List<String> questionIds,
+) => questionIds.any((id) => releasedMathSelection(rows, examId, [id]) != null);
+
 final serviceExamIdsProvider = FutureProvider.autoDispose
     .family<Set<String>, String>((ref, owner) async {
       final gateway = ref.watch(mathGatewayProvider(owner));

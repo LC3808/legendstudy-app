@@ -548,9 +548,9 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                                 children: [
                                   Text(
                                     u['name'] as String,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.titleMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium,
                                   ),
                                   const SizedBox(height: 4),
                                   if (service.isLoading ||
@@ -667,9 +667,29 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
           // 거짓양성을 피하려 표시하지 않는다. 안내는 비차단 정보이므로 공개된 TEXT
           // 문항의 작성·제출을 막지 않는다.
           final serviceExams = ref.watch(serviceExamIdsProvider(widget.owner));
+          final mathRows = ref.watch(mathCatalogProvider(widget.owner));
+          final mathEnabled = ref.watch(
+            mathEvaluationAvailableProvider(widget.owner),
+          );
+          final standaloneMathReady =
+              exam != null &&
+              essayServiceArea(exam) == EssayServiceArea.science &&
+              mathEnabled.asData?.value == true &&
+              hasReleasedMathQuestion(
+                mathRows.asData?.value ?? [],
+                exam['dbExamId'] as String?,
+                questions
+                    .where(
+                      (q) => selection.isEmpty || selection.contains(q['key']),
+                    )
+                    .map((q) => q['dbQuestionId'])
+                    .whereType<String>()
+                    .toList(),
+              );
           final feedbackPreparing =
               exam != null &&
               !writingBlocked &&
+              !standaloneMathReady &&
               exam['dbExamId'] is String &&
               serviceExams.hasValue &&
               !serviceExams.value!.contains(exam['dbExamId']);
@@ -2649,8 +2669,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
     const Divider(color: AppTokens.majorSurfaceBorder, height: 16),
     Text('제출 문항: ${widget.included.length}개'),
-    if (parentId != null && eligibleRewrite)
-      const Text('무료 재첨삭 · 추가 이용권 없음'),
+    if (parentId != null && eligibleRewrite) const Text('무료 재첨삭 · 추가 이용권 없음'),
     if (widget.inputBlocked)
       const Text('수리 문항의 인식 내용을 확인하면 전체 시험 첨삭을 요청할 수 있어요.')
     else if (!ready)

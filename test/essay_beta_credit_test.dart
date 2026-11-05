@@ -93,8 +93,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(Checkbox));
       await tester.pump();
-      await tester.ensureVisible(find.text('무료 첨삭 이용하러 가기'));
-      await tester.tap(find.text('무료 첨삭 이용하러 가기'));
+      await tester.ensureVisible(find.text('무료 첨삭 시작하기'));
+      await tester.tap(find.text('무료 첨삭 시작하기'));
       await tester.pumpAndSettle();
       expect(reads, 2);
       expect(find.byType(AlertDialog), findsNothing);
@@ -170,8 +170,8 @@ void main() {
     })!;
     expect(value.ended, true);
     expect(betaEndDate(value.endsAt!), '2026년 11월 10일 23:59');
-    expect(betaPolicyText(value.endsAt!), contains('무료 재첨삭은 베타 서비스 기간 동안만'));
-    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 이용권(3개)'));
+    expect(betaPolicyText(value.endsAt!), contains('인문·사회·상경·자연계열'));
+    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 이용권 3개'));
   });
   test('invalid balance and expiry never displayed', () {
     for (final count in [-1, 2, 3, 1.5, '1']) {
