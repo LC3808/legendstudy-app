@@ -42,7 +42,7 @@
 |11시험 등급컷 서버 연결|PASS|실제 HTTP 전 행 대조|
 |11시험 실기기 표 조회|PARTIAL|Owner는 요청한 2024·6월 원점수/2026·9월 표준점수·추정 — 및 과목/접기 확인 완료. 나머지 9시험 실기기 전체 확인 아님|
 |자료·학습 동일 표시/과목 변경/접기|PARTIAL|TEST62 Owner 2026학년도9월 수학 자료·학습 동일 확인 PASS. 과목군/출처 앞선 PASS, 11시험 전수 비교 아님|
-|작은 화면/PDF Viewer|NOT_VERIFIED|iPhone 조작 대기, Android 기기 없음|
+|작은 화면/PDF Viewer|PARTIAL|TEST62 PDF 열기 Owner FAIL 확인 → TEST 구성 복구·실제 PDF 응답 PASS, 실기기 재검수 대기. Android 기기 없음|
 
 ## 후속·운영 경계
 TEST 적용은 운영 적용 승인이 아니다. 운영 SQL은 아직 미적용. 등급컷 운영 공개 및 후속 Store 후보는 별도 승인·실기기 QA 후 진행한다. 건국 TEST 공개 fixture 부재를 화면 문구 강제 삭제로 감추지 않는다. 기존 제품 전체 공개 범위는 기존 서버 계약을 따른다.
@@ -89,3 +89,15 @@ Owner가2026학년도9월 국어 참고 범위·기준 시험, 수학 변경·�
 
 ### TEST62 자료·학습 동일 표시 확인
 Owner는 자료 탭2026학년도9월 수학 참고 표와 학습 탭 비교 요청에 “동일함”으로 답했다. 해당 시험·과목의 APP 자료↔학습 표시 일치 **PASS**. PDF 열기·뒤로 복귀는 답변이 명시하지 않아 별도 확인 대기다. 기존 코드/API 검사 재사용, 재빌드·DB 변경 없음.
+
+### TEST62 PDF 실패·TEST 구성 복구
+Owner는 PDF가 열리지 않고 국어 문제1건만 보이며 ‘자료를 바로 열 수 없어요’가 표시된다고 보고했다. 최초 실기기 결과 **FAIL**. 이는 기존 TASK19 최소 fixture가 시험당PDF1건만 복제하고 공개 source_status를 unknown으로 남긴 데다 TEST에 resource-resolver가 없었던 구성 누락이다. 운영 Viewer 결함 또는 운영 정상 여부로 확대 해석하지 않는다.
+
+격리 TEST `kpqbedylxlyntrrfybpn`만 보완했다.
+- 기존 `consume_resource_resolver_quota(uuid)` 존재 확인. 새 migration/ACL 변경 없음. 기존 [Guest Resolver 계약](decisions.md#2026-09-25--public-resolver-activation-and-accepted-mvp-cost-risk)과 동일 소스를 배포(version1, id296d207e-8530-4746-9383-8ed2ed111870, verify_jwt=false, sha897a7009dfd732a5701fd50db8b68a03b454809f93b1c0dc0be1c99975c5f72d). 플랫폼 기본 TEST Secret 사용, 별도 Secret 복사/변경 없음.
+- 운영 해당시험의 공개 resource 메타데이터49건만 읽기 전용 조회. 기존ID·과목FK·출처를 유지한 TEST insert on conflict do nothing: 기존1+신규48. 문제24/정답해설24/듣기1. 공개 원본 파일 복제/서명URL 저장 없음.
+- 원문 https://legendstudy.com/1686 HTTP200 및 기존 첨부 식별자 일치 확인 후 해당 TEST source_posts1건만 unknown→available로 복구. 검수/과금/History 행 변경 없음.
+- 실제 anonymous REST 목록49건 PASS. 국어(언매)·수학(기하)2건 TEST Resolver resolved/pdf 및 임시 타깃 HTTP206, %PDF- 헤더 PASS. 일시 주소/Secret은 로그·Git에 기록하지 않는다. TEST Resolver quota는 정상 호출에 따라 소비된다(이용권과 별개).
+- Deno 계약38PASS. 최초 실행2회는 테스트의 설정/소스 읽기 권한 미지정 실패였으며 allow-read=supabase로 명시한 후 통과.
+
+APP 소스/빌드 변경 없음. TEST62를 재실행하면 새 목록을 조회한다. 실기기 PDF 열기·복귀는 재확인 대기. 나머지10시험의 전체 첨부 fixture는 미보완이며 이번2건 성공으로11시험 전체PASS 처리하지 않는다. 운영 앱/DB/Store 변경0. 후보SQL·조회결과·API 요약은 `/private/tmp/task19c/pdf-expanded-seed.sql`, `pdf-resources-expanded.json`, `pdf-runtime-check.json`에 보존.

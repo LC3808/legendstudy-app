@@ -5744,3 +5744,6 @@ Owner 국어/수학 참고 범위·기준·출처 검수 “확인완료”. 실
 
 ### 2026-11-05 — TEST62 자료·학습 비교
 Owner2026학년도9월 수학 참고표 “동일함”: 해당 비교 PASS. PDF 열기/복귀 별도 확인 대기. [기록](task19c-device-verification-20261105.md#test62-자료학습-동일-표시-확인).
+
+### 2026-11-05 — TEST62 PDF 연결 복구
+Owner PDF FAIL: TEST resource1건/source unknown/Resolver미배포 확인. 2026·9월 공개첨부49건 동일ID 연결·원문1건 검증 후 TEST상태복구·기존Resolver TESTv1배포. Deno38PASS/실제목록49/국어·수학PDF206 PASS. 실기기 재검수 대기, 운영 변경0. [상세](task19c-device-verification-20261105.md#test62-pdf-실패test-구성-복구).
