@@ -1,0 +1,77 @@
+<!-- ============================================================= -->
+<!-- LegendStudy 논술 LAB 홍보 배너 (게시글 삽입용 템플릿)            -->
+<!-- 삽입 위치: 게시글 도입부 아래 · 기출 PDF 안내 "위"              -->
+<!-- 치환: {{...}} 토큰만 교체. 구조/CSS는 통일 유지.               -->
+<!--   {{UNIV_NAME}}   예: 한양대학교                                -->
+<!--   {{HEADLINE}}    ≤2줄. 예: 한양대 논술, 내 답안은 어느 수준일까? -->
+<!--   {{SUBCOPY}}     1줄. 예: 대학별 평가 기준으로 첨삭받고 부족한 부분을 확인하세요. -->
+<!--   {{CTA_LABEL}}   예: 한양대 논술 첨삭받기 →                     -->
+<!--   {{LAB_URL}}     예: https://lab.legendstudy.com/essay-lab/universities/hanyang/ -->
+<!--                   (딥링크 미지원이면 https://lab.legendstudy.com/essay-lab/ 사용) -->
+<!--   {{UNIV_ID}}     대학 slug 또는 ID. 예: hanyang                 -->
+<!--   {{TRACK}}       계열. 예: 인문계열                             -->
+<!--   {{POST_ID}}     게시글 식별자(임의 문자열).                    -->
+<!--   {{CAMPAIGN_ID}} 예: essaylab_2026                             -->
+<!-- ============================================================= -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="{{UNIV_NAME}} 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:16px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:680px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:8px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:12px 16px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">{{UNIV_NAME}} 논술 LAB</span>
+      <p class="lseb-head">{{HEADLINE}}</p>
+      <p class="lseb-sub">{{SUBCOPY}}</p>
+    </div>
+    <a class="lseb-cta"
+       href="{{LAB_URL}}?utm_source=tistory&utm_medium=post_banner&utm_campaign={{CAMPAIGN_ID}}&utm_content={{UNIV_ID}}_{{POST_ID}}"
+       rel="noopener"
+       data-lseb-univ="{{UNIV_ID}}" data-lseb-track="{{TRACK}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          track: cta.getAttribute('data-lseb-track'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    // 노출: 실제로 화면에 보일 때 1회 (IntersectionObserver, 미지원 시 즉시)
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    // 클릭: href 네비게이션은 그대로(preventDefault 안 함)
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
