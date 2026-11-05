@@ -32,7 +32,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-TASK20 / 운영 논술 LAB 공개·Registry·WEB 정상화: [운영 검증](task20-production-availability-20261105.md), [잔여 P0·숙명 복구 후보](task20-recovery-continuation-20261106.md).
+TASK20 / 운영 논술 LAB 공개·Registry·WEB 정상화: [운영 검증](task20-production-availability-20261105.md), [잔여 P0·승인 Registry 복구](task20-recovery-continuation-20261106.md).
 
 TASK19 / LAB 베타 안내·건국 자연 상태·평가원 등급컷 / 자료·학습 공통 조회: [구현·데이터·검증·운영 승인 경계](task19-lab-ux-grade-cutoff-20261105.md).
 
