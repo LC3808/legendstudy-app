@@ -5725,3 +5725,5 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 - 2026-11-05 TASK19 Owner 후속: 자료 상태/보조 표준점수 삭제, 출처 접기, 원점수·표준점수 전용 표 분리. 추정 원점수 연결 미완료를 구분. 모든 대학 공통 Math 공개 판별 회귀 추가. [상세](task19-owner-ui-followup-20261105.md).
 
 - 2026-11-05 TASK19-C: 소스9138593 별도 TEST60 iOS Release 설치·실행/Android APK PASS. TEST11시험2,457행 실제 HTTP 검증·보호5테이블 동일, 베타 문구 Owner PASS. 등급컷 실기기 조작 대기/건국 TEST scope PARTIAL. [보고서](task19c-device-verification-20261105.md).
+
+- 2026-11-05 TASK19-C Owner 등급컷 2시험 표시 확인 후 비교 UX 수정: 국어/수학/절대평가/과탐Ⅰ·Ⅱ/사탐 묶음, 학습 화면 안 시험 선택·즉시 조회. DB 변경0, TEST61 검수 준비. [상세](task19c-device-verification-20261105.md).

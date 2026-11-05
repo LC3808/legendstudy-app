@@ -7,13 +7,44 @@ import '../../analytics/analytics_guard.dart';
 import '../../analytics/domain/analytics_events.dart';
 import 'grade_cutoff.dart';
 
+String cutoffGroup(GradeCutoff row) {
+  final label = (row.data['subject_label'] as String? ?? '').replaceAll(
+    ' ',
+    '',
+  );
+  if (label.startsWith('국어')) return '국어';
+  if (label.startsWith('수학')) return '수학';
+  if (label == '영어' || label == '한국사') return '영어·한국사';
+  if (['물리학', '화학', '생명과학', '지구과학'].any(label.startsWith)) {
+    return '과학탐구';
+  }
+  if ([
+    '경제',
+    '동아시아사',
+    '사회문화',
+    '생활과윤리',
+    '세계사',
+    '세계지리',
+    '윤리와사상',
+    '정치와법',
+    '한국지리',
+  ].contains(label)) {
+    return '사회탐구';
+  }
+  return '제2외국어·한문';
+}
+
+const cutoffGroups = ['국어', '수학', '영어·한국사', '과학탐구', '사회탐구', '제2외국어·한문'];
+
 class GradeCutoffPanel extends ConsumerStatefulWidget {
   const GradeCutoffPanel({
     super.key,
     required this.contentItemId,
     required this.source,
+    this.inline = false,
   });
   final String contentItemId, source;
+  final bool inline;
   @override
   ConsumerState<GradeCutoffPanel> createState() => _GradeCutoffPanelState();
 }
@@ -34,197 +65,259 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
         },
       );
   @override
-  void didUpdateWidget(GradeCutoffPanel oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.contentItemId != widget.contentItemId) selected = null;
+  Widget build(BuildContext context) {
+    if (widget.inline) return content();
+    return Card(
+      child: ExpansionTile(
+        title: const Text('등급컷 확인'),
+        onExpansionChanged: (v) => setState(() => expanded = v),
+        childrenPadding: const EdgeInsets.all(12),
+        children: [if (expanded) content()],
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) => Card(
-    child: ExpansionTile(
-      title: const Text('등급컷 확인'),
-      onExpansionChanged: (v) => setState(() => expanded = v),
-      childrenPadding: const EdgeInsets.all(16),
-      children: [
-        if (expanded)
-          ref
-              .watch(gradeCutoffsProvider(widget.contentItemId))
-              .when(
-                loading: () =>
-                    const LinearProgressIndicator(semanticsLabel: '등급컷 불러오는 중'),
-                error: (_, _) => Column(
-                  children: [
-                    const Text('등급컷을 불러오지 못했어요. 자료와 PDF는 계속 이용할 수 있어요.'),
-                    TextButton(
-                      onPressed: () => ref.invalidate(
-                        gradeCutoffsProvider(widget.contentItemId),
-                      ),
-                      child: const Text('다시 시도'),
-                    ),
-                  ],
-                ),
-                data: (rows) {
-                  if (rows.isEmpty) return const Text('확인된 등급컷 자료가 아직 없습니다.');
-                  final subjects = <String, GradeCutoff>{
-                    for (final row in rows) row.key: row,
-                  };
-                  // Electives require explicit choice. Never choose the first elective silently.
-                  final key = subjects.length == 1
-                      ? subjects.keys.single
-                      : selected;
-                  final chosen = rows.where((r) => r.key == key).toList()
-                    ..sort((a, b) => a.grade.compareTo(b.grade));
-                  final rawTable = chosen.any((r) => r.hasRaw);
-                  if (chosen.isNotEmpty) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      if (mounted && expanded) record(chosen.first);
-                    });
-                  }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      DropdownButtonFormField<String>(
-                        key: ValueKey('${widget.contentItemId}:$key'),
-                        initialValue: key,
-                        isExpanded: true,
-                        itemHeight: null,
-                        decoration: const InputDecoration(labelText: '과목·선택과목'),
-                        hint: const Text('과목을 선택해 주세요'),
-                        items: [
-                          for (final r in subjects.values)
-                            DropdownMenuItem(
-                              value: r.key,
-                              child: Text(r.label),
-                            ),
-                        ],
-                        onChanged: (v) => setState(() => selected = v),
-                      ),
-                      if (chosen.isNotEmpty) ...[
-                        const SizedBox(height: 12),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(
-                            columnSpacing: 20,
-                            horizontalMargin: 8,
-                            columns: [
-                              const DataColumn(label: Text('등급')),
-                              DataColumn(
-                                label: Text(rawTable ? '원점수' : '표준점수'),
-                              ),
-                              if (!rawTable)
-                                const DataColumn(label: Text('추정 원점수')),
-                            ],
-                            rows: [
-                              for (final r in chosen)
-                                DataRow(
-                                  cells: [
-                                    DataCell(Text('${r.grade}등급')),
-                                    DataCell(
-                                      Text(
-                                        rawTable
-                                            ? (r.hasRaw ? r.score : '—')
-                                            : (r.data['standard_score']
-                                                      ?.toString() ??
-                                                  '—'),
-                                      ),
-                                    ),
-                                    if (!rawTable)
-                                      DataCell(Text(r.estimatedRaw)),
-                                  ],
-                                ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        ExpansionTile(
-                          title: const Text('출처'),
-                          children: [
-                            for (final url
-                                in chosen
-                                    .map((r) => r.data['source_url'])
-                                    .whereType<String>()
-                                    .toSet())
-                              ExternalLinkButton(
-                                uri: Uri.tryParse(url),
-                                label: '등급컷 원본 게시글',
-                              ),
-                            for (final url
-                                in chosen
-                                    .expand(
-                                      (r) => [
-                                        r.data['raw_source_url'],
-                                        r.data['standard_source_url'],
-                                        r.data['estimated_raw_source_url'],
-                                      ],
-                                    )
-                                    .whereType<String>()
-                                    .toSet())
-                              ExternalLinkButton(
-                                uri: Uri.tryParse(url),
-                                label: '점수 기준 원본 자료',
-                              ),
-                          ],
-                        ),
-                      ],
-                    ],
-                  );
-                },
-              ),
-      ],
-    ),
-  );
-}
-
-class GradeCutoffBrowser extends ConsumerStatefulWidget {
-  const GradeCutoffBrowser({super.key});
-  @override
-  ConsumerState<GradeCutoffBrowser> createState() => _GradeCutoffBrowserState();
-}
-
-class _GradeCutoffBrowserState extends ConsumerState<GradeCutoffBrowser> {
-  String? exam;
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('평가원 모의평가·수능 등급컷')),
-    body: ref
-        .watch(cutoffExamsProvider)
-        .when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, _) => Center(
-            child: TextButton(
-              onPressed: () => ref.invalidate(cutoffExamsProvider),
-              child: const Text('시험 목록 다시 불러오기'),
+  Widget content() => ref
+      .watch(gradeCutoffsProvider(widget.contentItemId))
+      .when(
+        loading: () =>
+            const LinearProgressIndicator(semanticsLabel: '등급컷 불러오는 중'),
+        error: (_, _) => Column(
+          children: [
+            const Text('등급컷을 불러오지 못했어요. 자료와 PDF는 계속 이용할 수 있어요.'),
+            TextButton(
+              onPressed: () =>
+                  ref.invalidate(gradeCutoffsProvider(widget.contentItemId)),
+              child: const Text('다시 시도'),
             ),
-          ),
-          data: (rows) => ListView(
-            padding: const EdgeInsets.all(16),
+          ],
+        ),
+        data: (rows) {
+          if (rows.isEmpty) return const Text('확인된 등급컷 자료가 아직 없습니다.');
+          final available = cutoffGroups
+              .where((g) => rows.any((r) => cutoffGroup(r) == g))
+              .toList();
+          final group = available.contains(selected)
+              ? selected!
+              : available.first;
+          final chosen = rows.where((r) => cutoffGroup(r) == group).toList();
+          final subjects = <String, GradeCutoff>{
+            for (final r in chosen) r.key: r,
+          }.values.toList();
+          final tables = <List<GradeCutoff>>[];
+          final sections = group == '과학탐구'
+              ? [
+                  for (final level in [false, true])
+                    subjects.where((r) {
+                      final label = r.data['subject_label'] as String? ?? '';
+                      return (label.endsWith('2') || label.endsWith('Ⅱ')) ==
+                          level;
+                    }).toList(),
+                ]
+              : [subjects];
+          for (final section in sections) {
+            for (var i = 0; i < section.length; i += 4) {
+              tables.add(section.skip(i).take(4).toList());
+            }
+          }
+          // All electives in a group are shown together; no implicit elective selection.
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted && (expanded || widget.inline)) {
+              for (final r in subjects) {
+                record(r);
+              }
+            }
+          });
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if (rows.isEmpty) const Text('조회 가능한 시험이 없습니다.'),
-              if (rows.isNotEmpty)
-                DropdownButtonFormField<String>(
-                  initialValue: exam,
-                  isExpanded: true,
-                  itemHeight: null,
-                  decoration: const InputDecoration(labelText: '시험 선택'),
-                  items: [
-                    for (final r in rows)
-                      DropdownMenuItem(
-                        value: r['content_item_id'] as String,
-                        child: Text(
-                          '${r['academic_year']}학년도 ${r['exam_type'] == 'csat' ? '수능' : '${r['exam_month']}월 모의평가'}',
-                        ),
+              DropdownButtonFormField<String>(
+                key: ValueKey('${widget.contentItemId}:$group'),
+                initialValue: group,
+                isExpanded: true,
+                decoration: const InputDecoration(labelText: '과목'),
+                items: [
+                  for (final g in available)
+                    DropdownMenuItem(value: g, child: Text(g)),
+                ],
+                onChanged: (v) => setState(() => selected = v),
+              ),
+              if (group == '영어·한국사')
+                const Padding(
+                  padding: EdgeInsets.only(top: 12),
+                  child: Text('절대평가 · 원점수'),
+                ),
+              for (final table in tables)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: _ComparisonTable(subjects: table, rows: chosen),
+                ),
+              ExpansionTile(
+                title: const Text('출처'),
+                children: [
+                  for (final url
+                      in chosen
+                          .map((r) => r.data['source_url'])
+                          .whereType<String>()
+                          .toSet())
+                    ExternalLinkButton(
+                      uri: Uri.tryParse(url),
+                      label: '등급컷 원본 게시글',
+                    ),
+                  for (final url
+                      in chosen
+                          .expand(
+                            (r) => [
+                              r.data['raw_source_url'],
+                              r.data['standard_source_url'],
+                              r.data['estimated_raw_source_url'],
+                            ],
+                          )
+                          .whereType<String>()
+                          .toSet())
+                    ExternalLinkButton(
+                      uri: Uri.tryParse(url),
+                      label: '점수 기준 원본 자료',
+                    ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+}
+
+class _ComparisonTable extends StatelessWidget {
+  const _ComparisonTable({required this.subjects, required this.rows});
+  final List<GradeCutoff> subjects, rows;
+  @override
+  Widget build(BuildContext context) {
+    final raw = {
+      for (final s in subjects)
+        s.key: rows.any((r) => r.key == s.key && r.hasRaw),
+    };
+    final indexed = {for (final r in rows) '${r.key}:${r.grade}': r};
+    final grades = rows.map((r) => r.grade).toSet().toList()..sort();
+    final style = Theme.of(context).textTheme.bodySmall
+        ?.copyWith(fontSize: 14, height: 1.45);
+    Widget cell(String text, {bool heading = false}) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: heading ? style?.copyWith(fontWeight: FontWeight.w700) : style,
+      ),
+    );
+    return LayoutBuilder(
+      builder: (context, c) => SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: SizedBox(
+          width: c.maxWidth < 280 ? 280 : c.maxWidth,
+          child: Table(
+            columnWidths: {0: const FixedColumnWidth(42)},
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            border: TableBorder(
+              horizontalInside: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
+            ),
+            children: [
+              TableRow(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                ),
+                children: [
+                  cell('등급', heading: true),
+                  for (final s in subjects)
+                    cell(
+                      '${(s.data['elective_label'] as String?)?.isNotEmpty == true ? s.data['elective_label'] : s.data['subject_label']}\n${raw[s.key] == true ? '원점수' : '표준점수 / 추정 원점수'}',
+                      heading: true,
+                    ),
+                ],
+              ),
+              for (final grade in grades)
+                TableRow(
+                  children: [
+                    cell('$grade'),
+                    for (final s in subjects)
+                      cell(
+                        raw[s.key] == true
+                            ? (indexed['${s.key}:$grade']?.hasRaw == true
+                                  ? indexed['${s.key}:$grade']!.score
+                                  : '—')
+                            : '${indexed['${s.key}:$grade']?.data['standard_score'] ?? '—'} / ${indexed['${s.key}:$grade']?.estimatedRaw ?? '—'}',
                       ),
                   ],
-                  onChanged: (v) => setState(() => exam = v),
-                ),
-              if (exam != null)
-                GradeCutoffPanel(
-                  key: ValueKey(exam),
-                  contentItemId: exam!,
-                  source: 'study',
                 ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Embedded in the existing study panel: selecting an exam opens its table here.
+class GradeCutoffPicker extends ConsumerStatefulWidget {
+  const GradeCutoffPicker({super.key});
+  @override
+  ConsumerState<GradeCutoffPicker> createState() => _GradeCutoffPickerState();
+}
+
+class _GradeCutoffPickerState extends ConsumerState<GradeCutoffPicker> {
+  String? exam;
+  @override
+  Widget build(BuildContext context) => ref
+      .watch(cutoffExamsProvider)
+      .when(
+        loading: () => const LinearProgressIndicator(),
+        error: (_, _) => TextButton(
+          onPressed: () => ref.invalidate(cutoffExamsProvider),
+          child: const Text('시험 목록 다시 불러오기'),
+        ),
+        data: (rows) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (rows.isEmpty) const Text('조회 가능한 시험이 없습니다.'),
+            if (rows.isNotEmpty)
+              DropdownButtonFormField<String>(
+                initialValue: exam,
+                isExpanded: true,
+                itemHeight: null,
+                decoration: const InputDecoration(labelText: '시험 선택'),
+                items: [
+                  for (final r in rows)
+                    DropdownMenuItem(
+                      value: r['content_item_id'] as String,
+                      child: Text(
+                        '${r['academic_year']}학년도 ${r['exam_type'] == 'csat' ? '수능' : '${r['exam_month']}월 모의평가'}',
+                      ),
+                    ),
+                ],
+                onChanged: (v) => setState(() => exam = v),
+              ),
+            if (exam != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: GradeCutoffPanel(
+                  contentItemId: exam!,
+                  source: 'study',
+                  inline: true,
+                ),
+              ),
+          ],
+        ),
+      );
+}
+
+class GradeCutoffBrowser extends StatelessWidget {
+  const GradeCutoffBrowser({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('등급컷 확인')),
+    body: const SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: GradeCutoffPicker(),
+    ),
   );
 }

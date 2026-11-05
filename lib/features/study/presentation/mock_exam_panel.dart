@@ -319,16 +319,13 @@ class _MockExamPanelState extends State<MockExamPanel> {
           ] else if (official && !papersLoading && papers.isEmpty)
             const Text('정답 데이터 없음 · 타이머만 사용할 수 있어요.'),
           if (official)
-            OutlinedButton.icon(
-              onPressed: preparing || starting
-                  ? null
-                  : () => Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => const GradeCutoffBrowser(),
-                      ),
-                    ),
-              icon: const Icon(Icons.table_chart_outlined),
-              label: const Text('공식 기출 등급컷 확인'),
+            Card(
+              child: ExpansionTile(
+                title: const Text('등급컷 확인'),
+                leading: const Icon(Icons.table_chart_outlined),
+                childrenPadding: const EdgeInsets.all(12),
+                children: const [GradeCutoffPicker()],
+              ),
             ),
           if (official && papers.isNotEmpty) ...[
             const SizedBox(height: 12),

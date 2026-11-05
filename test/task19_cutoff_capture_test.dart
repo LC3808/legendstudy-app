@@ -114,7 +114,7 @@ void main() {
   );
   for (final source in ['materials', 'study']) {
     testWidgets(
-      '$source uses real corpus in mocked API, explicit choice and one event',
+      '$source uses real corpus in mocked API, grouped comparison and per-subject events',
       (tester) async {
         resetAnalyticsOnce();
         tester.view.physicalSize = const Size(390, 844);
@@ -177,23 +177,45 @@ void main() {
           await tester.tap(find.text('2026학년도 9월 모의평가').last);
           await tester.pumpAndSettle();
         }
-        await tester.tap(find.text('등급컷 확인'));
-        await tester.pumpAndSettle();
-        expect(analytics.events, isEmpty);
-        await tester.tap(find.byType(DropdownButtonFormField<String>).last);
-        await tester.pumpAndSettle();
-        await tester.tap(find.text(rows.first.label).last);
-        await tester.pumpAndSettle();
-        expect(find.text(source == 'study' ? '표준점수' : '원점수'), findsOneWidget);
-        expect(analytics.events.length, 1);
-        expect(analytics.events.single['source'], source);
-        expect(analytics.events.single['exam_code'], id);
+        if (source == 'materials') {
+          await tester.tap(find.text('등급컷 확인'));
+          await tester.pumpAndSettle();
+        }
+        expect(
+          find.textContaining(source == 'study' ? '표준점수 / 추정 원점수' : '원점수'),
+          findsNWidgets(2),
+        );
+        expect(analytics.events.length, 2);
+        expect(
+          analytics.events.every(
+            (e) => e['source'] == source && e['exam_code'] == id,
+          ),
+          isTrue,
+        );
         await preview.capture(tester, 'task19-cutoff-$source');
-        await tester.tap(find.text('등급컷 확인'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text('등급컷 확인'));
-        await tester.pumpAndSettle();
-        expect(analytics.events.length, 1);
+        if (source == 'materials') {
+          await tester.tap(find.text('등급컷 확인'));
+          await tester.pumpAndSettle();
+          await tester.tap(find.text('등급컷 확인'));
+          await tester.pumpAndSettle();
+        }
+        expect(analytics.events.length, 2);
+        for (final group in ['수학', '영어·한국사', '과학탐구', '사회탐구']) {
+          await tester.ensureVisible(
+            find.byType(DropdownButtonFormField<String>).last,
+          );
+          await tester.tap(find.byType(DropdownButtonFormField<String>).last);
+          await tester.pumpAndSettle();
+          await tester.tap(find.text(group).last);
+          await tester.pumpAndSettle();
+          final expected = group == '사회탐구' ? 3 : (group == '과학탐구' ? 2 : 1);
+          expect(find.byType(Table), findsNWidgets(expected));
+          await preview.capture(
+            tester,
+            'task19-group-$source-${cutoffGroups.indexOf(group)}',
+          );
+          expect(tester.takeException(), isNull);
+        }
         expect(tester.takeException(), isNull);
       },
     );

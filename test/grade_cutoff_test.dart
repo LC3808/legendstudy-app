@@ -77,7 +77,7 @@ void main() {
     });
   });
   testWidgets(
-    'explicit elective choice and horizontally scrollable raw/standard table',
+    'Korean electives compare together without another subject choice',
     (tester) async {
       tester.view.physicalSize = const Size(320, 640);
       tester.view.devicePixelRatio = 1;
@@ -108,11 +108,6 @@ void main() {
         ),
       );
       await tester.tap(find.text('등급컷 확인'));
-      await tester.pumpAndSettle();
-      expect(find.text('92~93'), findsNothing);
-      await tester.tap(find.byType(DropdownButtonFormField<String>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('국어 · 언어와 매체').last);
       await tester.pumpAndSettle();
       expect(find.text('92~93'), findsOneWidget);
       expect(find.text('표준점수 (보조 정보)'), findsNothing);
