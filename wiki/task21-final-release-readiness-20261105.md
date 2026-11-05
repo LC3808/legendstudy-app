@@ -38,8 +38,33 @@ TASK20은 별도 채팅/작업트리에서 계속 실행 중. 실제 DB/공개 �
 기존 원본시각/평가 사실 유지; Registry·질문ID 재사용; DB UPDATE 없음; 사용자/답안 연계 유지; 서비스상태와 평가성적 구분; 서버권한/PII계약 유지; 화면 파생상태를 원장으로 저장하지 않음.
 
 ## 검증·빌드 진행
-집중42PASS. 초기 시스템 Flutter3.8은 저장소SDK와 달라 실행불가, 고정 tool/flutterw 3.47.6으로 재실행. 첫 전체검사 도중 수정된 기대문구가 기존 컴파일과 혼재했으므로 최종 전체검사를 다시 실행한다. 정적분석/최종전체/빌드 결과는 후속 기록.
+집중42PASS. 초기 시스템 Flutter3.8은 저장소SDK와 달라 실행불가, 고정 tool/flutterw 3.47.6으로 재실행. 첫 전체검사 도중 수정된 기대문구가 기존 컴파일과 혼재했으므로 최종 전체검사를 다시 실행한다. 동일 소스를 고정한 최종 전체 1,553 PASS / 7 SKIP, analyze No issues found. Android release AAB/APK PASS; iOS 정식 Archive/App Store IPA PASS.
 
 APP58 및63 IPA/AAB/Archive 별도 보존. 신규 버전1.0.2(64): 동일63번호 재사용으로 검수 산출물이 혼동되지 않게 다음번호 선택. 기존release63 플랫폼별 운영설정 그대로 재사용, 새Secret/권한 변경없음. 현재 작업트리 재생성가능 build intermediates만 정리했으며 보존63파일 해시 확인.
 
 운영 PDF 읽기검증18게시글/846PDF/846PENDING. 파일별 권리승인·Edge 개방0. iOS 과거 합성저장 Owner PASS와 최종 기기검수 구분. Android SM-G950N 연결·기존APP58 확인. 등급컷11시험2457행 공개는 이전 실제HTTP 원본대조PASS 유지. GA4최종버전 수신/Android저장/새iOS실기기 및 TASK20연결 최종확인 전 RELEASE_READY=NO.
+
+
+## 2026-11-06 Android 설치·보존 확인
+
+소스 `b9f6e1a` / 1.0.2(64). 정식 AAB 및 실기기용 arm64 release APK 생성 완료. 기존 APP58 AAB와 업로드 인증서 SHA256 `c00f4260d5b95a084335576c03bf36b8914a2f33cb3da701403e0adbacfb8ef1` 동일.
+
+연결된 Android SM-G950N의 APP58은 Google Play 앱서명 인증서 `4d9694e8525102cf3f65193bbc8c4061212a43b63d2c15061614a976df6371ac` 사용. `adb install -r`은 INSTALL_FAILED_UPDATE_INCOMPATIBLE로 거절되었고 설치 버전은58 그대로 확인했다. 삭제/앱 데이터 초기화/서명 우회 없음. 최종 Android 검수는 Owner의 Play 내부 테스트 배포 후 진행해야 한다. 디버그 수집용 일시 설정은 `.none.`으로 복구했다. DebugView는 당시 디버그 기기0/이벤트 대기였으며 최종 빌드 실수신 PASS가 아니다.
+
+산출물은 비공개 `development/legendstudy-private-backups/task21-release64-20261106/`에 보관한다.
+- `legendstudy-1.0.2-64.aab`: SHA256 `638ec0575a5127b621947982db7920a47b63be19089c12e8fbda2a9eff9050bc`
+- `legendstudy-1.0.2-64.apk`: SHA256 `214a231e5f4dc245d4be9d2194d17a341c43b39d8912b2e2eef3e52c85a9d2e3`
+
+TASK20 운영 상태를 재확인한 문서는 WEB23a03b0/배포858e369c이며 신규 전체 공개 완료 근거는 없다. 실제 기존 공개시험과 미공개시험을 구분한다. 최종 기기 동작·GA4 수신/Android PDF저장 및 전체 대학별 admission 검증이 완료되기 전 RELEASE_READY=NO 유지.
+
+
+## iOS 빌드·설치 결과
+
+동일 소스 `b9f6e1a`, 1.0.2(64) 정식 Archive 및 IPA 생성 PASS. IPA 내부 bundle `com.legendstudy.app`, version1.0.2/build64 확인. App Store 프로파일 get-task-allow=false, ProvisionedDevices 없음, Team VUKFS69GB4. Archive 및 IPA 내부 앱 codesign --verify --deep --strict PASS(시스템 신뢰 저장소 접근 가능한 환경에서 검증).
+
+- `legendstudy-1.0.2-64.ipa`: SHA256 `006887f3edc0c474958dc20eee1afe2aacf3d73876ff1744d6f835654d7f4bb6`
+- IPA/Runner.xcarchive는 Android와 동일 비공개 백업 디렉터리에 보관.
+- iPhone12ProMax 본앱63→64 삭제 없이 설치·실행 PASS. Owner 기능 확인 및 실제 GA4 수신은 별도 대기.
+- Android는 Owner가 AAB를 Play 내부 테스트에 직접 업로드하기로 응답. Agent Store 제출0.
+
+빌드 환경 경고: Flutter TTS의 iOS Swift Package Manager 미지원은 현 버전에서 경고이며 빌드 성공. Android CupertinoIcons 폰트 경고도 빌드 성공과 구분하여 기록한다. UI 시각 검수는 별도다.
