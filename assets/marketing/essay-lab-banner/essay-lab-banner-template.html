@@ -25,6 +25,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -32,6 +35,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -43,10 +47,13 @@
       <p class="lseb-sub">{{SUBCOPY}}</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="{{LAB_URL}}?utm_source=tistory&utm_medium=post_banner&utm_campaign={{CAMPAIGN_ID}}&utm_content={{UNIV_ID}}_{{POST_ID}}"
-       rel="noopener"
-       data-lseb-univ="{{UNIV_ID}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="{{LAB_URL}}?utm_source=tistory&utm_medium=post_banner&utm_campaign={{CAMPAIGN_ID}}&utm_content={{UNIV_ID}}_{{POST_ID}}"
+         rel="noopener"
+         data-lseb-univ="{{UNIV_ID}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
+    </div>
   </div>
   <script>
   (function(){

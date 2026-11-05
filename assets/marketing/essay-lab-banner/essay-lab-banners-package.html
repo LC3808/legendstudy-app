@@ -19,6 +19,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -26,6 +29,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -37,10 +41,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/hanyang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hanyang_hanyang"
-       rel="noopener"
-       data-lseb-univ="hanyang" data-lseb-post="hanyang" data-lseb-campaign="essaylab_2026">한양대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/hanyang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hanyang_hanyang"
+         rel="noopener"
+         data-lseb-univ="hanyang" data-lseb-post="hanyang" data-lseb-campaign="essaylab_2026">한양대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -84,6 +91,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -91,6 +101,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -102,10 +113,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/korea/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=korea_korea"
-       rel="noopener"
-       data-lseb-univ="korea" data-lseb-post="korea" data-lseb-campaign="essaylab_2026">고려대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/korea/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=korea_korea"
+         rel="noopener"
+         data-lseb-univ="korea" data-lseb-post="korea" data-lseb-campaign="essaylab_2026">고려대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -149,6 +163,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -156,6 +173,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -167,10 +185,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sungkyunkwan_sungkyunkwan"
-       rel="noopener"
-       data-lseb-univ="sungkyunkwan" data-lseb-post="sungkyunkwan" data-lseb-campaign="essaylab_2026">성균관대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sungkyunkwan_sungkyunkwan"
+         rel="noopener"
+         data-lseb-univ="sungkyunkwan" data-lseb-post="sungkyunkwan" data-lseb-campaign="essaylab_2026">성균관대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -214,6 +235,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -221,6 +245,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -232,10 +257,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/sogang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sogang_sogang"
-       rel="noopener"
-       data-lseb-univ="sogang" data-lseb-post="sogang" data-lseb-campaign="essaylab_2026">서강대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/sogang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sogang_sogang"
+         rel="noopener"
+         data-lseb-univ="sogang" data-lseb-post="sogang" data-lseb-campaign="essaylab_2026">서강대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -279,6 +307,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -286,6 +317,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -297,10 +329,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/chungang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=chungang_chungang"
-       rel="noopener"
-       data-lseb-univ="chungang" data-lseb-post="chungang" data-lseb-campaign="essaylab_2026">중앙대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/chungang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=chungang_chungang"
+         rel="noopener"
+         data-lseb-univ="chungang" data-lseb-post="chungang" data-lseb-campaign="essaylab_2026">중앙대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -344,6 +379,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -351,6 +389,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -362,10 +401,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/kyunghee/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kyunghee_kyunghee"
-       rel="noopener"
-       data-lseb-univ="kyunghee" data-lseb-post="kyunghee" data-lseb-campaign="essaylab_2026">경희대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/kyunghee/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kyunghee_kyunghee"
+         rel="noopener"
+         data-lseb-univ="kyunghee" data-lseb-post="kyunghee" data-lseb-campaign="essaylab_2026">경희대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -409,6 +451,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -416,6 +461,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -427,10 +473,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/konkuk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=konkuk_konkuk"
-       rel="noopener"
-       data-lseb-univ="konkuk" data-lseb-post="konkuk" data-lseb-campaign="essaylab_2026">건국대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/konkuk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=konkuk_konkuk"
+         rel="noopener"
+         data-lseb-univ="konkuk" data-lseb-post="konkuk" data-lseb-campaign="essaylab_2026">건국대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -474,6 +523,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -481,6 +533,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -492,10 +545,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/inha/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=inha_inha"
-       rel="noopener"
-       data-lseb-univ="inha" data-lseb-post="inha" data-lseb-campaign="essaylab_2026">인하대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/inha/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=inha_inha"
+         rel="noopener"
+         data-lseb-univ="inha" data-lseb-post="inha" data-lseb-campaign="essaylab_2026">인하대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -539,6 +595,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -546,6 +605,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -557,10 +617,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/dongguk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=dongguk_dongguk"
-       rel="noopener"
-       data-lseb-univ="dongguk" data-lseb-post="dongguk" data-lseb-campaign="essaylab_2026">동국대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/dongguk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=dongguk_dongguk"
+         rel="noopener"
+         data-lseb-univ="dongguk" data-lseb-post="dongguk" data-lseb-campaign="essaylab_2026">동국대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -604,6 +667,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -611,6 +677,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -622,10 +689,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/soongsil/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=soongsil_soongsil"
-       rel="noopener"
-       data-lseb-univ="soongsil" data-lseb-post="soongsil" data-lseb-campaign="essaylab_2026">숭실대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/soongsil/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=soongsil_soongsil"
+         rel="noopener"
+         data-lseb-univ="soongsil" data-lseb-post="soongsil" data-lseb-campaign="essaylab_2026">숭실대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -669,6 +739,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -676,6 +749,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -687,10 +761,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/kwangwoon/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kwangwoon_kwangwoon"
-       rel="noopener"
-       data-lseb-univ="kwangwoon" data-lseb-post="kwangwoon" data-lseb-campaign="essaylab_2026">광운대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/kwangwoon/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kwangwoon_kwangwoon"
+         rel="noopener"
+         data-lseb-univ="kwangwoon" data-lseb-post="kwangwoon" data-lseb-campaign="essaylab_2026">광운대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -734,6 +811,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -741,6 +821,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -752,10 +833,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/hufs/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hufs_hufs"
-       rel="noopener"
-       data-lseb-univ="hufs" data-lseb-post="hufs" data-lseb-campaign="essaylab_2026">한국외대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/hufs/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hufs_hufs"
+         rel="noopener"
+         data-lseb-univ="hufs" data-lseb-post="hufs" data-lseb-campaign="essaylab_2026">한국외대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -799,6 +883,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -806,6 +893,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -817,10 +905,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/sookmyung/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sookmyung_sookmyung"
-       rel="noopener"
-       data-lseb-univ="sookmyung" data-lseb-post="sookmyung" data-lseb-campaign="essaylab_2026">숙명여대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/sookmyung/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sookmyung_sookmyung"
+         rel="noopener"
+         data-lseb-univ="sookmyung" data-lseb-post="sookmyung" data-lseb-campaign="essaylab_2026">숙명여대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -864,6 +955,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -871,6 +965,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -882,10 +977,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/swu/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=swu_swu"
-       rel="noopener"
-       data-lseb-univ="swu" data-lseb-post="swu" data-lseb-campaign="essaylab_2026">서울여대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/swu/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=swu_swu"
+         rel="noopener"
+         data-lseb-univ="swu" data-lseb-post="swu" data-lseb-campaign="essaylab_2026">서울여대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
@@ -929,6 +1027,9 @@
   .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
   .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
   .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
   .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
   .lseb-cta:hover{filter:brightness(.96)}
@@ -936,6 +1037,7 @@
   @media (max-width:560px){
     .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
     .lseb-benefit{width:100%;justify-content:center}
+    .lseb-action{width:100%}
     .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
     .lseb-head{font-size:15px}
   }
@@ -947,10 +1049,13 @@
       <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
     </div>
-    <a class="lseb-cta"
-       href="https://lab.legendstudy.com/essay-lab/universities/kau/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kau_kau"
-       rel="noopener"
-       data-lseb-univ="kau" data-lseb-post="kau" data-lseb-campaign="essaylab_2026">한국항공대 논술 첨삭받기 →</a>
+    <div class="lseb-action">
+      <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="https://lab.legendstudy.com/essay-lab/universities/kau/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kau_kau"
+         rel="noopener"
+         data-lseb-univ="kau" data-lseb-post="kau" data-lseb-campaign="essaylab_2026">한국항공대 논술 첨삭받기 →</a>
+    </div>
   </div>
   <script>
   (function(){
