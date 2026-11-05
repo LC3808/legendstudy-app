@@ -64,3 +64,13 @@ TEST60 기존 표시 확인 후 Owner는 과목별 반복 선택을 줄이고 �
 
 ### TEST61 설치 영수증
 소스 `6aa0b48d1c3e4db20fef9f4f1e29c8563f4cece4`의 iOS Xcode Release/codesign PASS, iPhone12ProMax에 별도 LS Math TEST **1.0.1(61)** 업데이트 설치·실행 완료. Android 별도 package versionCode61 APK/apksigner PASS, 연결 기기는 없음. 기존 본앱/TEST60/APP58 산출물 보존. iOS AOT SHA256 `9c6525c5c6ce9ff1157a0c74640a18758328134b884da7c3f9cbf2d4bf6d1ad8`, Android APK SHA256 `29a7f5a4563a6c409333984c0ba8ee179c770ffee87d492de5d7b904c381c5a4`. 새 비교 UI Owner 실기기 검수 대기. 운영 DB/Store0.
+
+## TEST61 Owner 실기기 확인 및 추정 원점수 점검
+
+Owner는 과목군 비교·인라인 조회에 “잘 확인했어. 훨씬 좋아졌네”로 응답했다. 요청했던 국어2/수학3/과탐Ⅰ·Ⅱ/사탐 스크롤 비교 UI의 실기기 검수를 PASS로 기록한다. 11시험 전수·PDF Viewer·Android 검수를 대신하지 않는다.
+
+시험 자료 상세 `content_detail_page.dart`에는 동일 GradeCutoffPanel이 리소스 목록 앞에 연결돼 있다. PDF 문제 Viewer 내부에는 별도 등급컷 연결이 없다. 코드 확인과 실제 자료→PDF 왕복 검수는 구분한다.
+
+Owner는 추정 원점수 계산·기입을 요청했다. 기존 전사본 검증 결과 미확보 대상은 2026학년도9월/수능, 2027학년도6월 국어·수학 각40행, 총120행이다. 저장 자료에는 표준점수 경계만 있으며 공통·선택 점수 분포와 조정 계수가 없다. [평가원 Q&A의 공식 학교 배포본](https://bbh-h.goebc.kr/upload/bbh-h/na/bbs_4418/2025/04/B6DF413B-63A8-D885-7FA7-E3F265825A35.pdf)에 따르면 공통과목을 활용한 선택과목 조정 이후 표준점수를 산출한다. 현재 표준점수 경계만으로 원점수를 유일하게 역산할 수 없으므로 계산값을 만들어 저장하지 않았다.
+
+EBSi/메가스터디 원출처 검색은 수행했으나 대상120행의 검수 가능한 수치표는 확보하지 못했다. **추정 원점수 입력은 미완료**. 출처별 예상 원점수 또는 재현 가능한 분포/환산 자료 확보 후 별도 추정 필드·근거·revision을 연결해야 한다. 기존 원점수/표준점수/학생 성적은 변경하지 않는다. 데이터 검증기 2,457행/11시험 PASS, 이번 코드·DB·빌드 변경0.

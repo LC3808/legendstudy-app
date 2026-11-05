@@ -5729,3 +5729,6 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 - 2026-11-05 TASK19-C Owner 등급컷 2시험 표시 확인 후 비교 UX 수정: 국어/수학/절대평가/과탐Ⅰ·Ⅱ/사탐 묶음, 학습 화면 안 시험 선택·즉시 조회. DB 변경0, TEST61 검수 준비. [상세](task19c-device-verification-20261105.md).
 
 - 2026-11-05 TASK19-C 비교 UI 소스6aa0b48: TEST61 iOS Xcode Release/codesign·iPhone 설치/실행, Android APK 서명/versionCode61 PASS. 새 비교 UI Owner 검수 대기, 운영/Store0.
+
+### 2026-11-05 — TASK19-C TEST61 Owner PASS·추정 점수 한계
+과목군 비교/인라인 조회 Owner 실기기 PASS. 자료 상세에는 공통 표 연결, PDF 내부 연결 없음. 표준점수 전용120행은 원점수 역산 필수 입력 부재로 임의 기입하지 않음. 출처 추정값 확보 미완료. 기존2,457행 검사 PASS, 운영/DB/빌드 변경0. [상세](task19c-device-verification-20261105.md).
