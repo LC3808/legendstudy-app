@@ -61,3 +61,6 @@ TEST60 기존 표시 확인 후 Owner는 과목별 반복 선택을 줄이고 �
 - 기존 TEST60 사용자 검수 PASS를 새 레이아웃 PASS로 이전하지 않는다. 후속 TEST61 재빌드·설치 후 Owner 검수 필요.
 
 검증: 기존 학습/모의고사 포함 20개 회귀 범위 PASS, analyze0. 최종 과탐 단일 선택에 맞춰 테스트의 이전 Ⅰ/Ⅱ 문자열을 정정하고 실패했던 두 화면 검사를 재실행해 통과했다. 실제 전사 데이터+mock API 렌더 확인: [국어](assets/task19/cutoff-materials.png), [수학](assets/task19/cutoff-math-group.png), [과탐Ⅰ·Ⅱ](assets/task19/cutoff-science-group.png). 새 레이아웃 실기기 PASS를 의미하지 않는다.
+
+### TEST61 설치 영수증
+소스 `6aa0b48d1c3e4db20fef9f4f1e29c8563f4cece4`의 iOS Xcode Release/codesign PASS, iPhone12ProMax에 별도 LS Math TEST **1.0.1(61)** 업데이트 설치·실행 완료. Android 별도 package versionCode61 APK/apksigner PASS, 연결 기기는 없음. 기존 본앱/TEST60/APP58 산출물 보존. iOS AOT SHA256 `9c6525c5c6ce9ff1157a0c74640a18758328134b884da7c3f9cbf2d4bf6d1ad8`, Android APK SHA256 `29a7f5a4563a6c409333984c0ba8ee179c770ffee87d492de5d7b904c381c5a4`. 새 비교 UI Owner 실기기 검수 대기. 운영 DB/Store0.

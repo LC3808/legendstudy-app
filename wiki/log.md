@@ -5727,3 +5727,5 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 - 2026-11-05 TASK19-C: 소스9138593 별도 TEST60 iOS Release 설치·실행/Android APK PASS. TEST11시험2,457행 실제 HTTP 검증·보호5테이블 동일, 베타 문구 Owner PASS. 등급컷 실기기 조작 대기/건국 TEST scope PARTIAL. [보고서](task19c-device-verification-20261105.md).
 
 - 2026-11-05 TASK19-C Owner 등급컷 2시험 표시 확인 후 비교 UX 수정: 국어/수학/절대평가/과탐Ⅰ·Ⅱ/사탐 묶음, 학습 화면 안 시험 선택·즉시 조회. DB 변경0, TEST61 검수 준비. [상세](task19c-device-verification-20261105.md).
+
+- 2026-11-05 TASK19-C 비교 UI 소스6aa0b48: TEST61 iOS Xcode Release/codesign·iPhone 설치/실행, Android APK 서명/versionCode61 PASS. 새 비교 UI Owner 검수 대기, 운영/Store0.
