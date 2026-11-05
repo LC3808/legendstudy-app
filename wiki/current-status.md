@@ -1,8 +1,11 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
+## TASK20 운영 공개 복구 — PARTIAL
+[조사·수정·공개 후보·차단 요소](task20-production-availability-20261105.md): Registry363/패키지213/allowlist212/베타scope202/Math72 재확인. WEB 계열 일괄 hold 제거·부분 공개·오류 구분·베타 문구 수정, 92회귀/빌드 PASS. 건국Q1·경희 제한 안내·한양 인문/상경·인하 자연 운영 진입 확인. DB·공개설정·APP58 변경0. 배너 범위 별도 인계.
+
 ## TASK19 후속 업데이트 — PARTIAL
-[TASK19-C TEST60 실기기](task19c-device-verification-20261105.md): TEST60 iOS 설치·Android APK PASS. iPhone12ProMax26.6.1 베타 문구 Owner PASS. TEST11시험2,457행 실제 HTTP 대조 PASS·보호5테이블 동일. 2시험 표시·TEST61 비교 UI Owner PASS, 건국 TEST scope PARTIAL, Android 없음. 운영SQL/Store0. [UI 정정](task19-owner-ui-followup-20261105.md), [A/B 데이터·기존 회귀](task19-lab-ux-grade-cutoff-20261105.md), [운영 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). 출처 추정값 미확보; 승인된 과거 시험 참고범위120행 별도 표시 구현·9검사PASS/TEST62 참고표·자료/학습 대표 비교 PASS. APP58 보존. PDF TEST 복구·2026·9월 목록/열기/복귀 Owner PASS.
+[TASK19-C](task19c-device-verification-20261105.md): TEST62 참고 원점수·자료/학습 일치·PDF 목록/열기/복귀 Owner PASS. 운영 SQL/Store0, APP58 보존. [정정](task19-owner-ui-followup-20261105.md), [기존검증](task19-lab-ux-grade-cutoff-20261105.md), [운영승인후보](../supabase/candidates/task19_grade_cutoff/README.md). Android 실기기 미검증.
 
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL
 [실제 검증·품질 P0](task16m-evaluation-finalization-20261104.md): 신규 수리5→4/혼합4→4 저장·비교·History 및 WEB RPC↔Simulator 4결과 PASS. 수리 동일 표준화 표현의 판정 중요도 불일치 발견, 품질 마감 불가. 과거 INVALID_OUTPUT 원본 부재로 실제 원인 미확정; 검증 유지·고정 진단 보완. TEST 이용권 이전1+승인추가1 사용/무료0/예약0·과거27평가29원장 해시 동일. WEB260PASS/1SKIP·TypeScript·Simulator PASS, 실기기/새 WEB UI E2E 미검증. Math12호출162,026토큰, 비용/동일입력 절감률 미확인. TEST6b25e1bf/WEB432ab37, 운영·APP58 변경0. [이전L](task16l-learning-persistence-history-20261104.md).

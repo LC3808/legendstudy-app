@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK20 / 운영 논술 LAB 공개·Registry·WEB 정상화: [조사·수정·운영 검증·미공개 사유](task20-production-availability-20261105.md).
+
 TASK19 / LAB 베타 안내·건국 자연 상태·평가원 등급컷 / 자료·학습 공통 조회: [구현·데이터·검증·운영 승인 경계](task19-lab-ux-grade-cutoff-20261105.md).
 
 평가 정확도/최초 보류/최종 산술 검산/실제 TEST: [11/4 품질 검증·새 오판·수정·미완료](task16-evaluation-quality-closeout-20261104.md).

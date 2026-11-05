@@ -1,0 +1,434 @@
+[
+  {
+    "leaf_id": "81a39ee1-28b2-5c3f-8a89-a96745045400",
+    "exam_id": "1131e065-951f-5aba-bbc4-85c15fb9f0b0",
+    "question_id": "b107f361-a033-5a98-a2d8-8aa6842ad29b",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오후 · 문제 1"
+  },
+  {
+    "leaf_id": "81f6f465-d368-55c3-9245-1e162c6a4170",
+    "exam_id": "1131e065-951f-5aba-bbc4-85c15fb9f0b0",
+    "question_id": "ad66f6db-ac17-5a9e-ad67-3be2976665d8",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오후 · 문제 2"
+  },
+  {
+    "leaf_id": "663a25a2-10bb-5f49-b4b0-69a6a5759580",
+    "exam_id": "1131e065-951f-5aba-bbc4-85c15fb9f0b0",
+    "question_id": "efd9ccae-8c9d-59e0-961d-8719898679ec",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오후 · 문제 3"
+  },
+  {
+    "leaf_id": "a716fd23-217a-5383-bab0-3e21271517b8",
+    "exam_id": "7a00b094-234c-5376-b339-326a41abdeb9",
+    "question_id": "92b9a6ee-6516-5aab-b654-5a8e68fd969d",
+    "label": "중앙대학교 · 2027 · mock · 경영경제(창의) · 문제 3"
+  },
+  {
+    "leaf_id": "301f18a3-73b7-5552-a960-6235ff53b1fc",
+    "exam_id": "5a42333d-9def-5438-9baa-f46201f97fae",
+    "question_id": "5e9dbcfe-a532-5aa7-9e69-757d164415a4",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오전 · 문제 1"
+  },
+  {
+    "leaf_id": "2ce0c120-41de-538e-aed7-376b7efc5f3b",
+    "exam_id": "5a42333d-9def-5438-9baa-f46201f97fae",
+    "question_id": "f22d9736-384f-54e2-a3c1-f4f2c2d50a09",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오전 · 문제 2"
+  },
+  {
+    "leaf_id": "06cd2ae1-c7a5-52cb-8ab9-2725bbc7af9f",
+    "exam_id": "5a42333d-9def-5438-9baa-f46201f97fae",
+    "question_id": "921778a0-7f3a-5330-bb94-0692af1a257c",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오전 · 문제 3"
+  },
+  {
+    "leaf_id": "20fb9238-14bb-5100-949f-66dba3f08ccc",
+    "exam_id": "c5870bbe-a74f-5e7f-8767-8502166c56b4",
+    "question_id": "cf0a153e-f543-533d-bfe5-7e590c7e1f92",
+    "label": "중앙대학교 · 2023 · mock · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "af397781-3e8d-5cc5-9018-ae665ae81d49",
+    "exam_id": "33af3caf-afc5-5243-b110-4ba4d6a6651a",
+    "question_id": "39127bf2-ef37-5885-af96-e7db08cfbefc",
+    "label": "2022학년도 인하대학교 모의논술 자연계열 · 문제 1"
+  },
+  {
+    "leaf_id": "fa912822-b549-503b-b3ee-7b96a9116183",
+    "exam_id": "33af3caf-afc5-5243-b110-4ba4d6a6651a",
+    "question_id": "d770d34d-8354-5739-8e41-2e71041b0a95",
+    "label": "2022학년도 인하대학교 모의논술 자연계열 · 문제 2"
+  },
+  {
+    "leaf_id": "efca55c7-550a-55be-8d62-c0a4c738b545",
+    "exam_id": "33af3caf-afc5-5243-b110-4ba4d6a6651a",
+    "question_id": "c326c864-eda0-5929-a06d-814a843180bb",
+    "label": "2022학년도 인하대학교 모의논술 자연계열 · 문제 3"
+  },
+  {
+    "leaf_id": "2c34ec6b-5821-56df-b07c-99d5f365eca4",
+    "exam_id": "8c5dc701-9b26-5935-9610-7b27256eb767",
+    "question_id": "899a2a38-ce8e-51b6-a176-02d428c86f39",
+    "label": "2023학년도 경희대학교 수시논술 사회계 오전 · 논제 3"
+  },
+  {
+    "leaf_id": "cca96260-ac54-52d2-83dd-008a0429200e",
+    "exam_id": "3e2526ee-14af-5c47-a5fc-76b70cc5bf8c",
+    "question_id": "3be9ca31-73ca-56d4-909f-2bc07d5a6991",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오전 · 문제 1"
+  },
+  {
+    "leaf_id": "ef007231-0962-5c3e-ace9-1fc3593cf5f5",
+    "exam_id": "3e2526ee-14af-5c47-a5fc-76b70cc5bf8c",
+    "question_id": "40ddd6ef-0bd4-50d8-9a29-29b81153d1d7",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오전 · 문제 2"
+  },
+  {
+    "leaf_id": "c3abc2aa-8610-52bc-be22-bdebff5b2911",
+    "exam_id": "3e2526ee-14af-5c47-a5fc-76b70cc5bf8c",
+    "question_id": "948e0067-e2a7-5d6e-b68e-30c4be017595",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오전 · 문제 3"
+  },
+  {
+    "leaf_id": "6f5aa167-60ed-5b13-a88f-5bf332b8705b",
+    "exam_id": "53bdd6f5-78be-548f-ac1b-23081f9bf74c",
+    "question_id": "eaf570bf-af83-5e9e-a9b7-ac39fd801fcd",
+    "label": "중앙대학교 · 2026 · mock · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "69b117c5-2fea-5eaa-9c25-d812f1d1b718",
+    "exam_id": "ef5ca7d9-3a56-5068-933e-f7a2859ef438",
+    "question_id": "ac775585-f684-534d-9836-49e9d4d352cd",
+    "label": "2024학년도 한양대학교 수시논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "018b6b54-4815-504a-adb8-685faa204516",
+    "exam_id": "70b0ddd5-0816-5395-8ac5-6a4e3664a282",
+    "question_id": "e62ef7df-f6d2-5a98-a586-b3b1ac69a9bd",
+    "label": "2027학년도 인하대학교 모의논술 자연계열 · 문제 1"
+  },
+  {
+    "leaf_id": "c16c7ced-07e9-585a-9cea-a424c9fe6fd2",
+    "exam_id": "70b0ddd5-0816-5395-8ac5-6a4e3664a282",
+    "question_id": "b45cc32f-0b23-5599-94b8-ce1c40fcb2ba",
+    "label": "2027학년도 인하대학교 모의논술 자연계열 · 문제 2"
+  },
+  {
+    "leaf_id": "502352a4-3b67-58f8-81bf-70c0271fc6c6",
+    "exam_id": "70b0ddd5-0816-5395-8ac5-6a4e3664a282",
+    "question_id": "4116bb91-7aba-50ee-ab19-a62192e68ca9",
+    "label": "2027학년도 인하대학교 모의논술 자연계열 · 문제 3"
+  },
+  {
+    "leaf_id": "d3fa91a9-315c-52cf-86b9-e4e3ad1f7aca",
+    "exam_id": "df220173-b0ef-5cd2-8a92-12a958fd669e",
+    "question_id": "73bfc0f6-b992-5874-b24d-07cbdbe0360e",
+    "label": "2022학년도 건국대학교 수시논술 인문사회Ⅱ · 문제 2"
+  },
+  {
+    "leaf_id": "687452a8-0e06-5a41-bd5c-6850364d5e02",
+    "exam_id": "45f76789-e20e-596f-9760-3850644d21a9",
+    "question_id": "94c35043-cbcb-5ae0-a40e-9557ba8cc1cb",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오후 · 문제 1"
+  },
+  {
+    "leaf_id": "1cd8b541-a44c-513c-9afe-39cd46664a69",
+    "exam_id": "45f76789-e20e-596f-9760-3850644d21a9",
+    "question_id": "d8888609-2644-5ceb-b1d2-0747f11d2ac1",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오후 · 문제 2"
+  },
+  {
+    "leaf_id": "8000aa8a-902c-51da-b8c9-3b02b2b6e766",
+    "exam_id": "45f76789-e20e-596f-9760-3850644d21a9",
+    "question_id": "c204eb54-41f2-54ec-9b59-8efd77b0727d",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오후 · 문제 3"
+  },
+  {
+    "leaf_id": "838b227c-a442-5088-be0a-3339e0419d3f",
+    "exam_id": "e8ea5bb3-0956-5fd6-b90e-4b7fb350b2f9",
+    "question_id": "2884b1ef-8274-5ccf-8377-a5f255355f39",
+    "label": "2026학년도 한양대학교 수시논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "2c34f7fb-1485-5030-9b71-b2bd72fd6403",
+    "exam_id": "6536445f-75b2-5f84-894a-f33382e8ea91",
+    "question_id": "4723ac16-8f3c-59aa-b054-3f4cbf51bcf0",
+    "label": "2025학년도 한양대학교 수시논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "7b3d8849-dc6b-5613-9de2-585fff227ab5",
+    "exam_id": "81b81d92-0a1a-54af-b4dd-2702222bc1f3",
+    "question_id": "fae8f3fd-42ea-508b-ba3f-f589fb83f1ac",
+    "label": "건국대학교 2024학년도 모의논술 인문사회Ⅱ · 문제 2"
+  },
+  {
+    "leaf_id": "df0b03d7-613b-5926-a380-df9a5eea74dc",
+    "exam_id": "b4e457a5-0ce6-5973-bade-f4f43ecfa604",
+    "question_id": "95c4edff-caa6-54b4-bb8e-dc3d1de19cb8",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오후 · 문제 1"
+  },
+  {
+    "leaf_id": "c0247ec7-5e2f-5d84-ba81-691a5a0bea84",
+    "exam_id": "b4e457a5-0ce6-5973-bade-f4f43ecfa604",
+    "question_id": "5d5c02a5-31cb-55e7-a673-57cf8cb91abf",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오후 · 문제 2"
+  },
+  {
+    "leaf_id": "36497aa6-43a3-50e2-b069-26c45566b086",
+    "exam_id": "b4e457a5-0ce6-5973-bade-f4f43ecfa604",
+    "question_id": "fdfe59dc-e68e-5c03-be9c-4ab8f640ff93",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오후 · 문제 3"
+  },
+  {
+    "leaf_id": "ec11c069-b10c-5e16-89c8-0e20060fcfa3",
+    "exam_id": "5ff20127-f5b6-5d4c-a6fd-f54c97a87130",
+    "question_id": "8edfd369-d7b6-576c-bb94-78182f5e565c",
+    "label": "중앙대학교 · 2024 · admission · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "201f3df4-4851-52a3-9e18-6209ef34b56c",
+    "exam_id": "fd82164c-936c-56b2-ab96-b576f0c3be40",
+    "question_id": "a5acc44c-8e5b-51f2-b023-d211c0027093",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오후 · 문제 1"
+  },
+  {
+    "leaf_id": "6dd62ff5-b153-5dea-aeca-4bb7b86bbb2b",
+    "exam_id": "fd82164c-936c-56b2-ab96-b576f0c3be40",
+    "question_id": "6aff48ad-e0fd-59cb-93b2-972fe9f99183",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오후 · 문제 2"
+  },
+  {
+    "leaf_id": "67980cc4-1ff2-5e99-b482-7b1c913918c5",
+    "exam_id": "fd82164c-936c-56b2-ab96-b576f0c3be40",
+    "question_id": "45ade99d-5583-5375-9515-68d10bef0b78",
+    "label": "2025학년도 인하대학교 수시논술 자연계열 오후 · 문제 3"
+  },
+  {
+    "leaf_id": "9765f9ca-2f33-58bb-8e97-c7575564ad58",
+    "exam_id": "3566b3a0-10a3-56ab-a7dc-5b9638706164",
+    "question_id": "0aca057c-b5bf-533d-80ba-17991bac1b3d",
+    "label": "중앙대학교 · 2025 · admission · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "7d26749d-106d-535d-90c1-1c1bdebf8771",
+    "exam_id": "7b2ba890-bb8d-5c00-b665-b926cdd5008f",
+    "question_id": "590b127d-08da-5c33-9eea-34c9c03fc6a0",
+    "label": "2023학년도 건국대학교 수시논술 인문사회Ⅱ · 문제 2"
+  },
+  {
+    "leaf_id": "43f13de2-e1f7-564b-a572-90e6f2431d37",
+    "exam_id": "8931ed55-1c11-538a-b324-9765a60d3a75",
+    "question_id": "fceda5f5-01aa-5f9b-9826-b99c7726f09a",
+    "label": "중앙대학교 · 2024 · mock · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "31a6ae05-81d5-5026-907b-85f75f2bec6d",
+    "exam_id": "d4f1b0c4-98ef-5b28-999b-b369bb81d3ae",
+    "question_id": "aaf768ae-f47a-525c-82ab-3348359d39c8",
+    "label": "중앙대학교 · 2025 · mock · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "ae5f2aff-f6f9-5da3-bd48-db41539858b3",
+    "exam_id": "56a6be43-48eb-5aaa-a0ce-f646faaabe23",
+    "question_id": "37d697f8-bb39-5415-954d-81c0dc7fbedc",
+    "label": "2022학년도 한양대학교 수시논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "3bab07d3-c047-53c2-89ad-9fa20ec7b3f3",
+    "exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+    "question_id": "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb",
+    "label": "건국대 2026 수시 자연 1번 · 문제 1"
+  },
+  {
+    "leaf_id": "169e0ff4-4fd3-5f87-9908-a8cbe7e768ce",
+    "exam_id": "3e1a421d-0c40-5120-88ed-b1646f50e0fd",
+    "question_id": "aa3a95ed-91ae-5269-84e2-3788ae3e96f1",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오전 · 문제 1"
+  },
+  {
+    "leaf_id": "8d288993-9218-5b8c-95a9-581adf4d6e03",
+    "exam_id": "3e1a421d-0c40-5120-88ed-b1646f50e0fd",
+    "question_id": "7b641d4e-9a77-522c-923d-44c52a773cd7",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오전 · 문제 2"
+  },
+  {
+    "leaf_id": "609040a7-cee3-55b9-a678-2714f335a7a1",
+    "exam_id": "3e1a421d-0c40-5120-88ed-b1646f50e0fd",
+    "question_id": "0fa5fa7e-1196-57e7-a439-34173e6e23f9",
+    "label": "2022학년도 인하대학교 수시논술 자연계열 오전 · 문제 3"
+  },
+  {
+    "leaf_id": "148cb335-4931-52c1-8270-a1bac78c7082",
+    "exam_id": "f88663fb-a0d4-52ed-bead-ea11f2c2970e",
+    "question_id": "4b5993d2-f469-52b6-91f2-a282011e4703",
+    "label": "한양대학교 · 2024 · mock · 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "7532956e-9fb5-57c1-98a3-f71aeee46941",
+    "exam_id": "1f382418-b4b8-5562-82ec-0c2e5f3cfaef",
+    "question_id": "5e7e0c59-16c3-506a-9d75-3df6b9af0ddc",
+    "label": "건국대학교 2025학년도 모의논술 인문사회Ⅱ · 문제 2"
+  },
+  {
+    "leaf_id": "3e5189bc-840a-54ee-a6ab-d261261c5413",
+    "exam_id": "19f4c1e7-a82a-53ad-9aa2-7c72594518f1",
+    "question_id": "00de825b-ecd8-52f6-94f3-27b295e36039",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오후 · 문제 1"
+  },
+  {
+    "leaf_id": "e82980f0-57a7-5e52-b267-92742323d8d0",
+    "exam_id": "19f4c1e7-a82a-53ad-9aa2-7c72594518f1",
+    "question_id": "f43fa3ce-963a-5bdf-b30c-ad7e00588605",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오후 · 문제 2"
+  },
+  {
+    "leaf_id": "37db2b14-b863-561e-87dc-df8e286746ca",
+    "exam_id": "19f4c1e7-a82a-53ad-9aa2-7c72594518f1",
+    "question_id": "e36c2d3a-07e3-5129-8cc9-ed0a950474d6",
+    "label": "2026학년도 인하대학교 수시논술 자연계열 오후 · 문제 3"
+  },
+  {
+    "leaf_id": "73a0a0e0-ad1e-52cd-bf3d-ba3dc5773ded",
+    "exam_id": "54d99cb2-f04e-598a-b5e9-9222d0b97bba",
+    "question_id": "413b39ec-fa86-55e4-af64-cc3492d847f0",
+    "label": "2026학년도 한양대학교 모의논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "9c4f66ce-893a-566c-8883-17838de68ae5",
+    "exam_id": "3dc612e2-15e0-51cc-9906-40a387f128a5",
+    "question_id": "ee2534d7-7184-53f5-aa6e-ec8c368fffda",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오전 · 문제 1"
+  },
+  {
+    "leaf_id": "24f4aa41-fdc1-5801-ac60-fe7b1c4ded0c",
+    "exam_id": "3dc612e2-15e0-51cc-9906-40a387f128a5",
+    "question_id": "cc6b916a-1acd-5dc3-97e9-657f335d3d87",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오전 · 문제 2"
+  },
+  {
+    "leaf_id": "f64947cb-345f-516c-823c-38d120124d6d",
+    "exam_id": "3dc612e2-15e0-51cc-9906-40a387f128a5",
+    "question_id": "cde96d6e-86e6-587e-9175-00ce96883948",
+    "label": "2023학년도 인하대학교 수시논술 자연계열 오전 · 문제 3"
+  },
+  {
+    "leaf_id": "674d75b3-7850-5487-bf75-3c9603f58f7f",
+    "exam_id": "c2f698b5-c617-57da-bc44-ee21b9df25e6",
+    "question_id": "129c1128-18ac-5bd2-9939-fb7c8023c5f8",
+    "label": "2023학년도 인하대학교 모의논술 자연계열 · 문제 1"
+  },
+  {
+    "leaf_id": "1699c649-dcf0-5024-84f3-4775eaed49c3",
+    "exam_id": "c2f698b5-c617-57da-bc44-ee21b9df25e6",
+    "question_id": "6fad43cb-30fc-545f-be4b-acc344d6c3e0",
+    "label": "2023학년도 인하대학교 모의논술 자연계열 · 문제 2"
+  },
+  {
+    "leaf_id": "97db9255-d3c9-55c9-8af4-082133a65ee4",
+    "exam_id": "c2f698b5-c617-57da-bc44-ee21b9df25e6",
+    "question_id": "82b92a5a-e03a-5f07-b34e-29ab3fddccde",
+    "label": "2023학년도 인하대학교 모의논술 자연계열 · 문제 3"
+  },
+  {
+    "leaf_id": "206c7e42-f324-5d92-8bbe-b11979d57eda",
+    "exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+    "question_id": "ac4d234d-56c0-57fd-85c3-2b9889889acd",
+    "label": "2025학년도 경희대학교 모의논술 사회계 온라인 · 논제 3"
+  },
+  {
+    "leaf_id": "2c405a4c-6a94-530d-be82-76ecf8158138",
+    "exam_id": "1a51f7f2-76c3-5d2f-a6f2-8020d00ff637",
+    "question_id": "314a4ee0-e116-55fd-8b85-6438b60faa84",
+    "label": "2026학년도 인하대학교 모의논술 자연계열 · 문제 1"
+  },
+  {
+    "leaf_id": "a066dde9-1311-5b54-82d0-032094087dda",
+    "exam_id": "1a51f7f2-76c3-5d2f-a6f2-8020d00ff637",
+    "question_id": "52371b5f-4c4d-5e5c-84bf-e616b59fc98d",
+    "label": "2026학년도 인하대학교 모의논술 자연계열 · 문제 2"
+  },
+  {
+    "leaf_id": "e7379b0d-6b85-564f-9118-29cbdde8e3f4",
+    "exam_id": "1a51f7f2-76c3-5d2f-a6f2-8020d00ff637",
+    "question_id": "3a467677-0231-5877-b18e-8d9dba992853",
+    "label": "2026학년도 인하대학교 모의논술 자연계열 · 문제 3"
+  },
+  {
+    "leaf_id": "591f4939-0db3-565e-9ab0-d1ae60f438e6",
+    "exam_id": "68996278-1e19-5560-ac94-cf43656bf684",
+    "question_id": "a32bc8ed-edf9-580e-b2e6-10ddaea4cf1e",
+    "label": "2027학년도 한양대학교 모의논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "1ffa56cf-7b97-592b-a48c-8ab19e1e29f0",
+    "exam_id": "f45667e4-bbd0-5372-b044-e5e9d3983521",
+    "question_id": "08679328-cbcb-5106-8429-626b250cbb62",
+    "label": "2023학년도 한양대학교 수시논술 상경계열 · 문제 2"
+  },
+  {
+    "leaf_id": "0afcc1e0-68ed-56f1-94ef-52d4d81f144b",
+    "exam_id": "42c8d5be-6cdb-5528-8808-174d9785b9d4",
+    "question_id": "11f3fda1-4add-5072-a6ba-d8508b911025",
+    "label": "중앙대학교 · 2027 · mock · 경영경제(일반) · 문제 3"
+  },
+  {
+    "leaf_id": "2b528dc2-5c4e-5e4f-8ecb-8bb4c2a4d8e1",
+    "exam_id": "c722ffa2-0ff4-5718-9748-186111a7c560",
+    "question_id": "c6f2620a-32cc-5748-a40e-e2e2d11377c4",
+    "label": "건국대학교 2024학년도 수시 인문사회Ⅱ · 문제 2"
+  },
+  {
+    "leaf_id": "2186939f-a84c-535e-bd6b-647713856dbe",
+    "exam_id": "c3bb88cd-6a1d-54d0-bc84-4a4707202868",
+    "question_id": "0abea959-72df-5c55-adc8-76f2cd6af01e",
+    "label": "중앙대학교 · 2022 · mock · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "be56b9db-a783-5db8-8b0e-810a57473bc8",
+    "exam_id": "e9e7daf3-854c-57d3-a6dd-cc18fca0d8ea",
+    "question_id": "fb4072f0-054a-5ae0-bbdc-f21cf71bf865",
+    "label": "중앙대학교 · 2026 · admission · 경영경제 · 문제 3"
+  },
+  {
+    "leaf_id": "a655a974-324b-507d-bc59-fc6c86e35d78",
+    "exam_id": "e5f1d7de-f69b-5d7b-85e6-8ded440ee94d",
+    "question_id": "e18e8d89-63f0-51e1-8d9b-44cf9b2681a8",
+    "label": "2024학년도 인하대학교 모의논술 자연계열 · 문제 1"
+  },
+  {
+    "leaf_id": "f5860380-dcdb-553e-befd-7b23a326fbef",
+    "exam_id": "e5f1d7de-f69b-5d7b-85e6-8ded440ee94d",
+    "question_id": "a93206a4-35af-5623-92fa-d09f5f0abbd7",
+    "label": "2024학년도 인하대학교 모의논술 자연계열 · 문제 2"
+  },
+  {
+    "leaf_id": "bb365a98-0f32-5ff7-8ee6-bf5f8534f2a2",
+    "exam_id": "e5f1d7de-f69b-5d7b-85e6-8ded440ee94d",
+    "question_id": "52787b70-89e0-5588-bae2-1eca58f38ed3",
+    "label": "2024학년도 인하대학교 모의논술 자연계열 · 문제 3"
+  },
+  {
+    "leaf_id": "9464a798-36f8-5211-bcfb-c8ad43c1b4ad",
+    "exam_id": "b59d5983-e977-52be-89cf-385d6ecc0403",
+    "question_id": "fde7a4e6-9935-5717-baad-422e527c0608",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오전 · 문제 1"
+  },
+  {
+    "leaf_id": "e0f71b73-0f94-5fdc-94f6-6980d3a0bdb2",
+    "exam_id": "b59d5983-e977-52be-89cf-385d6ecc0403",
+    "question_id": "31791552-d69b-5e41-b41a-76d58d851d63",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오전 · 문제 2"
+  },
+  {
+    "leaf_id": "31df8d5d-a638-50dd-b6f1-4b3ed6da4610",
+    "exam_id": "b59d5983-e977-52be-89cf-385d6ecc0403",
+    "question_id": "b7ca7516-9ae3-5fc3-a8f6-409f7d3fd340",
+    "label": "2024학년도 인하대학교 수시논술 자연계열 오전 · 문제 3"
+  },
+  {
+    "leaf_id": "f43a377a-034e-5a7c-9b9f-dd1e60b16afa",
+    "exam_id": "7e232cd6-cbad-547f-bb34-2eb6cebb65f7",
+    "question_id": "b2dd66ec-1684-5fc3-8cae-d099e75cae74",
+    "label": "건국대학교 2025학년도 수시 인문사회Ⅱ · 문제 2"
+  }
+]

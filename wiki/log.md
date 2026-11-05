@@ -5750,3 +5750,9 @@ Owner PDF FAIL: TEST resource1건/source unknown/Resolver미배포 확인. 2026�
 
 ### 2026-11-05 — TEST62 PDF 실기기 복구 확인
 Owner 재실행 후2026·9월 목록/PDF 열기/뒤로 복귀 “완료”. 해당 범위 실기기PASS, 다른시험/Android/운영 검증은 별도. [상세](task19c-device-verification-20261105.md#test62-pdf-복구-후-실기기-pass).
+
+### 2026-11-05 — TASK20 운영 공개 상태 감사·WEB 수정
+Registry363·패키지213 실제 조회, 계열 일괄 hold/부분 Math 연결/베타 문구 수정, 집중92PASS·운영 설정 빌드PASS. 운영 조회 장애 잔존; DB/설정/평가/차감/APP58 변경0. [상세](task20-production-availability-20261105.md).
+
+### 2026-11-05 — TASK20 운영 WEB postflight
+23a03b0 / 858e369c 배포success. 건국Q1 부분 공개·경희 의약 제한 사유·한양 인문/상경·인하 자연 진입 확인. 다른1460경로/settings보존. 추가57회귀/타입/린트PASS. 미연결 자연계와202시험 전체 E2E는 미완료. [배너 인계](task20-banner-handoff-20261105.md).
