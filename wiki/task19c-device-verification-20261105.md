@@ -81,3 +81,8 @@ EBSi/메가스터디 원출처 검색은 수행했으나 대상120행의 검수 
 산출물·로그·receipt: `/Users/woojinchang/development/legendstudy-private-backups/task19c-20261105/test62/`. AOT SHA256 `0cc48db5ee38ece99a11dee060f4c43f7b9f5bb9d0127b6bbc47bf8694491b17`. 기존 참고값9검사/analyze PASS 재사용. Android 재빌드 없음(이번 요청 iPhone).
 
 Owner에게2026학년도9월 국어 화작91~98/언매87~96, 기준2024·2025학년도9월 및 수학·출처 확인을 요청했다. **참고표 실기기 UI 판정은 응답 대기**이며 이전TEST61 PASS로 대체하지 않는다.
+
+### TEST62 참고 원점수 실기기 PASS
+Owner가2026학년도9월 국어 참고 범위·기준 시험, 수학 변경·출처 펼치기 검수 요청에 “확인완료”로 응답했다. 해당 범위를 실제 iPhone12ProMax TEST62 **PASS**로 기록한다. [실기기 캡처](assets/task19/iphone-test62-reference.png)에서는 수학 기하/미적분/확통 참고 표, 기준2024·2025학년도9월, 실제 등급 판정용이 아님 안내, 미확인9등급—를 직접 확인했다. 캡처 시 출처는 접힌 상태이므로 펼치기 동작은 Owner 확인 근거다.
+
+11시험 전수/자료↔학습/PDF 왕복/Android 검수까지 PASS로 확대하지 않는다. 코드 변경·재빌드·운영 앱·DB 변경 없음.

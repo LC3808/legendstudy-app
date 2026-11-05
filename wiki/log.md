@@ -5738,3 +5738,6 @@ Owner 승인에 따라 이전 동일시기·선택과목·등급의 최소~최�
 
 ### 2026-11-05 — TEST62 iPhone 설치
 6ea7055 소스 Xcode Release·서명·TEST ID/버전62 검증 PASS. iPhone12ProMax LS Math TEST62 설치/실행, 본앱58 보존. 참고 원점수 Owner 검수 대기, 운영DB/Store0. [영수증](task19c-device-verification-20261105.md#test62-참고-원점수-검수-빌드).
+
+### 2026-11-05 — TEST62 참고 원점수 실기기 PASS
+Owner 국어/수학 참고 범위·기준·출처 검수 “확인완료”. 실제iPhone 수학3과목 참고표 캡처 확보. 11시험 전수/Android는 별도 미검증, 운영 변경0. [기록](task19c-device-verification-20261105.md#test62-참고-원점수-실기기-pass).
