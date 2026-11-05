@@ -18,6 +18,8 @@ String analyticsPlatform() {
 /// platform is a parameter. These are behaviour events — official completion,
 /// credit and revenue counts come from PostgreSQL, not from these.
 abstract final class AnalyticsEvents {
+  static const menuView = 'menu_view';
+  static const materialOpen = 'material_open';
   static const gradeCutoffView = 'grade_cutoff_view';
   // App / auth
   static const appOpen = 'app_open';
@@ -64,6 +66,10 @@ abstract final class AnalyticsEvents {
 /// dropped before sending. No answer body, evaluation text, name, email,
 /// phone, token, API key, payment instrument or student PII.
 abstract final class AnalyticsParamKeys {
+  static const menuId = 'menu_id';
+  static const contentItemId = 'content_item_id';
+  static const entrySource = 'entry_source';
+  static const schemaVersion = 'schema_version';
   static const academicYear = 'academic_year';
   static const subjectCode = 'subject_code';
   static const platform = 'platform';
@@ -82,6 +88,10 @@ abstract final class AnalyticsParamKeys {
   static const source = 'source';
 
   static const allowed = <String>{
+    menuId,
+    contentItemId,
+    entrySource,
+    schemaVersion,
     academicYear,
     subjectCode,
     platform,

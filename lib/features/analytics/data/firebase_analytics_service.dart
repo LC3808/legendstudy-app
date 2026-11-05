@@ -12,6 +12,8 @@ class FirebaseAnalyticsService implements AnalyticsService {
     : _analytics = analytics ?? FirebaseAnalytics.instance;
 
   final FirebaseAnalytics _analytics;
+  static Future<void> enableCollection() =>
+      FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
 
   void _fire(Future<void> Function() op) {
     try {
@@ -28,7 +30,6 @@ class FirebaseAnalyticsService implements AnalyticsService {
       ...?params,
     });
     _fire(() async {
-      await _analytics.setAnalyticsCollectionEnabled(true);
       await _analytics.logEvent(
         name: name,
         parameters: sanitized.isEmpty ? null : sanitized,

@@ -5750,3 +5750,5 @@ Owner PDF FAIL: TEST resource1건/source unknown/Resolver미배포 확인. 2026�
 
 ### 2026-11-05 — TEST62 PDF 실기기 복구 확인
 Owner 재실행 후2026·9월 목록/PDF 열기/뒤로 복귀 “완료”. 해당 범위 실기기PASS, 다른시험/Android/운영 검증은 별도. [상세](task19c-device-verification-20261105.md#test62-pdf-복구-후-실기기-pass).
+
+- 2026-11-05: [APP GA4](app-ga4-usage-20261105.md) 유한 메뉴/Registry 이벤트 구현; Firebase 플랫폼 등록·맞춤 차원·승인된 Viewer 적용, 실제 iOS DebugView/GA API 확인. 기존 원장·APP58·Store 보존.

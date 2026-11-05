@@ -1,3 +1,4 @@
+import '../features/analytics/usage_tracking.dart';
 import '../features/notices/notices.dart';
 import '../features/credits/credit_history.dart';
 import '../features/onboarding/device_intro.dart';
@@ -216,7 +217,8 @@ final routerProvider = Provider<GoRouter>((ref) {
                       title: '내신 LAB',
                       child: LabComingSoonPage(
                         title: '내신 LAB',
-                        lead: '내신 성적을 입력하면 과목별 강점과 보완이 필요한 영역을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
+                        lead:
+                            '내신 성적을 입력하면 과목별 강점과 보완이 필요한 영역을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '더 정교한 내신 분석 서비스를 준비하고 있습니다.',
                       ),
                     ),
@@ -227,7 +229,8 @@ final routerProvider = Provider<GoRouter>((ref) {
                       title: '수능 LAB',
                       child: LabComingSoonPage(
                         title: '수능 LAB',
-                        lead: '모의고사·수능 성적을 입력하면 영역별 강점과 보완이 필요한 부분을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
+                        lead:
+                            '모의고사·수능 성적을 입력하면 영역별 강점과 보완이 필요한 부분을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '성적 변화까지 한눈에 확인할 수 있도록 준비하고 있습니다.',
                       ),
                     ),
@@ -300,10 +303,8 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                   GoRoute(
                     path: 'school',
-                    builder: (_, _) => const NestedPage(
-                      title: '프로필 수정',
-                      child: SchoolPage(),
-                    ),
+                    builder: (_, _) =>
+                        const NestedPage(title: '프로필 수정', child: SchoolPage()),
                   ),
                   GoRoute(
                     path: 'recent',
@@ -394,6 +395,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       router.go('/auth/recovery?reason=link');
     }
   }, fireImmediately: true);
+  ref.onDispose(bindUsageTracking(router, ref.read(usageTrackerProvider)));
   ref.onDispose(router.dispose);
   return router;
 });

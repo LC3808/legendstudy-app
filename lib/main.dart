@@ -1,3 +1,4 @@
+import 'features/analytics/firebase_usage_options.dart';
 import 'core/network/review_read_only_client.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -77,7 +78,8 @@ class _AppBootstrapState extends State<AppBootstrap> {
       initializeAnalytics(
         enabled: config.analyticsEnabled,
         initialize: () async {
-          await Firebase.initializeApp();
+          await Firebase.initializeApp(options: usageFirebaseOptions());
+          await FirebaseAnalyticsService.enableCollection();
           return FirebaseAnalyticsService();
         },
       );

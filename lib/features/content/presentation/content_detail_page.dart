@@ -1,3 +1,5 @@
+import '../../analytics/usage_tracking.dart';
+import '../../analytics/analytics_providers.dart';
 import '../../exams/cutoffs/grade_cutoff_panel.dart';
 import '../../exams/cutoffs/grade_cutoff.dart';
 import 'material_display_title.dart';
@@ -37,6 +39,7 @@ class ContentDetailPage extends ConsumerStatefulWidget {
 
 class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
     with WidgetsBindingObserver {
+  MaterialViewTracker? _materialViews;
   String? _recentOwner;
   String? _recentContentId;
   ForegroundRecentViewTracker? _recentTracker;
@@ -49,8 +52,18 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
     WidgetsBinding.instance.addObserver(this);
     ref.listenManual(contentDetailProvider(widget.slug), (_, next) {
       final item = next.asData?.value;
-      if (item != null) _startRecent(item.id);
-    });
+      if (item != null) {
+        _startRecent(item.id);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted || ModalRoute.of(context)?.isCurrent != true) return;
+          _materialViews ??= MaterialViewTracker(
+            ref.read(analyticsServiceProvider),
+            ref.read(usageTrackerProvider).materialSource,
+          );
+          _materialViews!.loaded(item.id);
+        });
+      }
+    }, fireImmediately: true);
     ref.listenManual(authStateProvider, (_, _) {
       final item = ref.read(contentDetailProvider(widget.slug)).asData?.value;
       if (item != null) _startRecent(item.id);
@@ -132,8 +145,9 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
       if (mounted && !_recentFailureShown) {
         _recentFailureShown = true;
         // A recent view is auxiliary; never replace the resolved detail.
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
       }
     }
   }
