@@ -1,7 +1,7 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
-[통합63](app-update-final-audit-20261105.md): 코드 통합, 출시 검수 전.
+[APP63 점검](app63-prelaunch-readiness-20261105.md): 출시 보류.
 
 ## TASK19 후속 업데이트 — PARTIAL
 [TASK19-C TEST60 실기기](task19c-device-verification-20261105.md): TEST60 iOS 설치·Android APK PASS. iPhone12ProMax26.6.1 베타 문구 Owner PASS. TEST11시험2,457행 실제 HTTP 대조 PASS·보호5테이블 동일. 2시험 표시·TEST61 비교 UI Owner PASS, 건국 TEST scope PARTIAL, Android 없음. 운영SQL/Store0. [UI 정정](task19-owner-ui-followup-20261105.md), [A/B 데이터·기존 회귀](task19-lab-ux-grade-cutoff-20261105.md), [운영 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). 출처 추정값 미확보; 승인된 과거 시험 참고범위120행 별도 표시 구현·9검사PASS/TEST62 참고표·자료/학습 대표 비교 PASS. APP58 보존. PDF TEST 복구·2026·9월 목록/열기/복귀 Owner PASS.

@@ -5754,3 +5754,6 @@ Owner 재실행 후2026·9월 목록/PDF 열기/뒤로 복귀 “완료”. 해�
 - 2026-11-05: [APP GA4](app-ga4-usage-20261105.md) 유한 메뉴/Registry 이벤트 구현; Firebase 플랫폼 등록·맞춤 차원·승인된 Viewer 적용, 실제 iOS DebugView/GA API 확인. 기존 원장·APP58·Store 보존.
 
 2026-11-05 [후속 앱 최종 통합 감사·1.0.2(63)](app-update-final-audit-20261105.md): APP58 보존, 누락 PDF/문의/이용권 통합, 운영·Store 변경 없음.
+
+## 2026-11-05 APP63 출시 전 점검
+Owner 승인 TASK18 기반 운영 적용/PENDING PASS, APP63 iPhone 설치·실행 완료. TASK19 invoker의 운영 Registry SELECT 부재로 적용 보류; scoped definer 수정안 격리2457행 PASS/재승인 대기. 기존16테이블 변경통계 동일(내용해시 검토차단),63/58 산출물 보존·소스9fb4ea3 불변. GA4 보고서 행없음/실기기 문의·History 확인대기, RELEASE_READY=NO. [근거·다음 단계](app63-prelaunch-readiness-20261105.md).
