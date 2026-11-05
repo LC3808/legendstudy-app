@@ -10,6 +10,23 @@ void main() {
       'leaf_id': '22222222-2222-4222-8222-222222222222',
     },
   ];
+  test(
+    'release lookup applies to other universities without a name exception',
+    () {
+      for (final id in ['inha-exam', 'hanyang-exam', 'another-exam']) {
+        expect(
+          hasReleasedMathQuestion(
+            [
+              {...rows.single, 'essay_exam_id': id},
+            ],
+            id,
+            ['q1'],
+          ),
+          isTrue,
+        );
+      }
+    },
+  );
   test('Konkuk standalone release matches exact question, not track name', () {
     expect(hasReleasedMathQuestion(rows, exam, ['q1']), isTrue);
     expect(hasReleasedMathQuestion(rows, exam, ['q2']), isFalse);

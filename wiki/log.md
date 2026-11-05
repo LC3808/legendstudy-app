@@ -5721,3 +5721,5 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 ## 2026-11-05 — TASK19-A
 
 [베타 안내·standalone Math 상태](task19-lab-ux-grade-cutoff-20261105.md) 구현. 43개 로컬 회귀/analyze PASS. 운영 DB 읽기만, 실기기 미검증. B11시험 기존 Registry·출처 조사 진행.
+
+- 2026-11-05 TASK19 Owner 후속: 자료 상태/보조 표준점수 삭제, 출처 접기, 원점수·표준점수 전용 표 분리. 추정 원점수 연결 미완료를 구분. 모든 대학 공통 Math 공개 판별 회귀 추가. [상세](task19-owner-ui-followup-20261105.md).

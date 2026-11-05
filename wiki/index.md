@@ -351,4 +351,6 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 ## TASK19 후속 업데이트
 
+[Owner 등급컷 표시 정정·대학 공통 공개 범위 확인](task19-owner-ui-followup-20261105.md).
+
 [LAB 베타 안내·건국 자연 상태·평가원 등급컷](task19-lab-ux-grade-cutoff-20261105.md). 기존 Mock 채점/자료/PDF/Analytics 경로를 함께 따른다.

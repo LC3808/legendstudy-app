@@ -2,6 +2,7 @@
 # Current Status
 
 ## TASK19 후속 업데이트 — PARTIAL
+[Owner 표시 정정](task19-owner-ui-followup-20261105.md): 자료 상태·보조 표준점수 제거. 원점수/표준점수 전용 표 분리, 추정 원점수 출처·DB 연결은 미완료. 대학 공통 Math 공개 판별이며 등록 시험 전체 무조건 해제는 아님.
 [LAB 안내·11시험 등급컷](task19-lab-ux-grade-cutoff-20261105.md): A 독립 커밋·43회귀 PASS. B Native 자료/학습 공통 조회·원점수 우선·SQL 후보 구현. 2,457행 중 점수2,212/미확인NULL245. 전체1,500 PASS/7 SKIP, 로컬DB 권한·원복 PASS. 운영/실기기·GA4 미검증. [SQL 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). APP58·승인 버전·운영·다른 PDF 브랜치 보존. [이전 품질 상태](task19-prior-status-snapshot-20261105.md).
 
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL

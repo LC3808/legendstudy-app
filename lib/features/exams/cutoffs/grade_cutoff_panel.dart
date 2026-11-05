@@ -74,10 +74,7 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
                       : selected;
                   final chosen = rows.where((r) => r.key == key).toList()
                     ..sort((a, b) => a.grade.compareTo(b.grade));
-                  final scoreTypes = chosen
-                      .where((r) => r.scoreType != '자료 없음')
-                      .map((r) => r.scoreType)
-                      .toSet();
+                  final rawTable = chosen.any((r) => r.hasRaw);
                   if (chosen.isNotEmpty) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (mounted && expanded) record(chosen.first);
@@ -104,27 +101,18 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
                       ),
                       if (chosen.isNotEmpty) ...[
                         const SizedBox(height: 12),
-                        Text(
-                          '${scoreTypes.isEmpty ? '자료 없음' : scoreTypes.join(' · ')} 등급컷',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const Text('원점수 우선 · 원점수가 없으면 표준점수로 표시합니다.'),
-                        const SizedBox(height: 8),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: DataTable(
-                            columnSpacing: 16,
+                            columnSpacing: 20,
                             horizontalMargin: 8,
                             columns: [
                               const DataColumn(label: Text('등급')),
                               DataColumn(
-                                label: Text(
-                                  scoreTypes.length == 1
-                                      ? scoreTypes.first
-                                      : '점수',
-                                ),
+                                label: Text(rawTable ? '원점수' : '표준점수'),
                               ),
-                              const DataColumn(label: Text('자료 상태')),
+                              if (!rawTable)
+                                const DataColumn(label: Text('추정 원점수')),
                             ],
                             rows: [
                               for (final r in chosen)
@@ -133,75 +121,50 @@ class _GradeCutoffPanelState extends ConsumerState<GradeCutoffPanel> {
                                     DataCell(Text('${r.grade}등급')),
                                     DataCell(
                                       Text(
-                                        scoreTypes.length == 1
-                                            ? r.score
-                                            : '${r.scoreType} ${r.score}',
+                                        rawTable
+                                            ? (r.hasRaw ? r.score : '—')
+                                            : (r.data['standard_score']
+                                                      ?.toString() ??
+                                                  '—'),
                                       ),
                                     ),
-                                    DataCell(
-                                      Text(
-                                        r.certainty.replaceFirst(
-                                          '확정 여부 미제공',
-                                          '확정 여부\n미제공',
-                                        ),
-                                      ),
-                                    ),
+                                    if (!rawTable)
+                                      DataCell(Text(r.estimatedRaw)),
                                   ],
                                 ),
                             ],
                           ),
                         ),
-                        if (chosen.any(
-                          (r) => r.hasRaw && r.data['standard_score'] != null,
-                        )) ...[
-                          const SizedBox(height: 12),
-                          const Text(
-                            '표준점수 (보조 정보)',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          for (final r in chosen.where(
-                            (r) => r.data['standard_score'] != null,
-                          ))
-                            Text(
-                              '${r.grade}등급: ${r.data['standard_score']} · ${GradeCutoff.certaintyLabel(r.data['standard_certainty'])}',
-                            ),
-                        ],
-                        const SizedBox(height: 12),
-                        const Text(
-                          '등급 경계는 해당 등급의 하한입니다. 범위는 원자료의 추정 범위입니다. 추정 원점수는 공식 확정 점수가 아닙니다.',
+                        const SizedBox(height: 8),
+                        ExpansionTile(
+                          title: const Text('출처'),
+                          children: [
+                            for (final url
+                                in chosen
+                                    .map((r) => r.data['source_url'])
+                                    .whereType<String>()
+                                    .toSet())
+                              ExternalLinkButton(
+                                uri: Uri.tryParse(url),
+                                label: '등급컷 원본 게시글',
+                              ),
+                            for (final url
+                                in chosen
+                                    .expand(
+                                      (r) => [
+                                        r.data['raw_source_url'],
+                                        r.data['standard_source_url'],
+                                        r.data['estimated_raw_source_url'],
+                                      ],
+                                    )
+                                    .whereType<String>()
+                                    .toSet())
+                              ExternalLinkButton(
+                                uri: Uri.tryParse(url),
+                                label: '점수 기준 원본 자료',
+                              ),
+                          ],
                         ),
-                        if (chosen.length < 9)
-                          const Text(
-                            '원자료에서 확인된 등급만 표시합니다. 누락된 경계는 임의 계산하지 않습니다.',
-                          ),
-                        for (final url
-                            in chosen
-                                .map((r) => r.data['source_url'])
-                                .whereType<String>()
-                                .toSet())
-                          ExternalLinkButton(
-                            uri: Uri.tryParse(url),
-                            label: '등급컷 원본 게시글',
-                          ),
-                        for (final url
-                            in chosen
-                                .expand(
-                                  (r) => [
-                                    r.data['raw_source_url'],
-                                    r.data['standard_source_url'],
-                                  ],
-                                )
-                                .whereType<String>()
-                                .toSet())
-                          ExternalLinkButton(
-                            uri: Uri.tryParse(url),
-                            label: '점수 기준 원본 자료',
-                          ),
-                        for (final entry in {
-                          for (final r in chosen)
-                            '${r.data['source_name']} · ${r.data['verified_at']?.toString().split('T').first ?? ''}',
-                        })
-                          Text(entry),
                       ],
                     ],
                   );

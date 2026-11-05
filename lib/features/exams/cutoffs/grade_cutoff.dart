@@ -27,6 +27,9 @@ class GradeCutoff {
       'raw_score_min',
       'raw_score_max',
       'standard_score',
+      'estimated_raw_score',
+      'estimated_raw_score_min',
+      'estimated_raw_score_max',
     ]) {
       final n = data[key];
       if (n != null &&
@@ -61,6 +64,23 @@ class GradeCutoff {
           ? '${data['raw_score_min']}~${data['raw_score_max']}'
           : data['standard_score']?.toString()) ??
       '—';
+
+  /// Supplementary estimate must have a source; never derive raw from standard score.
+  String get estimatedRaw {
+    if (data['estimated_raw_source_url'] is! String ||
+        !(data['estimated_raw_source_url'] as String).startsWith('https://')) {
+      return '—';
+    }
+    final exact = data['estimated_raw_score'];
+    final low = data['estimated_raw_score_min'];
+    final high = data['estimated_raw_score_max'];
+    if (exact is int && low == null && high == null) return '$exact';
+    if (exact == null && low is int && high is int && low <= high) {
+      return '$low~$high';
+    }
+    return '—';
+  }
+
   String get certainty => scoreType == '자료 없음'
       ? '자료 없음'
       : certaintyLabel(data[hasRaw ? 'raw_certainty' : 'standard_certainty']);

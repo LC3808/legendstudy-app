@@ -184,10 +184,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text(rows.first.label).last);
         await tester.pumpAndSettle();
-        expect(
-          find.text(source == 'study' ? '표준점수 등급컷' : '원점수 등급컷'),
-          findsOneWidget,
-        );
+        expect(find.text(source == 'study' ? '표준점수' : '원점수'), findsOneWidget);
         expect(analytics.events.length, 1);
         expect(analytics.events.single['source'], source);
         expect(analytics.events.single['exam_code'], id);

@@ -42,6 +42,21 @@ void main() {
       expect(c.scoreType, '표준점수');
       expect(c.certainty, '확정');
       expect(GradeCutoff(row()).score, '—');
+      expect(c.estimatedRaw, '—');
+      expect(
+        GradeCutoff({...row(standard: 130), 'estimated_raw_score': 94})
+            .estimatedRaw,
+        '—',
+      );
+      expect(
+        GradeCutoff({
+          ...row(standard: 130),
+          'estimated_raw_score_min': 93,
+          'estimated_raw_score_max': 94,
+          'estimated_raw_source_url': 'https://example.org/cutoff',
+        }).estimatedRaw,
+        '93~94',
+      );
       expect(() => GradeCutoff(row(low: 93, high: 92)), throwsFormatException);
       expect(() => GradeCutoff(row(low: 93)), throwsFormatException);
       expect(() => GradeCutoff(row(raw: 101)), throwsFormatException);
@@ -100,7 +115,10 @@ void main() {
       await tester.tap(find.text('국어 · 언어와 매체').last);
       await tester.pumpAndSettle();
       expect(find.text('92~93'), findsOneWidget);
-      expect(find.text('표준점수 (보조 정보)'), findsOneWidget);
+      expect(find.text('표준점수 (보조 정보)'), findsNothing);
+      expect(find.text('자료 상태'), findsNothing);
+      expect(find.text('추정'), findsNothing);
+      expect(find.text('표준점수'), findsNothing);
       expect(tester.takeException(), isNull);
     },
   );
