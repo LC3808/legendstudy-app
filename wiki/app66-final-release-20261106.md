@@ -27,3 +27,9 @@ APP65 소스 234368b를 기준으로 운영 Q3의 근거 부족 응답에 설명
 3. Android 실기기 및 최종 이벤트 검증 이후 출시 차단 여부를 재판정하고 Owner가 검수한 빌드를 운영 트랙에 승격한다.
 
 검수 시간대 GA4 실시간 API HTTP 200, iOS 1.0.2의 app_open/menu_view/screen_view/session_start/user_engagement 각 1건. 빌드 식별과 자료 Registry ID는 이 집계로 확인할 수 없다. DebugView 최초 조회는 이벤트 대기였고 Mac 잠금으로 상세 대조가 중단됐다. 66에서의 iPhone 화면별 확인과 Android 내부 트랙 및 양 플랫폼 빌드별 GA4 수신을 후속 검수한다.
+
+## APP66 iPhone 실기기 후속 검수
+
+iPhone 12 Pro Max에서 65→66 업데이트 후 Owner가 기존 로그인·MY·History, 모의고사 PDF 열람·등급컷, 건국 2026 자연 4문항과 경희 2026 자연 3문항의 답안 작성 화면 진입을 모두 확인했다. 해당 화면 검수 PASS. Q3 신규 운영 실평가는 NOT VERIFIED.
+
+같은 검수 시간대 GA4 실시간 iOS 1.0.2에서 material_open 1건, grade_cutoff_view 15건, university_select 2건, question_select 7건, essay_editor_open 7건 수신. 집계에서 개별 자료 Registry ID와 빌드 번호는 제공되지 않았다. Android Play 업데이트 실기기 검수와 플랫폼별 GA4 상세 대조가 남아 RELEASE_READY = NO.
