@@ -15,3 +15,11 @@ APP67은 계정·시험별 POST /api/essay/exam의 questionIds와 mathQuestions�
 - 경희 2027 모의 사회·한양 2027 모의 상경·숙명 2027 모의 인문의 작성 폼 및 요청 영역 확인. 한양 Q1의 2쪽 PDF 렌더링 확인. 경희 사회와 숙명 인문은 뷰어 진입 확인, 최초 로딩 완료 별도 검수 필요. 빈 답안에서 새 평가/차감 실행하지 않음.
 - 배포 서명 IPA, 서명 AAB 생성. iPhone 12 Pro Max 설치·실행 완료. 동일 일반 계정으로 위 5개 경로의 PDF → 답안 작성 → 첨삭 요청 전 단계까지 Owner 실기기 확인 완료(PASS). 실제 평가는 실행하지 않음. Galaxy S8(SM-G950N, Android 9/API 28)은 ADB 연결 확인. Play 설치본 1.0.1(58)의 앱 서명 SHA-256은 4d9694e8…6371ac, APP67 AAB 업로드 서명은 c00f4260…8ef1로 다름. 기존 앱을 삭제하거나 로컬 APK로 교체하지 않음. Owner가 Play 내부 테스트에 APP67을 배포한 뒤 같은 기기에서 업데이트·5개 경로 검증 필요(NOT_VERIFIED). 운영 86시험 Catalog/DB 변경 없음. 이번 작업에서 86개 비노출 전수 재검증은 수행하지 않음.
 - 보관 경로 `/Users/woojinchang/development/legendstudy-private-backups/app67-release-20261106`. APP66 IPA·AAB 기존 체크섬 일치. 출시·업로드 보류.
+
+## 최종 산출물 대조
+
+- 빌드 시점 Git HEAD 2fa70bf, 이후 변경은 Wiki뿐이다. IPA·AAB 각각 보관본과 동일 작업 트리 빌드 출력의 SHA-256이 일치한다. AAB에는 VCS SHA가 내장돼 있지 않아 빌드 기록과 바이너리를 함께 대조했다.
+- APP66에는 없던 신규 admission 검사·재시도·혼합형 전체 문항 제출 안내 식별자 3개가 APP67 iOS·Android arm64 AOT 바이너리에 모두 있다.
+- IPA: Apple Distribution, 1.0.2(67), Mac 신뢰 체인에서 codesign --verify --deep --strict 통과. App.framework UUID가 xcarchive와 일치한다. SHA-256: 192ce1b18f94e0f5c393afb2d548decba711fce81b448facb04ef176783d9a2b
+- AAB: jarsigner 서명 검증 통과(업로드 키). SHA-256: 223e9b49396a973fa7eabd9af157c01d65a7f9412a564e5d45929071e0928c5b
+- Android 내부 테스트 배포 전(Owner 확인). Galaxy S8에서 Play 설치 58 재확인. 업데이트 후 데이터 보존·PDF 본문·첨삭 진입 미검증. 앱 삭제 또는 대체 설치 없음.
