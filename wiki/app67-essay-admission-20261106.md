@@ -31,3 +31,5 @@ APP67은 계정·시험별 POST /api/essay/exam의 questionIds와 mathQuestions�
 운영 LegendStudy에서 파일별 resource_download_policy를 읽기 전용 집계: 18게시글, 활성 PDF 846개, 전부 PENDING, 권한 revision 0건. 기존 파일별 인벤토리는 codex/popular-pdf-task18의 wiki/task18-popular-pdf-inventory-20261104.md (문제지 420, 정답·해설 416, 듣기대본 10). 파일 ID·원본 키 유지. 제공 권한을 입증하지 못한 파일은 활성화하지 않는다.
 APP67의 다운로드 위젯·서비스 기존 테스트 13 PASS (릴리스 SDK 3.47.6). 버튼·파일명·해시·저장 완료·실패 후 재시도 검증이며 운영 실물 E2E는 아니다. 기존 열람 및 합성 PDF 저장 PASS도 대체 근거가 아니다.
 다음 단계: 파일별 배포 근거·권리자 확인 → 동일 resource ID/source key로 PDF 원본과 SHA-256 대조 → 허용 파일에만 검수 근거와 안전한 저장명을 포함한 ALLOWED revision 추가 → 일반 앱에서 정책 RPC·resource-download 성공, iOS 파일 앱·Android 파일 관리자에서 저장 이름과 본문 확인. 원복은 기존 이력을 삭제하지 않고 차단 revision 추가.
+
+Owner는 제공 권한 문제를 해결했다고 회신했다. 기존 18개 게시글에서 Registry 원본 키로 대조한 [846개 PDF 실물 검사](evidence/task18-pdf-byte-audit-20261106.jsonl)를 보존했다. 모두 원본 HTTP 조회·크기 제한·PDF 헤더 및 EOF 확인·SHA-256 산출 완료. 최초 통신 오류 2건 재시도 성공. 현 권한 원장에 기록할 문서 위치와 파일별 권리자 매핑은 미확인. 실기기 저장/열람 및 운영 허용 응답은 미검증.
