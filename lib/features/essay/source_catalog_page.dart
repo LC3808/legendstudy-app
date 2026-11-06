@@ -779,6 +779,8 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                 Text(essayServiceAreaLabel(exam)),
                 _ExamServiceNotice(
                   state: serviceState,
+                  admissionCode:
+                      admissionState.asData?.value['code'] as String?,
                   availableLabels: availableLabels,
                   partialRelease: partialRelease,
                   onRetry: () {
@@ -1138,7 +1140,9 @@ class _ExamServiceNotice extends StatelessWidget {
     required this.onRetry,
     this.availableLabels = const [],
     this.partialRelease = false,
+    this.admissionCode,
   });
+  final String? admissionCode;
   final List<String> availableLabels;
   final bool partialRelease;
   final ExamServiceState state;
@@ -1161,6 +1165,7 @@ class _ExamServiceNotice extends StatelessWidget {
           Text(
             examServiceNoticeMessage(
               state,
+              admissionCode: admissionCode,
               availableLabels: availableLabels,
               partialRelease: partialRelease,
             ),
@@ -3273,6 +3278,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
         children: [
           _ExamServiceNotice(
             state: status,
+            admissionCode: admission?['code'] as String?,
             availableLabels: availableLabels,
             partialRelease:
                 availableLabels.isNotEmpty &&
