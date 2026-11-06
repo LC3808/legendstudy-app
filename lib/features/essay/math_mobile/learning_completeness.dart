@@ -28,6 +28,12 @@ class LearningCompletenessCard extends StatelessWidget {
         level >= 1 &&
         level <= 5;
     final withheld = data['status'] == 'INSUFFICIENT_EVIDENCE' && level == null;
+    if (withheld &&
+        data.containsKey('level') &&
+        data['rationale'] == null &&
+        data['next_direction'] == null) {
+      return const MathCard(child: Text('학습 완성도 · 판단 보류'));
+    }
     if (!assessed && !withheld) return const SizedBox.shrink();
     final rationale = data['rationale'];
     final direction = data['next_direction'];

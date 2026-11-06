@@ -66,6 +66,28 @@ void main() {
     expect(find.text('학습 완성도 · 판단 보류'), findsOneWidget);
     expect(find.byIcon(Icons.star), findsNothing);
   });
+  testWidgets('production withheld marker needs no explanation or rating', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: LearningCompletenessCard(
+            evaluationId: 'new',
+            value: {
+              'version': 'learning-completeness-v1',
+              'evaluation_id': 'new',
+              'status': 'INSUFFICIENT_EVIDENCE',
+              'level': null,
+            },
+          ),
+        ),
+      ),
+    );
+    expect(find.text('학습 완성도 · 판단 보류'), findsOneWidget);
+    expect(find.byIcon(Icons.star), findsNothing);
+    expect(find.text('이전 답안과 비교'), findsNothing);
+  });
   testWidgets('server comparison preserves evidence and policy boundaries', (
     t,
   ) async {
