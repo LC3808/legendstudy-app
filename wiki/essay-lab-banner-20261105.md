@@ -66,5 +66,5 @@
 | 한국항공대학교 | kau | …/kau/ | 첨삭 시작하기(table inactive) |
 
 > ⚠️ **LAB URL 슬러그 ≠ DB slug**(라이브 LAB `/essay-lab/` 앵커에서 42개 전수 추출): 중앙대=`cau`(DB chungang), 성균관=`skku`(DB sungkyunkwan). 나머지 13개는 DB slug와 동일. 배너 URL은 **LAB 슬러그** 사용(2026-11-06 수정, Owner 404 제보 반영).
-> 디자인(2026-11-06, 최종): 흰 배너가 본문에 묻혀 **네이비 카드·가운데정렬**로 개정 → 네이비+주황 부조화로 **주황 제거** → 밝은 그린이 떠 보여 **차분한 에메랄드**로 확정(챗GPT 팔레트). 배경 `#1D3557`, CTA `#16A765`(흰 글자, hover `#138A55`), 혜택박스 솔리드 `#174C43`/`#D1FAE5`, 좌측선 `#16A765`, 서브카피 핵심어 "대학별 평가 기준" 흰 볼드. 오렌지·노랑 미사용.
+> 디자인 변천(2026-11-06): 흰→네이비 카드→주황 제거→에메랄드(챗GPT) → **최종 v3: 흰 카드 + 대학 로고 + 대학 공식 브랜드 컬러**(테두리 3px·CTA·혜택틴트). 제목 `#17212F`, 보조 `#64748B`(핵심어 볼드). 로고=LAB 공식 `university-logos/{slug}.{ext}` 핫링크. 색 출처·값은 [`ASSETS.md`](../assets/marketing/essay-lab-banner/ASSETS.md)(공식 9 + Pantone 환산 3 + 임시 네이비 3). CTA 새 탭(`target=_blank`).
 > 미확인: LAB 목록 3~4페이지(미열람)에 "첨삭 시작하기"가 더 있는지 → 있으면 Owner 확인 후 동일 방식 추가. 딥링크(대학·시험 선택) 지원 여부 → 미지원 시 base `/essay-lab/`로. GA4 `lab_banner_impression/click` 실수신은 운영 적용 후 Realtime 검증 필요.
