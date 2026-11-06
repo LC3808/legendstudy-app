@@ -33,3 +33,5 @@ APP67의 다운로드 위젯·서비스 기존 테스트 13 PASS (릴리스 SDK 
 다음 단계: 파일별 배포 근거·권리자 확인 → 동일 resource ID/source key로 PDF 원본과 SHA-256 대조 → 허용 파일에만 검수 근거와 안전한 저장명을 포함한 ALLOWED revision 추가 → 일반 앱에서 정책 RPC·resource-download 성공, iOS 파일 앱·Android 파일 관리자에서 저장 이름과 본문 확인. 원복은 기존 이력을 삭제하지 않고 차단 revision 추가.
 
 Owner는 제공 권한 문제를 해결했다고 회신했다. 기존 18개 게시글에서 Registry 원본 키로 대조한 [846개 PDF 실물 검사](evidence/task18-pdf-byte-audit-20261106.jsonl)를 보존했다. 모두 원본 HTTP 조회·크기 제한·PDF 헤더 및 EOF 확인·SHA-256 산출 완료. 최초 통신 오류 2건 재시도 성공. 현 권한 원장에 기록할 문서 위치와 파일별 권리자 매핑은 미확인. 실기기 저장/열람 및 운영 허용 응답은 미검증.
+
+운영 활성화 후속 대조: 파일 식별자·SHA-256 846건과 Owner 공개 결정 확보. 운영 원장의 permission revision은 0건이며, 필수 rights_holder(권리자 명칭)와 evidence_url(해당 범위 이용허락 근거의 위치) 매핑 대기. 저장명 규칙에 맞춰 기호를 정리하고 동명 파일은 기존 ID 접미사로 구분한 [저장명 후보](evidence/task18-save-name-overrides-20261106.json)를 준비했다. 원본 파일명은 원본 검사 목록에 보존. 전체 저장명 846건 형식·유일성 검증. 운영 활성화·양 OS 실제 다운로드 저장 후 재열람은 미검증.
