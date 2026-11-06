@@ -1,5 +1,7 @@
 # LegendStudy Wiki Index
 
+[APP66 최종 빌드·운영 검증·스토어 인계](app66-final-release-20261106.md) · 실기기 최종 검수 진행.
+
 [TASK08 통합·격리 검수·Analytics 계약·Owner 대기/HOLD](essay-beta-integration-task08-20261101.md).
 [2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
 

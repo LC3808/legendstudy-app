@@ -1,5 +1,7 @@
 ## 2026-11-04 — 인하 Q1 공식 해설 한정 운영 적용
 
+[APP66 최종 빌드·운영 검증·스토어 인계](app66-final-release-20261106.md) · 실기기 최종 검수 진행.
+
 ## 2026-11-06 — TASK20 건국·경희 우선6문항
 
 [공식자료 복구·검증·승인안](task20-priority-natural-connection-20261106.md): DRAFT96행 후보/기존Q1 보존. Owner 승인 OpenAI12회와 실제결과 격리저장12회 PASS,7문항 무료재첨삭·중복·권한·원복 PASS. APP31/WEB74/후보7 PASS. 운영DB·WEB·APP65·스토어 변경0. 다른TASK20-C 중복 작업 확인, 적용 전 후보 단일화 필요.
