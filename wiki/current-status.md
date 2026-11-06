@@ -1,8 +1,7 @@
 # Current Status
 
-[APP67 논술 공개 상태 · 출시 보류](app67-essay-admission-20261106.md)
+[APP67 HOLD](app67-essay-admission-20261106.md)
 
-[APP66](app66-final-release-20261106.md)
 
 [TASK20](task20-priority-natural-connection-20261106.md): WEB/APP7문항 PASS·숙명TEST6 PASS. [APP65](task21-final-release-readiness-20261105.md).
 
