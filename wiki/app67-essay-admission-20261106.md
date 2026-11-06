@@ -24,3 +24,10 @@ APP67은 계정·시험별 POST /api/essay/exam의 questionIds와 mathQuestions�
 - AAB: jarsigner 서명 검증 통과(업로드 키). SHA-256: 223e9b49396a973fa7eabd9af157c01d65a7f9412a564e5d45929071e0928c5b
 - Android 내부 테스트 배포 전(Owner 확인). Galaxy S8에서 Play 설치 58 재확인. 업데이트 후 데이터 보존·PDF 본문·첨삭 진입 미검증. 앱 삭제 또는 대체 설치 없음.
 - iPhone 12 Pro Max에서 실제 문제 PDF 본문까지 표시됐음을 Owner가 명시적으로 확인했다. iOS RELEASE_READY = YES. Android RELEASE_READY = NO, 통합 RELEASE_READY = NO. 스토어 업로드·심사 제출 없음.
+
+## TASK18 출시 게이트 추가 — 2026-11-06
+
+최신 결정: 논술·서명 게이트와 별도로 iOS·Android 모두 최종 제출 HOLD. 운영 실물 PDF 저장·열람은 양 OS NOT_VERIFIED. APP67 산출물 보존.
+운영 LegendStudy에서 파일별 resource_download_policy를 읽기 전용 집계: 18게시글, 활성 PDF 846개, 전부 PENDING, 권한 revision 0건. 기존 파일별 인벤토리는 codex/popular-pdf-task18의 wiki/task18-popular-pdf-inventory-20261104.md (문제지 420, 정답·해설 416, 듣기대본 10). 파일 ID·원본 키 유지. 제공 권한을 입증하지 못한 파일은 활성화하지 않는다.
+APP67의 다운로드 위젯·서비스 기존 테스트 13 PASS (릴리스 SDK 3.47.6). 버튼·파일명·해시·저장 완료·실패 후 재시도 검증이며 운영 실물 E2E는 아니다. 기존 열람 및 합성 PDF 저장 PASS도 대체 근거가 아니다.
+다음 단계: 파일별 배포 근거·권리자 확인 → 동일 resource ID/source key로 PDF 원본과 SHA-256 대조 → 허용 파일에만 검수 근거와 안전한 저장명을 포함한 ALLOWED revision 추가 → 일반 앱에서 정책 RPC·resource-download 성공, iOS 파일 앱·Android 파일 관리자에서 저장 이름과 본문 확인. 원복은 기존 이력을 삭제하지 않고 차단 revision 추가.
