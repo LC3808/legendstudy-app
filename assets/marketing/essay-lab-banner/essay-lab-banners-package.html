@@ -1,37 +1,36 @@
 <!-- =============================================================
-     논술 LAB 대학별 홍보 배너 패키지 (15개 공개 대학 · 2026-11-05)
-     사용법: 해당 대학 게시글 HTML 편집에서 그 대학 블록(START~END)만
-     복사·붙여넣기. 위치=도입부 아래·기출 PDF 안내 위. 게시글당 1개.
-     공개 근거: 로그인 LAB에서 "첨삭 시작하기" 노출(Owner 확인 2026-11-05).
-     딥링크 미지원 시 href를 https://lab.legendstudy.com/essay-lab/ 로 교체.
+     논술 LAB 대학별 홍보 배너 패키지 (15개 공개 대학 · 2026-11-06)
+     사용법: 해당 대학 게시글 HTML 편집에서 그 대학 블록(START~END)만 복사·붙여넣기.
+     위치=도입부 아래·기출 PDF 안내 위. 게시글당 1개. 디자인=네이비 카드(가운데정렬).
+     LAB URL 슬러그는 라이브 LAB에서 추출한 실제 경로(예: 중앙대=cau, 성균관=skku).
      ============================================================= -->
 
 <!-- ========== 한양대학교 (hanyang) ========== -->
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="한양대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -82,28 +81,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="고려대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -150,32 +149,32 @@
 </section>
 <!-- LS-ESSAY-BANNER:END -->
 
-<!-- ========== 성균관대학교 (sungkyunkwan) ========== -->
+<!-- ========== 성균관대학교 (skku) ========== -->
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="성균관대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -188,9 +187,9 @@
     <div class="lseb-action">
       <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
       <a class="lseb-cta"
-         href="https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sungkyunkwan_sungkyunkwan"
+         href="https://lab.legendstudy.com/essay-lab/universities/skku/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=skku_skku"
          rel="noopener"
-         data-lseb-univ="sungkyunkwan" data-lseb-post="sungkyunkwan" data-lseb-campaign="essaylab_2026">성균관대 논술 첨삭받기 →</a>
+         data-lseb-univ="skku" data-lseb-post="skku" data-lseb-campaign="essaylab_2026">성균관대 논술 첨삭받기 →</a>
     </div>
   </div>
   <script>
@@ -226,28 +225,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="서강대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -294,32 +293,32 @@
 </section>
 <!-- LS-ESSAY-BANNER:END -->
 
-<!-- ========== 중앙대학교 (chungang) ========== -->
+<!-- ========== 중앙대학교 (cau) ========== -->
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="중앙대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -332,9 +331,9 @@
     <div class="lseb-action">
       <span class="lseb-brand"><span class="bdot"></span>LegendStudy LAB</span>
       <a class="lseb-cta"
-         href="https://lab.legendstudy.com/essay-lab/universities/chungang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=chungang_chungang"
+         href="https://lab.legendstudy.com/essay-lab/universities/cau/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=cau_cau"
          rel="noopener"
-         data-lseb-univ="chungang" data-lseb-post="chungang" data-lseb-campaign="essaylab_2026">중앙대 논술 첨삭받기 →</a>
+         data-lseb-univ="cau" data-lseb-post="cau" data-lseb-campaign="essaylab_2026">중앙대 논술 첨삭받기 →</a>
     </div>
   </div>
   <script>
@@ -370,28 +369,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="경희대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -442,28 +441,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="건국대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -514,28 +513,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="인하대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -586,28 +585,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="동국대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -658,28 +657,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="숭실대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -730,28 +729,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="광운대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -802,28 +801,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="한국외국어대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -874,28 +873,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="숙명여자대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -946,28 +945,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="서울여자대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
@@ -1018,28 +1017,28 @@
 <!-- LS-ESSAY-BANNER:START -->
 <section class="lseb-wrap" role="complementary" aria-label="한국항공대학교 논술 LAB 안내">
   <style>
-  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
   .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
-  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;text-align:left;background:linear-gradient(135deg,#21416B 0%,#172E4D 100%);border:1px solid rgba(255,255,255,.08);border-left:4px solid #FFAC14;border-radius:16px;box-shadow:0 10px 28px rgba(16,32,56,.28);padding:18px 20px;max-width:620px;margin:0 auto}
   .lseb-main{flex:1 1 auto;min-width:0}
-  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
-  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
-  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
-  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#FFFFFF;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;letter-spacing:-.01em;margin-bottom:10px}
+  .lseb-head{font-size:17px;font-weight:800;color:#FFFFFF;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:7px;font-size:13px;font-weight:500;color:rgba(226,234,245,.82);line-height:1.55;word-break:keep-all}
+  .lseb-benefit{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#FFCB5E;background:rgba(255,172,20,.14);border:1px solid rgba(255,172,20,.45);border-radius:8px;padding:6px 11px;line-height:1.3;word-break:keep-all}
   .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
-  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
-  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#1F3A5F;letter-spacing:.01em;white-space:nowrap}
+  .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lseb-brand{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.02em;white-space:nowrap}
   .lseb-brand .bdot{width:5px;height:5px;border-radius:1.5px;background:#FFAC14}
-  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
-  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
-  .lseb-cta:hover{filter:brightness(.96)}
-  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1A2E4A;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;box-shadow:0 4px 12px rgba(255,172,20,.3);transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1A2E4A;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(1.04)}
+  .lseb-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
   @media (max-width:560px){
-    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-card{flex-direction:column;align-items:stretch;gap:14px;padding:18px;max-width:100%}
     .lseb-benefit{width:100%;justify-content:center}
     .lseb-action{width:100%}
-    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
-    .lseb-head{font-size:15px}
+    .lseb-cta{width:100%;padding:14px 16px;font-size:15px}
+    .lseb-head{font-size:16px}
   }
   </style>
   <div class="lseb-card">
