@@ -13,5 +13,5 @@ APP67은 계정·시험별 POST /api/essay/exam의 questionIds와 mathQuestions�
 - 정적 분석 이슈 0. Flutter 전체 1,556 통과, 7 건너뜀. 미공개·부분 공개·수리 단독 및 혼합형·사진 보정·기존 인문 회귀 포함.
 - 운영 로그인 WEB에서 건국 2026 수시 자연 Q1~Q4의 답안 작성과 PDF 1·2·3·4쪽을 각각 확인. 경희 2026 수시 자연 Q1~Q3의 답안 작성과 PDF 1·2·2쪽을 각각 확인. 사진 미첨부 상태에서 추출 버튼 비활성 확인.
 - 경희 2027 모의 사회·한양 2027 모의 상경·숙명 2027 모의 인문의 작성 폼 및 요청 영역 확인. 한양 Q1의 2쪽 PDF 렌더링 확인. 경희 사회와 숙명 인문은 뷰어 진입 확인, 최초 로딩 완료 별도 검수 필요. 빈 답안에서 새 평가/차감 실행하지 않음.
-- 배포 서명 IPA, 서명 AAB 생성. iPhone 12 Pro Max 설치·실행 완료. 위 5개 경로의 동일 일반 계정 실기기 화면 비교는 검수 대기. Android ADB 연결 0대. 운영 86시험 Catalog/DB 변경 없음. 이번 작업에서 86개 비노출 전수 재검증은 수행하지 않음.
+- 배포 서명 IPA, 서명 AAB 생성. iPhone 12 Pro Max 설치·실행 완료. 동일 일반 계정으로 위 5개 경로의 PDF → 답안 작성 → 첨삭 요청 전 단계까지 Owner 실기기 확인 완료(PASS). 실제 평가는 실행하지 않음. Galaxy S8(SM-G950N, Android 9/API 28)은 ADB 연결 확인. Play 설치본 1.0.1(58)의 앱 서명 SHA-256은 4d9694e8…6371ac, APP67 AAB 업로드 서명은 c00f4260…8ef1로 다름. 기존 앱을 삭제하거나 로컬 APK로 교체하지 않음. Owner가 Play 내부 테스트에 APP67을 배포한 뒤 같은 기기에서 업데이트·5개 경로 검증 필요(NOT_VERIFIED). 운영 86시험 Catalog/DB 변경 없음. 이번 작업에서 86개 비노출 전수 재검증은 수행하지 않음.
 - 보관 경로 `/Users/woojinchang/development/legendstudy-private-backups/app67-release-20261106`. APP66 IPA·AAB 기존 체크섬 일치. 출시·업로드 보류.
