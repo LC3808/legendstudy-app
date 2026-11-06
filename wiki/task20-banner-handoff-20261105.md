@@ -6,7 +6,8 @@
 
 |대학|계열|시험|공개 문항|LAB URL|확인|
 |---|---|---|---|---|---|
-|건국대학교|자연|2026 수시 KU논술우수자|문제1만(1문항)|https://lab.legendstudy.com/essay-lab/universities/konkuk/|부분 공개 및 사진 답안 경로 확인. 전체 시험 공개로 표현 금지|
+|건국대학교|자연|2026학년도 수시 KU논술우수자|Q1~Q4 · 4문항|https://lab.legendstudy.com/essay-lab/universities/konkuk/|기존 Q1 및 추가 Q2~Q4 공개 확인|
+|경희대학교|자연계|2026학년도 수시 논술|논제 Ⅰ~Ⅲ · 3문항|https://lab.legendstudy.com/essay-lab/universities/kyunghee/|PDF·작성·첨삭 요청 진입 확인. 학습 단계 홍보 제외|
 |한양대학교|인문|2027 모의논술|1문항|https://lab.legendstudy.com/essay-lab/universities/hanyang/|기존 첨삭 요청 경로 확인|
 |한양대학교|상경|2027 모의논술|2문항|https://lab.legendstudy.com/essay-lab/universities/hanyang/|Essay+Math 전체 답안 요구 확인|
 |인하대학교|자연|2027 모의논술|3문항|https://lab.legendstudy.com/essay-lab/universities/inha/|기존 기록 진입·사진 답안 경로 확인|
@@ -15,7 +16,7 @@
 
 ## 기존 공개 설정 대학 전체 목록
 
-[시험·학년도·문항·URL 전체202행](evidence/task20-20261105/release-configured-exams.csv). 아래는 공개 설정 및 패키지 확인 수치다. 개별 시험 운영 화면 검증이 끝나기 전에 모든 시험을 홍보 확정 대상으로 자동 전환하지 않는다. 건국 자연 standalone Q1은 아래202시험과 별도다.
+[시험·학년도·문항·URL 전체202행](evidence/task20-20261105/release-configured-exams.csv). 아래는 공개 설정 및 패키지 확인 수치다. 개별 시험 운영 화면 검증이 끝나기 전에 모든 시험을 홍보 확정 대상으로 자동 전환하지 않는다. 아래 202시험은 이전 집계다. 위 두 자연계 시험의 최신 범위는 [운영 검수 기록](task20c-production-web-20261106.md)을 따른다.
 
 |대학|공개설정 시험|문항|계열|
 |---|---:|---:|---|
