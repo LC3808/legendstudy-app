@@ -23,3 +23,4 @@ APP67은 계정·시험별 POST /api/essay/exam의 questionIds와 mathQuestions�
 - IPA: Apple Distribution, 1.0.2(67), Mac 신뢰 체인에서 codesign --verify --deep --strict 통과. App.framework UUID가 xcarchive와 일치한다. SHA-256: 192ce1b18f94e0f5c393afb2d548decba711fce81b448facb04ef176783d9a2b
 - AAB: jarsigner 서명 검증 통과(업로드 키). SHA-256: 223e9b49396a973fa7eabd9af157c01d65a7f9412a564e5d45929071e0928c5b
 - Android 내부 테스트 배포 전(Owner 확인). Galaxy S8에서 Play 설치 58 재확인. 업데이트 후 데이터 보존·PDF 본문·첨삭 진입 미검증. 앱 삭제 또는 대체 설치 없음.
+- iPhone 12 Pro Max에서 실제 문제 PDF 본문까지 표시됐음을 Owner가 명시적으로 확인했다. iOS RELEASE_READY = YES. Android RELEASE_READY = NO, 통합 RELEASE_READY = NO. 스토어 업로드·심사 제출 없음.
