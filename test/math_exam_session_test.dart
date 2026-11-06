@@ -181,16 +181,19 @@ void main() {
                 ],
               ),
               mathGatewayProvider('owner').overrideWithValue(fake),
-              mathEvaluationAvailableProvider('owner')
-                  .overrideWith((ref) async => enabled),
-              examAvailabilityProvider((owner: 'owner', examId: 'exam'))
-                  .overrideWith(
-                    (ref) async => {
-                      'ready': true,
-                      'questionIds': ['q1'],
-                      'mathQuestions': {'q1': 'leaf'},
-                    },
-                  ),
+              mathEvaluationAvailableProvider(
+                'owner',
+              ).overrideWith((ref) async => !enabled),
+              examAvailabilityProvider((
+                owner: 'owner',
+                examId: 'exam',
+              )).overrideWith(
+                (ref) async => {
+                  'ready': enabled,
+                  'questionIds': ['q1'],
+                  'mathQuestions': {'q1': 'leaf'},
+                },
+              ),
             ],
             child: MaterialApp(
               home: Scaffold(

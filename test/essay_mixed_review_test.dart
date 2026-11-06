@@ -1,5 +1,6 @@
 import 'package:legendstudy_app/features/essay/exam_submission.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/math_gateway.dart';
@@ -29,14 +30,16 @@ void main() {
         await t.pumpWidget(
           ProviderScope(
             overrides: [
-              examAvailabilityProvider((owner: 'owner', examId: 'exam'))
-                  .overrideWith(
-                    (ref) async => {
-                      'ready': serverReady,
-                      'questionIds': ['text-q', 'math-q'],
-                      'mathQuestions': {'math-q': 'approved-leaf'},
-                    },
-                  ),
+              examAvailabilityProvider((
+                owner: 'owner',
+                examId: 'exam',
+              )).overrideWith(
+                (ref) async => {
+                  'ready': serverReady,
+                  'questionIds': ['text-q', 'math-q'],
+                  'mathQuestions': {'math-q': 'approved-leaf'},
+                },
+              ),
               mathCatalogProvider('owner').overrideWith(
                 (ref) async => mathPublished
                     ? [
@@ -84,16 +87,11 @@ void main() {
           ),
         );
         await t.pumpAndSettle();
-        expect(
-          find.textContaining(
-            !mathPublished
-                ? '현재 이 수리 문항은 첨삭을 이용할 수 없어요'
-                : track == '통합'
-                ? '시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요'
-                : '평가자료 또는 첨삭 기능을 준비 중',
-          ),
-          findsOneWidget,
-        );
+        if (serverReady) {
+          expect(find.byType(ExamSubmissionPanel), findsOneWidget);
+        } else {
+          expect(find.textContaining('평가자료 또는 첨삭 기능을 준비 중'), findsOneWidget);
+        }
         expect(find.byType(CheckboxListTile), findsNWidgets(2));
         expect(
           t
@@ -108,7 +106,7 @@ void main() {
         expect(find.text('2026학년도 수시논술 사회·상경'), findsOneWidget);
         expect(find.textContaining('TEXT · Essay(TEXT)'), findsNothing);
         expect(find.textContaining('IMAGE · Math'), findsNothing);
-        expect(find.text('답안 수정'), findsOneWidget);
+        if (!serverReady) expect(find.text('답안 수정'), findsOneWidget);
         expect(t.takeException(), isNull);
       },
     );

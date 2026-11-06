@@ -49,6 +49,43 @@ import 'essay_live_gateway.dart';
 import 'essay_controller.dart';
 import 'essay_models.dart';
 
+// Resolve the same two read-only endpoints as WEB ScopedExamSubmit. A ready
+// exam response is authoritative even if the global Math catalog is delayed.
+final _publicExamProvider = FutureProvider.autoDispose
+    .family<Map<String, dynamic>, ({String owner, String examId})>((
+      ref,
+      scope,
+    ) async {
+      final admission = await ref.watch(examAvailabilityProvider(scope).future);
+      if (admission['ready'] is! bool) {
+        throw const FormatException('INVALID_ADMISSION');
+      }
+      if (admission['ready'] == true ||
+          const {
+            'MIXED_QA_PENDING',
+            'RELEASE_SCOPE_CHANGED',
+          }.contains(admission['code'])) {
+        return admission;
+      }
+      if (!ref.mounted) return admission;
+      final rows = await ref.watch(
+        releasedMathQuestionsProvider(scope.owner).future,
+      );
+      final leaves = <String, String>{
+        for (final row in rows)
+          if (row['essay_exam_id'] == scope.examId &&
+              row['essay_question_id'] is String &&
+              row['leaf_id'] is String)
+            row['essay_question_id'] as String: row['leaf_id'] as String,
+      };
+      if (leaves.isEmpty) return admission;
+      return {
+        'ready': true,
+        'questionIds': leaves.keys.toList(),
+        'mathQuestions': leaves,
+      };
+    });
+
 class SourceCatalogPage extends ConsumerWidget {
   const SourceCatalogPage({
     super.key,
@@ -549,9 +586,9 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                                 children: [
                                   Text(
                                     u['name'] as String,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.titleMedium,
                                   ),
                                   const SizedBox(height: 4),
                                   if (service.isLoading ||
@@ -665,23 +702,8 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
             examId: '${exam?['dbExamId'] ?? ''}',
           );
           final admissionState = exam?['dbExamId'] is String
-              ? ref.watch(examAvailabilityProvider(scope))
+              ? ref.watch(_publicExamProvider(scope))
               : const AsyncValue<Map<String, dynamic>>.data({});
-          final mathRows = ref.watch(
-            releasedMathQuestionsProvider(widget.owner),
-          );
-          final mathEnabled = ref.watch(
-            mathEvaluationAvailableProvider(widget.owner),
-          );
-          final standalone = <String>{
-            if (mathEnabled.asData?.value == true)
-              for (final row
-                  in mathRows.asData?.value ?? <Map<String, dynamic>>[])
-                if (row['essay_exam_id'] == exam?['dbExamId'] &&
-                    row['leaf_id'] is String &&
-                    row['essay_question_id'] is String)
-                  row['essay_question_id'] as String,
-          };
           final serviceState = resolveExamServiceState(
             questions: questions
                 .where((q) => selection.contains(q['key']))
@@ -689,20 +711,12 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                 .whereType<String>()
                 .toSet(),
             admission: admissionState.asData?.value,
-            standaloneMathQuestions: standalone,
             policyBlocked: !ownedHistory && isUniversityServicePreparing(uni),
-            failed:
-                admissionState.hasError ||
-                mathRows.hasError ||
-                mathEnabled.hasError,
-            loading:
-                admissionState.isLoading ||
-                mathRows.isLoading ||
-                mathEnabled.isLoading,
+            failed: admissionState.hasError,
+            loading: admissionState.isLoading,
           );
           final availableIds = availableExamQuestionIds(
             admission: admissionState.asData?.value,
-            standaloneMathQuestions: standalone,
             policyBlocked: !ownedHistory && isUniversityServicePreparing(uni),
           );
           final availableLabels = questions
@@ -1477,11 +1491,22 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
         body: Center(child: Text('계정이 변경됐어요. 문항을 다시 열어 주세요.')),
       );
     }
-    final mathPhoto = (ref.watch(mathCatalogProvider(widget.owner)).value ?? [])
-        .any(
-          (r) =>
-              r['essay_exam_id'] == widget.exam['dbExamId'] &&
-              r['essay_question_id'] == widget.question['dbQuestionId'],
+    final examId = widget.exam['dbExamId'];
+    final admission = examId is String
+        ? ref
+              .watch(_publicExamProvider((owner: widget.owner, examId: examId)))
+              .asData
+              ?.value
+        : null;
+    final mathPhoto =
+        admission?['ready'] == true &&
+            (admission?['mathQuestions'] as Map? ?? {}).containsKey(
+              widget.question['dbQuestionId'],
+            ) ||
+        (ref.watch(mathCatalogProvider(widget.owner)).value ?? []).any(
+          (row) =>
+              row['essay_exam_id'] == examId &&
+              row['essay_question_id'] == widget.question['dbQuestionId'],
         );
     final c = controller;
     final pdf = QuestionPdfAsset.parse(
@@ -1853,6 +1878,7 @@ class ExamSubmissionPanel extends ConsumerStatefulWidget {
 
 class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     with WidgetsBindingObserver {
+  bool checkingAdmission = true, admissionFailed = false;
   bool serverReady = false,
       busy = false,
       polling = false,
@@ -1863,10 +1889,6 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   bool get ready {
     if (widget.inputBlocked || !serverReady || widget.included.isEmpty) {
       return false;
-    }
-    if (widget.exam['verification'] != 'REVIEW_REQUIRED' &&
-        widget.exam['evaluationReady'] != false) {
-      return true;
     }
     final questions = (widget.exam['questions'] as List)
         .cast<Map<String, dynamic>>();
@@ -2179,6 +2201,8 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       );
       if (mounted) {
         setState(() {
+          checkingAdmission = false;
+          admissionFailed = result['ready'] is! bool;
           serverReady = result['ready'] == true;
           admittedQuestions = (result['questionIds'] as List? ?? [])
               .whereType<String>()
@@ -2189,7 +2213,13 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         });
       }
     } catch (_) {
-      // Availability failure leaves execution closed, but must not hide eligibility.
+      if (mounted) {
+        setState(() {
+          checkingAdmission = false;
+          admissionFailed = true;
+          serverReady = false;
+        });
+      }
     }
     try {
       final client = ref.read(supabaseClientProvider);
@@ -2710,6 +2740,22 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     if (parentId != null && eligibleRewrite) const Text('무료 재첨삭 · 추가 이용권 없음'),
     if (widget.inputBlocked)
       const Text('수리 문항의 인식 내용을 확인하면 전체 시험 첨삭을 요청할 수 있어요.')
+    else if (checkingAdmission)
+      const LinearProgressIndicator(semanticsLabel: '첨삭 가능 여부 확인 중')
+    else if (admissionFailed)
+      TextButton(
+        onPressed: () {
+          ref.invalidate(
+            examAvailabilityProvider((
+              owner: widget.owner,
+              examId: widget.exam['dbExamId'] as String,
+            )),
+          );
+          setState(() => checkingAdmission = true);
+          unawaited(check());
+        },
+        child: const Text('첨삭 가능 여부 다시 확인'),
+      )
     else if (!ready)
       const Text('현재 이 문항은 첨삭을 이용할 수 없어요. 답안 작성과 저장은 계속할 수 있어요.'),
     // [답안 수정] [첨삭 요청] 나란히 배치.
@@ -3009,33 +3055,17 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
 
   @override
   Widget build(BuildContext context) {
-    final admission = widget.exam['dbExamId'] is String
+    final id = widget.exam['dbExamId'];
+    final admission = id is String
         ? ref
-              .watch(
-                examAvailabilityProvider((
-                  owner: widget.owner,
-                  examId: widget.exam['dbExamId'] as String,
-                )),
-              )
+              .watch(_publicExamProvider((owner: widget.owner, examId: id)))
               .asData
               ?.value
         : null;
-    final mathRows =
-        ref.watch(mathCatalogProvider(widget.owner)).asData?.value ?? [];
-    final mathAvailable =
-        ref
-            .watch(mathEvaluationAvailableProvider(widget.owner))
-            .asData
-            ?.value ==
-        true;
     String availability(Map<String, dynamic> q) {
-      if (mathAvailable &&
-          essayServiceArea(widget.exam) == EssayServiceArea.science &&
-          mathRows.any(
-            (r) =>
-                r['essay_exam_id'] == widget.exam['dbExamId'] &&
-                r['essay_question_id'] == q['dbQuestionId'] &&
-                r['leaf_id'] is String,
+      if (admission?['ready'] == true &&
+          (admission?['mathQuestions'] as Map? ?? {}).containsKey(
+            q['dbQuestionId'],
           )) {
         return '수리논술 · 답안 확인 후 첨삭';
       }
@@ -3197,41 +3227,23 @@ class _RoundSubmitRouter extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scope = (owner: owner, examId: '${exam['dbExamId'] ?? ''}');
     final admissionState = exam['dbExamId'] is String
-        ? ref.watch(examAvailabilityProvider(scope))
+        ? ref.watch(_publicExamProvider(scope))
         : const AsyncValue<Map<String, dynamic>>.data({});
     final admission = admissionState.asData?.value;
-    final mathState = ref.watch(mathEvaluationAvailableProvider(owner));
-    final catalog = ref.watch(releasedMathQuestionsProvider(owner));
     final leaves = <String, String>{
-      // Per-exam admission carries the same canonical Math bindings used by WEB.
-      // Do not infer absence from the catalog's bounded first page.
       if (admission?['ready'] == true)
-        for (final entry in (admission?['mathQuestions'] as Map? ?? {}).entries)
-          if (entry.key is String &&
-              entry.value is String &&
-              (admission?['questionIds'] as List? ?? []).contains(entry.key))
-            entry.key as String: entry.value as String,
-      for (final row in catalog.value ?? <Map<String, dynamic>>[])
-        if (row['essay_exam_id'] == exam['dbExamId'] &&
-            row['essay_question_id'] is String &&
-            row['leaf_id'] is String)
-          row['essay_question_id'] as String: row['leaf_id'] as String,
+        for (final e in (admission?['mathQuestions'] as Map? ?? {}).entries)
+          if (e.value is String &&
+              e.key is String &&
+              (admission?['questionIds'] as List? ?? []).contains(e.key))
+            e.key as String: e.value as String,
     };
     final selected = (exam['questions'] as List)
         .cast<Map<String, dynamic>>()
         .where((q) => included.contains(q['key']))
         .toList();
-    final area = essayServiceArea(exam);
     final mathSelected = selected
-        .where(
-          (q) =>
-              leaves.containsKey(q['dbQuestionId']) ||
-              (admission?['mathQuestions'] is Map &&
-                  (admission!['mathQuestions'] as Map).containsKey(
-                    q['dbQuestionId'],
-                  )) ||
-              q['inputMode'] == 'image',
-        )
+        .where((q) => leaves.containsKey(q['dbQuestionId']))
         .toList();
     Widget unavailable(String message) => Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -3247,21 +3259,14 @@ class _RoundSubmitRouter extends ConsumerWidget {
           .whereType<String>()
           .toSet(),
       admission: admission,
-      standaloneMathQuestions: mathState.asData?.value == true
-          ? leaves.keys.toSet()
-          : {},
       policyBlocked:
           rewriteRun == null &&
           isUniversityServicePreparing(exam['sourceUniversityId']),
-      failed: admissionState.hasError || catalog.hasError || mathState.hasError,
-      loading:
-          admissionState.isLoading || catalog.isLoading || mathState.isLoading,
+      failed: admissionState.hasError,
+      loading: admissionState.isLoading,
     );
     final availableIds = availableExamQuestionIds(
       admission: admission,
-      standaloneMathQuestions: mathState.asData?.value == true
-          ? leaves.keys.toSet()
-          : {},
       policyBlocked:
           rewriteRun == null &&
           isUniversityServicePreparing(exam['sourceUniversityId']),
@@ -3296,15 +3301,18 @@ class _RoundSubmitRouter extends ConsumerWidget {
         ],
       );
     }
-    if (area == EssayServiceArea.science &&
-        (selected.isEmpty ||
-            !selected.every((q) => leaves.containsKey(q['dbQuestionId'])))) {
-      return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
+    if (admission?['requireCompleteQuestionSet'] == true) {
+      final requiredIds = (admission?['questionIds'] as List)
+          .whereType<String>()
+          .toSet();
+      final selectedIds = selected.map((q) => q['dbQuestionId']).toSet();
+      if (!selectedIds.containsAll(requiredIds)) {
+        return unavailable('이 시험은 공개된 모든 문항의 답안을 함께 제출해 주세요.');
+      }
     }
-    if (area == null && mathSelected.isNotEmpty) {
-      return unavailable('시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요. 작성한 답안은 보존됩니다.');
-    }
-    if (mathSelected.isNotEmpty && mathSelected.length != selected.length) {
+    final admittedIds = (admission?['questionIds'] as List? ?? [])
+        .whereType<String>();
+    if (leaves.isNotEmpty && admittedIds.any((id) => !leaves.containsKey(id))) {
       final mathAdmission = admission?['mathQuestions'] as Map? ?? {};
       if (admission?['ready'] != true ||
           !selected.every(
@@ -3333,16 +3341,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
         onSubmittedChanged: onSubmittedChanged,
       );
     }
-    if (mathSelected.isNotEmpty &&
-        !selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
-    }
-    if (selected.isNotEmpty &&
-        selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      if (ref.watch(mathEvaluationAvailableProvider(owner)).asData?.value !=
-          true) {
-        return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
-      }
+    if (selected.isNotEmpty && mathSelected.length == selected.length) {
       return MathExamSession(
         key: ValueKey(
           '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
