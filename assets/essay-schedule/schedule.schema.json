@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LegendStudy 논술 일정 intake row",
+  "description": "대학별 논술 시험 일정 staging 레코드. 운영 DB 직접 반영 금지(Owner 승인 후). 미확인 값은 UNKNOWN, 검토 전은 REVIEW_REQUIRED. 공식 자료 미제공 대학은 임의 생성 금지.",
+  "type": "object",
+  "required": [
+    "university_id", "university_name", "academic_year", "conduct_year",
+    "admission_type", "track", "exam_date", "start_time", "end_time",
+    "venue", "official_source_url", "announcement_date",
+    "confirmed", "review_status", "source_evidence", "extracted_by", "extracted_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "university_id": {
+      "type": "string",
+      "description": "university_catalog.dart 의 sourceUniversityId (예: sogang, konkuk). 카탈로그에 존재해야 함.",
+      "pattern": "^[a-z][a-z0-9_]+$"
+    },
+    "university_name": { "type": "string", "minLength": 2, "description": "공식 대학명(예: 서강대학교)." },
+    "academic_year": {
+      "type": "integer", "minimum": 2000, "maximum": 2100,
+      "description": "학년도(입학 학년도). 예: 2026학년도 수시논술 → 2026."
+    },
+    "conduct_year": {
+      "type": "integer", "minimum": 2000, "maximum": 2100,
+      "description": "시행연도(시험 실제 시행 연도). 학년도≠시행연도. 수시는 보통 academic_year-1. 다르면 notes에 사유."
+    },
+    "admission_type": {
+      "type": "string",
+      "description": "전형명(예: 수시논술, 모의논술, 정시). 요강 명칭 그대로.",
+      "minLength": 2
+    },
+    "track": {
+      "type": "string",
+      "description": "계열/모집단위(예: 인문계열(경제경영), 통합, 자연 A). WEB 등록 계열 명칭과 정합."
+    },
+    "exam_date": {
+      "oneOf": [
+        { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        { "type": "string", "enum": ["UNKNOWN"] }
+      ],
+      "description": "시험일 YYYY-MM-DD(KST) 또는 UNKNOWN. 미확인 시 임의 생성 금지."
+    },
+    "start_time": {
+      "oneOf": [
+        { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+        { "type": "string", "enum": ["UNKNOWN"] }
+      ],
+      "description": "시작 시각 HH:MM(24h, KST) 또는 UNKNOWN."
+    },
+    "end_time": {
+      "oneOf": [
+        { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+        { "type": "string", "enum": ["UNKNOWN"] }
+      ],
+      "description": "종료 시각 HH:MM(24h, KST) 또는 UNKNOWN. 둘 다 known이면 start<end."
+    },
+    "venue": {
+      "type": "string",
+      "description": "장소(고사장) 또는 UNKNOWN."
+    },
+    "official_source_url": {
+      "type": "string",
+      "description": "공식 출처 URL(입학처 공지/요강 PDF). 임의 URL 금지. 없으면 review_status=REVIEW_REQUIRED 유지.",
+      "pattern": "^https?://"
+    },
+    "announcement_date": {
+      "oneOf": [
+        { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        { "type": "string", "enum": ["UNKNOWN"] }
+      ],
+      "description": "합격/결과 발표일 YYYY-MM-DD 또는 UNKNOWN."
+    },
+    "confirmed": {
+      "type": "string",
+      "enum": ["CONFIRMED", "TENTATIVE", "UNKNOWN"],
+      "description": "확정 여부. CONFIRMED=공식 확정, TENTATIVE=예상/잠정, UNKNOWN=미상."
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["REVIEW_REQUIRED", "REVIEWED", "REJECTED"],
+      "description": "검토 상태. 공식 자료 대조 전은 REVIEW_REQUIRED. REVIEWED만 운영 승인 후보."
+    },
+    "source_evidence": {
+      "type": "string",
+      "description": "근거(요강 PDF 파일명+페이지/캡처 식별자/공지 제목·일자). 빈 값이면 review_status=REVIEW_REQUIRED 강제."
+    },
+    "extracted_by": { "type": "string", "description": "추출자(claude/codex/owner/manus)." },
+    "extracted_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "추출/기록일." },
+    "notes": { "type": "string", "description": "비고(학년도≠시행연도 사유, 복수 교시 등)." }
+  }
+}
