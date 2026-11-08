@@ -67,17 +67,45 @@ def apply_changes(conn, run_id, post_id, changes):
                       Jsonb(json.loads(json.dumps(change.after, default=str)))))
 
 
-def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-report.json')):
+def change_metrics(changes, known_hash=False):
+    """Counts committed changes; volatile observation timestamps are not edits."""
+    result=Counter()
+    is_new=any(c.table=='source_posts' and c.before is None for c in changes)
+    result['new_posts']=int(is_new)
+    meaningful=any(c.table!='source_posts' or set(c.after)-{'last_crawled_at','parser_version','content_hash'} for c in changes)
+    meaningful |= known_hash and any(c.table=='source_posts' and 'content_hash' in c.after for c in changes)
+    result['modified_posts']=int(not is_new and meaningful)
+    for c in changes:
+        if c.table!='resources': continue
+        if c.before is None: result['added_attachments']+=1
+        elif c.after.get('is_active') is False: result['removed_attachments']+=1
+        elif 'source_url' in c.after: result['replaced_attachments']+=1
+    return result
+
+
+def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-report.json'), managed=False):
     from psycopg.types.json import Jsonb
     conn.execute("set statement_timeout='30s'")
     conn.execute("set lock_timeout='5s'")
     # Session pooler/direct only: session advisory lock spans per-post commits.
     require(conn.execute('select pg_try_advisory_lock(178431, 18) as locked').fetchone()['locked'], 'run_already_active')
-    run_id = str(uuid.uuid4())
+    trigger = None
+    if managed:
+        from ingestion.schedule import claim
+        claimed = claim(conn)
+        if claimed is None:
+            conn.execute('select pg_advisory_unlock(178431,18)')
+            report = {'status':'not_due','started_at':now(),'finished_at':now(),'counts':{}}
+            output.write_text(json.dumps(report))
+            return report
+        run_id, trigger = claimed
+    else:
+        run_id = str(uuid.uuid4())
     report = {'run_id': run_id, 'mode': 'apply' if apply else 'dry_run', 'started_at': now(), 'posts': []}
     counts = Counter()
+    totals = Counter()
     try:
-        if apply:
+        if apply and not managed:
             conn.execute("update ingestion_ops.runs set status='interrupted',finished_at=now() where status='running'")
             conn.execute("insert into ingestion_ops.runs(id,trigger_name,status) values (%s,%s,'running')", (run_id, os.getenv('GITHUB_EVENT_NAME','operator')))
         config = conn.execute('select * from ingestion_ops.config where singleton').fetchone()
@@ -92,7 +120,8 @@ def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-rep
         require(ElementTree.fromstring(xml).tag.rsplit('}',1)[-1] == 'urlset', 'sitemap_incomplete')
         inventory = {e.external_post_id:e.lastmod for e in sitemap_entries(xml)}
         require(len(inventory) >= 100, 'sitemap_inventory_suspicious')
-        existing = {r['external_post_id'] for r in conn.execute("select external_post_id from public.source_posts where source='legendstudy'")}
+        source_hashes = {r['external_post_id']:r['content_hash'] for r in conn.execute("select external_post_id,content_hash from public.source_posts where source='legendstudy'")}
+        existing = set(source_hashes)
         prior = {r['post_id']:r for r in conn.execute('select * from ingestion_ops.observations')}
         new = [i for i in inventory if i not in existing and
                (i not in prior or prior[i]['status']=='failed' or prior[i]['lastmod'] != inventory[i])]
@@ -108,32 +137,41 @@ def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-rep
         report['new_deferred'] = max(0, len(new)-30)
         for post_id in candidates:
             if apply:
-                require(conn.execute('select enabled from ingestion_ops.config where singleton').fetchone()['enabled'], 'sync_disabled')
+                require(conn.execute('update ingestion_ops.config set last_poll_at=now() where singleton returning enabled' if managed else 'select enabled from ingestion_ops.config where singleton').fetchone()['enabled'], 'sync_disabled')
             status, code, changes = 'ok', None, []
+            fingerprint = None
+            unchanged = False
             try:
                 url = f'https://legendstudy.com/{post_id}'
                 require(robots.can_fetch(USER_AGENT,url), 'robots_denied')
                 post = observe(post_id, fetcher.get(url, request_label=post_id), now())
-                # Independent repeat is mandatory for deletions. Compare canonical
-                # hash, not rotating credentials. Fetch before taking row locks.
-                with conn.transaction():
-                    before = load_current(conn,post_id)
-                removed = before and any(r['is_active'] and r['source_resource_key'] not in
-                             {x['source_resource_key'] for x in post.resources} for r in before['resources'])
-                confirm = None
-                if removed:
-                    confirm = observe(post_id,fetcher.get(url,request_label=post_id+'-confirm'),now()).source_post['content_hash']
-                with conn.transaction():
-                    current = load_current(conn,post_id,lock=apply)
-                    if post.exam and current is None:
-                        e=post.exam
-                        duplicate=conn.execute('select 1 from public.exams where year=%s and exam_month=%s and grade_level=%s and exam_type=%s limit 1',
-                                               (e['year'],e['exam_month'],e['grade_level'],e['exam_type'])).fetchone()
-                        require(not duplicate, 'existing_exam_identity')
-                    managed={str(r['row_id']) for r in conn.execute("select distinct on (row_id) row_id, after_row from ingestion_ops.changes where table_name='resources' and post_id=%s and after_row ? 'is_active' order by row_id,id desc", (post_id,)) if r['after_row'].get('is_active') is False}
-                    changes=reconcile(post,current,new_since=config['new_since'],confirmed_hash=confirm,managed_removed=managed)
-                    if apply:
-                        apply_changes(conn,run_id,post_id,changes)
+                fingerprint = post.source_post['content_hash']
+                unchanged = bool(managed and prior.get(post_id,{}).get('status')=='ok' and
+                                 prior[post_id].get('content_hash') == fingerprint and source_hashes.get(post_id) == fingerprint)
+                if unchanged:
+                    totals['unchanged_posts'] += 1
+                else:
+                    # Independent repeat is mandatory for deletions. Compare canonical
+                    # hash, not rotating credentials. Fetch before taking row locks.
+                    with conn.transaction():
+                        before = load_current(conn,post_id)
+                    removed = before and any(r['is_active'] and r['source_resource_key'] not in
+                                 {x['source_resource_key'] for x in post.resources} for r in before['resources'])
+                    confirm = None
+                    if removed:
+                        confirm = observe(post_id,fetcher.get(url,request_label=post_id+'-confirm'),now()).source_post['content_hash']
+                    with conn.transaction():
+                        current = load_current(conn,post_id,lock=apply)
+                        if post.exam and current is None:
+                            e=post.exam
+                            duplicate=conn.execute('select 1 from public.exams where year=%s and exam_month=%s and grade_level=%s and exam_type=%s limit 1',
+                                                   (e['year'],e['exam_month'],e['grade_level'],e['exam_type'])).fetchone()
+                            require(not duplicate, 'existing_exam_identity')
+                        managed_removed={str(r['row_id']) for r in conn.execute("select distinct on (row_id) row_id, after_row from ingestion_ops.changes where table_name='resources' and post_id=%s and after_row ? 'is_active' order by row_id,id desc", (post_id,)) if r['after_row'].get('is_active') is False}
+                        changes=reconcile(post,current,new_since=config['new_since'],confirmed_hash=confirm,managed_removed=managed_removed)
+                        if apply:
+                            apply_changes(conn,run_id,post_id,changes)
+                    totals.update(change_metrics(changes, bool(prior.get(post_id,{}).get('content_hash'))))
             except ReviewRequired as exc:
                 status, code = 'review', str(exc)
             except Exception as exc:
@@ -146,6 +184,8 @@ def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-rep
             if apply:
                 conn.execute('insert into ingestion_ops.observations(post_id,lastmod,status,error_code,observed_at,last_success_at) values (%s,%s,%s,%s,now(),case when %s then now() else null end) on conflict(post_id) do update set lastmod=excluded.lastmod,status=excluded.status,error_code=excluded.error_code,observed_at=excluded.observed_at,last_success_at=coalesce(excluded.last_success_at,ingestion_ops.observations.last_success_at)',
                              (post_id,inventory.get(post_id),status,code,status=='ok'))
+                if managed and status=='ok':
+                    conn.execute('update ingestion_ops.observations set content_hash=%s where post_id=%s',(fingerprint,post_id))
             print(json.dumps(summary,ensure_ascii=False),flush=True)
         report['status']='partial' if counts['failed'] or counts['review'] else 'success'
     except Exception as exc:
@@ -154,8 +194,14 @@ def run(conn, *, apply=False, only=(), fetcher=None, output=Path('daily-sync-rep
     finally:
         report['finished_at']=now()
         report['counts']=dict(counts)
+        report['metrics']=dict(totals)
+        report['review_reasons']=dict(Counter(p['code'] for p in report['posts'] if p['status']=='review'))
+        report['failure_reasons']=dict(Counter(p['code'] for p in report['posts'] if p['status']=='failed'))
         output.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
-        if apply:
+        if managed:
+            from ingestion.schedule import finish
+            finish(conn,report,trigger)
+        elif apply:
             conn.execute('update ingestion_ops.runs set status=%s,finished_at=now(),summary=%s where id=%s',
                          (report['status'],Jsonb(report),run_id))
         conn.execute('select pg_advisory_unlock(178431,18)')
@@ -182,8 +228,9 @@ def main():
     with psycopg.connect(dsn,autocommit=True,row_factory=dict_row,connect_timeout=20) as conn:
         if not args.apply:
             conn.execute('set default_transaction_read_only=on')
-        result=run(conn,apply=args.apply,only=args.post,output=args.output)
-    return 0 if result['status']=='success' else 1
+        require(not (args.apply and args.post), 'partial_production_run_forbidden')
+        result=run(conn,apply=args.apply,only=args.post,output=args.output,managed=args.apply)
+    return 0 if result['status'] in ('success','not_due') or (result['status']=='partial' and not result['counts'].get('failed',0)) else 1
 
 
 if __name__=='__main__':

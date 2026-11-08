@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import re
+import hashlib
 from urllib.parse import urlsplit
 
 from .apply import resolve, row_id, assert_no_signing_material
@@ -78,6 +79,11 @@ def observe(post_id, html, observed_at):
     plan = normalize(raw, observed_at, map_subjects=True)
     require(plan.publishable, 'classification_review')
     resolved = resolve(plan)
+    # Full article text detects edits even when the source modified time is stale.
+    # Attachment signatures remain excluded by the canonical parser contract.
+    body = " ".join("".join(p.body_text).split())
+    resolved.source_post["content_hash"] = hashlib.sha256(
+        (resolved.source_post["content_hash"] + "\x1f" + body).encode()).hexdigest()
     assert_no_signing_material([resolved])
     for r in resolved.resources:
         u = urlsplit(r['source_url'])
