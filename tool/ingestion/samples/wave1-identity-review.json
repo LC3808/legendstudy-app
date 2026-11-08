@@ -1,0 +1,293 @@
+{
+  "reason": "Owner-frozen publication review; not parser exceptions. Resolve explicitly before removal.",
+  "groups": [
+    {
+      "identity": [
+        2019,
+        6,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1421",
+        "1422"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        6,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1423",
+        "1424"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        7,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1445",
+        "1460",
+        "1461"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1425",
+        "1426"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1427",
+        "1428",
+        "1450"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1448"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        10,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1446",
+        "1462",
+        "1463"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1429",
+        "1451"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1430",
+        "1452"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        3,
+        "csat"
+      ],
+      "external_post_ids": [
+        "1449"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        3,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1464"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        3,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1468"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        4,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1475"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1465"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1469"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1472"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        7,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1476"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1466"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1470"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1473"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        10,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1477"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        11,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1467"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        11,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1471"
+      ]
+    }
+  ],
+  "owner_closeout_resolution": {
+    "date": "2026-09-27",
+    "rule": "Full-set source counterparts released for source/identity/resource preflight; partial source records remain held. This is not automatic publication approval.",
+    "released_full_set_ids": [
+      "1416",
+      "1417",
+      "1418",
+      "1419",
+      "1420",
+      "1431",
+      "1433",
+      "1434",
+      "1435",
+      "1436",
+      "1437",
+      "1438",
+      "1439",
+      "1440",
+      "1441",
+      "1442",
+      "1443",
+      "1444"
+    ]
+  }
+}
