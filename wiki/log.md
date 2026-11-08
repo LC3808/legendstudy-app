@@ -276,3 +276,49 @@
   as provisional future UI work. Source/generated image bytes and all code unchanged.
 - Documentation-only follow-up after 9abbb08; diff/scope checks PASS. Flutter tests
   and builds not rerun. No DB/Supabase changes, push or merge.
+
+
+## 2026-11-01 — 베타 출시 마케팅 & 논술 LAB 정비 (Claude, 기획·디자인·검토)
+
+- Owner FINAL INTEGRATED INSTRUCTION(§4~§17) 대응. 별도 브랜치
+  `claude/relaxed-stonebraker-027081`(main 기반). 기존 서비스 코드/운영 DB/Registry
+  미수정, Codex 브랜치 미접근. 산출물 = 문서·배너 자산·staging 템플릿만.
+- 런타임 실측: legendstudy.com = 티스토리(메인 `.ls-slider`), lab.legendstudy.com =
+  커스텀 LAB(대학 상세 `/essay-lab/universities/{sourceUniversityId}/`). 서강=인문
+  (경제경영)·11회차 등록, 건국=통합·수리 킬스위치(`math_evaluations_enabled`).
+- 생성: `wiki/beta-launch-marketing-20261101.md`(마스터·§17 보고), 슬라이더 수정
+  (`web-main-slider-fix-20261101.md`), 지원상태 UX(`essay-support-status-ux-20261101.md`),
+  일정 입력·검증(`essay-schedule-intake-20261101.md`), 마케팅 Analytics
+  (`marketing-analytics-events-20261101.md`). 자산 `assets/marketing/banners/`(배너
+  5키 WebP@1x/@2x + PNG 폴백 + SVG + gen.py), `assets/essay-schedule/`(CSV/JSON/validate.py).
+- 배너 렌더 PASS(모바일 320–430 잘림 0), validate.py PASS(2 rows 0 invalid). 서비스
+  코드 미변경이라 Flutter/WEB 빌드·테스트 해당 없음. 운영 DB 미반영.
+- 미완료(대기): §6-1 배너 카피 원문, 대학별 실제 일정 Owner 자료 순차 제공, 서강
+  경제경영 검증 게이트(DB SELECT/실평가), GA4 크로스도메인·Firebase, 베타 종료 시각
+  화면 문구 확정, 실제 티스토리 스킨 편집·배포(Codex/Owner).
+- 리뷰용 PR #10(base main) 생성(자동병합 OFF). Owner 배너 디자인 v1 반려 → 미니멀
+  재디자인·공식 앱 아이콘/스토어 배지 방향 지시. Claude 시안도 반려.
+- **배너 시각 디자인 작업을 Manus로 이관**(Owner 지시). 인계서
+  `wiki/banner-handover-manus-20261101.md` + 확정 재료 `assets/marketing/handover/`
+  (공식 아이콘·App Store/Google Play 배지·실제 앱 화면·SOURCES.md) 작성. 명세·Analytics·
+  일정·지원상태 문서는 유지. v1 자산 미덮어쓰기, 최종 자산 미제작(Owner 승인 게이트).
+
+### TASK 15 — 모바일 웹 앱 홍보 모달 (Claude, CODE COMPLETE / OWNER DEPLOYMENT PENDING)
+
+- legendstudy.com(티스토리) 모바일 방문자 앱 설치 전환용 모달. 운영 스킨 직접 수정 않고
+  Owner가 붙여넣을 **드롭인 블록 1개** 제공. 산출물 `assets/marketing/promo-modal/`
+  (`legendstudy-app-promo-modal.html` 코드 + `README.md` 적용 가이드), 명세
+  `wiki/app-promo-modal-20261101.md`.
+- 동작(Owner 수정 반영): 모바일 전용(PC·인앱 WebView 미노출), 진입 **5초 후**, **세션 1회
+  제한 없음**(새로고침/재접속마다 노출). iOS→App Store / Android→Google Play(공식 URL).
+  숨김 X/배경/ESC=**지속 숨김 없음**(재접속 재노출)·오늘그만=당일(자정)·다운로드=**15일**
+  (`ls_appmodal_*`). PDF뷰어·키보드 입력 중 미노출, 배경 스크롤 잠금/복원, role=dialog·포커스
+  트랩·ESC. GA4 신규 이벤트 `app_promo_impression/click/dismiss/snooze`(미설정 시 무오류).
+  ※ Owner 탑재본의 CTA `+` 구문오류(다운로드 버튼 NaN 소실) 수정. "논술 첨삭은 지원
+  대학에 한해…" 제한 문구는 Owner 지시로 모달에서 미표시(의도적 삭제).
+- 문구 Owner 승인(원문 유지) — "논술 첨삭은 지원 대학에 한해 제공됩니다."는 Codex가 개발 중인
+  지원/미지원 대학 구분·순차 제공 정책 반영이라 유지(임의 변경 금지).
+- 검증: JS `node --check` PASS, 라이브 모바일 렌더 확인, 스킨 충돌 스캔 0건(`lsapm` 클래스/ID·
+  전역 플래그·스토리지 키 미충돌), 홈 슬라이더·AdSense·검색·게시글 등 보존. vanilla JS·전역 1회
+  가드로 Codex TASK 14-B/C와 영역 분리.
+- 상태: CODE COMPLETE. 실제 티스토리 스킨 편집 권한 없음 → Owner 적용·교차검증 후 완료 처리.

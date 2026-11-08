@@ -1,0 +1,80 @@
+<!-- ============================================================= -->
+<!-- LegendStudy 논술 LAB 홍보 배너 (게시글 삽입용 템플릿) v3.1      -->
+<!-- 디자인: 흰 카드 + 대학 로고 + 대학 공식 브랜드 컬러            -->
+<!-- 색은 래퍼 inline CSS 변수(--lseb-c/--lseb-t)로 주입 →          -->
+<!--   한 페이지에 여러 배너가 있어도 각자 제 색으로 표시(충돌 없음). -->
+<!-- 삽입 위치: 게시글 도입부 아래 · 기출 PDF 안내 "위" · 게시글당 1개 -->
+<!-- ============================================================= -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="{{UNIV_NAME}} 논술 LAB 안내" style="--lseb-c:{{UNIV_COLOR}};--lseb-t:{{UNIV_TINT}}">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:20px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%;text-align:center}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-wrap .lseb-card{display:flex;align-items:center;gap:16px;text-align:left;background:#FFFFFF;border:3px solid var(--lseb-c);border-radius:13px;box-shadow:0 2px 10px rgba(16,24,40,.06);padding:16px 18px;max-width:640px;margin:0 auto}
+  .lseb-wrap .lseb-logo{flex:0 0 auto;width:56px;height:56px;border-radius:10px;background:#fff;border:1px solid #EEF1F4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .lseb-wrap .lseb-logo img{max-width:50px;max-height:50px;object-fit:contain;display:block}
+  .lseb-wrap .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-wrap .lseb-univ{display:inline-block;font-size:11.5px;font-weight:800;color:var(--lseb-c);background:var(--lseb-t);border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:8px}
+  .lseb-wrap .lseb-head{font-size:16px;font-weight:800;color:#17212F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-wrap .lseb-sub{margin-top:6px;font-size:12.5px;font-weight:400;color:#64748B;line-height:1.5;word-break:keep-all}
+  .lseb-wrap .lseb-key{color:#17212F;font-weight:700}
+  .lseb-wrap .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--lseb-c);background:var(--lseb-t);border-radius:7px;padding:5px 10px;line-height:1.35;word-break:keep-all}
+  .lseb-wrap .lseb-benefit .dot{flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:var(--lseb-c)}
+  .lseb-wrap .lseb-action{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:7px}
+  .lseb-wrap .lseb-brand{font-size:10.5px;font-weight:800;color:#94A3B8;letter-spacing:.02em;white-space:nowrap}
+  .lseb-wrap .lseb-cta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:var(--lseb-c);color:#FFFFFF;font-size:13.5px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:12px 16px;white-space:nowrap;transition:filter .15s}
+  .lseb-wrap .lseb-cta:link,.lseb-wrap .lseb-cta:visited{color:#FFFFFF;text-decoration:none}
+  .lseb-wrap .lseb-cta:hover{filter:brightness(1.1)}
+  .lseb-wrap .lseb-cta:focus-visible{outline:2px solid var(--lseb-c);outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-wrap .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px;max-width:100%}
+    .lseb-wrap .lseb-logo{align-self:flex-start}
+    .lseb-wrap .lseb-benefit{width:100%;justify-content:center}
+    .lseb-wrap .lseb-action{width:100%}
+    .lseb-wrap .lseb-cta{width:100%;padding:13px 16px;font-size:14.5px}
+    .lseb-wrap .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-logo"><img src="{{LOGO_URL}}" alt="{{LOGO_ALT}}" loading="lazy"></div>
+    <div class="lseb-main">
+      <span class="lseb-univ">{{UNIV_NAME}} 논술 LAB</span>
+      <p class="lseb-head">{{HEADLINE}}</p>
+      <p class="lseb-sub"><span class="lseb-key">대학별 평가 기준</span>으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <div class="lseb-action">
+      <span class="lseb-brand">LegendStudy LAB</span>
+      <a class="lseb-cta"
+         href="{{LAB_URL}}?utm_source=tistory&utm_medium=post_banner&utm_campaign={{CAMPAIGN_ID}}&utm_content={{UNIV_ID}}_{{POST_ID}}"
+         target="_blank" rel="noopener noreferrer"
+         data-lseb-univ="{{UNIV_ID}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
