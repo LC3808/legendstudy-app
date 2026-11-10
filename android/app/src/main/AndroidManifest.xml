@@ -48,6 +48,12 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="com.legendstudy.app" android:host="auth-recovery"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="com.legendstudy.app" android:host="invite"/>
+            </intent-filter>
             <!-- Social login callback. Same scheme, separate host, so a
                  provider consent result and a recovery link stay distinct. -->
             <intent-filter>

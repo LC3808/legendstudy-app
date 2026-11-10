@@ -47,6 +47,21 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let inviteShare = FlutterMethodChannel(name: "com.legendstudy.app/invite-share", binaryMessenger: binaryMessenger)
+    inviteShare.setMethodCallHandler { [weak self] call, result in
+      guard call.method == "share" else { result(FlutterMethodNotImplemented); return }
+      guard let url = call.arguments as? String,
+        url.range(of: "^https://lab\\.legendstudy\\.com/invite/\\?t=[0-9a-f]{64}$", options: .regularExpression) != nil,
+        var presenter = self?.window?.rootViewController else {
+        result(FlutterError(code: "SHARE_FAILED", message: "Sharing unavailable", details: nil)); return
+      }
+      while let presented = presenter.presentedViewController { presenter = presented }
+      let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+      sheet.popoverPresentationController?.sourceView = presenter.view
+      sheet.popoverPresentationController?.sourceRect = CGRect(x: presenter.view.bounds.midX, y: presenter.view.bounds.midY, width: 1, height: 1)
+      presenter.present(sheet, animated: true) { result(nil) }
+    }
+
     let webAuth = FlutterMethodChannel(name: "com.legendstudy.app/web-auth", binaryMessenger: binaryMessenger)
     webAuth.setMethodCallHandler { [weak self] call, result in
       guard call.method == "authenticate" else { result(FlutterMethodNotImplemented); return }

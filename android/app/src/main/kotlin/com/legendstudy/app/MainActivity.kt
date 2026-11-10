@@ -68,6 +68,19 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         AnswerOcrBridge(flutterEngine.dartExecutor.binaryMessenger)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/invite-share").setMethodCallHandler { call, result ->
+            if (call.method != "share") { result.notImplemented(); return@setMethodCallHandler }
+            try {
+                val url = call.arguments as String
+                require(url.matches(Regex("https://lab\\.legendstudy\\.com/invite/\\?t=[0-9a-f]{64}")))
+                val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                    type = "text/plain"; putExtra(android.content.Intent.EXTRA_TEXT, url)
+                }
+                startActivity(android.content.Intent.createChooser(intent, "친구 초대"))
+                result.success(null)
+            } catch (_: Exception) { result.error("SHARE_FAILED", "Unable to open share sheet", null) }
+        }
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/pdf-download").setMethodCallHandler { call, result ->
             if (call.method != "save") { result.notImplemented(); return@setMethodCallHandler }
             if (pdfResult != null) { result.error("BUSY", "A save is in progress", null); return@setMethodCallHandler }

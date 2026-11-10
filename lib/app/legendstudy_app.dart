@@ -1,3 +1,5 @@
+import '../features/learning/invite_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +22,10 @@ class LegendStudyApp extends ConsumerWidget {
     routerConfig: ref.watch(routerProvider),
     builder: (context, child) => AppUpdateGate(
       router: ref.watch(routerProvider),
-      child: child ?? const SizedBox.shrink(),
+      child: InviteListener(
+        router: ref.watch(routerProvider),
+        child: child ?? const SizedBox.shrink(),
+      ),
     ),
   );
 }

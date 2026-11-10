@@ -31,6 +31,7 @@ dependencies:
   firebase_analytics: 12.6.1
   uuid: 4.6.0
 
+  app_links: 6.4.1 # Already resolved by Supabase; independent invite listener.
   shared_preferences: 2.5.5 # Existing SDK storage; beta display preference.
   flutter_math_fork: 0.7.4
 

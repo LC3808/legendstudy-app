@@ -1,3 +1,5 @@
+import '../../learning/learning_widgets.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -74,6 +76,10 @@ class StudyPage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppTokens.space12),
+          if (!study.mockSelected) ...[
+            const ConfirmedStudySummary(),
+            const SizedBox(height: 12),
+          ],
           if (study.mockSelected)
             MockExamPanel(
               key: ValueKey(study.viewGeneration),
@@ -157,6 +163,7 @@ class StudyPage extends ConsumerWidget {
           if (!study.mockSelected) ...[
             const SectionHeader('최근 7일'),
             LsCard(child: StudyWeekSummary(study: study)),
+            const LearningHomeExtras(),
           ],
         ],
       ),

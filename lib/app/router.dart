@@ -1,3 +1,5 @@
+import '../features/learning/learning_widgets.dart';
+import '../features/learning/invite_page.dart';
 import '../features/analytics/usage_tracking.dart';
 import '../features/notices/notices.dart';
 import '../features/credits/credit_history.dart';
@@ -91,6 +93,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         ? '/auth/owner-check'
         : '/home',
     routes: [
+      GoRoute(
+        path: '/study/schools',
+        builder: (_, _) => const SchoolRankingPage(),
+      ),
+      GoRoute(path: '/study/invite', builder: (_, _) => const InvitePage()),
       GoRoute(path: '/intro', builder: (_, _) => const DeviceIntroPage()),
       GoRoute(path: onboardingRoute, builder: (_, _) => const OnboardingPage()),
       if (ownerAuthCheckEnabled)

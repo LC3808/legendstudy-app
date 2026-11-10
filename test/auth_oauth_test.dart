@@ -282,18 +282,19 @@ void main() {
     });
 
     test('Android registers the social login callback host', () {
-      final manifest = File(
-        'android/app/src/main/AndroidManifest.xml',
-      ).readAsStringSync();
+      final manifest = File('android/app/src/main/AndroidManifest.xml')
+          .readAsStringSync();
       expect(
         manifest,
         contains('android:host="${oauth.host}"'),
         reason: 'without this the provider callback never reaches the app',
       );
       expect(manifest, contains('android:host="${recovery.host}"'));
+      expect(manifest, contains('android:host="invite"'));
+      // Two existing auth hosts plus the independent invite host.
       expect(
         'android.intent.category.BROWSABLE'.allMatches(manifest).length,
-        2,
+        3,
       );
     });
   });

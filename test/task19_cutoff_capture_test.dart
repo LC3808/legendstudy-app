@@ -82,11 +82,17 @@ void main() {
                 'active': true,
                 'available': 1,
                 'status': 'active',
-                'ends_at': '2026-11-10T15:00:00Z',
+                'ends_at': DateTime.now()
+                    .toUtc()
+                    .add(const Duration(days: 1))
+                    .toIso8601String(),
                 'campaign_id': 'fixture',
                 'policy_version': 'daily-v2',
                 'notice_seen': false,
-                'expires_at': '2026-11-10T15:00:00Z',
+                'expires_at': DateTime.now()
+                    .toUtc()
+                    .add(const Duration(days: 1))
+                    .toIso8601String(),
               }),
             ),
           ],
