@@ -36,6 +36,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+APP67 학습 통합 / 학교 순위 / 친구 초대: [구현·계약·검증·운영 미적용·후속](app67-learning-integration-20261111.md).
+
 TASK20 건국·경희 자연 전체 문항 복구: [공식자료·실제12회·격리 적용/원복·운영 승인안](task20-priority-natural-connection-20261106.md).
 
 TASK19 / LAB 베타 안내·건국 자연 상태·평가원 등급컷 / 자료·학습 공통 조회: [구현·데이터·검증·운영 승인 경계](task19-lab-ux-grade-cutoff-20261105.md).

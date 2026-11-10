@@ -5787,3 +5787,10 @@ Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/
 - 2026-11-06 Owner APP65 건국4·경희3 전체 진입/미제공 안내 해제 확인. [TASK20 7문항 진입 최종 PASS](task20-priority-natural-connection-20261106.md), 나머지 대학 연결 계속.
 
 - 2026-11-06 숙명 일반3문항 승인 TEST6회 PASS·실제출력 격리저장/조회81검사 PASS, 운영미적용. [TASK20 후속](task20-priority-natural-connection-20261106.md).
+
+
+## 2026-11-11 — APP67 학습 기능 통합
+
+APP67 기준 별도 브랜치에서 학습 홈·서버 학교 순위·친구 초대 Native 통합을 구현했다.
+기존 타이머/학교 검색/모의고사/출시 산출물을 보존했다. SQL은 격리 후보이며 운영 적용0.
+[결과·검증·링크 수신 제한·후속](app67-learning-integration-20261111.md).
