@@ -5861,3 +5861,6 @@ APP73 Owner 후속: 공부시간 순서·공식 기출 기본·시험 제목 박
 검수 원점수 기반364키 예상/79키 추정(17시험396과목) 별도 표시, 원본 점수/grade/DB 불변.
 회귀708개 중 이전 기본값 기대5개 정정 후 해당19개 재검증 PASS, 렌더4·analyze PASS.
 [재현·경계·제한](task03-result-ux-20261111.md). 내부 APP74 빌드 검증 후 영수증 추가, 스토어0.
+
+APP74 source b92d2b9: iOS 서명 빌드·삭제 없는 iPhone 설치/실행 PASS. APP73 hash 동일 보존.
+선택 답안 일시정지 대비4검사·analyze·Wiki PASS. Owner UI/등급 확인 대기. 운영 변경·스토어0.

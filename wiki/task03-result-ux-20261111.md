@@ -160,3 +160,18 @@ TASK19 기존 비교표는 그대로이며 “판정에 쓰지 않음”의 당�
 - 추가 한글 렌더4 PASS, 360/428px·1×/2×에서 새 배너·등급·답안·공부시간 순서 검사.
 - 정적 분석 PASS. 수치 검사는 계산/매핑 검증이며 추정 정확도의 경험적 검증과 구분한다.
 - 새 내부 APP74 빌드·실기기 설치 결과는 아래 실제 영수증 확인 후 기록한다.
+
+
+### APP74 내부 설치 결과
+
+- 빌드 기준 `b92d2b9`, iOS1.0.2(74), com.legendstudy.app.
+- release Xcode build60.9초/44.5MB, codesign deep/strict PASS.
+- iPhone12 Pro Max에 삭제 없는 설치·실행 PASS. 설치/실행 영수증은 비공개
+  `.local/task03c/install74.json`, `.local/task03c/launch74.json`에 보관.
+- App.framework SHA256: `c71494a82d614075ce5b87e6024e4e930d5185847bb8b0dc1e59cad3cfa828bb`.
+- APP73 보존 복사본 Framework SHA256은 기존 `1bd3ebce47d0d182656d49359dd5b3983600fdb90c45cdbc11e3eb5bcb94cc0a`와 동일.
+- 선택 답안은 일시정지 상태에서도 검정/흰색 유지, 해당4검사 추가 재확인 PASS.
+- 최종 analyze·Wiki 링크 검사 PASS. 검수 참조 재생성 두 파일 바이트 동일 PASS.
+- [등급 배너 렌더](assets/task03-result-ux/estimated-grade.png)는 합성 만점 결과이며 실제 학생 점수가 아니다.
+- Owner 실제 UI·기존 결과 재조회 확인 대기. Android 실기기/빌드·IPA/AAB·스토어 미실행.
+- 운영 DB/RPC/WEB 변경0, 실제 채점 제출·결제·이용권 실행0.
