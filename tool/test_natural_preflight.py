@@ -1,11 +1,16 @@
 """Exact Stage-1 SQL rehearsal in disposable Unix-only PG17; no remote DSN/Provider."""
-import copy,hashlib,inspect,json,sys
+import copy,hashlib,inspect,json,os,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import test_math_persistence as m
 from psycopg import sql
 from psycopg.types.json import Jsonb
 from prepare_natural_preflight import OUT,PRIVATE,BASE,R
+scope_mode=os.environ.get('NATURAL_PREFLIGHT_SCOPE','all')
+assert scope_mode in ('all','kau')
+if scope_mode=='kau':
+ OUT=R/'supabase/candidates/natural_expansion_20261111/kau-production-preflight'
+ PRIVATE=R/'.local/kau-production-preflight-20261112'
 from essay_lab.four_university_connection import ORDER
 from essay_lab.task20_priority_packages import registration_sql
 
@@ -13,7 +18,8 @@ from essay_lab.task20_priority_packages import registration_sql
 def content_case(c,rpc,new,scalar,A,B):
  review=json.loads((BASE/'question-review.json').read_text())['questions']
  packages=[json.loads(p.read_text()) for p in sorted(PRIVATE.glob('*.package.private.json'))]
- assert len(packages)==53
+ expected=json.loads((OUT/'scope.json').read_text())['counts']['new_draft']
+ assert len(packages)==expected
  c.execute('alter table public.math_subproblems add column essay_question_id uuid references public.essay_questions(id)')
  for uid in sorted({q['university_id'] for q in review}):
   c.execute("insert into public.universities(id,slug,name,is_active) values(%s,%s,'Synthetic university',false)",(uid,'fixture-'+uid))
@@ -93,7 +99,7 @@ def content_case(c,rpc,new,scalar,A,B):
  denied('preservation_guard_detects_existing_data_change',lambda:c.execute(apply),'PRESERVATION_DRIFT')
  ok('preservation_failure_atomic_rollback',full_snapshot()==before)
  c.execute('drop trigger synthetic_mutate on math_private.task20_hanyang_source_pages;drop function math_private.synthetic_mutate()')
- c.execute(apply);ok('exact_53_apply_commit')
+ c.execute(apply);ok(f'exact_{expected}_apply_commit')
  ok('postcheck_all_pass',all(x[1] is True for x in rows((OUT/'verify.sql').read_text()) if len(x)==2))
  ok('old_catalog_preserved',rpc('math_catalog',[50])==catalog)
  ok('old_result_preserved',rpc('math_evaluation_detail',[ev])==old_result)
@@ -101,6 +107,9 @@ def content_case(c,rpc,new,scalar,A,B):
  for q in [q for q in review if q['state'] in ('HOLD','NOT READY')]:
   assert scalar('select count(*) from public.math_subproblems where essay_question_id=%s',(q['registry_id'],))==0
  ok('hold5_not_ready16_not_inserted')
+ if scope_mode=='kau':
+  deferred=[q for q in review if q['university']!='한국항공대학교' and q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
+  ok('deferred_46_not_inserted',len(deferred)==46 and all(scalar('select count(*) from public.math_subproblems where essay_question_id=%s',(q['registry_id'],))==0 for q in deferred))
  for p in packages:
   for uid,label in [(A,'owner'),(B,'other')]:
    denied(p['essay_question_id']+'_'+label+'_draft_denied',lambda p=p,uid=uid:rpc('math_submit_attempt',[dict(client_submission_id=new(),leaf_id=p['ids']['leaf'],kind='INITIAL',input_kind='TYPED',typed_answer='Synthetic')],uid=uid),'CONTENT_UNAVAILABLE')

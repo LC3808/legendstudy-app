@@ -15,16 +15,28 @@ def csv(ids):return ','.join(map(literal,ids))
 def fingerprint(table,where='true',key='id'):
  return f"select {literal(table)} name,count(*) n,md5(coalesce(string_agg(md5(to_jsonb(x)::text),'' order by {key}),'')) digest from {table} x where {where}"
 
-def build():
+def build(university=None, output=None, private=None):
+ # Single-university rollout reuses the reviewed data/guards; it never activates content.
+ assert university in (None,'한국항공대학교'), 'Only the current university is authorized for preparation'
+ evidence=R/'supabase/candidates/natural_expansion_20261111/production-preflight'
+ OUT=output or evidence
+ PRIVATE=private or R/'.local/natural-production-preflight-20261112'
+ if university:assert output and private and OUT!=evidence and PRIVATE!=R/'.local/natural-production-preflight-20261112'
+ assert '.local' in PRIVATE.resolve().parts
  OUT.mkdir(parents=True,exist_ok=True);PRIVATE.mkdir(parents=True,exist_ok=True)
  review=json.loads((BASE/'question-review.json').read_text())['questions']
  assert len(review)==len({q['registry_id'] for q in review})==81
  roots={'한국항공대학교':R/'.local/natural-connection-20261111/kau','건국대학교':R/'.local/four-university-20261111/konkuk','경희대학교':R/'.local/four-university-20261111/kyunghee','성균관대학교':R/'.local/four-university-20261111/sungkyunkwan'}
  selected=[q for q in review if q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
  assert len(selected)==53
+ if university:selected=[q for q in selected if q['university']==university]
+ expected=7 if university else 53
+ assert len(selected)==expected
+ if OUT!=evidence:(OUT/'production-functions.json').write_bytes((evidence/'production-functions.json').read_bytes())
  packages=[];worker=[];matrix=[]
  for q in review:
   state=q['state'];scope='EXISTING_PRESERVE' if state=='SERVICE READY (OPERATING PRESERVED)' else 'HOLD_EXCLUDED' if state=='HOLD' else 'NOT_READY_EXCLUDED' if state=='NOT READY' else 'NEW_DRAFT_ONLY'
+  if scope=='NEW_DRAFT_ONLY' and university and q['university']!=university:scope='DEFERRED_UNIVERSITY'
   matrix.append({k:q[k] for k in ['university','exam_id','registry_id','registry_key','admission_year','track','question_label','state']}|dict(application_scope=scope,pdf_approval_pending=q.get('student_pdf',{}).get('studentDisplay')=='PENDING',kyunghee_partial=state=='DATA READY',partial_exam=scope=='NEW_DRAFT_ONLY' and sum(x['exam_id']==q['exam_id'] for x in selected)<sum(x['exam_id']==q['exam_id'] for x in review),student_pdf=q.get('student_pdf'),math_connection=q.get('math_connection'),operating_math_bindings=q['operating_math_bindings']))
   if scope!='NEW_DRAFT_ONLY':continue
   root=roots[q['university']];qid=q['registry_id'];raw=(root/(qid+'.package.private.json')).read_bytes();p=json.loads(raw)
@@ -66,7 +78,7 @@ def build():
  compare="do $preserve$ begin if exists(select 1 from ("+snapshot+") now_rows full join _approval_before old_rows using(name) where now_rows.n is distinct from old_rows.n or now_rows.digest is distinct from old_rows.digest) then raise exception 'PRESERVATION_DRIFT';end if;end $preserve$;\n"
  header="-- REVIEW ONLY: Stage 1 DRAFT insert, no activation/publication. Owner approval required.\nbegin isolation level repeatable read;\nset local lock_timeout='5s';\nset local statement_timeout='120s';\nselect pg_advisory_xact_lock(20261112,53);\n"
  applied=[(t+' exact count',f'(select count(*) from public.{t} where id in ({csv(v)}))={len(v)}'+(f" and not exists(select 1 from public.{t} where id in ({csv(v)}) and state<>'DRAFT')" if t in STATE_TABLES else '')) for t,v in ids.items()]
- applied.append(('Worker exact count',f'(select count(*) from math_private.task20_hanyang_source_pages where question_id in ({csv(qids)}))=53'))
+ applied.append(('Worker exact count',f'(select count(*) from math_private.task20_hanyang_source_pages where question_id in ({csv(qids)}))={expected}'))
  for p in packages:
   w=json.loads((PRIVATE/(p['essay_question_id']+'.worker.private.json')).read_text())
   applied.append((p['essay_question_id']+' Worker identity/digest',f"exists(select 1 from math_private.task20_hanyang_source_pages where question_id={literal(w['question_id'])} and exam_id={literal(w['exam_id'])} and content_sha256={literal(w['sha256'])})"))
@@ -82,7 +94,7 @@ def build():
  for t in STATE_TABLES:rollback+=f"update public.{t} set state='RETIRED' where id in ({csv(ids[t])}) and state='DRAFT';\n"
  rollback+=compare+'commit;\n';(OUT/'rollback-retire.sql').write_text(rollback)
  (OUT/'verify-retired.sql').write_text((OUT/'verify.sql').read_text().replace("state<>'DRAFT'","state<>'RETIRED'"))
- dump(OUT/'scope.json',dict(base_commit='536a2fc22c5fa763d31fa59fe239460cef93d794',questions=matrix,counts=dict(review=81,candidates=58,new_draft=53,existing_preserve=7,hold=5,not_ready=16,pdf_pending_subset=15,partial_exam_subset=5,kyunghee_partial_subset=4,duplicate_excluded=0),selected_exams=len({q['exam_id'] for q in selected}),rows={t:len(v) for t,v in ids.items()},worker_rows=53,functions=funcs,production_writes=0,publication_allowed=False))
+ dump(OUT/'scope.json',dict(base_commit='536a2fc22c5fa763d31fa59fe239460cef93d794',questions=matrix,counts=dict(review=81,candidates=58,new_draft=expected,deferred_university=53-expected,existing_preserve=7,hold=5,not_ready=16,pdf_pending_subset=sum(q['pdf_approval_pending'] for q in matrix if q['application_scope']=='NEW_DRAFT_ONLY'),partial_exam_subset=sum(q['partial_exam'] for q in matrix),kyunghee_partial_subset=sum(q['kyunghee_partial'] for q in matrix if q['application_scope']=='NEW_DRAFT_ONLY'),duplicate_excluded=0),selected_exams=len({q['exam_id'] for q in selected}),rows={t:len(v) for t,v in ids.items()},worker_rows=expected,functions=funcs,production_writes=0,publication_allowed=False))
  dump(OUT/'sql-receipt.json',dict(private_apply=str(PRIVATE/'apply-draft.private.sql'),sha256=digest(apply.encode()),bytes=len(apply.encode()),files={f:digest((OUT/f).read_bytes()) for f in ['preflight.sql','verify.sql','rollback-retire.sql','verify-retired.sql']},source_metadata_sha256={str(f.relative_to(R)):digest(f.read_bytes()) for f in [BASE/'question-review.json',BASE/'leaf-contract-candidate.json',BASE/'existing-pdf-reuse-verification.json']},candidate_packages={p['essay_question_id']:digest((PRIVATE/(p['essay_question_id']+'.package.private.json')).read_bytes()) for p in packages}))
- print(json.dumps(dict(selected=len(selected),exams=len({q['exam_id'] for q in selected}),rows={t:len(v) for t,v in ids.items()},worker_rows=53,apply_bytes=len(apply.encode()))))
+ print(json.dumps(dict(selected=len(selected),exams=len({q['exam_id'] for q in selected}),rows={t:len(v) for t,v in ids.items()},worker_rows=expected,apply_bytes=len(apply.encode()))))
 if __name__=='__main__':build()

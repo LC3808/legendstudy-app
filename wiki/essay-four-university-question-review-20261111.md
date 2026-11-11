@@ -1,5 +1,7 @@
 # 네 대학 문항별 연결·Owner 검수 목록
 
+최신 Owner 기준: [한 대학씩 SERVICE READY·확정 순서](essay-natural-sequential-order-20261112.md). 아래 로컬 상태/일괄53 후보는 당시 증거이며 현재 완료·일괄 실행 승인을 뜻하지 않는다.
+
 기존 Registry 23시험·81문항. 이 표의 연도는 학년도이며 실제 시험 시행일이 아니다. 운영 미반영 후보는 현재 서비스에서 사용할 수 없다.
 
 [20개 필수 항목·원본 파일명/SHA/physical page·leaf ID·PDF 해시·상태 전체](../supabase/candidates/natural_expansion_20261111/four-university/question-review.json). Registry ID와 문항 UUID는 동일한 기존 `essay_questions.id`; 별도 ID를 만들지 않았다.

@@ -1050,8 +1050,12 @@ Owner 작업04-C 첨부 화면 후속: 홈 편집은 알림과 나란히 배치�
 
 ## 2026-11-11 — 자연계열 네 대학 연결 범위
 
-Owner는 항공→건국→경희→성균관의 기존 Registry/공식 근거/Worker 연결을 순차 진행하도록 지정했다. 로컬 후보가 검증되면 다음 대학으로 진행하며 운영 승인 대기로 로컬 작업을 중단하지 않는다. 품질 평가는 Owner/사용자 담당, Provider 호출·새 엔진·운영 변경·공개는 이번 범위가 아니다. 공식 원문 보존·중앙 과학11 HOLD를 계승하고 항공2024 공학Q2 HOLD 및 기존 불일치 검수는 유지한다. [기존 근거 보존 원칙](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) · [적용 결과와 공개 경계](essay-four-university-connection-20261111.md).
+Owner는 항공→건국→경희→성균관의 기존 Registry/공식 근거/Worker 연결을 순차 진행하도록 지정했다. 당시에는 로컬 후보가 검증되면 다음 대학으로 진행하도록 했으나, 아래2026-11-12 대학별 순차 SERVICE READY 결정으로 대체됐다. 품질 평가는 Owner/사용자 담당, Provider 호출·새 엔진·운영 변경·공개는 이번 범위가 아니다. 공식 원문 보존·중앙 과학11 HOLD를 계승하고 항공2024 공학Q2 HOLD 및 기존 불일치 검수는 유지한다. [기존 근거 보존 원칙](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) · [적용 결과와 공개 경계](essay-four-university-connection-20261111.md).
 
 ### 2026-11-11 — 운영 자료 적재·Owner 검수·사용자 공개 분리
 
 위 네 대학 연결 결정을 계승한다. Owner는1단계 비공개 Backend 연결,2단계 Owner 계정 실제 검수,3단계 승인 문항 공개를 분리하고 현재는 사전 검증만 지시했다. HOLD·NOT READY·PDF 대기를 임의 해제하지 않는다. [사전 결과](essay-four-university-production-preflight-20261112.md):53 DRAFT는 Codex 승인 요청안이며 아직 승인/운영 적용이 아니다. 현재 ACTIVE 경로의 Owner 전용 접근 통제 GAP은 별도 검토하며 공개 목록 숨김으로 대체하지 않는다.
+
+## 2026-11-12 — 자연·수리 대학별 순차 SERVICE READY 기준
+
+Owner 최종 순서: 한국항공→건국→경희→성균관→서강→숭실→숙명여대→동국→광운→서울여대. 기완료 한양·중앙·고려·인하는 재작업하지 않는다. 한 대학씩 실제 서비스 검수가 가능한 SERVICE READY까지 진행해 대학별 결과를 보고한다. 일반 중간 보고 생략,Owner 판단/운영 승인/HOLD는 즉시 보고. 기존 Registry·공식 근거·기준·Worker와 첨삭 엔진 재사용,운영 DB/RPC 및 사용자 공개는 별도 승인. 이전 로컬 후보 완료만으로 다음 대학을 시작하는 규칙을 대체한다. [대학별 상태·현재 승인·잔여 HOLD](essay-natural-sequential-order-20261112.md).

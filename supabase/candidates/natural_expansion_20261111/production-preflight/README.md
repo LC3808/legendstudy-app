@@ -1,5 +1,7 @@
 # Stage 1: 53 DRAFT connections — NOT APPLIED
 
+**SUPERSEDED EXECUTION SCOPE:** [Owner 순차 결정](../../../../wiki/essay-natural-sequential-order-20261112.md)에 따라 현재 실행 대상은 한국항공 단독 후보이며,이53문항 일괄 SQL은 실행하지 않는다. 역사적 검증 증거로만 보존한다.
+
 [Canonical report](../../../../wiki/essay-four-university-production-preflight-20261112.md) · [81-row Registry scope](../../../../wiki/essay-four-university-application-scope-20261112.md).
 
 Base commit `536a2fc22c5fa763d31fa59fe239460cef93d794`. Proposal, not Owner authorization.

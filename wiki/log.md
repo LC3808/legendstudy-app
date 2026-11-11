@@ -5923,3 +5923,7 @@ APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/
 ## 2026-11-12 — 네 대학 운영 연결 사전 검증
 
 기준536a2fc에서81 UUID를 기존7/후보58/NOT READY16으로 재대조. HOLD5 제외53문항(경희partial4·성균관PDF대기15 포함)의 DRAFT687+Worker53 단일 적용 후보 준비. 운영SELECT116,격리 apply/retire238,Python22,WEB65 PASS. 기존7/이력/권한 보존,실패 원자성 검증. ACTIVE 직접 RPC의 Owner 전용 통제 GAP 재현;1단계와2·3단계 승인 분리. 운영쓰기/Provider/배포0. [보고·승인 범위](essay-four-university-production-preflight-20261112.md) · [81 UUID](essay-four-university-application-scope-20261112.md).
+
+## 2026-11-12 — 자연·수리 대학 순서 및 완료 기준 확정
+
+Owner 최종 순서10개교와 기완료4개교 제외를 반영. 현재한국항공에 한정하여7문항/106행 DRAFT 적용·검증·원복을 기존 후보에서 분리,격리55 PASS. 다른46개 후보 미적재 검증. 실제SERVICE READY 미달·HOLD5·운영 승인·Owner 검수 접근 제어를 즉시 보고하며 후순위 진행하지 않음. 이전53 일괄승인안은 실행 대상에서 제외. 운영쓰기/Provider/배포0. [결정·인계](essay-natural-sequential-order-20261112.md).

@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-[네 대학 운영 사전 검증](essay-four-university-production-preflight-20261112.md): 81=기존7+후보58+NOT_READY16. HOLD5 제외한18시험53문항 DRAFT687+Worker53행 승인 제안. 운영SELECT116·격리238·Python22·WEB65 PASS. 운영쓰기/Provider/배포0. Owner 전용 ACTIVE 접근 제어는 GAP,2단계 별도 검토. [81개 UUID 처리표](essay-four-university-application-scope-20261112.md).
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 한양·중앙·고려·인하 재작업 제외. 한국항공→건국→경희→성균관→서강→숭실→숙명여대→동국→광운→서울여대. 현재 한국항공 NOT SERVICE READY: HOLD5/운영 승인/Owner 검수 접근 제어 대기. 단독7문항106행 DRAFT 승인 후보·격리55 PASS;후순위 착수0. 로컬 검증만으로 완료/다음 대학 진행 금지.
 
 [이전 확장 감사와 범위 이력](essay-connection-owner-verification-20261111.md) · [공식 불일치·원문 보존·중앙 과학11 HOLD](essay-natural-expansion-20261111.md).
 

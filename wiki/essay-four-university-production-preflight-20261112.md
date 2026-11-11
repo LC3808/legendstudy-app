@@ -1,5 +1,7 @@
 # 네 대학 자연계열 운영 연결 사전 검증 — 2026-11-12
 
+최신 Owner 기준: [한 대학씩 SERVICE READY·확정 순서](essay-natural-sequential-order-20261112.md). 아래 로컬 상태/일괄53 후보는 당시 증거이며 현재 완료·일괄 실행 승인을 뜻하지 않는다.
+
 **1단계 비공개 적재 준비 DONE / 운영 적용 NOT APPLIED / Owner 실제 첨삭 검수 NOT TESTED.**
 Owner 2026-11-11 지시와 기준 commit `536a2fc22c5fa763d31fa59fe239460cef93d794`를 이어받았다.
 브랜치 `codex/essay-natural-expansion-20261111`. 현재 HEAD는 `git log -1`로 확인한다.
