@@ -1,5 +1,7 @@
 # Current Status
 
+[APP78 Native UX 후속](onboarding-inline-applications-20261111.md): N수·기타 학교 단계 자동 생략, 온보딩 내부 실제 지원 추가/수정/삭제, MY 공통 카드 폼·외부 라벨·미저장 이탈 확인. 기존 repository/운영 데이터 변경0. 계정별 단계 복원 유지. 최종 검사·기기 검수 후속 기록,릴리스 HOLD.
+
 [이메일 인증 후 온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner Resend 수신·인증·로그인 성공 보고. Owner 재현 iPhone17 Pro Max 일반 배포 앱1.0.2(67) 확인, 빌드 기록 소스2fa70bf. 이전 iPhone12/APP75 연결 보고 정정. profile 존재를 완료로 오판하는 gate 수정; 완료/skip marker로 판별. 집중212 PASS/analyze PASS. Owner 승인으로 iPhone17에77 삭제 없는 업데이트·실행 PASS. APP77 온보딩 노출 Owner PASS. N수 실제 지원 선택 단계·계정별 단계 복원 구현. iPhone17 APP78 업데이트/실행 PASS, iPhone12 APP75 재확인. 최종전체2540 PASS/8 SKIP/기존5 FAIL,analyze PASS. 최종 실기기 연속 흐름과 기존 회원46개 재노출 검토 대기; 임시 draft 완전 복원은 후속. 운영 변경0.
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).

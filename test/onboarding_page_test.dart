@@ -173,7 +173,11 @@ Future<GoRouter> _mount(
           return owner == null
               ? null
               : ApplicationRepository(
-                  (name, params) async => <Object?>[],
+                  (name, params) async => {
+                    'version': 'applications-v1',
+                    'has_more': false,
+                    'items': <Object?>[],
+                  },
                   () => ref.read(authStateProvider).asData?.value.userId,
                   owner,
                 );
@@ -240,6 +244,9 @@ void main() {
       if (font.existsSync()) {
         await (FontLoader(
           'CorePreview',
+        )..addFont(font.readAsBytes().then(ByteData.sublistView))).load();
+        await (FontLoader(
+          'Roboto',
         )..addFont(font.readAsBytes().then(ByteData.sublistView))).load();
       }
     }
@@ -692,6 +699,10 @@ void main() {
   testWidgets('retaker skips grade/school and clears grade on finish', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(430, 932);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final repo = _Repo();
     await _mount(tester, repo, user: 'u1');
     await tester.tap(find.text('N수생 · 검정고시 등'));
@@ -699,23 +710,24 @@ void main() {
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
 
-    expect(find.text('학년·학교는 재학생 전용이에요'), findsOneWidget);
+    expect(find.text('학년·학교는 재학생 전용이에요'), findsNothing);
     expect(find.text('학년'), findsNothing);
-    await tester.tap(find.text('다음')); // 확인 → 관심 대학
-    await tester.pumpAndSettle();
     await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 실제 지원
     await tester.pumpAndSettle();
     expect(find.text('실제 지원 대학을 입력해 주세요'), findsOneWidget);
-    expect(find.text('4 / 7'), findsOneWidget);
-    await tester.tap(find.text('실제 지원 대학 관리'));
+    expect(find.text('3 / 6'), findsOneWidget);
+    await preview.capture(tester, 'onboarding-inline-empty');
+    await tester.tap(find.text('지원 대학 추가하기'));
     await tester.pumpAndSettle();
-    expect(find.text('지원 대학 등록하기'), findsOneWidget);
-    await tester.tap(find.text('지원 대학 등록하기'));
+    expect(find.text('대학 검색 · 필수'), findsOneWidget);
+    expect(find.text('3 / 6'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+    await preview.capture(tester, 'onboarding-inline-form');
+    await tester.ensureVisible(find.text('저장'));
     await tester.pumpAndSettle();
-    expect(find.text('지원 대학 등록'), findsOneWidget);
-    await tester.pageBack();
-    await tester.pumpAndSettle();
-    await tester.pageBack();
+    await preview.capture(tester, 'onboarding-inline-fields');
+    await tester.ensureVisible(find.text('입력 닫기'));
+    await tester.tap(find.text('입력 닫기'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('나중에 입력하기'));
     await tester.pumpAndSettle();
@@ -745,10 +757,10 @@ void main() {
     await _mount(tester, repo, user: 'u1', progress: progress);
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
-    expect(progress.steps['u1'], 2);
+    expect(progress.steps['u1'], 3);
     await tester.pumpWidget(const SizedBox.shrink());
     await _mount(tester, repo, user: 'u1', progress: progress);
-    expect(find.text('학년·학교는 재학생 전용이에요'), findsOneWidget);
+    expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
     expect(repo.upserts, 0);
     await tester.pumpWidget(const SizedBox.shrink());
     await _mount(
@@ -758,8 +770,54 @@ void main() {
       progress: progress,
     );
     expect(find.text('N수생 · 검정고시 등'), findsOneWidget);
-    expect(progress.steps['u1'], 2);
+    expect(progress.steps['u1'], 3);
   });
+
+  for (final grade in [1, 2, 3]) {
+    testWidgets('student grade $grade retains school step', (t) async {
+      final repo = _Repo()
+        ..initial = UserProfile(
+          id: 'u1',
+          academicStatus: 'student',
+          gradeLevel: grade,
+        );
+      await _mount(t, repo, user: 'u1', progress: _Progress()..steps['u1'] = 2);
+      expect(find.text('학년'), findsWidgets);
+      expect(find.text('2 / 6'), findsOneWidget);
+      expect(repo.schoolWrites, 0);
+    });
+  }
+
+  for (final kind in ['retaker', 'other']) {
+    testWidgets(
+      '$kind skips obsolete restored school step and preserves school',
+      (t) async {
+        final progress = _Progress()..steps['u1'] = 2;
+        final repo = _Repo()
+          ..initial = UserProfile(
+            id: 'u1',
+            academicStatus: kind,
+            neisOfficeCode: 'B10',
+            neisSchoolCode: '7010001',
+          );
+        await _mount(t, repo, user: 'u1', progress: progress);
+        expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+        expect(
+          find.text(kind == 'retaker' ? '2 / 6' : '2 / 5'),
+          findsOneWidget,
+        );
+        await t.tap(find.text('이전'));
+        await t.pumpAndSettle();
+        await t.tap(find.text('고등학교 재학생'));
+        await t.pumpAndSettle();
+        await t.tap(find.text('다음'));
+        await t.pumpAndSettle();
+        expect(find.text('학년'), findsWidgets);
+        expect(find.text('2 / 6'), findsOneWidget);
+        expect(repo.schoolWrites, 0);
+      },
+    );
+  }
 
   testWidgets('skip completes onboarding without writing status', (
     tester,

@@ -233,7 +233,7 @@ void main() {
       expect(find.text('등록된 지원 내역이 없습니다.'), findsOneWidget);
       await t.tap(find.text('지원 대학 등록하기'));
       await t.pumpAndSettle();
-      expect(find.text('지원 학년도'), findsOneWidget);
+      expect(find.text('지원 학년도 · 필수'), findsOneWidget);
       expect(t.takeException(), isNull);
     });
   }

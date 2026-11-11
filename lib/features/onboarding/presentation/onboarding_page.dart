@@ -1,5 +1,5 @@
 import '../onboarding_progress.dart';
-import '../../applications/applications_page.dart';
+import '../../applications/onboarding_applications.dart';
 import '../../home/customization/home_configuration.dart';
 import '../../home/customization/home_editor.dart';
 import '../device_intro.dart';
@@ -71,7 +71,16 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   bool _stepRestored = false;
   int _ownerEpoch = 0;
   // Stable IDs keep the existing steps intact; only N수 accounts gain a step.
-  List<int> get _steps => [1, 2, 3, if (_status == 'retaker') 7, 4, 5, 6];
+  List<int> get _steps => [
+    1,
+    if (_isStudent) 2,
+    3,
+    if (_status == 'retaker') 7,
+    4,
+    5,
+    6,
+  ];
+  GlobalKey<OnboardingApplicationsState> _applicationsKey = GlobalKey();
   HomeConfiguration _homeDraft = HomeConfiguration.defaults();
   int? _homeSavedRevision;
   bool _homeEdited = false;
@@ -146,7 +155,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     if (_busy || _advancing || !_hydrated) return;
     if (delta > 0 && _step == 2 && _isStudent && _schoolSearchPending) return;
     if (delta > 0 && _step == 3 && _universitySearchPending) return;
-    final owner = ref.read(authStateProvider).value?.userId;
+    final leavingOwner = ref.read(authStateProvider).value?.userId;
+    final leavingStep = _step;
+    if (_step == 7 &&
+        !await (_applicationsKey.currentState?.confirmLeave() ??
+            Future.value(true))) {
+      return;
+    }
+    if (!_sameOwner(leavingOwner) || _step != leavingStep) return;
+    final owner = leavingOwner;
     setState(() {
       _busy = true;
       _error = null;
@@ -228,6 +245,14 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Future<void> _skip() async {
     if (_busy) return;
+    final leavingOwner = ref.read(authStateProvider).value?.userId;
+    final leavingStep = _step;
+    if (_step == 7 &&
+        !await (_applicationsKey.currentState?.confirmLeave() ??
+            Future.value(true))) {
+      return;
+    }
+    if (!_sameOwner(leavingOwner) || _step != leavingStep) return;
     setState(() {
       _busy = true;
       _error = null;
@@ -362,6 +387,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     if (_owner != auth.value?.userId) {
       _owner = auth.value?.userId;
       _step = 1;
+      _applicationsKey = GlobalKey();
       _stepRestored = false;
       final epoch = ++_ownerEpoch;
       if (_owner != null) _restoreStep(_owner!, epoch);
@@ -388,6 +414,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       if (!_gradeDirty) _grade = profile?.gradeLevel;
       _savedNickname = profile?.displayName;
       if (!_nicknameDirty) _nickname.text = _savedNickname ?? '';
+      if (_step == 2 && _status != null && !_isStudent) _step = 3;
       if (!_steps.contains(_step) || (_step != 1 && _status == null)) {
         _step = 1;
       }
@@ -525,7 +552,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             '실제 지원 대학을 입력해 주세요',
             '관심 대학과 별도로 실제 지원한 대학·학과·전형을 기록해요. 아직 정하지 않았다면 나중에 MY에서 입력할 수 있어요.',
           ),
-          const ApplicationsEntry(),
+          OnboardingApplications(key: _applicationsKey),
         ];
       case 4:
         return _majorStep();
@@ -730,7 +757,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 backgroundColor: _accent,
                 foregroundColor: _ink,
                 disabledBackgroundColor: AppTokens.disabled,
-                textStyle: const TextStyle(
+                textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
                 ),

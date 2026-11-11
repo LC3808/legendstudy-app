@@ -1,3 +1,7 @@
+## 2026-11-11 — APP78 온보딩 Native UX 후속
+
+[구현·보존·렌더](onboarding-inline-applications-20261111.md): N수/기타 학교 단계 생략·과거 단계 정규화, 실제 지원 inline CRUD·MY 공통 외부라벨/카드 폼·미저장 이탈 확인. 기존 Repository/Backend/학교 소속 불변,운영 쓰기0. 최종 회귀·기기 영수증 후속,릴리스 HOLD.
+
 ## 2026-11-11 — N수 온보딩 APP78 설치·최종 회귀
 
 [APP78 영수증](onboarding-auth-routing-fix-20261111.md#app78-최종-영수증): 소스79f5a12, iPhone17 삭제 없는78 업데이트·실행/버전 확인, iPhone12 APP75 보존 확인. 전체2540 PASS/8 SKIP/기존5 FAIL,analyze/Wiki PASS. 학교 완료회원 fixture 보정 후 추가 실패 해소. APP77 노출 Owner PASS,APP78 실제 신규 N수 입력·단계 복원·로그인 조합 NOT TESTED,릴리스 HOLD. 운영/기존 회원 데이터 변경0.
