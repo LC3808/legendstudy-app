@@ -1,7 +1,10 @@
 # Natural expansion 2026-11-11 — OFFLINE / NOT FOR PRODUCTION APPLY
 
+**Latest Owner scope and delivered follow-up: [connection/README.md](connection/README.md).**
+The material below records the original v1 preparation. Normalization/Provider quality is no longer a completion gate. The v1 locator was incompatible with the existing Worker; use the hash-preserving connection follow-up, not the old SQL.
+
 [Canonical report](../../../wiki/essay-natural-expansion-20261111.md).
-No new schema/RPC, no production writes, no Storage uploads, no Provider calls.
+The original offline preparation and connection-only follow-up make no new schema/RPC, production writes, Storage uploads or Provider calls. The interrupted earlier quality experiment is recorded separately in the Wiki.
 Existing IDs only. Central69 completed math packages and science11 HOLD unchanged.
 
 ## Files
@@ -19,7 +22,7 @@ Existing IDs only. Central69 completed math packages and science11 HOLD unchange
 - `isolated-contract-report.json`, `verification.json`: actual local results; synthetic evaluation is not Provider quality.
 
 Private body/PNG/base64/PDF/SQL remain ignored under `.local/natural-expansion-20261111/kau-verified/`.
-No deployable activation SQL. `register-draft.private.sql` is a review artifact using the existing TASK20 renderer. Do not apply it to production without normalization, fresh preflight, TEST E2E and separate Owner authorization.
+No deployable activation SQL. `register-draft.private.sql` is a review artifact using the existing TASK20 renderer. Do not apply it to production without the corrected connection metadata, fresh preflight and separate Owner authorization.
 
 ## Reproduce offline
 

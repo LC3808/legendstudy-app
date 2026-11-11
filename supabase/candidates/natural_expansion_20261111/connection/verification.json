@@ -1,0 +1,46 @@
+{
+  "python": {
+    "passed": 18
+  },
+  "worker": {
+    "questions": 12,
+    "checks": 120,
+    "passed": true
+  },
+  "postgres": {
+    "common_checks": 6,
+    "question_checks": 72,
+    "provider": "MOCK",
+    "passed": true
+  },
+  "web": {
+    "numTotalTests": 25,
+    "numPassedTests": 25,
+    "numFailedTests": 0,
+    "success": true
+  },
+  "flutter": {
+    "passed": 31,
+    "skipped": 4,
+    "failed": 0,
+    "skip_reason": "existing approved result private fixtures unavailable"
+  },
+  "new_product_failures": 0,
+  "transient_test_failures": [
+    "candidate SQL dependency order corrected",
+    "Mock http.Response missing request corrected",
+    "new test strict type/style diagnostics corrected"
+  ],
+  "device_e2e": "NOT_TESTED",
+  "remote_test_e2e": "NOT_TESTED",
+  "provider_calls_after_owner_stop": 0,
+  "production_writes": 0,
+  "source_worker_md5": "54acd2a1914f360e6ecd62e39acc8222",
+  "app_base": "bcbee7267d94e351a4f4cbd89dd914feeb8ae47e",
+  "web_reference": "745fbf3",
+  "analyze": "PASS",
+  "web_existing_result_rewrite": {
+    "passed": 5,
+    "failed": 0
+  }
+}

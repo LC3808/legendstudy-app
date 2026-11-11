@@ -1,3 +1,7 @@
+## 2026-11-11 — 논술 연결 범위 정정·한국항공 기술 연결
+
+[최신 검수/잔여](essay-natural-expansion-20261111.md): 반복 Provider 중단(25요청/22응답/3미확정, 이후0), 실험 격리. 기존 원문 v1을 보존해 항공12문항172행 새 후보·Worker locator 수정, 공통Registry 신규10개교28/94 확인. Python18/로컬PG198/WEB30/Flutter31 PASS·4SKIP·Analyze PASS. 공식 이슈5 parent Owner검수, 중앙과학11·기존HOLD 보존, 운영/TEST원격쓰기·배포0. 실제 서비스/기기·나머지 package PARTIAL.
+
 ## 2026-11-11 — 논술 자연계열 확장 인수·로컬 후보
 
 [인수·검증·잔여](essay-natural-expansion-20261111.md): 중앙69 기존 운영연결 재확인·과학11 HOLD, Owner390시험 감사와 등록 수 일치. 한국항공6시험12문항/172행 private DRAFT·문제PDF6개25쪽·기존Math계약 리허설 PASS. 신규10개교는 기존Catalog/Registry 후보만, 실제 Provider·후보UI E2E 미실행. Python15/WEB97/Flutter85 PASS·4SKIP. 운영DB/공개/WEB/Store 변경0.

@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-11 — 논술 LAB은 기존 시험·문항 연결, 품질 평가는 Owner
+
+Owner는 [공식 원본 보존](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30)과 [TASK20 기존 서비스 연결](task20-priority-natural-connection-20261106.md)을 유지하며, Codex의 범위를 Registry·공식 기준·문제·입력·제출·결과·재작성 연결로 확정했다. 반복 Provider/정오·부분답안 생성·품질 평가는 중단하고 최소 Mock 기술검사만 사용한다. 원문·공식해설·배점을 독자 수정하지 않으며 불일치는 Owner 판단 대상으로 기록한다. 소문항 의심으로 시험 전체를 자동 제외하지 않는다. 중앙69 재작업 금지/과학11 HOLD, 기존 엔진·프롬프트·결과 UX·Credit 보존. 운영 변경/공개/배포는 별도 승인. [실제 구현·검수·미완료](essay-natural-expansion-20261111.md).
+
 ## 2026-11-11 — 사용자 선택 홈·공식 대학 소식
 
 Owner는 [기존 홈 개인화 설계](home-personalization-and-events.md)를 확장했다. 학년별 기본 홈 강제 없이 APP75 기본 구성을 보존하며 온보딩 마지막 선택/홈 편집에서 표시·드래그 순서를 명시 저장한다. 대학 소식은 기본 OFF, 기존 입시 일정 계획은 이 카드 안에 통합한다. 희망/실제 지원 데이터를 재사용하고 공식 출처·정확한 연도/전형/모집단위·개정 이력·KST를 검증한 정보만 제공한다. [닉네임 정책](#2026-11-03--마지막-선택형-닉네임-온보딩)은 유지하고 뒤에 홈 선택 단계를 추가한다. 구현·후보 계약만 승인, 운영/릴리스/스토어는 별도다. [작업04 구현·검수](task04-home-university-news-20261111.md).

@@ -131,7 +131,7 @@ def validate_plan(plan, registry):
 
 def build_review_package(exam, q, page_text):
     """Existing math-v1 schema; raw extraction is retained only in private DRAFT."""
-    uid = lambda key: str(uuid.uuid5(uuid.UUID(q['question_id']), 'natural-expansion-20261111-v1:' + key))
+    uid = lambda key: str(uuid.uuid5(uuid.UUID(q['question_id']), 'natural-expansion-20261111-connection-source-v1:' + key))
     rows = {}
     def add(table, key, **values):
         rows.setdefault('math_' + table, []).append(dict(id=uid(key), **values))
@@ -148,7 +148,7 @@ def build_review_package(exam, q, page_text):
     for role, key in [('QUESTION', 'problem'), ('SCORING', 'rubric'), ('INTENT', 'intent'), ('SOLUTION', 'solution')]:
         add('source_artifacts', role, problem_id=uid('problem'), source_role=role,
             source_url='urn:sha256:' + exam['source']['sha256'],
-            locator=f"{exam['source']['file']} / physical pages {','.join(map(str, q['evidence'][key]))} / {q['label']}",
+            locator=f"{exam['source']['file']} PDF {','.join(map(str, q['evidence'][key]))}쪽",
             provenance='OFFICIAL', verification='HASH_VERIFIED', content_sha256=exam['source']['sha256'])
     add('evaluation_profiles', 'profile', scope='LEAF', leaf_id=uid('leaf'),
         response_format='FULL_SOLUTION', rubric_version='math-rubric-v1',
@@ -169,8 +169,9 @@ def build_review_package(exam, q, page_text):
                 state='DRAFT', publication_allowed=False, provider_allowed=False,
                 extraction_has_private_glyphs=any(0xE000 <= ord(c) <= 0xF8FF for c in raw),
                 technical_ready=False,
-                remaining=['NORMALIZED_MATH_AND_RUBRIC_REVIEW', 'LOCAL_DB_REHEARSAL',
-                           'WEB_APP_INPUT_AND_RESULT_E2E', 'OWNER_PUBLICATION_APPROVAL'])
+                remaining=['EXISTING_WORKER_SOURCE_CONTRACT', 'LOCAL_DB_REHEARSAL',
+                           'WEB_APP_CONNECTION_CONTRACT', 'OWNER_SOURCE_ISSUE_REVIEW',
+                           'OWNER_PUBLICATION_APPROVAL'])
 
 
 def student_crop_limit(spec, height, heading_tops):

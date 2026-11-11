@@ -1,6 +1,6 @@
 # Current Status
 
-[논술 자연 확장](essay-natural-expansion-20261111.md): PARTIAL. Owner 감사390시험 등록 수 현재일치, 중앙20시험69수학 ACTIVE/과학11 HOLD 확인. 항공6시험12 DRAFT·문제PDF6·격리DB계약 PASS; 신규10개교 기존ID 후보 정리. 수식/기준 정규화·실제 첨삭·WEB/APP 후보 E2E 미완료. 신규Python15/WEB97/Flutter85 PASS·4SKIP, 운영/공개/배포0.
+[논술 자연 확장](essay-natural-expansion-20261111.md): PARTIAL. Owner 범위는 기존 시험·문항 연결만; 반복 Provider 종료·후속0회. 중앙20/69 기존연결·과학11 HOLD 보존. 항공6/12 원문 보존 후보·기존Worker locator 보완·로컬계약198검사 PASS; 신규10개교 공통Registry28/94 매칭. Python18/WEB30/Flutter31 PASS·4SKIP, Analyze PASS. 공식 불일치5 parent Owner검수, 실제 운영·기기·신규10개교package는 미완료. 운영/배포0.
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 

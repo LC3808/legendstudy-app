@@ -65,6 +65,9 @@ def content_case(c, rpc, new, scalar, A, B):
     except m.psycopg.Error as error:
         c.execute('rollback');assert 'TASK20_CONTENT_DRIFT' in str(error)
     checks+=['duplicate_binding_rejected','immutable_content_preserved','changed_package_rejected']
+    if (root/'worker-source.private.sql').exists():
+        from essay_lab.natural_connection_contract import verify_worker
+        verify_worker(c,scalar,root,packages,plan,R)
     questions=[]
     for p in packages:
         leaf=p['ids']['leaf']

@@ -101,12 +101,15 @@ class NaturalExpansionTest(unittest.TestCase):
                 student_crop_limit({'crop_bottom_pt':bottom},842,[])
         self.assertEqual(student_crop_limit({'crop_bottom_pt':None},842,[]),842)
 
-    def test_draft_idempotence_and_unreviewed_math_gate(self):
+    def test_draft_idempotence_and_connection_approval_gate(self):
         e=PLAN['exams'][0];q=e['questions'][0];pages=['fixture \ue123']*e['source']['pages']
         a=build_review_package(e,q,pages);b=build_review_package(e,q,pages)
         self.assertEqual(a,b);self.assertTrue(a['extraction_has_private_glyphs'])
         self.assertFalse(a['technical_ready']);self.assertFalse(a['publication_allowed'])
         self.assertEqual(len(a['existing_schema_rows']),8)
+        self.assertNotIn('NORMALIZED_MATH_AND_RUBRIC_REVIEW',a['remaining'])
+        for row in a['existing_schema_rows']['math_source_artifacts']:
+            self.assertRegex(row['locator'],r' PDF [0-9,]+쪽$')
         for records in a['existing_schema_rows'].values():
             for r in records:
                 if 'state' in r:self.assertEqual(r['state'],'DRAFT')

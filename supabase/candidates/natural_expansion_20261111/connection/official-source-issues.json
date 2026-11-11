@@ -1,0 +1,128 @@
+{
+  "scope": "KNOWN_OBSERVATIONS_NOT_AI_QUALITY_ASSESSMENT",
+  "physical_pages": true,
+  "issues": [
+    {
+      "id": "KAU-2024-ENG-Q2-4",
+      "year": 2024,
+      "track": "공학",
+      "question": 2,
+      "subquestion": "2-4",
+      "pages": {
+        "problem": [
+          9
+        ],
+        "rubric": [
+          11
+        ],
+        "solution": [
+          15,
+          16,
+          17
+        ]
+      },
+      "observation": "문제의 거리·정의역과 공식 예시풀이의 부호 있는 차이/최댓값 결론이 충돌할 가능성. 공식 답을 수정하지 않음.",
+      "owner_decision": "해당 소문항 또는 Q2 공개 범위 판단",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "source_sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+      "state": "OWNER_REVIEW_REQUIRED_NOT_AUTOMATIC_EXAM_HOLD",
+      "official_content_changed": false,
+      "independent_registry_subquestion_id": null,
+      "split_status": "CURRENT_PARENT_QUESTION_TO_ONE_LEAF; NO_AUTOMATIC_SPLIT"
+    },
+    {
+      "id": "KAU-2024-SCI-Q1-POINTS",
+      "year": 2024,
+      "track": "이학",
+      "question": 1,
+      "subquestion": "1-3,1-4",
+      "pages": {
+        "rubric": [
+          5,
+          6
+        ],
+        "solution": [
+          8,
+          9
+        ]
+      },
+      "observation": "1-3(1): 기준 2+2+2 / 풀이 1.5+1.5+3. 1-3(3): 기준 2+1+2 / 풀이 1+1+3. 1-3 제목17점과 세부합16점. 1-4(3) 기준5점/풀이 과정2+답3. 양쪽 원문 보존.",
+      "owner_decision": "기준표/예시풀이 세부 배점 차이의 안내·공개 방침",
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "source_sha256": "f07121c91e7d2a7c937f0c32e08d635f45446f950f7e6b48912976d5213f6b6d",
+      "state": "OWNER_REVIEW_REQUIRED_NOT_AUTOMATIC_EXAM_HOLD",
+      "official_content_changed": false,
+      "independent_registry_subquestion_id": null,
+      "split_status": "CURRENT_PARENT_QUESTION_TO_ONE_LEAF; NO_AUTOMATIC_SPLIT"
+    },
+    {
+      "id": "KAU-2026-SCI-Q1-SIGN-POINTS",
+      "year": 2026,
+      "track": "이학",
+      "question": 1,
+      "subquestion": "1-2 및 1-1(1)",
+      "pages": {
+        "rubric": [
+          5
+        ],
+        "solution": [
+          6,
+          7
+        ]
+      },
+      "observation": "1-2 풀이 계산 마지막 음수와 최종 답 줄 양수의 부호 불일치. 1-1(1) 모든 빈칸 미기재: 기준표3점/예시풀이0점. 원문 보존.",
+      "owner_decision": "부호·배점 불일치 검수 후 공개 범위 판단",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "source_sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+      "state": "OWNER_REVIEW_REQUIRED_NOT_AUTOMATIC_EXAM_HOLD",
+      "official_content_changed": false,
+      "independent_registry_subquestion_id": null,
+      "split_status": "CURRENT_PARENT_QUESTION_TO_ONE_LEAF; NO_AUTOMATIC_SPLIT"
+    },
+    {
+      "id": "KAU-2024-ENG-Q1-SIGN",
+      "year": 2024,
+      "track": "공학",
+      "question": 1,
+      "subquestion": "1-2",
+      "pages": {
+        "solution": [
+          6
+        ]
+      },
+      "observation": "두 로그 합을 정리하는 중간 줄과 이후 곱 형태 사이 부호 표기 차이. Codex 정정 없이 원문 보존.",
+      "owner_decision": "중간 전개 표기 검수",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "source_sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+      "state": "OWNER_REVIEW_REQUIRED_NOT_AUTOMATIC_EXAM_HOLD",
+      "official_content_changed": false,
+      "independent_registry_subquestion_id": null,
+      "split_status": "CURRENT_PARENT_QUESTION_TO_ONE_LEAF; NO_AUTOMATIC_SPLIT"
+    },
+    {
+      "id": "KAU-2026-SCI-Q2-SIGN",
+      "year": 2026,
+      "track": "이학",
+      "question": 2,
+      "subquestion": "2-4",
+      "pages": {
+        "solution": [
+          18
+        ]
+      },
+      "observation": "주 풀이의 이차식 일차항 -17m, 이후 근/다른 풀이의 +17m 표기 차이. 원문 보존.",
+      "owner_decision": "공식 풀이 표기 검수",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "source_sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+      "state": "OWNER_REVIEW_REQUIRED_NOT_AUTOMATIC_EXAM_HOLD",
+      "official_content_changed": false,
+      "independent_registry_subquestion_id": null,
+      "split_status": "CURRENT_PARENT_QUESTION_TO_ONE_LEAF; NO_AUTOMATIC_SPLIT"
+    }
+  ]
+}

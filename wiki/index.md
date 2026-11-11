@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-논술 자연계열 확장 / 중앙대69 / 기존15대학 감사 / 신규10개교 / 한국항공 DRAFT: [11/11 인수·현재DB·후보·검증·미완료](essay-natural-expansion-20261111.md). 운영 적용·사용자 공개 없음.
+논술 자연계열 연결 / 중앙대69 보존·과학11 HOLD / 한국항공6·12 / 신규10개교: [최신 Owner 연결 범위·문항별 검수·공식 이슈·검증](essay-natural-expansion-20261111.md). 반복 Provider 중단, 원문 보존, 운영 적용·공개 없음.
 
 작업04 / 고3·N수 실제 지원 대학 / 합격 발표 일정: [04-C 실계정·기기 검수](task04c-device-verification-20261111.md) · [APP75 기반 지원 관리](task04-applications-20261111.md) · [홈 커스터마이징·나의 대학 소식·후보 SQL·검증](task04-home-university-news-20261111.md) · [작업04-B 운영 사전 검토](task04b-production-preflight-20261111.md) · [작업04-C 홈 A 운영 적용·UI 후속/C·D HOLD](task04c-home-production-20261111.md).
 
