@@ -1,5 +1,7 @@
 # 대학 Catalog 확대 — 78개 운영 적용 완료
 
+**Owner 완료 승인 / CLOSED**: [종료 기록·보류7 사유·잔여 검증](../../../wiki/university-catalog-closure-20261112.md). 추가 적용 없음, APP 릴리스 HOLD 유지.
+
 **APPLIED 2026-11-12 / Owner 명시 승인: 신규78행 INSERT.** 대상 LegendStudy(`stlhijzpjfgwwdgunlsd`)만.
 적용 전 사용자 요청에 따라 기존 운영 Catalog53행(활성50/비활성3)을 읽기 전용 전수 확인했다.
 [원본 메타데이터](../../../wiki/assets/university-catalog-audit-20261112.json), [대조표](audit.csv), [SQL 후보](candidate.sql).

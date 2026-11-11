@@ -50,6 +50,8 @@
 
 ## 대학 Catalog
 
+Owner 최종 완료 승인으로 Catalog78개 확장은 **CLOSED**. [최종 결과·보류7 사유·운영 증거·NOT TESTED](university-catalog-closure-20261112.md). 온보딩 전체 및 APP 릴리스 HOLD와 구분한다.
+
 [읽기 전수 감사·78개 SQL 후보·원복/승인](../supabase/candidates/university_catalog_20261112/README.md).
 적용 전 운영53행/활성50. 당시 한국교원대0, 교육대10개 모두0. 기존 과학기술5개 활성.
 교육청116+공식2개 비교:118 중 기존33/후보78/identity보류7. 국가전체 대학 목록 완전 커버리지는 아직 검증하지 않았다.

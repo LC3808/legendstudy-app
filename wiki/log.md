@@ -1,3 +1,7 @@
+## 2026-11-12 — 대학 검색 Catalog 확장 CLOSED
+
+[최종 마감](university-catalog-closure-20261112.md): Owner 신규78 추가 완료 승인. 전체131/활성128, 양쪽 검색 PASS, 기존 ID·사용자·논술 LAB 보존. 보류7 사유·운영 영수증 정리. iPhone 검색/WEB 배포본 E2E NOT TESTED, 추가 DB·배포0, APP HOLD. Catalog 원래 브랜치만 커밋·원격 Push 대상으로 인계.
+
 ## 2026-11-12 — 승인 Catalog78 운영 추가
 
 [운영 반영·검색 검증](onboarding-p0-ux-20261112.md#catalog-운영-반영--2026-11-12-owner-후속-승인). 신규78 INSERT(53→131/활성128), 보류7 제외. 기존53행/프로필/관심/지원/논술 시험·문항 해시 보존. 공개 검색78개 및 관심·실제 지원 Flutter 검색 검증, 물리기기 재검색 NOT TESTED. Auth/LAB/배포 변경0, APP HOLD.
