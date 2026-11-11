@@ -1,0 +1,38 @@
+{
+  "app_base": "4489603ccb3359aa95857737cc06dc016e1150f1",
+  "web_source": "745fbf3",
+  "registry_snapshot_sha256": "563391e650aca7cb2dc7a4fd6466c3682e19c2075ff0da27e4bae13d581a8044",
+  "web_artifacts": [
+    {
+      "path": "supabase/candidates/task20_chungang_connection_20261107/production-postflight.json",
+      "sha256": "eb7b801d3d439b46ba2c295efb36c49faef8956c7f9caf3f128350c930054cad"
+    },
+    {
+      "path": "supabase/candidates/task20_chungang_connection_20261107/production-ordinary-user-web.json",
+      "sha256": "b1281669ce2d1328a0252ce2d47706457419d271d66032fb01ce1ef7b68628f1"
+    },
+    {
+      "path": "src/data/essay-public-catalog.json",
+      "sha256": "504c2b03ba196d30b479ef24f08cab7f59ec692f55a60e05c64b3de172fc396f"
+    },
+    {
+      "path": "src/data/essay-source-registry.json",
+      "sha256": "d005203d19c098f6dce061761cfe5a44edcb4e0b5e73087786ec8e8883da1354"
+    },
+    {
+      "path": "src/lib/essay-runtime/catalog-policy.ts",
+      "sha256": "fa4263152ea5f0fa44f78b9a3db7d98f7aafeb451dc285b513e6760adbe598e1"
+    }
+  ],
+  "source_pdf_policy": "Owner supplied official archive retained; SHA verified against archive; current official index is separate evidence; no claim of re-downloaded byte identity",
+  "owner_reference_documents": [
+    {
+      "name": "task20-15-audit-20261107.md",
+      "sha256": "4a1e0652b08a297a407c3d1be1efa7c4578f688a215d191339a7039ac61bb516"
+    },
+    {
+      "name": "task20-15-exams-20261107.md",
+      "sha256": "9e3de39fd0e770912d1637cc902d2520b88671c9207c6006160f5ed143de50b9"
+    }
+  ]
+}

@@ -1,0 +1,545 @@
+{
+  "version": "natural-expansion-review-v1",
+  "as_of_kst": "2026-11-11",
+  "publication_allowed": false,
+  "provider_allowed": false,
+  "exams": [
+    {
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2024,
+      "exam_kind": "admission",
+      "field_or_division": "공학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2024-admission-engineering",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+        "file": "한국항공대/2024학년도 한국항공대 수시 논술_공학계열 문제,해설,답안.pdf",
+        "pages": 17
+      },
+      "questions": [
+        {
+          "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2
+            ],
+            "intent": [
+              2
+            ],
+            "rubric": [
+              4
+            ],
+            "solution": [
+              5,
+              6,
+              7
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": 452
+            }
+          ]
+        },
+        {
+          "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              8,
+              9
+            ],
+            "intent": [
+              9
+            ],
+            "rubric": [
+              11
+            ],
+            "solution": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 8,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 9,
+              "crop_bottom_pt": 391
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2024,
+      "exam_kind": "admission",
+      "field_or_division": "이학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2024-admission-science",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "f07121c91e7d2a7c937f0c32e08d635f45446f950f7e6b48912976d5213f6b6d",
+        "file": "한국항공대/2024학년도 한국항공대 수시 논술_이학계열 문제,해설,답안.pdf",
+        "pages": 16
+      },
+      "questions": [
+        {
+          "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2,
+              3
+            ],
+            "intent": [
+              3
+            ],
+            "rubric": [
+              5,
+              6
+            ],
+            "solution": [
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 3,
+              "crop_bottom_pt": 443
+            }
+          ]
+        },
+        {
+          "question_id": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              10,
+              11
+            ],
+            "intent": [
+              11
+            ],
+            "rubric": [
+              13
+            ],
+            "solution": [
+              14,
+              15,
+              16
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 10,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 11,
+              "crop_bottom_pt": 333
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2025,
+      "exam_kind": "admission",
+      "field_or_division": "공학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2025-admission-engineering",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "f805468fb8f089c6f692e256fbaf63c11d0401610bde869fd9e3fdfb47931f62",
+        "file": "한국항공대/2025학년도 한국항공대 수시 논술_공학계열 문제,해설,답안.pdf",
+        "pages": 15
+      },
+      "questions": [
+        {
+          "question_id": "ff6226fc-32ac-5903-ab0f-b1560803efbb",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2
+            ],
+            "intent": [
+              3
+            ],
+            "rubric": [
+              4
+            ],
+            "solution": [
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": null
+            }
+          ]
+        },
+        {
+          "question_id": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              10,
+              11
+            ],
+            "intent": [
+              12
+            ],
+            "rubric": [
+              12,
+              13
+            ],
+            "solution": [
+              13,
+              14,
+              15
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 10,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 11,
+              "crop_bottom_pt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "85a8468d-2141-52b1-9d70-3bcf6f340f8e",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2025,
+      "exam_kind": "admission",
+      "field_or_division": "이학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2025-admission-science",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "4fb7305ecc36be6c1d62268b8e0608d92ae0f4c4c398f373d0476df189076367",
+        "file": "한국항공대/2025학년도 한국항공대 수시 논술_이학계열 문제,해설,답안.pdf",
+        "pages": 16
+      },
+      "questions": [
+        {
+          "question_id": "8744f2ad-02c4-51d4-83de-6d5ab245cec5",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2
+            ],
+            "intent": [
+              2
+            ],
+            "rubric": [
+              5
+            ],
+            "solution": [
+              6,
+              7,
+              8
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": 595
+            }
+          ]
+        },
+        {
+          "question_id": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              9,
+              10
+            ],
+            "intent": [
+              10
+            ],
+            "rubric": [
+              12,
+              13
+            ],
+            "solution": [
+              13,
+              14,
+              15,
+              16
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 9,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 10,
+              "crop_bottom_pt": 248
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "6815943a-42c1-5eae-b711-449ac403b9fb",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2026,
+      "exam_kind": "admission",
+      "field_or_division": "공학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2026-admission-engineering",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "b27088461cf6b5fbd54b8a2c493664eb4b8b481c55d14d09974f47482b639082",
+        "file": "한국항공대/2026학년도 한국항공대 수시 논술_공학계열 문제,해설,답안.pdf",
+        "pages": 17
+      },
+      "questions": [
+        {
+          "question_id": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2
+            ],
+            "intent": [
+              3
+            ],
+            "rubric": [
+              5
+            ],
+            "solution": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": null
+            }
+          ]
+        },
+        {
+          "question_id": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              12,
+              13
+            ],
+            "intent": [
+              14
+            ],
+            "rubric": [
+              15
+            ],
+            "solution": [
+              16,
+              17
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 12,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 13,
+              "crop_bottom_pt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "university_id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "admission_year": 2026,
+      "exam_kind": "admission",
+      "field_or_division": "이학계열",
+      "session_label": null,
+      "campus": null,
+      "exam_key": "source-kau-2026-admission-science",
+      "university_slug": "kau",
+      "source": {
+        "sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+        "file": "한국항공대/2026학년도 한국항공대 수시 논술_이학계열 문제,해설,답안.pdf",
+        "pages": 18
+      },
+      "questions": [
+        {
+          "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+          "number": 1,
+          "label": "문제 1",
+          "display_order": 0,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              1,
+              2
+            ],
+            "intent": [
+              2
+            ],
+            "rubric": [
+              5
+            ],
+            "solution": [
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 1,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 2,
+              "crop_bottom_pt": 341
+            }
+          ]
+        },
+        {
+          "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+          "number": 2,
+          "label": "문제 2",
+          "display_order": 1,
+          "hold": false,
+          "evidence": {
+            "problem": [
+              10,
+              11
+            ],
+            "intent": [
+              12
+            ],
+            "rubric": [
+              14
+            ],
+            "solution": [
+              15,
+              16,
+              17,
+              18
+            ]
+          },
+          "student_pages": [
+            {
+              "physical_page": 10,
+              "crop_bottom_pt": null
+            },
+            {
+              "physical_page": 11,
+              "crop_bottom_pt": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2331 @@
+{
+  "as_of_kst": "2026-11-11",
+  "catalog_universities": 42,
+  "owner_priority_universities": 22,
+  "candidate_universities": [
+    {
+      "source_university_id": "gachon",
+      "university_id": "a9e38cdc-9593-4c60-b8a6-698133f48518",
+      "name": "가천대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 17,
+      "registered_questions": 166,
+      "source_selection_exams": 0,
+      "source_selection_questions": 0,
+      "source_matched_exams": 0,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://admission.gachon.ac.kr/upload/BBS0024/202507151748295SGWU8.PDF",
+        "evidence_state": "OFFICIAL_GUIDE_CONFIRMED"
+      },
+      "review_note": "국어/수학 혼합; 자연이라는 명칭만으로 모든 문항 Math 라우팅 금지",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "0e8c1793-9030-5e2c-805a-05eff39eec48",
+          "exam_key": "source-gachon-2025-mock-b",
+          "admission_year": 2025,
+          "exam_kind": "mock",
+          "field_or_division": "B형",
+          "session_label": "B형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "9cc05e3b-4e43-5004-a004-ab23f55bce54",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e731f174-c6d9-5053-9f44-efc01c32e9b5",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5745d0b2-e08c-56ac-87d5-d47559b920d0",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "866c6e70-59af-50f7-bb66-7411a7103fe7",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "3f470a94-e273-5507-8f0f-804ba32611cf",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4dcdc028-64b6-528a-91c3-30981ef4e3ad",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "1a3a22e4-fac5-5f10-8cfd-b931f2b30ceb",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ab162238-841b-584b-bb60-06efcac1183a",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "1c897296-d62e-54ce-9624-f652d50338eb",
+          "exam_key": "source-gachon-2026-admission-humanities",
+          "admission_year": 2026,
+          "exam_kind": "admission",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "e9c8e333-aff9-553b-8e58-b1df62569f3d",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "27a3dccc-906f-50fa-a123-e5b22531f5e5",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a016009b-2400-5dad-a8d7-2bb113144f31",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d0a05e75-aaad-5da3-9bc5-d8b14b27b323",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "dba3963b-c854-5e0f-8550-17216fa6916c",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4444e0ba-fe08-5645-9109-2a2c3e848b76",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "306d105c-7985-589b-a554-c815448ef859",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "55d7351e-9e38-51f2-b8ed-c437d096c66a",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "136729fc-a8f2-56ba-b565-65a40f5858b6",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "140f234a-ad71-522b-b525-f74fc190b49a",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "11af755f-f2ca-5dbd-9a28-6a6a012ba80b",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "76f9c028-00b7-5112-8c61-bfd5eb1f125c",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "71d06404-63b8-5bcb-8eca-090808ecb86a",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8dd01155-0973-5278-9052-eededddf89ae",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8ee0c7de-cbfb-5d15-a958-95ba0bc17eed",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "20068b85-9517-544c-b0e5-22f825907695",
+          "exam_key": "source-gachon-2027-mock-medicine",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "의예",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "aacb425b-c2b2-5c28-9b09-eb10e1315cd9",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "db2bdb4d-56ce-5a2d-954f-6a2520aa23bf",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a2244a08-4aa6-58fa-8d09-69d7de4e93da",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4d92bf5f-f8e5-5941-9e5a-56037fbee009",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "263c6dbb-54d0-58bd-ae37-17bc32db8021",
+          "exam_key": "source-gachon-2025-admission-medicine",
+          "admission_year": 2025,
+          "exam_kind": "admission",
+          "field_or_division": "의예",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "905a8ab8-1acc-5029-8975-c3a029308ee9",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ed298f7a-0574-5a1d-bbfa-8e8c2769cc50",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "82ccf2fe-de1a-5876-a280-9eea70ec1502",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "18f024b9-1810-5125-bac9-2e8fcc60c6e4",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fec89a06-e742-5cd6-b23f-2dda5b8bec11",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ce8a9b66-1b1b-59bd-961d-7de7f6461ace",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "44269426-5b3b-5f12-8c35-d07691d00cab",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9ecc799b-98eb-5285-a0a4-b5f0f0074271",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "288a1f6f-80a6-53c6-9cfa-55c372d9ec1c",
+          "exam_key": "source-gachon-2024-admission-humanities",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "d7fee053-846d-50e3-9240-87f9f889dbc2",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "bd69296b-f65b-5e2c-82a9-a1183d96c000",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0a2b7eba-2fbf-5749-abbb-c4e4f2346126",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5c59e781-53f1-5cc9-a252-8d746c1c0ec0",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fd1639db-13b1-5e47-974d-edfdd775448a",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9d1580fc-bc36-5232-83d6-76d420b7162f",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "33c5287c-34e8-5a68-a5e7-44b32a568dce",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8e44c43e-f5d1-5016-bb48-80ae71210ace",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "30a847dd-99d1-5820-ad1f-ac2b1fd9f8c3",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4475819e-939a-5fef-b125-b0d147606a9d",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2f2bb869-4e1e-5c87-b94c-8bab57d35f20",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0633eb4a-5f27-5e80-af32-29202f6a428f",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "741c12e9-e765-5ca7-b490-9b7feaf33ee1",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "7b92dd83-88b4-5a37-87cf-544289b370c4",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "db10110a-ee96-5297-8de2-cc5836098ad9",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "2943cb71-28d5-5a42-aab0-e3fbe91a32b1",
+          "exam_key": "source-gachon-2026-mock-b",
+          "admission_year": 2026,
+          "exam_kind": "mock",
+          "field_or_division": "B형",
+          "session_label": "B형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "1e643549-d6ba-5b23-9b79-ff00a5480812",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0aa05184-1106-5965-b237-afca0d4747eb",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "77407253-7c1b-522e-abbe-fed274a59f64",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fb60f992-b617-599c-8493-ddae6121aaaa",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e0337431-68c8-5e10-a159-c18eff8d57ea",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f99e9bd2-bbc7-575f-b995-72a80697d58f",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "26217f76-b217-540b-8516-edc4cc86a4f5",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "06387c05-6912-5752-8f56-7d3e2c52826f",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "30822fb5-a6ba-5295-a9b8-a1b29a7d6413",
+          "exam_key": "source-gachon-2027-mock-a",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "A형",
+          "session_label": "A형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "c4dfa218-0717-5f41-a952-c4ce600836f9",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9a23e626-ee3d-510c-8299-910d095571de",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b8042ca1-1305-5b1e-be51-3df41b0cf733",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c7188235-9d32-5254-a7ea-c01f28acc4b6",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "50426c30-6a02-54d9-9ed9-28854bd8a648",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a984924d-8ae9-54a8-91fa-aa3fec44a9c9",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "82648828-2f49-5c88-9902-7827932883f5",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "dc7f02f7-01b5-5b09-af50-5b5bae9eb9f9",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "6f10f7e6-00c8-5e5b-9d0d-e655e512bdf3",
+          "exam_key": "source-gachon-2025-admission-natural",
+          "admission_year": 2025,
+          "exam_kind": "admission",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "e03b99f2-b265-54d2-bb38-03abe566bb72",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "251ba051-52ed-55b5-9082-327e224d0a5f",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9f1c4574-ba9f-5a4f-b247-afac308ffd32",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c289276c-91bc-532d-8b96-2ddd09372860",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b4f62f70-a9ad-5ff0-ad4f-6bf3c09f1e3c",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b2cd49f5-2723-5fd0-9d03-e487b42f7c5c",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "6ef51c9f-9ec7-5e11-9d44-cbd701db5f1b",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "77149048-50c5-595a-b45f-90b71eeef125",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a721194a-8cd0-5ee4-b259-b96c0c98aa6d",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "20a4b404-19af-5e0c-be6d-076ee7204088",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "54341279-3833-5971-b3ef-c9017bdd9deb",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "81e97ef8-ca23-576d-9e32-7bafff2982e1",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5e2056af-f728-517a-ac8b-ed784cab5be0",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8693c959-7ee3-50ea-bdf5-5e53fbf9c821",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "818e7263-576d-5b4a-995f-a2e6cb3f4901",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "76f44394-092f-5e2b-86fb-811d09e73ce7",
+          "exam_key": "source-gachon-2025-mock-a",
+          "admission_year": 2025,
+          "exam_kind": "mock",
+          "field_or_division": "A형",
+          "session_label": "A형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "96ad4afb-6b94-5617-ba47-3ddcd98ed24c",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d4bcaabc-9345-5b1a-9938-73bbb10a0aa8",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "85c9557b-e8df-542e-a7e4-1a04b3450d6f",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4d11ee54-83a4-5521-9ae6-b30aeb531507",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "eb3b41b2-d7b5-5649-9114-3866d4da8cc3",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2a67e8ff-a96f-5214-be1d-319ffba2fb29",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "75a9d1db-11e8-537a-905b-526ec7ae3c99",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9aa7568e-3aec-5a3b-8729-285fe64f71cf",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "7b45e217-183e-5300-90a3-3d1b66cbc7dd",
+          "exam_key": "source-gachon-2024-admission-natural",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "ea7a526c-2a1a-509e-85ac-e406055b857e",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5f6421ba-7717-56e4-af21-fc1945bf3fd0",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "bd11d3d7-2209-5687-9677-e815c28f2ba9",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c871a08e-daf1-573c-b080-8bcfd5e0e09b",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ecf823e7-6c10-5357-ba2f-351aaf2a0aa5",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "edbe7072-4fc9-55ea-991a-73e558948e21",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "16b3aeb7-41e5-5b30-94c0-c00ba58ed192",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d1f9b309-ec13-55ec-aee8-0cbc73322ef8",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "3f75b298-e74d-511e-b483-9502ee2a0590",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "3b1cedab-19ab-5ef0-90f4-e677fb4a29da",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9c59a5db-2945-577c-ad74-29178fdd3830",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "380dd1b7-193e-59bd-a0d8-bc09764d9870",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e317ebab-effc-56c4-8769-a46c3a547c67",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "be579e22-863f-591a-99ae-d8c2764dc87d",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2acbcf6a-5fa8-5ff1-af35-41b50a93b16f",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "9eb63e5c-6d70-576a-b934-0c3a6f00cd92",
+          "exam_key": "source-gachon-2026-mock-a",
+          "admission_year": 2026,
+          "exam_kind": "mock",
+          "field_or_division": "A형",
+          "session_label": "A형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "0a0d8c38-cfd9-5403-bbbc-f52f90347b01",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8f4f613e-4926-5ed6-b2d6-9d4ad9f0f970",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "14304443-0a4f-5dab-86b2-8ab1401b1476",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "028fe088-b49b-5dbb-b418-6bf8add33257",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "efcc6491-9638-56d9-8aa3-5240e1bc2de2",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d136e3dc-9163-5dc9-8b2b-8d94da5afadd",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c2cf7730-85d3-5016-b9c4-de5376484c5b",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d11dde51-c034-5e32-8903-0e0a058010ef",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "b6a8c6a1-ae0b-5513-b07a-8b62cffe05ef",
+          "exam_key": "source-gachon-2026-mock-medicine",
+          "admission_year": 2026,
+          "exam_kind": "mock",
+          "field_or_division": "의예",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "76b7a67f-d9c9-5080-8573-762a4e00d809",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e134f223-3eb6-5cb5-8c62-5b964dd21058",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ad5e6b5b-1842-5fb8-b27b-c8cf4241c450",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "679c3c83-1681-5d4e-bbe4-c5278372ac90",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "b7b6d7c1-fc8a-5a88-a20f-3ac42a9644b0",
+          "exam_key": "source-gachon-2026-admission-natural",
+          "admission_year": 2026,
+          "exam_kind": "admission",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "e539ed1b-de77-5d2c-b052-c569ccb84c64",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f9ac9358-a6fe-5f45-b877-405b8e8b5416",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c7a87d84-22c6-5eaf-b4d0-c50d1ce5f079",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b5f17902-33a2-5700-ad63-7cbff600e6cc",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "82177842-b087-5248-9bdb-d5021b119383",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f8bfe95b-dcd9-5684-9e2c-064ffeb3e75c",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "dcb17b54-cf85-540f-9b74-8655a1b94f2f",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a1540c47-95b6-5c2d-b991-5602728bf262",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "29c7108b-ffc8-504d-98c0-50398be38676",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0f928c19-22b0-5a6d-99c5-3f06458ecd29",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f3a63117-4c33-5daa-888f-7abaaa6b623a",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b6aa197e-da1c-5714-8f27-627cd06d627e",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2c37cbb3-82d6-5bb5-8bcf-8ae4d3201ca8",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "80f2c05f-5832-5235-b33a-948a436e7efb",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "087174a4-2591-5d61-8267-d35042991bb2",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "cd8af703-2246-50c7-9770-af04055be325",
+          "exam_key": "source-gachon-2027-mock-b",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "B형",
+          "session_label": "B형",
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "d2647a26-8da4-5537-9d7b-c050150a1df4",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d5fb4843-1515-5739-afed-3e5d849649a4",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "68b972d2-7ce0-5883-b05b-8cf255cc4b20",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a61ba619-ddf5-5ddc-99a2-14d7a8068f35",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8424ff9f-d5dc-5fd3-bb5e-a1baf1b29a9d",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fe3cc7ec-40ce-5824-aa5f-e981d7008bd9",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0c6955e9-fd9a-5b90-98cd-1e0744f8444f",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e38d4c27-5635-5ee1-8e09-154c02176a60",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "ec7f8112-4340-5985-80be-991c164f3556",
+          "exam_key": "source-gachon-2025-admission-humanities",
+          "admission_year": 2025,
+          "exam_kind": "admission",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "41ae3ed8-bf0d-5255-934e-c76b8cf25586",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4f7d5792-d901-5f25-b922-32d6a7204bae",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "554a8357-8227-54ec-bb32-c9069b66bc61",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e9922982-4d13-5d6e-be24-7668ec44a980",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c57969e0-64d7-5a60-b837-7eb431cc4454",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "93b1fe55-71a5-55bd-99d2-e32594f42048",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2e4f3a8c-27d2-5d1a-94fd-cc894d952798",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "da0246db-fe88-5af3-b529-0cd1d94b681b",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "97ab6a84-19a7-57aa-acc3-7f618a81234a",
+              "label": "9번",
+              "display_order": 8,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "6bae24bc-db5a-592b-9631-a02a2da3ef44",
+              "label": "10번",
+              "display_order": 9,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2809b450-92eb-550f-a16c-ea8a7b9dbbd1",
+              "label": "11번",
+              "display_order": 10,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "898efd00-be2e-5b08-8067-0c7b42316b30",
+              "label": "12번",
+              "display_order": 11,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "1d500c21-74f6-51c1-aa05-f17df8194ae4",
+              "label": "13번",
+              "display_order": 12,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "922e6d28-e0f9-52e8-ab0b-674999dc4afc",
+              "label": "14번",
+              "display_order": 13,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4a6e2845-a459-5fe0-9901-2c1214555693",
+              "label": "15번",
+              "display_order": 14,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "f6b96be5-83a0-52f8-a413-84efab31fcc5",
+          "exam_key": "source-gachon-2026-admission-medicine",
+          "admission_year": 2026,
+          "exam_kind": "admission",
+          "field_or_division": "의예",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "ae455922-4ddb-5a49-bb9a-1ea1bbb9a84d",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "367ef06b-f26f-597c-8c17-2b460a6b9234",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8f7816de-2650-5624-8a1b-ad77c18d3f56",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0e405d19-3fbc-5b99-8772-db122d99271f",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "abbb11de-6168-5b7e-9a7c-73cf655b63e0",
+              "label": "5번",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fec19942-9d0f-5fd1-bfb8-bde9a97f8635",
+              "label": "6번",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "3cca301a-3982-50d2-91f9-7650379a7c31",
+              "label": "7번",
+              "display_order": 6,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "060fd51d-0d1b-5b19-a541-17c235474f7e",
+              "label": "8번",
+              "display_order": 7,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "fc0a1768-0a86-5622-a094-492162e37f52",
+          "exam_key": "source-gachon-2027-mock-korean-medicine-pharmacy",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "한의예·약학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "ec1840f7-9000-5735-9aed-4d10d91bc63c",
+              "label": "1번",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fc61e566-4985-5469-90bb-bf30515b0dd6",
+              "label": "2번",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "32df8e35-e2c8-52a5-9c08-a1b9d9ebe264",
+              "label": "3번",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "05e62616-ae9b-54e4-942d-14864afcaed5",
+              "label": "4번",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 17,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "knu",
+      "university_id": "72bc4be0-6e72-4c72-adc5-8ee54279f3bd",
+      "name": "경북대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 1,
+      "registered_questions": 3,
+      "source_selection_exams": 1,
+      "source_selection_questions": 3,
+      "source_matched_exams": 1,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://www.knu.ac.kr/wbbs/wbbs/bbs/btin/viewBtin.action?bbs_cde=28&btin.doc_no=1333182&menu_idx=214",
+        "evidence_state": "OFFICIAL_2025_ADMISSION_NOTICE_CONFIRMED"
+      },
+      "review_note": "2025수시 자연I/II 안내와 2025모의 자료는 별개; 통합과학/의학논술 지원 미확정",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "8e1c6be3-5eeb-5c9b-bd9f-d91ab4bdbd5e",
+          "exam_key": "source-27935245c1e353e1418b4ce018f28bef3329bdf56e1116b1416adfb9cb9020eb",
+          "admission_year": 2025,
+          "exam_kind": "mock",
+          "field_or_division": "자연계열Ⅱ",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "c28665aa-8f4f-523e-8a98-df526c335688",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c34692e1-eaa9-545d-be6b-45fb89fc27b4",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "07ec03d7-6b24-53a9-aa0e-d95420511184",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 1,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "pnu",
+      "university_id": "08303fd3-ec87-4976-a9a9-547a1d52f996",
+      "name": "부산대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 2,
+      "registered_questions": 6,
+      "source_selection_exams": 2,
+      "source_selection_questions": 6,
+      "source_matched_exams": 2,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://go.pusan.ac.kr/college_2016/pages/index.asp?b=B_1_3&bn=42069&m=read&p=7",
+        "evidence_state": "OFFICIAL_PAST_PAPER_INDEX_CONFIRMED"
+      },
+      "review_note": "2021모의/수시 각3; 원본 세부 rubric/수식 재검수 필요",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "18ef2745-8624-5ccc-ab7a-5fb878128116",
+          "exam_key": "source-e08397b0e108e92d074cf53b4dddbf4d9400803b03101e19eb297b7e0ad105aa",
+          "admission_year": 2021,
+          "exam_kind": "mock",
+          "field_or_division": "자연계",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "36d8d0aa-94fc-5e9b-bd53-923c37bfb7c3",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a684ac25-e395-5865-b2cf-ed17479983e9",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "aee3380b-f189-5b65-adf7-b14fe9ce6b95",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "caa7b41b-2445-5c2c-928a-9e982b720fc8",
+          "exam_key": "source-b9f690e08db0a352e94ed467af8555c324c804a6a71a65649e04cae7a59b802c",
+          "admission_year": 2021,
+          "exam_kind": "admission",
+          "field_or_division": "자연계",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "3db808a0-544b-55f0-9e2e-f3b2e38d2a61",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e23a4c3e-c60e-5e0c-86ef-b53150f371ae",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e481448b-69ae-5bfa-ae2b-cfad34b066ef",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 2,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "ewha",
+      "university_id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "name": "이화여자대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 1,
+      "registered_questions": 3,
+      "source_selection_exams": 1,
+      "source_selection_questions": 3,
+      "source_matched_exams": 1,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://admission.ewha.ac.kr/admission/html/rolling/lecture-info.asp",
+        "evidence_state": "OFFICIAL_PAST_PAPER_INDEX_CONFIRMED"
+      },
+      "review_note": "2024모의 자연I 3; 최신2026공식자료와 연도 혼동 금지",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+          "exam_key": "source-fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81",
+          "admission_year": 2024,
+          "exam_kind": "mock",
+          "field_or_division": "자연계열Ⅰ",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4a432fdf-d601-5230-b045-d2123c614773",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e7362b80-3f05-5d84-8768-826ab7136233",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 1,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "sejong",
+      "university_id": "447d2f79-fb0a-4a02-bce6-d214244b683d",
+      "name": "세종대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 3,
+      "registered_questions": 9,
+      "source_selection_exams": 3,
+      "source_selection_questions": 9,
+      "source_matched_exams": 3,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=list",
+        "evidence_state": "OFFICIAL_PAST_PAPER_INDEX_CONFIRMED"
+      },
+      "review_note": "2023수시 A/B 각3,2024모의3; 기존 Math v1 후보",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "4b774bc1-d3ba-5e93-8e53-1efe023491b4",
+          "exam_key": "source-89c5e396478fb95134eaa94f4d67ebebfeaf61fdddf967c40466ed5d938cd3c3",
+          "admission_year": 2023,
+          "exam_kind": "admission",
+          "field_or_division": "자연계열(A형)",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "db4f76bd-ab01-5fb3-8a51-d8796dd68911",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c8d77549-8412-558a-af3d-c4b932774122",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "7337db78-f0c4-5eaf-ac1e-75ed09511145",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "60d8c263-b12f-555e-a572-eb2cc910fd9b",
+          "exam_key": "source-773d4e058712657cd9f1f27bf13c33990840151f4d0480274b88c562d9f3962f",
+          "admission_year": 2024,
+          "exam_kind": "mock",
+          "field_or_division": "자연계열",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "d94bfec2-bb29-5762-bfcd-2c02bc75315b",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "09efb3a0-7115-5b07-902b-b7b19a813ae0",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f6ff5654-2069-539f-b77a-fbe65be4e7a0",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "62ca44b0-5a17-5c4c-a9ce-acb9acb77ad4",
+          "exam_key": "source-65bf33c14303f1f0839c2156f1a11bf258187dd63d39947326a3ab4e4d5604e9",
+          "admission_year": 2023,
+          "exam_kind": "admission",
+          "field_or_division": "자연계열(B형)",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "22d6234f-5cc7-5d7f-b3d2-5d61ba845d42",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d8df544b-1079-522a-89c6-782612bff3cb",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5a64560a-744b-5653-a8c7-568606a129c4",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 3,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "ajou",
+      "university_id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "name": "아주대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 6,
+      "registered_questions": 12,
+      "source_selection_exams": 6,
+      "source_selection_questions": 12,
+      "source_matched_exams": 6,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://www.iajou.ac.kr/pasttest/index.php?f=&m_type=SUSI&nPage=-6148&s=",
+        "evidence_state": "OFFICIAL_PAST_PAPER_INDEX_CONFIRMED"
+      },
+      "review_note": "2021–2024모의 인문/자연; 자연2022–2024의6 우선 Math, 인문6 기존 Essay 후보",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "0153dee6-4c53-562e-a741-283853f2a04d",
+          "exam_key": "source-b86727f198939bc6d8549922ee1cc0903f200e5794ba33a23b0de8ca41a744c5",
+          "admission_year": 2023,
+          "exam_kind": "mock",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "8eba9492-a943-517f-a5d7-1c9dec23c88b",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0d235daa-6be2-5b79-b910-c9189f0b0609",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "1ab73d5a-aeab-5d9d-ba38-4e11fda720d8",
+          "exam_key": "source-77d7e587f96f4bc44db4a3f1b60646772a627e0a85f139eb6922717cbc24ffea",
+          "admission_year": 2024,
+          "exam_kind": "mock",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "6e16d7f1-e85e-59f0-86ad-cd7e09a21a0b",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e6576458-b59d-586b-a1f9-b98b9ac48941",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "2424e448-7324-5264-8d85-6bc84651b95d",
+          "exam_key": "source-76ed73ad13b3e0051207aebd3cdf5e19c1e9752a82c58794b2f122b6115c4f06",
+          "admission_year": 2023,
+          "exam_kind": "mock",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "e61746ae-af4e-5862-b445-7552ce0721ed",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "24ec4acf-7a43-59fa-8e1c-6f083d0e0f82",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "50bbc2a6-19ea-588d-99ec-2a7ecba5c724",
+          "exam_key": "source-cd74505ff64db7a4194a10a4c696c344bebc32bf09e923d265beaca9f4d6a8cf",
+          "admission_year": 2022,
+          "exam_kind": "mock",
+          "field_or_division": "자연",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "5aa7ef5a-6a99-5a30-8858-4690e797c5e5",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a4efa115-3f53-5d85-a046-6471e04b4628",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "5d1a5b58-5944-5641-910f-d4e6d8df2b1b",
+          "exam_key": "source-ce29682bab7a56a1941845ad6e70a80fa54955111eb47b764a58b339d95a5884",
+          "admission_year": 2024,
+          "exam_kind": "mock",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "01232a6b-fad3-5fda-83c8-bc352fd163c9",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "1f988986-8a3a-540b-81f1-76bb679e243f",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "66e9c029-57a1-5e6b-a354-a246aa9bfdd4",
+          "exam_key": "source-1e6729a56df27337b643d1a1c3b11dc9aa81ab6c0266c86104061ebf2a141741",
+          "admission_year": 2021,
+          "exam_kind": "mock",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "88d3e98d-4e24-5339-bf9a-1e6eeaec72b1",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f8f2fc9a-eff5-5f25-9908-442b121377e6",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 6,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "yonsei",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "name": "연세대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 12,
+      "registered_questions": 47,
+      "source_selection_exams": 13,
+      "source_selection_questions": 50,
+      "source_matched_exams": 12,
+      "source_unresolved_exams": [
+        "source:621ea7a49a94f02441ab7dc5a9eea7a4a36f1698e61825b42bdff5cf5ed7573f"
+      ],
+      "official_source": {
+        "url": "https://www2.yonsei.ac.kr/entrance/2025/2026%ED%95%99%EB%85%84%EB%8F%84_%EC%97%B0%EC%84%B8%EB%8C%80%ED%95%99%EA%B5%90_%EB%8C%80%ED%95%99%EB%B3%84%EA%B3%A0%EC%82%AC_%EC%9E%90%EB%A3%8C%EC%A7%91.pdf",
+        "evidence_state": "OFFICIAL_URL_RECORDED_FETCH_SIZE_LIMIT_NOT_REVIEWED"
+      },
+      "review_note": "2022/2024수학8 우선; 과학39 기존 Math로 자동 연결 금지;2025자연추가3 identity HOLD",
+      "service_preparing_hold": true,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "14a49810-643b-52d8-b0e1-0a4c453aaa47",
+          "exam_key": "source-320897fc0244298eb016bc1747ff111dce1fd63c90e16cfd90962686f175f49c",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "물리",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "2f996f60-856f-54d4-9355-0ce12811c87e",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "77509dca-bff8-5406-96db-1f0267cfc27c",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "c8cc4efb-2a55-52be-ba64-7e5e49b0b33e",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "345ec1f8-174e-57ad-8e51-996d9714b185",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "2df26093-6f5c-54ca-87b7-3d4b929d4d35",
+          "exam_key": "source-edbb79f4ffbab05740dadc90f54034ef9311c6cbdd49d9e4101701beee650547",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "생명과학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "0ac45911-746b-53a1-a890-6c1c3efac77a",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "6c82e92f-6978-572e-adea-563dd9b22e68",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8a2a73a6-faa4-5419-967c-ac455170feba",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "49bcdb3d-e103-50c3-8575-1f8654dd7ce1",
+          "exam_key": "source-a21e2a9643c1ed3cce268e1caac9695626f7d0fdfaf585bc17059087e297baaa",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "화학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "6738f147-db3e-5fa2-a6d3-4a29d1366dd6",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "bc70e6d0-e556-5e44-acc3-4a1cd9fa128d",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "492ae072-ecfa-5d6b-aff3-8fb562d7f625",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "86c46ee6-02d7-5220-81df-6b6c9698044c",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "49c3eab7-d158-5196-80d5-dd35ca26af7a",
+          "exam_key": "source-0cb3623191bd1faf9f7579f8ea29a28f0a6bbbf154c1090b2eadbd8e49361c9d",
+          "admission_year": 2022,
+          "exam_kind": "admission",
+          "field_or_division": "수학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "a846698c-1d6f-5f20-8b8f-c85714dc8fb0",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4eff36a9-c91f-5055-aef6-381015cfe7e8",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "d8f4eb65-9f38-5c7d-b980-98ff5ca200a3",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f161f133-40e0-5733-a506-977172b8dec2",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "4db87c9d-9718-54f3-ad92-b2135c6115e7",
+          "exam_key": "source-31584bf6068e47873075f7be49045a54accc1aa68859436133eaffd3f5199c85",
+          "admission_year": 2022,
+          "exam_kind": "admission",
+          "field_or_division": "화학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "c785bbad-ac4e-5fb4-9024-5a3b83006635",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5e746bf6-333d-5d6e-bcf7-c0524d14def9",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "1d7e157c-d5b7-51eb-92b0-166fcc7bd7ae",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9c346200-e024-5f40-8640-90adbfe2542c",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "67d29ce8-2269-56ca-98c6-6cc7939c4b03",
+          "exam_key": "source-6377fb8256baac599cd2469218924200cbaa917f5a186aae95a86b5696ca932a",
+          "admission_year": 2023,
+          "exam_kind": "admission",
+          "field_or_division": "화학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "b573457e-a889-5bf1-9aba-a8f892711514",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b92fca72-f881-5fb2-887f-c57935af575b",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "1c7f4bee-75a5-55de-abdf-9c9a887d04d8",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "f0a37502-5784-5ba6-9e64-5f738eb540a9",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "7848ecd6-c175-5eb6-b2cb-ea8dee16f15e",
+          "exam_key": "source-9f9db39f5148f19740abdaef93a9aa615d8a4a6278aaf95a4d2b35432e228c56",
+          "admission_year": 2023,
+          "exam_kind": "admission",
+          "field_or_division": "지구과학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "12d151d4-b2ea-52db-8169-4d6451097f89",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4623ecc9-81d1-5560-bcef-45321e4336c1",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "e90229ad-c6b4-5a53-844f-8e36bc1671bc",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "6a158abf-e237-5264-8fc3-fa55beed8c12",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "18e904de-1931-5a93-9801-f0bae66adc66",
+              "label": "문제 5",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "7011b324-bfa0-579f-a719-e347ff4108ae",
+              "label": "문제 6",
+              "display_order": 5,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "7faf45bf-3a5d-52f0-be38-321488b480df",
+          "exam_key": "source-af9a85b530794418c695da6602ede593df4da090e5aac79891791275c97a9bd2",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "지구과학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "3e9f16b0-21bd-5ece-8d28-64ce11037e81",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "2c318d62-8092-5c69-a05d-e00e86c6ec5b",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "498788cf-8bd2-54e5-ad6d-79481c8a89d3",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "73539fcb-1ef9-5096-841f-cb932742bf7d",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "a4d4c7dd-04bd-5429-af37-18637184b74a",
+              "label": "문제 5",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "6ba13b75-9116-5599-9fbe-53b021f9adac",
+              "label": "문제 6",
+              "display_order": 5,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "907806c5-c410-5969-a6fe-ea5d796c13ae",
+          "exam_key": "source-a354ede68029ede894ea45986fbb43c33fa18170391fa21d26a42ee8ff7ac4c3",
+          "admission_year": 2024,
+          "exam_kind": "admission",
+          "field_or_division": "수학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "15c9105d-1394-51d7-8067-56dae515ed5c",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "7f1658d6-c7f2-566b-9110-68174756c5fc",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "08ff16b7-6975-5777-b4a6-a567c1185132",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4366e4aa-7e25-5482-8aab-6b60e784cf44",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "a430b60d-19cd-523e-bee5-ed4cbb43da05",
+          "exam_key": "source-e0ce43aace785d90a9e218d3c0a50fbf1e46e67ac49c614180e165b7f82a3f5e",
+          "admission_year": 2022,
+          "exam_kind": "admission",
+          "field_or_division": "생명과학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "242f10e4-510a-5652-a0bb-ce767e9e159d",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "23abb377-55ee-5edb-be4a-a0fb211db2f9",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "5cbac83d-cdda-5a56-a89f-f14259f81e09",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "b773229c-4a6e-5b74-8f38-01e068c290b9",
+          "exam_key": "source-a1e8df891b50667cf19cc78b5d1a35e50d1b5ec6a178413c25798963229d3f28",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "자연계(과학)",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "bb226790-abe0-5be0-a662-494bd2d7c7d6",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "711dc64e-9608-508c-ac47-f27d73fa09e6",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            }
+          ]
+        },
+        {
+          "exam_id": "f3a35dc8-ed6d-5a89-813f-6361e1ff2b53",
+          "exam_key": "source-f4eb70a6f7e283ddbdbead3e19d5e25cf63c9d7a61e7fce8d3e4932c0a99fa97",
+          "admission_year": 2023,
+          "exam_kind": "admission",
+          "field_or_division": "생명과학",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "e16a0fdf-2bd2-53df-ad86-d1206073f9ce",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "95a76167-cdd9-538f-848a-75806db2e885",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "4602cf88-0ac1-5ebc-9ef6-0dea53450ab3",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 16,
+      "empty_exam_ids": [
+        "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+        "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+        "96153040-bcac-5006-82a4-147a98d0b553",
+        "f95339d5-ffe8-59ff-960a-31ba637cf37b"
+      ]
+    },
+    {
+      "source_university_id": "hongik",
+      "university_id": "15f50d54-001d-49b9-836b-a5d9c76b9c0a",
+      "name": "홍익대학교",
+      "owner_priority_22": true,
+      "existing_catalog_reused": true,
+      "registered_exams": 1,
+      "registered_questions": 7,
+      "source_selection_exams": 1,
+      "source_selection_questions": 7,
+      "source_matched_exams": 1,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://www.hongik.ac.kr/kr/admission/notice-admission.do?articleNo=134109&mode=view",
+        "evidence_state": "PRIOR_OFFICIAL_SOURCE_CURRENT_FETCH_FAILED"
+      },
+      "review_note": "2025수시 세종7; 서울 캠퍼스로 매칭 금지",
+      "service_preparing_hold": true,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "75e1851b-5f4d-582a-86c3-f9452482ab8f",
+          "exam_key": "source-06ce30c195c160b5c8bd2bdcff13b2bc7e675fc09b12d6746f01e18985a9e05c",
+          "admission_year": 2025,
+          "exam_kind": "admission",
+          "field_or_division": "자연계열(수학)",
+          "session_label": null,
+          "campus": "세종",
+          "questions": [
+            {
+              "question_id": "6bd88251-5c42-5794-b348-5f3acf0228e3",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "8abd5bd3-75f3-50a4-b5a5-b3621856b70b",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "9571e926-6281-54dc-94c2-e9975db07b31",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "ef21454c-4f1e-57f9-9393-8f03935e2917",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0522cf7f-2a6b-5755-bdad-fbc005f7bcb4",
+              "label": "문제 5",
+              "display_order": 4,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "29d84301-840b-5084-9913-b698151c558c",
+              "label": "문제 6",
+              "display_order": 5,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "b136cc16-1640-5a46-a504-45668efa4429",
+              "label": "문제 7",
+              "display_order": 6,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 1,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "uos",
+      "university_id": "0598e08a-20d6-4814-9511-6abe22814355",
+      "name": "서울시립대학교",
+      "owner_priority_22": false,
+      "existing_catalog_reused": true,
+      "registered_exams": 1,
+      "registered_questions": 4,
+      "source_selection_exams": 1,
+      "source_selection_questions": 4,
+      "source_matched_exams": 1,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://admission.uos.ac.kr/admissionNew/main.do",
+        "evidence_state": "OFFICIAL_ADMISSION_INDEX_CONFIRMED"
+      },
+      "review_note": "2027모의4; 실제 수시로 변경 금지, 서비스 준비중 유지",
+      "service_preparing_hold": true,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "9dee99a6-5932-582c-a586-961cf835dfde",
+          "exam_key": "source-0ae28a27b90a7a9c5eb8a0d855ae3e3494fda8b7b5cd061c1aa41fe4470402db",
+          "admission_year": 2027,
+          "exam_kind": "mock",
+          "field_or_division": "자연계열",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "26995e8f-5f9a-5364-bfae-62c94801d435",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "32e0cc59-ec93-599f-9f13-594e7c56ac4f",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "74e54ceb-6780-5c1c-82c8-5881c9af92c4",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "72169754-d0d4-526a-a43b-2283e9136094",
+              "label": "문제 4",
+              "display_order": 3,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 1,
+      "empty_exam_ids": []
+    },
+    {
+      "source_university_id": "catholic",
+      "university_id": "c5850ef5-616e-4ebb-aeac-3f6a3e7c4d0a",
+      "name": "가톨릭대학교",
+      "owner_priority_22": false,
+      "existing_catalog_reused": true,
+      "registered_exams": 1,
+      "registered_questions": 3,
+      "source_selection_exams": 1,
+      "source_selection_questions": 3,
+      "source_matched_exams": 1,
+      "source_unresolved_exams": [],
+      "official_source": {
+        "url": "https://ipsi.catholic.ac.kr/",
+        "evidence_state": "OFFICIAL_HOME_ONLY_CONTENT_NOT_REVERIFIED"
+      },
+      "review_note": "기존2026모의 인문3만; 자연 신규 수/평가기준 미확정, 제3자 사본을 공식 검증으로 승격 금지",
+      "service_preparing_hold": false,
+      "runtime_packages_prepared_this_task": 0,
+      "publication_allowed": false,
+      "provider_quality": "NOT TESTED",
+      "exams": [
+        {
+          "exam_id": "946b8614-62bf-5a0d-a4cc-7e415ecfc135",
+          "exam_key": "source-d7e29c3b42ba2b2ebdab1b4cac76edc9c1634279bed577a90b9f5d171aaab339",
+          "admission_year": 2026,
+          "exam_kind": "mock",
+          "field_or_division": "인문",
+          "session_label": null,
+          "campus": null,
+          "questions": [
+            {
+              "question_id": "5612b953-a0ac-5e11-952d-d70f3898e5c9",
+              "label": "문제 1",
+              "display_order": 0,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "0a5d8985-55e9-5eaa-b804-00106142053c",
+              "label": "문제 2",
+              "display_order": 1,
+              "existing_math_bindings": []
+            },
+            {
+              "question_id": "fe9db85b-7588-5577-b694-5e89579d6049",
+              "label": "문제 3",
+              "display_order": 2,
+              "existing_math_bindings": []
+            }
+          ]
+        }
+      ],
+      "registry_exams_including_empty": 1,
+      "empty_exam_ids": []
+    }
+  ],
+  "production_writes": 0,
+  "registry_snapshot_sha256": "563391e650aca7cb2dc7a4fd6466c3682e19c2075ff0da27e4bae13d581a8044"
+}

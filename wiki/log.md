@@ -1,3 +1,7 @@
+## 2026-11-11 — 논술 자연계열 확장 인수·로컬 후보
+
+[인수·검증·잔여](essay-natural-expansion-20261111.md): 중앙69 기존 운영연결 재확인·과학11 HOLD, Owner390시험 감사와 등록 수 일치. 한국항공6시험12문항/172행 private DRAFT·문제PDF6개25쪽·기존Math계약 리허설 PASS. 신규10개교는 기존Catalog/Registry 후보만, 실제 Provider·후보UI E2E 미실행. Python15/WEB97/Flutter85 PASS·4SKIP. 운영DB/공개/WEB/Store 변경0.
+
 ## 2026-11-11 — iPhone 알림 수정 Owner 확인
 
 [알림 안정화](notification-loading-fix-20261111.md): Owner가 오류 문구·재시도 버튼·로딩 종료를 확인했다. 재시도 실행/공지 이동은 미회신으로 NOT TESTED 유지. 코드·운영 변경0.

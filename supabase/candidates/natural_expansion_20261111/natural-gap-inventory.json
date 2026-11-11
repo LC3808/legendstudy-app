@@ -1,0 +1,3353 @@
+{
+  "as_of_kst": "2026-11-11",
+  "scope": "Explicit track names only; direct FK is not complete runtime availability. Legacy Konkuk Q1 requires existing runtime binding. Unbound is not publishable.",
+  "universities": [
+    {
+      "slug": "ajou",
+      "name": "아주대학교",
+      "exams": 3,
+      "questions": 6,
+      "direct_math_bound": 0,
+      "unbound": 6,
+      "exam_inventory": [
+        {
+          "exam_id": "1ab73d5a-aeab-5d9d-ba38-4e11fda720d8",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6e16d7f1-e85e-59f0-86ad-cd7e09a21a0b",
+            "e6576458-b59d-586b-a1f9-b98b9ac48941"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2424e448-7324-5264-8d85-6bc84651b95d",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e61746ae-af4e-5862-b445-7552ce0721ed",
+            "24ec4acf-7a43-59fa-8e1c-6f083d0e0f82"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "50bbc2a6-19ea-588d-99ec-2a7ecba5c724",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "5aa7ef5a-6a99-5a30-8858-4690e797c5e5",
+            "a4efa115-3f53-5d85-a046-6471e04b4628"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 3
+    },
+    {
+      "slug": "chungang",
+      "name": "중앙대학교",
+      "exams": 20,
+      "questions": 80,
+      "direct_math_bound": 69,
+      "unbound": 11,
+      "exam_inventory": [
+        {
+          "exam_id": "0723cb5a-6061-514d-9e2e-968662ea180f",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "1b7f6944-0de5-5e61-bbcb-f44c78d61dac",
+          "year": 2021,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "43a525d1-164a-58b3-834c-f7a85afeb5c0"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "25b00850-70b1-594d-93b4-b124701faf5c",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2f7d8e9a-28d4-566c-b69a-09c0bdc01738",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "3회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "cd057283-bea1-54b0-860e-ff47aad72e09"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "30c84aee-1dcb-5d20-8c98-e25b1d8670d2",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "43202ccc-d561-577f-9385-3eb80d8c6d3f",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "48f194ed-202f-5788-962c-cb259317157a",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "b0793de9-a7db-5978-bed1-f98e53093a9e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "66f3816a-221e-5bf8-9486-bf69cec2e216",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "9da257bb-4452-5cc5-a5c6-539769a75a6a"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "66fa2252-0e8a-5f29-985a-c50adafa7dce",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "76ae9d8e-7613-5d56-84a1-167ce31ecb14",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7bc501df-6c12-5e13-82ad-ce487947f5f9",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "5e5b168f-ade4-5df2-ad8f-0317e2a4b72f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7def3132-0356-5e18-be98-895637c20e6e",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "568908e8-513e-5b23-bedb-cc20f98b2b8f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "8174f3c1-879c-582f-8a88-f658286c5b9b",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "866d1793-bbb5-5991-96e8-e52c2c99b2cd",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "8842d967-e841-5296-a9d1-1bf24c78f6f7",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "a341b39c-2645-5f35-a9be-da6c5f84af08"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "bbd2b0a2-b1b6-5956-87fc-aa1cfa08a404",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "e1870a2f-d7d8-5e8f-99ab-53d1f44be094"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "be701bb5-5647-5465-a338-1119dc0e064f",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "3회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "a964eb0b-21ac-53d0-b759-aef6a1ee3063"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "bfe00753-a4bf-5857-8a39-056907969d23",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "d0613988-e9ca-5732-9e70-48961cc3f8c3"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "e484b585-d3ac-56d5-9c2c-7b604f28299d",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "ee5df319-a4f8-5840-a1c2-02136655512d",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2회차",
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "77a6d30a-cc13-5e9b-95cc-fa6db3c56fd3"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 20
+    },
+    {
+      "slug": "dongguk",
+      "name": "동국대학교",
+      "exams": 7,
+      "questions": 21,
+      "direct_math_bound": 0,
+      "unbound": 21,
+      "exam_inventory": [
+        {
+          "exam_id": "0fa138ec-e8a0-56a6-b241-4c883c86eacc",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+            "1dbd7967-f712-5185-aa8e-3656349706a4",
+            "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "324dbf82-b4bc-5607-977b-2cf512812212",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+            "67388db9-9a5d-54a3-ace4-5ab35375105f",
+            "73f883bd-0e9d-51b3-a043-4c41f64544b1"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "3b9a5530-3362-5223-94f1-04922e6f5d11",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+            "48836643-ef6b-5777-9b53-4a76342ec189",
+            "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+            "f2172ac5-f197-5a4f-a2a8-2452f094b5d0",
+            "24571e32-f295-5c2e-b69a-51f5138dbf35"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "81f8d0b3-6751-542e-913e-b4169a247de6",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+            "95c1ec51-efa3-5f34-996a-192e6080271b",
+            "62d29f41-9b3b-5861-be1f-608133203bb3"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "8871c481-f6e2-5f87-b3c8-45c042f6a775",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b3c4b57d-b178-50ab-be64-3b939967fe82",
+            "0911229c-eb20-5831-a3a0-1a625a54489f",
+            "6f4ac3f6-da5b-538c-a2f4-8376a942512e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f5f512ab-79d1-50f9-8d79-039393226b00",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d0add313-5092-5acf-8882-065f29817c9b",
+            "0e89f48c-26ca-5bb1-9b82-b55633783017",
+            "e494e7c5-b83e-5863-9aba-bc4da33d41b2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 7
+    },
+    {
+      "slug": "ewha",
+      "name": "이화여자대학교",
+      "exams": 1,
+      "questions": 3,
+      "direct_math_bound": 0,
+      "unbound": 3,
+      "exam_inventory": [
+        {
+          "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열Ⅰ",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+            "4a432fdf-d601-5230-b045-d2123c614773",
+            "e7362b80-3f05-5d84-8768-826ab7136233"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 1
+    },
+    {
+      "slug": "gachon",
+      "name": "가천대학교",
+      "exams": 8,
+      "questions": 73,
+      "direct_math_bound": 0,
+      "unbound": 73,
+      "exam_inventory": [
+        {
+          "exam_id": "20068b85-9517-544c-b0e5-22f825907695",
+          "year": 2027,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "aacb425b-c2b2-5c28-9b09-eb10e1315cd9",
+            "db2bdb4d-56ce-5a2d-954f-6a2520aa23bf",
+            "a2244a08-4aa6-58fa-8d09-69d7de4e93da",
+            "4d92bf5f-f8e5-5941-9e5a-56037fbee009"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "263c6dbb-54d0-58bd-ae37-17bc32db8021",
+          "year": 2025,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 8,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "905a8ab8-1acc-5029-8975-c3a029308ee9",
+            "ed298f7a-0574-5a1d-bbfa-8e8c2769cc50",
+            "82ccf2fe-de1a-5876-a280-9eea70ec1502",
+            "18f024b9-1810-5125-bac9-2e8fcc60c6e4",
+            "fec89a06-e742-5cd6-b23f-2dda5b8bec11",
+            "ce8a9b66-1b1b-59bd-961d-7de7f6461ace",
+            "44269426-5b3b-5f12-8c35-d07691d00cab",
+            "9ecc799b-98eb-5285-a0a4-b5f0f0074271"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6f10f7e6-00c8-5e5b-9d0d-e655e512bdf3",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 15,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e03b99f2-b265-54d2-bb38-03abe566bb72",
+            "251ba051-52ed-55b5-9082-327e224d0a5f",
+            "9f1c4574-ba9f-5a4f-b247-afac308ffd32",
+            "c289276c-91bc-532d-8b96-2ddd09372860",
+            "b4f62f70-a9ad-5ff0-ad4f-6bf3c09f1e3c",
+            "b2cd49f5-2723-5fd0-9d03-e487b42f7c5c",
+            "6ef51c9f-9ec7-5e11-9d44-cbd701db5f1b",
+            "77149048-50c5-595a-b45f-90b71eeef125",
+            "a721194a-8cd0-5ee4-b259-b96c0c98aa6d",
+            "20a4b404-19af-5e0c-be6d-076ee7204088",
+            "54341279-3833-5971-b3ef-c9017bdd9deb",
+            "81e97ef8-ca23-576d-9e32-7bafff2982e1",
+            "5e2056af-f728-517a-ac8b-ed784cab5be0",
+            "8693c959-7ee3-50ea-bdf5-5e53fbf9c821",
+            "818e7263-576d-5b4a-995f-a2e6cb3f4901"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7b45e217-183e-5300-90a3-3d1b66cbc7dd",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 15,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ea7a526c-2a1a-509e-85ac-e406055b857e",
+            "5f6421ba-7717-56e4-af21-fc1945bf3fd0",
+            "bd11d3d7-2209-5687-9677-e815c28f2ba9",
+            "c871a08e-daf1-573c-b080-8bcfd5e0e09b",
+            "ecf823e7-6c10-5357-ba2f-351aaf2a0aa5",
+            "edbe7072-4fc9-55ea-991a-73e558948e21",
+            "16b3aeb7-41e5-5b30-94c0-c00ba58ed192",
+            "d1f9b309-ec13-55ec-aee8-0cbc73322ef8",
+            "3f75b298-e74d-511e-b483-9502ee2a0590",
+            "3b1cedab-19ab-5ef0-90f4-e677fb4a29da",
+            "9c59a5db-2945-577c-ad74-29178fdd3830",
+            "380dd1b7-193e-59bd-a0d8-bc09764d9870",
+            "e317ebab-effc-56c4-8769-a46c3a547c67",
+            "be579e22-863f-591a-99ae-d8c2764dc87d",
+            "2acbcf6a-5fa8-5ff1-af35-41b50a93b16f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b6a8c6a1-ae0b-5513-b07a-8b62cffe05ef",
+          "year": 2026,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "76b7a67f-d9c9-5080-8573-762a4e00d809",
+            "e134f223-3eb6-5cb5-8c62-5b964dd21058",
+            "ad5e6b5b-1842-5fb8-b27b-c8cf4241c450",
+            "679c3c83-1681-5d4e-bbe4-c5278372ac90"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b7b6d7c1-fc8a-5a88-a20f-3ac42a9644b0",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 15,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e539ed1b-de77-5d2c-b052-c569ccb84c64",
+            "f9ac9358-a6fe-5f45-b877-405b8e8b5416",
+            "c7a87d84-22c6-5eaf-b4d0-c50d1ce5f079",
+            "b5f17902-33a2-5700-ad63-7cbff600e6cc",
+            "82177842-b087-5248-9bdb-d5021b119383",
+            "f8bfe95b-dcd9-5684-9e2c-064ffeb3e75c",
+            "dcb17b54-cf85-540f-9b74-8655a1b94f2f",
+            "a1540c47-95b6-5c2d-b991-5602728bf262",
+            "29c7108b-ffc8-504d-98c0-50398be38676",
+            "0f928c19-22b0-5a6d-99c5-3f06458ecd29",
+            "f3a63117-4c33-5daa-888f-7abaaa6b623a",
+            "b6aa197e-da1c-5714-8f27-627cd06d627e",
+            "2c37cbb3-82d6-5bb5-8bcf-8ae4d3201ca8",
+            "80f2c05f-5832-5235-b33a-948a436e7efb",
+            "087174a4-2591-5d61-8267-d35042991bb2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f6b96be5-83a0-52f8-a413-84efab31fcc5",
+          "year": 2026,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 8,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ae455922-4ddb-5a49-bb9a-1ea1bbb9a84d",
+            "367ef06b-f26f-597c-8c17-2b460a6b9234",
+            "8f7816de-2650-5624-8a1b-ad77c18d3f56",
+            "0e405d19-3fbc-5b99-8772-db122d99271f",
+            "abbb11de-6168-5b7e-9a7c-73cf655b63e0",
+            "fec19942-9d0f-5fd1-bfb8-bde9a97f8635",
+            "3cca301a-3982-50d2-91f9-7650379a7c31",
+            "060fd51d-0d1b-5b19-a541-17c235474f7e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "fc0a1768-0a86-5622-a094-492162e37f52",
+          "year": 2027,
+          "kind": "mock",
+          "track": "한의예·약학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ec1840f7-9000-5735-9aed-4d10d91bc63c",
+            "fc61e566-4985-5469-90bb-bf30515b0dd6",
+            "32df8e35-e2c8-52a5-9c08-a1b9d9ebe264",
+            "05e62616-ae9b-54e4-942d-14864afcaed5"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 8
+    },
+    {
+      "slug": "hanyang",
+      "name": "한양대학교",
+      "exams": 21,
+      "questions": 42,
+      "direct_math_bound": 42,
+      "unbound": 0,
+      "exam_inventory": [
+        {
+          "exam_id": "12fc2456-206b-5172-8a54-513056b4692f",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "1d3fbceb-ef00-5b63-adca-15d2913d2410",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "26703113-7ecb-5632-b3a3-7185fdd9bb0a",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2b66ee4c-a7bf-5c2d-b648-629cf712b0ca",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2c20b87a-0594-5a1e-80ae-30bc72087152",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2d4f01c3-6a94-5010-84a5-ba8c410d5aa3",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "30559faa-7c26-54ee-a5ec-859a58f96bda",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6b0965be-d896-5a7a-97ef-88716c251fdb",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6d59d592-045f-5a07-ab47-6d2b9b1c6080",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "77f27f9e-7ef9-5184-8fb1-607c68cc03d2",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7a837ee4-ef07-5885-8d06-d20ff241ebc6",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "913dc1fb-b97a-585a-a3bc-42403307833c",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "92e250d2-e074-5e84-8b8b-60c335aa2cde",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b8fc4b28-b54c-5af1-ab01-e7a191978a93",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c4c633bf-8edb-536a-8a7b-89f9ab64921e",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c51e9d2b-2141-582d-8fef-39aa3569146a",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "cb2bd529-7d6f-5f61-a6a6-7f8deba486c1",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "ec06c1af-0efc-5477-80b9-ab25b3f938b7",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오전",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f62b2b3f-5e45-50d2-843b-8f839812fcae",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f62c49c7-39ca-5405-9969-93ee88972bdd",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후2",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "fff2d3d1-5b69-5da9-8a67-53c9658896a4",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후1",
+          "questions": 2,
+          "direct_math_bound": 2,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 21
+    },
+    {
+      "slug": "hongik",
+      "name": "홍익대학교",
+      "exams": 1,
+      "questions": 7,
+      "direct_math_bound": 0,
+      "unbound": 7,
+      "exam_inventory": [
+        {
+          "exam_id": "75e1851b-5f4d-582a-86c3-f9452482ab8f",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열(수학)",
+          "campus": "세종",
+          "session": null,
+          "questions": 7,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6bd88251-5c42-5794-b348-5f3acf0228e3",
+            "8abd5bd3-75f3-50a4-b5a5-b3621856b70b",
+            "9571e926-6281-54dc-94c2-e9975db07b31",
+            "ef21454c-4f1e-57f9-9393-8f03935e2917",
+            "0522cf7f-2a6b-5755-bdad-fbc005f7bcb4",
+            "29d84301-840b-5084-9913-b698151c558c",
+            "b136cc16-1640-5a46-a504-45668efa4429"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 1
+    },
+    {
+      "slug": "inha",
+      "name": "인하대학교",
+      "exams": 25,
+      "questions": 75,
+      "direct_math_bound": 72,
+      "unbound": 3,
+      "exam_inventory": [
+        {
+          "exam_id": "1131e065-951f-5aba-bbc4-85c15fb9f0b0",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "19f4c1e7-a82a-53ad-9aa2-7c72594518f1",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "1a51f7f2-76c3-5d2f-a6f2-8020d00ff637",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "216c2d1c-e807-5823-aab6-578560b52498",
+          "year": 2022,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "28055f9c-b578-5d11-93f6-b3243ec7a014",
+          "year": 2023,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "2e3a428b-a02a-5803-b317-3b9ad41e4834",
+          "year": 2023,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "33af3caf-afc5-5243-b110-4ba4d6a6651a",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "3dc612e2-15e0-51cc-9906-40a387f128a5",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "3e1a421d-0c40-5120-88ed-b1646f50e0fd",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "3e2526ee-14af-5c47-a5fc-76b70cc5bf8c",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "43621b22-b507-5c54-816c-66ea6d06a01b",
+          "year": 2024,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "4418be93-d956-5ec5-ab74-16cc48baab23",
+          "year": 2027,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "45f76789-e20e-596f-9760-3850644d21a9",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "5a42333d-9def-5438-9baa-f46201f97fae",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "6b6dc48d-4c84-5c75-93ed-8ab28b63ecb9",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6f54de1d-240c-5be0-836b-6a7e525264c0",
+            "54389c15-3655-55b1-b41c-c40ed6a72c82",
+            "aa5a231e-848c-516b-b56c-da97205b366a"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "70b0ddd5-0816-5395-8ac5-6a4e3664a282",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "7398c5f5-7678-5294-a7f8-81ac8d88be7c",
+          "year": 2024,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "84f67679-aa38-541a-a208-a3eceb1b17c5",
+          "year": 2026,
+          "kind": "mock",
+          "track": "의예",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "b4e457a5-0ce6-5973-bade-f4f43ecfa604",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "b59d5983-e977-52be-89cf-385d6ecc0403",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "c2f698b5-c617-57da-bc44-ee21b9df25e6",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "c951a7bf-3acc-5c4e-8ddf-07f09b257f25",
+          "year": 2025,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": "오전",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "e5f1d7de-f69b-5d7b-85e6-8ded440ee94d",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "eab15ec7-dd3c-5c41-865b-4b018b715a71",
+          "year": 2026,
+          "kind": "admission",
+          "track": "의예",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        },
+        {
+          "exam_id": "fd82164c-936c-56b2-ab96-b576f0c3be40",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": "오후",
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 3,
+          "runtime_approval_status": "APPROVED"
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 25
+    },
+    {
+      "slug": "kau",
+      "name": "한국항공대학교",
+      "exams": 10,
+      "questions": 20,
+      "direct_math_bound": 0,
+      "unbound": 20,
+      "exam_inventory": [
+        {
+          "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "year": 2024,
+          "kind": "admission",
+          "track": "공학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+            "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "01f78bea-cf4c-5d92-aac1-8f9dfa4f2b51",
+          "year": 2023,
+          "kind": "admission",
+          "track": "이학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "269bf3cb-37cc-5f4d-8af9-2b8cea67c74e",
+            "1119c093-c826-5c9f-b493-03dd1c04b4f9"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af",
+          "year": 2025,
+          "kind": "admission",
+          "track": "공학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ff6226fc-32ac-5903-ab0f-b1560803efbb",
+            "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "year": 2026,
+          "kind": "admission",
+          "track": "이학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "8c11754b-d3af-56bf-9b66-d72092468f70",
+            "48512d94-959c-5a94-b985-7e1bd005c6b7"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "44689cc8-4721-5d69-8cb4-512baefe59d7",
+          "year": 2023,
+          "kind": "admission",
+          "track": "공학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "4b02d04c-4048-5d2b-b1bb-8e5c1af368e3",
+            "5ccf38bc-a1f3-56cb-aa95-a0acb5170e09"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+          "year": 2024,
+          "kind": "admission",
+          "track": "이학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+            "ed096a20-52a7-5f27-a71b-4c7c2401cdc9"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6815943a-42c1-5eae-b711-449ac403b9fb",
+          "year": 2026,
+          "kind": "admission",
+          "track": "공학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a",
+            "6eaec5d3-4786-55a2-8dc6-a457edd5b16b"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "85a8468d-2141-52b1-9d70-3bcf6f340f8e",
+          "year": 2025,
+          "kind": "admission",
+          "track": "이학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "8744f2ad-02c4-51d4-83de-6d5ab245cec5",
+            "fccb2d75-d4e6-54ec-b0fe-f3eced268b36"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b187ce96-2633-50e5-b5af-951b3d5fc66f",
+          "year": 2022,
+          "kind": "admission",
+          "track": "이학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b3fd58f6-9498-5510-a594-edaab057b98e",
+            "9b99b725-1db4-5f45-98b7-8062184259e9"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "fa0a7ece-3cb8-5942-b136-2227f8e3875f",
+          "year": 2022,
+          "kind": "admission",
+          "track": "공학계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "266b08c1-3b68-5e67-aee4-9dacc75093b3",
+            "8b9b0f55-5bcf-5c74-98b7-83ba81a9da9e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 10
+    },
+    {
+      "slug": "konkuk",
+      "name": "건국대학교",
+      "exams": 7,
+      "questions": 28,
+      "direct_math_bound": 3,
+      "unbound": 25,
+      "exam_inventory": [
+        {
+          "exam_id": "168f2eb0-34be-5015-bf42-db002faa9868",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연 B",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "28f34ddb-5de8-5d3d-8ae1-9578bd879174",
+            "488c350e-9c3f-5eba-96ef-01960ede29b6",
+            "beb96180-87b8-5877-94fe-1d8cce9db925",
+            "59855528-951c-516d-b4cf-721a086253bb"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [
+            "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "321dfcff-62eb-564d-a40a-b683cf721316",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "f8e90b86-1a36-533d-a8c1-9847e1dd4014",
+            "4ec222eb-b5be-5a50-b2c6-883fd359b31d",
+            "b3a88056-a671-57ea-9a59-03cf1fb322ff",
+            "011b01a5-3714-5aab-821d-b459979df5e2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "529fc5f3-79b3-5ff4-8ef2-4a5ce843c7b8",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3df812ba-7ac3-5737-a50e-3db7e6a2c733",
+            "404cfc21-77d6-55da-9ba6-84198a1b3a01",
+            "84f6b941-8aae-5663-a6db-ac0c2e17fedf",
+            "d685fdad-23c9-56bf-8f68-a372cdf3edfa"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "56402c57-6ecc-5e20-96d8-26a5fbeb957b",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "cfa4839f-c292-5a95-b8b0-e408aa1df009",
+            "707f9eea-3bcc-581e-b50e-4a5fccbdca7e",
+            "ddae2f2e-bbc6-5769-b779-bd9b997ab202",
+            "982a78ca-012f-5683-bd31-4f00bdf711e2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "9288300f-76c8-5321-8c28-2ed4f2587ef3",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연 A",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "2837c76a-7fd1-51d3-9d89-567524e6d00a",
+            "7c74e44d-375d-5f9c-83c2-60b8fc06977f",
+            "1dcae52c-5937-5d83-854f-f77c0ede42d4",
+            "09140d75-579d-5570-bf90-7228c99478a6"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b628acde-5861-5f14-8d35-31da62259867",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "a42806ac-63c2-5fd5-a383-ca3c5df4468a",
+            "47d0af04-d836-5c5a-9cfa-4a5c4c986597",
+            "48937249-a641-5425-bffd-acaf096190a4",
+            "1bee0815-02e0-502a-b4ac-5090bfb69212"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 7
+    },
+    {
+      "slug": "korea",
+      "name": "고려대학교",
+      "exams": 5,
+      "questions": 20,
+      "direct_math_bound": 20,
+      "unbound": 0,
+      "exam_inventory": [
+        {
+          "exam_id": "23ff598d-4abb-5483-9ac3-a12c7e5ce09c",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "4680d613-8b1f-57f2-aff6-36a084a8a59f",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": "오전",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7f0d0a2f-7c38-5b7f-8987-91afc1773321",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": "오후",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "91d3f4ec-72ea-5031-bcbc-fb7fa7ba47af",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": "오후",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "dd68fa7b-67a5-5b76-9ce6-39b44efeb079",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": "서울",
+          "session": "오전",
+          "questions": 4,
+          "direct_math_bound": 4,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 5
+    },
+    {
+      "slug": "kwangwoon",
+      "name": "광운대학교",
+      "exams": 21,
+      "questions": 42,
+      "direct_math_bound": 0,
+      "unbound": 42,
+      "exam_inventory": [
+        {
+          "exam_id": "10ade245-4c6a-552b-beae-5dc7af3b75bd",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "337de419-bd66-5177-9a86-ae9d947fc3dd",
+            "dae06914-3342-5f0d-a58d-baedcce87b10"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "1705c7d2-e11d-570f-9a4a-d220d0600acd",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b2b7413e-097c-5b8e-b69b-57ee1f66f41e",
+            "509cae03-b726-5ebc-a9c9-ee9e45197358"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "18902739-69fc-53c8-a9a7-6bf620c9008b",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "3교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e6498a07-6b1c-5c1b-bf0d-5c5a5d6bc762",
+            "026319f4-90fb-5acd-b5e3-ec5c9788f46c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "1a3a3532-8fa1-5d33-917c-e99d441e1788",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3f726a45-322f-5d6b-8bb7-9791c9413552",
+            "00d92017-166a-5722-a3d0-95de2c20b735"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "1e66b782-4e74-5fd4-b36d-032991875522",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "c571234a-dd0c-5617-8142-6c84b2e46c21",
+            "e72b96c2-1286-5fb9-a02c-431cbccd8daa"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "3368bb8c-eaf7-5c8f-9e50-aa86c3eb36a1",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "93170547-b42e-5cb2-a3f5-b5598268b01e",
+            "5cfb4b28-41c1-5141-ab52-c3e1190e7ea8"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "44eba80d-09ed-5e8c-a988-01e90c78ffd4",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "9c7f45ca-aaff-5045-b175-b9a7477b3e02",
+            "5239e2e4-c412-547a-ab9b-6a73185d434c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "45febe31-1b94-5648-a081-e335f82e81a4",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "16add21e-e6f3-52fa-ae14-173581498ed8",
+            "c6fd30bf-fc87-551f-bd0b-fb2474b789a8"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "5ebc33d1-1097-5ed4-b521-6b9a25d13eaf",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b6b37529-d6e2-51fa-afdc-aa6331cc863c",
+            "2b3ef3be-03b0-59da-b76d-7b5befa5ec78"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6f01f238-622d-5a85-9a04-8bb5a7b9759d",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "cc580066-bed4-5fda-8eb6-cab0d26500b7",
+            "b23b4bae-a23e-5e1a-b0d0-b0e04a163c3e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "76b32d03-e941-51e0-9355-46c139a0617a",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "49a092ef-9d72-5cbc-8079-45fba6009481",
+            "ae1d6f23-34da-5692-b9f0-254deb64a31f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "91802b60-96bf-5cb6-abef-d1c1a738ae6f",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "936a3c4f-3b00-5373-8ec7-2847e7104fdc",
+            "cb3c7480-69fa-5549-b400-978ff7abcd07"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "a2a9d777-2237-50c2-af89-a617b88c5bff",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d86a8455-0ff3-51b8-b2b1-34812738c7dd",
+            "91f6574f-33e4-5290-868c-41d8683d768b"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "a68fa7e1-b701-5c7b-95ae-cfc46850614f",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "73049dcd-32fc-5898-960d-9cf323ebad03",
+            "e726d1b0-7b57-5c23-be37-ba9526d06699"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b1e3505a-359e-5122-bf42-32b1cb49a174",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "737d6f29-1a45-5f9d-b66a-ccb4e85956ef",
+            "62d7ce0e-d9ec-546c-8693-05c4eaf0a1b2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "baceb638-55ee-5d78-8ff4-93dad7832914",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "73d55396-a0fb-5624-a026-1fd4b2495652",
+            "8a45444a-7396-51ff-a91b-626b50c1d870"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c435f96e-0ce0-5603-ac22-c0984662eb98",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "4599e32a-b895-527e-82b6-89e1b3b29b58",
+            "33e00250-a7ea-5ef3-9476-6b229786403d"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "cb4dc5d6-df44-519d-82b4-64833a13304e",
+          "year": 2021,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d59307f4-5c54-57d1-a2b2-0aceed1ba8db",
+            "e12393db-b081-5764-aa96-cd0aef47bd47"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "d2abfee2-2412-5630-9af8-a858116b6759",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "a791224e-ce1a-55b7-af8c-13908adfed64",
+            "468aa8e4-f4bf-5b4c-89b5-38c1e7ad0080"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "de78b082-d9b1-5234-8bb9-d7f7543294db",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ec9efc78-c763-5162-85cd-07aa47c6b6eb",
+            "6d4cdfca-66f5-57e9-8a8d-e33396476237"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "eb9c551a-dd29-5454-9a55-8b58a2bb432d",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "3교시",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "03b9cb57-b91b-5080-8766-19ec23db5d97",
+            "dae3b5e6-c2f0-53bf-aef6-c524442d7e65"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 21
+    },
+    {
+      "slug": "kyunghee",
+      "name": "경희대학교",
+      "exams": 5,
+      "questions": 26,
+      "direct_math_bound": 3,
+      "unbound": 23,
+      "exam_inventory": [
+        {
+          "exam_id": "0a331c3e-d46b-5af3-b787-e3342e8a1ae8",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "year": 2026,
+          "kind": "admission",
+          "track": "의·약학계",
+          "campus": null,
+          "session": null,
+          "questions": 8,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ec20faaf-5f4b-5675-8798-aa52a80c2fd6",
+            "8bc7d2fa-8147-5354-857f-1baa46d84355",
+            "7873aab1-1245-52c4-919e-0cc2888e70bd",
+            "dc618430-fc97-5868-ad1d-cc168ed0cf13",
+            "a3d0ca59-1ac8-534c-b30a-74da00810686",
+            "24a038de-b10a-5f62-af31-4214d12c093a",
+            "f67348c2-6c17-550d-a806-64bcfde64af9",
+            "213cc62c-629a-580b-b83c-9846024db47d"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6e289e0f-e5b9-5f47-8de6-4d9fb58cdb3f",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d09383a2-bbe1-5dbf-b08d-dd730062c506",
+            "1dc8ec21-0d5c-5129-afef-6c6109215d4b",
+            "0f1ef133-918b-566c-9a4a-024952ef78e8"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "f7733560-15d9-530e-aaae-6d04da444d51",
+            "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d",
+            "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5",
+            "c6b54603-e483-5a5d-b4c3-d4044b40a0d2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "year": 2027,
+          "kind": "mock",
+          "track": "의·약학계",
+          "campus": null,
+          "session": null,
+          "questions": 8,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "694acb0a-4226-5a21-a340-377d3ea166d7",
+            "a4b76128-9a35-56cd-ad08-e4032eac6296",
+            "ae3aa413-1fdf-5274-a0a6-4c4f59c5af8a",
+            "2eece199-d608-5e4d-90f3-8b188543b851",
+            "04321068-ec5c-528d-b211-b5c6d4e44894",
+            "22f61110-4d80-5faa-be59-fab0855fa0cf",
+            "fed0bf52-4242-52e9-9a1e-6a35d8f309ca",
+            "fc09f3ae-3aa8-501d-8a82-05f8449b2140"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [
+        "2946d60b-cc6b-586b-b769-1f21718b4df7",
+        "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+        "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+        "de947c5e-7c9d-5190-a025-aeefb0631bcd"
+      ],
+      "registry_exams_including_empty": 9
+    },
+    {
+      "slug": "kyungpook",
+      "name": "경북대학교",
+      "exams": 1,
+      "questions": 3,
+      "direct_math_bound": 0,
+      "unbound": 3,
+      "exam_inventory": [
+        {
+          "exam_id": "8e1c6be3-5eeb-5c9b-bd9f-d91ab4bdbd5e",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열Ⅱ",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "c28665aa-8f4f-523e-8a98-df526c335688",
+            "c34692e1-eaa9-545d-be6b-45fb89fc27b4",
+            "07ec03d7-6b24-53a9-aa0e-d95420511184"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 1
+    },
+    {
+      "slug": "pusan",
+      "name": "부산대학교",
+      "exams": 2,
+      "questions": 6,
+      "direct_math_bound": 0,
+      "unbound": 6,
+      "exam_inventory": [
+        {
+          "exam_id": "18ef2745-8624-5ccc-ab7a-5fb878128116",
+          "year": 2021,
+          "kind": "mock",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "36d8d0aa-94fc-5e9b-bd53-923c37bfb7c3",
+            "a684ac25-e395-5865-b2cf-ed17479983e9",
+            "aee3380b-f189-5b65-adf7-b14fe9ce6b95"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "caa7b41b-2445-5c2c-928a-9e982b720fc8",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3db808a0-544b-55f0-9e2e-f3b2e38d2a61",
+            "e23a4c3e-c60e-5e0c-86ef-b53150f371ae",
+            "e481448b-69ae-5bfa-ae2b-cfad34b066ef"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 2
+    },
+    {
+      "slug": "sejong",
+      "name": "세종대학교",
+      "exams": 3,
+      "questions": 9,
+      "direct_math_bound": 0,
+      "unbound": 9,
+      "exam_inventory": [
+        {
+          "exam_id": "4b774bc1-d3ba-5e93-8e53-1efe023491b4",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열(A형)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "db4f76bd-ab01-5fb3-8a51-d8796dd68911",
+            "c8d77549-8412-558a-af3d-c4b932774122",
+            "7337db78-f0c4-5eaf-ac1e-75ed09511145"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "60d8c263-b12f-555e-a572-eb2cc910fd9b",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d94bfec2-bb29-5762-bfcd-2c02bc75315b",
+            "09efb3a0-7115-5b07-902b-b7b19a813ae0",
+            "f6ff5654-2069-539f-b77a-fbe65be4e7a0"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "62ca44b0-5a17-5c4c-a9ce-acb9acb77ad4",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열(B형)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "22d6234f-5cc7-5d7f-b3d2-5d61ba845d42",
+            "d8df544b-1079-522a-89c6-782612bff3cb",
+            "5a64560a-744b-5653-a8c7-568606a129c4"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 3
+    },
+    {
+      "slug": "sogang",
+      "name": "서강대학교",
+      "exams": 9,
+      "questions": 11,
+      "direct_math_bound": 0,
+      "unbound": 11,
+      "exam_inventory": [
+        {
+          "exam_id": "1f52095a-2950-5e59-8302-9801c111dac2",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "38855473-99d1-5b4d-8dd1-3af5c22b2102"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "237f04f0-00d2-5cc5-ad60-f319abaafe22",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1차",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b16130e9-da51-5356-83d3-7ad3719c3a37",
+            "c1d581a5-d7d4-5414-8f14-47d6452d6712"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "24af7fab-5708-59b6-bf61-aaad03e99d37",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3b96a9ab-3629-5e4d-bec3-475928fa4a74"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6dbdaf3c-0188-56e7-9507-d828e8803ac9",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "885fffa4-6922-5326-98fd-f0fb455c3dd9"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "71833056-873e-5bc3-8238-2f32792776ef",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e24c5c6c-c0ad-5723-a15c-61f5b2322044"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b271fd77-2fdd-5aab-b654-6e6d309ba8a2",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d74b47b8-87a1-587b-ae7d-623d08ccdb08"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "e08ff787-f4d4-5da9-8922-d78d2c45f443",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "2차",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d79c31c0-4d95-54df-87bf-132082d25ea7",
+            "cf5f3f9a-66e1-5e52-881a-6dad8ed84eb8"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "e57cfa3e-072a-5c64-ac14-e3b0118d4e7c",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "fa0bd742-0c3c-5981-8525-e19976f67f7b"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "e7f8e4a3-5bdd-546a-b703-9cd274f581c1",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": "1차",
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d36e5405-2436-5f9c-a734-bceb1d3b188c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 9
+    },
+    {
+      "slug": "sookmyung",
+      "name": "숙명여자대학교",
+      "exams": 18,
+      "questions": 50,
+      "direct_math_bound": 6,
+      "unbound": 44,
+      "exam_inventory": [
+        {
+          "exam_id": "11ac8d4a-c8e4-5184-ac2a-8d622722cdcf",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열(약학부)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "56206981-3f89-5739-a3bb-ee3e6a6248e1",
+            "3776f1e9-7286-5995-be20-225ad60fdbf3",
+            "9eb9138b-980c-5f92-8142-e3010c1adfd0"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "39493cde-f3ca-558d-9aab-7d3c5d7b871a",
+          "year": 2021,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "27cb0371-2c9f-5c35-a207-a7762d8d93d5"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "3ebbbb28-afad-514d-a294-a50fabbdd917",
+          "year": 2022,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b944a252-a747-5048-a19a-308cfc2e5c30",
+            "a7763fd9-db6e-5541-adc5-59bf3b45d38c",
+            "271aea88-776b-5cc2-9e35-95bf38047fb8"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "4835da12-452e-57c3-b134-9dbea8f821bb",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열(약학부)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "1e8b4d61-0a53-59ae-a7b2-c387cc5676ea",
+            "173f1ee4-18e1-5b97-9974-888925c91e4b",
+            "48c5d506-38a1-5c26-9590-16d82c8e297e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "4c582db3-d518-57f9-b3b1-56c257aca2e5",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "8746b128-64ef-5656-935b-29b6a7b4ed03",
+            "c656f4b4-c255-56fc-936c-89e4ab2b18a9",
+            "523b6663-f918-5c29-aa6e-14e3e296b198"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "4eb4266c-f109-540a-880b-4044730b4474",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6fb0c914-efe2-57b2-bb8f-eddee79ea858",
+            "342f6175-9755-5b85-b5f3-915b5a1f0880",
+            "0b6409e5-0456-5965-b3ae-840d37c59b52"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "55b45df4-d873-5c4b-9dcb-6741c0197298",
+          "year": 2022,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "285a4076-66e1-579e-90c1-39fdcbc55571",
+            "0bb0e263-5de8-50ee-b61f-32668b504e47",
+            "dd5889bb-a785-5039-b511-e81e041da071"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "5f002de0-5b59-50b8-8e05-684428e1e96d",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열(약학부 제외)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6aa5f389-5cf0-5a35-84e7-ba74bb13557f",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열(약학부)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "32b555e0-c382-5e37-ae36-89776d945d3b",
+            "ac4280ba-0b6b-5546-8a58-a696e6bf53a8",
+            "ace8ee6a-8b7e-526f-884a-18ae936b0fe7"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6bc75b10-b63f-52cd-b74f-44ddacfb90e9",
+          "year": 2024,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "160867f9-bd9d-511b-b9f1-68e387ae8df3",
+            "fee14e99-2500-56d2-91b9-66341935a4a4",
+            "bc37bc35-afbc-57a2-9a78-c34363b8d3ef"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6be424d3-ffc6-56ed-bab5-5d86416d142e",
+          "year": 2026,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "24b846d7-6e1f-5a9c-ac08-0cfb1d2058e3",
+            "1c279c86-167b-5873-a2ef-01efe77ac82d",
+            "b30e117f-6240-54a1-98ab-ab392e36f239"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "6db119ec-58bd-5d5c-83ab-af33d192ffcc",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3d5b560d-3c20-59ec-b669-51d5e9a10e1f",
+            "83c71d35-af92-5333-a82b-a703e87f8df7",
+            "91c8ef90-168a-5505-936d-3939b9c88683"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7484fbea-4c68-5285-b525-227f835ca4cc",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열(약학부)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 3,
+          "unbound_question_ids": [],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7528297c-65f6-556d-9958-188ea5fad975",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열(약학부)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6eaa7428-3686-51f6-8efb-0e5127e0d3d0",
+            "256ebc83-09fb-5c47-9813-b9b67ca4155d",
+            "47501a70-0d53-5377-8105-da806dac184c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "78dc85f3-f3c8-5c8b-98fc-ff96b87527ac",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "c1bce14d-1e5f-5c50-8a34-fff319499d49",
+            "f90a2b99-3acc-52db-80dd-dd04ef64e077",
+            "ef01787b-275b-5d1e-965a-34696816b83a"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "deb21169-6937-5309-a9bb-c446bd6d4d5c",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열(일반)",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d7a1a8f4-8fba-5ece-9f20-946ece988ea5",
+            "1d25219b-a954-54e1-bfca-63d41fcca980",
+            "eb24d5aa-04a9-56a9-bc97-bf556c5bfb0e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f1f86385-3ee4-5af4-a836-e819bae455a6",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6a4613da-4eb8-5e9b-a8db-fdfcb9e4eb9b",
+            "eb89752e-1fe4-5b24-be01-0a2dfd1bb728",
+            "d18140c2-a0f8-53f7-af82-b236ad6e0a08"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f2807bf1-7ffb-51b1-b062-41e7feb6f3a4",
+          "year": 2021,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 1,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "9290038b-accc-5b7a-914e-56b9bc2628a5"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 18
+    },
+    {
+      "slug": "soongsil",
+      "name": "숭실대학교",
+      "exams": 5,
+      "questions": 20,
+      "direct_math_bound": 0,
+      "unbound": 20,
+      "exam_inventory": [
+        {
+          "exam_id": "1e754392-59da-5daa-80ec-58225c188eee",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b01f7a32-bc0e-5980-9190-14c15376de8a",
+            "918203f8-f289-5fbd-add7-6fb464767f2f",
+            "a183ac01-316d-54c2-9d22-1552540abc44",
+            "17d687d8-0a2d-59a9-ac9f-f5c0d4c273ed"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2825efbe-25c9-5881-94bb-3c46f542e7ce",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d758749d-1b70-56c3-a4bd-8f8deae44a7b",
+            "8e725482-0731-52e2-a5bc-f985976e9689",
+            "753b737b-4b38-53e8-ac84-aa1200c823bc",
+            "7c888400-a224-5f31-b289-7882b01fd75f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "34bf13e8-76b8-534a-8d87-12b2cd92e6f2",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3f29026e-f974-5355-bf90-e8c02cf369c9",
+            "bfcfaecc-ddd8-5a05-9e0c-cba14493104b",
+            "54949986-9666-5bc3-ae0c-45e521c68c89",
+            "8d70db7f-98ac-5f4f-a20a-0d0fd06b6e0e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "44c4905f-c774-589e-9ad5-83507d15befe",
+          "year": 2025,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "d15a72e9-14fc-532d-aa28-a29669a83534",
+            "da0e3b82-0a26-5f4c-ab08-4d273160dcf6",
+            "30fe8e8a-3a9d-5857-a2ae-1a12f1d93be0",
+            "f96695e2-7c6d-504c-8f50-a82b0d04fbda"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ca641fbc-126d-58d3-85ee-cd6a50613d23",
+            "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+            "acb61559-3e3c-53fe-9bf6-75c9ac48da58",
+            "7c3fb259-ee90-55dc-bc1a-765d0358d030"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 5
+    },
+    {
+      "slug": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exams": 5,
+      "questions": 15,
+      "direct_math_bound": 0,
+      "unbound": 15,
+      "exam_inventory": [
+        {
+          "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+          "year": 2026,
+          "kind": "admission",
+          "track": "수리형",
+          "campus": null,
+          "session": "3교시",
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "8121b47e-4a8c-5767-b90c-90bde3327d74",
+            "e8deaca8-512a-56d8-82fa-fa11993883bc",
+            "b36ee18b-15cd-53bf-ba79-62bccf56510e"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+          "year": 2026,
+          "kind": "admission",
+          "track": "수리형",
+          "campus": null,
+          "session": "2교시",
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+            "8633896c-7611-5eeb-ae69-ab2672f1d867",
+            "337b7c8a-1c15-5f67-b542-f82877aad6df"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+          "year": 2023,
+          "kind": "mock",
+          "track": "자연계",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+            "40cb9125-a195-5540-a650-60f0cc6f7518",
+            "d0e47369-676a-5347-94f3-bb7a2dcd6814"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+          "year": 2027,
+          "kind": "mock",
+          "track": "수리형",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "9ea7243c-f209-5341-a334-347cda833409",
+            "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+            "fda4849f-0f49-5553-99bb-1c78985ab5cb"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+          "year": 2026,
+          "kind": "admission",
+          "track": "수리형",
+          "campus": null,
+          "session": "1교시",
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+            "8215d793-884f-5392-ba34-39b2c934c7db",
+            "1bb7bbff-fdf4-5205-b779-ccb29e756479"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [
+        "405fa544-7f65-5e56-88e6-a2959d32dd30",
+        "56a562f2-992e-5302-af54-1508b6a4c1c8",
+        "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+        "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949"
+      ],
+      "registry_exams_including_empty": 9
+    },
+    {
+      "slug": "swu",
+      "name": "서울여자대학교",
+      "exams": 4,
+      "questions": 9,
+      "direct_math_bound": 0,
+      "unbound": 9,
+      "exam_inventory": [
+        {
+          "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+          "year": 2026,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후반",
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+            "6c7d310f-d055-595c-8aa5-49d901b19f36",
+            "318473c0-46ea-55e7-ab06-53520ea2373f"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+          "year": 2023,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후반",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "dd144dfa-d36a-5393-a966-f4968b773485",
+            "b8a5061c-b06d-57c7-b2e1-8e41d248eb17"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+          "year": 2025,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후반",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "137e2e86-6d84-5e88-a276-b0479e435556",
+            "44610023-7a33-50e6-9924-e06a57f78a84"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+          "year": 2024,
+          "kind": "admission",
+          "track": "자연계열",
+          "campus": null,
+          "session": "오후반",
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "8ba18b30-2a9a-5eba-a8ff-f3544ce67134",
+            "9bb9c3b5-9a18-52b5-a8fb-befbe86573c5"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 4
+    },
+    {
+      "slug": "uos",
+      "name": "서울시립대학교",
+      "exams": 1,
+      "questions": 4,
+      "direct_math_bound": 0,
+      "unbound": 4,
+      "exam_inventory": [
+        {
+          "exam_id": "9dee99a6-5932-582c-a586-961cf835dfde",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계열",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "26995e8f-5f9a-5364-bfae-62c94801d435",
+            "32e0cc59-ec93-599f-9f13-594e7c56ac4f",
+            "74e54ceb-6780-5c1c-82c8-5881c9af92c4",
+            "72169754-d0d4-526a-a43b-2283e9136094"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [],
+      "registry_exams_including_empty": 1
+    },
+    {
+      "slug": "yonsei",
+      "name": "연세대학교",
+      "exams": 12,
+      "questions": 47,
+      "direct_math_bound": 0,
+      "unbound": 47,
+      "exam_inventory": [
+        {
+          "exam_id": "14a49810-643b-52d8-b0e1-0a4c453aaa47",
+          "year": 2024,
+          "kind": "admission",
+          "track": "물리",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "2f996f60-856f-54d4-9355-0ce12811c87e",
+            "77509dca-bff8-5406-96db-1f0267cfc27c",
+            "c8cc4efb-2a55-52be-ba64-7e5e49b0b33e",
+            "345ec1f8-174e-57ad-8e51-996d9714b185"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "2df26093-6f5c-54ca-87b7-3d4b929d4d35",
+          "year": 2024,
+          "kind": "admission",
+          "track": "생명과학",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "0ac45911-746b-53a1-a890-6c1c3efac77a",
+            "6c82e92f-6978-572e-adea-563dd9b22e68",
+            "8a2a73a6-faa4-5419-967c-ac455170feba"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "49bcdb3d-e103-50c3-8575-1f8654dd7ce1",
+          "year": 2024,
+          "kind": "admission",
+          "track": "화학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "6738f147-db3e-5fa2-a6d3-4a29d1366dd6",
+            "bc70e6d0-e556-5e44-acc3-4a1cd9fa128d",
+            "492ae072-ecfa-5d6b-aff3-8fb562d7f625",
+            "86c46ee6-02d7-5220-81df-6b6c9698044c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "49c3eab7-d158-5196-80d5-dd35ca26af7a",
+          "year": 2022,
+          "kind": "admission",
+          "track": "수학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "a846698c-1d6f-5f20-8b8f-c85714dc8fb0",
+            "4eff36a9-c91f-5055-aef6-381015cfe7e8",
+            "d8f4eb65-9f38-5c7d-b980-98ff5ca200a3",
+            "f161f133-40e0-5733-a506-977172b8dec2"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "4db87c9d-9718-54f3-ad92-b2135c6115e7",
+          "year": 2022,
+          "kind": "admission",
+          "track": "화학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "c785bbad-ac4e-5fb4-9024-5a3b83006635",
+            "5e746bf6-333d-5d6e-bcf7-c0524d14def9",
+            "1d7e157c-d5b7-51eb-92b0-166fcc7bd7ae",
+            "9c346200-e024-5f40-8640-90adbfe2542c"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "67d29ce8-2269-56ca-98c6-6cc7939c4b03",
+          "year": 2023,
+          "kind": "admission",
+          "track": "화학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "b573457e-a889-5bf1-9aba-a8f892711514",
+            "b92fca72-f881-5fb2-887f-c57935af575b",
+            "1c7f4bee-75a5-55de-abdf-9c9a887d04d8",
+            "f0a37502-5784-5ba6-9e64-5f738eb540a9"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7848ecd6-c175-5eb6-b2cb-ea8dee16f15e",
+          "year": 2023,
+          "kind": "admission",
+          "track": "지구과학",
+          "campus": null,
+          "session": null,
+          "questions": 6,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "12d151d4-b2ea-52db-8169-4d6451097f89",
+            "4623ecc9-81d1-5560-bcef-45321e4336c1",
+            "e90229ad-c6b4-5a53-844f-8e36bc1671bc",
+            "6a158abf-e237-5264-8fc3-fa55beed8c12",
+            "18e904de-1931-5a93-9801-f0bae66adc66",
+            "7011b324-bfa0-579f-a719-e347ff4108ae"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "7faf45bf-3a5d-52f0-be38-321488b480df",
+          "year": 2024,
+          "kind": "admission",
+          "track": "지구과학",
+          "campus": null,
+          "session": null,
+          "questions": 6,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "3e9f16b0-21bd-5ece-8d28-64ce11037e81",
+            "2c318d62-8092-5c69-a05d-e00e86c6ec5b",
+            "498788cf-8bd2-54e5-ad6d-79481c8a89d3",
+            "73539fcb-1ef9-5096-841f-cb932742bf7d",
+            "a4d4c7dd-04bd-5429-af37-18637184b74a",
+            "6ba13b75-9116-5599-9fbe-53b021f9adac"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "907806c5-c410-5969-a6fe-ea5d796c13ae",
+          "year": 2024,
+          "kind": "admission",
+          "track": "수학",
+          "campus": null,
+          "session": null,
+          "questions": 4,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "15c9105d-1394-51d7-8067-56dae515ed5c",
+            "7f1658d6-c7f2-566b-9110-68174756c5fc",
+            "08ff16b7-6975-5777-b4a6-a567c1185132",
+            "4366e4aa-7e25-5482-8aab-6b60e784cf44"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "a430b60d-19cd-523e-bee5-ed4cbb43da05",
+          "year": 2022,
+          "kind": "admission",
+          "track": "생명과학",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "242f10e4-510a-5652-a0bb-ce767e9e159d",
+            "23abb377-55ee-5edb-be4a-a0fb211db2f9",
+            "5cbac83d-cdda-5a56-a89f-f14259f81e09"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "b773229c-4a6e-5b74-8f38-01e068c290b9",
+          "year": 2027,
+          "kind": "mock",
+          "track": "자연계(과학)",
+          "campus": null,
+          "session": null,
+          "questions": 2,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "bb226790-abe0-5be0-a662-494bd2d7c7d6",
+            "711dc64e-9608-508c-ac47-f27d73fa09e6"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        },
+        {
+          "exam_id": "f3a35dc8-ed6d-5a89-813f-6361e1ff2b53",
+          "year": 2023,
+          "kind": "admission",
+          "track": "생명과학",
+          "campus": null,
+          "session": null,
+          "questions": 3,
+          "direct_math_bound": 0,
+          "unbound_question_ids": [
+            "e16a0fdf-2bd2-53df-ad86-d1206073f9ce",
+            "95a76167-cdd9-538f-848a-75806db2e885",
+            "4602cf88-0ac1-5ebc-9ef6-0dea53450ab3"
+          ],
+          "reviewed_package_question_count": 0,
+          "runtime_approval_status": null
+        }
+      ],
+      "empty_exam_ids": [
+        "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+        "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+        "f95339d5-ffe8-59ff-960a-31ba637cf37b"
+      ],
+      "registry_exams_including_empty": 15
+    }
+  ],
+  "registry_snapshot_sha256": "563391e650aca7cb2dc7a4fd6466c3682e19c2075ff0da27e4bae13d581a8044"
+}

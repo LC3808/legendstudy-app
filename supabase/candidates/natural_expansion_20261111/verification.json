@@ -1,0 +1,86 @@
+{
+  "date_kst": "2026-11-11",
+  "overall": "PARTIAL",
+  "scope": "Offline candidates and existing runtime contracts; no new production publication",
+  "checks": {
+    "python_identity_safety": {
+      "passed": 15,
+      "failed": 0
+    },
+    "isolated_pg17": {
+      "packages": 12,
+      "common_checks": 6,
+      "per_question_checks": 72,
+      "passed": true,
+      "provider": "synthetic"
+    },
+    "web": {
+      "test_files": 9,
+      "passed": 97,
+      "failed": 0,
+      "source_head": "745fbf3"
+    },
+    "flutter": {
+      "sdk": "3.47.6",
+      "test_files": 8,
+      "passed": 85,
+      "skipped": 4,
+      "skip_reason": "Existing approved result tests need external local fixture paths; not provided",
+      "failed": 0
+    },
+    "pdf": {
+      "original_pages_rendered": 99,
+      "derived_pdfs": 6,
+      "derived_pages": 25,
+      "visual_layout_checked": true,
+      "final_raster_pixels_match_reviewed_output": true,
+      "hidden_text_or_annotations": 0,
+      "real_app_render": "NOT TESTED"
+    },
+    "registry": {
+      "source_exams": 93,
+      "exact_existing_id_matches": 90,
+      "unresolved_no_insert": 3,
+      "owner_audit_exams": 390,
+      "registered_count_drift": 0
+    },
+    "real_provider_quality": "NOT TESTED",
+    "new_candidate_web_app_e2e": "NOT TESTED",
+    "new_device_install": "NOT PERFORMED",
+    "build": "NOT RUN - no product source or build configuration changes",
+    "release_catalog": "Read-only confirmed Central69/Hanyang42/Korea20/Inha45/Konkuk4/Kyunghee3/Sookmyung6; Inha medical27 excluded",
+    "wiki_handoff": "PASS - 10 required routes, local links; current-status under 12 KB"
+  },
+  "private_artifacts": {
+    "sql_sha256": "bd924f93319411fd79414ddf20c930b90eea8ac1e3a76f707c9723da54a5cb5b",
+    "package_source": "kau-draft-manifest.json",
+    "raw_content_committed": false
+  },
+  "log_hashes": {
+    "contract-test.log": "62a9207ed227155883d7ae62a9a923ac33c55022fc13a1fedbe0eab1cd842a12",
+    "web-regression.log": "d524f75decac595541bebf6848f060ed66f9559b45737cc78e21a3964c1045d3",
+    "flutter-regression.log": "7d0588edcf8394a1a91ce603204e850de971b02d55b47d362e0607718319b069"
+  },
+  "preservation": {
+    "production_schema_changes": 0,
+    "production_rpc_changes": 0,
+    "production_dml": 0,
+    "storage_uploads": 0,
+    "new_university_ids": 0,
+    "new_exam_ids": 0,
+    "new_registry_question_ids": 0,
+    "provider_calls": 0,
+    "credit_payment_policy_changes": 0,
+    "web_deployments": 0,
+    "release_merges": 0,
+    "store_submissions": 0
+  },
+  "remaining": [
+    "KAU math text normalization and rubric review",
+    "Private TEST real Provider and new-candidate WEB/APP flow",
+    "Remaining existing natural gaps",
+    "10 candidate universities source/rubric/runtime packages",
+    "Central science11 HOLD",
+    "Owner approval before any production apply/publication"
+  ]
+}

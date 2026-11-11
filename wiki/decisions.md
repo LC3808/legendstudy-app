@@ -1039,3 +1039,7 @@ Owner 작업04-C 첨부 화면 후속: 홈 편집은 알림과 나란히 배치�
 ## 2026-11-11 — 개인 알림 조회 상태와 공지사항 독립성
 
 [기존 공통 공지사항](notices-system.md)의 별도 목록·읽음 계약을 유지한다. Owner는 개인 알림을 Loading/Success/Empty/Error로 구분하고 정상0개만 Empty, 오류·시간 초과는 오류/다시 시도로 처리하도록 결정했다. 공지 메뉴는 알림 조회 실패 중에도 이용 가능해야 한다. 자동 시간 경과를 빈 목록으로 처리하지 않는다. 이번 범위는 앱 안정화이며 운영 DB/RPC 변경은 금지한다. [구현·실제 운영 상태](notification-loading-fix-20261111.md).
+
+## 2026-11-11 — 자연계열 논술 확장과 공개 경계
+
+[공식 원본 보존](#2026-09-30--archive-first-official-essay-evidence)과 [기존 TASK20](task20-priority-natural-connection-20261106.md)을 계승한다. Owner는 중앙대 수학 연결 상태를 먼저 확인하고 기존 자연 누락·신규 약10개교를 기존 Catalog/Registry/공통 Backend로 확장하도록 지시했다. 완료 항목 중복 생성 금지, 중앙 과학Q4 11 HOLD 유지. Registry/DRAFT·기술 연결·실제 첨삭 품질·사용자 공개를 구분하며 운영 DB/RPC·WEB 배포·공개는 별도 Owner 승인 전 금지한다. 새로운 평가 엔진·Provider/Credit/결제 정책 변경을 허용하지 않는다. [실제 인수 결과·미완료](essay-natural-expansion-20261111.md).

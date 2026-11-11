@@ -1,0 +1,48 @@
+{
+  "query": "with c as (select x->>'essay_question_id' as question_id, x->>'leaf_id' as leaf_id, x->>'essay_exam_id' as exam_id from jsonb_array_elements(math_private.release_catalog(null)) x) select u.slug,count(distinct e.id) as exams,count(*) as math_catalog_questions from c join public.essay_exams e on e.id::text=c.exam_id join public.universities u on u.id=e.university_id where coalesce(e.field_or_division,'') ~ '자연|수리|이학|공학|의예|약학|수학|물리|화학|생명과학|지구과학' group by u.slug order by u.slug",
+  "as_of_kst": "2026-11-11",
+  "rows": [
+    {
+      "slug": "chungang",
+      "exams": 20,
+      "math_catalog_questions": 69
+    },
+    {
+      "slug": "hanyang",
+      "exams": 21,
+      "math_catalog_questions": 42
+    },
+    {
+      "slug": "inha",
+      "exams": 15,
+      "math_catalog_questions": 45
+    },
+    {
+      "slug": "konkuk",
+      "exams": 1,
+      "math_catalog_questions": 4
+    },
+    {
+      "slug": "korea",
+      "exams": 5,
+      "math_catalog_questions": 20
+    },
+    {
+      "slug": "kyunghee",
+      "exams": 1,
+      "math_catalog_questions": 3
+    },
+    {
+      "slug": "sookmyung",
+      "exams": 2,
+      "math_catalog_questions": 6
+    }
+  ],
+  "scope": "Read-only current Math backend release catalog; not current WEB deployment or real-user E2E",
+  "inha_active_not_in_release_catalog": {
+    "track": "의예",
+    "exams": 9,
+    "questions": 27,
+    "action": "PRESERVE_CURRENT_SCOPE"
+  }
+}

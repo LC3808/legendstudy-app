@@ -1,0 +1,312 @@
+{
+  "packages": [
+    {
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "01720b00-ad78-5be4-a79a-67416d88402e",
+      "package_sha256": "2613145d60115f2e9ea944c3b219d676712271ee179bba9a4fb3451d1d4bd355",
+      "publication_allowed": false,
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "row_count": 13,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "d954b0f9-edb2-5d4d-984b-f0069b6a7d52",
+      "package_sha256": "30795549be75f279c0678abfc9032975d5817fc8e6ce2b72943e4b5bbee7e02a",
+      "publication_allowed": false,
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "row_count": 17,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3,
+        4
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "f248a7a6-72cf-5abd-8c40-1ac703495ac9",
+      "package_sha256": "3f8e62473d02fe59f0ff29a8b069c4cacc20fb48197d2232d2a03ef0b7554f20",
+      "publication_allowed": false,
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "row_count": 15,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2,
+        3
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "fafaf414-4adb-5c39-bc79-69d637218b29",
+      "package_sha256": "772a3882fcc06cd7fb151418975ed6f616915f32abf1547e6fb7d760a9e932ba",
+      "publication_allowed": false,
+      "question_id": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9",
+      "row_count": 13,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        4,
+        5
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "98d677cf-18c1-5a49-9634-6974e666e5da",
+      "package_sha256": "199a1cb6e9d088a54ee595e88da0e77ec9331eb1cb75a3365237344be1508b8a",
+      "publication_allowed": false,
+      "question_id": "ff6226fc-32ac-5903-ab0f-b1560803efbb",
+      "row_count": 15,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "f53fc0ca-8ef1-5414-a96b-8d4598229fe8",
+      "package_sha256": "df89f61888d4c53c2d3484a9a546c066be73e0d0e6e1ccd187ba6b48a1039f8a",
+      "publication_allowed": false,
+      "question_id": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77",
+      "row_count": 14,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3,
+        4
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "85a8468d-2141-52b1-9d70-3bcf6f340f8e",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "924d1078-1127-56e6-9233-dd8a05307831",
+      "package_sha256": "5a30b12b241463dfa3d5c15102d329b6cfad14112eb4e70d2aee5e30b4500e04",
+      "publication_allowed": false,
+      "question_id": "8744f2ad-02c4-51d4-83de-6d5ab245cec5",
+      "row_count": 13,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "85a8468d-2141-52b1-9d70-3bcf6f340f8e",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "1590354b-1604-58a2-9bed-1f40126c8a7c",
+      "package_sha256": "a7d9cff826088d69603b7a4d700523798b745c2081bf58b92abedc5d1da25f15",
+      "publication_allowed": false,
+      "question_id": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36",
+      "row_count": 15,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3,
+        4
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "6815943a-42c1-5eae-b711-449ac403b9fb",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "9bb57ac4-6ffc-5e0c-b684-d0b0bf1676ea",
+      "package_sha256": "09bc8cd609c5f23df81cc4271d0ac01839565fabbb7c196207448b16656377d0",
+      "publication_allowed": false,
+      "question_id": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a",
+      "row_count": 17,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "6815943a-42c1-5eae-b711-449ac403b9fb",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "3bfcd4df-8aec-57bf-b504-e06694158f59",
+      "package_sha256": "cde7a93652496ab9df801e140de68159b46ffff5740e7bd30fee656625ad970f",
+      "publication_allowed": false,
+      "question_id": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b",
+      "row_count": 12,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3,
+        4
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "b620b60e-faaf-5690-a23c-cb13733b4833",
+      "package_sha256": "b6230833fe8202bafab067c23975a9b3875b825165b3ef8c76170a80f19d24ef",
+      "publication_allowed": false,
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "row_count": 14,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1,
+        2
+      ],
+      "technical_ready": false
+    },
+    {
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "extraction_has_private_glyphs": true,
+      "leaf_id": "80d6466f-57a1-5a18-bdbc-0d25924f9b65",
+      "package_sha256": "2a0056928d94622a7ef2aae02040785e1ebf8e23e10db176038be211a0be3b8b",
+      "publication_allowed": false,
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "row_count": 14,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3,
+        4
+      ],
+      "technical_ready": false
+    }
+  ],
+  "problem_pdfs": [
+    {
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "pages": 4,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "902d8e3b71d651a00a38d2e43a7ed02aaeaa917f61267eb5f305e3bc33f6cf24",
+      "upload_status": "NOT_UPLOADED"
+    },
+    {
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "pages": 5,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "da53ce7de67544776a7466e72d4c43b6d8c78b13b4192c5417ad46914aa93e91",
+      "upload_status": "NOT_UPLOADED"
+    },
+    {
+      "exam_id": "3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af",
+      "pages": 4,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "12a3ca8414ba9ac6cbb66742612a9b2422165411a77bd7081c63805454c0280d",
+      "upload_status": "NOT_UPLOADED"
+    },
+    {
+      "exam_id": "85a8468d-2141-52b1-9d70-3bcf6f340f8e",
+      "pages": 4,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "fcadf95c24a0d7a2ed05f52d4ae6651049ee28190d9722c540a6fb771ec0baab",
+      "upload_status": "NOT_UPLOADED"
+    },
+    {
+      "exam_id": "6815943a-42c1-5eae-b711-449ac403b9fb",
+      "pages": 4,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "ee62949f2cd26f15856afbb44daf04fa36e892ddbcc314414699b2edbe360568",
+      "upload_status": "NOT_UPLOADED"
+    },
+    {
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "pages": 4,
+      "raster_only": true,
+      "review_status": "VISUAL_LAYOUT_CHECKED_25_PAGES_NOT_DEVICE_QA",
+      "sha256": "7bf5c514730fc26191a46ee38595c50eae781106329b36391cfc9b3a5a569360",
+      "upload_status": "NOT_UPLOADED"
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0,
+  "publication_allowed": false,
+  "worker_payloads": [
+    {
+      "image_bytes": 299338,
+      "images": 6,
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "sha256": "3a72c2a22d473c90c793c7e9af8c7b677138c38667d3c7495c88e1f2bd9c34df"
+    },
+    {
+      "image_bytes": 432134,
+      "images": 9,
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "sha256": "46eea0f78d46ad898536d11ce21e3140be0d8865c102c0e43d30b96308fabc40"
+    },
+    {
+      "image_bytes": 424778,
+      "images": 8,
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "sha256": "aa9d36284e10c1cd2a4499219e4a14005a183a28e8bc169d8a9bc502e28dc2bc"
+    },
+    {
+      "image_bytes": 349756,
+      "images": 6,
+      "question_id": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9",
+      "sha256": "fafd1cea30e5bfbcdf38e2b7cb2ba79cd30471d196fd5cc36f266f57674bce06"
+    },
+    {
+      "image_bytes": 508405,
+      "images": 9,
+      "question_id": "ff6226fc-32ac-5903-ab0f-b1560803efbb",
+      "sha256": "168009cb0897d680791280fd367a095adc49019e80d33467a387b8259dbffe70"
+    },
+    {
+      "image_bytes": 285857,
+      "images": 6,
+      "question_id": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77",
+      "sha256": "696866ad679dd6f5f251d2e7d5bfd4c3fea64cd9627237ec5ed215b3ec84740a"
+    },
+    {
+      "image_bytes": 270678,
+      "images": 6,
+      "question_id": "8744f2ad-02c4-51d4-83de-6d5ab245cec5",
+      "sha256": "d5e5795dfb5dd6ecd3f00e8cd3a2dfcf175607cc1cc072f3e95565130b43c9b7"
+    },
+    {
+      "image_bytes": 359559,
+      "images": 7,
+      "question_id": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36",
+      "sha256": "b1b5ca060a83785a5514ce598a949dd98f962f6f386347585f3b4001a90663de"
+    },
+    {
+      "image_bytes": 492516,
+      "images": 10,
+      "question_id": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a",
+      "sha256": "e92a5ab51e07befe973e28a71a2b86eda0c9674d5d65ba54302e8023031e7544"
+    },
+    {
+      "image_bytes": 298085,
+      "images": 6,
+      "question_id": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b",
+      "sha256": "7fc6d1b527daed903b9254d3b34258f11fcb9d3e17182a8d10cea89403d68f39"
+    },
+    {
+      "image_bytes": 346720,
+      "images": 7,
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "sha256": "9fd057bd08c4986aaa0d9b8a71507dbc40f2c6287987bd63729a627bb4c30997"
+    },
+    {
+      "image_bytes": 455859,
+      "images": 8,
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "sha256": "5908e14365220e4aadeb79e05effdd993f58772547b0f27a32478419b510bd4a"
+    }
+  ]
+}
