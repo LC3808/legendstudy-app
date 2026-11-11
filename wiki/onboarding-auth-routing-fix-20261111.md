@@ -180,3 +180,22 @@ ApplicationsEntry → ApplicationsPage → 동일 등록/수정 화면 및 RPC/�
   전체 실기기 연속 시나리오, 기존 회원/Apple/Google/계정전환 실기기 회귀.
 - 릴리스 통합 후보는 준비할 수 있으나 **릴리스 승인 HOLD**. 미확인 실기기 항목과
   marker 없는 기존 회원46개의 재노출 위험을 Owner가 검토해야 한다. 전체 suite green으로 보고하지 않는다.
+
+### APP78 최종 영수증
+
+소스 `79f5a12653231462e58e30916ab2b8288d516132`, iOS1.0.2(78), release80초/44.8MB,
+codesign deep/strict PASS, 기존 공개 설정/OAuth3개/프로젝트/동일 bundle 보존.
+App.framework SHA256 `16866e6d3bd67fc53ed7771d4d4dea6ecff7f345a967738a5d27c369d973d82f`.
+iPhone17 기존77 위78 **삭제 없는 업데이트·실행·버전 재조회 PASS**.
+iPhone12의 `com.legendstudy.app` **1.0.2(75)** 읽기 재확인 PASS.
+영수증 `.local/onboarding-device/install78.json`, `launch78.json`(ignored).
+최종 후속 전체 **2540 PASS /8 SKIP /기존5 FAIL**. D3 runner1·mobile IA4로 기존과 동일.
+중간 실행의 추가 학교 test 실패1은 완료 회원 fixture에 marker가 없던 것으로 수정,
+해당13검사 및 최종 전체 재실행에서 해소했다. production 코드 추가 변경0.
+최종 analyze No issues found, Wiki handoff PASS.
+
+APP77 온보딩 노출은 Owner PASS, APP78 신규 N수 단계/프로세스 재시작 후 단계 재개/
+완료→홈→재로그인·Apple/Google/기존 회원 실기기 조합은 **NOT TESTED**.
+이미 완료한 회원을 새 단계 검수 때문에 재온보딩시키지 않는다. 실제 데이터 등록은 Owner가
+지정한 미완료 테스트 계정의 명시적 입력으로 검수해야 하며 임의 초기화/가짜 지원 기록 생성0.
+릴리스 통합 **PARTIAL / 승인 HOLD** 유지.

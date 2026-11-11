@@ -375,10 +375,11 @@ void main() {
     'authenticated restored school and guest new session do not share state',
     (tester) async {
       final profiles = Profiles()
-        ..profile = const UserProfile(
+        ..profile = UserProfile(
           id: 'owner-a',
           neisOfficeCode: 'J10',
           neisSchoolCode: '7530932',
+          onboardingCompletedAt: DateTime(2026),
         );
       final c = await mount(
         tester,

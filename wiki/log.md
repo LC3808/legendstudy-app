@@ -1,3 +1,7 @@
+## 2026-11-11 — N수 온보딩 APP78 설치·최종 회귀
+
+[APP78 영수증](onboarding-auth-routing-fix-20261111.md#app78-최종-영수증): 소스79f5a12, iPhone17 삭제 없는78 업데이트·실행/버전 확인, iPhone12 APP75 보존 확인. 전체2540 PASS/8 SKIP/기존5 FAIL,analyze/Wiki PASS. 학교 완료회원 fixture 보정 후 추가 실패 해소. APP77 노출 Owner PASS,APP78 실제 신규 N수 입력·단계 복원·로그인 조합 NOT TESTED,릴리스 HOLD. 운영/기존 회원 데이터 변경0.
+
 ## 2026-11-11 — N수 온보딩 실제 지원 단계·진행 복원
 
 [Owner 결정·구현·영향](onboarding-auth-routing-fix-20261111.md): APP77 온보딩 노출 Owner 확인. N수 관심 대학 다음 기존 실제 지원 등록 UI 진입 단계 추가, 개별 skip. 계정별 로컬 단계 ID 복원/완료 시 제거. 집중69 PASS; 이전 전체2538 PASS/8 SKIP/기존5 FAIL. 현재 marker 없는62개 중 기존46개, 과거 완료 여부 확정 불가. 운영 데이터 변경0.
