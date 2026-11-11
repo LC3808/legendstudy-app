@@ -1,0 +1,47 @@
+{
+  "packages": [
+    {
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "leaf_id": "65e9cdb8-20c3-5d5f-82a2-884142070d98",
+      "official_content_preserved": true,
+      "package_sha256": "a92dbc53ad088a81a95135132bd2b0ac9ab8f9ac10f1a59e2bc93dc337338c71",
+      "publication_allowed": false,
+      "question_id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+      "row_count": 11,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1
+      ]
+    },
+    {
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "leaf_id": "98dd8662-3976-5884-9bfc-945dcc19c59b",
+      "official_content_preserved": true,
+      "package_sha256": "b7def77ae3e25eb95aa2cf508b565e55f89ac9dd3e6448903ef513a0838aca6f",
+      "publication_allowed": false,
+      "question_id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+      "row_count": 11,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        2
+      ]
+    },
+    {
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "leaf_id": "edb40a2a-9f42-5170-8e8a-ea1c7c696669",
+      "official_content_preserved": true,
+      "package_sha256": "f2675665111234e74961bc5e22ed5bb07fb30dbb97c28b26615ea6effc41964a",
+      "publication_allowed": false,
+      "question_id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+      "row_count": 11,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        3
+      ]
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0,
+  "publication_allowed": false,
+  "version": "swu-natural-math-connection-20261112-v1"
+}

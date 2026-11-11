@@ -1,0 +1,13 @@
+{
+  "private_directory": ".local/natural-tech-20261112/seoul-women",
+  "files": {
+    "apply-draft.private.sql": "a257e1fae48e36eba226f29f17112dbc834ccd22a9a3aa24d00c0b0ee1bfa153",
+    "register-draft.private.sql": "fb61949c264947a0e46495c967718bf06dbc977dc24019e9f36bebdaade4847e",
+    "worker-source.private.sql": "47138de1177629a9b4cfa07c8d095728f4448264df0024c692d60adf4aaa3aa2",
+    "rollback-retire.sql": "8efb36f7eb7be255e1e233254d21cc5c75dcdaa89492ee3da278f447813779d3"
+  },
+  "production_applied": false,
+  "executable_scope_approved": false,
+  "pdf_existing_preserved": 3,
+  "pdf_approval_pending": 0
+}

@@ -1,0 +1,20 @@
+{
+  "university": "seoul-women",
+  "technical_contract_questions": 3,
+  "exams": 1,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 69,
+  "web_pass": 6,
+  "web_skip": 1,
+  "app_pass": 4,
+  "app_log_sha256": "bc8e4fb52e9f21cac83e3c78eeb2f2c9e6f9d45a877d4edbe2ced6a2aa6a0144",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "9b1ad6edfbdc53e2bad3cc90391e3aa3328fee93f71554816a21921b52007d0f",
+  "sql_receipt_sha256": "c68bf30ad870b8719e053b26628cd66a99ec27c9dd61a221077ad09553ffd263"
+}

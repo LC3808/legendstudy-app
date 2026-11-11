@@ -1,0 +1,14 @@
+{
+  "exams": [
+    {
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "pages": 3,
+      "sha256": "42cbf084357a0a7550f4973961379466b6859c6f0a0305fe8c0607181ba8fc5f",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    }
+  ],
+  "pages": 3,
+  "visual_review": "PASS",
+  "review_scope": "2026 original shared problem page and all three official rubric pages; original region pixel identity, no hidden text/annotations."
+}

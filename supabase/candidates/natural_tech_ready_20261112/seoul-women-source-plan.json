@@ -1,0 +1,179 @@
+{
+  "version": "swu-natural-math-connection-20261112-v1",
+  "provider_allowed": false,
+  "publication_allowed": false,
+  "exams": [
+    {
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "exam_key": "source-swu-2026-admission-natural",
+      "university_id": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+      "admission_year": 2026,
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "session_label": "오후반",
+      "campus": null,
+      "university_slug": "swu",
+      "university_name": "서울여자대학교",
+      "registry_question_ids": [
+        "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+        "6c7d310f-d055-595c-8aa5-49d901b19f36",
+        "318473c0-46ea-55e7-ab06-53520ea2373f"
+      ],
+      "questions": [
+        {
+          "question_id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+          "question_key": "source:swu-2026-admission-natural:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                4
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                5
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+          "question_key": "source:swu-2026-admission-natural:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                7
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+          "question_key": "source:swu-2026-admission-natural:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                9
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                10
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "pages": [
+                11
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

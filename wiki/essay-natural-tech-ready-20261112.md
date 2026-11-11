@@ -15,7 +15,7 @@
 |7|숙명|16시험44문항|기술 계약 TECH READY; DB889/WEB66/APP45 PASS|기존 운영6 보존; 신규 PDF38 승인·운영 미적재|
 |8|동국|7시험21문항|TECH READY; DB429/WEB30/APP22 PASS|기존 승인PDF21 보존; DRAFT286행 미승인·미적재|
 |9|광운|21시험42문항|TECH READY; DB849/WEB86/APP43 PASS|신규PDF42 승인 대기; DRAFT636행 미적용|
-|10|서울여|후속 순서|아직 TECH READY 미보고|광운 이후 순차 검증|
+|10|서울여|1시험3수리문항|TECH READY; DB69/WEB6/APP4 PASS|2023–2025과학6 NOT READY; 수리DRAFT36행 미적용|
 
 위 검사 수는 각 대학의 명명 계약 검사 수다. DB는 기존 Worker 자료 매칭과 합성 답안/Mock 결과의 제출·결과·재작성·재첨삭·멱등성·권한·원복을 합산한다. 실제 Provider 호출/모델 품질/운영 WEB·APP 실계정 E2E가 아니다. WEB 각 대학1 SKIP은 대상에 없는 과거10대학 fixture이며 실패0. Flutter는 leaf별 기존 입력 진입과 계약 검사를 실행했다. 공통 Python 음성검사26 PASS. 기존 엔진·학생 기록·Credit·결제·APP75 코드 변경0.
 
@@ -78,3 +78,11 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 21시험42개의 기존 Registry ID를 유지했다. 2021–2026수시14시험과2021–2027모의7시험이다. 공식 보관 합본에서 문제·기준·예시답안을 연결하고21개 문제PDF78쪽의 원본영역 픽셀 일치·숨김텍스트/주석 없음을 검사했다. 기준 지면도 육안 대조했다. 2021수시2교시Q1은물리2–3쪽/Q2는4쪽으로 바로잡고,2022모의Q2 펼침면은 왼쪽 전체와 오른쪽 문제 연속 영역으로 나누어 누락을 방지했다. 문제 내용·수식·공식 기준은 수정하지 않았다. 6개 빈 출제의도 상단과6개 표지는 제외했다.
 
 로컬 PDF 생성기에 검토된 사각영역 crop과 범위/모드충돌 검사를 추가했다. 기존 엔진/WEB/APP 제품 동작은 변경하지 않았다. 신규 학생PDF42문항은 승인 대기이며 업로드0. Math594+Worker42=636행 DRAFT 후보는 미승인·미적용이다. 격리 DB849/WEB86(비대상1SKIP)/Flutter43·Python26 PASS. [광운 영수증](../supabase/candidates/natural_tech_ready_20261112/kwangwoon-receipt.json). TECH READY이며 실제 검수 접근/AI품질 완료가 아니다. 다음은 서울여대.
+
+## 서울여 수리3 연결·과학6 분리
+
+운영 Registry4시험9문항 중2026학년도1시험3문항만 수리형이다. 기존 ID/공식 보관 원본11쪽의 문제2쪽·출제의도3/6/9쪽·기준4/7/10쪽·공식답안5/8/11쪽을 기존 Math/Worker에 연결했다. 세 문항은 원래 한 문제지에 있으므로 동일 원본 지면을 각 문항의 문맥으로 보존하고 문항 ID별 기준만 매칭한다. 학생 후보3쪽의 픽셀 일치·숨김텍스트/주석 없음 및 세 기준표를 육안 확인했다. 실제 연결 후보는 기존 승인 학생PDF3 메타데이터를 보존한다. Math33+Worker3=36행 미승인 DRAFT. DB69/WEB6(비대상1SKIP)/Flutter4 PASS. [서울여 영수증](../supabase/candidates/natural_tech_ready_20261112/seoul-women-receipt.json).
+
+2023–2025의6문항은 물리/생명/통합과학 서술형이다. [기존 과학 경계](essay-mixed-mode-foundation.md#oct18-release-quality-audit--read-only) 및 실제 `science.ts`/composition/persistence 코드를 확인했다. 기존 SCIENCE_REASONING 후보 모듈은 있으나 해당6문항의 reviewed criterion binding·영속 제출/결과·WEB/APP 서비스 경로는 검증되지 않았다. 자연계열이라는 이유로 Math나 인문 엔진에 배정하지 않고 **NOT READY**로 유지한다. 새 엔진·기존 인문 서울여 운영 연결 변경0.
+
+[6문항 원본 지면/차단 목록](../supabase/candidates/natural_tech_ready_20261112/seoul-women-science-gaps.json)에 문제·기준·예시답안 SHA/쪽을 남겼다.2024Q2의 표/그림3은물리9쪽까지 포함한다.2023Q2 예시답안은물리10쪽 이미지에 존재하지만 추출 텍스트에 빠져 있었다. 최초 텍스트만으로 판단한 자료누락 보고는 원본 확인 후 정정했으며 원본부재/HOLD로 계산하지 않는다. 실제 과학 연결은 기존 후보의 서비스 결합 범위 검토가 필요하다. 전체10개교 검토 순서는 끝났으나 NOT READY/부분/승인 대기 때문에 전체 REVIEW READY는 아니다.

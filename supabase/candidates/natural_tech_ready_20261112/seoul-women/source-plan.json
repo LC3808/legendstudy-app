@@ -1,0 +1,179 @@
+{
+  "exams": [
+    {
+      "admission_year": 2026,
+      "campus": null,
+      "exam_id": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "exam_key": "source-swu-2026-admission-natural",
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+          "question_key": "source:swu-2026-admission-natural:q1",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                3
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                2
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                4
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                5
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "physical_page": 2,
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+          "question_key": "source:swu-2026-admission-natural:q2",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                6
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                2
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                7
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                8
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "physical_page": 2,
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+          "question_key": "source:swu-2026-admission-natural:q3",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                9
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "problem": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                2
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "rubric": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                10
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            },
+            "solution": {
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                11
+              ],
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 서울여대 논술_자연계열 문제,해설,답안.pdf",
+              "page_count": 11,
+              "physical_page": 2,
+              "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+        "6c7d310f-d055-595c-8aa5-49d901b19f36",
+        "318473c0-46ea-55e7-ab06-53520ea2373f"
+      ],
+      "session_label": "오후반",
+      "university_id": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+      "university_name": "서울여자대학교",
+      "university_slug": "swu"
+    }
+  ],
+  "provider_allowed": false,
+  "publication_allowed": false,
+  "version": "swu-natural-math-connection-20261112-v1"
+}

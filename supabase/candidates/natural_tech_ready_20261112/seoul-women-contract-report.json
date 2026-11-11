@@ -1,0 +1,66 @@
+{
+  "scope": "DISPOSABLE_PG17_SYNTHETIC_CONTRACT_NOT_PROVIDER_OR_UI_E2E",
+  "checks": [
+    "draft_insert_and_replay",
+    "prior_essay_answers_results_ledger_preserved",
+    "private_table_acls_preserved",
+    "duplicate_binding_rejected",
+    "immutable_content_preserved",
+    "changed_package_rejected",
+    "retire_rollback_replay",
+    "retired_submit_denied",
+    "history_and_results_preserved_after_rollback"
+  ],
+  "questions": [
+    {
+      "question_id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+      "checks": [
+        "draft_submit_denied",
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+      "checks": [
+        "draft_submit_denied",
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+      "checks": [
+        "draft_submit_denied",
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0
+}
