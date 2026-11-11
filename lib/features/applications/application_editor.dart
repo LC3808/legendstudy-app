@@ -111,6 +111,86 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
     }
   }
 
+  Future<void> search() => run((r) async {
+    final q = query.text.trim();
+    if (q.isEmpty) return;
+    final rows = await ref.read(universityRepositoryProvider)!.searchCatalog(q);
+    r.checkOwner();
+    if (mounted) {
+      setState(() {
+        results = rows;
+        searched = true;
+      });
+    }
+  });
+
+  Widget _yearAndType() {
+    final selectedYear = int.tryParse(year.text);
+    final yearField = field(
+      '지원 학년도 · 필수',
+      DropdownButtonFormField<int>(
+        isExpanded: true,
+        menuMaxHeight: 320,
+        initialValue:
+            selectedYear != null && selectedYear >= 1900 && selectedYear <= 2200
+            ? selectedYear
+            : null,
+        decoration: const InputDecoration(),
+        items: List.generate(
+          301,
+          (i) =>
+              DropdownMenuItem(value: 1900 + i, child: Text('${1900 + i}학년도')),
+        ),
+        onChanged: busy
+            ? null
+            : (v) => setState(() {
+                year.text = '$v';
+                dirty = true;
+              }),
+        validator: (v) =>
+            v == null || v < 1900 || v > 2200 ? '학년도를 확인해 주세요.' : null,
+      ),
+    );
+    final typeField = field(
+      '모집 시기 · 필수',
+      DropdownButtonFormField<String>(
+        isExpanded: true,
+        initialValue: type,
+        items: {
+          '수시',
+          '정시',
+          type,
+        }.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
+        onChanged: busy
+            ? null
+            : (v) => setState(() {
+                type = v!;
+                dirty = true;
+              }),
+        decoration: const InputDecoration(),
+      ),
+    );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 280 ||
+            MediaQuery.textScalerOf(context).scale(16) > 20) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [yearField, typeField],
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: yearField),
+            const SizedBox(width: 12),
+            Expanded(child: typeField),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final repo = ref.watch(applicationRepositoryProvider);
@@ -127,7 +207,7 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
       children: [
         if (savedId == null) ...[
           ApplicationSection(
-            title: '지원 대학',
+            title: '',
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -136,34 +216,22 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
                   TextField(
                     controller: query,
                     enabled: !busy,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: '대학 이름을 검색해 주세요',
+                      suffixIcon: IconButton(
+                        tooltip: '검색',
+                        onPressed: busy ? null : search,
+                        icon: const Icon(Icons.search),
+                      ),
                     ),
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: busy ? null : (_) => search(),
                     onChanged: (_) => setState(() {
                       results = [];
                       searched = false;
                       dirty = true;
                     }),
                   ),
-                ),
-                TextButton(
-                  onPressed: busy
-                      ? null
-                      : () => run((r) async {
-                          final q = query.text.trim();
-                          if (q.isEmpty) return;
-                          final rows = await ref
-                              .read(universityRepositoryProvider)!
-                              .searchCatalog(q);
-                          r.checkOwner();
-                          if (mounted) {
-                            setState(() {
-                              results = rows;
-                              searched = true;
-                            });
-                          }
-                        }),
-                  child: const Text('검색'),
                 ),
                 for (final u in results)
                   ListTile(
@@ -186,7 +254,7 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
                 if (university != null)
                   Container(
                     margin: const EdgeInsets.only(top: 12),
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFFF5DF),
                       borderRadius: BorderRadius.circular(14),
@@ -217,49 +285,15 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
           ApplicationSection(
-            title: '지원 정보',
+            title: '',
             child: Form(
               key: form,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  field(
-                    '지원 학년도 · 필수',
-                    TextFormField(
-                      controller: year,
-                      enabled: !busy,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(hintText: '예: 2027'),
-                      onChanged: (_) => setState(() => dirty = true),
-                      validator: (v) {
-                        final y = int.tryParse(v ?? '');
-                        return y == null || y < 1900 || y > 2200
-                            ? '학년도를 확인해 주세요.'
-                            : null;
-                      },
-                    ),
-                  ),
-                  field(
-                    '모집 시기 · 필수',
-                    DropdownButtonFormField<String>(
-                      isExpanded: true,
-                      initialValue: type,
-                      items: {'수시', '정시', type}
-                          .map(
-                            (t) => DropdownMenuItem(value: t, child: Text(t)),
-                          )
-                          .toList(),
-                      onChanged: busy
-                          ? null
-                          : (v) => setState(() {
-                              type = v!;
-                              dirty = true;
-                            }),
-                      decoration: const InputDecoration(),
-                    ),
-                  ),
+                  _yearAndType(),
                   for (final pair in [(division, '모집단위·학과'), (track, '전형명')])
                     field(
                       '${pair.$2} · 필수',
@@ -273,37 +307,34 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
                             v == null || v.trim().isEmpty ? '입력해 주세요.' : null,
                       ),
                     ),
-                  ApplicationSection(
-                    title: '지원 상태',
-                    child: field(
-                      widget.record == null
-                          ? '현재 지원 상태 · 필수'
-                          : '현재 지원 상태 · 변경 선택',
-                      DropdownButtonFormField<String>(
-                        isExpanded: true,
-                        initialValue:
-                            widget.record != null &&
-                                !applicationStates.containsKey(initialStatus)
-                            ? null
-                            : status,
-                        hint: Text(widget.record?.status ?? '상태를 선택해 주세요'),
-                        items: applicationStates.entries
-                            .map(
-                              (e) => DropdownMenuItem(
-                                value: e.key,
-                                child: Text(e.value),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: busy
-                            ? null
-                            : (v) => setState(() {
-                                status = v!;
-                                statusChanged = true;
-                                dirty = true;
-                              }),
-                        decoration: const InputDecoration(),
-                      ),
+                  field(
+                    widget.record == null
+                        ? '현재 지원 상태 · 필수'
+                        : '현재 지원 상태 · 변경 선택',
+                    DropdownButtonFormField<String>(
+                      isExpanded: true,
+                      initialValue:
+                          widget.record != null &&
+                              !applicationStates.containsKey(initialStatus)
+                          ? null
+                          : status,
+                      hint: Text(widget.record?.status ?? '상태를 선택해 주세요'),
+                      items: applicationStates.entries
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e.key,
+                              child: Text(e.value),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: busy
+                          ? null
+                          : (v) => setState(() {
+                              status = v!;
+                              statusChanged = true;
+                              dirty = true;
+                            }),
+                      decoration: const InputDecoration(),
                     ),
                   ),
                 ],
@@ -317,7 +348,7 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
             error!,
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 12),
         SafeArea(
           top: false,
           child: FilledButton(
@@ -389,25 +420,36 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
           if (context.mounted) Navigator.pop(context);
         }
       },
-      child: widget.embedded
-          ? content
-          : Scaffold(
-              appBar: AppBar(
-                title: Text(widget.record == null ? '지원 대학 등록' : '지원 정보 수정'),
-              ),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
-                  child: content,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 12,
+            ),
+          ),
+        ),
+        child: widget.embedded
+            ? content
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text(widget.record == null ? '지원 대학 등록' : '지원 정보 수정'),
+                ),
+                body: SafeArea(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    child: content,
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }
 
 Widget field(String label, Widget input) => Padding(
-  padding: const EdgeInsets.only(bottom: 24),
+  padding: const EdgeInsets.only(bottom: 12),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -418,7 +460,7 @@ Widget field(String label, Widget input) => Padding(
           color: Color(0xFF1C2B4B),
         ),
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 6),
       input,
     ],
   ),
@@ -434,10 +476,10 @@ class ApplicationSection extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(20),
+    padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(16),
       border: Border.all(color: const Color(0xFFE3E7ED)),
       boxShadow: const [
         BoxShadow(
@@ -452,12 +494,14 @@ class ApplicationSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 20),
+          if (title.isNotEmpty) ...[
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 12),
+          ],
           child,
         ],
       ),

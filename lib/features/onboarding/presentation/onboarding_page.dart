@@ -527,6 +527,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         title,
         style: const TextStyle(
           fontSize: 26,
+          fontFamilyFallback: ['Apple Color Emoji', 'Noto Color Emoji'],
           fontWeight: FontWeight.w800,
           height: 1.2,
           color: _ink,
@@ -534,7 +535,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       ),
       const SizedBox(height: AppTokens.space8),
       Text(description, style: AppTokens.secondary),
-      const SizedBox(height: AppTokens.space24),
+      SizedBox(height: _step == 7 ? AppTokens.space16 : AppTokens.space24),
     ],
   );
 
@@ -549,8 +550,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       case 7:
         return [
           _header(
-            '실제 지원 대학을 입력해 주세요',
-            '관심 대학과 별도로 실제 지원한 대학·학과·전형을 기록해요. 아직 정하지 않았다면 나중에 MY에서 입력할 수 있어요.',
+            '합격의 순간까지, 함께할게요! 🎓',
+            '지원 대학을 등록하면 전형 일정을 더 편하게 챙길 수 있어요. 합격 발표도 놓치지 않도록 함께 준비해요.',
           ),
           OnboardingApplications(key: _applicationsKey),
         ];
@@ -757,10 +758,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 backgroundColor: _accent,
                 foregroundColor: _ink,
                 disabledBackgroundColor: AppTokens.disabled,
-                textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800,
-                ),
+                textStyle: Theme.of(context).textTheme.labelLarge
+                    ?.copyWith(fontSize: 16, fontWeight: FontWeight.w800),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppTokens.radiusMd),
                 ),

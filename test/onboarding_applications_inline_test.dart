@@ -91,7 +91,7 @@ void main() {
   }
 
   Future<void> tap(WidgetTester t, String text) async {
-    final f = find.text(text).last;
+    final f = text == '검색' ? find.byTooltip('검색') : find.text(text).last;
     await t.ensureVisible(f);
     await t.tap(f);
     await t.pumpAndSettle();
@@ -107,8 +107,21 @@ void main() {
   Future<void> add(WidgetTester t, String track) async {
     await tap(t, '지원 대학 추가하기');
     await t.enterText(find.byType(TextField).first, '테스트');
-    await tap(t, '검색');
+    await t.testTextInput.receiveAction(TextInputAction.search);
+    await t.pumpAndSettle();
     await tap(t, '테스트대학교');
+    final year = find.byType(DropdownButtonFormField<int>);
+    await t.ensureVisible(year);
+    await t.tap(year);
+    await t.pumpAndSettle();
+    await t.tap(find.text('2028학년도').last);
+    await t.pumpAndSettle();
+    final season = find.byType(DropdownButtonFormField<String>).first;
+    await t.ensureVisible(season);
+    await t.tap(season);
+    await t.pumpAndSettle();
+    await t.tap(find.text('정시').last);
+    await t.pumpAndSettle();
     await field(t, '모집단위·학과', '경영학과');
     await field(t, '전형명', track);
     await tap(t, '저장');
@@ -124,6 +137,13 @@ void main() {
       expect(find.text('테스트대학교'), findsOneWidget);
       await add(t, '학생부');
       expect(ledger.rows.length, 2);
+      expect(
+        ledger.rows.values.every(
+          (row) =>
+              row['admission_year'] == 2028 && row['admission_type'] == '정시',
+        ),
+        isTrue,
+      );
       await tap(t, '수정');
       await field(t, '모집단위·학과', '경제학과');
       await tap(t, '저장');

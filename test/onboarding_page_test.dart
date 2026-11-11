@@ -151,6 +151,7 @@ Future<GoRouter> _mount(
   List<University> universityResults = const [],
   HomeRpc? homeRpc,
   _Progress? progress,
+  List<Map<String, dynamic>> applicationRows = const [],
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -176,7 +177,7 @@ Future<GoRouter> _mount(
                   (name, params) async => {
                     'version': 'applications-v1',
                     'has_more': false,
-                    'items': <Object?>[],
+                    'items': applicationRows,
                   },
                   () => ref.read(authStateProvider).asData?.value.userId,
                   owner,
@@ -237,6 +238,12 @@ Future<GoRouter> _mount(
 void main() {
   setUpAll(() async {
     if (const bool.fromEnvironment('CORE_RENDER')) {
+      await (FontLoader('Apple Color Emoji')..addFont(
+            File('/System/Library/Fonts/Apple Color Emoji.ttc')
+                .readAsBytes()
+                .then(ByteData.sublistView),
+          ))
+          .load();
       await (FontLoader(
         'MaterialIcons',
       )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
@@ -714,7 +721,7 @@ void main() {
     expect(find.text('학년'), findsNothing);
     await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 실제 지원
     await tester.pumpAndSettle();
-    expect(find.text('실제 지원 대학을 입력해 주세요'), findsOneWidget);
+    expect(find.text('합격의 순간까지, 함께할게요! 🎓'), findsOneWidget);
     expect(find.text('3 / 6'), findsOneWidget);
     await preview.capture(tester, 'onboarding-inline-empty');
     await tester.tap(find.text('지원 대학 추가하기'));
@@ -771,6 +778,72 @@ void main() {
     );
     expect(find.text('N수생 · 검정고시 등'), findsOneWidget);
     expect(progress.steps['u1'], 3);
+  });
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('compact applications layout and keyboard access $scale', (
+      t,
+    ) async {
+      t.view.physicalSize = const Size(430, 932);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      final repo = _Repo()
+        ..initial = const UserProfile(id: 'u1', academicStatus: 'retaker');
+      await _mount(
+        t,
+        repo,
+        user: 'u1',
+        progress: _Progress()..steps['u1'] = 7,
+        textScale: scale,
+      );
+      await t.tap(find.text('지원 대학 추가하기'));
+      await t.pumpAndSettle();
+      final y = t.getTopLeft(find.text('지원 학년도 · 필수')).dy;
+      final season = t.getTopLeft(find.text('모집 시기 · 필수')).dy;
+      expect(scale == 1 ? (season - y).abs() < 1 : season > y, isTrue);
+      expect(find.byTooltip('검색'), findsOneWidget);
+      if (scale == 1) await preview.capture(t, 'onboarding-compact-form');
+      t.view.viewInsets = const FakeViewPadding(bottom: 300);
+      addTearDown(t.view.resetViewInsets);
+      await t.pumpAndSettle();
+      await t.scrollUntilVisible(
+        find.text('저장'),
+        200,
+        scrollable: find.byType(Scrollable).first,
+        maxScrolls: 30,
+      );
+      await t.pumpAndSettle();
+      expect(find.text('다음'), findsOneWidget);
+      expect(t.takeException(), isNull);
+    });
+  }
+  testWidgets('compact applications restored card render', (t) async {
+    t.view.physicalSize = const Size(430, 932);
+    t.view.devicePixelRatio = 1;
+    addTearDown(t.view.resetPhysicalSize);
+    addTearDown(t.view.resetDevicePixelRatio);
+    await _mount(
+      t,
+      _Repo()..initial = const UserProfile(id: 'u1', academicStatus: 'retaker'),
+      user: 'u1',
+      progress: _Progress()..steps['u1'] = 7,
+      applicationRows: [
+        {
+          'id': 'fixture',
+          'university_id': 'fixture-university',
+          'university_name_snapshot': '테스트대학교',
+          'intended_division': '경영학과',
+          'admission_type': '수시',
+          'admission_name': '학생부종합',
+          'admission_year': 2027,
+          'revision': 1,
+          'latest_event': {'kind': 'submitted'},
+        },
+      ],
+    );
+    expect(find.text('테스트대학교'), findsOneWidget);
+    await preview.capture(t, 'onboarding-compact-saved');
   });
 
   for (final grade in [1, 2, 3]) {

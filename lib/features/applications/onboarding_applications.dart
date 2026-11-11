@@ -137,7 +137,7 @@ class OnboardingApplicationsState
             icon: const Icon(Icons.add),
             label: const Text('지원 대학 추가하기'),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 14),
           rows.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (_, _) => TextButton(
@@ -155,10 +155,8 @@ class OnboardingApplicationsState
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text('${row.year}학년도 · ${row.type}'),
-                          const SizedBox(height: 8),
-                          Text(row.division),
-                          const SizedBox(height: 8),
-                          Text(row.track),
+                          const SizedBox(height: 6),
+                          Text('${row.division} · ${row.track}'),
                           const SizedBox(height: 12),
                           Text(
                             row.status,

@@ -285,7 +285,7 @@ void main() {
       await t.tap(find.text('지원 대학 등록하기'));
       await t.pumpAndSettle();
       await t.enterText(find.byType(TextField).first, '테스트');
-      await t.tap(find.text('검색'));
+      await t.tap(find.byTooltip('검색'));
       await t.pumpAndSettle();
       await t.tap(find.text('테스트대학교'));
       await t.pumpAndSettle();

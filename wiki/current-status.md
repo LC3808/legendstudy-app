@@ -1,5 +1,7 @@
 # Current Status
 
+[지원 대학 카피·컴팩트 폼](onboarding-compact-layout-20261111.md): Owner 지정 따뜻한 문구, 검색 아이콘 통합, 학년도/모집 시기2열(큰 글자 세로), 카드·간격 축소. 기존 저장/진행 복원·Backend 유지. 집중66 PASS/렌더3 PASS/analyze PASS, 최종 전체·기기 후속; Owner UX 확인 전 HOLD.
+
 [APP78 Native UX 후속](onboarding-inline-applications-20261111.md): N수·기타 학교 단계 자동 생략, 온보딩 내부 실제 지원 추가/수정/삭제, MY 공통 카드 폼·외부 라벨·미저장 이탈 확인. 기존 repository/운영 데이터 변경0. 계정별 단계 복원 유지. 집중62 PASS/전체2548 PASS·8 SKIP·기존5 FAIL,analyze PASS. iPhone17 APP79 설치 확인/iPhone12 APP75 보존. 기기 잠금·미러링 사용 중으로 화면 검증 NOT TESTED; Owner 최종 UX 검수 대기,릴리스 HOLD.
 
 [이메일 인증 후 온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner Resend 수신·인증·로그인 성공 보고. Owner 재현 iPhone17 Pro Max 일반 배포 앱1.0.2(67) 확인, 빌드 기록 소스2fa70bf. 이전 iPhone12/APP75 연결 보고 정정. profile 존재를 완료로 오판하는 gate 수정; 완료/skip marker로 판별. 집중212 PASS/analyze PASS. Owner 승인으로 iPhone17에77 삭제 없는 업데이트·실행 PASS. APP77 온보딩 노출 Owner PASS. N수 실제 지원 선택 단계·계정별 단계 복원 구현. iPhone17 APP78 업데이트/실행 PASS, iPhone12 APP75 재확인. 최종전체2540 PASS/8 SKIP/기존5 FAIL,analyze PASS. 최종 실기기 연속 흐름과 기존 회원46개 재노출 검토 대기; 임시 draft 완전 복원은 후속. 운영 변경0.
