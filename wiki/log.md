@@ -1,3 +1,7 @@
+## 2026-11-11 — iPhone 알림 수정 Owner 확인
+
+[알림 안정화](notification-loading-fix-20261111.md): Owner가 오류 문구·재시도 버튼·로딩 종료를 확인했다. 재시도 실행/공지 이동은 미회신으로 NOT TESTED 유지. 코드·운영 변경0.
+
 ## 2026-11-11 — 알림 안정화·이메일 인증 읽기 조사
 
 [알림 수정](notification-loading-fix-20261111.md): 운영 RPC 부재404와 기본 자동 재시도 확인, 단계별8초/4상태/재시도 중복 억제. 관련46 PASS,전체2532 PASS/8 SKIP/기존5 FAIL,analyze/iOS/Android build PASS. Android 오류·재시도·공지 이동 확인,iPhone 회신 대기. [이메일 조사](email-verification-audit-20261111.md): 현재19개 중5미인증,오늘 발송 한도 로그21; 수신·SMTP 미확인. 운영 변경0.

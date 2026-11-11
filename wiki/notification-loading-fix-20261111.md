@@ -40,7 +40,7 @@ Future.timeout은 화면 대기와 결과 반영을 제한하며 기존 SDK의 �
 - `flutter analyze --no-pub`: No issues found. iOS profile/no-codesign PASS, Android debug PASS. 기존 flutter_tts SPM/Kotlin 미래 지원 경고는 남아 있다.
 - 정상 main.dart를 별도 **LS04C QA 1.0.2(76)**로 서명·설치했다. 기존 iPhone APP75 및 Android 기존67 설치본은 보존한다. 릴리스 산출물·스토어 업로드가 아니다.
 - Android Galaxy S8: 기존 로그인 세션에서 홈 종→오류/재시도, 재시도 후 로딩 종료, 공지사항5개 목록, 뒤로·재진입 및 완전 종료/재실행 후 오류 상태 전환 확인. [오류 화면](assets/notification-loading-20261111/android-error.png) / [공지 목록](assets/notification-loading-20261111/android-notices.png).
-- iPhone: 별도 앱 업데이트·실행 DONE. 화면 동작 Owner 회신 대기, 현재 **NOT TESTED**. 미회신을 PASS로 처리하지 않는다.
+- iPhone: 별도 앱 업데이트·실행 DONE. Owner가 2026-11-11 “알림을 불러오지 못했습니다”, “다시시도” 버튼 표시와 무한 로딩 종료를 직접 확인했다(**PASS — Owner 실기기 회신**). 버튼을 누른 뒤의 재시도 완료·공지사항 이동은 이번 회신에 포함되지 않아 **NOT TESTED**로 유지한다. 전체 실기기 판정은 PARTIAL이다.
 - 실제 운영 0개/1개 fixture·네트워크 장애·Auth 장애는 만들지 않았다. 해당 분기는 자동 테스트 PASS이며 실기기 운영 장애 시험이 아니다. 로그아웃/재로그인 알림 전용 실기기 회귀는 NOT TESTED.
 
 ## 보존·한계
