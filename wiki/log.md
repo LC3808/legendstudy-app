@@ -1,3 +1,7 @@
+## 2026-11-11 — Owner 재현 설치본 정정
+
+[온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner iPhone17 Pro Max 홈 화면 앱. 일반 배포 앱 포함 조회로1.0.2(67) 확인, 빌드 기록2fa70bf의 동일 gate 결함 대조. 이전 개발 앱 전용 조회로 생긴 APP75 설치본 연결 오류 정정. 앱 설치/삭제/운영 변경0.
+
 ## 2026-11-11 — 인증 후 온보딩 P0
 
 [원인·수정·기기 근거·남은 검수](onboarding-auth-routing-fix-20261111.md): iPhone12 일반 앱75 조회. 로그인 profile 자동 생성과 존재 기반 gate로 온보딩 누락. 완료 marker 기준으로 수정,212 집중 PASS/analyze PASS. 운영 변경0; 수정 실기기와 저장 전 임시 draft 복원 미완료.

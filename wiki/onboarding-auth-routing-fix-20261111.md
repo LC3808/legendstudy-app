@@ -7,22 +7,28 @@
 Owner는 Resend 인증 메일 수신→인증→이메일 로그인 성공, 일반 iPhone 앱에서 온보딩 미노출을 보고했다.
 SMTP 성공은 Owner 실기기 보고이며 이번 에이전트가 운영 설정을 변경하거나 발송하지 않았다.
 
-연결된 **iPhone 12 Pro Max**의 `devicectl device info apps` 읽기 결과:
-`com.legendstudy.app`, **레전드스터디+ 1.0.2(75)**. 별도 LS04C QA는76이다.
-[APP75 설치 영수증](task03-result-ux-20261111.md)의 소스는
-`c9b483018bcada179050595cf78c8ca4a3d213ba`. 소스 SHA는 설치 영수증 매핑이며
-현재 실행 바이너리 안에서 추출한 SHA는 아니다. 함께 연결된 iPhone17 Pro Max는 최초 잠금으로 조회 실패했으나,
-Owner 잠금 해제 후 재조회에 성공했다. bundleIdentifier에 legendstudy가 포함된 설치 앱은 조회되지 않았다.
-따라서 이번 연결 기기에서 확인된 일반 LegendStudy 설치본은 위 iPhone12의 APP75다. 설치/삭제/실행은 하지 않았다.
-APP75에도 최신 닉네임/학교 검색 온보딩은 포함하지만 아래 gate 결함이 존재한다.
-이 브랜치의 홈6단계 및 이메일 UX 후속은 APP75 설치본과 구분한다.
+**정정: Owner 재현 기기는 iPhone 17 Pro Max, 홈 화면에서 실행한 앱이다.**
+`devicectl device info apps --include-default-apps`로 일반 배포 앱을 포함해 확인:
+`com.legendstudy.app`, **레전드스터디+ 1.0.2(67)**, builtByDeveloper=false.
+앞선 조회는 기본값이 개발용 앱만 포함하므로 빈 결과였으며 앱 미설치 근거가 아니었다.
+iPhone12의 APP75를 재현 설치본으로 연결한 이전 보고를 철회한다.
+
+[APP67 빌드 기록](app67-essay-admission-20261106.md)에 대응하는 소스는
+`2fa70bf9a5e7ff2016e714bf107faad2289672e2`. 이는 빌드 기록 매핑이며
+현재 기기 바이너리에서 직접 추출한 SHA가 아니다. 해당 Git 소스의 AuthPage 로그인 profile upsert와
+onboarding_gate의 profile 존재만으로 완료 판단하는 조건을 직접 대조해 동일 결함을 확인했다.
+최신 개선 코드가 설치돼 있었다고 주장하지 않는다. APP67에도 존재하는 결함이 APP75 및 수정 전 브랜치에 이어져 있다.
+
+별도 연결된 iPhone12 Pro Max는1.0.2(75), LS04C QA는76으로 확인했으나 Owner 재현 기기가 아니다.
+이 브랜치의 홈6단계·이메일 UX·gate 수정은 APP67 설치본에 포함되지 않는다.
+설치/삭제/실행·운영 설정 변경 없이 메타데이터와 기존 Git 소스만 확인했다.
 
 ## 원인과 최소 수정
 
 이메일 로그인 성공 → `AuthPage._passwordAuth`의 id-only profile upsert →
 `currentProfileProvider`의 계정별 조회 → router의 `onboardingRedirect`.
 기존 gate는 profile 행만 있으면 준비 완료로 판단하여 NULL 완료 marker를 무시했다.
-APP75와 현재 코드 모두 같은 조건이다. Auth 가입/인증 성공이 온보딩 완료를 의미하지 않는다.
+APP67·APP75와 수정 전 브랜치 모두 같은 조건이다. Auth 가입/인증 성공이 온보딩 완료를 의미하지 않는다.
 
 `onboardingProfileReady`를 `hasCompletedOnboarding` 기준으로 수정했다.
 - 인증 전/guest: 온보딩 대상 아님.
@@ -74,6 +80,6 @@ LAB `bcbee72` 대 `4489603` 변경 범위와 비교: 수정 Dart/test 파일 겹
 wiki/index/current-status/log/decisions는 공통 편집 파일이므로 향후 통합 시 해당 항목만 수동 병합한다.
 기존 LAB SQL/Registry/코드 변경0. Auth/SMTP/운영 DB/RPC/기존 사용자 데이터/스토어 변경0.
 
-다음: 설치 대상 기기 확정 → 독립 검수 빌드로 신규 로그인/온보딩/완료/재로그인 확인 →
+다음: iPhone17 Pro Max 대상 독립 검수 빌드로 신규 로그인/온보딩/완료/재로그인 확인 →
 미완료 재개/계정 전환/Apple·Google 실기기 검수 → 저장 전 임시 draft 보존 범위 해결 → 릴리스 통합.
 이번 결과는 코드 결함 수정·격리 회귀 완료이며 실기기 전체 안정화 완료가 아니다.
