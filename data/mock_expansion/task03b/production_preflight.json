@@ -1,0 +1,189 @@
+{
+  "project_ref": "stlhijzpjfgwwdgunlsd",
+  "checked_at": "2026-11-11T02:47:14.557561+00:00",
+  "transaction": "READ ONLY; ROLLBACK",
+  "counts": {
+    "exam_questions": 0,
+    "mock_exam_answers": 0,
+    "mock_exam_attempts": 0,
+    "answer_key_versions": 0,
+    "grade_cutoff_versions": 0,
+    "grade_cutoff_references": 2457
+  },
+  "server_version": "17.6",
+  "reference_rows_digest": "6e2db2a78ea3ca5a6856afb4f816b616",
+  "rls": [
+    {
+      "name": "answer_key_versions",
+      "forced": false,
+      "enabled": true
+    },
+    {
+      "name": "exam_questions",
+      "forced": false,
+      "enabled": true
+    },
+    {
+      "name": "grade_cutoff_versions",
+      "forced": false,
+      "enabled": true
+    },
+    {
+      "name": "mock_exam_attempts",
+      "forced": false,
+      "enabled": true
+    },
+    {
+      "name": "mock_exam_answers",
+      "forced": false,
+      "enabled": true
+    },
+    {
+      "name": "grade_cutoff_references",
+      "forced": false,
+      "enabled": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "scoring_cutoffs_valid(smallint[],integer)",
+      "definition_md5": "fe6cb8d1f897dd99835e6e7aa564f92c",
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_text(text,integer)",
+      "definition_md5": "2f41cd23b1551dc45c1c124a3ee1ea99",
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_source_url(text)",
+      "definition_md5": "eebd591d254d6a3fd9973ae5a915fc92",
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_answer_guard()",
+      "definition_md5": "bd1763a58680d8b7ee0cb3adbf320809",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_normalize_answers(jsonb,integer)",
+      "definition_md5": "8ed9a92191521d1138ca0b7382e32202",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_mcq5(jsonb,jsonb,smallint[],text)",
+      "definition_md5": "684f35cbe7389a1cee473e0a558a2234",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_question_guard()",
+      "definition_md5": "ba11dd39c73af83ec8419d821bc7b85e",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_publication_guard()",
+      "definition_md5": "48fb47fd23ae2a171ca208f99bb6ec3e",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_attempt_guard()",
+      "definition_md5": "1553a4ca46d68421e3c716e0667b56ea",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "scoring_attempt_consistency()",
+      "definition_md5": "0083bf0a5fc5f7272161a1c2168e22bb",
+      "acl": [
+        "postgres=X/postgres"
+      ]
+    },
+    {
+      "name": "submit_mock_attempt(uuid,uuid,uuid,uuid,text,jsonb)",
+      "definition_md5": "06f52fd93a0f2cc68e18ce99f5959165",
+      "acl": [
+        "postgres=X/postgres",
+        "authenticated=X/postgres"
+      ]
+    },
+    {
+      "name": "guard_grade_cutoff_reference()",
+      "definition_md5": "97d33ee55426c5ebcd8c13d6748edeb3",
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ]
+    },
+    {
+      "name": "grade_cutoff_lookup(uuid)",
+      "definition_md5": "47c0193fcc719a412c28041686999b96",
+      "acl": [
+        "postgres=X/postgres",
+        "anon=X/postgres",
+        "authenticated=X/postgres",
+        "service_role=X/postgres"
+      ]
+    }
+  ],
+  "account_dependencies": [
+    {
+      "name": "account_private.lock_subject(uuid)",
+      "definition_md5": "e48a7203c22b570c80e65ed51a7d20c9",
+      "acl": [
+        "postgres=X/postgres",
+        "essay_executor=X/postgres"
+      ]
+    },
+    {
+      "name": "account_private.allowed(uuid)",
+      "definition_md5": "5bb28e0026f17746239e4369a772a5ce",
+      "acl": [
+        "postgres=X/postgres",
+        "essay_executor=X/postgres"
+      ]
+    },
+    {
+      "name": "account_service_allowed()",
+      "definition_md5": "4bc4e4ef8067186bbfb20e6460070cd7",
+      "acl": [
+        "postgres=X/postgres",
+        "authenticated=X/postgres"
+      ]
+    }
+  ],
+  "registry_readonly_check": {
+    "rows": 417,
+    "differences": [],
+    "canonical_ids_unchanged": true
+  },
+  "end_readonly_check": {
+    "checked_at": "2026-11-11 03:10:35.982239+00",
+    "keys": 0,
+    "questions": 0,
+    "attempts": 0,
+    "answers": 0,
+    "grading_cutoffs": 0,
+    "references": 2457,
+    "reference_digest": "6e2db2a78ea3ca5a6856afb4f816b616"
+  }
+}

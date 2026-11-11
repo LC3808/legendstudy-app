@@ -1,0 +1,69 @@
+{
+  "status": "PARTIAL",
+  "production_mutations": false,
+  "store_submission": false,
+  "flutter_scoring_tests": 522,
+  "flutter_learning_regression_tests": 120,
+  "python_tests": 22,
+  "flutter_analyze": "PASS",
+  "wiki_handoff": "PASS",
+  "official_paper_stored_vectors": 1329,
+  "legacy_official_vectors": 1236,
+  "legacy_published_keys": 412,
+  "production_scope": "read-only metadata/Registry/counts/digest only",
+  "isolated_sql_contract": "Captured target function ACL, columns, constraints; synthetic account lifecycle dependencies, not a full production clone",
+  "verified": [
+    "draft/publish identical rerun",
+    "conflicting content abort",
+    "all 443 paper perfect/wrong/blank result persistence",
+    "concurrent same-attempt retry one row",
+    "changed payload conflict",
+    "new-attempt repeat submission",
+    "two-user isolation",
+    "pending/erasing account submit/retry/fetch denial",
+    "withdrawal preserves snapshots and original 2457 reference hash",
+    "inactive Registry does not block withdrawal",
+    "legacy mcq5/multiple accepted answers/all-credit/0/999/blank"
+  ],
+  "logs": {
+    "flutter_scoring": {
+      "sha256": "81b5fb5c516c0749fc156f6285f605020a5a2ce578fa6f1dee7d46b2f605d7cc",
+      "tail": [
+        "00:06 +520: /Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/test/mock_scoring_ui_test.dart: answer marking/semantics/results 360x640 2.0 x 45",
+        "00:06 +521: /Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/test/mock_scoring_ui_test.dart: answer marking/semantics/results 360x640 2.0 x 100",
+        "00:09 +522: All tests passed!"
+      ]
+    },
+    "learning": {
+      "sha256": "a84f6f8a31ef54197aa27615a27bf7248bc8f281f063f9bddb2e0f2446580023",
+      "tail": [
+        "00:05 +118: /Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/test/day7_school_test.dart: authenticated restored school and guest new session do not share state",
+        "00:05 +119: /Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/test/day7_school_test.dart: school screen fits 360x640 with 2x text",
+        "00:05 +120: All tests passed!"
+      ]
+    },
+    "analyze": {
+      "sha256": "88657990b8d4e8dad9cc97aa3e15ac547f1637ec8e16ce9d036a4b991eebe9b5",
+      "tail": [
+        "Try `flutter pub outdated` for more information.",
+        "Analyzing legendstudy-service-app-20261022...                   ",
+        "No issues found! (ran in 5.4s)"
+      ]
+    },
+    "sql_final": {
+      "sha256": "427a73dc5410443c807078fb218c5729e41bd6c725f89e1fdcb40a083a4a302a",
+      "tail": [
+        "PASS captured production scoring/cutoff function ACL, columns and constraints",
+        "PASS 1329 stored perfect/wrong/blank submissions, concurrent identical retry, changed payload rejection, new attempt resubmission, owner isolation; rollback preserves attempts/questions/old 2457 references; draft/publish rerun, conflict/RLS/Registry guards"
+      ]
+    },
+    "legacy_sql": {
+      "sha256": "32395076cb2078a2149a580bb533f76e4a972c7081262f6965db91951b0051ba",
+      "tail": [
+        "PASS: 1236 official-paper SQL scoring vectors",
+        "PASS: 412 official keys published/read via anon availability and submitted via authenticated RPC in disposable DB; owner isolation preserved",
+        "PASS: candidate compiles; legacy engine unchanged; READY gate; mixed/MCA/all-credit/zero/999; immutable per-question snapshots; retry/owner/stale/invalid guards"
+      ]
+    }
+  }
+}

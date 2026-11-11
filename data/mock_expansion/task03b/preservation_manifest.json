@@ -1,0 +1,11 @@
+{
+  "baseline_commit": "1556b0f",
+  "files": {
+    "data/mock_expansion/task03a/verified_papers.json": "b2031c4a008d718d80864fe0e8f1c5b506b934512c7310fea703ef6d7dc82b47",
+    "data/mock_expansion/task03a/verification_report.json": "2a8172a720e71df0013bc65e0d7dd0e1755a7ceb6cffb392b0fa9fe10100fbc8",
+    "data/mock_expansion/task03a/cutoff_review.json": "ea7bf2a0e308539ada390fabe0465eddbc97317c92160f8bcc362d6343fa0093",
+    "data/mock_expansion/task03/registry_snapshot.json": "b5dc48144cf5c7e2d60960d7b08f6d7f8afb8054fa0187998847774603ae0876",
+    "data/grade_cutoffs/task03_pending/ocr_candidates.json": "609ff6f3926c49745b7322e299dadf3c048ae6eed9b63eecc54f85f5b9cdc43f",
+    "data/grade_cutoffs/task19/reviewed_rows.json": "11c6e5b856aa0b0e26a8029ff6255b94c41340206e374394466e1cb56678e056"
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "registry_mutation": false,
+  "aliases": [
+    {
+      "content_item_id": "b0f42638-ee2d-5934-a7ed-d721c9dc6755",
+      "exam_subject_id": "89f0b3e9-43b4-512c-82ee-ab82db90b84d",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "a16c783a-6a6a-5228-96ef-d0382edd4b00",
+          "label": "국어(언매)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "dddf0fc7-464b-5100-8db0-8dd673bf44d1",
+          "label": "국어(화작)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "b0f42638-ee2d-5934-a7ed-d721c9dc6755",
+      "exam_subject_id": "8792650f-9158-5894-aa0e-4e4a4cc1a005",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "c6514f99-15c3-5499-812d-bc2efcf68a21",
+          "label": "수학(기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "c3ae29b9-3d47-5fbd-9501-3109baeee134",
+          "label": "수학(미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "6870b1e9-acfb-576e-a4ac-9f6fdffd57dc",
+          "label": "수학(확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "5a70a5c1-1bc7-55b3-8240-02d0c7c4166f",
+      "exam_subject_id": "abc08504-9e54-5b80-ad05-efb11053b68d",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "ea554939-3bd3-59ce-a038-3e63bf855b8c",
+          "label": "국어(언매)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "bf4935ec-6b49-5823-8c8f-4a092f0204b7",
+          "label": "국어(화작)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "5a70a5c1-1bc7-55b3-8240-02d0c7c4166f",
+      "exam_subject_id": "2afa8527-ea18-5827-b230-db3ec3d4a815",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "ee86f29e-5ce2-5cdc-b1b6-513445781c98",
+          "label": "수학(기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "704840fa-c8a3-58d6-8c27-fbd91bd5f86b",
+          "label": "수학(미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "585c16b4-7fdc-5837-a7fb-e47c01157aed",
+          "label": "수학(확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "02e67848-cd05-5b3a-bb99-4de2e9198c2c",
+      "exam_subject_id": "d3979c55-dc12-5988-86ad-b6ca3baa78e5",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "f3496da9-27ca-526d-9814-9ca726d4d50d",
+          "label": "국어(+언매)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "823338e8-c29d-50b0-93e3-5f18669e545c",
+          "label": "국어(+화작)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "02e67848-cd05-5b3a-bb99-4de2e9198c2c",
+      "exam_subject_id": "f2c685c2-8eb9-551a-9375-6297bd728aec",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "059c4a7f-3a29-5676-b243-f84455549329",
+          "label": "수학(+기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "e4ebb1ab-c78a-5a1f-a25a-58c1a5784aae",
+          "label": "수학(+미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "ffaa8892-af9f-51d6-bc3c-7d718b76632d",
+          "label": "수학(+확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "689a5f19-a1f7-5c22-8a4d-9e5ff3a0fe84",
+      "exam_subject_id": "f30570a1-77e8-58d8-b628-73b713937485",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "d4db6558-20d6-5a0b-a926-bad875723ff3",
+          "label": "국어(언매)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "b75f4c8d-f667-5c95-b289-fd04d15cbf60",
+          "label": "국어(화작)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "689a5f19-a1f7-5c22-8a4d-9e5ff3a0fe84",
+      "exam_subject_id": "be30bf5c-8cfc-5b1c-a4d4-4dd96ae425a3",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "d94f31b8-5e6c-501a-94ff-7aaa7edd9a78",
+          "label": "수학(기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "272832c7-0314-5276-bae2-cec964fb983b",
+          "label": "수학(미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "aa295057-bf4d-5b6c-94c4-d4ce68be5734",
+          "label": "수학(확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "66d59401-acf9-59ce-b497-ccfb89a9adf2",
+      "exam_subject_id": "2ae39fbc-2851-5bee-a092-1e18c479681e",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "96ad4735-f0d8-5d25-b4f1-1d0419d2c6d7",
+          "label": "국어(언매)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "93c9ef5d-4224-5137-80e3-1664b3a649ce",
+          "label": "국어(화작)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "66d59401-acf9-59ce-b497-ccfb89a9adf2",
+      "exam_subject_id": "8da0a93e-c47f-546a-bf5c-9500606cf30c",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "4559b526-823f-51e7-a17d-93d052b2c98d",
+          "label": "수학(기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "2833176b-4ef3-5641-b9f3-881bbd0e3bc5",
+          "label": "수학(미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "01c4c0e7-5c85-51aa-baf3-dd6a7566961f",
+          "label": "수학(확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "6908d376-7494-53e1-8423-c30acd2b0b66",
+      "exam_subject_id": "26cc4e19-be13-5d46-a197-115a0fee281e",
+      "subject_label": "국어",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "75f50ac1-acfc-5bea-9af6-9522e45988e9",
+          "label": "국어(화작)",
+          "canonical_code": "korean"
+        },
+        {
+          "exam_subject_id": "377eca06-9cd5-5abc-a9ce-3970398f5365",
+          "label": "국어(언매)",
+          "canonical_code": "korean"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    },
+    {
+      "content_item_id": "6908d376-7494-53e1-8423-c30acd2b0b66",
+      "exam_subject_id": "ce801f3c-ddcc-57fb-bf50-3d6ecc268336",
+      "subject_label": "수학",
+      "classification": "ELECTIVE_UMBRELLA_NOT_IDENTICAL_DUPLICATE",
+      "mapping_status": "VERIFIED_ONE_TO_MANY",
+      "targets": [
+        {
+          "exam_subject_id": "b5334fba-9582-578d-a917-0dfd7e64736b",
+          "label": "수학(기하)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "da0514d1-d157-5966-ad2c-5b2e7a006ede",
+          "label": "수학(미적)",
+          "canonical_code": "math"
+        },
+        {
+          "exam_subject_id": "957a539d-fbcb-522c-ba5a-8f02e710a087",
+          "label": "수학(확통)",
+          "canonical_code": "math"
+        }
+      ],
+      "action": "PRESERVE_ID_NO_MERGE_NO_DIRECT_KEY",
+      "reason": "Use existing explicit elective keys. Generic-only exams retain their original ID and paper_variant contract."
+    }
+  ]
+}

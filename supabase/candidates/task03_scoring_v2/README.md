@@ -73,3 +73,11 @@ both individual bounds and the legacy mcq5-v1 disjoint bound; mixed-v2 exact cou
 validated by the deferred snapshot consistency trigger. No production application occurred.
 Do not restore the old disjoint bound while mixed-v2 all-credit attempts exist.
 [Official-data validation and rollout limits](../../../wiki/task03a-official-ready-20261111.md).
+
+## Superseded production application path — TASK03-B
+
+Do not apply this initial-schema candidate directly to current production. The read-only
+production audit found an existing account lifecycle lock/eligibility guard that this older
+fixture does not contain. Use the [TASK03-B approval bundle](../task03b_ready_20261111/README.md),
+which preserves that guard and pins current function/ACL/constraint fingerprints.
+This file remains for original-schema regression history; no production application occurred.

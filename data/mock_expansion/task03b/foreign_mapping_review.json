@@ -1,0 +1,2786 @@
+{
+  "production_mutation": false,
+  "subjects": [
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "89c9d38d-9c51-5665-a44b-e0e3b5f9aed0",
+      "registry_label": "독일어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "독일어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:독일어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "1f0ca43bbda32a38b1fb78a6dcdf942073428014a274fda51045f14226f02d30",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "01 독일어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "독일어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "d486bdb4-b90b-541b-bb42-bb5e595b5654",
+      "registry_label": "러시아어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "러시아어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:러시아어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "89ba5f2a654eb8a95de37bd8059806abdce3b89d00b5aec1f00b516be5bed515",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "06 러시아어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "러시아어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "609799d4-9dde-5c18-b838-c20f8a2edaf1",
+      "registry_label": "베트남어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "베트남어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:베트남어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "576e0d0557d47f52d361d77ae26d5079fdc8d6758934f8e5dcecc0d9e08f5f22",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "08 베트남어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "베트남어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "00f46448-52ed-5c0e-a1ce-b256a15641ec",
+      "registry_label": "스페인어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "스페인어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:스페인어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "2b8e455f9475738690f45914ba8231d169ecdbb11afedd0fe518769764864670",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "03 스페인어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "스페인어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "9151a9bc-8d64-5ebe-85b2-a913aa3d460f",
+      "registry_label": "아랍어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "아랍어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:아랍어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "211317d09417c0f9ce5a4d1da7c0f1429c3037f87737b55ff69e296e6a8b5f95",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "07 아랍어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "아랍어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "609257cf-62be-53fe-b9a6-7bcbb0403bde",
+      "registry_label": "일본어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "일본어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:일본어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "c99dcb47d9dc8204ab5929e9e6e26ad71e3cbb9dfb14d2c0fd3d5953baec0346",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "05 일본어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "일본어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "30d41273-3d75-5176-9fcd-4a3d07e3e309",
+      "registry_label": "중국어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "중국어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:중국어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "9e1f05a3c61252601fa4149e008cbb00d9ffb7849d7f5207469cdc49089a6c9c",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "04 중국어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "중국어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "138d7960-4413-5f92-b31d-3af8f8b4ed50",
+      "registry_label": "프랑스어",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "프랑스어I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:프랑스어",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "fbb623de0d5c32c8a49acda9dccfad0c4ed555963c4d5be865bd2f00c1e57ce1",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "02 프랑스어Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "프랑스어I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    },
+    {
+      "content_item_id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "exam_subject_id": "ea3bff9c-9cf9-5317-ade0-552a3fb466b3",
+      "registry_label": "한문",
+      "registry_subject_id": null,
+      "registry_code": null,
+      "official_name": "한문I",
+      "official_subject_code": null,
+      "recognized_internal_paper_key": "foreign:한문",
+      "name_and_answer_mapping": "VERIFIED",
+      "canonical_code_status": "NOT_VERIFIED",
+      "verification_status": "NOT_READY",
+      "reason": "Official name/30 questions/50 points match; numeric official code and canonical subjects mapping not established. ZIP prefix is attachment order, not a verified official code. No Registry update or seed.",
+      "paper": {
+        "academic_year": 2027,
+        "exam_month": 9,
+        "source": "https://www.suneung.re.kr/boardCnts/fileDown.do?fileSeq=cbcdbf03fa100ca08ab579a25b908c42",
+        "sha256": "8f1252506d66fa07c00911ea528ca9d08294a8df7b8c309ef4a826c65cba692a",
+        "pdf_sha256": "3f8978f3842a5cea744c34de9a17e0bca6eb04d88c97de77a561d74853e37804",
+        "file": "cbcdbf03fa100ca08ab579a25b908c42.zip",
+        "member": "09 한문Ⅰ_정답.pdf",
+        "page": 1,
+        "subject": "한문I",
+        "elective": null,
+        "variant": "공통",
+        "question_count": 30,
+        "max_score": 50,
+        "questions": [
+          {
+            "number": 1,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 2,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 3,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 4,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 5,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 6,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 7,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 8,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 9,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 10,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 11,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 12,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 13,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 14,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 15,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 16,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 17,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 18,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 19,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 20,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 1
+          },
+          {
+            "number": 21,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 22,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 23,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              5
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 24,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 25,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              2
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 26,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 27,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 28,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              1
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 29,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              4
+            ],
+            "all_credit": false,
+            "points": 2
+          },
+          {
+            "number": 30,
+            "answer_type": "multiple_choice",
+            "accepted_answers": [
+              3
+            ],
+            "all_credit": false,
+            "points": 2
+          }
+        ],
+        "extraction_checks": [
+          "pymupdf_pdfplumber_exact_cells",
+          "year_exam_header",
+          "subject_elective_header",
+          "contiguous_question_numbers",
+          "point_total",
+          "answer_type_position"
+        ]
+      }
+    }
+  ]
+}

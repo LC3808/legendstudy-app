@@ -1,0 +1,20 @@
+{
+  "engine_source_sha256": "83b5bca7b212aaa087d6ee9241e52c42fa273489e22076fcd287e23ad75905b4",
+  "preserved_production_account_guard": true,
+  "counts": {
+    "answer_key_versions": 443,
+    "exam_questions": 11170,
+    "grade_cutoff_references": 1029
+  },
+  "files": {
+    "00_preflight.sql": "fe45ddf57ac5d216121b7fb9ef270537afdcda8cd4b4c34a8427d918a300627e",
+    "01_engine.sql": "1052ac6137cfe3d1335b14120914344848af36795d532f5cd27a35ad7f6a7f12",
+    "02_seed_drafts.sql": "607a0245a57f29c2f7f94328629b3b80a3d1a231e3c3d80938ba39ddc1bdf767",
+    "03_publish.sql": "53ea63c242058638b74a449e3c3868f371a3601a4adc882daf215ac5ba44a623",
+    "04_validate.sql": "4444d49f8ebc268e2fb00ad78874399dbec7129926ffc28fae98989ff30754bf",
+    "05_rollback_visibility.sql": "3d6681c2e68a81983b04db596fd946c92c52ab7cd36e66a78a93d56339e5d508",
+    "check_complete.sql": "ca1196085c1adb47d0ea9a797ce9b43d4e2bb8c212e4a4b4468b9d50f789b0ce",
+    "check_staged.sql": "655fede91fc00f0a0032074487fdf179a33cff40b090dfb422c09d494fe23600",
+    "payload.sql": "7bebef6ea42a8bf8018165b0554f2782d6edc0344a1e4c18339641cb485f5eb3"
+  }
+}

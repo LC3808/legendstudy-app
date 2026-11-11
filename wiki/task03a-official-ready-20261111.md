@@ -171,3 +171,8 @@ APP67 원본, Owner 검수 완료 APP71, 기존 학교 순위·타이머·초대
 8. Owner 승인 후 별도 내부빌드·iOS/Android 실기기 검수. 스토어 제출은 Owner 별도 범위다.
 
 로컬 재현법은 [자료 README](../data/mock_expansion/task03a/README.md)를 따른다.
+
+## 후속 작업03-B
+
+위 수치는03-A 당시 증거다. [03-B 최신 검수·운영 후보](task03b-ready-candidate-20261111.md)에서
+2025수능24과목을 추가해 READY396으로 확장했다. 기존03-A 자료파일은 그대로 보존한다.
