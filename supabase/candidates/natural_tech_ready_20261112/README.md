@@ -25,3 +25,5 @@ Soongsil: five exams/twenty leaf contracts verified. Six official sources, inclu
 Kwangwoon: 21 exams/42 questions, DB849/WEB86/APP43 PASS. Original student regions78 pages preserved;2021session2 continuation and2022mockQ2 spread mapped correctly. All42 student PDF references require approval; Math594+Worker42 DRAFT636 rows are not applied.
 
 Seoul Women (Registry slug `swu`):2026math3 TECH READY, DB69/WEB6/APP4; Math33+Worker3 DRAFT36 rows not applied, approvedPDF3 preserved.2023–2025science6 remain NOT READY, mapped separately in `seoul-women-science-gaps.json`; no Math package generated for science. Official2023Q2 solution exists in raster despite text extraction omission.
+
+Integrated scope:87 exams234 questions = TECH_READY186 + PARTIAL7 + HOLD6 + NOT_READY22 + PRESERVED13.97 PDF approvals overlap TECH_READY. `integrated-review-scope.json` pins identities, statuses and private package hashes, never activation. See `../natural_owner_review_20261112/README.md` for shared disabled access candidate and602 isolated checks. Final production SELECT:7 KAU bindings/Worker rows,0 publication,179 remaining unbound.

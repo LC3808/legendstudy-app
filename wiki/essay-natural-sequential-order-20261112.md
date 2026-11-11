@@ -59,7 +59,7 @@ DRAFT는 Owner도 제출 불가. 현재 ACTIVE만 켜면 다른 로그인 계정
 ## 결정·검증 인계
 
 [기존 보존 검토7항](essay-four-university-production-preflight-20261112.md#보존-검토7항-및-승인-경계)을 그대로 계승한다. 선택된 UUID 범위만53→7로 축소했고 새로운 저장 구조/이력 UPDATE/점수 추정은 없다.
-승인된 운영 DRAFT106행 INSERT 완료. RPC 변경·활성화·사용자 공개·WEB/APP 배포0. 현재 대학은 한국항공대,다음은 건국대이며 **승인/HOLD 보고만으로 TECH READY로 간주하지 않는다**.
+승인된 운영 DRAFT106행 INSERT 완료. RPC 변경·활성화·사용자 공개·WEB/APP 배포0. 이는 한국항공 적재 당시 기록이며, 최신 순차 검토 집계는 상단 표와 [통합 검수 준비](essay-natural-integrated-review-20261112.md)를 따른다. **승인/HOLD 보고만으로 TECH READY로 간주하지 않는다**.
 Git HEAD는 `git log -1`로 확인한다. SQL 실행 파일·SHA·대상 UUID·검증 결과는 아래 후보 README에서 추적한다.
 
 ## 2026-11-12 검수 일정 변경 반영
@@ -67,3 +67,5 @@ Git HEAD는 `git log -1`로 확인한다. SQL 실행 파일·SHA·대상 UUID·�
 한국항공7문항은 기존 Registry/공식 자료/Math·Worker/WEB·APP Mock 계약과 운영 DRAFT106행 보존 증거를 갖춘 TECH READY 범위다. HOLD5는 제외한다. 실제 Owner 검수 경로는 아직 REVIEW READY가 아니며 [접근 제어 준비](essay-owner-review-access-20261112.md)로 분리한다. 대학별 상세 기술 검증 증거와 후순위 진행은 후속 항목에 기록한다.
 
 [대학별 TECH READY 결과·검사 수·서강 PDF 누락](essay-natural-tech-ready-20261112.md): 한국항공→건국→경희→성균관→서강 순차 검증, 실제 품질 검수는 통합 단계로 유예. 숭실16/부분3/검수보류1을 후속 확인했고 다음은 숙명.
+
+현재 지정10개교 순차 검토 결과와 다음 실행은 [통합 검수 준비](essay-natural-integrated-review-20261112.md)에 있다. TECH186/부분7/HOLD6/NOTREADY22/기존보존13. 전체 REVIEW READY 아님.

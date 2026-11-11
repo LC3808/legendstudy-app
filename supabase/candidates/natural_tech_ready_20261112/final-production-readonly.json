@@ -1,0 +1,19 @@
+{
+  "registry_questions": 186,
+  "published_questions": 0,
+  "active_exams": 0,
+  "math_bound": 7,
+  "worker_source_rows": 7,
+  "checked_at_kst": "2026-11-12T01:51:58.736554+09:00",
+  "method": "Production SELECT, exact186 TECH_READY Registry IDs",
+  "production_writes": 0,
+  "new_review_control_exists": false,
+  "new_review_scope_exists": false,
+  "existing_function_md5": {
+    "math_private.resolve_profile(uuid)": "b67ac9f2a2a713366484b2a167d8b468",
+    "math_private.release_catalog(uuid)": "d5ec622c31c80a43f2536a1ddeab8cba",
+    "public.math_claim_evaluation(uuid)": "5995b8a703765ba47fa5c53df5166e67",
+    "public.math_claim_extraction(uuid)": "b7f35215c69a404d6c0c1d006f74d7e6"
+  },
+  "function_baseline_equal": true
+}

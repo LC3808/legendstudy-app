@@ -5951,3 +5951,7 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12: 광운21시험42문항 TECH READY(DB849/WEB86/APP43·Python26). 펼침면/문항경계 보정, 원본78쪽 보존·PDF42 승인 대기. DRAFT636행 미적용. [증거/다음 서울여](essay-natural-tech-ready-20261112.md#광운-자연42-연결).
 
 - 2026-11-12: 서울여2026수리3 TECH READY(DB69/WEB6/APP4),36행 미적용·승인PDF3 보존.2023–2025과학6은 기존SCIENCE_REASONING 서비스 결합 미검증으로 NOT READY.2023Q2답안은 이미지에 존재, 텍스트 추출누락을 원본부재로 보지 않음. [순차검토 결과](essay-natural-tech-ready-20261112.md#서울여-수리3-연결과학6-분리).
+
+- 2026-11-12:10개교87시험234문항 통합 scope 고정(TECH186/부분7/HOLD6/NOTREADY22/기존13). 공통 Owner접근 후보 private2테이블/helper1/기존4함수·기본OFF, 격리602검사 PASS. 운영 SELECT:186중KAU7연결·공개0·기존4함수동일·신규gate미존재. 신규운영쓰기/Provider/배포0. [검수 준비·차단·승인 경계](essay-natural-integrated-review-20261112.md).
+
+- 2026-11-12: 다음 건국24/299행 단독 DRAFT 승인안 준비. 운영 사전SELECT116 PASS, 기존KAU106행 포함 격리124검사 PASS·96행 비파괴 retirement 검증. 적용0. [정확 범위/SQL SHA/승인](../supabase/candidates/natural_tech_ready_20261112/konkuk-production-preflight/README.md).

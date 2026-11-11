@@ -7,10 +7,13 @@ from psycopg import sql
 from psycopg.types.json import Jsonb
 from prepare_natural_preflight import OUT,PRIVATE,BASE,R
 scope_mode=os.environ.get('NATURAL_PREFLIGHT_SCOPE','all')
-assert scope_mode in ('all','kau')
+assert scope_mode in ('all','kau','konkuk')
 if scope_mode=='kau':
  OUT=R/'supabase/candidates/natural_expansion_20261111/kau-production-preflight'
  PRIVATE=R/'.local/kau-production-preflight-20261112'
+if scope_mode=='konkuk':
+ OUT=R/'supabase/candidates/natural_tech_ready_20261112/konkuk-production-preflight'
+ PRIVATE=R/'.local/konkuk-production-preflight-20261112'
 from essay_lab.four_university_connection import ORDER
 from essay_lab.task20_priority_packages import registration_sql
 
@@ -48,6 +51,7 @@ def content_case(c,rpc,new,scalar,A,B):
  c.execute((R/'tool/fixtures/kau-connection-worker-20261111.sql').read_text())
  c.execute('revoke all on function math_private.hanyang_worker_references(jsonb) from public,anon,authenticated')
  for f in json.loads((OUT/'production-functions.json').read_text()):c.execute(f['definition'])
+ if scope_mode=='konkuk':c.execute((R/'.local/kau-production-preflight-20261112/apply-draft.private.sql').read_text())
  checks=[]
  def ok(name,value=True):assert value,name;checks.append(name);print(name,'PASS',flush=True)
  def denied(name,fn,expected):
@@ -110,6 +114,11 @@ def content_case(c,rpc,new,scalar,A,B):
  if scope_mode=='kau':
   deferred=[q for q in review if q['university']!='한국항공대학교' and q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
   ok('deferred_46_not_inserted',len(deferred)==46 and all(scalar('select count(*) from public.math_subproblems where essay_question_id=%s',(q['registry_id'],))==0 for q in deferred))
+ if scope_mode=='konkuk':
+  deferred=[q for q in review if q['university'] not in ('건국대학교','한국항공대학교') and q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
+  ok('deferred_22_not_inserted',len(deferred)==22 and all(scalar('select count(*) from public.math_subproblems where essay_question_id=%s',(q['registry_id'],))==0 for q in deferred))
+  kau_ids=[q['registry_id'] for q in review if q['university']=='한국항공대학교' and q['state']=='SERVICE READY (LOCAL)']
+  ok('prior_kau7_draft_and_worker_preserved',all(scalar("select count(*) from public.math_subproblems l join public.math_problems p on p.id=l.problem_id where l.essay_question_id=%s and p.state='DRAFT'",(qid,))==1 and scalar('select count(*) from math_private.task20_hanyang_source_pages where question_id=%s',(qid,))==1 for qid in kau_ids))
  for p in packages:
   for uid,label in [(A,'owner'),(B,'other')]:
    denied(p['essay_question_id']+'_'+label+'_draft_denied',lambda p=p,uid=uid:rpc('math_submit_attempt',[dict(client_submission_id=new(),leaf_id=p['ids']['leaf'],kind='INITIAL',input_kind='TYPED',typed_answer='Synthetic')],uid=uid),'CONTENT_UNAVAILABLE')

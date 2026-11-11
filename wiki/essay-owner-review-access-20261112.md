@@ -30,3 +30,7 @@
 5. 접근 제어는 학습 서비스 운영 정책이며 입시 Decision/Outcome 데이터로 전환하지 않는다.
 6. private table/helper 직접 접근을 제한하고 탈퇴 lifecycle을 계승한다. 새로운 학생 수집/외부 공유/retention 정책은 만들지 않는다.
 7. Mock 결과·53검사 PASS는 기술 경계 증거다. AI 품질이나 실제 서비스 사용 가능성으로 보고하지 않는다.
+
+## 10개교 공통 후보 후속
+
+[통합 검수 준비](essay-natural-integrated-review-20261112.md): TECH186 exact scope, private control/scope2테이블·helper1·기존4함수 후보를 기본OFF로 준비했다. 격리602검사 PASS, 문항별승인·회수 및 삭제중 차단 추가. 기존7leaf53검사는 역사적 경계 증거로 보존한다. 운영 적용·실제 WEB/APP 진입은 여전히 미완료이며 대학별 자료 연결과 분리한다.

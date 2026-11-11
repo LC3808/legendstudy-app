@@ -17,7 +17,7 @@ def fingerprint(table,where='true',key='id'):
 
 def build(university=None, output=None, private=None):
  # Single-university rollout reuses the reviewed data/guards; it never activates content.
- assert university in (None,'한국항공대학교'), 'Only the current university is authorized for preparation'
+ assert university in (None,'한국항공대학교','건국대학교'), 'Only the current university is authorized for preparation'
  evidence=R/'supabase/candidates/natural_expansion_20261111/production-preflight'
  OUT=output or evidence
  PRIVATE=private or R/'.local/natural-production-preflight-20261112'
@@ -30,7 +30,7 @@ def build(university=None, output=None, private=None):
  selected=[q for q in review if q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
  assert len(selected)==53
  if university:selected=[q for q in selected if q['university']==university]
- expected=7 if university else 53
+ expected={'한국항공대학교':7,'건국대학교':24}.get(university,53)
  assert len(selected)==expected
  if OUT!=evidence:(OUT/'production-functions.json').write_bytes((evidence/'production-functions.json').read_bytes())
  packages=[];worker=[];matrix=[]
