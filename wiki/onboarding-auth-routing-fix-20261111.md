@@ -11,8 +11,9 @@ SMTP 성공은 Owner 실기기 보고이며 이번 에이전트가 운영 설정
 `com.legendstudy.app`, **레전드스터디+ 1.0.2(75)**. 별도 LS04C QA는76이다.
 [APP75 설치 영수증](task03-result-ux-20261111.md)의 소스는
 `c9b483018bcada179050595cf78c8ca4a3d213ba`. 소스 SHA는 설치 영수증 매핑이며
-현재 실행 바이너리 안에서 추출한 SHA는 아니다. 함께 연결된 iPhone17 Pro Max는 잠겨 조회 실패;
-Owner가 그 기기를 의미했다면 설치본 식별은 추가 확인 필요.
+현재 실행 바이너리 안에서 추출한 SHA는 아니다. 함께 연결된 iPhone17 Pro Max는 최초 잠금으로 조회 실패했으나,
+Owner 잠금 해제 후 재조회에 성공했다. bundleIdentifier에 legendstudy가 포함된 설치 앱은 조회되지 않았다.
+따라서 이번 연결 기기에서 확인된 일반 LegendStudy 설치본은 위 iPhone12의 APP75다. 설치/삭제/실행은 하지 않았다.
 APP75에도 최신 닉네임/학교 검색 온보딩은 포함하지만 아래 gate 결함이 존재한다.
 이 브랜치의 홈6단계 및 이메일 UX 후속은 APP75 설치본과 구분한다.
 
