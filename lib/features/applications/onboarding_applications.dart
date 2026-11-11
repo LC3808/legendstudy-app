@@ -6,7 +6,8 @@ import 'application_repository.dart';
 
 /// Inline composition; never pushes the MY route or creates another repository.
 class OnboardingApplications extends ConsumerStatefulWidget {
-  const OnboardingApplications({super.key});
+  const OnboardingApplications({super.key, this.onEditingChanged});
+  final ValueChanged<bool>? onEditingChanged;
   @override
   ConsumerState<OnboardingApplications> createState() =>
       OnboardingApplicationsState();
@@ -112,6 +113,7 @@ class OnboardingApplicationsState
                 editing = null;
                 notice = '지원 내역을 저장했어요.';
               });
+              widget.onEditingChanged?.call(false);
             },
           ),
           TextButton(
@@ -121,6 +123,7 @@ class OnboardingApplicationsState
                   open = false;
                   editing = null;
                 });
+                widget.onEditingChanged?.call(false);
               }
             },
             child: const Text('입력 닫기'),
@@ -133,6 +136,7 @@ class OnboardingApplicationsState
                     open = true;
                     editing = null;
                     notice = null;
+                    widget.onEditingChanged?.call(true);
                   }),
             icon: const Icon(Icons.add),
             label: const Text('지원 대학 추가하기'),
@@ -173,6 +177,7 @@ class OnboardingApplicationsState
                                         editing = row;
                                         open = true;
                                         notice = null;
+                                        widget.onEditingChanged?.call(true);
                                       }),
                                 child: const Text('수정'),
                               ),

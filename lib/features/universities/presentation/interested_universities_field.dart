@@ -194,7 +194,7 @@ class _InterestedUniversitiesFieldState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          '선택하지 않아도 괜찮아요 · 최대 $maxInterested개, 약 $recommendedInterested개 추천',
+          '목표 대학은 최대 $maxInterested개 · $recommendedInterested개부터 시작해 보세요',
           style: AppTokens.caption.copyWith(color: AppTokens.textTertiary),
         ),
         const SizedBox(height: AppTokens.space8),
@@ -205,7 +205,7 @@ class _InterestedUniversitiesFieldState
             onRetry: () => ref.invalidate(interestedUniversitiesProvider),
           ),
         if (!interested.isLoading && !interested.hasError && selected.isEmpty)
-          const EmptyState('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.')
+          const EmptyState('첫 번째 목표 대학을 찾아보세요.')
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

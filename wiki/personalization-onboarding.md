@@ -1,5 +1,7 @@
 # Personalization Foundation & First-Login Onboarding
 
+2026-11-12 최신: [P0 UX·단계skip](onboarding-p0-ux-20261112.md). 아래 과거 skip==전체완료 계약은 폐기. 현재 단계만 이동, 최종 완료에서만 marker기록. 선택 입력/기존 값·복원 유지.
+
 2026-11-11 최신 UX: [온보딩 내부 실제 지원 UI](onboarding-inline-applications-20261111.md). N수/기타 학교 단계 자동 생략, N수6·기타5·재학생6단계. N수 지원은 별도 MY 이동 대신 inline 공통 폼·카드·수정/삭제. 아래7단계 기록은 APP78 당시 이력이다.
 
 2026-11-11 후속: N수생은 관심 대학 다음 실제 지원 대학 선택 단계 추가(총7단계). 기존 MY 등록 화면 재사용; 일반6단계 유지. 계정별 기기 로컬 진행 단계 복원 추가. [상세 검수](onboarding-auth-routing-fix-20261111.md).

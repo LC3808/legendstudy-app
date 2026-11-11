@@ -1,3 +1,7 @@
+import 'onboarding_applications_inline_test.dart' show Ledger;
+import 'application_management_test.dart' show FakeUniversities;
+
+import 'package:legendstudy_app/features/universities/data/university_repository.dart';
 import 'package:legendstudy_app/features/onboarding/onboarding_progress.dart';
 import 'package:legendstudy_app/features/applications/application_repository.dart';
 import 'package:legendstudy_app/features/home/customization/home_configuration.dart';
@@ -30,6 +34,11 @@ import 'package:legendstudy_app/features/school/school_providers.dart';
 
 // Phase 1.1 restyle guard: the onboarding visuals changed but the FUNCTION must
 // not. These tests exercise the flow through the redesigned widgets.
+class _Universities extends FakeUniversities {
+  @override
+  Future<List<InterestedUniversity>> listInterested() async => [];
+}
+
 class _Repo implements ProfileRepository {
   UserProfile? initial;
   String? status;
@@ -150,6 +159,7 @@ Future<GoRouter> _mount(
   double textScale = 1,
   List<University> universityResults = const [],
   HomeRpc? homeRpc,
+  ApplicationRpc? applicationRpc,
   _Progress? progress,
   List<Map<String, dynamic>> applicationRows = const [],
 }) async {
@@ -169,16 +179,18 @@ Future<GoRouter> _mount(
         onboardingProgressStoreProvider.overrideWithValue(
           progress ?? _Progress(),
         ),
+        universityRepositoryProvider.overrideWithValue(_Universities()),
         applicationRepositoryProvider.overrideWith((ref) {
           final owner = ref.watch(authStateProvider).asData?.value.userId;
           return owner == null
               ? null
               : ApplicationRepository(
-                  (name, params) async => {
-                    'version': 'applications-v1',
-                    'has_more': false,
-                    'items': applicationRows,
-                  },
+                  applicationRpc ??
+                      (name, params) async => {
+                        'version': 'applications-v1',
+                        'has_more': false,
+                        'items': applicationRows,
+                      },
                   () => ref.read(authStateProvider).asData?.value.userId,
                   owner,
                 );
@@ -307,7 +319,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
-        expect(find.text('학년과 학교'), findsOneWidget);
+        expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
         final switcher = tester.widget<AnimatedSwitcher>(
           find.byType(AnimatedSwitcher).first,
         );
@@ -322,10 +334,10 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text('이전'));
         await tester.pumpAndSettle();
-        expect(find.text('학년과 학교'), findsOneWidget);
+        expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
         await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
-        await tester.tap(find.text('나중에 설정할게요'));
+        await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
         await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
@@ -334,8 +346,8 @@ void main() {
         expect(repo.grade, 2);
         expect(repo.status, 'student');
         expect(repo.upserts, greaterThanOrEqualTo(2));
-        if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-          await tester.tap(find.text('다음에 할게요'));
+        if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+          await tester.tap(find.text('이대로 시작하기'));
           await tester.pumpAndSettle();
         }
         expect(repo.completed, isTrue);
@@ -368,33 +380,26 @@ void main() {
       await tester.pumpAndSettle();
     }
     for (var step = 1; step <= 4; step++) {
-      await tester.tap(find.text(step == 3 ? '나중에 설정할게요' : '다음'));
+      await tester.tap(find.text(step == 3 ? '다음' : '다음'));
       await tester.pumpAndSettle();
     }
-    expect(find.text('어떤 이름으로 불러드릴까요?'), findsOneWidget);
+    expect(find.text('나의 도전에 어울리는 이름은?'), findsOneWidget);
     expect(find.text('5 / 6'), findsOneWidget);
     expect(repo.completed, isFalse);
   }
 
-  testWidgets('home skip completes without creating configuration', (t) async {
-    var writes = 0;
+  testWidgets('final completion saves defaults and has no skip action', (
+    t,
+  ) async {
     final repo = _Repo();
-    await toNickname(
-      t,
-      repo,
-      homeRpc: (name, params) async {
-        if (name.startsWith('save_')) writes++;
-        return null;
-      },
-    );
+    await toNickname(t, repo);
     await t.tap(find.text('다음'));
     await t.pumpAndSettle();
-    expect(find.text('6 / 6'), findsOneWidget);
-    await preview.capture(t, 'task04-onboarding-home');
-    await t.tap(find.text('다음에 할게요'));
+    expect(find.byKey(const ValueKey('onboarding-step-skip')), findsNothing);
+    await t.tap(find.text('이대로 시작하기'));
     await t.pumpAndSettle();
     expect(repo.completed, true);
-    expect(writes, 0);
+    expect(repo.completionAttempts, 1);
   });
   testWidgets(
     'home failure keeps selection; retry saves once; completion retries separately',
@@ -489,8 +494,8 @@ void main() {
     await toNickname(t, repo);
     await t.tap(find.text('다음'));
     await t.pumpAndSettle();
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await t.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await t.tap(find.text('이대로 시작하기'));
       await t.pumpAndSettle();
     }
     expect(repo.completed, isTrue);
@@ -521,15 +526,20 @@ void main() {
       await t.tap(
         find.text(
           action == 'later'
-              ? '나중에 설정하기'
+              ? '이 단계 건너뛰기'
               : action == 'blank'
               ? '다음'
               : '다음',
         ),
       );
       await t.pumpAndSettle();
-      if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-        await t.tap(find.text('다음에 할게요'));
+      if (action == 'later') {
+        expect(find.text('이 단계의 입력을 건너뛸까요?'), findsOneWidget);
+        await t.tap(find.widgetWithText(TextButton, '이 단계 건너뛰기').last);
+        await t.pumpAndSettle();
+      }
+      if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+        await t.tap(find.text('이대로 시작하기'));
         await t.pumpAndSettle();
       }
       expect(repo.completed, isTrue);
@@ -568,8 +578,8 @@ void main() {
     repo.failComplete = false;
     await t.tap(find.text('이대로 시작하기'));
     await t.pumpAndSettle();
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await t.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await t.tap(find.text('이대로 시작하기'));
       await t.pumpAndSettle();
     }
     expect(repo.completed, isTrue);
@@ -602,7 +612,7 @@ void main() {
     await t.pumpAndSettle();
     expect(repo.nicknameWrites, 1);
     expect(repo.completionAttempts, 0);
-    await t.tap(find.text('다음에 할게요'));
+    await t.tap(find.text('이대로 시작하기'));
     await t.pumpAndSettle();
     expect(repo.completionAttempts, 1);
   });
@@ -636,7 +646,11 @@ void main() {
       t.view.viewInsets = const FakeViewPadding(bottom: 336);
       addTearDown(t.view.resetViewInsets);
       await t.pumpAndSettle();
-      await t.ensureVisible(find.byType(TextField));
+      await t.scrollUntilVisible(
+        find.byType(TextField),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await t.enterText(find.byType(TextField), '레전드학생');
       await t.pumpAndSettle();
       await preview.capture(t, 'nickname-keyboard-$scale');
@@ -649,8 +663,8 @@ void main() {
       await t.tap(find.text('다음'));
       await t.pumpAndSettle();
       expect(repo.nickname, '레전드학생');
-      if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-        await t.tap(find.text('다음에 할게요'));
+      if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+        await t.tap(find.text('이대로 시작하기'));
         await t.pumpAndSettle();
       }
       expect(repo.completed, isTrue);
@@ -669,7 +683,7 @@ void main() {
     final repo = _Repo();
     final router = await _mount(tester, repo, user: 'u1');
 
-    expect(find.text('지금의 나를 알려주세요'), findsOneWidget);
+    expect(find.text('지금, 어떤 목표를 향해 달리고 있나요?'), findsOneWidget);
     // Advance is gated until a status is chosen.
     expect(
       tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
@@ -680,12 +694,12 @@ void main() {
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
 
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     await tester.tap(find.text('2학년'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음')); // 학년/학교 → 관심 대학
     await tester.pumpAndSettle();
-    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
+    await tester.tap(find.text('다음')); // 관심 대학(0개) → 희망 전공
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
@@ -694,8 +708,8 @@ void main() {
 
     expect(repo.status, 'student');
     expect(repo.grade, 2);
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await tester.tap(find.text('이대로 시작하기'));
       await tester.pumpAndSettle();
     }
     expect(repo.completed, isTrue);
@@ -719,7 +733,7 @@ void main() {
 
     expect(find.text('학년·학교는 재학생 전용이에요'), findsNothing);
     expect(find.text('학년'), findsNothing);
-    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 실제 지원
+    await tester.tap(find.text('다음')); // 관심 대학(0개) → 실제 지원
     await tester.pumpAndSettle();
     expect(find.text('합격의 순간까지, 함께할게요! 🎓'), findsOneWidget);
     expect(find.text('3 / 6'), findsOneWidget);
@@ -736,10 +750,10 @@ void main() {
     await tester.ensureVisible(find.text('입력 닫기'));
     await tester.tap(find.text('입력 닫기'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('나중에 입력하기'));
+    await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
     expect(repo.completed, isFalse);
-    expect(find.text('어떤 전공에 관심이 있나요?'), findsOneWidget);
+    expect(find.text('어떤 미래를 꿈꾸고 있나요? ✨'), findsOneWidget);
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
@@ -748,8 +762,8 @@ void main() {
     expect(repo.status, 'retaker');
     expect(repo.grade, isNull);
     expect(repo.clearedGrade, isTrue);
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await tester.tap(find.text('이대로 시작하기'));
       await tester.pumpAndSettle();
     }
     expect(repo.completed, isTrue);
@@ -767,7 +781,7 @@ void main() {
     expect(progress.steps['u1'], 3);
     await tester.pumpWidget(const SizedBox.shrink());
     await _mount(tester, repo, user: 'u1', progress: progress);
-    expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+    expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
     expect(repo.upserts, 0);
     await tester.pumpWidget(const SizedBox.shrink());
     await _mount(
@@ -814,10 +828,108 @@ void main() {
         maxScrolls: 30,
       );
       await t.pumpAndSettle();
-      expect(find.text('다음'), findsOneWidget);
+      expect(find.text('다음'), findsNothing);
       expect(t.takeException(), isNull);
     });
   }
+  testWidgets('application editing owns CTA until successful save', (t) async {
+    t.view.physicalSize = const Size(375, 667);
+    t.view.devicePixelRatio = 1;
+    addTearDown(t.view.resetPhysicalSize);
+    addTearDown(t.view.resetDevicePixelRatio);
+    final ledger = Ledger();
+    final repo = _Repo()
+      ..initial = const UserProfile(id: 'u1', academicStatus: 'retaker');
+    await _mount(
+      t,
+      repo,
+      user: 'u1',
+      progress: _Progress()..steps['u1'] = 7,
+      applicationRpc: ledger.rpc,
+    );
+    await t.tap(find.text('지원 대학 추가하기'));
+    await t.pumpAndSettle();
+    expect(find.text('다음'), findsNothing);
+    expect(find.byKey(const ValueKey('onboarding-step-skip')), findsNothing);
+    await t.enterText(find.byType(TextField).first, '테스트');
+    await t.testTextInput.receiveAction(TextInputAction.search);
+    await t.pumpAndSettle();
+    await t.scrollUntilVisible(
+      find.text('테스트대학교'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await t.tap(find.text('테스트대학교'));
+    await t.pumpAndSettle();
+    for (final hint in ['모집단위·학과', '전형명']) {
+      final input = find.widgetWithText(TextFormField, hint);
+      await t.scrollUntilVisible(
+        input,
+        150,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await t.enterText(input, hint == '전형명' ? '학생부종합' : '경영학과');
+      await t.pumpAndSettle();
+    }
+    await t.scrollUntilVisible(
+      find.text('저장'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('다음'), findsNothing);
+    await preview.capture(t, 'onboarding-p0-save-small');
+    await t.tap(find.text('저장'));
+    await t.pumpAndSettle();
+    expect(ledger.saves, 1);
+    expect(ledger.events, 1);
+    expect(repo.completionAttempts, 0);
+    expect(find.text('지원 내역을 저장했어요.'), findsOneWidget);
+    expect(find.text('다음'), findsOneWidget);
+    expect(find.text('대학 검색 · 필수'), findsNothing);
+    await preview.capture(t, 'onboarding-p0-saved-small');
+    await t.tap(find.text('다음'));
+    await t.pumpAndSettle();
+    expect(find.text('어떤 미래를 꿈꾸고 있나요? ✨'), findsOneWidget);
+  });
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('all headers centered and back next stable at $scale', (
+      t,
+    ) async {
+      t.view.physicalSize = const Size(375, 667);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      final repo = _Repo()
+        ..initial = const UserProfile(id: 'u1', academicStatus: 'student');
+      await _mount(t, repo, user: 'u1', textScale: scale);
+      for (var step = 1; step <= 6; step++) {
+        final titles = find.byWidgetPredicate(
+          (w) => w is Text && w.style?.fontSize == 26,
+        );
+        final title = t.widget<Text>(titles.first);
+        expect(title.textAlign, TextAlign.center);
+        expect(title.style?.wordSpacing, 0);
+        expect(title.style?.letterSpacing, 0);
+        expect(title.maxLines, isNull); // Never truncate accessibility text.
+        await preview.capture(t, 'onboarding-p0-step-$step-$scale');
+        expect(repo.completionAttempts, 0);
+        if (step == 2 || step == 3) {
+          await t.tap(find.text('이전'));
+          await t.pumpAndSettle();
+          await t.tap(find.text('다음'));
+          await t.pumpAndSettle();
+          expect(t.widget<Text>(titles.first).data, title.data);
+        }
+        if (step < 6) {
+          await t.tap(find.text('다음'));
+          await t.pumpAndSettle();
+        }
+        expect(t.takeException(), isNull);
+      }
+    });
+  }
+
   testWidgets('compact applications restored card render', (t) async {
     t.view.physicalSize = const Size(430, 932);
     t.view.devicePixelRatio = 1;
@@ -874,7 +986,7 @@ void main() {
             neisSchoolCode: '7010001',
           );
         await _mount(t, repo, user: 'u1', progress: progress);
-        expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+        expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
         expect(
           find.text(kind == 'retaker' ? '2 / 6' : '2 / 5'),
           findsOneWidget,
@@ -892,22 +1004,24 @@ void main() {
     );
   }
 
-  testWidgets('skip completes onboarding without writing status', (
-    tester,
+  testWidgets('skip advances only current step without writing completion', (
+    t,
   ) async {
     final repo = _Repo();
-    final router = await _mount(tester, repo, user: 'u1');
-    await tester.tap(find.text('건너뛰기'));
-    await tester.pumpAndSettle();
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
-      await tester.pumpAndSettle();
-    }
-    expect(repo.completed, isTrue);
+    final router = await _mount(t, repo, user: 'u1');
+    final skip = find.byKey(const ValueKey('onboarding-step-skip'));
+    await t.scrollUntilVisible(
+      skip,
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await t.tap(skip);
+    await t.pumpAndSettle();
+    expect(repo.completionAttempts, 0);
     expect(repo.upserts, 0);
-    expect(router.routeInformationProvider.value.uri.path, '/home');
+    expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
+    expect(router.routeInformationProvider.value.uri.path, '/onboarding');
   });
-
   testWidgets('renders without overflow on a small phone', (tester) async {
     tester.view.physicalSize = const Size(360, 640);
     tester.view.devicePixelRatio = 1;
@@ -1007,7 +1121,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     expect(repo.schoolWrites, 0);
     expect(repo.completed, isFalse);
   });
@@ -1022,22 +1136,31 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('다음'));
     await tester.pump();
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     schools.result.complete(const []);
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     expect(repo.schoolWrites, 0);
     expect(repo.completed, isFalse);
     // Optional profile remains optional via the explicit skip action.
-    await tester.tap(find.text('건너뛰기'));
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey('onboarding-step-skip')),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.byKey(const ValueKey('onboarding-step-skip')));
     await tester.pumpAndSettle();
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
+    expect(find.text('이 단계의 입력을 건너뛸까요?'), findsOneWidget);
+    await tester.tap(find.widgetWithText(TextButton, '이 단계 건너뛰기').last);
+    await tester.pumpAndSettle();
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await tester.tap(find.text('이대로 시작하기'));
       await tester.pumpAndSettle();
     }
-    expect(repo.completed, isTrue);
+    expect(repo.completed, isFalse);
+    expect(repo.completionAttempts, 0);
     expect(repo.schoolWrites, 0);
   });
 
@@ -1049,21 +1172,25 @@ void main() {
       tester.view.viewInsets = const FakeViewPadding(bottom: 336);
       addTearDown(tester.view.resetViewInsets);
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byType(TextField));
+      await tester.scrollUntilVisible(
+        find.byType(TextField),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.enterText(find.byType(TextField), '레전드');
       await tester.pumpAndSettle();
       await tester.testTextInput.receiveAction(TextInputAction.search);
       await tester.pumpAndSettle();
       tester.view.viewInsets = const FakeViewPadding();
       await tester.pumpAndSettle();
-      expect(find.text('학년과 학교'), findsOneWidget);
+      expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
       expect(repo.schoolWrites, 0);
       expect(repo.completed, isFalse);
       expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
       await tester.tap(find.text('레전드고등학교로 설정하기'));
       await tester.pumpAndSettle();
       expect(repo.schoolWrites, 1);
-      expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+      expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );
@@ -1076,7 +1203,11 @@ void main() {
     tester.view.viewInsets = const FakeViewPadding(bottom: 336);
     addTearDown(tester.view.resetViewInsets);
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.byType(TextField));
+    await tester.scrollUntilVisible(
+      find.byType(TextField),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.enterText(find.byType(TextField), '레전드');
     await tester.pumpAndSettle();
     final search = find.widgetWithText(OutlinedButton, '검색');
@@ -1091,7 +1222,7 @@ void main() {
         .position
         .jumpTo(0);
     await tester.pumpAndSettle();
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
     expect(repo.schoolWrites, 0);
     expect(repo.completed, isFalse);
@@ -1125,7 +1256,11 @@ void main() {
       await preview.capture(tester, 'school-compact-$scale');
       tester.view.viewInsets = const FakeViewPadding(bottom: 336);
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byType(TextField));
+      await tester.scrollUntilVisible(
+        find.byType(TextField),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.enterText(find.byType(TextField), '레전드');
       await tester.pumpAndSettle();
       final search = find.widgetWithText(OutlinedButton, '검색');
@@ -1136,7 +1271,7 @@ void main() {
         isTrue,
       );
       expect(find.text('다음'), findsNothing);
-      expect(find.text('건너뛰기'), findsNothing);
+      expect(find.byKey(const ValueKey('onboarding-step-skip')), findsNothing);
       await preview.capture(tester, 'school-keyboard-$scale');
       await tester.tap(search);
       await tester.pumpAndSettle();
@@ -1174,14 +1309,22 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('다음'));
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byType(TextField));
+      await tester.scrollUntilVisible(
+        find.byType(TextField),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.enterText(find.byType(TextField), '검수');
       await tester.pumpAndSettle();
-      final skip = find.widgetWithText(FilledButton, '나중에 설정할게요');
+      final skip = find.widgetWithText(FilledButton, '다음');
       expect(tester.widget<FilledButton>(skip).onPressed, isNull);
       tester.view.viewInsets = const FakeViewPadding(bottom: 336);
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byType(TextField));
+      await tester.scrollUntilVisible(
+        find.byType(TextField),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.pumpAndSettle();
       final search = find.widgetWithText(OutlinedButton, '검색');
       expect(
@@ -1190,7 +1333,7 @@ void main() {
             .contains(tester.getCenter(search)),
         isTrue,
       );
-      expect(find.text('나중에 설정할게요'), findsNothing);
+      expect(find.text('다음'), findsNothing);
       await preview.capture(tester, 'university-keyboard-$scale');
       await tester.tap(search);
       await tester.pumpAndSettle();
@@ -1203,7 +1346,7 @@ void main() {
       await preview.capture(tester, 'university-result-$scale');
       await tester.tap(skip);
       await tester.pumpAndSettle();
-      expect(find.text('어떤 전공에 관심이 있나요?'), findsOneWidget);
+      expect(find.text('어떤 미래를 꿈꾸고 있나요? ✨'), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
   }
@@ -1220,14 +1363,23 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
     expect(repo.schoolWrites, 0);
-    await tester.tap(find.text('건너뛰기'));
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey('onboarding-step-skip')),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.byKey(const ValueKey('onboarding-step-skip')));
+    await tester.pumpAndSettle();
+    expect(find.text('이 단계의 입력을 건너뛸까요?'), findsOneWidget);
+    await tester.tap(find.widgetWithText(TextButton, '이 단계 건너뛰기').last);
     await tester.pumpAndSettle();
     expect(repo.grade, 2);
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await tester.tap(find.text('이대로 시작하기'));
       await tester.pumpAndSettle();
     }
-    expect(repo.completed, isTrue);
+    expect(repo.completed, isFalse);
+    expect(repo.completionAttempts, 0);
     expect(repo.schoolWrites, 0);
   });
 
@@ -1242,90 +1394,41 @@ void main() {
     repo.failWrite = true;
     await tester.tap(find.text('레전드고등학교로 설정하기'));
     await tester.pumpAndSettle();
-    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
     expect(repo.completed, isFalse);
     expect(repo.schoolWrites, 0);
     repo.failWrite = false;
     await tester.tap(find.text('레전드고등학교로 설정하기'));
     await tester.pumpAndSettle();
     expect(repo.schoolWrites, 1);
-    expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+    expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
   });
 
-  testWidgets('skip independently completes and reports unsaved fields', (
-    tester,
+  testWidgets('step skip waits for profile save and retry preserves draft', (
+    t,
   ) async {
-    final repo = _Repo();
-    final router = await _mount(tester, repo, user: 'u1');
-    await tester.tap(find.text('고등학교 재학생'));
-    await tester.pumpAndSettle();
+    final (repo, router) = await toSchoolStep(t);
+    await t.tap(find.text('2학년'));
     repo.failWrite = true;
-    await tester.tap(find.text('건너뛰기'));
-    await tester.pumpAndSettle();
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
-      await tester.pumpAndSettle();
-    }
-    expect(repo.completed, isTrue);
-    expect(repo.status, isNull);
-    expect(find.text('일부 정보를 저장하지 못했어요'), findsOneWidget);
-    await tester.tap(find.text('저장 없이 계속'));
-    await tester.pumpAndSettle();
-    expect(router.routeInformationProvider.value.uri.path, '/home');
-    expect(repo.status, isNull);
-  });
-
-  testWidgets('best effort skip preserves grade draft for repeated retry', (
-    tester,
-  ) async {
-    final (repo, router) = await toSchoolStep(tester);
-    await tester.tap(find.text('2학년'));
-    repo.failWrite = true;
-    await tester.tap(find.text('건너뛰기'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('다시 저장'));
-    await tester.pumpAndSettle();
-    expect(find.text('일부 정보를 저장하지 못했어요'), findsOneWidget);
-    expect(repo.grade, isNull);
-    repo.failWrite = false;
-    await tester.tap(find.text('다시 저장'));
-    await tester.pumpAndSettle();
-    expect(repo.grade, 2);
-    expect(repo.status, 'student');
-    expect(repo.completionAttempts, 1);
-    expect(router.routeInformationProvider.value.uri.path, '/home');
-  });
-
-  for (final draftFails in [false, true]) {
-    testWidgets(
-      'completion failure stays and retries; draft fails $draftFails',
-      (tester) async {
-        final repo = _Repo();
-        final router = await _mount(tester, repo, user: 'u1');
-        await tester.tap(find.text('고등학교 재학생'));
-        await tester.pumpAndSettle();
-        repo.failWrite = draftFails;
-        repo.failComplete = true;
-        await tester.tap(find.text('건너뛰기'));
-        await tester.pumpAndSettle();
-        expect(repo.completed, isFalse);
-        expect(repo.completionAttempts, 1);
-        expect(router.routeInformationProvider.value.uri.path, '/onboarding');
-        expect(find.textContaining('온보딩 완료를 기록하지 못했어요'), findsOneWidget);
-        expect(find.text('저장 없이 계속'), findsNothing);
-        repo.failWrite = repo.failComplete = false;
-        await tester.tap(find.text('건너뛰기'));
-        await tester.pumpAndSettle();
-        expect(repo.status, 'student');
-        if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-          await tester.tap(find.text('다음에 할게요'));
-          await tester.pumpAndSettle();
-        }
-        expect(repo.completed, isTrue);
-        expect(router.routeInformationProvider.value.uri.path, '/home');
-      },
+    final skip = find.byKey(const ValueKey('onboarding-step-skip'));
+    await t.scrollUntilVisible(
+      skip,
+      200,
+      scrollable: find.byType(Scrollable).first,
     );
-  }
+    await t.tap(skip);
+    await t.pumpAndSettle();
+    expect(repo.completed, false);
+    expect(repo.completionAttempts, 0);
+    expect(find.text('우리 학교에서 시작하는 합격 준비!'), findsOneWidget);
+    repo.failWrite = false;
+    await t.tap(skip);
+    await t.pumpAndSettle();
+    expect(repo.grade, 2);
+    expect(repo.completionAttempts, 0);
+    expect(router.routeInformationProvider.value.uri.path, '/onboarding');
+    expect(find.text('꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓'), findsOneWidget);
+  });
 
   testWidgets('resumed profile values survive an untouched skip', (
     tester,
@@ -1339,14 +1442,15 @@ void main() {
         neisSchoolCode: '7010001',
       );
     await _mount(tester, repo, user: 'u1');
-    await tester.tap(find.text('건너뛰기'));
+    await tester.tap(find.byKey(const ValueKey('onboarding-step-skip')));
     await tester.pumpAndSettle();
     expect(repo.upserts, 0);
     expect(repo.schoolWrites, 0);
-    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
-      await tester.tap(find.text('다음에 할게요'));
+    if (find.text('이대로 시작하기').evaluate().isNotEmpty) {
+      await tester.tap(find.text('이대로 시작하기'));
       await tester.pumpAndSettle();
     }
-    expect(repo.completed, isTrue);
+    expect(repo.completed, isFalse);
+    expect(repo.completionAttempts, 0);
   });
 }

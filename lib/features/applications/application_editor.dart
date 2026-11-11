@@ -449,7 +449,7 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
 }
 
 Widget field(String label, Widget input) => Padding(
-  padding: const EdgeInsets.only(bottom: 12),
+  padding: const EdgeInsets.only(bottom: 10),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -460,7 +460,7 @@ Widget field(String label, Widget input) => Padding(
           color: Color(0xFF1C2B4B),
         ),
       ),
-      const SizedBox(height: 6),
+      const SizedBox(height: 4),
       input,
     ],
   ),
@@ -476,7 +476,7 @@ class ApplicationSection extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(14),
+    padding: const EdgeInsets.all(12),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(16),

@@ -49,7 +49,7 @@ class _IntendedMajorFieldState extends ConsumerState<IntendedMajorField> {
             onTap: _busy ? null : () => _choose(field),
           ),
         _MajorChip(
-          label: '아직 정하지 못했어요',
+          label: '진로 탐색 중',
           selected: current == null,
           onTap: _busy ? null : () => _choose(null),
         ),
@@ -81,13 +81,12 @@ class _MajorChip extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(AppTokens.radiusMd),
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth > 0 ? maxWidth : 280),
+            constraints: BoxConstraints(
+              maxWidth: maxWidth > 0 ? maxWidth : 280,
+            ),
             child: Container(
               constraints: const BoxConstraints(minHeight: 42),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: selected ? AppTokens.primary : AppTokens.surface,
                 borderRadius: BorderRadius.circular(AppTokens.radiusMd),

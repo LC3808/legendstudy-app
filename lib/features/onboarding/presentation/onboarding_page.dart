@@ -17,7 +17,6 @@ import '../../personal/personal_providers.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
 import '../../school/presentation/school_search_picker.dart';
-import '../../universities/application/university_providers.dart';
 import '../../universities/presentation/interested_universities_field.dart';
 import '../../profile/presentation/intended_major_field.dart';
 import '../../profile/nickname_validation.dart';
@@ -40,24 +39,18 @@ const _statusOptions = <(String, String, String, IconData, Color)>[
   (
     'student',
     '고등학교 재학생',
-    '학년과 학교를 설정하면 학사일정·급식을 함께 볼 수 있어요.',
+    '학교 공부 기록과 급식을 함께 챙겨보세요.',
     Icons.school_outlined,
     _fresh,
   ),
   (
     'retaker',
     'N수생 · 검정고시 등',
-    '재학 중이 아니어도 자료와 D-Day를 그대로 활용할 수 있어요.',
+    '목표 대학과 지원 기록, D-Day로 다음 도전을 준비해요.',
     Icons.autorenew_rounded,
     _accent,
   ),
-  (
-    'other',
-    '기타 · 아직 선택 안 함',
-    '나중에 MY에서 언제든 바꿀 수 있어요.',
-    Icons.explore_outlined,
-    _mint,
-  ),
+  ('other', '기타', '나만의 목표에 맞춰 공부 기록을 쌓아보세요.', Icons.explore_outlined, _mint),
 ];
 
 class OnboardingPage extends ConsumerStatefulWidget {
@@ -100,6 +93,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   // Debounces step changes so a fast double-tap can't skip a question (the
   // transition owns the short lock; values are untouched).
   bool _advancing = false;
+  bool _applicationEditing = false;
   String? _error;
   School? _schoolDraft;
   bool _schoolSearchPending = false;
@@ -151,10 +145,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     ref.invalidate(currentProfileProvider);
   }
 
-  Future<void> _move(int delta) async {
+  Future<void> _move(int delta, {bool skip = false}) async {
     if (_busy || _advancing || !_hydrated) return;
-    if (delta > 0 && _step == 2 && _isStudent && _schoolSearchPending) return;
-    if (delta > 0 && _step == 3 && _universitySearchPending) return;
+    if (!skip &&
+        delta > 0 &&
+        _step == 2 &&
+        _isStudent &&
+        _schoolSearchPending) {
+      return;
+    }
+    if (!skip && delta > 0 && _step == 3 && _universitySearchPending) return;
+    if (delta > 0 && _step == 7 && _applicationEditing) return;
     final leavingOwner = ref.read(authStateProvider).value?.userId;
     final leavingStep = _step;
     if (_step == 7 &&
@@ -170,7 +171,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     });
     try {
       await _persistDraft(owner);
-      if (delta > 0 && _step == 5) {
+      if (!skip && delta > 0 && _step == 5) {
         final nickname = _nickname.text.trim();
         final validation = nickname.isEmpty
             ? null
@@ -189,7 +190,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           ref.invalidate(currentProfileProvider);
         }
       }
-      if (delta > 0 && _step == 2 && _isStudent && _schoolDraft != null) {
+      if (!skip &&
+          delta > 0 &&
+          _step == 2 &&
+          _isStudent &&
+          _schoolDraft != null) {
         final applied = await ref
             .read(schoolSelectionProvider.notifier)
             .select(_schoolDraft);
@@ -228,7 +233,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   bool get _isStudent => _status == 'student';
 
   Future<void> _leave() async {
-    // Both finish and skip mark onboarding complete so it never re-prompts.
+    // Only the final step records completion; intermediate skips advance one step.
     final owner = ref.read(authStateProvider).value?.userId;
     if (owner != null) {
       try {
@@ -244,81 +249,48 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Future<void> _skip() async {
-    if (_busy) return;
-    final leavingOwner = ref.read(authStateProvider).value?.userId;
-    final leavingStep = _step;
-    if (_step == 7 &&
-        !await (_applicationsKey.currentState?.confirmLeave() ??
-            Future.value(true))) {
+    if (_busy ||
+        _advancing ||
+        !_hydrated ||
+        _step == 6 ||
+        _applicationEditing) {
       return;
     }
-    if (!_sameOwner(leavingOwner) || _step != leavingStep) return;
-    setState(() {
-      _busy = true;
-      _error = null;
-    });
-    final owner = ref.read(authStateProvider).value?.userId;
-    try {
-      var draftSaved = false;
-      try {
-        await _persistDraft(owner);
-        draftSaved = true;
-      } catch (_) {
-        // Skip is best effort: completion is independent of optional fields.
-      }
-      if (!_sameOwner(owner)) return;
-      await ref.read(profileRepositoryProvider).markOnboardingComplete();
-      if (!_sameOwner(owner)) return;
-      while (!draftSaved) {
-        if (!mounted) return;
-        final retry = await showDialog<bool>(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => AlertDialog(
-            title: const Text('일부 정보를 저장하지 못했어요'),
-            content: const Text(
-              '온보딩 완료는 기록했지만 상태·학년은 저장되지 않았어요. 입력한 값으로 다시 저장하거나, 나중에 MY에서 설정할 수 있어요.',
+    final owner = _owner;
+    final step = _step;
+    final hasDraft =
+        (_step == 2 && (_schoolDraft != null || _schoolSearchPending)) ||
+        (_step == 3 && _universitySearchPending) ||
+        (_step == 5 && _nicknameDirty);
+    if (hasDraft) {
+      final discard = await showDialog<bool>(
+        context: context,
+        builder: (c) => AlertDialog(
+          title: const Text('이 단계의 입력을 건너뛸까요?'),
+          content: const Text('아직 저장하지 않은 입력은 반영되지 않아요. 이미 저장한 정보는 유지됩니다.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(c, false),
+              child: const Text('계속 입력'),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('저장 없이 계속'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: const Text('다시 저장'),
-              ),
-            ],
-          ),
-        );
-        if (!_sameOwner(owner)) return;
-        if (retry != true) break;
-        try {
-          await _persistDraft(owner);
-          draftSaved = true;
-        } catch (_) {
-          if (!_sameOwner(owner)) return;
-        }
-      }
-      if (!_sameOwner(owner)) return;
-      ref.read(analyticsServiceProvider).logEvent(
-        AnalyticsEvents.onboardingComplete,
-        {'status': 'completed'},
+            TextButton(
+              onPressed: () => Navigator.pop(c, true),
+              child: const Text('이 단계 건너뛰기'),
+            ),
+          ],
+        ),
       );
-      await _leave();
-    } catch (_) {
-      if (_sameOwner(owner)) {
-        setState(
-          () => _error = '온보딩 완료를 기록하지 못했어요. 입력값은 유지되어 있어요. 다시 시도해 주세요.',
-        );
-      }
-    } finally {
-      if (_sameOwner(owner)) setState(() => _busy = false);
+      if (discard != true || !_sameOwner(owner) || _step != step) return;
     }
+    if (_step == 5) {
+      _nickname.text = _savedNickname ?? '';
+      _nicknameDirty = false;
+    }
+    await _move(1, skip: true);
   }
 
   Future<void> _finish() async {
-    if (_busy || _advancing || _status == null || !_hydrated) return;
+    if (_busy || _advancing || !_hydrated) return;
     final nickname = _nickname.text.trim();
     final validationError = nickname.isEmpty
         ? null
@@ -388,6 +360,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _owner = auth.value?.userId;
       _step = 1;
       _applicationsKey = GlobalKey();
+      _applicationEditing = false;
       _stepRestored = false;
       final epoch = ++_ownerEpoch;
       if (_owner != null) _restoreStep(_owner!, epoch);
@@ -415,7 +388,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _savedNickname = profile?.displayName;
       if (!_nicknameDirty) _nickname.text = _savedNickname ?? '';
       if (_step == 2 && _status != null && !_isStudent) _step = 3;
-      if (!_steps.contains(_step) || (_step != 1 && _status == null)) {
+      if (!_steps.contains(_step)) {
         _step = 1;
       }
       _hydrated = true;
@@ -486,7 +459,35 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                               AppTokens.space16,
                             ),
                             children: _hydrated
-                                ? _stepContent()
+                                ? [
+                                    ..._stepContent(),
+                                    if (_step != 6 &&
+                                        !_applicationEditing &&
+                                        MediaQuery.viewInsetsOf(context)
+                                                .bottom ==
+                                            0)
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 28,
+                                          bottom: 12,
+                                        ),
+                                        child: Center(
+                                          child: TextButton(
+                                            key: const ValueKey(
+                                              'onboarding-step-skip',
+                                            ),
+                                            onPressed: _busy || _advancing
+                                                ? null
+                                                : _skip,
+                                            style: TextButton.styleFrom(
+                                              foregroundColor:
+                                                  AppTokens.textSecondary,
+                                            ),
+                                            child: const Text('이 단계 건너뛰기'),
+                                          ),
+                                        ),
+                                      ),
+                                  ]
                                 : [
                                     if (profileState.hasError)
                                       TextButton(
@@ -507,8 +508,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                       ),
                       // Do not put a step-changing CTA above a search
                       // keyboard where users expect the search action.
-                      if (!(((_step == 2 && _isStudent) || _step == 3) &&
-                          MediaQuery.viewInsetsOf(context).bottom > 0))
+                      if (!_applicationEditing &&
+                          !(((_step == 2 && _isStudent) || _step == 3) &&
+                              MediaQuery.viewInsetsOf(context).bottom > 0))
                         _footer(),
                     ],
                   ),
@@ -519,13 +521,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Widget _header(String title, String description) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       _StepProgress(step: _steps.indexOf(_step), total: _steps.length),
       const SizedBox(height: AppTokens.space16),
       Text(
         title,
+        textAlign: TextAlign.center,
+        softWrap: true,
         style: const TextStyle(
+          letterSpacing: 0,
+          wordSpacing: 0,
           fontSize: 26,
           fontFamilyFallback: ['Apple Color Emoji', 'Noto Color Emoji'],
           fontWeight: FontWeight.w800,
@@ -534,7 +540,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         ),
       ),
       const SizedBox(height: AppTokens.space8),
-      Text(description, style: AppTokens.secondary),
+      Text(
+        description,
+        textAlign: TextAlign.center,
+        style: AppTokens.secondary.copyWith(letterSpacing: 0, wordSpacing: 0),
+      ),
       SizedBox(height: _step == 7 ? AppTokens.space16 : AppTokens.space24),
     ],
   );
@@ -551,9 +561,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         return [
           _header(
             '합격의 순간까지, 함께할게요! 🎓',
-            '지원 대학을 등록하면 전형 일정을 더 편하게 챙길 수 있어요. 합격 발표도 놓치지 않도록 함께 준비해요.',
+            '지원 대학과 전형을 한곳에 모아보세요. 지원부터 합격·등록까지, 나의 도전을 차곡차곡 기록해요.',
           ),
-          OnboardingApplications(key: _applicationsKey),
+          OnboardingApplications(
+            key: _applicationsKey,
+            onEditingChanged: (value) =>
+                setState(() => _applicationEditing = value),
+          ),
         ];
       case 4:
         return _majorStep();
@@ -562,8 +576,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       default:
         return [
           _header(
-            '나만의 홈 화면 만들기',
-            '자주 사용하는 기능을 선택해 주세요. 선택한 기능을 홈 화면에서 빠르게 확인할 수 있어요. 나중에 언제든 변경할 수 있습니다.',
+            '나만의 합격 준비 공간을 완성해요!',
+            '필요한 기능을 골라 나만의 홈을 꾸며보세요. 매일의 공부와 입시 준비가 더 편리해집니다.',
           ),
           HomeCardSelector(
             value: _homeDraft,
@@ -581,8 +595,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   List<Widget> _universitiesStep() => [
     _header(
-      '관심 있는 대학을 선택해 주세요',
-      '아직 지원 대학을 정하지 않았어도 괜찮아요. 관심 대학을 바탕으로 필요한 입시 정보를 보여드릴게요.',
+      '꿈꾸는 대학, 이제 목표로 만들어 볼까요? 🎓',
+      '마음에 두고 있는 대학을 모아보세요. 나의 목표 대학과 관심 학과를 한곳에서 관리할 수 있어요.',
     ),
     InterestedUniversitiesField(
       source: 'onboarding',
@@ -593,14 +607,14 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   List<Widget> _majorStep() => [
     _header(
-      '어떤 전공에 관심이 있나요?',
-      '관심 있는 전공 계열을 선택해 주세요. 아직 정하지 못했다면 나중에 MY에서 언제든 바꿀 수 있어요.',
+      '어떤 미래를 꿈꾸고 있나요? ✨',
+      '관심 있는 전공 계열을 선택해 주세요. 아직 정하지 못했다면 나만의 목표에 맞춰 공부 기록을 쌓아보세요.',
     ),
     const IntendedMajorField(),
   ];
 
   List<Widget> _nicknameStep() => [
-    _header('어떤 이름으로 불러드릴까요?', '실명 대신 사용할 닉네임을 입력해 주세요. MY에서 언제든 변경할 수 있어요.'),
+    _header('나의 도전에 어울리는 이름은?', '나를 표현하는 닉네임을 정해보세요. 레전드스터디에서 함께할 나만의 이름이에요.'),
     if (!_hydrated) ...[
       const Text('기존 닉네임 정보를 불러오는 중이에요.'),
       if (ref.watch(currentProfileProvider).hasError)
@@ -615,9 +629,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       maxLength: 80,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        labelText: '닉네임 (선택)',
+        labelText: '닉네임',
         hintText: '사용할 닉네임',
-        helperText: '비워두거나 나중에 설정해도 기존 닉네임은 유지돼요.',
+        helperText: '실명 대신 나를 표현하는 이름을 사용해 주세요.',
         helperMaxLines: 3,
         suffixIcon: IconButton(
           tooltip: '키보드 닫기',
@@ -635,8 +649,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   List<Widget> _statusStep() => [
     _header(
-      '지금의 나를 알려주세요',
-      '입력한 정보는 Home·자료·D-Day 등에서 그대로 재사용돼요. 언제든 건너뛰거나 나중에 바꿀 수 있어요.',
+      '지금, 어떤 목표를 향해 달리고 있나요?',
+      '현재 학습 단계를 알려주세요. 나에게 맞는 공부와 입시 준비의 첫걸음이에요.',
     ),
     for (final (value, title, subtitle, icon, tint) in _statusOptions)
       Padding(
@@ -669,7 +683,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     }
 
     return [
-      _header('학년과 학교', '학교와 학년을 설정해 주세요. 학교별 학습 정보와 맞춤형 서비스를 제공하는 데 활용됩니다.'),
+      _header('우리 학교에서 시작하는 합격 준비!', '학교와 학년을 등록하고, 같은 학교 친구들과 공부 기록을 쌓아보세요.'),
       Row(
         children: [
           const _FieldLabel('학년'),
@@ -712,11 +726,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         ? _status != null
         : !((_step == 2 && _isStudent && _schoolSearchPending) ||
               (_step == 3 && _universitySearchPending));
-    // 관심 대학은 0개도 허용 — 선택이 없으면 이 단계를 건너뛰는 CTA를 보여준다.
-    final interestedEmpty =
-        _step == 3 &&
-        (ref.watch(interestedUniversitiesProvider).asData?.value.isEmpty ??
-            true);
     return Container(
       decoration: const BoxDecoration(
         color: AppTokens.surface,
@@ -732,7 +741,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (_step == 2 && _isStudent && _schoolSearchPending) ...[
-            const Text('학교를 검색하고 결과를 확인해 주세요. 나중에 설정하려면 건너뛰기를 눌러 주세요.'),
+            const Text('학교를 검색한 뒤 선택한 학교를 확인해 주세요.'),
             const SizedBox(height: AppTokens.space8),
           ],
           if (_step == 3 && _universitySearchPending) ...[
@@ -769,8 +778,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     ? '저장 중…'
                     : _step == 2 && _isStudent && _schoolDraft != null
                     ? '${_schoolDraft!.name}로 설정하기'
-                    : interestedEmpty
-                    ? '나중에 설정할게요'
                     : _step != 6
                     ? '다음'
                     : '이대로 시작하기',
@@ -785,30 +792,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   onPressed: _busy || _advancing ? null : _back,
                   child: const Text('이전'),
                 ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: !_hydrated || _busy || _advancing
-                        ? null
-                        : _step == 7
-                        ? _advance
-                        : _skip,
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppTokens.textSecondary,
-                    ),
-                    child: Text(
-                      _step == 7
-                          ? '나중에 입력하기'
-                          : _step == 6
-                          ? '다음에 할게요'
-                          : _step == 5
-                          ? '나중에 설정하기'
-                          : '건너뛰기',
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ],

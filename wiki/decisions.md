@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-12 — 온보딩 저장 우선·현재 단계 건너뛰기
+
+Owner 실기기 피드백으로 [컴팩트 폼](onboarding-compact-layout-20261111.md)을 보완한다. 제목/설명center·실제 기능 가치 카피, 지원 입력 중 다음 숨김/저장성공 후 복귀, 보조skip 본문 이동. 중간skip은 현재 단계만 이동하며 전체 완료/홈이동 금지, 최종 완료만marker저장. 과거 전체skip 완료 정책을 대체한다. 선택 입력·기존 데이터/계정 복원은 유지한다. Catalog 확대는 후보SQL까지만, 논술지원 확대0·운영별도승인·Owner HOLD. [구현·검수·카피표](onboarding-p0-ux-20261112.md).
+
 ## 2026-11-11 — 지원 대학 온보딩 카피·입력 부담 완화
 
 Owner 지정 ‘합격의 순간까지, 함께할게요! 🎓’와 지원 일정 준비 설명을 적용한다. [기존 inline 입력](onboarding-inline-applications-20261111.md)을 [컴팩트 검색·2열 폼](onboarding-compact-layout-20261111.md)으로 정리하되 자동 합격 조회/알림 제공을 암시하지 않는다. 데이터·필수 검증·진행 복원·릴리스 HOLD 유지.

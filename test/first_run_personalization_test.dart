@@ -344,7 +344,7 @@ void main() {
       );
       await t.pumpAndSettle();
       expect(find.textContaining('최대 5개'), findsWidgets);
-      expect(find.text('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.'), findsOneWidget);
+      expect(find.text('첫 번째 목표 대학을 찾아보세요.'), findsOneWidget);
     });
 
     testWidgets('major field marks undecided when unset', (t) async {
@@ -352,7 +352,7 @@ void main() {
       await c.read(authStateProvider.future);
       await t.pumpWidget(host(const IntendedMajorField(), c));
       await t.pumpAndSettle();
-      expect(find.text('아직 정하지 못했어요'), findsOneWidget);
+      expect(find.text('진로 탐색 중'), findsOneWidget);
       expect(find.text('공학'), findsOneWidget);
     });
   });

@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../domain/university_models.dart';
+import '../domain/university_search_query.dart';
 
 /// Reads the public `universities` catalog and manages the signed-in user's
 /// **interested** universities in `student_target_universities`. No new table,
@@ -31,7 +32,7 @@ class SupabaseUniversityRepository implements UniversityRepository {
 
   @override
   Future<List<University>> searchCatalog(String query, {int limit = 20}) async {
-    final q = query.trim();
+    final q = universitySearchQuery(query);
     if (q.isEmpty) return const [];
     final rows = await _client
         .from('universities')

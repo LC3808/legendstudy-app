@@ -1,3 +1,7 @@
+## 2026-11-12 — 온보딩 P0 실기기 피드백 후속
+
+[정렬·카피·저장 우선·현재 단계skip·Catalog 후보](onboarding-p0-ux-20261112.md). 중간skip이 전체완료하던 경로 수정, 지원open에서 next차단. 집중80/렌더6/analyze PASS. 대학53행 전수조회, 공식118대조/신규78·보류7, 후보SQL 로컬 보존/충돌/재적용 PASS. 운영0, 전체2552 PASS·8 SKIP·기존5 FAIL, 기기 후속/HOLD.
+
 ## 2026-11-11 — 실제 지원 카피·컴팩트 폼
 
 [구현·화면·검증](onboarding-compact-layout-20261111.md): 따뜻한 Owner 카피, 검색 suffix아이콘/키보드 action, 학년도1900~2200·모집 시기2열과 접근성 세로 전환, 간격 축소·저장 카드. 집중66 PASS/렌더3 PASS/analyze PASS, 운영 변경0. 전체2551 PASS·8 SKIP·기존5 FAIL. iPhone17 APP80 삭제 없는 설치·실행/버전 확인 PASS, iPhone12 APP75 보존. 미러링 사용 중으로 실기기 UI 검수 NOT TESTED,Owner 확인 전 HOLD.
