@@ -5823,3 +5823,12 @@ APP71 학교 순위 Owner 확인 완료. 17시험819첨부·417Registry 과목 �
 Flutter92·analyze·격리PG17·Python7 PASS. 추가 등급컷114표909행은 OCR 검수 대기;
 실제 채점 READY0, 신규 검수 완료 등급컷0. 운영 DB/RPC/스토어 변경0.
 [상세·미완료·출처·오답노트 계약](task03-mixed-scoring-20261111.md).
+
+## 2026-11-11 — 작업03-A 공식 정답·READY 후보
+
+작업03의 기존 엔진 유지. 417Registry 과목을 READY372/PARTIAL36/NOT_READY9로 분류,
+16시험412정답표10,340문항과 추가6시험 표준점수1,026등급행 검증 후보 기록.
+전원정답 미응답 만점 제출의 카운터 제약 충돌을 격리RPC에서 재현하고 로컬SQL 후보 보완.
+Flutter504/학습회귀112/analyze/Python14 PASS. 운영 변경·앱 배포·스토어 제출0.
+[출처·검사·잔여 범위](task03a-official-ready-20261111.md). LegendStudy 자료 사용 Owner 결정은
+기존 작업03 공식 검수·데이터 보존 계약에 연결했다.

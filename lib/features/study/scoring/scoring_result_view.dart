@@ -154,7 +154,7 @@ class _ScoringResultViewState extends State<ScoringResultView> {
                         if (score.cutoffSource != null)
                           source('등급 기준', score.cutoffSource)
                         else
-                          const Text('등급 정보 준비 중'),
+                          const Text('등급 산출 불가'),
                         const Text('응시 당시 기준으로 계산한 결과예요. 공식 성적표가 아니에요.'),
                       ],
                     ),

@@ -56,6 +56,15 @@ alter table public.mock_exam_answers alter column awarded_points set expression 
  (case when all_credit_snapshot or coalesce(submitted_answer=any(accepted_answers_snapshot),submitted_answer=correct_answer_snapshot,false) then points_snapshot else 0 end);
 alter table public.mock_exam_attempts drop constraint mock_exam_attempts_scoring_version_check;
 alter table public.mock_exam_attempts add constraint mock_exam_attempts_scoring_version_check check(scoring_version in ('mcq5-v1','mixed-v2'));
+-- all-credit unanswered questions belong to BOTH counters. Preserve the actual
+-- blank answer; the deferred consistency trigger recomputes both exact counts.
+-- Legacy mcq5-v1 retains its disjoint-count invariant.
+alter table public.mock_exam_attempts drop constraint mock_exam_attempts_counts;
+alter table public.mock_exam_attempts add constraint mock_exam_attempts_counts check (
+ correct_count <= question_count and unanswered_count <= question_count
+ and (scoring_version='mixed-v2' or correct_count+unanswered_count <= question_count)
+);
+
 create function public.scoring_normalize_answers_v2(p_answers jsonb, p_count integer)
 returns jsonb language plpgsql immutable security invoker set search_path = ''
 as $$

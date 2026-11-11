@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/core/links/external_link.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_result_view.dart';
+
 import 'support/grade_fixture.dart';
 
 void main() {
@@ -27,7 +29,7 @@ void main() {
       expect(
         result.gradeLabel,
         scenario.$1 == 'unavailable'
-            ? '등급 정보 준비 중'
+            ? '등급 산출 불가'
             : '${scenario.$1 == 'estimated' ? '예상 ' : ''}${scenario.$3}등급',
       );
       final restored = ScoreResult.fromJson(
@@ -74,7 +76,7 @@ void main() {
       j.remove('cutoff_source');
       final old = ScoreResult.fromJson(j);
       expect(old.grade, 1);
-      expect(old.gradeLabel, '등급 정보 준비 중');
+      expect(old.gradeLabel, '등급 산출 불가');
       expect(old.keySource, isNull);
     },
   );

@@ -1,5 +1,5 @@
 """Disposable PostgreSQL 17 only. TCP disabled; no DSN/config/production access."""
-import json,os,subprocess,tempfile
+import json,os,subprocess,tempfile,uuid
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];PG=Path('/opt/homebrew/opt/postgresql@17/bin')
 def main():
@@ -43,6 +43,17 @@ def main():
     cut='null' if v['minimum_scores'] is None else "array"+str(v['minimum_scores'])+"::smallint[]"
     result=json.loads(sql(f"select public.scoring_mixed_v2({lit(shared['questions'])},{lit(v['answers'])},{cut},'{v['certainty']}');"))
     assert result==v['expected'],(v['name'],result)
+   # Official local fixtures use the same existing SQL engine; no production DSN.
+   from task03a_packages import papers,engine_questions,vectors
+   official_count=0
+   for paper in papers():
+    qs=engine_questions(paper)
+    for name,answers,expected in vectors(paper):
+     result=json.loads(sql(f"select public.scoring_mixed_v2({lit(qs)},{lit(answers)},null,'unavailable');"))
+     assert result['raw_score']==expected,(paper['academic_year'],paper['exam_month'],paper['subject_label'],name,result)
+     assert result['max_score']==paper['max_score'] and result['grade'] is None
+     official_count+=1
+   print(f'PASS: {official_count} official-paper SQL scoring vectors')
    assert sql("select public.scoring_mcq5('[[1,1,2],[2,2,3]]','[1,null]',null,'unavailable');")==legacy
 
    sql(f"insert into answer_key_versions(id,exam_subject_id,content_item_id,paper_variant,version,question_count,max_score,source_name,source_url,source_digest,fetched_at,scoring_version) values('{key}','{subject}','{content}','synthetic-mixed',1,4,10,'Synthetic','https://example.invalid/v2',repeat('0',64),now(),'mixed-v2');")
@@ -56,6 +67,8 @@ def main():
    assert sql(f"set role anon;select count(*) from answer_key_versions where id='{key}';")=='0'
    sql(f"update answer_key_versions set verification_status='READY' where id='{key}';"+publish)
    assert sql("set role anon;select verification_status from mock_exam_scoring_availability where scoring_version='mixed-v2';")=='READY'
+   perfect_blank=json.loads(sql(rpc(key,uid(42),[3,0,999,None])))
+   assert (perfect_blank['raw_score'],perfect_blank['correct_count'],perfect_blank['unanswered_count'])==(10,4,1)
    result=json.loads(sql(rpc(key,attempt,[3,0,1,None])))
    assert (result['raw_score'],result['correct_count'],result['unanswered_count'])==(7,3,1),result
    assert result['answers'][1]['submitted_answer']==0 and result['answers'][3]['all_credit_snapshot']
@@ -71,6 +84,36 @@ def main():
    sql(f"update answer_key_versions set is_current=false where id='{key}';")
    assert json.loads(sql(rpc(key,attempt,[3,0,1,None])))==result
    sql(rpc(key,uid(8),[3,0,1,None]),'KEY_UNAVAILABLE')
+   # Publish and submit real paper fixtures only inside this disposable database.
+   # Exact Registry IDs are reused locally; no source/customer records are read remotely.
+   statements=[];loaded_exams=set();loaded_subjects=set();real_keys=[]
+   def quote(value):return "'"+str(value).replace("'","''")+"'"
+   for paper in papers():
+    cid=paper['content_item_id'];sid=paper['exam_subject_id']
+    if cid not in loaded_exams:
+     loaded_exams.add(cid)
+     statements.append(f"insert into content_items(id,source_post_id,source_content_key,slug,content_type,title,source_url,is_active) values('{cid}','{source}','{cid}','{cid}','exam','Official isolated fixture','https://example.invalid/isolated',true);insert into exams(content_item_id) values('{cid}');")
+    if sid not in loaded_subjects:
+     loaded_subjects.add(sid)
+     statements.append(f"insert into exam_subjects(id,content_item_id,source_subject_key,is_active) values('{sid}','{cid}','{sid}',true);")
+    kid=str(uuid.uuid5(uuid.NAMESPACE_URL,'isolated-task03a:'+sid+':'+paper['paper_variant']))
+    real_keys.append((kid,paper))
+    ev=paper['answer_evidence']
+    statements.append(f"insert into answer_key_versions(id,exam_subject_id,content_item_id,paper_variant,version,question_count,max_score,source_name,source_url,source_digest,fetched_at,scoring_version,verification_status) values('{kid}','{sid}','{cid}',{quote(paper['paper_variant'])},1,{paper['question_count']},{paper['max_score']},'KICE isolated fixture',{quote(ev['url'])},'{ev['sha256']}',now(),'mixed-v2','READY');")
+    for q in paper['questions']:
+     statements.append(f"insert into exam_questions(answer_key_version_id,question_number,answer_type,correct_answer,points,accepted_answers,all_credit,question_id) values('{kid}',{q['number']},{quote(q['answer_type'])},null,{q['points']},array{q['accepted_answers']}::smallint[],{str(q['all_credit']).lower()},'{q['question_id']}');")
+    statements.append(f"update answer_key_versions set status='published',is_current=true,verified_at=now() where id='{kid}';")
+   sql('begin;'+''.join(statements)+'commit;')
+   assert int(sql("set role anon;select count(*) from mock_exam_scoring_availability where scoring_version='mixed-v2' and verification_status='READY';"))==len(real_keys)
+   for kid,paper in real_keys:
+    answers=vectors(paper)[0][1]
+    aid=str(uuid.uuid5(uuid.NAMESPACE_URL,'isolated-attempt:'+kid))
+    result=json.loads(sql(rpc(kid,aid,answers)))
+    assert result['raw_score']==paper['max_score'] and result['grade'] is None
+    assert len(result['answers'])==paper['question_count']
+    assert [r['question_id'] for r in result['answers']]==[q['question_id'] for q in paper['questions']]
+   assert sql(f"set role authenticated;set request.jwt.claim.sub='{b}';select count(*) from mock_exam_attempts;")=='0'
+   print(f'PASS: {len(real_keys)} official keys published/read via anon availability and submitted via authenticated RPC in disposable DB; owner isolation preserved')
    print('PASS: candidate compiles; legacy engine unchanged; READY gate; mixed/MCA/all-credit/zero/999; immutable per-question snapshots; retry/owner/stale/invalid guards')
   finally:run([PG/'pg_ctl','-D',db,'-m','immediate','-w','stop'])
 if __name__=='__main__':main()

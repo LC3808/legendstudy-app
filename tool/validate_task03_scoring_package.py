@@ -21,7 +21,7 @@ def validate(package,registry):
   domains=('kice.re.kr','suneung.re.kr','moe.go.kr','korea.kr','law.go.kr')
   check(official.scheme=='https' and any(host==d or host.endswith('.'+d) for d in domains),label+':missing official origin')
   check(bool(re.fullmatch(r'[a-f0-9]{64}',str(ref.get('sha256','')))),label+':missing digest')
-  check(type(ref.get('page')) is int and ref['page']>0,label+':missing page')
+  check((type(ref.get('page')) is int and ref['page']>0) or (isinstance(ref.get('section'),str) and bool(ref['section'].strip())),label+':missing page/section')
   check(ref.get('reviewed') is True,label+':not source-reviewed')
  check(package.get('verification_status')=='READY','NOT_READY: evidence verification incomplete')
  check(package.get('engine')=='mixed-v2','unsupported engine')
@@ -66,6 +66,8 @@ def validate(package,registry):
  check(points==package.get('max_score') and 1<=points<=1000,'points total mismatch')
  if package.get('academic_year')==2022 and package.get('exam_month')==11 and package.get('subject_code')=='life_science_2':
   check(len(qs)>=20 and qs[19].get('all_credit') is True,'2022 CSAT biology II correction not applied')
+ if package.get('academic_year')==2023 and package.get('exam_month')==6 and package.get('subject_code')=='earth_science_2':
+  check(len(qs)>=14 and qs[13].get('all_credit') is True,'2023 June earth science II correction not applied')
  return errors
 
 def main():

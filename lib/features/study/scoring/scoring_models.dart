@@ -359,7 +359,7 @@ class ScoreResult {
   bool get hasGradeBasis =>
       cutoffSource != null && cutoffSource!.certainty == gradeStatus;
   String get gradeLabel => gradeStatus == 'unavailable' || !hasGradeBasis
-      ? '등급 정보 준비 중'
+      ? '등급 산출 불가'
       : gradeStatus == 'estimated'
       ? '예상 $grade등급'
       : '$grade등급';

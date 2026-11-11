@@ -64,3 +64,12 @@ See [Task03 contract and preservation review](../../../wiki/task03-mixed-scoring
 Question UUIDs are additive: legacy records are not backfilled with invented IDs.
 Academic context snapshot and cross-attempt wrong-answer queries remain a reviewed
 future contract, not a newly deployed notebook API. No notebook UI/subscription.
+
+## TASK03-A follow-up — local only
+
+Official all-credit papers exposed `correct_count + unanswered_count > question_count`
+for otherwise perfect attempts with the all-credit question blank. The candidate now keeps
+both individual bounds and the legacy mcq5-v1 disjoint bound; mixed-v2 exact counts remain
+validated by the deferred snapshot consistency trigger. No production application occurred.
+Do not restore the old disjoint bound while mixed-v2 all-credit attempts exist.
+[Official-data validation and rollout limits](../../../wiki/task03a-official-ready-20261111.md).
