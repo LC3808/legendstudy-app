@@ -15,6 +15,7 @@
   "installed": true,
   "uploaded": false,
   "launched": true,
-  "owner_functional_verification": "PENDING",
-  "device": "iPhone 12 Pro Max"
+  "owner_functional_verification": "PASS",
+  "device": "iPhone 12 Pro Max",
+  "owner_feedback": "학교 순위 화면은 이대로 진행"
 }

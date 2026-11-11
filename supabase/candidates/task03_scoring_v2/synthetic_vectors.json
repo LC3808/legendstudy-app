@@ -1,0 +1,189 @@
+{
+  "synthetic": true,
+  "questions": [
+    {
+      "question_number": 1,
+      "question_id": "00000000-0000-4000-8000-000000000001",
+      "answer_type": "multiple_choice",
+      "accepted_answers": [
+        1,
+        3
+      ],
+      "all_credit": false,
+      "points": 2
+    },
+    {
+      "question_number": 2,
+      "question_id": "00000000-0000-4000-8000-000000000002",
+      "answer_type": "numeric",
+      "accepted_answers": [
+        0
+      ],
+      "all_credit": false,
+      "points": 3
+    },
+    {
+      "question_number": 3,
+      "question_id": "00000000-0000-4000-8000-000000000003",
+      "answer_type": "numeric",
+      "accepted_answers": [
+        999
+      ],
+      "all_credit": false,
+      "points": 3
+    },
+    {
+      "question_number": 4,
+      "question_id": "00000000-0000-4000-8000-000000000004",
+      "answer_type": "multiple_choice",
+      "accepted_answers": [],
+      "all_credit": true,
+      "points": 2
+    }
+  ],
+  "vectors": [
+    {
+      "name": "mixed",
+      "answers": [
+        3,
+        0,
+        1,
+        null
+      ],
+      "minimum_scores": null,
+      "certainty": "unavailable",
+      "expected": {
+        "raw_score": 7,
+        "max_score": 10,
+        "question_count": 4,
+        "correct_count": 3,
+        "incorrect_questions": [
+          3
+        ],
+        "unanswered_questions": [
+          4
+        ],
+        "unanswered_count": 1,
+        "grade": null,
+        "grade_status": "unavailable"
+      }
+    },
+    {
+      "name": "perfect",
+      "answers": [
+        1,
+        0,
+        999,
+        1
+      ],
+      "minimum_scores": null,
+      "certainty": "unavailable",
+      "expected": {
+        "raw_score": 10,
+        "max_score": 10,
+        "question_count": 4,
+        "correct_count": 4,
+        "incorrect_questions": [],
+        "unanswered_questions": [],
+        "unanswered_count": 0,
+        "grade": null,
+        "grade_status": "unavailable"
+      }
+    },
+    {
+      "name": "blank",
+      "answers": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "minimum_scores": null,
+      "certainty": "unavailable",
+      "expected": {
+        "raw_score": 2,
+        "max_score": 10,
+        "question_count": 4,
+        "correct_count": 1,
+        "incorrect_questions": [],
+        "unanswered_questions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "unanswered_count": 4,
+        "grade": null,
+        "grade_status": "unavailable"
+      }
+    },
+    {
+      "name": "confirmed",
+      "answers": [
+        3,
+        0,
+        1,
+        null
+      ],
+      "minimum_scores": [
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 7,
+        "max_score": 10,
+        "question_count": 4,
+        "correct_count": 3,
+        "incorrect_questions": [
+          3
+        ],
+        "unanswered_questions": [
+          4
+        ],
+        "unanswered_count": 1,
+        "grade": 4,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "estimated",
+      "answers": [
+        1,
+        0,
+        999,
+        1
+      ],
+      "minimum_scores": [
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        2,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 10,
+        "max_score": 10,
+        "question_count": 4,
+        "correct_count": 4,
+        "incorrect_questions": [],
+        "unanswered_questions": [],
+        "unanswered_count": 0,
+        "grade": 1,
+        "grade_status": "estimated"
+      }
+    }
+  ]
+}

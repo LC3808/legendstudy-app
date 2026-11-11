@@ -292,7 +292,7 @@ void main() {
             ),
             findsOneWidget,
           );
-          expect(find.text('정답 ${symbols[r.correct - 1]}'), findsOneWidget);
+          expect(find.text('정답 ${symbols[r.correct! - 1]}'), findsOneWidget);
           expect(find.text('배점 ${r.points}점'), findsOneWidget);
         }
         stage = 'provenance';

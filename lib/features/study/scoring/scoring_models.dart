@@ -17,12 +17,24 @@ class MockScoringAvailability {
       gradeCutoffVersionId = j['grade_cutoff_version_id'] as String?,
       gradeStatus = j['grade_status'] as String,
       scoringVersion = j['scoring_version'] as String,
+      verificationStatus = j['verification_status'] as String?,
       availability = switch (j['availability']) {
         'timer_only' => ScoringAvailability.timerOnly,
         'scoring_available' => ScoringAvailability.scoringAvailable,
         _ => throw const FormatException('Invalid availability'),
       } {
-    scoringCheck(examSubjectId.isNotEmpty && scoringVersion == 'mcq5-v1');
+    scoringCheck(
+      examSubjectId.isNotEmpty &&
+          ['mcq5-v1', 'mixed-v2'].contains(scoringVersion),
+    );
+    scoringCheck(
+      verificationStatus == null ||
+          ['READY', 'PARTIAL', 'NOT_READY'].contains(verificationStatus),
+    );
+    if (available &&
+        (scoringVersion == 'mixed-v2' || verificationStatus != null)) {
+      scoringCheck(verificationStatus == 'READY');
+    }
     if (available) {
       scoringCheck(
         answerKeyVersionId != null &&
@@ -37,6 +49,7 @@ class MockScoringAvailability {
   }
   final String examSubjectId, gradeStatus, scoringVersion;
   final String? paperVariant, answerKeyVersionId, gradeCutoffVersionId;
+  final String? verificationStatus;
   final int? answerKeyVersion, questionCount, maxScore;
   final ScoringAvailability availability;
   bool get available => availability == ScoringAvailability.scoringAvailable;
@@ -51,19 +64,30 @@ class MockScoringAvailability {
     'grade_status': gradeStatus,
     'scoring_version': scoringVersion,
     'availability': available ? 'scoring_available' : 'timer_only',
+    if (verificationStatus != null) 'verification_status': verificationStatus,
   };
 }
 
 /// Deliberately cannot carry a correct answer into the running UI/state.
 class AnswerEntryQuestion {
-  const AnswerEntryQuestion(this.questionNumber, this.points);
+  const AnswerEntryQuestion(
+    this.questionNumber,
+    this.points, {
+    this.answerType = 'multiple_choice',
+  });
   final int questionNumber, points;
-  String get answerType => 'multiple_choice';
+  final String answerType;
+  bool accepts(int? answer) =>
+      answer == null ||
+      (answerType == 'multiple_choice'
+          ? answer >= 1 && answer <= 5
+          : answerType == 'numeric' && answer >= 0 && answer <= 999);
   factory AnswerEntryQuestion.fromJson(Map<String, dynamic> j) {
-    scoringCheck(j['answer_type'] == 'multiple_choice');
+    scoringCheck(['multiple_choice', 'numeric'].contains(j['answer_type']));
     final q = AnswerEntryQuestion(
       j['question_number'] as int,
       j['points'] as int,
+      answerType: j['answer_type'] as String,
     );
     scoringCheck(
       q.questionNumber >= 1 &&
@@ -97,8 +121,12 @@ class AnswerDraft {
     for (var i = 0; i < questions.length; i++) {
       scoringCheck(
         questions[i].questionNumber == i + 1 &&
-            (this.answers[i] == null ||
-                (this.answers[i]! >= 1 && this.answers[i]! <= 5)),
+            ['multiple_choice', 'numeric'].contains(questions[i].answerType) &&
+            questions[i].points >= 1 &&
+            questions[i].points <= 100 &&
+            questions[i].accepts(this.answers[i]) &&
+            (availability.scoringVersion == 'mixed-v2' ||
+                questions[i].answerType == 'multiple_choice'),
       );
     }
     scoringCheck(
@@ -114,7 +142,7 @@ class AnswerDraft {
     scoringCheck(
       number >= 1 &&
           number <= answers.length &&
-          (choice == null || choice >= 1 && choice <= 5),
+          questions[number - 1].accepts(choice),
     );
     final next = [...answers]..[number - 1] = choice;
     return AnswerDraft(availability, questions, next);
@@ -140,10 +168,62 @@ class AnswerDraft {
 }
 
 class AnswerReview {
-  const AnswerReview(this.number, this.submitted, this.correct, this.points);
-  final int number, correct, points;
+  AnswerReview(this.number, this.submitted, int correct, this.points)
+    : answerType = 'multiple_choice',
+      acceptedAnswers = List.unmodifiable([correct]),
+      allCredit = false,
+      questionId = null,
+      unit = null,
+      domain = null,
+      itemType = null;
+  AnswerReview.typed(
+    this.number,
+    this.submitted,
+    this.points, {
+    required this.answerType,
+    required List<int> acceptedAnswers,
+    this.allCredit = false,
+    required this.questionId,
+    this.unit,
+    this.domain,
+    this.itemType,
+  }) : acceptedAnswers = List.unmodifiable(acceptedAnswers) {
+    scoringCheck(
+      questionId != null &&
+          questionId!.isNotEmpty &&
+          ['multiple_choice', 'numeric'].contains(answerType) &&
+          number >= 1 &&
+          number <= 100 &&
+          points >= 1 &&
+          points <= 100,
+    );
+    final entry = AnswerEntryQuestion(number, points, answerType: answerType);
+    scoringCheck(
+      entry.accepts(submitted) &&
+          (allCredit ? acceptedAnswers.isEmpty : acceptedAnswers.isNotEmpty) &&
+          acceptedAnswers.length <=
+              (answerType == 'multiple_choice' ? 5 : 1000) &&
+          acceptedAnswers.toSet().length == acceptedAnswers.length &&
+          acceptedAnswers.every(entry.accepts),
+    );
+  }
+  final int number, points;
   final int? submitted;
-  bool get isCorrect => submitted == correct;
+  final String answerType;
+  final List<int> acceptedAnswers;
+  final bool allCredit;
+  final String? questionId, unit, domain, itemType;
+  int? get correct =>
+      acceptedAnswers.length == 1 ? acceptedAnswers.single : null;
+  bool get isCorrect =>
+      allCredit || submitted != null && acceptedAnswers.contains(submitted);
+  String formatAnswer(int? value) => value == null
+      ? '—'
+      : answerType == 'numeric'
+      ? '$value'
+      : ['①', '②', '③', '④', '⑤'][value - 1];
+  String get correctLabel =>
+      allCredit ? '전원 정답' : acceptedAnswers.map(formatAnswer).join(' / ');
   Map<String, dynamic> toJson() => {
     'question_number': number,
     'submitted_answer': submitted,
@@ -151,20 +231,47 @@ class AnswerReview {
     'points_snapshot': points,
     'is_correct': isCorrect,
     'awarded_points': isCorrect ? points : 0,
+    if (questionId != null) ...{
+      'answer_type': answerType,
+      'accepted_answers_snapshot': acceptedAnswers,
+      'all_credit_snapshot': allCredit,
+      'question_id': questionId,
+      'unit': unit,
+      'domain': domain,
+      'item_type': itemType,
+    },
   };
   factory AnswerReview.fromJson(Map<String, dynamic> j) {
-    final r = AnswerReview(
-      j['question_number'] as int,
-      j['submitted_answer'] as int?,
-      j['correct_answer_snapshot'] as int,
-      j['points_snapshot'] as int,
-    );
+    final r = j['accepted_answers_snapshot'] != null
+        ? AnswerReview.typed(
+            j['question_number'] as int,
+            j['submitted_answer'] as int?,
+            j['points_snapshot'] as int,
+            answerType: j['answer_type'] as String,
+            acceptedAnswers: (j['accepted_answers_snapshot'] as List)
+                .cast<int>(),
+            allCredit: j['all_credit_snapshot'] as bool,
+            questionId: j['question_id'] as String,
+            unit: j['unit'] as String?,
+            domain: j['domain'] as String?,
+            itemType: j['item_type'] as String?,
+          )
+        : AnswerReview(
+            j['question_number'] as int,
+            j['submitted_answer'] as int?,
+            j['correct_answer_snapshot'] as int,
+            j['points_snapshot'] as int,
+          );
     scoringCheck(
-      r.correct >= 1 &&
-          r.correct <= 5 &&
+      AnswerEntryQuestion(
+            r.number,
+            r.points,
+            answerType: r.answerType,
+          ).accepts(r.submitted) &&
+          (r.questionId != null || (r.correct! >= 1 && r.correct! <= 5)) &&
           r.points > 0 &&
           r.points <= 100 &&
-          (r.submitted == null || r.submitted! >= 1 && r.submitted! <= 5) &&
+          j['correct_answer_snapshot'] == r.correct &&
           j['is_correct'] == r.isCorrect &&
           j['awarded_points'] == (r.isCorrect ? r.points : 0),
     );
@@ -231,8 +338,13 @@ class ScoreResult {
           answers.fold(0, (n, a) => n + (a.isCorrect ? a.points : 0)) ==
               rawScore,
     );
+    final identities = <String>{};
     for (var i = 0; i < answers.length; i++) {
-      scoringCheck(answers[i].number == i + 1);
+      scoringCheck(
+        answers[i].number == i + 1 &&
+            (answers[i].questionId == null ||
+                identities.add(answers[i].questionId!)),
+      );
     }
     scoringCheck(
       (cutoffSource == null || cutoffSource!.certainty == gradeStatus) &&
@@ -363,6 +475,72 @@ ScoreResult scoreMcq5(
   }
   final raw = review.fold(0, (n, a) => n + (a.isCorrect ? a.points : 0)),
       maximum = review.fold(0, (n, a) => n + a.points);
+  int? grade;
+  if (minimumScores != null) {
+    scoringCheck(
+      minimumScores.length == 9 &&
+          minimumScores.last == 0 &&
+          ['confirmed', 'estimated'].contains(certainty),
+    );
+    for (var i = 0; i < 9; i++) {
+      scoringCheck(
+        minimumScores[i] >= 0 &&
+            minimumScores[i] <= maximum &&
+            (i == 0 || minimumScores[i] < minimumScores[i - 1]),
+      );
+    }
+    grade = minimumScores.indexWhere((s) => raw >= s) + 1;
+  } else {
+    scoringCheck(certainty == 'unavailable');
+  }
+  return ScoreResult(
+    raw,
+    maximum,
+    review,
+    grade: grade,
+    gradeStatus: certainty,
+  );
+}
+
+/// mixed-v2 retains the same result/attempt envelope. Solutions are fetched only
+/// after submit. Unknown metadata remains null; no topic inference is performed.
+ScoreResult scoreMixed(
+  List<Map<String, dynamic>> questions,
+  List<int?> answers, {
+  List<int>? minimumScores,
+  String certainty = 'unavailable',
+}) {
+  scoringCheck(
+    questions.isNotEmpty &&
+        questions.length <= 100 &&
+        questions.length == answers.length,
+  );
+  final review = <AnswerReview>[];
+  final ids = <String>{};
+  for (var i = 0; i < questions.length; i++) {
+    final q = questions[i];
+    scoringCheck(
+      q['question_number'] == i + 1 &&
+          q['question_id'] is String &&
+          ids.add(q['question_id'] as String),
+    );
+    review.add(
+      AnswerReview.typed(
+        i + 1,
+        answers[i],
+        q['points'] as int,
+        answerType: q['answer_type'] as String,
+        acceptedAnswers: (q['accepted_answers'] as List).cast<int>(),
+        allCredit: q['all_credit'] as bool,
+        questionId: q['question_id'] as String,
+        unit: q['unit'] as String?,
+        domain: q['domain'] as String?,
+        itemType: q['item_type'] as String?,
+      ),
+    );
+  }
+  final raw = review.fold(0, (n, a) => n + (a.isCorrect ? a.points : 0));
+  final maximum = review.fold(0, (n, a) => n + a.points);
   int? grade;
   if (minimumScores != null) {
     scoringCheck(

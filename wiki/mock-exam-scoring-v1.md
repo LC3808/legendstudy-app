@@ -1,5 +1,8 @@
 # Mock Exam Scoring v1 — Day 8-D architecture proposal
 
+2026-11-11 후속: 기존 mcq5-v1은 보존하며 [작업03 mixed-v2](task03-mixed-scoring-20261111.md)에
+단답형·복수정답·전원정답 지원을 추가했다. 운영 미적용, 공식 전체 데이터 검수 대기.
+
 Reviewed: 2026-09-15. **Day 8-D1, Day 8-D2 and Day 8-D3 COMPLETE. Day 8 overall NOT COMPLETE.**
 Production migration/Postflight and actual A/B JWT/RPC acceptance are Owner-reported PASS.
 D2 answer/raw-score and D3 grade/result actual A/B Flutter runtime PASS (Owner-reported). No real key import or scraping.

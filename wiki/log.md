@@ -5815,3 +5815,11 @@ Owner 빌드70 확인 후 학교 순위 제목 통합·시간 글자/색상 강�
 학습 통합28 PASS, analyze PASS, 밝은/어두운 테마·확대 글자 렌더링 확인.
 [변경·검수 기록](app67-learning-integration-20261111.md). 운영 DB/스토어 변경 없음.
 빌드71(source a15711f) 서명 검사·iPhone 삭제 없는 설치/실행 PASS, Owner 화면 재검수 대기.
+
+## 2026-11-11 — 작업03 mixed-v2·5개년 검수 준비
+
+APP71 학교 순위 Owner 확인 완료. 17시험819첨부·417Registry 과목 대조,
+단답형/복수정답/전원정답·READY 차단·201건 목록 및2022조회 범위 구현.
+Flutter92·analyze·격리PG17·Python7 PASS. 추가 등급컷114표909행은 OCR 검수 대기;
+실제 채점 READY0, 신규 검수 완료 등급컷0. 운영 DB/RPC/스토어 변경0.
+[상세·미완료·출처·오답노트 계약](task03-mixed-scoring-20261111.md).

@@ -198,4 +198,4 @@ Owner는 빌드70 검수에 “다 확인했어”로 회신하고 학교 순위
 
 빌드71(1.0.2), source a15711f: iOS release 빌드·codesign 검증 PASS.
 iPhone12 Pro Max 삭제 없는 설치·실행 PASS. [설치 증거](../tool/app71-learning-rank-receipt-20261111.json).
-학교 순위 실기기 최종 모양은 Owner 재검수 대기. APP67 원본/운영 데이터 보존, 스토어 제출0.
+학교 순위 실기기 최종 모양은 Owner가 “확인했어…이대로 진행”으로 검수 완료. APP67 원본/운영 데이터 보존, 스토어 제출0.

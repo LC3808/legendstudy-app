@@ -135,27 +135,63 @@ class SupabaseScoringRepository implements ScoringRepository {
     if (rows.length != 1 ||
         rows.single['answer_key_version_id'] != a.answerKeyVersionId ||
         rows.single['grade_cutoff_version_id'] != a.gradeCutoffVersionId ||
-        rows.single['availability'] != 'scoring_available') {
+        rows.single['availability'] != 'scoring_available' ||
+        rows.single['scoring_version'] != a.scoringVersion ||
+        (a.scoringVersion == 'mixed-v2' &&
+            rows.single['verification_status'] != 'READY')) {
       throw const ScoringStale();
     }
   }
 
   @override
   Future<List<ScoringPaper>> availablePapers() async {
-    final rows = await _rows('mock_exam_scoring_availability', {
-      'select': '*',
-      'availability': 'eq.scoring_available',
-      'order': 'exam_subject_id,paper_variant',
-      'limit': '100',
-    });
+    // A five-year catalogue exceeds one PostgREST page. Never silently return
+    // only its first 100 papers or a partially failed multi-page result.
+    const pageSize = 100;
+    const maxPages = 20;
+    final rows = <Map<String, dynamic>>[];
+    final seen = <String>{};
+    for (var page = 0; ; page++) {
+      if (page == maxPages) throw const ScoringFailure();
+      final batch = await _rows('mock_exam_scoring_availability', {
+        'select': '*',
+        'availability': 'eq.scoring_available',
+        'order': 'exam_subject_id,paper_variant',
+        'limit': '$pageSize',
+        'offset': '${page * pageSize}',
+      });
+      for (final row in batch) {
+        final key = '${row['exam_subject_id']}:${row['paper_variant']}';
+        if (!seen.add(key)) throw const ScoringFailure();
+      }
+      rows.addAll(batch);
+      if (batch.length < pageSize) break;
+    }
     if (rows.isEmpty) return [];
-    final ids = rows.map((r) => r['exam_subject_id'] as String).toSet();
-    final titles = await _rows('exam_subjects', {
-      'select': 'id,content_item_id,raw_subject_label,subject_id,taxonomy_version,subjects(name,code,category),exams(year,grade_level,exam_month,exam_type,content_items(title))',
-      'id': 'in.(${ids.join(',')})',
-      'limit': '100',
-    });
-    final metadata = {for (final row in titles) row['id'] as String: row};
+    final ids = rows
+        .map((r) => r['exam_subject_id'] as String)
+        .toSet()
+        .toList();
+    final metadata = <String, Map<String, dynamic>>{};
+    // Bound URI size independently from the number of paper variants.
+    for (var start = 0; start < ids.length; start += 40) {
+      final chunk = ids.skip(start).take(40).toList();
+      final titles = await _rows('exam_subjects', {
+        'select': 'id,content_item_id,raw_subject_label,subject_id,taxonomy_version,subjects(name,code,category),exams(year,grade_level,exam_month,exam_type,content_items(title))',
+        'id': 'in.(${chunk.join(',')})',
+        'limit': '40',
+      });
+      for (final row in titles) {
+        final id = row['id'];
+        if (id is! String || !chunk.contains(id) || metadata.containsKey(id)) {
+          throw const ScoringFailure();
+        }
+        metadata[id] = row;
+      }
+      if (chunk.any((id) => !metadata.containsKey(id))) {
+        throw const ScoringFailure();
+      }
+    }
     return rows
         .map((r) {
           final a = MockScoringAvailability.fromJson(r);
@@ -212,7 +248,9 @@ class SupabaseScoringRepository implements ScoringRepository {
     if (owner == null) {
       await _current(a);
       final questions = await _rows('exam_questions', {
-        'select': 'question_number,correct_answer,points',
+        'select': a.scoringVersion == 'mixed-v2'
+            ? 'question_number,answer_type,accepted_answers,all_credit,points,question_id,unit,domain,item_type'
+            : 'question_number,correct_answer,points',
         'answer_key_version_id': 'eq.${a.answerKeyVersionId}',
         'order': 'question_number',
         'limit': '101',
@@ -239,20 +277,27 @@ class SupabaseScoringRepository implements ScoringRepository {
         certainty = rows.single['certainty'] as String;
         cutoffSource = ScoringSource.fromJson(rows.single);
       }
-      final score = scoreMcq5(
-        questions
-            .map(
-              (q) => [
-                q['question_number'] as int,
-                q['correct_answer'] as int,
-                q['points'] as int,
-              ],
+      final score = a.scoringVersion == 'mixed-v2'
+          ? scoreMixed(
+              questions,
+              attempt.draft.answers,
+              minimumScores: cutoffs,
+              certainty: certainty,
             )
-            .toList(),
-        attempt.draft.answers,
-        minimumScores: cutoffs,
-        certainty: certainty,
-      );
+          : scoreMcq5(
+              questions
+                  .map(
+                    (q) => [
+                      q['question_number'] as int,
+                      q['correct_answer'] as int,
+                      q['points'] as int,
+                    ],
+                  )
+                  .toList(),
+              attempt.draft.answers,
+              minimumScores: cutoffs,
+              certainty: certainty,
+            );
       scoringCheck(
         score.maxScore == a.maxScore && score.answers.length == a.questionCount,
       );
@@ -303,7 +348,13 @@ class SupabaseScoringRepository implements ScoringRepository {
       scoringCheck(
         raw['attempt_id'] == attempt.id &&
             raw['answer_key_version_id'] == a.answerKeyVersionId &&
-            score.answers[i].submitted == attempt.draft.answers[i],
+            score.answers[i].submitted == attempt.draft.answers[i] &&
+            score.answers[i].answerType ==
+                attempt.draft.questions[i].answerType &&
+            score.answers[i].points == attempt.draft.questions[i].points &&
+            (a.scoringVersion == 'mixed-v2'
+                ? score.answers[i].questionId != null
+                : score.answers[i].questionId == null),
       );
     }
     return score;

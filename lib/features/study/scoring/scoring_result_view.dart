@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/links/external_link.dart';
 import 'scoring_models.dart';
 
@@ -25,8 +26,9 @@ class _ScoringResultViewState extends State<ScoringResultView> {
     }
   }
 
-  String choice(int? n) => n == null ? '—' : ['①', '②', '③', '④', '⑤'][n - 1];
-  String outcome(AnswerReview a) => a.submitted == null
+  String outcome(AnswerReview a) => a.allCredit
+      ? '전원 정답'
+      : a.submitted == null
       ? '미응답'
       : a.isCorrect
       ? '정답'
@@ -94,9 +96,8 @@ class _ScoringResultViewState extends State<ScoringResultView> {
           child: ExcludeSemantics(
             child: Text(
               '${score.rawScore} / ${score.maxScore}점',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700),
+              style: Theme.of(context).textTheme.headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.w700),
             ),
           ),
         ),
@@ -206,7 +207,7 @@ class _ScoringResultViewState extends State<ScoringResultView> {
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Semantics(
               label:
-                  '${review.number}번, 내 답 ${review.submitted == null ? '미응답' : '${review.submitted}번'}, 정답 ${review.correct}번, ${outcome(review)}, ${review.points}점',
+                  '${review.number}번, 내 답 ${review.submitted == null ? '미응답' : '${review.submitted}번'}, 정답 ${review.answerType == 'multiple_choice' && review.correct != null ? '${review.correct}번' : review.correctLabel}, ${outcome(review)}, ${review.points}점',
               child: ExcludeSemantics(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,8 +220,8 @@ class _ScoringResultViewState extends State<ScoringResultView> {
                       spacing: 16,
                       runSpacing: 4,
                       children: [
-                        Text('내 답 ${choice(review.submitted)}'),
-                        Text('정답 ${choice(review.correct)}'),
+                        Text('내 답 ${review.formatAnswer(review.submitted)}'),
+                        Text('정답 ${review.correctLabel}'),
                         Text('배점 ${review.points}점'),
                       ],
                     ),

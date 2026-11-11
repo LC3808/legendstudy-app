@@ -8,7 +8,7 @@ import '../domain/exam_metadata.dart';
 bool supportsGradeCutoff(ExamMetadata? exam) =>
     exam != null &&
     exam.gradeLevel == 3 &&
-    (exam.academicYear ?? 0) >= 2024 &&
+    (exam.academicYear ?? 0) >= 2022 &&
     (exam.academicYear ?? 0) <= 2027 &&
     ((exam.examType == 'evaluation_mock' && [6, 9].contains(exam.examMonth)) ||
         (exam.examType == 'csat' &&
@@ -136,7 +136,7 @@ final cutoffExamsProvider =
           )
           .eq('content_items.is_active', true)
           .eq('grade_level', 3)
-          .gte('academic_year', 2024)
+          .gte('academic_year', 2022)
           .lte('academic_year', 2027)
           .inFilter('exam_type', ['evaluation_mock', 'csat'])
           .order('academic_year', ascending: false)

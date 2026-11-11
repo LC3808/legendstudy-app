@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../application/study_controller.dart';
 import '../domain/study_models.dart';
@@ -182,45 +184,67 @@ class _AnswerEntryPageState extends State<AnswerEntryPage> {
                                     style: const TextStyle(fontSize: 14),
                                   ),
                                 ),
-                                for (var choice = 1; choice <= 5; choice++)
+                                if (draft.questions[n - 1].answerType ==
+                                    'numeric')
                                   Expanded(
-                                    child: Semantics(
-                                      label: '$n번, $choice번 선택지',
-                                      selected: draft.answers[n - 1] == choice,
+                                    child: NumericAnswerField(
+                                      key: ValueKey('numeric-$n'),
+                                      number: n,
+                                      value: draft.answers[n - 1],
                                       enabled: enabled,
-                                      button: true,
-                                      child: ExcludeSemantics(
-                                        child: TextButton(
-                                          key: ValueKey('answer-$n-$choice'),
-                                          style: TextButton.styleFrom(
-                                            minimumSize: const Size(48, 48),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor:
-                                                draft.answers[n - 1] == choice
-                                                ? AppTokens.primarySoft
-                                                : null,
-                                            foregroundColor:
-                                                AppTokens.textPrimary,
-                                          ),
-                                          onPressed: enabled
-                                              ? () => c.selectAnswer(
-                                                  n,
+                                      onChanged: (v) async {
+                                        await c.selectAnswer(n, v);
+                                        if (c.draft?.answers?.answers[n - 1] !=
+                                            v) {
+                                          throw StateError(
+                                            'Answer not persisted',
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  )
+                                else
+                                  for (var choice = 1; choice <= 5; choice++)
+                                    Expanded(
+                                      child: Semantics(
+                                        label: '$n번, $choice번 선택지',
+                                        selected:
+                                            draft.answers[n - 1] == choice,
+                                        enabled: enabled,
+                                        button: true,
+                                        child: ExcludeSemantics(
+                                          child: TextButton(
+                                            key: ValueKey('answer-$n-$choice'),
+                                            style: TextButton.styleFrom(
+                                              minimumSize: const Size(48, 48),
+                                              padding: EdgeInsets.zero,
+                                              backgroundColor:
                                                   draft.answers[n - 1] == choice
-                                                      ? null
-                                                      : choice,
-                                                )
-                                              : null,
-                                          child: Text(
-                                            ['①', '②', '③', '④', '⑤'][choice -
-                                                1],
-                                            style: const TextStyle(
-                                              fontSize: 18,
+                                                  ? AppTokens.primarySoft
+                                                  : null,
+                                              foregroundColor:
+                                                  AppTokens.textPrimary,
+                                            ),
+                                            onPressed: enabled
+                                                ? () => c.selectAnswer(
+                                                    n,
+                                                    draft.answers[n - 1] ==
+                                                            choice
+                                                        ? null
+                                                        : choice,
+                                                  )
+                                                : null,
+                                            child: Text(
+                                              ['①', '②', '③', '④', '⑤'][choice -
+                                                  1],
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
                               ],
                             ),
                             const Divider(height: 1),
@@ -354,4 +378,86 @@ class ScoringHistory extends StatelessWidget {
               ),
           ],
         );
+}
+
+/// The same controller command owns numeric and MCQ edits, including deadline,
+/// pause, recovery and durable-write checks. Empty differs from numeric zero.
+class NumericAnswerField extends StatefulWidget {
+  const NumericAnswerField({
+    super.key,
+    required this.number,
+    required this.value,
+    required this.enabled,
+    required this.onChanged,
+  });
+  final int number;
+  final int? value;
+  final bool enabled;
+  final Future<void> Function(int?) onChanged;
+  @override
+  State<NumericAnswerField> createState() => _NumericAnswerFieldState();
+}
+
+class _NumericAnswerFieldState extends State<NumericAnswerField> {
+  late final TextEditingController input = TextEditingController(
+    text: widget.value?.toString() ?? '',
+  );
+  int pendingWrites = 0;
+  int editGeneration = 0;
+  String? error;
+  @override
+  void didUpdateWidget(covariant NumericAnswerField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (pendingWrites == 0 &&
+        (oldWidget.value != widget.value || !widget.enabled)) {
+      input.text = widget.value?.toString() ?? '';
+    }
+  }
+
+  @override
+  void dispose() {
+    input.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    controller: input,
+    enabled: widget.enabled,
+    keyboardType: TextInputType.number,
+    inputFormatters: [
+      TextInputFormatter.withFunction(
+        (oldValue, newValue) => RegExp(r'^[0-9]{0,3}$').hasMatch(newValue.text)
+            ? newValue
+            : oldValue,
+      ),
+    ],
+    decoration: InputDecoration(
+      labelText: '${widget.number}번 단답형',
+      hintText: '0~999',
+      errorText: error,
+    ),
+    onChanged: (text) async {
+      final value = text.isEmpty ? null : int.parse(text);
+      // Serial controller persistence is reused; no second draft writer.
+      pendingWrites++;
+      final edit = ++editGeneration;
+      error = null;
+      try {
+        await widget.onChanged(value);
+      } catch (_) {
+        if (mounted && edit == editGeneration) {
+          input.text = widget.value?.toString() ?? '';
+          error = '저장하지 못했어요. 다시 입력해 주세요.';
+        }
+      } finally {
+        pendingWrites--;
+        if (mounted) {
+          setState(() {
+            if (!widget.enabled) input.text = widget.value?.toString() ?? '';
+          });
+        }
+      }
+    },
+  );
 }

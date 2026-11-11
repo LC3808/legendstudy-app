@@ -1,0 +1,20 @@
+[
+  {
+    "academic_year": 2022,
+    "exam_month": 11,
+    "exam_type": "csat",
+    "subject_label": "생명과학2",
+    "exam_subject_id": "56820c90-7c9b-585b-8c73-8cbb19941573",
+    "question_number": 20,
+    "treatment": "all_credit",
+    "prior_answer_not_valid": 5,
+    "official_sources": [
+      "https://www.korea.kr/news/policyNewsView.do?newsId=156486634",
+      "https://www.law.go.kr/LSW/precInfoP.do?precSeq=219611"
+    ],
+    "source_reviewed_on": "2026-11-11",
+    "points_verified": false,
+    "paper_ready": false,
+    "note": "정정 근거만 확인. 배점·나머지 문항·정정 후 등급컷 검수 필요. 누락 답안도 전원정답 처리하는 엔진 지원; 운영 공개하지 않음."
+  }
+]

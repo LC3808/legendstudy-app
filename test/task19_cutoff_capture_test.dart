@@ -60,6 +60,17 @@ void main() {
     expect(supportsGradeCutoff(e(2026, 11, 'csat')), true);
     expect(supportsGradeCutoff(e(2026, 6, 'national_mock')), false);
     expect(supportsGradeCutoff(e(2026, 6, 'evaluation_mock', grade: 2)), false);
+    expect(supportsGradeCutoff(e(2021, 6, 'evaluation_mock')), false);
+    for (var year = 2022; year <= 2026; year++) {
+      for (final month in [6, 9, 11]) {
+        expect(
+          supportsGradeCutoff(
+            e(year, month, month == 11 ? 'csat' : 'evaluation_mock'),
+          ),
+          true,
+        );
+      }
+    }
     expect(supportsGradeCutoff(null), false);
   });
   testWidgets(
