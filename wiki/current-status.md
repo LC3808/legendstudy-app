@@ -13,10 +13,10 @@ Owner 작업02 후속 승인에 따라 누적·지원 중복 두 함수를 운�
   비공개 인원 **, 기존 NEIS 학교명 조회·등록 연결. APP 별도 집계 없음.
 - 초대: 기존 Backend 생성/복사/OS공유/토큰 보관/로그인 후 귀속/학교 확인.
   기존 Auth URL 교환은 변경하지 않는다. HTTPS 링크는 기존 WEB 랜딩이며 앱 내 직접
-  링크 입력과 전용 custom scheme 수신을 구현했다. Universal/App Links 운영 도메인 검증,
+  전용 custom scheme 수신을 구현했다. 수동 받은 초대 페이지는 제거하고 학습 초대하기에서 바로 OS 공유한다. Universal/App Links 운영 도메인 검증,
   설치 후 토큰 복원 및 실기기 E2E는 별도 미완료다.
 - 누적 표시 연결 완료. 두 함수 운영 적용 및 기존 데이터/ACL/요약 보존 검사 PASS.
-  학습·초대 집중29 PASS, analyze PASS. iPhone12 Pro Max에 내부 빌드68 설치·실행 완료, Owner 기능 검수 대기.
+  학습·초대 집중29 PASS, analyze PASS. iPhone12 Pro Max에 Owner UX 반영 빌드69 설치·실행 완료, 재검수 대기.
 
 ## 다음 작업
 
