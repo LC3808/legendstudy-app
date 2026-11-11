@@ -1,5 +1,7 @@
 # Personalization Foundation & First-Login Onboarding
 
+2026-11-11 후속: N수생은 관심 대학 다음 실제 지원 대학 선택 단계 추가(총7단계). 기존 MY 등록 화면 재사용; 일반6단계 유지. 계정별 기기 로컬 진행 단계 복원 추가. [상세 검수](onboarding-auth-routing-fix-20261111.md).
+
 2026-11-11 P0: [인증 후 온보딩 수정](onboarding-auth-routing-fix-20261111.md). Owner 최신 지시에 따라 profile 존재만으로 완료 처리하던 gate를 완료/skip marker 기준으로 수정했다. 아래 Oct19의 기존 shared profile 무조건 제외 정책을 대체한다. 운영 데이터 backfill/초기화 없음.
 
 2026-11-11 개발 후속: APP75 닉네임5단계 뒤 [홈 카드 선택6단계](task04-home-university-news-20261111.md)를 추가했다. 기존 회원 재온보딩 없음, skip은 설정 생성0. 계정 홈 저장 후보 DB는 운영 미적용.

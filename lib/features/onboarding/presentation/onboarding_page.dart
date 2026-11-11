@@ -1,3 +1,5 @@
+import '../onboarding_progress.dart';
+import '../../applications/applications_page.dart';
 import '../../home/customization/home_configuration.dart';
 import '../../home/customization/home_editor.dart';
 import '../device_intro.dart';
@@ -66,8 +68,13 @@ class OnboardingPage extends ConsumerStatefulWidget {
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   int _step = 1;
+  bool _stepRestored = false;
+  int _ownerEpoch = 0;
+  // Stable IDs keep the existing steps intact; only N수 accounts gain a step.
+  List<int> get _steps => [1, 2, 3, if (_status == 'retaker') 7, 4, 5, 6];
   HomeConfiguration _homeDraft = HomeConfiguration.defaults();
   int? _homeSavedRevision;
+  bool _homeEdited = false;
   final _nickname = TextEditingController();
   String? _savedNickname;
   bool _nicknameDirty = false;
@@ -96,6 +103,29 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       owner != null &&
       ref.read(authStateProvider).value?.userId == owner;
 
+  Future<void> _restoreStep(String owner, int epoch) async {
+    var saved = 1;
+    try {
+      saved = await ref.read(onboardingProgressStoreProvider).load(owner);
+      if (saved == 6) {
+        final repo = ref.read(homeConfigurationRepositoryProvider);
+        if (repo != null && repo.owner == owner) {
+          final settings = await repo.load().last;
+          if (_sameOwner(owner) && epoch == _ownerEpoch && settings.confirmed) {
+            _homeDraft = settings.configuration;
+          }
+        }
+      }
+    } catch (_) {
+      // A local read failure never discards server answers or marks completion.
+    }
+    if (!_sameOwner(owner) || epoch != _ownerEpoch) return;
+    setState(() {
+      _step = saved;
+      _stepRestored = true;
+    });
+  }
+
   Future<void> _persistDraft(String? owner) async {
     if (!_sameOwner(owner)) throw StateError('Account changed');
     if (!_statusDirty && !_gradeDirty) return;
@@ -113,7 +143,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Future<void> _move(int delta) async {
-    if (_busy || _advancing) return;
+    if (_busy || _advancing || !_hydrated) return;
     if (delta > 0 && _step == 2 && _isStudent && _schoolSearchPending) return;
     if (delta > 0 && _step == 3 && _universitySearchPending) return;
     final owner = ref.read(authStateProvider).value?.userId;
@@ -149,10 +179,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         if (!applied) throw StateError('School was not saved');
       }
       if (!_sameOwner(owner)) return;
+      final nextStep = _steps[_steps.indexOf(_step) + delta];
+      await ref.read(onboardingProgressStoreProvider).save(owner!, nextStep);
+      if (!_sameOwner(owner)) return;
       setState(() {
         _schoolDraft = null;
         _schoolSearchPending = _universitySearchPending = false;
-        _step += delta;
+        _step = nextStep;
         _advancing = true;
       });
       _unlockSoon();
@@ -179,6 +212,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Future<void> _leave() async {
     // Both finish and skip mark onboarding complete so it never re-prompts.
+    final owner = ref.read(authStateProvider).value?.userId;
+    if (owner != null) {
+      try {
+        await ref.read(onboardingProgressStoreProvider).clear(owner);
+      } catch (_) {
+        // The server completion marker still wins if local cleanup fails.
+      }
+      if (!_sameOwner(owner)) return;
+    }
     ref.invalidate(currentProfileProvider);
     ref.invalidate(schoolSelectionProvider);
     if (mounted) context.go('/home');
@@ -285,9 +327,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         final settings = await settingsRepo.load().last;
         if (!settings.confirmed) throw StateError('Settings read failed');
         // A resumed onboarding on an older client must retain future card IDs.
-        final chosenIds = _homeDraft.cards.map((card) => card.id).toSet();
+        final draft = _homeEdited ? _homeDraft : settings.configuration;
+        final chosenIds = draft.cards.map((card) => card.id).toSet();
         final configuration = HomeConfiguration([
-          ..._homeDraft.cards,
+          ...draft.cards,
           ...settings.configuration.cards.where(
             (card) => !chosenIds.contains(card.id),
           ),
@@ -319,8 +362,12 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     if (_owner != auth.value?.userId) {
       _owner = auth.value?.userId;
       _step = 1;
+      _stepRestored = false;
+      final epoch = ++_ownerEpoch;
+      if (_owner != null) _restoreStep(_owner!, epoch);
       _homeDraft = HomeConfiguration.defaults();
       _homeSavedRevision = null;
+      _homeEdited = false;
       _status = null;
       _grade = null;
       _nickname.clear();
@@ -332,12 +379,18 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _schoolSearchPending = _universitySearchPending = false;
     }
     final profileState = ref.watch(currentProfileProvider);
-    if (!_hydrated && profileState.hasValue && !profileState.isLoading) {
+    if (!_hydrated &&
+        _stepRestored &&
+        profileState.hasValue &&
+        !profileState.isLoading) {
       final profile = profileState.asData?.value;
       if (!_statusDirty) _status = profile?.academicStatus;
       if (!_gradeDirty) _grade = profile?.gradeLevel;
       _savedNickname = profile?.displayName;
       if (!_nicknameDirty) _nickname.text = _savedNickname ?? '';
+      if (!_steps.contains(_step) || (_step != 1 && _status == null)) {
+        _step = 1;
+      }
       _hydrated = true;
     }
     final reduceMotion =
@@ -405,7 +458,23 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                               AppTokens.space20,
                               AppTokens.space16,
                             ),
-                            children: _stepContent(),
+                            children: _hydrated
+                                ? _stepContent()
+                                : [
+                                    if (profileState.hasError)
+                                      TextButton(
+                                        onPressed: () => ref.invalidate(
+                                          currentProfileProvider,
+                                        ),
+                                        child: const Text(
+                                          '프로필을 불러오지 못했어요. 다시 시도',
+                                        ),
+                                      )
+                                    else
+                                      const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                  ],
                           ),
                         ),
                       ),
@@ -425,7 +494,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Widget _header(String title, String description) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _StepProgress(step: _step - 1, total: 6),
+      _StepProgress(step: _steps.indexOf(_step), total: _steps.length),
       const SizedBox(height: AppTokens.space16),
       Text(
         title,
@@ -450,6 +519,14 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         return _detailStep();
       case 3:
         return _universitiesStep();
+      case 7:
+        return [
+          _header(
+            '실제 지원 대학을 입력해 주세요',
+            '관심 대학과 별도로 실제 지원한 대학·학과·전형을 기록해요. 아직 정하지 않았다면 나중에 MY에서 입력할 수 있어요.',
+          ),
+          const ApplicationsEntry(),
+        ];
       case 4:
         return _majorStep();
       case 5:
@@ -466,6 +543,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 ? null
                 : (value) => setState(() {
                     _homeDraft = value;
+                    _homeEdited = true;
                     _homeSavedRevision = null;
                   }),
           ),
@@ -643,9 +721,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 52),
             child: FilledButton(
-              onPressed: !canAdvance || _busy || _advancing
+              onPressed: !_hydrated || !canAdvance || _busy || _advancing
                   ? null
-                  : _step < 6
+                  : _step != 6
                   ? _advance
                   : _finish,
               style: FilledButton.styleFrom(
@@ -667,7 +745,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     ? '${_schoolDraft!.name}로 설정하기'
                     : interestedEmpty
                     ? '나중에 설정할게요'
-                    : _step < 6
+                    : _step != 6
                     ? '다음'
                     : '이대로 시작하기',
               ),
@@ -685,12 +763,18 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: _busy ? null : _skip,
+                    onPressed: !_hydrated || _busy || _advancing
+                        ? null
+                        : _step == 7
+                        ? _advance
+                        : _skip,
                     style: TextButton.styleFrom(
                       foregroundColor: AppTokens.textSecondary,
                     ),
                     child: Text(
-                      _step == 6
+                      _step == 7
+                          ? '나중에 입력하기'
+                          : _step == 6
                           ? '다음에 할게요'
                           : _step == 5
                           ? '나중에 설정하기'

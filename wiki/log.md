@@ -1,3 +1,7 @@
+## 2026-11-11 — N수 온보딩 실제 지원 단계·진행 복원
+
+[Owner 결정·구현·영향](onboarding-auth-routing-fix-20261111.md): APP77 온보딩 노출 Owner 확인. N수 관심 대학 다음 기존 실제 지원 등록 UI 진입 단계 추가, 개별 skip. 계정별 로컬 단계 ID 복원/완료 시 제거. 집중69 PASS; 이전 전체2538 PASS/8 SKIP/기존5 FAIL. 현재 marker 없는62개 중 기존46개, 과거 완료 여부 확정 불가. 운영 데이터 변경0.
+
 ## 2026-11-11 — iPhone17 온보딩 수정 앱77 설치
 
 [설치 영수증·한계](onboarding-auth-routing-fix-20261111.md#owner-승인-iphone17-업데이트-설치--후속): Owner 데이터 유지 조건 승인. 소스1b2a925,1.0.2(77) 동일 team/bundle ID/provisioning·서명 검증 후67 위 업데이트·실행·버전 재조회 PASS. 삭제/초기화0. 미러링 사용 중 시간 초과; 온보딩 화면/로그인 보존 실제 검증 대기.

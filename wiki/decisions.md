@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-11 — N수생 온보딩 실제 지원 대학
+
+Owner는 N수생 온보딩에도 실제 지원 대학 입력을 요청했다. [기존 대학 관리 정책](my-college-management-20261026.md)의 관심/실제 지원 분리를 유지하고 기존 지원 등록 화면을 선택 단계에서 재사용한다. 미입력은 나중에 MY에서 보완하며 관심 대학을 자동 전환하지 않는다. [구현·보존 검토](onboarding-auth-routing-fix-20261111.md#n수생-실제-지원-단계--단계-복원--owner-후속-구현).
+
 ## 2026-11-11 — 인증 이후 온보딩 완료 판별
 
 Owner는 Auth 가입/인증·profile 존재·온보딩 완료를 구분하도록 지시했다. [기존 개인화 설계](personalization-onboarding.md)의 완료/skip marker를 기준으로 미완료 회원은 시작/재개하고 완료 회원은 홈으로 보낸다. 선택 입력을 필수화하지 않으며 과거 shared profile 존재만으로 생략하던 정책을 대체한다. [구현·호환성·남은 검수](onboarding-auth-routing-fix-20261111.md).

@@ -1,3 +1,5 @@
+import 'package:legendstudy_app/features/onboarding/onboarding_progress.dart';
+import 'package:legendstudy_app/features/applications/application_repository.dart';
 import 'package:legendstudy_app/features/home/customization/home_configuration.dart';
 
 import 'support/home_test_support.dart';
@@ -128,6 +130,16 @@ class _PendingSchool extends _OneSchool {
   Future<List<School>> search(String query) => result.future;
 }
 
+class _Progress extends OnboardingProgressStore {
+  final steps = <String, int>{};
+  @override
+  Future<int> load(String owner) async => steps[owner] ?? 1;
+  @override
+  Future<void> save(String owner, int step) async => steps[owner] = step;
+  @override
+  Future<void> clear(String owner) async => steps.remove(owner);
+}
+
 Future<GoRouter> _mount(
   WidgetTester tester,
   _Repo repo, {
@@ -138,6 +150,7 @@ Future<GoRouter> _mount(
   double textScale = 1,
   List<University> universityResults = const [],
   HomeRpc? homeRpc,
+  _Progress? progress,
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -152,6 +165,19 @@ Future<GoRouter> _mount(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
+        onboardingProgressStoreProvider.overrideWithValue(
+          progress ?? _Progress(),
+        ),
+        applicationRepositoryProvider.overrideWith((ref) {
+          final owner = ref.watch(authStateProvider).asData?.value.userId;
+          return owner == null
+              ? null
+              : ApplicationRepository(
+                  (name, params) async => <Object?>[],
+                  () => ref.read(authStateProvider).asData?.value.userId,
+                  owner,
+                );
+        }),
         authStateProvider.overrideWith(
           (ref) => authStream ?? Stream.value(AuthStatus(user)),
         ),
@@ -677,8 +703,24 @@ void main() {
     expect(find.text('학년'), findsNothing);
     await tester.tap(find.text('다음')); // 확인 → 관심 대학
     await tester.pumpAndSettle();
-    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
+    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 실제 지원
     await tester.pumpAndSettle();
+    expect(find.text('실제 지원 대학을 입력해 주세요'), findsOneWidget);
+    expect(find.text('4 / 7'), findsOneWidget);
+    await tester.tap(find.text('실제 지원 대학 관리'));
+    await tester.pumpAndSettle();
+    expect(find.text('지원 대학 등록하기'), findsOneWidget);
+    await tester.tap(find.text('지원 대학 등록하기'));
+    await tester.pumpAndSettle();
+    expect(find.text('지원 대학 등록'), findsOneWidget);
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('나중에 입력하기'));
+    await tester.pumpAndSettle();
+    expect(repo.completed, isFalse);
+    expect(find.text('어떤 전공에 관심이 있나요?'), findsOneWidget);
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
@@ -692,6 +734,31 @@ void main() {
       await tester.pumpAndSettle();
     }
     expect(repo.completed, isTrue);
+  });
+
+  testWidgets('saved step resumes per account without losing saved answers', (
+    tester,
+  ) async {
+    final progress = _Progress();
+    final repo = _Repo()
+      ..initial = const UserProfile(id: 'u1', academicStatus: 'retaker');
+    await _mount(tester, repo, user: 'u1', progress: progress);
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    expect(progress.steps['u1'], 2);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await _mount(tester, repo, user: 'u1', progress: progress);
+    expect(find.text('학년·학교는 재학생 전용이에요'), findsOneWidget);
+    expect(repo.upserts, 0);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await _mount(
+      tester,
+      _Repo()..initial = const UserProfile(id: 'u2'),
+      user: 'u2',
+      progress: progress,
+    );
+    expect(find.text('N수생 · 검정고시 등'), findsOneWidget);
+    expect(progress.steps['u1'], 2);
   });
 
   testWidgets('skip completes onboarding without writing status', (
