@@ -87,3 +87,23 @@ APP LAB42개 매핑·시험·Registry는 변경0. 후보SQL에 새대학 essay_e
 - [200% 큰글자](assets/onboarding-p0-20261112/onboarding-p0-step-3-2.0.png)
 
 전체 회귀 **2552 PASS / 8 SKIP / 기존5 FAIL** (D3 runner1·mobile IA mock4, 신규실패0). 최종 카피 집중80 PASS 재확인. 앱 소스 SHA·iPhone 설치/실화면은 후속 영수증에 기록한다. Owner UX 확인 전 **HOLD**.
+
+## APP81 실기기 영수증 — 2026-11-12 KST
+
+- DONE: 앱 소스 `275d9761f07e193c7304103b177194d0cd03542b`, 1.0.2(81), `com.legendstudy.app`.
+  device-qa identity/codesign PASS, iOS44.8MB release build PASS. Framework SHA256
+  `580eddfa338b6b7d52d891a40921c4cd7df6e935349a2fd8ab7dc1067fc5f287`.
+- DONE: iPhone17 Pro Max APP80→81 삭제 없는 설치·process launch·실제 metadata81 확인. iPhone12 Pro Max APP75 읽기 확인/변경0.
+- DONE: Owner 잠금 후 미러링 연결. 기존 완료 계정은 홈으로 진입하고 MY/실제 지원 목록으로 이동됨.
+  공통 MY 등록폼에서 학년도·모집2열과 저장 버튼 전체 노출, 미저장 입력 이탈 확인창/닫기→목록 복귀 확인.
+  운영 저장·수정·삭제 호출0. 검수 검색어는 지우고 로컬 초안만 닫음.
+- PARTIAL: 미러링 텍스트 주입이 한글 조합 대신 자모로 전달되어 실제 검색·키보드 검수는 완료하지 못함.
+  검색 별칭 transport와 입력/키보드 레이아웃은 격리 테스트로 구분한다.
+- NOT TESTED: 새 온보딩 전체 제목·현재단계skip·지원 저장 후 다음 복귀의 **실기기** 연속 흐름.
+  현재 계정은 이미 완료되었으므로 강제 재온보딩/marker·프로필 초기화를 하지 않았다. 미완료 테스트 계정에서 Owner 최종 UX 검수 필요.
+- 실제 기기 캡처: [MY 기본폼](assets/onboarding-p0-20261112/iphone-app81-my-form.png),
+  [미저장 이탈 확인](assets/onboarding-p0-20261112/iphone-app81-unsaved-guard.png).
+  위 격리 렌더와 구분하며 실제 운영 저장 성공 근거로 사용하지 않는다.
+- build receipt의 installed:false는 빌드 시점 값이며 install81/launch81 영수증과 metadata81로 설치를 별도 검증했다.
+- Catalog78개 추가 운영 승인 대기. 국내 전체대학 커버리지·보류7 정체성·WEB 소비자 영향은 미완료.
+  APP 릴리스 HOLD, 스토어/병합/운영DB·Auth·LAB·Credit 변경0.
