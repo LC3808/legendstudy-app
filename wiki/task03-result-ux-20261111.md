@@ -85,3 +85,14 @@ Owner 이번 요청은 학습자의 대략적 위치를 제공할 대안을 요�
 - Owner APP72 기능 정상 보고와 첨부한 결과/숫자 답안은 이전 빌드의 실기기 확인 근거다.
   로그인 계정·프로세스 재시작·Android까지 검증됐다고 확대하지 않는다.
 - APP73 내부 서명 빌드·설치는 후속 기록에 실제 결과를 추가한다. APP72/71/67 보존, 스토어 미제출.
+
+## APP73 내부 설치 결과
+
+- source commit: `b8b824d`, iOS1.0.2(73), com.legendstudy.app.
+- release build PASS(57.6초), codesign deep/strict PASS.
+- iPhone12 Pro Max에 기존 앱 삭제 없이 설치·실행 PASS. Owner 새 UI 확인 요청, 회신 대기.
+- 동일 production define을 재사용했다. 원본 APP72 복사본의 Framework SHA256은
+  `b4eeee7f19c38b9d8e87b67db951612bf1d6b869a0da42ca3b17a613410f417f`로 기존 기록과 일치한다.
+- APP73 Framework SHA256: `1bd3ebce47d0d182656d49359dd5b3983600fdb90c45cdbc11e3eb5bcb94cc0a`.
+- 산출물 `build/ios/iphoneos/Runner.app`, 설치/실행 영수증은 비공개 `.local/task03c/install73.json`, `launch73.json`.
+- Android 빌드/실기기 검수·IPA/AAB·스토어 제출 미실행. 이번 변경의 실제 화면 최종 PASS는 Owner 회신 후 기록한다.
