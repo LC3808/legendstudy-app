@@ -397,3 +397,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [자연·수리10개교 통합 검수 준비·TECH186 및 차단](essay-natural-integrated-review-20261112.md)
 
 - [건국대 자연·수리 운영 공개 전환·검증](essay-konkuk-public-20261112.md)
+
+- [경희대 자연·수리 공개 연결](essay-kyunghee-public-20261112.md) — 건국 다음 순차 적용·부분 공개/제외·검증·원복.

@@ -44,7 +44,7 @@ WEB은 Source Registry6시험(기존 미연결1보완·신규5)와 expansion6시
 - 02:30 KST: Migration `20261111173026_konkuk_24_natural_public_release`,96행 ACTIVE 및 기존2함수 허용목록24추가. 사후72 PASS. 첫 활성화는 검증용 `resolve_profile` 실행권한 부족으로 전체 rollback됐다. 권한을 추가하지 않고 같은 우선순위의 SELECT 검사로 교정, 해당 함수 실행권한이 없는 격리 verifier로 재검증 후 적용했다. SQL 원복 준비, 실제 원복 미실행.
 - 02:37 KST: Pages `802acf70-90c8-45ec-b4e3-1468f8c9d0c9`, 배포 소스 `96bb2902ffab4ebfa5291b79e24b945245777065`. 새6시험24문항 공개 API 정확히 일치. 홈·논술·건국·catalog HTTP200. 기존 비논술 정적 자산2049개 hash, Functions 경로, Secrets/Preview 및 비대상 설정 보존.
 - 실제 일반 계정(quality operator=false) 공개24문항/승인PDF6개 조회 PASS. 로그인 브라우저에서2024자연A/B,2026모의 자연,기존2026수시 자연의 문항 편집 진입 및 대표PDF 수식 표시 확인. 전체24문항의 실제 AI 제출은 수행하지 않았다.
-- 제출/중복방지/결과/다른계정차단/재작성/재첨삭/이력보존은24문항 격리 DB와 mock 결과로 검증. 실제 AI 품질을 PASS로 평가하지 않는다. Provider/Credit 호출0. 새 iPhone/Android 실기기 검사는 NOT TESTED.
+- 제출/중복방지/결과/다른계정차단/재작성/재첨삭/이력보존은24문항 격리 DB와 mock 결과로 검증. 실제 AI 품질을 PASS로 평가하지 않는다. Provider/Credit 호출0. 공개24문항 UUID를 이용한 Flutter 입력 계약25 PASS. 새 iPhone/Android 실기기 검사는 NOT TESTED.
 - APP 구현 Git 준비 `1adb9e6`, WEB 배포 Git `96bb290`. 이후 검증SQL 정정·운영기록 commit은 Git history 참조. 다음 대학은 경희이며 Owner 품질 검수 대기를 착수 조건으로 두지 않는다.
 
 재현: `python3 tool/prepare_konkuk_public_release.py PRIVATE_LIVE_FUNCTIONS_JSON`은 현재 SELECT로 확보한 함수 정의를 입력받아 후보만 생성한다. `python tool/test_konkuk_public_release.py --pg-bin /opt/homebrew/opt/postgresql@17/bin`은 격리 DB만 사용한다. 공개/원복 SQL은 원문을 포함하므로 .local에 두고 추적본에는 SHA와 검증 SQL/원복 정의만 기록한다.

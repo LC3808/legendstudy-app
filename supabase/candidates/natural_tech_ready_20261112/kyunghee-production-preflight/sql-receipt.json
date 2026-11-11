@@ -1,0 +1,25 @@
+{
+  "private_apply": "/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/.local/kyunghee-production-preflight-20261112/apply-draft.private.sql",
+  "sha256": "8fc2851734cd31109074ad5016b66c407e0b46793a2163ec8cd50c23a5569769",
+  "bytes": 1786781,
+  "files": {
+    "preflight.sql": "024924d2efac2bc2a31a1931ee065b84f59c1bfe2ce2167eea57b80cfc7ac47c",
+    "verify.sql": "4f874cef1291f7f145837aa5faec8415828384a5f9cf0ba62e098d149c4e9248",
+    "rollback-retire.sql": "d02a79a37e913ecc954288e9bfdebfacb4f8e33d47f67389681decc2434e73b8",
+    "verify-retired.sql": "6a6fb9ea29d448facb3d8b6a05184fa0995be58ad0a8f38238aea117b3ba1006"
+  },
+  "source_metadata_sha256": {
+    "supabase/candidates/natural_expansion_20261111/four-university/question-review.json": "e0efff89b053344c399db89863c50b8796027282936f5f4515f95889c56a29a1",
+    "supabase/candidates/natural_expansion_20261111/four-university/leaf-contract-candidate.json": "05d78f816e6d9a009802c5ccf4c882424f4510dd43562c376f95eb731e83daa4",
+    "supabase/candidates/natural_expansion_20261111/four-university/existing-pdf-reuse-verification.json": "d843925a4314b4c35e254063c896ef43e085e2120e0bdde57b2d55285a56dab0"
+  },
+  "candidate_packages": {
+    "ec20faaf-5f4b-5675-8798-aa52a80c2fd6": "946eb62a3b19eb5936e31b538ef7c6d55961c92b61a619fee67eafc3d03bba9f",
+    "8bc7d2fa-8147-5354-857f-1baa46d84355": "6135f265a479dd8e2fb1d905115e0f56307a9802e5a00bd6de652b7ad1264168",
+    "d09383a2-bbe1-5dbf-b08d-dd730062c506": "8964fd90a3f55044c15e53643ed9505cf225a6da9dd813a59337e0e7d3a86e79",
+    "1dc8ec21-0d5c-5129-afef-6c6109215d4b": "816d12c3d29313716118654f2f1ad7faa4a309484d13c9b38acbe4812e984dc1",
+    "0f1ef133-918b-566c-9a4a-024952ef78e8": "075bf1a62f81f5b825a937f9c1b4a6698df1d98826314826958b649db6b388d8",
+    "694acb0a-4226-5a21-a340-377d3ea166d7": "6f37add0757754aafc39699712f6f7752f6ea1fbc1b0f89a4585b89509574dda",
+    "a4b76128-9a35-56cd-ad08-e4032eac6296": "8f219fc93d9e36f391e4df2c2a2800b714aa7d4cbf1663b984b811756fddc43d"
+  }
+}

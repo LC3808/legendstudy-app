@@ -15,9 +15,9 @@ def csv(ids):return ','.join(map(literal,ids))
 def fingerprint(table,where='true',key='id'):
  return f"select {literal(table)} name,count(*) n,md5(coalesce(string_agg(md5(to_jsonb(x)::text),'' order by {key}),'')) digest from {table} x where {where}"
 
-def build(university=None, output=None, private=None):
+def build(university=None, output=None, private=None, production_functions=None):
  # Single-university rollout reuses the reviewed data/guards; it never activates content.
- assert university in (None,'한국항공대학교','건국대학교'), 'Only the current university is authorized for preparation'
+ assert university in (None,'한국항공대학교','건국대학교','경희대학교'), 'Only the current university is authorized for preparation'
  evidence=R/'supabase/candidates/natural_expansion_20261111/production-preflight'
  OUT=output or evidence
  PRIVATE=private or R/'.local/natural-production-preflight-20261112'
@@ -30,9 +30,9 @@ def build(university=None, output=None, private=None):
  selected=[q for q in review if q['state'] in ('SERVICE READY (LOCAL)','DATA READY')]
  assert len(selected)==53
  if university:selected=[q for q in selected if q['university']==university]
- expected={'한국항공대학교':7,'건국대학교':24}.get(university,53)
+ expected={'한국항공대학교':7,'건국대학교':24,'경희대학교':7}.get(university,53)
  assert len(selected)==expected
- if OUT!=evidence:(OUT/'production-functions.json').write_bytes((evidence/'production-functions.json').read_bytes())
+ if OUT!=evidence:(OUT/'production-functions.json').write_bytes((production_functions or evidence/'production-functions.json').read_bytes())
  packages=[];worker=[];matrix=[]
  for q in review:
   state=q['state'];scope='EXISTING_PRESERVE' if state=='SERVICE READY (OPERATING PRESERVED)' else 'HOLD_EXCLUDED' if state=='HOLD' else 'NOT_READY_EXCLUDED' if state=='NOT READY' else 'NEW_DRAFT_ONLY'

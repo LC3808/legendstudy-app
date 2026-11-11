@@ -1,0 +1,41 @@
+{
+  "exams": [
+    "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+    "6e289e0f-e5b9-5f47-8de6-4d9fb58cdb3f",
+    "c71cb668-d9c6-52a9-b771-c48c3efd7dc3"
+  ],
+  "questions": [
+    "0f1ef133-918b-566c-9a4a-024952ef78e8",
+    "1dc8ec21-0d5c-5129-afef-6c6109215d4b",
+    "694acb0a-4226-5a21-a340-377d3ea166d7",
+    "8bc7d2fa-8147-5354-857f-1baa46d84355",
+    "a4b76128-9a35-56cd-ad08-e4032eac6296",
+    "d09383a2-bbe1-5dbf-b08d-dd730062c506",
+    "ec20faaf-5f4b-5675-8798-aa52a80c2fd6"
+  ],
+  "leaves": [
+    "de5473e3-fc93-5d6b-b831-5b2fa8839bdc",
+    "3ca32881-ec0f-5bbd-8925-400857b7fc89",
+    "a44dbcc5-ae56-5539-9a6b-220370058f91",
+    "ac4eacec-9f71-5061-8ede-fb5d13f0ef28",
+    "aebce05f-9b64-55f7-92f2-f4f7bb70e8c4",
+    "3d04e9e2-4a30-5324-94bc-3d8451c6059f",
+    "3c00e597-1197-5180-9e1e-764cbebb324c"
+  ],
+  "new_rows": 92,
+  "active_state_rows": 28,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before": "e92163625b44ba17df0c7618e41ea256",
+      "after": "c12496eb4bb4d84e823c82540b62433e"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before": "abe3c9650cc5dfc59eeead9689032bea",
+      "after": "4aadca3ec3133e4235071865a7236c91"
+    }
+  ],
+  "draft_sql_sha256": "8fc2851734cd31109074ad5016b66c407e0b46793a2163ec8cd50c23a5569769",
+  "activate_sql_sha256": "c9a9f19d691e115d3bdc3cc96c7d1f3a1bd69dcd87350841f4bddb517cd5a4ef"
+}
