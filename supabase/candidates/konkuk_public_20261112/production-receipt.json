@@ -396,5 +396,9 @@
     "2026 admission natural (existing)"
   ],
   "actual_live_ai_submission_result_rewrite": "NOT TESTED; exact 24-question paths verified with isolated DB and mock finalization",
-  "new_native_device_test": "NOT TESTED; unchanged native contract reused"
+  "new_native_device_test": "NOT TESTED; unchanged native contract reused",
+  "flutter_tests": {
+    "pass": 25,
+    "scope": "exact deployed 24-question identity/input contract; no device or Provider"
+  }
 }

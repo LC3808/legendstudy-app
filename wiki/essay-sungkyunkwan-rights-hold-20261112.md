@@ -33,8 +33,8 @@
 
 ## 원본 확인 경로
 
-- [2026학년도 성균관대 수시 논술_수리형1 문제.pdf](</Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형1 문제.pdf>)
-- [2026학년도 성균관대 수시 논술_수리형2 문제.pdf](</Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형2 문제.pdf>)
-- [2026학년도 성균관대 수시 논술_수리형3 문제.pdf](</Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형3 문제.pdf>)
-- [2023학년도 성균관대 모의논술_자연계 문제.pdf](</Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2023학년도 성균관대 모의논술_자연계 문제.pdf>)
-- [2027학년도 성균관대 모의논술_수리형 문제.pdf](</Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2027학년도 성균관대 모의논술_수리형 문제.pdf>)
+- 2026학년도 성균관대 수시 논술_수리형1 문제.pdf: `/Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형1 문제.pdf`
+- 2026학년도 성균관대 수시 논술_수리형2 문제.pdf: `/Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형2 문제.pdf`
+- 2026학년도 성균관대 수시 논술_수리형3 문제.pdf: `/Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2026학년도 성균관대 수시 논술_수리형3 문제.pdf`
+- 2023학년도 성균관대 모의논술_자연계 문제.pdf: `/Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2023학년도 성균관대 모의논술_자연계 문제.pdf`
+- 2027학년도 성균관대 모의논술_수리형 문제.pdf: `/Users/woojinchang/development/legendstudy-materials/essay-2026-10/성균관대/2027학년도 성균관대 모의논술_수리형 문제.pdf`
