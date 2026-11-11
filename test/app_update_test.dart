@@ -408,7 +408,7 @@ void main() {
   }
 
   for (final completed in [false, true]) {
-    testWidgets('existing profile receives updates (completed=$completed)', (
+    testWidgets('update prompt waits for onboarding (completed=$completed)', (
       tester,
     ) async {
       await mount(
@@ -418,20 +418,23 @@ void main() {
         profile: () async =>
             UserProfile(id: 'u', onboardingCompletedAt: completed ? now : null),
       );
-      expect(find.byType(AlertDialog), findsOneWidget);
+      expect(
+        find.byType(AlertDialog),
+        completed ? findsOneWidget : findsNothing,
+      );
     });
   }
   testWidgets('missing profile waits for onboarding', (tester) async {
     await mount(tester, authed: true, profile: () async => null);
     expect(find.byType(AlertDialog), findsNothing);
   });
-  testWidgets('loading profile waits, then legacy shared profile is allowed', (
+  testWidgets('loading profile waits, then completed profile is allowed', (
     tester,
   ) async {
     final profile = Completer<UserProfile?>();
     await mount(tester, authed: true, profile: () => profile.future);
     expect(find.byType(AlertDialog), findsNothing);
-    profile.complete(const UserProfile(id: 'u'));
+    profile.complete(UserProfile(id: 'u', onboardingCompletedAt: now));
     await tester.pumpAndSettle();
     expect(find.byType(AlertDialog), findsOneWidget);
   });

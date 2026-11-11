@@ -1,5 +1,7 @@
 # Current Status
 
+[이메일 인증 후 온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner Resend 수신·인증·로그인 성공 보고. iPhone12 설치본1.0.2(75) 조회, 영수증 소스c9b4830. profile 존재를 완료로 오판하는 gate 수정; 완료/skip marker로 판별. 집중212 PASS/analyze PASS. 수정 실기기·저장 전 임시 draft 강제 종료 복원은 미검증/미완료. 운영 변경0.
+
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 
 [알림 무한 로딩 수정](notification-loading-fix-20261111.md): 운영 개인 알림 table/RPC4개 부재·404 확인. 자동 재시도 해제·단계별8초 제한·Empty/Error 분리·수동 재시도. 관련46 PASS, 전체2532 PASS/8 SKIP/기존5 FAIL, analyze·iOS/Android build PASS. Android 오류/재시도/공지 이동 확인, iPhone 회신 대기. 운영 DB/배포 변경0.

@@ -4,9 +4,12 @@ import '../personal/domain/personal_models.dart';
 
 const onboardingRoute = '/onboarding';
 
-/// Any existing shared profile is valid, including pre-APP/WEB accounts.
+/// A profile can be created by login before onboarding has even started.
+/// Only explicit completion (including an allowed skip) finishes the flow.
 bool onboardingProfileReady(AsyncValue<UserProfile?> profile) =>
-    !profile.isLoading && !profile.hasError && profile.value != null;
+    !profile.isLoading &&
+    !profile.hasError &&
+    profile.value?.hasCompletedOnboarding == true;
 
 /// First-login routing decision. Kept pure so the gate can be unit-tested
 /// without a router: given the auth/profile state and the current location,
@@ -17,9 +20,8 @@ bool onboardingProfileReady(AsyncValue<UserProfile?> profile) =>
 /// - Auth/onboarding routes are never intercepted (recovery, owner-check, the
 ///   onboarding page itself).
 /// - While the profile is loading or errored we wait — no redirect yet.
-/// - A confirmed missing profile starts onboarding. Any existing shared profile
-///   is reused, including profiles created on Web before APP onboarding existed.
-///   Missing optional fields belong in MY editing, not a repeated introduction.
+/// - A missing profile or completion marker starts/resumes onboarding.
+/// - Completed profiles remain ready even with missing optional fields.
 String? onboardingRedirect({
   required bool authed,
   required AsyncValue<UserProfile?> profile,

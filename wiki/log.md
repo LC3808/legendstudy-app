@@ -1,3 +1,7 @@
+## 2026-11-11 — 인증 후 온보딩 P0
+
+[원인·수정·기기 근거·남은 검수](onboarding-auth-routing-fix-20261111.md): iPhone12 일반 앱75 조회. 로그인 profile 자동 생성과 존재 기반 gate로 온보딩 누락. 완료 marker 기준으로 수정,212 집중 PASS/analyze PASS. 운영 변경0; 수정 실기기와 저장 전 임시 draft 복원 미완료.
+
 ## 2026-11-11 — 알림 안정화·이메일 인증 읽기 조사
 
 [알림 수정](notification-loading-fix-20261111.md): 운영 RPC 부재404와 기본 자동 재시도 확인, 단계별8초/4상태/재시도 중복 억제. 관련46 PASS,전체2532 PASS/8 SKIP/기존5 FAIL,analyze/iOS/Android build PASS. Android 오류·재시도·공지 이동 확인,iPhone 회신 대기. [이메일 조사](email-verification-audit-20261111.md): 현재19개 중5미인증,오늘 발송 한도 로그21; 수신·SMTP 미확인. 운영 변경0.

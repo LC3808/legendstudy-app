@@ -29,14 +29,14 @@ void main() {
       );
     });
 
-    test('existing shared profile skips full onboarding without APP marker', () {
+    test('login-created profile without completion enters onboarding', () {
       expect(
         onboardingRedirect(
           authed: true,
           profile: authedIncomplete,
           location: '/home',
         ),
-        isNull,
+        onboardingRoute,
       );
     });
 
@@ -140,10 +140,7 @@ void main() {
           requests.add(request);
           if (request.method == 'POST') {
             final body = jsonDecode(request.body) as Map<String, dynamic>;
-            rows[body['id'] as String] = {
-              ...?rows[body['id']],
-              ...body,
-            };
+            rows[body['id'] as String] = {...?rows[body['id']], ...body};
             return http.Response('', 201, request: request);
           }
           final id = request.url.queryParameters['id']!.substring(3);
@@ -225,5 +222,42 @@ void main() {
       expect(saved.gradeLevel, 2);
       expect(saved.hasCompletedOnboarding, isTrue);
     });
+
+    test(
+      'login upsert, partial progress, restart, completion and account switch',
+      () async {
+        String? redirect(UserProfile? profile) => onboardingRedirect(
+          authed: true,
+          profile: AsyncData(profile),
+          location: '/home',
+        );
+        await session('owner-a');
+        // Email login ensures a profile exists; this is not completion.
+        await repository.upsertCurrentProfile();
+        expect(
+          redirect(await repository.fetchCurrentProfile()),
+          onboardingRoute,
+        );
+        await repository.upsertCurrentProfile(
+          academicStatus: 'student',
+          gradeLevel: 2,
+        );
+        // A fresh repository models reload of persisted progress after restart.
+        final resumed = SupabaseProfileRepository(client);
+        final progress = await resumed.fetchCurrentProfile();
+        expect(progress!.gradeLevel, 2);
+        expect(redirect(progress), onboardingRoute);
+        await resumed.markOnboardingComplete();
+        await session('owner-a');
+        await resumed.upsertCurrentProfile();
+        expect(redirect(await resumed.fetchCurrentProfile()), isNull);
+        // Read by current identity; another account cannot inherit completion.
+        await session('owner-b');
+        await resumed.upsertCurrentProfile();
+        expect(redirect(await resumed.fetchCurrentProfile()), onboardingRoute);
+        await session('owner-a');
+        expect(redirect(await resumed.fetchCurrentProfile()), isNull);
+      },
+    );
   });
 }
