@@ -1,0 +1,85 @@
+{
+  "features": {
+    "APP75": {
+      "commit": "c9b483018bcada179050595cf78c8ca4a3d213ba",
+      "included": true
+    },
+    "APP78": {
+      "commit": "79f5a12653231462e58e30916ab2b8288d516132",
+      "included": true
+    },
+    "email_verification": {
+      "commit": "c5cd349aded4f1b5d9b6db932504350c66ba1975",
+      "included": true
+    },
+    "onboarding_route": {
+      "commit": "ddbbe5acbbae0a8ba4dae519e573fa7d031461ff",
+      "included": true
+    },
+    "home_personalization": {
+      "commit": "efb6b59e884de110254397be3318c9710ea3c754",
+      "included": true
+    },
+    "notifications": {
+      "commit": "4489603ccb3359aa95857737cc06dc016e1150f1",
+      "included": true
+    },
+    "inline_applications": {
+      "commit": "8470a15c509eea1fbf387f701c735baa428e30bc",
+      "included": true
+    },
+    "compact_onboarding": {
+      "commit": "11e84e92e8ec56d2d20c5c9e0bd7855e3a50d151",
+      "included": true
+    },
+    "onboarding_p0": {
+      "commit": "275d9761f07e193c7304103b177194d0cd03542b",
+      "included": true
+    },
+    "catalog_rollout": {
+      "commit": "bffa2104fa00c47ad61a34c1cb8b146cf9a73613",
+      "included": true
+    },
+    "catalog_closure": {
+      "commit": "6e2f13856807e0aef7f303346c2c780ecc282f6c",
+      "included": true
+    },
+    "main": {
+      "commit": "aeb8be2dade4dfd39ea6c98eba2d738a83fb7a85",
+      "included": true
+    }
+  },
+  "main_new_or_changed_files_preserved": [
+    ".github/workflows/materials-daily-sync.yml",
+    ".gitignore",
+    "supabase/candidates/materials_daily_sync_20261108/README.md",
+    "supabase/candidates/materials_daily_sync_20261108/disable.sql",
+    "supabase/candidates/materials_daily_sync_20261108/install.sql",
+    "supabase/candidates/materials_sync_admin_20261108/README.md",
+    "supabase/candidates/materials_sync_admin_20261108/disable.sql",
+    "supabase/candidates/materials_sync_admin_20261108/install.sql",
+    "tool/ingestion/__init__.py",
+    "tool/ingestion/apply.py",
+    "tool/ingestion/crawler.py",
+    "tool/ingestion/daily_sync.py",
+    "tool/ingestion/models.py",
+    "tool/ingestion/normalizer.py",
+    "tool/ingestion/parser.py",
+    "tool/ingestion/samples/wave1-identity-review.json",
+    "tool/ingestion/schedule.py",
+    "tool/ingestion/subjects.py",
+    "tool/ingestion/taxonomy.py",
+    "tool/ingestion/writer.py",
+    "tool/requirements-material-sync.txt",
+    "tool/rollback_daily_material_sync.py",
+    "tool/run_daily_material_sync.py",
+    "tool/test_daily_material_sync.py",
+    "tool/test_material_sync_schedule.py"
+  ],
+  "app75_essay_and_study_source_diff": [],
+  "provider_calls": 0,
+  "store_submissions": 0,
+  "production_admin_writes": 0,
+  "existing_user_data_writes": 0,
+  "new_owner_test_account_ui_writes": true
+}

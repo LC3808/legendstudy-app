@@ -7,6 +7,7 @@ import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/study/application/study_controller.dart';
 import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
+
 import 'mock_scoring_test.dart' show FakeScoring, availability;
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
 
@@ -78,17 +79,27 @@ void main() {
     await t.pumpAndSettle();
     expect(find.text('2 / 6점'), findsOneWidget);
     expect(c!.draft, isNull);
-    await tap(find.text('다시 학습으로'));
-    final title = c!.attempts.single.title;
+    // APP75 result pages use the app bar back action, not the retired footer.
+    await t.pageBack();
+    await t.pumpAndSettle();
     expect(
       container!.read(routerProvider).routeInformationProvider.value.uri.path,
       '/study',
     );
     await mount();
     final count = scoring.calls.length;
-    await tap(find.text('$title · 2 / 6점'));
+    await tap(
+      find.ancestor(
+        of: find.textContaining(' · 2 / 6점'),
+        matching: find.byType(TextButton),
+      ),
+    );
     expect(find.text('2 / 6점'), findsOneWidget);
-    await tap(find.text('홈으로'));
+    await t.pageBack();
+    await t.pumpAndSettle();
+    await tap(
+      find.descendant(of: find.byType(NavigationBar), matching: find.text('홈')),
+    );
     expect(
       container!.read(routerProvider).routeInformationProvider.value.uri.path,
       '/home',

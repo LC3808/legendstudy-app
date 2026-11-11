@@ -36,6 +36,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+APP82 / 2026-11-13 릴리스 후보 / 인증·온보딩·홈·Catalog 통합: [소스 정합성·검증·실기기·main 승인 경계](app-release-rc-20261113.md).
+
 대학 검색 / Catalog / 한국교원대 / 관심·실제 지원 대학: [main 통합 의존성·대안](university-catalog-main-integration-20261112.md) · [78개 확장 CLOSED·운영 근거·보류7·잔여 검증](university-catalog-closure-20261112.md). APP 릴리스 HOLD 유지.
 
 작업04 / 고3·N수 실제 지원 대학 / 합격 발표 일정: [04-C 실계정·기기 검수](task04c-device-verification-20261111.md) · [APP75 기반 지원 관리](task04-applications-20261111.md) · [홈 커스터마이징·나의 대학 소식·후보 SQL·검증](task04-home-university-news-20261111.md) · [작업04-B 운영 사전 검토](task04b-production-preflight-20261111.md) · [작업04-C 홈 A 운영 적용·UI 후속/C·D HOLD](task04c-home-production-20261111.md).

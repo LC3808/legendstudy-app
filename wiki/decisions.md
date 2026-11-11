@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-12 — APP 전체 릴리스 후보 통합
+
+Owner는 Catalog만 main에 분리하는 작업을 중단하고 인증·온보딩·홈·알림·Catalog를 포함한 최신 APP RC를 별도 브랜치에서 통합하도록 결정했다. APP75 검증 기능과 최신main 변경을 보존하며 실제 검증 전 main을 덮어쓰지 않는다. 2026-11-13 업데이트가 목표이나 최종 Owner 승인 전 main merge/Push·스토어 제출은 금지한다. 운영 DB/RPC·WEB·기존 회원 데이터 변경도 금지한다. [이전 Catalog 분리 검토](university-catalog-main-integration-20261112.md)는 이 결정으로 종료하고 [RC 검증 보고](app-release-rc-20261113.md)로 연결한다.
+
 ## 2026-11-12 — 온보딩 저장 우선·현재 단계 건너뛰기
 
 Owner 실기기 피드백으로 [컴팩트 폼](onboarding-compact-layout-20261111.md)을 보완한다. 제목/설명center·실제 기능 가치 카피, 지원 입력 중 다음 숨김/저장성공 후 복귀, 보조skip 본문 이동. 중간skip은 현재 단계만 이동하며 전체 완료/홈이동 금지, 최종 완료만marker저장. 과거 전체skip 완료 정책을 대체한다. 선택 입력·기존 데이터/계정 복원은 유지한다. 후속 Owner 승인으로 한국교원대 포함 Catalog78개 INSERT를 허용한다(보류7 제외). 기존 ID·사용자 데이터·논술지원 범위는 보존하며 추가 운영 변경·릴리스 HOLD는 유지한다. [구현·검수·카피표](onboarding-p0-ux-20261112.md).

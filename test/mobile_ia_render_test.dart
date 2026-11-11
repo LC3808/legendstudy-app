@@ -361,6 +361,11 @@ void main() {
             );
           }
           if (screen == 'mock') {
+            // Official papers are the default; custom subject belongs to free practice.
+            final practice = find.widgetWithText(ChoiceChip, '자유 연습');
+            await t.ensureVisible(practice);
+            await t.tap(practice);
+            await t.pumpAndSettle();
             final subject = find.byKey(const ValueKey('mock-subject-국어'));
             await t.ensureVisible(subject);
             await t.tap(subject);

@@ -1,6 +1,6 @@
 # Current Status
 
-[Catalog main 통합 보류](university-catalog-main-integration-20261112.md): 최신main에 대학 검색/관심·지원 관리 선행 코드가 없어 Catalog 검색 연결만 분리 불가. main 변경0. 자료·영수증만 분리하거나 검증된 선행 기능 통합 후 재진행. 운영 Catalog CLOSED·APP HOLD 유지.
+[APP82 통합 RC·릴리스 HOLD](app-release-rc-20261113.md): Catalog 단독 병합 중단, 최신 APP+원격main을 별도 RC에서 충돌 없이 통합. APP75/78·홈·알림·Catalog ancestry 확인, APP75 LAB/학습 소스 보존. 기존5개 테스트 기대값 보정, 전체2557 PASS/8 SKIP/0 FAIL·analyze PASS. iPhone17 APP82 삭제 없는 설치/실행·iPhone12 APP75 보존. 신규 N수 온보딩·저장·MY·종료/복원·홈/알림·논술PDF 실기기 확인. 기존 회원 로그인·계정 격리 확인, 소셜/marker 영향 검토 대기. Owner 최종 승인 전 main merge/Push·스토어 금지.
 
 [대학 검색 Catalog 확장 CLOSED](university-catalog-closure-20261112.md): Owner 완료 승인. 신규78·전체131·활성128, 관심/실제 지원 검색 PASS. 기존 ID·사용자·논술 LAB 보존. 보류7 정체성 검토 제외, iPhone 검색·WEB 배포본 E2E NOT TESTED. 추가 운영 변경 없이 마감, APP 릴리스 HOLD 유지.
 

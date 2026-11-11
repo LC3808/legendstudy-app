@@ -1,3 +1,7 @@
+## 2026-11-12 — APP82 전체 릴리스 후보 통합
+
+[기능/소스 정합성·검수·미완료·승인 경계](app-release-rc-20261113.md): Catalog 단독 통합 중단 후1eb8e1f+원격main aeb8be2를 별도RC에 충돌 없이 통합. main25파일/APP75 LAB·학습 제품 소스 보존, feature ancestry 확인. 기존5개 실패 재현 후 UI 기대값만 보정, 최종2557 PASS/8 SKIP/0 FAIL·analyze/Python26/liveCatalog2 PASS. APP82 iPhone17 삭제 없는 설치·실행, iPhone12 APP75 보존. Owner 신규 테스트 계정에서 N수 온보딩·한국교원대 양쪽 검색·지원 저장·MY·중단복원·완료/홈복원·알림오류/논술PDF 확인. 기존 회원 로그인·홈·계정 격리 확인, 소셜 실기기/marker 없는 기존 회원 영향은 미완료. 운영관리변경/기존회원쓰기/Provider/main merge·Push/스토어0, HOLD 유지.
+
 ## 2026-11-12 — Catalog main 통합 의존성 확인·병합 보류
 
 [검토·대안](university-catalog-main-integration-20261112.md): origin/main aeb8be2와 완료6e2f138 비교. main에 검색Repository/관심·지원UI가 없고 전체2161파일 차이. 데이터 증거는 분리 가능하나 검색 기능은 선행 개인화 의존. Owner의 미검증Auth/온보딩 제외 조건에 따라 임의main병합0. 운영Catalog CLOSED, APP HOLD 유지.

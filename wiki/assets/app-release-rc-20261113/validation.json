@@ -1,0 +1,66 @@
+{
+  "source_sha": "eab45637bec4abea837ed10ec98c609040894f18",
+  "flutter": "3.47.6",
+  "full_suite": {
+    "success": 2557,
+    "skip": 8
+  },
+  "success": true,
+  "skipped_tests": [
+    "public search repository live read-only contract",
+    "actual local Auth JWT → Dart SupabaseEssayGateway → public RPC / RLS",
+    "TASK03C live public app repository and guest grading",
+    "stored additional paid result renders without fabricating a free-rewrite comparison",
+    "saved operating result approved Native view comparison false scale 1.0",
+    "saved operating result approved Native view comparison false scale 2.0",
+    "saved operating result approved Native view comparison true scale 1.0",
+    "saved operating result approved Native view comparison true scale 2.0"
+  ],
+  "raw_test_log_sha256": "4bb8930161a2a3b52b69435fa8886eca3bd47e3782b509d9566c0ef8cf914a6d",
+  "analyze": "PASS",
+  "baseline_failures_reproduced": 5,
+  "corrected_focused_tests": 61,
+  "main_material_sync_python_tests": 26,
+  "live_catalog_read_and_widget_tests": 2,
+  "ios_build": {
+    "version": "1.0.2",
+    "build": "82",
+    "codesign": "PASS",
+    "device17_installed_and_launched": true,
+    "device12_app75_preserved": true
+  },
+  "production_admin_writes": 0,
+  "existing_user_data_writes": 0,
+  "provider_calls": 0,
+  "main_merge_or_push": false,
+  "store_submissions": 0,
+  "new_test_account_device": {
+    "owner_signup_verification_login": "Owner performed; onboarding observed",
+    "n_su_school_skip": "PASS",
+    "previous_next": "PASS",
+    "skip_current_step_only": "PASS",
+    "interest_knue_search_save": "PASS",
+    "application_knue_search_save": "PASS",
+    "unsaved_guard": "PASS",
+    "saved_application_step_process_restart": "PASS",
+    "onboarding_complete_home": "PASS",
+    "post_complete_restart_home": "PASS",
+    "my_linkage": "PASS",
+    "home_settings_restore": "PASS",
+    "notification_error_retry": "PASS",
+    "study_and_mock_screen": "PARTIAL",
+    "suneung_lab_screen": "PARTIAL",
+    "essay_catalog_exam_pdf": "PASS",
+    "essay_paid_submission": "NOT TESTED",
+    "legacy_login": "PASS: Owner sign-in, home without onboarding",
+    "apple_google_login": "NOT TESTED",
+    "account_isolation": "PASS: existing profile/home distinct and no new QA university data"
+  },
+  "known_limitations": [
+    "8 environment-gated tests skipped",
+    "Apple/Google physical login NOT TESTED",
+    "Legacy missing onboarding marker cohort review remains",
+    "Paid essay submission and provider quality NOT TESTED",
+    "Main merge/post-merge regression/push require final Owner approval"
+  ]
+}

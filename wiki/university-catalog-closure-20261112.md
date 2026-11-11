@@ -52,3 +52,7 @@
 이 Catalog 작업 브랜치에 종료 문서 변경만 커밋하고 `origin`의 동일 브랜치로 Push한다. 원격 SHA는 `git ls-remote --heads origin refs/heads/codex/email-auth-stabilization-20261111`로 로컬 `git rev-parse HEAD`와 비교하며 최종 결과·SHA는 종료 응답에 보고한다. SHA를 current-status의 영구 HEAD로 고정하지 않는다.
 
 다른 작업 브랜치 변경 포함0, main 병합0, 이번 마감 중 추가 운영 DB 변경0, WEB·APP 배포0, 스토어 제출0. 잔여 NOT TESTED를 명시한 상태로 Owner 승인 범위의 Catalog 작업을 **CLOSED** 처리한다.
+
+## 후속 APP82 실기기 검증
+
+[전체 APP RC 검수](app-release-rc-20261113.md)에서 iPhone17 Pro Max의 관심 대학과 실제 지원 대학 검색 모두 `KNUE`→한국교원대학교 표시·선택을 확인했다. Owner 신규 테스트 계정으로 관심·지원 저장과 MY 연동도 확인했다. 당시 CLOSED의 iPhone NOT TESTED 기록은 역사적으로 보존하며, 추가 운영 Catalog 변경은0이다. 나머지77개 각각의 실기기 검색/WEB E2E는 이번에도 NOT TESTED다. Catalog 단독 main 통합은 중단하고 전체 RC의 별도 Owner 승인 경계를 따른다.

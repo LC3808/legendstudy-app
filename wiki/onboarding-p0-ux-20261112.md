@@ -127,3 +127,7 @@ Owner는 한국교원대 포함78개 INSERT만 명시 승인했다. 보류7 제�
 - LAB: APP 별도42개 catalog/source 매핑 유지. WEB 로컬 `src/lib/essay-runtime/public-discovery.ts`는 정적 essay-public-catalog.json 사용 확인. Registry/시험/문항/WEB 코드·배포 변경0.
 - NOT TESTED: 이번 추가 이후 iPhone 물리 화면 검색 및 WEB 배포본 E2E. 위 검색 결과는 실제 운영 공개 API + 호스트 Flutter 위젯 검증이며 실기기 결과와 구분한다.
 - 앱 재설치 없이 새 검색 요청부터 반영. 국내 전체 대학 완전성/보류7 identity 검토는 후속. Owner 실기기 UX 확인 전 APP 릴리스 HOLD 유지.
+
+## APP82 전체 RC 실기기 후속
+
+[통합 결과·기기별 DONE/PARTIAL/NOT TESTED](app-release-rc-20261113.md). 동일 제품 소스를 포함한 APP82에서 Owner 신규 계정의 N수6단계, 이전/다음·현재 단계skip, 한국교원대 양쪽 검색·inline 저장, 미저장 보호, 종료 후3/6 및 저장 카드 복원, 최종 완료→홈→재실행, MY와 홈 설정 복원을 확인했다. 고등학생·기타 분기와 확대/소프트키보드의 이번 물리기기 재검증은 자동 검사와 구분한다. 기존 계정 초기화·운영 Auth/DB관리 변경·스토어 제출0, 최종 Owner 승인 전 HOLD.

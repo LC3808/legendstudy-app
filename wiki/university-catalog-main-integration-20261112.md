@@ -1,5 +1,7 @@
 # 대학 Catalog main 통합 검토 — BLOCKED (운영 작업은 CLOSED 유지)
 
+> 후속 Owner 결정: Catalog 단독 병합 작업을 중단하고 [APP 전체 RC 통합](app-release-rc-20261113.md)으로 전환했다. 아래 BLOCKED는 당시 범위의 역사적 근거이며 최신 RC 상태를 대신하지 않는다.
+
 2026-11-12 Owner는 Catalog만 분리 가능하면 main 병합·Push를 승인하고, 이메일 인증·온보딩의 미검증 변경은 제외하도록 지시했다. 안전하게 분리할 수 없으면 임의 병합하지 않는 조건이다.
 
 ## 확인한 원격 기준
