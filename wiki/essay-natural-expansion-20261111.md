@@ -1,5 +1,7 @@
 # 논술 LAB 기존 시험·문항 연결 — 2026-11-11
 
+최신 [Owner 연결 상태 검증·12문항 전체표·집계](essay-connection-owner-verification-20261111.md): 운영 항공 연결0, 실제 Source 시험진입 probe1 FAIL. 기존 후보 PASS와 구분한다.
+
 **전체 PARTIAL. 한국항공대6시험12문항 로컬 기술 연결 검증 DONE, 운영 연결·공개 NOT APPLIED.**
 중앙20시험69수학은 기존 운영 연결을 보존하고 과학Q4 11문항 HOLD를 유지했다.
 신규10개교는 기존 공통 Registry 연결28시험94문항을 검증했으며 새 첨삭 package·공개 완료는 아니다.

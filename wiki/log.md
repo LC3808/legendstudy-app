@@ -1,3 +1,7 @@
+## 2026-11-11 — Owner 실제 연결 상태 검증
+
+[Owner 연결 상태 재검증](essay-connection-owner-verification-20261111.md): 항공12 Registry만 운영등록/Math·Worker0/비공개. 로컬PG198·Flutter24·WEB후보25 PASS, 실제 Source 시험진입 가정1 FAIL. 대상22개교153시험572문항, 운영연결 미완료503; 신규 기능·Provider·운영쓰기0.
+
 ## 2026-11-11 — 논술 연결 범위 정정·한국항공 기술 연결
 
 [최신 검수/잔여](essay-natural-expansion-20261111.md): 반복 Provider 중단(25요청/22응답/3미확정, 이후0), 실험 격리. 기존 원문 v1을 보존해 항공12문항172행 새 후보·Worker locator 수정, 공통Registry 신규10개교28/94 확인. Python18/로컬PG198/WEB30/Flutter31 PASS·4SKIP·Analyze PASS. 공식 이슈5 parent Owner검수, 중앙과학11·기존HOLD 보존, 운영/TEST원격쓰기·배포0. 실제 서비스/기기·나머지 package PARTIAL.
