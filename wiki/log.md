@@ -5955,3 +5955,5 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12:10개교87시험234문항 통합 scope 고정(TECH186/부분7/HOLD6/NOTREADY22/기존13). 공통 Owner접근 후보 private2테이블/helper1/기존4함수·기본OFF, 격리602검사 PASS. 운영 SELECT:186중KAU7연결·공개0·기존4함수동일·신규gate미존재. 신규운영쓰기/Provider/배포0. [검수 준비·차단·승인 경계](essay-natural-integrated-review-20261112.md).
 
 - 2026-11-12: 다음 건국24/299행 단독 DRAFT 승인안 준비. 운영 사전SELECT116 PASS, 기존KAU106행 포함 격리124검사 PASS·96행 비파괴 retirement 검증. 적용0. [정확 범위/SQL SHA/승인](../supabase/candidates/natural_tech_ready_20261112/konkuk-production-preflight/README.md).
+
+- 2026-11-12: Owner 운영 공개 지시 반영, 건국24/299 공개 후보를 최신 운영 소스에 연결. 사전116·격리72+24흐름/원복·WEB381 PASS. 운영 반영 전. [근거](essay-konkuk-public-20261112.md).

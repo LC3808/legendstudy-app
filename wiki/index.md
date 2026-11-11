@@ -395,3 +395,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 - 자연·수리 TECH READY 순차 검증 / 서강 PDF 누락 / 통합 Owner 검수 대기: [대학별 영수증·미완료](essay-natural-tech-ready-20261112.md).
 - [자연·수리10개교 통합 검수 준비·TECH186 및 차단](essay-natural-integrated-review-20261112.md)
+
+- [건국대 자연·수리 운영 공개 전환·검증](essay-konkuk-public-20261112.md)

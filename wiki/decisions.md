@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-12 — 논술 자연·수리 연결의 완료 기준은 운영 공개
+
+Owner는 기존 [기술 연결·품질 분리 결정](#2026-11-11--논술-lab은-기존-시험문항-연결-품질-평가는-owner)을 유지하되 비공개 DRAFT 종료 방식을 폐기했다. 검증된 문항의 운영 연결과 사용자 공개를 승인하며, 건국24부터 대학별 순차 진행한다. 기존 엔진·권한·Credit 보존, 새 RPC/Storage 정책 및 기존 공개 기능 영향 배포는 사전 범위 보고. 실제 AI 품질은 전체 대학 후 Owner 통합 검수이며 다음 대학 착수 조건이 아니다. PUBLISHED는 운영 접근·입력/제출·결과·재첨삭 연결이 모두 확인된 문항만 사용한다. [적용 범위·보존 검토](essay-konkuk-public-20261112.md).
+
 ## 2026-11-11 — 논술 LAB은 기존 시험·문항 연결, 품질 평가는 Owner
 
 Owner는 [공식 원본 보존](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30)과 [TASK20 기존 서비스 연결](task20-priority-natural-connection-20261106.md)을 유지하며, Codex의 범위를 Registry·공식 기준·문제·입력·제출·결과·재작성 연결로 확정했다. 반복 Provider/정오·부분답안 생성·품질 평가는 중단하고 최소 Mock 기술검사만 사용한다. 원문·공식해설·배점을 독자 수정하지 않으며 불일치는 Owner 판단 대상으로 기록한다. 소문항 의심으로 시험 전체를 자동 제외하지 않는다. 중앙69 재작업 금지/과학11 HOLD, 기존 엔진·프롬프트·결과 UX·Credit 보존. 운영 변경/공개/배포는 별도 승인. [실제 구현·검수·미완료](essay-natural-expansion-20261111.md).
