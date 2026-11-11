@@ -5869,3 +5869,5 @@ APP74 source b92d2b9: iOS 서명 빌드·삭제 없는 iPhone 설치/실행 PASS
 ## 2026-11-11 — APP75 결과 제목·과목 통합
 APP74 Owner 확인 완료. 결과 목록·상세·답안 확인 제목에 저장된 과목을 함께 표시하고 별도 과목 줄 제거.
 [UI 후속](task03-result-ux-20261111.md#app75-과목명-표시-후속). 원본 데이터/채점/등급/운영 불변.
+
+APP75 source c9b4830:55검사·렌더4·analyze PASS, iPhone 서명·설치·실행 PASS. 과목명 표시 Owner 확인 대기.

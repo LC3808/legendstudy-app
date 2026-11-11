@@ -186,3 +186,11 @@ Owner가 APP74 실기기 화면 확인 완료를 보고했다. 결과 목록과 
 - 기존 attempt.subject 사용. 과목이 없는 과거 기록은 추측하지 않고 제목만 유지.
 - UI 표시만 변경, 앞의 7항 보존 검토 그대로 적용. 원본 제목/과목/답안/점수/등급·운영 DB/RPC 불변.
 - 내부 APP75 검증·설치 영수증은 완료 후 아래 추가. APP74 보존, 스토어 미제출.
+
+
+APP75 검증·설치 완료: 관련55검사/한글 렌더4검사·analyze·Wiki PASS.
+소스 c9b4830, iOS1.0.2(75) Release62.4초/44.5MB·codesign deep/strict PASS.
+iPhone12 Pro Max 삭제 없는 설치·실행 PASS, 영수증 `.local/task03c/install75.json`, `launch75.json`.
+Framework SHA256 `69bd4e1fc4c917e9483c7476c839bc0a7dcbb9a7d5a9886e70751b8f2d3b9402`.
+APP74 보존 해시 일치. 실제 학생 제출·운영 DB/RPC·WEB·스토어 변경0.
+과목명 후속 실기기 Owner 확인 대기. Android 빌드/실기기 미실행.
