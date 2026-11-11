@@ -1,0 +1,13 @@
+{
+  "private_directory": ".local/natural-tech-20261112/sookmyung",
+  "files": {
+    "apply-draft.private.sql": "e5f7574f1a41f500d301353319aeae83c9424b828504bdb145cc5ac320cedde7",
+    "register-draft.private.sql": "53bed3bd5699dc1ac59936f7b4d8159497105f1446e79f6e603fa114f29e24db",
+    "worker-source.private.sql": "2a29ac818b2ea2e242e343538281cf7b214d3cd1c9f75ce8fc6bc1230df51d34",
+    "rollback-retire.sql": "d3b991a67dcf20ab32ed70e0a7bd06373ffc4f3f44ad5c2553279ed86483473a"
+  },
+  "production_applied": false,
+  "executable_scope_approved": false,
+  "pdf_existing_preserved": 6,
+  "pdf_approval_pending": 38
+}

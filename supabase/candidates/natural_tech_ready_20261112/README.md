@@ -13,3 +13,7 @@ Reproduction uses existing tools: `essay_lab.four_university_connection` with th
 Operation requires separate university-specific approval after fresh preflight; files existing in Git are not an approval or applied migration. Do not execute the historical53-question batch. Do not activate/publicize content, expand global allowlists, change Credit, or delete prior answers/results. Candidate rollback retires only its named versions and preserves histories.
 
 Soongsil: five exams/twenty leaf contracts verified. Six official sources, including a freshly downloaded2025 admission report; Math230+Worker20 fixture rows. The2024Q2 official rubric says25+15 while the question says25. It is held for Owner source review without correction. Three sibling leaves remain partial and the2024exam is excluded from the expansion candidate; four complete exams/sixteen questions are TECH READY. The20question SQL is a local contract fixture containing HOLD and MUST NOT be executed in production. A separately reviewed bounded DRAFT proposal is needed. Original approved PDF references stay unchanged.
+
+## Sookmyung
+
+44 new technical candidates /16exams; existing6 unchanged. DB889/WEB66/APP45 PASS, no Provider.32 source PDFs;53 problem pages/37 unique rubric pages reviewed. NewPDF38 Owner approval pending,6 existing references reused. Math658+Worker44=702 DRAFT rows NOT APPROVED/NOT APPLIED. See `sookmyung-receipt.json` and source plan.

@@ -1,0 +1,20 @@
+{
+  "university": "sookmyung",
+  "technical_contract_questions": 44,
+  "exams": 16,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 889,
+  "web_pass": 66,
+  "web_skip": 1,
+  "app_pass": 45,
+  "app_log_sha256": "be32ef3e944b5c15925c182135d9d139b4aca20bb557f313b99f5ade2c076b47",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "79dfe9c8c7bce01cd4780a4bdf39a8dc0ad12dfa2040df5e8baa4c78c73400cb",
+  "sql_receipt_sha256": "7a6cb133bbd18aefe9d69a5b6057386128ef08c3f8bce4d1b43827a260a21a30"
+}

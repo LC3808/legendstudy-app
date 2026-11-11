@@ -6,9 +6,9 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
- a=argparse.ArgumentParser();a.add_argument('slug',choices=['konkuk','kyunghee','sungkyunkwan','sogang','soongsil']);a.add_argument('--app-log',type=Path,required=True);x=a.parse_args()
+ a=argparse.ArgumentParser();a.add_argument('slug',choices=['konkuk','kyunghee','sungkyunkwan','sogang','soongsil','sookmyung','dongguk','kwangwoon','seoul-women']);a.add_argument('--app-log',type=Path,required=True);x=a.parse_args()
  old=R/'supabase/candidates/natural_expansion_20261111/four-university'/x.slug;private=R/'.local/four-university-20261111'/x.slug;out=R/'supabase/candidates/natural_tech_ready_20261112';out.mkdir(exist_ok=True)
- if x.slug in ('sogang','soongsil'):old=out/x.slug;private=R/'.local/natural-tech-20261112'/x.slug
+ if x.slug in ('sogang','soongsil','sookmyung','dongguk','kwangwoon','seoul-women'):old=out/x.slug;private=R/'.local/natural-tech-20261112'/x.slug
  manifest=json.loads((old/'manifest.json').read_text());items=manifest['packages'];ids={p['question_id'] for p in items};sql=json.loads((old/'sql-receipt.json').read_text())
  for name,h in sql['files'].items():assert sha(private/name)==h,(name,'SQL_DRIFT')
  for p in items:assert sha(private/(p['question_id']+'.package.private.json'))==p['package_sha256'],p['question_id']
