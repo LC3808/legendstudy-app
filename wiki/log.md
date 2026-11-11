@@ -1,3 +1,7 @@
+## 2026-11-11 — 온보딩 inline APP79 검수본
+
+[최종 검사·APP79](onboarding-inline-applications-20261111.md#최종-검사--app79): 소스8470a15, iPhone17 APP79 삭제 없는 업데이트 설치. 집중62 PASS/전체2548 PASS·8 SKIP·기존5 FAIL/analyze PASS. 200% dropdown overflow 수정·격리 렌더5장 보존. iPhone17 79/iPhone12 75 재조회 PASS. 잠금·미러링 사용 중으로 에이전트 화면검증 NOT TESTED. Owner 실기기 CRUD/복원 최종검수 대기,운영 변경0,HOLD.
+
 ## 2026-11-11 — APP78 온보딩 Native UX 후속
 
 [구현·보존·렌더](onboarding-inline-applications-20261111.md): N수/기타 학교 단계 생략·과거 단계 정규화, 실제 지원 inline CRUD·MY 공통 외부라벨/카드 폼·미저장 이탈 확인. 기존 Repository/Backend/학교 소속 불변,운영 쓰기0. 최종 회귀·기기 영수증 후속,릴리스 HOLD.

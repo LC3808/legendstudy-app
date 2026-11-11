@@ -76,3 +76,23 @@ Owner 최종 UX 확인, 실제 테스트 계정에서 등록/수정/삭제·재�
 기존 full suite 실패5(D3 runner1/mobile IA4)는 별도 작업이며 이번 UI 변경으로 고치지 않는다.
 LAB 독립 작업과 공유하는 Wiki status/index/log/decisions는 향후 항목 단위 통합이 필요하다.
 릴리스 병합/스토어 제출은 하지 않으며 HOLD 유지.
+
+## 최종 검사 / APP79
+
+- 집중 **62 PASS**, 명시적 상태 event 추가검사3 PASS, 실제 Flutter 렌더3 PASS.
+- 최종 전체 **2548 PASS /8 SKIP /기존5 FAIL**(D3 runner1/mobile IA4).
+  중간 실행에서 발견된 200% dropdown overflow2건은 수정 후 전체 재실행에서 해소.
+- `flutter analyze --no-pub`: No issues found. Wiki handoff PASS.
+- 검수 빌드 **1.0.2(79)**, 소스 `8470a15c509eea1fbf387f701c735baa428e30bc`,
+  release87초/44.8MB, 기존 공개 config/OAuth3개/동일 bundle·서명 검증 PASS.
+- App.framework SHA256 `60ed8a7aad4753b6500a54fa8bfcc9e33a020eac7cc55900e982a9f52d38bf6b`.
+- iPhone17에 APP78 위79 삭제 없는 업데이트 설치 SUCCESS. 영수증은
+  ignored `.local/onboarding-device/install79.json`; 앱 데이터 초기화/로그아웃/계정 강제 변경0.
+- 실기기 실제 신규/기존 계정 CRUD·강제 종료·로그인 E2E는 **NOT TESTED / Owner 최종 확인 대기**.
+  fake transport와 Flutter 렌더를 운영 데이터 검수 PASS로 바꾸지 않는다.
+
+설치 후 실제 메타데이터: iPhone17 **1.0.2(79)**, iPhone12 **1.0.2(75)** 재확인.
+명령 실행은 기기 Locked로 실패했고, 미러링 재연결도 ‘iPhone 사용 중’으로 종료됐다.
+따라서 **설치 DONE / 에이전트 실기기 화면·CRUD 검증 NOT TESTED**로 구분한다.
+Owner는 기기에서 앱을 직접 열어 최종 UX를 확인한다. 앱79의 삭제 없는 업데이트 외
+기존 계정·profile·지원 기록·학교 소속에 대한 에이전트 쓰기0.
