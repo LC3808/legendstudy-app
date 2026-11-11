@@ -5931,3 +5931,7 @@ Owner 최종 순서10개교와 기완료4개교 제외를 반영. 현재한국�
 ## 2026-11-12 — 한국항공대7문항 운영 DRAFT 적재
 
 Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 INSERT. KST00:23:31 시작/00:27:07 성공 응답,00:28:02 범위 확인. 운영 사전116/사후122 PASS,기존 데이터·함수·RLS·권한20 snapshot 동일,HOLD5/후순위46 미적재·신규 release catalog0. 비파괴 rollback 준비 유지,실패 없어 미실행. RPC/활성화/Provider/배포0. DRAFT DONE,NOT SERVICE READY. [영수증·검증·다음 단계](essay-kau-draft-production-20261112.md).
+
+## 2026-11-12 — Owner 검수 계정 지정·TECH READY 기준 변경
+
+지정 계정 존재/인증/계정 허용을 SELECT 확인. 한국항공7 제한 후보 private table/helper 및 admission4 함수의 격리53검사 PASS, 운영 변경0. 대학별 품질 검수 대기를 해제하고 TECH READY→다음 대학→전체 REVIEW READY→Owner 통합 검수로 기준 변경.7문항 후보는 접근 경계 증거로 보존하고 공통 검수 기능 준비와 대학별 연결을 분리. [접근 제어/미완료](essay-owner-review-access-20261112.md) · [새 순차 기준](essay-natural-sequential-order-20261112.md).

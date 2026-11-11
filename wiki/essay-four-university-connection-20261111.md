@@ -1,6 +1,6 @@
 # 논술 자연계열 네 대학 연결 후보 — 2026-11-11
 
-최신 Owner 기준: [한 대학씩 SERVICE READY·확정 순서](essay-natural-sequential-order-20261112.md). 아래 로컬 상태/일괄53 후보는 당시 증거이며 현재 완료·일괄 실행 승인을 뜻하지 않는다.
+최신 Owner 기준: [한 대학씩 TECH READY·통합 Owner 검수](essay-natural-sequential-order-20261112.md). 아래 로컬 상태/일괄53 후보는 당시 증거이며 현재 완료·일괄 실행 승인을 뜻하지 않는다.
 
 최신: [운영 사전 검증 및53문항 승인안](essay-four-university-production-preflight-20261112.md). 아래58문항 전체 SQL은 이번 적용 범위가 아니다.
 

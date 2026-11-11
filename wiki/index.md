@@ -390,3 +390,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 [작업03-A 공식 정답·배점·등급컷 검수/READY 후보/미완료](task03a-official-ready-20261111.md).
 
 [작업03-B 2025수능 검수·별칭/코드·원점수/백분위·승인용 SQL](task03b-ready-candidate-20261111.md).
+
+- Owner 통합 검수 접근 제어 / TECH READY 후 검수 권한 준비: [후보·검증·차단](essay-owner-review-access-20261112.md).

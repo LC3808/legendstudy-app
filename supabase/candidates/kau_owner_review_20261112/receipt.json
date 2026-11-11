@@ -1,0 +1,19 @@
+{
+  "owner_subject_sha256": "29bd2e5a7faee17bef8cdfdc653b8e3a591daf36059dfe401ba912f4fb1a0db9",
+  "scope": [
+    "2a5f8c6d-f076-517e-af42-3da22e7da820",
+    "8b167c8f-4def-5747-9fea-c27b63880ff9",
+    "dde4effa-358f-5a69-871a-d09cb460bc50",
+    "b085d5df-212f-576b-a0b7-8ee3c21f36c2",
+    "2b478cd7-6c71-5a29-b4f4-1ec3aecec712",
+    "cab98973-6c96-5ea1-ae62-1131b498ab9c",
+    "3ae7907d-32a4-519a-898c-ea65ac73de6b"
+  ],
+  "private_install": "/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/.local/kau-owner-review-20261112/install-closed.private.sql",
+  "install_sha256": "2f3eb274a0ad211c4fb8e4297f828d6dd9eae6155aaf0301243ea8d51b5c8f5c",
+  "close_sha256": "b0990d09d7ba4c699f98457abf04bc4e2cc37634f49c5086618c5ca1ee7ec1c3",
+  "restore_sha256": "3e62ea8cb82648dda53fcec1ca111678513e9d8a99f37e9335cba688a44892f0",
+  "activation_included": false,
+  "provider_calls": 0,
+  "production_writes": 0
+}
