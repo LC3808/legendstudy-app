@@ -8,7 +8,7 @@ Owner 작업02 후속 승인에 따라 누적·지원 중복 두 함수를 운�
 [구현·검증·후속 작업](app67-learning-integration-20261111.md) ·
 [SQL 후보·검증·원복](../supabase/candidates/app67_learning_20261111/README.md).
 
-- 학습 홈: 서버 확정 오늘/이번 주, 최근 기록, 기존 최근7일 차트·타이머, 학교 순위·초대 진입.
+- 학습 홈: 서버 확정 오늘/누적/이번 주, 최근7일 차트·타이머, 학교 순위·초대 진입.
 - 학교 순위: 서버 RPC all/participation 기본, 네 기간·세 지표, 공동 순위/TOP10/주변,
   비공개 인원 **, 기존 NEIS 학교명 조회·등록 연결. APP 별도 집계 없음.
 - 초대: 기존 Backend 생성/복사/OS공유/토큰 보관/로그인 후 귀속/학교 확인.
@@ -16,7 +16,7 @@ Owner 작업02 후속 승인에 따라 누적·지원 중복 두 함수를 운�
   전용 custom scheme 수신을 구현했다. 수동 받은 초대 페이지는 제거하고 학습 초대하기에서 바로 OS 공유한다. Universal/App Links 운영 도메인 검증,
   설치 후 토큰 복원 및 실기기 E2E는 별도 미완료다.
 - 누적 표시 연결 완료. 두 함수 운영 적용 및 기존 데이터/ACL/요약 보존 검사 PASS.
-  학습·초대·Auth 집중49 PASS, analyze PASS. iPhone12 Pro Max에 Owner UX·Scene 공유 오류 반영 빌드70 설치·실행 완료, 재검수 대기.
+  학습·초대·Auth 집중49 PASS, analyze PASS. iPhone12 Pro Max에 Owner UX·Scene 공유 오류 반영 빌드70 설치·실행 완료, Owner 확인 회신. 학교 순위 제목/시간 강조 후속 UI28검사 PASS, 빌드71 준비.
 
 ## 다음 작업
 

@@ -490,10 +490,18 @@ void main() {
           expect(t.takeException(), isNull);
           expect(find.text('참여 **명'), findsNWidgets(2));
           expect(find.text('참여 2명'), findsOneWidget);
-          expect(find.text('1위'), findsNWidgets(2));
-          expect(find.text('11위 · 우리 학교'), findsOneWidget);
+          expect(
+            find.textContaining(RegExp(r'^1위 · '), findRichText: true),
+            findsNWidgets(2),
+          );
+          expect(
+            find.textContaining('11위 · 우리 학교', findRichText: true),
+            findsOneWidget,
+          );
           await preview.capture(t, 'learning-rank-$scale-$dark');
-          await t.ensureVisible(find.text('11위 · 우리 학교'));
+          await t.ensureVisible(
+            find.textContaining('11위 · 우리 학교', findRichText: true),
+          );
           await t.pumpAndSettle();
           expect(t.takeException(), isNull);
           await preview.capture(t, 'learning-rank-rows-$scale-$dark');
@@ -547,6 +555,39 @@ void main() {
       expect(t.takeException(), isNull);
     },
   );
+  for (final metric in [RankMetric.total, RankMetric.average]) {
+    testWidgets(
+      '${metric.value} highlights time and hides registration count',
+      (t) async {
+        await t.pumpWidget(
+          ProviderScope(
+            overrides: [
+              rankSchoolNameProvider.overrideWith((ref, key) async => '진접고등학교'),
+            ],
+            child: MaterialApp(
+              home: Scaffold(
+                body: RankTile(
+                  row: SchoolRank.parse(row(12, 1, own: true, ms: 3600000)),
+                  metric: metric,
+                  own: true,
+                ),
+              ),
+            ),
+          ),
+        );
+        await t.pumpAndSettle();
+        expect(
+          find.textContaining('1위 · 우리 학교 · 진접고등학교', findRichText: true),
+          findsOneWidget,
+        );
+        expect(find.textContaining('가입'), findsNothing);
+        final value = t.widget<Text>(find.text('1시간 0분'));
+        expect(value.style?.fontSize, 26);
+        expect(value.style?.fontWeight, FontWeight.w800);
+        expect(t.takeException(), isNull);
+      },
+    );
+  }
   testWidgets('unset school shows setup, never requests ranks', (t) async {
     var calls = 0;
     await t.pumpWidget(

@@ -106,8 +106,8 @@ enum RankPeriod {
 
 enum RankMetric {
   participation('participation', '참여 학생 수'),
-  total('total', '총공부시간'),
-  average('average', '1인당 평균 공부시간');
+  total('total', '총 공부 시간'),
+  average('average', '1인당 평균 공부 시간');
 
   const RankMetric(this.value, this.label);
   final String value, label;

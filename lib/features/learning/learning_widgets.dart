@@ -370,7 +370,7 @@ class _SchoolRankingPageState extends ConsumerState<SchoolRankingPage> {
                                           ),
                                         const SizedBox(height: 12),
                                         const Text(
-                                          '다른 학교의 가입·참여 인원은 **로 표시해요. 총공부시간과 평균은 기록자 3명 이상일 때 공개돼요. 공동 순위와 표시 순서는 서버 기준이에요.',
+                                          '다른 학교의 가입·참여 인원은 **로 표시해요. 총 공부 시간과 평균은 기록자 3명 이상일 때 공개돼요. 공동 순위와 표시 순서는 서버 기준이에요.',
                                         ),
                                       ],
                                     ),
@@ -405,28 +405,58 @@ class RankTile extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              '${row.rank}위${own ? ' · 우리 학교' : ''}',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
             name.when(
-              data: Text.new,
-              loading: () => const Text('학교명 확인 중'),
+              data: (schoolName) => Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${row.rank}위${own ? ' · 우리 학교' : ''} · ',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    TextSpan(
+                      text: schoolName,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              loading: () => Text('${row.rank}위 · 학교명 확인 중'),
               error: (_, _) => TextButton(
                 onPressed: () => ref.invalidate(
                   rankSchoolNameProvider((row.office, row.school)),
                 ),
-                child: const Text('학교명 다시 확인'),
+                child: Text('${row.rank}위 · 학교명 다시 확인'),
               ),
             ),
+            const SizedBox(height: 12),
             Text(
               metric == RankMetric.participation
                   ? '참여 ${own ? row.active?.toString() ?? '**' : '**'}명'
                   : time == null
                   ? '공개 기준 미충족'
                   : learningDuration(time),
+              style: metric == RankMetric.participation
+                  ? null
+                  : TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: metric == RankMetric.total
+                          ? (Theme.of(context).brightness == Brightness.dark
+                                ? const Color(0xff5eead4)
+                                : const Color(0xff0f766e))
+                          : (Theme.of(context).brightness == Brightness.dark
+                                ? const Color(0xffc4b5fd)
+                                : const Color(0xff6d28d9)),
+                    ),
             ),
-            Text('가입 ${own ? row.registered?.toString() ?? '**' : '**'}명'),
+            if (metric == RankMetric.participation)
+              Text('가입 ${own ? row.registered?.toString() ?? '**' : '**'}명'),
           ],
         ),
       ),
