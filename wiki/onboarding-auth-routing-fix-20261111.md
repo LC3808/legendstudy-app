@@ -83,3 +83,23 @@ wiki/index/current-status/log/decisions는 공통 편집 파일이므로 향후 
 다음: iPhone17 Pro Max 대상 독립 검수 빌드로 신규 로그인/온보딩/완료/재로그인 확인 →
 미완료 재개/계정 전환/Apple·Google 실기기 검수 → 저장 전 임시 draft 보존 범위 해결 → 릴리스 통합.
 이번 결과는 코드 결함 수정·격리 회귀 완료이며 실기기 전체 안정화 완료가 아니다.
+
+## Owner 승인 iPhone17 업데이트 설치 — 후속
+
+Owner는 기존 앱 데이터 유지 조건으로 수정 앱 설치·온보딩 검증을 승인했다.
+빌드 소스 `1b2a92542b6cb8051dc0a28079e982babdd8e350`, 버전 **1.0.2(77)**.
+기존 APP75 공개 클라이언트 설정을 로컬 파일로 재사용했고 OAuth3개/프로젝트 일치 validator PASS.
+Flutter release 빌드80초,44.8MB; codesign deep/strict PASS.
+동일 team `VUKFS69GB4`, application identifier `VUKFS69GB4.com.legendstudy.app`,
+iPhone17 대상 UDID의 provisioning 포함을 확인했다.
+App.framework SHA256 `d53f873e2b7110a8b795693c0b72e4601367d608db5ec10d3192afe5bdd0acbf`.
+
+`devicectl device install app`으로 기존67 위에77 업데이트 설치 SUCCESS, launch SUCCESS,
+설치 메타데이터1.0.2(77) 재조회 PASS. 삭제/재설치/컨테이너 초기화/로그아웃/계정 reset 없음.
+설치·실행 영수증은 ignored `.local/onboarding-device/{install77,launch77}.json`,
+빌드 영수증은 `build/ios/device-qa-receipt.json`. 비밀값/개인 기기 식별자는 Git에 기록하지 않는다.
+기존 배포 앱 container는 접근 불가여서 업데이트 전 데이터 전체 해시/백업은 취득하지 않았다.
+따라서 삭제 없는 업데이트 성공과 앱 내 실제 데이터·세션 보존 확인은 구분한다.
+
+iPhone 미러링은 대상 iPhone17 사용 중으로 연결 시간이 초과됐다. Owner에게 화면 잠금을 요청했다.
+온보딩 화면/실제 세션 보존은 NOT TESTED; 잠금 후 연결하여 확인해야 한다. 운영 Auth·DB·SMTP 설정/스토어 변경0.

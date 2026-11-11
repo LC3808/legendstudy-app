@@ -1,3 +1,7 @@
+## 2026-11-11 — iPhone17 온보딩 수정 앱77 설치
+
+[설치 영수증·한계](onboarding-auth-routing-fix-20261111.md#owner-승인-iphone17-업데이트-설치--후속): Owner 데이터 유지 조건 승인. 소스1b2a925,1.0.2(77) 동일 team/bundle ID/provisioning·서명 검증 후67 위 업데이트·실행·버전 재조회 PASS. 삭제/초기화0. 미러링 사용 중 시간 초과; 온보딩 화면/로그인 보존 실제 검증 대기.
+
 ## 2026-11-11 — Owner 재현 설치본 정정
 
 [온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner iPhone17 Pro Max 홈 화면 앱. 일반 배포 앱 포함 조회로1.0.2(67) 확인, 빌드 기록2fa70bf의 동일 gate 결함 대조. 이전 개발 앱 전용 조회로 생긴 APP75 설치본 연결 오류 정정. 앱 설치/삭제/운영 변경0.
