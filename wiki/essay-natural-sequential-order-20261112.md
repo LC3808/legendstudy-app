@@ -10,7 +10,7 @@
 
 |순번|대학|현재 상태|다음 행동|
 |---|---|---|---|
-|1|한국항공대학교|진행 중 / NOT SERVICE READY / 운영 승인·HOLD·검수 접근 제어 대기|아래7문항 단독 승인안부터 처리|
+|1|한국항공대학교|7문항 DRAFT 운영 적재 DONE / NOT SERVICE READY / HOLD·검수 접근 제어 대기|Owner 전용 검수 접근 제어 준비|
 |2|건국대학교|대기 / 기존 후보24·기존 운영4 보존|한국항공대 마감 보고 후 착수|
 |3|경희대학교|대기 / 후보7·기존 운영3·NOT READY16 보존|건국대 마감 보고 후 착수;의약 부분4 구분|
 |4|성균관대학교|대기 / 후보15·PDF 승인 대기15 보존|경희대 마감 보고 후 착수|
@@ -33,9 +33,9 @@ HOLD 또는 운영 승인으로 막히면 즉시 Owner에게 보고한다. HOLD�
 - 대상 중 HOLD/NOT READY가 남으면 준비된 문항의 범위를 명시하고 대학 전체 완료로 확대하지 않는다. 잔여 범위를 어떻게 마감할지 Owner에게 판단을 요청한다.
 - 대학별 결과·미완료/HOLD·검수 경로·다음 순서를 이 Wiki에 갱신한다. 일반 중간 보고는 생략하며 SERVICE READY 달성 또는 Owner 판단/운영 승인/HOLD 시 보고한다.
 
-## 한국항공대 — 지금 필요한 승인과 HOLD
+## 한국항공대 — DRAFT 적용 결과와 남은 HOLD
 
-현재12문항 중7문항의 로컬 자료/계약은 검증됐고5문항은 HOLD다. **현재 실제 SERVICE READY 확인0**, 운영 미적용이며 실제 WEB/APP 계정 검수 NOT TESTED다.
+현재12문항 중7문항·106행은 Owner 승인 후 운영 비공개 DRAFT로 적재했고5문항은 HOLD다. **현재 실제 SERVICE READY 확인0**,실제 WEB/APP 계정 검수 NOT TESTED다. [적용 결과·전후 검증](essay-kau-draft-production-20261112.md).
 [기존 공식 이슈5개](../supabase/candidates/natural_expansion_20261111/connection/official-source-issues.json) · [문항별 근거](essay-four-university-question-review-20261111.md).
 
 |HOLD|이유/Owner 판단|
@@ -49,11 +49,11 @@ HOLD 또는 운영 승인으로 막히면 즉시 Owner에게 보고한다. HOLD�
 원문·해설을 고치거나 HOLD를 임의 해제하지 않는다. 부분 시험의 공개/진입 정책도 자동 결정하지 않는다.
 
 새 순서에 맞춰 [한국항공 단독 적용 후보](../supabase/candidates/natural_expansion_20261111/kau-production-preflight/README.md)를 기존53 후보에서 분리했다.
-**4시험7문항 / 기존 Math8테이블99행 + private Worker7행 =106행 DRAFT INSERT**만 승인 요청한다.2024 이학Q2는 해당 시험의 부분1문항이며 공개 승인과 다르다.
+**4시험7문항 / 기존 Math8테이블99행 + private Worker7행 =106행 DRAFT INSERT**만 승인받아 적용했다.2024 이학Q2는 해당 시험의 부분1문항이며 공개 승인과 다르다.
 HOLD5,후순위 후보46,기존 운영7,중앙 과학11은 적용 대상에서 제외한다. 기존53 일괄 SQL은 역사적 검증 자료로 보존하지만 현재 실행 대상으로 사용하지 않는다.
 정확한 단독 apply/verify/retire SQL로 **격리 PG17 명명 검사55 PASS**:7문항×2계정 DRAFT 차단,Worker 자료 해석,기존 기록/함수/권한 보존,실패 시 전체 취소,후순위46 미적재,반복 원복·결과 읽기.
 원복은 신규 versioned4테이블28행 DRAFT→RETIRED만 변경하며 공식 자료·사용자 이력은 삭제하지 않는다.
-이 결과는 **승인 준비 결과이며 SERVICE READY 완료 보고가 아니다.** 이번 원격 DB 읽기/쓰기·Provider·배포는0이며,운영 사전 상태 근거는 이전00:05:50 KST SELECT다. 승인 후 실제 적용 직전에 단독 `preflight.sql`을 다시 실행해야 한다.
+위55개는 격리 승인 준비 증거다. 이후 승인 실행에서 운영 사전116/사후122조건 PASS 및20개 보존 snapshot 동일을 확인했다. DRAFT 적재는 DONE이나 SERVICE READY 완료 보고는 아니다. apply 재실행 금지,Provider·배포0.
 
 별도 미해결 사항: [Owner 전용 검수 접근 제어 GAP](essay-four-university-production-preflight-20261112.md#공개-차단과-owner-검수-경로--핵심-gap).
 DRAFT는 Owner도 제출 불가. 현재 ACTIVE만 켜면 다른 로그인 계정의 직접 RPC 제출을 차단하지 못한다. 숨김 목록/WEB allowlist만으로 우회하지 않는다.
@@ -62,5 +62,5 @@ DRAFT는 Owner도 제출 불가. 현재 ACTIVE만 켜면 다른 로그인 계정
 ## 결정·검증 인계
 
 [기존 보존 검토7항](essay-four-university-production-preflight-20261112.md#보존-검토7항-및-승인-경계)을 그대로 계승한다. 선택된 UUID 범위만53→7로 축소했고 새로운 저장 구조/이력 UPDATE/점수 추정은 없다.
-운영 DB·RPC 변경·사용자 공개·WEB/APP 배포0. 현재 대학은 한국항공대,다음은 건국대이며 **승인/HOLD 보고를 대학 마감으로 간주하지 않는다**.
+승인된 운영 DRAFT106행 INSERT 완료. RPC 변경·활성화·사용자 공개·WEB/APP 배포0. 현재 대학은 한국항공대,다음은 건국대이며 **승인/HOLD 보고를 대학 마감으로 간주하지 않는다**.
 Git HEAD는 `git log -1`로 확인한다. SQL 실행 파일·SHA·대상 UUID·검증 결과는 아래 후보 README에서 추적한다.

@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 한양·중앙·고려·인하 재작업 제외. 한국항공→건국→경희→성균관→서강→숭실→숙명여대→동국→광운→서울여대. 현재 한국항공 NOT SERVICE READY: HOLD5/운영 승인/Owner 검수 접근 제어 대기. 단독7문항106행 DRAFT 승인 후보·격리55 PASS;후순위 착수0. 로컬 검증만으로 완료/다음 대학 진행 금지.
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 현재 한국항공7문항·106행 운영 비공개 DRAFT 적재 DONE([영수증·검증](essay-kau-draft-production-20261112.md)). 사전116/사후122 PASS,기존 데이터·함수·권한20개 snapshot 동일,HOLD5 유지. SERVICE READY 아님;다음은 한국항공 Owner 전용 검수 접근 제어 준비. 후순위 착수0,기완료4개교 재작업 제외.
 
 [이전 확장 감사와 범위 이력](essay-connection-owner-verification-20261111.md) · [공식 불일치·원문 보존·중앙 과학11 HOLD](essay-natural-expansion-20261111.md).
 

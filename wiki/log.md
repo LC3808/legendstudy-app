@@ -5927,3 +5927,7 @@ APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/
 ## 2026-11-12 — 자연·수리 대학 순서 및 완료 기준 확정
 
 Owner 최종 순서10개교와 기완료4개교 제외를 반영. 현재한국항공에 한정하여7문항/106행 DRAFT 적용·검증·원복을 기존 후보에서 분리,격리55 PASS. 다른46개 후보 미적재 검증. 실제SERVICE READY 미달·HOLD5·운영 승인·Owner 검수 접근 제어를 즉시 보고하며 후순위 진행하지 않음. 이전53 일괄승인안은 실행 대상에서 제외. 운영쓰기/Provider/배포0. [결정·인계](essay-natural-sequential-order-20261112.md).
+
+## 2026-11-12 — 한국항공대7문항 운영 DRAFT 적재
+
+Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 INSERT. KST00:23:31 시작/00:27:07 성공 응답,00:28:02 범위 확인. 운영 사전116/사후122 PASS,기존 데이터·함수·RLS·권한20 snapshot 동일,HOLD5/후순위46 미적재·신규 release catalog0. 비파괴 rollback 준비 유지,실패 없어 미실행. RPC/활성화/Provider/배포0. DRAFT DONE,NOT SERVICE READY. [영수증·검증·다음 단계](essay-kau-draft-production-20261112.md).

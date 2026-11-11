@@ -1,6 +1,6 @@
 # Current Status
 
-[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 한양·중앙·고려·인하 재작업 제외. 한국항공→건국→경희→성균관→서강→숭실→숙명여대→동국→광운→서울여대. 현재 한국항공 NOT SERVICE READY: HOLD5/운영 승인/Owner 검수 접근 제어 대기. 단독7문항106행 DRAFT 승인 후보·격리55 PASS;후순위 착수0. 로컬 검증만으로 완료/다음 대학 진행 금지.
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 현재 한국항공7문항·106행 운영 비공개 DRAFT 적재 DONE([영수증·검증](essay-kau-draft-production-20261112.md)). 사전116/사후122 PASS,기존 데이터·함수·권한20개 snapshot 동일,HOLD5 유지. SERVICE READY 아님;다음은 한국항공 Owner 전용 검수 접근 제어 준비. 후순위 착수0,기완료4개교 재작업 제외.
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 

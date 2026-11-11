@@ -1,4 +1,8 @@
-# 한국항공대 단독 비공개 적재 후보 — NOT APPLIED / NOT SERVICE READY
+# 한국항공대 단독 비공개 적재 — APPLIED / NOT SERVICE READY
+
+**운영 적용 DONE. apply 재실행 금지.** [적용 시각·전후 검증·보존·잔여 작업](../../../../wiki/essay-kau-draft-production-20261112.md).
+
+아래는 실행한 승인 패키지의 재현/감사 설명이며 추가 실행 승인이 아니다.
 
 [최신 Owner 순서·완료 기준·HOLD](../../../../wiki/essay-natural-sequential-order-20261112.md).
 기존53개 일괄 후보를 실행하지 않고 한국항공대7개만 분리했다. 기존 엔진/함수/정책은 변경하지 않는다.
@@ -14,7 +18,7 @@
 - `sql-receipt.json`:SQL 및 패키지 SHA256. 정확한 apply 파일은 `/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/.local/kau-production-preflight-20261112/apply-draft.private.sql` (ignored,원문/이미지 포함).
 - Apply SHA256: `c4fdfeb05aa785ff7ca6afd9da3c20a0dad69c7f0294d94bf065e84ad4a3da62`.
 
-Owner 별도 승인 후에만: 영수증 확인→운영 SELECT preflight116조건 재검사→단독 apply 한 transaction→verify→결과 기록. 오류 시 readback으로 commit 여부 확인 후 비파괴 원복. 기존 register/Worker 파일을 중복 실행하지 않는다. 기존53 일괄파일과 함께 실행하지 않는다.
+이번 Owner 승인으로 실행 완료한 절차: 영수증 확인→운영 SELECT preflight116조건 재검사→단독 apply 한 transaction→verify→결과 기록. 오류 시 readback으로 commit 여부 확인 후 비파괴 원복. 기존 register/Worker 파일을 중복 실행하지 않는다. 기존53 일괄파일과 함께 실행하지 않는다.
 DRAFT에서는 Owner도 제출할 수 없다. Owner 전용 검수 경로는 미해결이며 실제 검수/ACTIVE/RPC·배포·Provider 호출·일반 공개는 이번 승인 요청 범위 밖이다.
 
 재현 (APP checkout):
