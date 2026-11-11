@@ -36,6 +36,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+작업04 / 고3·N수 실제 지원 대학 / 합격 발표 일정: [APP75 기반 구현·기존 RPC·공식 출처 조사](task04-applications-20261111.md).
+
 모의고사 결과/답안 UI·공식 기출 기본·예상/추정 등급: [학생 결과 UI 후속](task03-result-ux-20261111.md).
 
 작업03-C 자동채점 운영 적용 / READY 공개 / 실기기 검수: [운영 결과·검증·보존·원복](task03c-production-rollout-20261111.md).

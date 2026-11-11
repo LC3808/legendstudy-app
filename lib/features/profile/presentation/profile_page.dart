@@ -1,3 +1,4 @@
+import '../../applications/applications_page.dart';
 import '../../credits/credit_balance.dart';
 import '../../lab/score_summary.dart';
 import '../avatar.dart';
@@ -146,6 +147,8 @@ class ProfilePage extends ConsumerWidget {
           const LsCard(padding: _myCardPadding, child: MyScoreSummary()),
           const SectionHeader('관심 대학·학과'),
           const AspirationsCard(),
+          const SizedBox(height: 12),
+          const ApplicationsEntry(),
           const SectionHeader('나의 자료'),
           LsCard(
             padding: _myCardPadding,
