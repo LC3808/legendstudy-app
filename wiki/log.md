@@ -5814,3 +5814,4 @@ iOS 공유창의 Scene 접근 수정, 집중49 PASS. 운영 데이터/권한 변
 Owner 빌드70 확인 후 학교 순위 제목 통합·시간 글자/색상 강조·시간 탭 가입 인원 제거.
 학습 통합28 PASS, analyze PASS, 밝은/어두운 테마·확대 글자 렌더링 확인.
 [변경·검수 기록](app67-learning-integration-20261111.md). 운영 DB/스토어 변경 없음.
+빌드71(source a15711f) 서명 검사·iPhone 삭제 없는 설치/실행 PASS, Owner 화면 재검수 대기.

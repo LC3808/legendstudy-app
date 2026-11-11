@@ -195,3 +195,7 @@ Owner는 빌드70 검수에 “다 확인했어”로 회신하고 학교 순위
 검증: 학습 통합28테스트 PASS, analyze No issues found. 360px 밝은/어두운 테마와
 글자1배/2배 렌더링 검사 PASS. 기존 순위 테스트의 독립 순위 텍스트 탐색을 합쳐진 제목 탐색으로 갱신했다.
 빌드71 서명·기기 설치는 아래 후속 증거로 구분한다. 스토어 제출 없음.
+
+빌드71(1.0.2), source a15711f: iOS release 빌드·codesign 검증 PASS.
+iPhone12 Pro Max 삭제 없는 설치·실행 PASS. [설치 증거](../tool/app71-learning-rank-receipt-20261111.json).
+학교 순위 실기기 최종 모양은 Owner 재검수 대기. APP67 원본/운영 데이터 보존, 스토어 제출0.
