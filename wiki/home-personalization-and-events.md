@@ -1,5 +1,7 @@
 # Home Personalization and Event Collection — Architecture Audit
 
+2026-11-11 후속: [작업04 홈 설정·공식 대학 소식](task04-home-university-news-20261111.md)에서 동일 기본 홈/표시·드래그/온보딩 선택을 구현했다. 아래 역할별 preset·드래그 후순위는 과거 설계이며 최신 Owner 정책이 우선한다. 후보 DB는 운영 미적용.
+
 Status: **PLANNED / FOUNDATION DESIGN ONLY — 2026-09-25**
 
 This document records the audited foundation for two future product tracks:

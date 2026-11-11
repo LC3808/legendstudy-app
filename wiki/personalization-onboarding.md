@@ -1,5 +1,7 @@
 # Personalization Foundation & First-Login Onboarding
 
+2026-11-11 개발 후속: APP75 닉네임5단계 뒤 [홈 카드 선택6단계](task04-home-university-news-20261111.md)를 추가했다. 기존 회원 재온보딩 없음, skip은 설정 생성0. 계정 홈 저장 후보 DB는 운영 미적용.
+
 ## 2026-11-03 — V2 superseding implementation
 
 [현재 4단계 저장·학교 검색 V2](onboarding-school-search-v2-20261103.md): 상태/학년 수정분은 단계 이동과 건너뛰기 전에 저장한다. 학교는 검색 결과의 임시 선택 후 명시적 확인으로만 저장한다. 아래 마지막 완료에만 저장/학교 즉시 저장/2단계 설명은 과거 기록이다. 운영 배포는 별도이며 APP41 보존.

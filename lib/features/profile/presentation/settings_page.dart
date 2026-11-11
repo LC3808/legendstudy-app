@@ -1,3 +1,4 @@
+import '../../home/customization/home_editor.dart';
 import 'learning_info_row.dart';
 import '../../study/study_providers.dart';
 
@@ -58,6 +59,12 @@ class SettingsPage extends ConsumerWidget {
               ],
             ),
           const SettingsGroup(title: '기본 정보', children: [LearningInfoRow()]),
+          SettingsGroup(
+            title: '홈',
+            children: [
+              LsListRow(title: '홈 화면 설정', onTap: () => openHomeEditor(context)),
+            ],
+          ),
           SettingsGroup(
             title: '학습 설정',
             children: [

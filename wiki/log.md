@@ -5876,3 +5876,10 @@ APP75 source c9b4830:55검사·렌더4·analyze PASS, iPhone 서명·설치·실
 ## 2026-11-11 — 작업04 실제 지원 대학 관리
 
 [구현·검증·일정 후보](task04-applications-20261111.md). APP75 최신633f982 기반 별도 브랜치. MY 고3/N수·기존 WEB RPC·상태 append/정정·부분 저장 재시도. 운영 RPC 정의 SELECT만, 변경0. 공식 모집요강 전형별 일정 차이 확인·홈 일정 미구현. 실기기/릴리스/스토어 대기.
+
+
+## 2026-11-11 — 작업04 홈 개인화·나의 대학 소식 확장
+
+APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/편집·드래그·계정 설정/공식 대학 소식 Native UI를 추가했다. 정확 매칭/KST/개정·철회/미확인·만료 분리, 운영 후보 SQL은 로컬 PostgreSQL17만 검증. 운영 DB·RPC·WEB·APP75 설치·스토어 변경0. [구현·25항 인계·테스트·잔여](task04-home-university-news-20261111.md), [후보 계약](../supabase/candidates/task04_home_20261111/README.md).
+
+작업04 최종 검증: 관련93항목PASS, 전체2505PASS/8SKIP/APP75 동일5FAIL, Analyze/iOS profile/Android debug/Wiki PASS. Native360px1x·2x 렌더 확인. 실기기·실서버 동기화·공식 자료 운영 제공은 미검증/미적용. [완료 근거](task04-home-university-news-20261111.md).

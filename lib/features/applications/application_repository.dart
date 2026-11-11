@@ -181,7 +181,7 @@ final applicationRepositoryProvider = Provider<ApplicationRepository?>((ref) {
     owner,
   );
 });
-final applicationsProvider = FutureProvider<List<ApplicationRecord>>((
+final applicationsProvider = FutureProvider.autoDispose<List<ApplicationRecord>>((
   ref,
 ) async {
   final repo = ref.watch(applicationRepositoryProvider);

@@ -1,3 +1,5 @@
+import '../../home/customization/home_configuration.dart';
+import '../../home/customization/home_editor.dart';
 import '../device_intro.dart';
 import '../../analytics/analytics_providers.dart';
 import '../../analytics/domain/analytics_events.dart';
@@ -64,6 +66,8 @@ class OnboardingPage extends ConsumerStatefulWidget {
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   int _step = 1;
+  HomeConfiguration _homeDraft = HomeConfiguration.defaults();
+  int? _homeSavedRevision;
   final _nickname = TextEditingController();
   String? _savedNickname;
   bool _nicknameDirty = false;
@@ -119,6 +123,25 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     });
     try {
       await _persistDraft(owner);
+      if (delta > 0 && _step == 5) {
+        final nickname = _nickname.text.trim();
+        final validation = nickname.isEmpty
+            ? null
+            : nicknameValidationError(nickname);
+        if (validation != null) {
+          if (_sameOwner(owner)) setState(() => _error = validation);
+          return;
+        }
+        if (nickname.isNotEmpty && nickname != _savedNickname) {
+          await ref
+              .read(profileRepositoryProvider)
+              .upsertCurrentProfile(displayName: nickname);
+          if (!_sameOwner(owner)) return;
+          _savedNickname = nickname;
+          _nicknameDirty = false;
+          ref.invalidate(currentProfileProvider);
+        }
+      }
       if (delta > 0 && _step == 2 && _isStudent && _schoolDraft != null) {
         final applied = await ref
             .read(schoolSelectionProvider.notifier)
@@ -254,6 +277,26 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         ref.invalidate(currentProfileProvider);
       }
       if (!_sameOwner(owner)) return;
+      if (_homeSavedRevision == null) {
+        final settingsRepo = ref.read(homeConfigurationRepositoryProvider);
+        if (settingsRepo == null || settingsRepo.owner != owner) {
+          throw StateError('Settings unavailable');
+        }
+        final settings = await settingsRepo.load().last;
+        if (!settings.confirmed) throw StateError('Settings read failed');
+        // A resumed onboarding on an older client must retain future card IDs.
+        final chosenIds = _homeDraft.cards.map((card) => card.id).toSet();
+        final configuration = HomeConfiguration([
+          ..._homeDraft.cards,
+          ...settings.configuration.cards.where(
+            (card) => !chosenIds.contains(card.id),
+          ),
+        ]);
+        final saved = await settingsRepo.save(configuration, settings.revision);
+        if (!_sameOwner(owner)) return;
+        _homeSavedRevision = saved.revision;
+        ref.invalidate(homeConfigurationProvider);
+      }
       await repo.markOnboardingComplete();
       if (!_sameOwner(owner)) return;
       ref.read(analyticsServiceProvider).logEvent(
@@ -276,6 +319,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     if (_owner != auth.value?.userId) {
       _owner = auth.value?.userId;
       _step = 1;
+      _homeDraft = HomeConfiguration.defaults();
+      _homeSavedRevision = null;
       _status = null;
       _grade = null;
       _nickname.clear();
@@ -380,7 +425,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Widget _header(String title, String description) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _StepProgress(step: _step - 1, total: 5),
+      _StepProgress(step: _step - 1, total: 6),
       const SizedBox(height: AppTokens.space16),
       Text(
         title,
@@ -407,8 +452,24 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         return _universitiesStep();
       case 4:
         return _majorStep();
-      default:
+      case 5:
         return _nicknameStep();
+      default:
+        return [
+          _header(
+            '나만의 홈 화면 만들기',
+            '자주 사용하는 기능을 선택해 주세요. 선택한 기능을 홈 화면에서 빠르게 확인할 수 있어요. 나중에 언제든 변경할 수 있습니다.',
+          ),
+          HomeCardSelector(
+            value: _homeDraft,
+            onChanged: _busy
+                ? null
+                : (value) => setState(() {
+                    _homeDraft = value;
+                    _homeSavedRevision = null;
+                  }),
+          ),
+        ];
     }
   }
 
@@ -462,7 +523,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         _nicknameDirty = true;
         _error = null;
       }),
-      onSubmitted: (_) => _finish(),
+      onSubmitted: (_) => _move(1),
     ),
   ];
 
@@ -584,7 +645,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             child: FilledButton(
               onPressed: !canAdvance || _busy || _advancing
                   ? null
-                  : _step < 5
+                  : _step < 6
                   ? _advance
                   : _finish,
               style: FilledButton.styleFrom(
@@ -606,11 +667,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     ? '${_schoolDraft!.name}로 설정하기'
                     : interestedEmpty
                     ? '나중에 설정할게요'
-                    : _step < 5
+                    : _step < 6
                     ? '다음'
-                    : _nickname.text.trim().isEmpty
-                    ? '시작하기'
-                    : '저장하고 시작하기',
+                    : '이대로 시작하기',
               ),
             ),
           ),
@@ -630,7 +689,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     style: TextButton.styleFrom(
                       foregroundColor: AppTokens.textSecondary,
                     ),
-                    child: Text(_step == 5 ? '나중에 설정하기' : '건너뛰기'),
+                    child: Text(
+                      _step == 6
+                          ? '다음에 할게요'
+                          : _step == 5
+                          ? '나중에 설정하기'
+                          : '건너뛰기',
+                    ),
                   ),
                 ),
               ),

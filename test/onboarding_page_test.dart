@@ -1,3 +1,7 @@
+import 'package:legendstudy_app/features/home/customization/home_configuration.dart';
+
+import 'support/home_test_support.dart';
+
 import 'dart:async';
 import 'dart:io';
 
@@ -133,6 +137,7 @@ Future<GoRouter> _mount(
   bool reduceMotion = false,
   double textScale = 1,
   List<University> universityResults = const [],
+  HomeRpc? homeRpc,
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -151,6 +156,23 @@ Future<GoRouter> _mount(
           (ref) => authStream ?? Stream.value(AuthStatus(user)),
         ),
         profileRepositoryProvider.overrideWithValue(repo),
+        homeConfigurationRepositoryProvider.overrideWith((ref) {
+          final owner = ref.watch(authStateProvider).asData?.value.userId;
+          return HomeConfigurationRepository(
+            owner: owner,
+            currentOwner: () =>
+                ref.read(authStateProvider).asData?.value.userId,
+            cache: MemoryHomeCache(),
+            rpc:
+                homeRpc ??
+                (name, params) async => name == 'my_home_configuration'
+                    ? null
+                    : {
+                        ...params['p_config'] as Map<String, dynamic>,
+                        'revision': 1,
+                      },
+          );
+        }),
         schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
         universitySearchProvider.overrideWith(
           (ref, query) async => query.isEmpty ? const [] : universityResults,
@@ -267,11 +289,15 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
-        await tester.tap(find.text('시작하기'));
+        await tester.tap(find.text('다음'));
         await tester.pumpAndSettle();
         expect(repo.grade, 2);
         expect(repo.status, 'student');
         expect(repo.upserts, greaterThanOrEqualTo(2));
+        if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+          await tester.tap(find.text('다음에 할게요'));
+          await tester.pumpAndSettle();
+        }
         expect(repo.completed, isTrue);
         expect(tester.takeException(), isNull);
       },
@@ -283,6 +309,7 @@ void main() {
     _Repo repo, {
     Stream<AuthStatus>? authStream,
     double scale = 1,
+    HomeRpc? homeRpc,
   }) async {
     tester.view.physicalSize = const Size(428, 926);
     tester.view.devicePixelRatio = 1;
@@ -294,6 +321,7 @@ void main() {
       user: 'u1',
       authStream: authStream,
       textScale: scale,
+      homeRpc: homeRpc,
     );
     if (repo.initial?.academicStatus == null) {
       await tester.tap(find.text('고등학교 재학생'));
@@ -304,17 +332,127 @@ void main() {
       await tester.pumpAndSettle();
     }
     expect(find.text('어떤 이름으로 불러드릴까요?'), findsOneWidget);
-    expect(find.text('5 / 5'), findsOneWidget);
+    expect(find.text('5 / 6'), findsOneWidget);
     expect(repo.completed, isFalse);
   }
+
+  testWidgets('home skip completes without creating configuration', (t) async {
+    var writes = 0;
+    final repo = _Repo();
+    await toNickname(
+      t,
+      repo,
+      homeRpc: (name, params) async {
+        if (name.startsWith('save_')) writes++;
+        return null;
+      },
+    );
+    await t.tap(find.text('다음'));
+    await t.pumpAndSettle();
+    expect(find.text('6 / 6'), findsOneWidget);
+    await preview.capture(t, 'task04-onboarding-home');
+    await t.tap(find.text('다음에 할게요'));
+    await t.pumpAndSettle();
+    expect(repo.completed, true);
+    expect(writes, 0);
+  });
+  testWidgets(
+    'home failure keeps selection; retry saves once; completion retries separately',
+    (t) async {
+      var writes = 0;
+      var fail = true;
+      Map<String, dynamic>? stored;
+      final repo = _Repo()..failComplete = true;
+      await toNickname(
+        t,
+        repo,
+        scale: 2,
+        homeRpc: (name, params) async {
+          if (name == 'my_home_configuration') return stored;
+          writes++;
+          if (fail) throw StateError('offline');
+          return stored = {
+            ...params['p_config'] as Map<String, dynamic>,
+            'revision': 1,
+          };
+        },
+      );
+      await t.tap(find.text('다음'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('나의 대학 소식'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('나의 대학 소식'));
+      await t.pump();
+      await t.tap(find.text('이대로 시작하기'));
+      await t.pumpAndSettle();
+      expect(repo.completionAttempts, 0);
+      expect(find.textContaining('완료하지 못했어요'), findsOneWidget);
+      fail = false;
+      await t.tap(find.text('이대로 시작하기'));
+      await t.pumpAndSettle();
+      expect(repo.completed, false);
+      expect(writes, 2);
+      expect(
+        (stored!['cards'] as List).singleWhere(
+          (c) => c['card_id'] == 'university_news',
+        )['visible'],
+        true,
+      );
+      repo.failComplete = false;
+      await t.tap(find.text('이대로 시작하기'));
+      await t.pumpAndSettle();
+      expect(repo.completed, true);
+      expect(writes, 2);
+      expect(t.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'resumed onboarding retains unknown future cards when explicitly saving',
+    (t) async {
+      Map<String, dynamic>? saved;
+      final repo = _Repo();
+      final existing = HomeConfiguration([
+        ...HomeConfiguration.defaults().cards,
+        const HomeCardChoice('future_card', true),
+      ]);
+      await toNickname(
+        t,
+        repo,
+        homeRpc: (name, params) async {
+          if (name == 'my_home_configuration') {
+            return {...existing.toJson(), 'revision': 4};
+          }
+          expect(params['p_revision'], 4);
+          saved = params['p_config'] as Map<String, dynamic>;
+          return {...saved!, 'revision': 5};
+        },
+      );
+      await t.tap(find.text('다음'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('이대로 시작하기'));
+      await t.pumpAndSettle();
+      expect(repo.completed, true);
+      expect(
+        HomeConfiguration.fromJson(saved).cards
+            .singleWhere((c) => c.id == 'future_card')
+            .visible,
+        true,
+      );
+    },
+  );
 
   testWidgets('optional blank nickname completes without a nickname write', (
     t,
   ) async {
     final repo = _Repo();
     await toNickname(t, repo);
-    await t.tap(find.text('시작하기'));
+    await t.tap(find.text('다음'));
     await t.pumpAndSettle();
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await t.tap(find.text('다음에 할게요'));
+      await t.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.nicknameWrites, 0);
   });
@@ -345,11 +483,15 @@ void main() {
           action == 'later'
               ? '나중에 설정하기'
               : action == 'blank'
-              ? '시작하기'
-              : '저장하고 시작하기',
+              ? '다음'
+              : '다음',
         ),
       );
       await t.pumpAndSettle();
+      if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+        await t.tap(find.text('다음에 할게요'));
+        await t.pumpAndSettle();
+      }
       expect(repo.completed, isTrue);
       expect(repo.nicknameWrites, 0);
       expect((await repo.fetchCurrentProfile())!.displayName, '기존별명');
@@ -365,24 +507,31 @@ void main() {
     await t.enterText(find.byType(TextField), '  새별명  ');
     await t.pumpAndSettle();
     repo.failNickname = true;
-    await t.tap(find.text('저장하고 시작하기'));
+    await t.tap(find.text('다음'));
     await t.pumpAndSettle();
     expect(repo.completionAttempts, 0);
     expect(
       t.widget<TextField>(find.byType(TextField)).controller!.text,
       '  새별명  ',
     );
-    expect(find.textContaining('완료하지 못했어요'), findsOneWidget);
+    expect(find.textContaining('저장하지 못했어요'), findsOneWidget);
     repo.failNickname = false;
     repo.failComplete = true;
-    await t.tap(find.text('저장하고 시작하기'));
+    await t.tap(find.text('다음'));
     await t.pumpAndSettle();
     expect(repo.nickname, '새별명');
     expect(repo.nicknameWrites, 1);
     expect(repo.completed, isFalse);
-    repo.failComplete = false;
-    await t.tap(find.text('저장하고 시작하기'));
+    await t.tap(find.text('이대로 시작하기'));
     await t.pumpAndSettle();
+    expect(repo.completed, isFalse);
+    repo.failComplete = false;
+    await t.tap(find.text('이대로 시작하기'));
+    await t.pumpAndSettle();
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await t.tap(find.text('다음에 할게요'));
+      await t.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.nicknameWrites, 1);
   });
@@ -392,7 +541,7 @@ void main() {
     await toNickname(t, repo);
     await t.enterText(find.byType(TextField), '별명\u0000');
     await t.pumpAndSettle();
-    await t.tap(find.text('저장하고 시작하기'));
+    await t.tap(find.text('다음'));
     await t.pumpAndSettle();
     expect(repo.nicknameWrites, 0);
     expect(repo.completionAttempts, 0);
@@ -404,7 +553,7 @@ void main() {
     await toNickname(t, repo);
     await t.enterText(find.byType(TextField), '새별명');
     await t.pumpAndSettle();
-    final save = find.text('저장하고 시작하기');
+    final save = find.text('다음');
     await t.tap(save);
     await t.tap(save);
     await t.pump();
@@ -412,6 +561,9 @@ void main() {
     repo.nicknameGate!.complete();
     await t.pumpAndSettle();
     expect(repo.nicknameWrites, 1);
+    expect(repo.completionAttempts, 0);
+    await t.tap(find.text('다음에 할게요'));
+    await t.pumpAndSettle();
     expect(repo.completionAttempts, 1);
   });
 
@@ -425,7 +577,7 @@ void main() {
       await toNickname(t, repo, authStream: auth.stream);
       await t.enterText(find.byType(TextField), '이전계정별명');
       await t.pumpAndSettle();
-      await t.tap(find.text('저장하고 시작하기'));
+      await t.tap(find.text('다음'));
       await t.pump();
       auth.add(const AuthStatus(null));
       await t.pumpAndSettle();
@@ -454,9 +606,13 @@ void main() {
       expect(t.testTextInput.isVisible, isFalse);
       t.view.resetViewInsets();
       await t.pumpAndSettle();
-      await t.tap(find.text('저장하고 시작하기'));
+      await t.tap(find.text('다음'));
       await t.pumpAndSettle();
       expect(repo.nickname, '레전드학생');
+      if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+        await t.tap(find.text('다음에 할게요'));
+        await t.pumpAndSettle();
+      }
       expect(repo.completed, isTrue);
       expect(t.takeException(), isNull);
     });
@@ -493,11 +649,15 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('시작하기'));
+    await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'student');
     expect(repo.grade, 2);
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(router.routeInformationProvider.value.uri.path, '/home');
     expect(tester.takeException(), isNull);
@@ -521,12 +681,16 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('시작하기'));
+    await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'retaker');
     expect(repo.grade, isNull);
     expect(repo.clearedGrade, isTrue);
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
   });
 
@@ -537,6 +701,10 @@ void main() {
     final router = await _mount(tester, repo, user: 'u1');
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.upserts, 0);
     expect(router.routeInformationProvider.value.uri.path, '/home');
@@ -667,6 +835,10 @@ void main() {
     // Optional profile remains optional via the explicit skip action.
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.schoolWrites, 0);
   });
@@ -795,6 +967,7 @@ void main() {
         repo,
         user: 'u1',
         textScale: scale,
+
         universityResults: const [University(id: 'uni', name: '검수대학교')],
       );
       await tester.tap(find.text('고등학교 재학생'));
@@ -852,6 +1025,10 @@ void main() {
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
     expect(repo.grade, 2);
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.schoolWrites, 0);
   });
@@ -887,6 +1064,10 @@ void main() {
     repo.failWrite = true;
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
     expect(repo.status, isNull);
     expect(find.text('일부 정보를 저장하지 못했어요'), findsOneWidget);
@@ -938,6 +1119,10 @@ void main() {
         await tester.tap(find.text('건너뛰기'));
         await tester.pumpAndSettle();
         expect(repo.status, 'student');
+        if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+          await tester.tap(find.text('다음에 할게요'));
+          await tester.pumpAndSettle();
+        }
         expect(repo.completed, isTrue);
         expect(router.routeInformationProvider.value.uri.path, '/home');
       },
@@ -960,6 +1145,10 @@ void main() {
     await tester.pumpAndSettle();
     expect(repo.upserts, 0);
     expect(repo.schoolWrites, 0);
+    if (find.text('다음에 할게요').evaluate().isNotEmpty) {
+      await tester.tap(find.text('다음에 할게요'));
+      await tester.pumpAndSettle();
+    }
     expect(repo.completed, isTrue);
   });
 }

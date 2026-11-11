@@ -1,5 +1,7 @@
 # WEB MY — 프로필 압축·대학 관리 통합
 
+2026-11-11 APP 후속: [고3·N수 Native 실제 지원 관리](task04-applications-20261111.md)가 기존 WEB RPC를 재사용하며 [나의 대학 소식](task04-home-university-news-20261111.md)에 관심·지원 조회를 연결한다. WEB/운영 변경 없음.
+
 Owner P1 2026-10-26 지시, 2026-10-27 KST 배포. 기존 [MY 공통 계약](my-shared-foundation.md)과 [장기 학습·지원 데이터 원칙](longitudinal-learning-admissions-data-strategy.md)을 재사용한다.
 
 ## 적용 결과
