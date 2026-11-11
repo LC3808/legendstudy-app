@@ -1,0 +1,102 @@
+{
+  "packages": [
+    {
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "leaf_id": "3c00e597-1197-5180-9e1e-764cbebb324c",
+      "official_content_preserved": true,
+      "package_sha256": "946eb62a3b19eb5936e31b538ef7c6d55961c92b61a619fee67eafc3d03bba9f",
+      "publication_allowed": false,
+      "question_id": "ec20faaf-5f4b-5675-8798-aa52a80c2fd6",
+      "row_count": 12,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1
+      ]
+    },
+    {
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "leaf_id": "ac4eacec-9f71-5061-8ede-fb5d13f0ef28",
+      "official_content_preserved": true,
+      "package_sha256": "6135f265a479dd8e2fb1d905115e0f56307a9802e5a00bd6de652b7ad1264168",
+      "publication_allowed": false,
+      "question_id": "8bc7d2fa-8147-5354-857f-1baa46d84355",
+      "row_count": 12,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "exam_id": "6e289e0f-e5b9-5f47-8de6-4d9fb58cdb3f",
+      "leaf_id": "3d04e9e2-4a30-5324-94bc-3d8451c6059f",
+      "official_content_preserved": true,
+      "package_sha256": "8964fd90a3f55044c15e53643ed9505cf225a6da9dd813a59337e0e7d3a86e79",
+      "publication_allowed": false,
+      "question_id": "d09383a2-bbe1-5dbf-b08d-dd730062c506",
+      "row_count": 11,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1
+      ]
+    },
+    {
+      "exam_id": "6e289e0f-e5b9-5f47-8de6-4d9fb58cdb3f",
+      "leaf_id": "3ca32881-ec0f-5bbd-8925-400857b7fc89",
+      "official_content_preserved": true,
+      "package_sha256": "816d12c3d29313716118654f2f1ad7faa4a309484d13c9b38acbe4812e984dc1",
+      "publication_allowed": false,
+      "question_id": "1dc8ec21-0d5c-5129-afef-6c6109215d4b",
+      "row_count": 12,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "exam_id": "6e289e0f-e5b9-5f47-8de6-4d9fb58cdb3f",
+      "leaf_id": "de5473e3-fc93-5d6b-b831-5b2fa8839bdc",
+      "official_content_preserved": true,
+      "package_sha256": "075bf1a62f81f5b825a937f9c1b4a6698df1d98826314826958b649db6b388d8",
+      "publication_allowed": false,
+      "question_id": "0f1ef133-918b-566c-9a4a-024952ef78e8",
+      "row_count": 11,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        4
+      ]
+    },
+    {
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "leaf_id": "a44dbcc5-ae56-5539-9a6b-220370058f91",
+      "official_content_preserved": true,
+      "package_sha256": "6f37add0757754aafc39699712f6f7752f6ea1fbc1b0f89a4585b89509574dda",
+      "publication_allowed": false,
+      "question_id": "694acb0a-4226-5a21-a340-377d3ea166d7",
+      "row_count": 13,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        1
+      ]
+    },
+    {
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "leaf_id": "aebce05f-9b64-55f7-92f2-f4f7bb70e8c4",
+      "official_content_preserved": true,
+      "package_sha256": "8f219fc93d9e36f391e4df2c2a2800b714aa7d4cbf1663b984b811756fddc43d",
+      "publication_allowed": false,
+      "question_id": "a4b76128-9a35-56cd-ad08-e4032eac6296",
+      "row_count": 14,
+      "state": "DRAFT",
+      "student_pdf_pages": [
+        2,
+        3
+      ]
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0,
+  "publication_allowed": false,
+  "version": "four-university-official-v1"
+}

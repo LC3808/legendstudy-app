@@ -1047,3 +1047,7 @@ Owner 작업04-C 첨부 화면 후속: 홈 편집은 알림과 나란히 배치�
 ## 2026-11-11 — 자연계열 논술 확장과 공개 경계
 
 [공식 원본 보존](#2026-09-30--archive-first-official-essay-evidence)과 [기존 TASK20](task20-priority-natural-connection-20261106.md)을 계승한다. Owner는 중앙대 수학 연결 상태를 먼저 확인하고 기존 자연 누락·신규 약10개교를 기존 Catalog/Registry/공통 Backend로 확장하도록 지시했다. 완료 항목 중복 생성 금지, 중앙 과학Q4 11 HOLD 유지. Registry/DRAFT·기술 연결·실제 첨삭 품질·사용자 공개를 구분하며 운영 DB/RPC·WEB 배포·공개는 별도 Owner 승인 전 금지한다. 새로운 평가 엔진·Provider/Credit/결제 정책 변경을 허용하지 않는다. [실제 인수 결과·미완료](essay-natural-expansion-20261111.md).
+
+## 2026-11-11 — 자연계열 네 대학 연결 범위
+
+Owner는 항공→건국→경희→성균관의 기존 Registry/공식 근거/Worker 연결을 순차 진행하도록 지정했다. 로컬 후보가 검증되면 다음 대학으로 진행하며 운영 승인 대기로 로컬 작업을 중단하지 않는다. 품질 평가는 Owner/사용자 담당, Provider 호출·새 엔진·운영 변경·공개는 이번 범위가 아니다. 공식 원문 보존·중앙 과학11 HOLD를 계승하고 항공2024 공학Q2 HOLD 및 기존 불일치 검수는 유지한다. [기존 근거 보존 원칙](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) · [적용 결과와 공개 경계](essay-four-university-connection-20261111.md).

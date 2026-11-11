@@ -1,0 +1,10 @@
+{
+  "private_directory": ".local/natural-connection-20261111/kau",
+  "files": {
+    "apply-draft.private.sql": "b35536975f29569725c71672855cdcb1325e6d495b488bf1f2efbde2ef3531ee",
+    "register-draft.private.sql": "88e9ee280b2a72176e8c422d79675bbc305493cf7865c77a3b5dc1a7634f1e25",
+    "worker-source.private.sql": "ebff84f740996fb111cc2187fe6a5dfc13995f83c5733bd14b10caf449aa7141",
+    "rollback-retire.sql": "752dfe951368e1dd2976c96b37fe9c41c1eba216530be9d2b103f3d8aa42c33e"
+  },
+  "production_applied": false
+}

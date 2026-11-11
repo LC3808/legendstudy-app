@@ -1,0 +1,10 @@
+{
+  "private_directory": ".local/four-university-20261111/konkuk",
+  "files": {
+    "apply-draft.private.sql": "c3f4db7a3000285dbc801987816190e6c833b4b57ec5a7acccd4cd6a1b3c1c39",
+    "register-draft.private.sql": "67b17c916af46eecf412b44188aaf11fb7cac270708c77f5f32975c701355f46",
+    "worker-source.private.sql": "d1266a7fa83d0102587829551fb2a56ae63aaf527ab337e836378f9eca274301",
+    "rollback-retire.sql": "5f980fcf2a5c62177def01885a0aa5c07cd24004a3f95a7494b38aac2ddd45db"
+  },
+  "production_applied": false
+}

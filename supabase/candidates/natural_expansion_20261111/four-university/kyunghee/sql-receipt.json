@@ -1,0 +1,10 @@
+{
+  "private_directory": ".local/four-university-20261111/kyunghee",
+  "files": {
+    "apply-draft.private.sql": "36a16700a3f27667718189c30f2ad7b4a7249bf5a5d25270265926d064f68853",
+    "register-draft.private.sql": "76ce7238370677901eb8831eca1ea4f5c52f5ab95fad615498679d16bc7dfb4e",
+    "worker-source.private.sql": "89d213f25a59a8c625aac5599f1877d104334ca4cee771b3e9ee76578e993541",
+    "rollback-retire.sql": "00b29705b3ba8bde05c4c745452cdd293b18f4f3c027859b0ba63e874098e3b5"
+  },
+  "production_applied": false
+}

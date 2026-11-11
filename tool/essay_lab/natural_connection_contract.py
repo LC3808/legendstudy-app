@@ -20,7 +20,8 @@ def verify_worker(c, scalar, root, packages, plan, repository):
       revoke all on math_private.task20_hanyang_source_pages from public,anon,authenticated;''')
     c.execute(definition)
     c.execute('revoke all on function math_private.hanyang_worker_references(jsonb) from public,anon,authenticated')
-    c.execute((root/'worker-source.private.sql').read_text())
+    apply=root/'apply-draft.private.sql'
+    c.execute((apply if apply.exists() else root/'worker-source.private.sql').read_text())
     before=scalar("select md5(pg_get_functiondef('math_private.hanyang_worker_references(jsonb)'::regprocedure))")
     assert before=='54acd2a1914f360e6ecd62e39acc8222'
     results=[]
@@ -28,7 +29,10 @@ def verify_worker(c, scalar, root, packages, plan, repository):
         exam=next(e for e in plan['exams'] if e['exam_id']==p['exam_id'])
         q=next(q for q in exam['questions'] if q['question_id']==p['essay_question_id'])
         payload=json.loads((root/(q['question_id']+'.worker.private.json')).read_text())
-        pages=validate_worker(payload,exam,q)
+        if 'refs' in q:
+            from essay_lab.four_university_connection import validate_worker as validate_multi
+            pages=validate_multi(payload,exam,q)
+        else:pages=validate_worker(payload,exam,q)
         ctx=scalar('''select jsonb_build_object('leaf',to_jsonb(l),'problem',to_jsonb(pr),
           'sources',(select jsonb_agg(to_jsonb(s)) from public.math_source_artifacts s where s.problem_id=pr.id))
           from public.math_subproblems l join public.math_problems pr on pr.id=l.problem_id where l.id=%s''',(p['ids']['leaf'],))
@@ -58,4 +62,4 @@ def verify_worker(c, scalar, root, packages, plan, repository):
     report=dict(scope='DISPOSABLE_LOCAL_PG17_EXISTING_WORKER_FUNCTION',worker_definition_md5=before,
                 questions=results,provider_calls=0,production_writes=0)
     (root/'worker-contract-report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps(dict(worker_questions=len(results),worker_checks=120,status='PASS',provider_calls=0,production_writes=0)))
+    print(json.dumps(dict(worker_questions=len(results),worker_checks=10*len(results),status='PASS',provider_calls=0,production_writes=0)))

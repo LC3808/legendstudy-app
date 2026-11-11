@@ -20,8 +20,11 @@ def content_case(c, rpc, new, scalar, A, B):
     root = Path(os.environ['NATURAL_EXPANSION_PACKAGES']).resolve()
     assert '.local' in root.parts
     packages = [json.loads(p.read_text()) for p in sorted(root.glob('*.package.private.json'))]
-    assert len(packages) == 12 and all(p['state']=='DRAFT' and not p['publication_allowed'] for p in packages)
-    plan = json.loads((R/'supabase/candidates/natural_expansion_20261111/kau-source-plan.json').read_text())
+    assert packages and all(p['state']=='DRAFT' and not p['publication_allowed'] for p in packages)
+    plan_path=root/'source-plan.json'
+    if not plan_path.exists():plan_path=R/'supabase/candidates/natural_expansion_20261111/kau-source-plan.json'
+    plan = json.loads(plan_path.read_text())
+    assert len(packages)==sum(len(e['questions']) for e in plan['exams'])
     c.execute('alter table public.math_subproblems add column essay_question_id uuid references public.essay_questions(id)')
     university = plan['exams'][0]['university_id']
     c.execute("insert into public.universities(id,slug,name,is_active) values(%s,'kau-review','Synthetic KAU',false)",(university,))
@@ -97,10 +100,42 @@ def content_case(c, rpc, new, scalar, A, B):
             rpc('math_evaluation_detail',[ev],uid=B)
             raise AssertionError('Foreign result allowed')
         except m.psycopg.Error:pass
-        questions.append(dict(question_id=p['essay_question_id'],checks=['draft_submit_denied','submission_idempotent','evaluation_idempotent','criteria_finalize','result_read','foreign_result_denied'],status='PASS'))
+        # Existing learning envelope: exact selected leaf and prior evaluation survive.
+        def learning(action,value):
+            return rpc('math_learning',[dict(dto_version='math-learning-v1',action=action,payload=value)])['result']
+        rewrite_payload=dict(client_submission_id=new(),leaf_id=leaf,kind='FULL_RESOLVE',predecessor_id=attempt,
+                             prior_evaluation_id=ev,input_kind='TYPED',typed_answer='Synthetic rewritten work')
+        revised=str(learning('create_resolve_attempt',rewrite_payload)['attempt_id'])
+        assert str(learning('create_resolve_attempt',rewrite_payload)['attempt_id'])==revised
+        assert scalar('select lineage_id from public.math_attempts where id=%s',(revised,))==scalar('select lineage_id from public.math_attempts where id=%s',(attempt,))
+        revision_key=new();req=dict(attempt_id=revised,client_submission_id=revision_key)
+        revision=str(learning('request_reevaluation',req)['evaluation_id'])
+        assert str(learning('request_reevaluation',req)['evaluation_id'])==revision
+        claimed=rpc('math_claim_evaluation',[revision],role='math_evaluation_worker')
+        revision_out=copy.deepcopy(out)
+        revision_out['steps'][0]['id']=new()
+        revision_out['progression']=dict(prior_evaluation_id=ev,target_step_id=None,downstream=None,
+            summary='Synthetic linkage only',delta=[dict(kind='NO_MATERIAL_CHANGE',explanation='Mock contract')])
+        rpc('math_finalize_evaluation',[revision,claimed['lease_token'],revision_out],role='math_evaluation_worker')
+        assert rpc('math_evaluation_detail',[revision])['output']['progression']['prior_evaluation_id']==ev
+        questions.append(dict(question_id=p['essay_question_id'],checks=['draft_submit_denied','submission_idempotent','evaluation_idempotent','criteria_finalize','result_read','foreign_result_denied','rewrite_idempotent','lineage_preserved','reevaluation_idempotent','rewritten_result_read'],status='PASS'))
+    if (root/'rollback-retire.sql').exists():
+        def history_snapshot():
+            return {t:scalar(sql.SQL("select md5(coalesce(jsonb_agg(to_jsonb(t) order by id)::text,'[]')) from public.{} t").format(sql.Identifier(t))) for t in preserve+['math_attempts','math_evaluations']}
+        before_retire=history_snapshot()
+        c.execute((root/'rollback-retire.sql').read_text())
+        c.execute((root/'rollback-retire.sql').read_text())
+        assert history_snapshot()==before_retire
+        assert rpc('math_evaluation_detail',[revision])['output']['contract_version']=='math-eval-v1'
+        for p in packages:
+            try:
+                rpc('math_submit_attempt',[dict(client_submission_id=new(),leaf_id=p['ids']['leaf'],kind='INITIAL',input_kind='TYPED',typed_answer='Synthetic')])
+                raise AssertionError('Retired candidate admitted')
+            except m.psycopg.Error:pass
+        checks+=['retire_rollback_replay','retired_submit_denied','history_and_results_preserved_after_rollback']
     report=dict(scope='DISPOSABLE_PG17_SYNTHETIC_CONTRACT_NOT_PROVIDER_OR_UI_E2E',checks=checks,questions=questions,production_writes=0,provider_calls=0)
     (root/'contract-report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps(dict(natural_packages=12,contract_checks=len(checks),question_checks=72,status='PASS',production_writes=0,provider_calls=0)))
+    print(json.dumps(dict(natural_packages=len(packages),contract_checks=len(checks),question_checks=10*len(packages),status='PASS',production_writes=0,provider_calls=0)))
 
 
 def main():

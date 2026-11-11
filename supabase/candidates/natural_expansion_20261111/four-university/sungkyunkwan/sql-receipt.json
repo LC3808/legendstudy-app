@@ -1,0 +1,10 @@
+{
+  "private_directory": ".local/four-university-20261111/sungkyunkwan",
+  "files": {
+    "apply-draft.private.sql": "bc616f767254fd3b802ee79e2095d917c9cfebe77ddc1220388c21731c79d48c",
+    "register-draft.private.sql": "aac269af75b4a3bae0e9fab6ff116a9b4656baaeeda3ded390764239f6ff0c4f",
+    "worker-source.private.sql": "4abf56e8456f76f9df4397417c9e3cd5db32ac6b157dd8d84619e14683042264",
+    "rollback-retire.sql": "8cf346f40ea3d6c8abf52765aaf5309b7a25ca66ed0c4c08c1924a21641956ff"
+  },
+  "production_applied": false
+}

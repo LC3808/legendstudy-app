@@ -1,0 +1,84 @@
+{
+  "scope": "ISOLATED_MOCK_CONTRACT_NOT_PRODUCTION_OR_AI_QUALITY",
+  "universities": {
+    "kau": {
+      "questions": 12,
+      "runtime_checks": 120,
+      "common_checks": 9,
+      "worker_checks": 120
+    },
+    "konkuk": {
+      "questions": 24,
+      "runtime_checks": 240,
+      "common_checks": 9,
+      "worker_checks": 240
+    },
+    "kyunghee": {
+      "questions": 7,
+      "runtime_checks": 70,
+      "common_checks": 9,
+      "worker_checks": 70
+    },
+    "sungkyunkwan": {
+      "questions": 15,
+      "runtime_checks": 150,
+      "common_checks": 9,
+      "worker_checks": 150
+    }
+  },
+  "production_writes": 0,
+  "provider_calls": 0,
+  "web": {
+    "kau": {
+      "numPassedTests": 27,
+      "numFailedTests": 0,
+      "numPendingTests": 0
+    },
+    "konkuk": {
+      "numPassedTests": 26,
+      "numFailedTests": 0,
+      "numPendingTests": 1
+    },
+    "kyunghee": {
+      "numPassedTests": 6,
+      "numFailedTests": 0,
+      "numPendingTests": 1
+    },
+    "sungkyunkwan": {
+      "numPassedTests": 22,
+      "numFailedTests": 0,
+      "numPendingTests": 1
+    }
+  },
+  "python_tests": 22,
+  "flutter": {
+    "passed": 77,
+    "skipped": 4,
+    "failed": 0
+  },
+  "web_common_regression": {
+    "passed": 5,
+    "failed": 0
+  },
+  "flutter_analyze": "PASS",
+  "student_pdfs": {
+    "existing_kau": 6,
+    "existing_kau_pages": 25,
+    "new": 14,
+    "new_pages": 55,
+    "new_page_pixel_identity": "55/55 PASS",
+    "final_policy": "REUSE_20_EXISTING_ASSETS_FOR_58_QUESTIONS",
+    "existing_approval_counts": {
+      "approved": 43,
+      "pending": 15,
+      "changed": 0
+    }
+  },
+  "states": {
+    "HOLD": 5,
+    "SERVICE READY (LOCAL)": 49,
+    "SERVICE READY (OPERATING PRESERVED)": 7,
+    "NOT READY": 16,
+    "DATA READY": 4
+  }
+}

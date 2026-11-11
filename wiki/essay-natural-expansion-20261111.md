@@ -1,5 +1,7 @@
 # 논술 LAB 기존 시험·문항 연결 — 2026-11-11
 
+후속 Owner 지시의 최신 상태는 [네 대학 연결 후보](essay-four-university-connection-20261111.md)를 따른다. 아래는 당시 조사/검증 기록이다. 항공 Source 진입 실패는 후속 로컬 후보에서 해결됐으며 운영 미반영은 유지한다.
+
 최신 [Owner 연결 상태 검증·12문항 전체표·집계](essay-connection-owner-verification-20261111.md): 운영 항공 연결0, 실제 Source 시험진입 probe1 FAIL. 기존 후보 PASS와 구분한다.
 
 **전체 PARTIAL. 한국항공대6시험12문항 로컬 기술 연결 검증 DONE, 운영 연결·공개 NOT APPLIED.**

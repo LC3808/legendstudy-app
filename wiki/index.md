@@ -36,10 +36,9 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-[Owner 연결 상태 재검증](essay-connection-owner-verification-20261111.md): 항공12 Registry만 운영등록/Math·Worker0/비공개. 로컬PG198·Flutter24·WEB후보25 PASS, 실제 Source 시험진입 가정1 FAIL. 대상22개교153시험572문항, 운영연결 미완료503; 신규 기능·Provider·운영쓰기0.
+[네 대학 연결 후보·상태·검증·SQL·복구](essay-four-university-connection-20261111.md): 항공→건국→경희→성균관23시험81문항, 기존7보존/새후보58. 격리DB1196·Flutter77·WEB86 PASS, Python22·Analyze PASS. HOLD5/경희partial4/NOT_READY16, 운영쓰기·Provider·배포0.
 
-
-논술 자연계열 연결 / 중앙대69 보존·과학11 HOLD / 한국항공6·12 / 신규10개교: [최신 Owner 연결 범위·문항별 검수·공식 이슈·검증](essay-natural-expansion-20261111.md). 반복 Provider 중단, 원문 보존, 운영 적용·공개 없음.
+[이전 확장 감사와 범위 이력](essay-connection-owner-verification-20261111.md) · [공식 불일치·원문 보존·중앙 과학11 HOLD](essay-natural-expansion-20261111.md).
 
 작업04 / 고3·N수 실제 지원 대학 / 합격 발표 일정: [04-C 실계정·기기 검수](task04c-device-verification-20261111.md) · [APP75 기반 지원 관리](task04-applications-20261111.md) · [홈 커스터마이징·나의 대학 소식·후보 SQL·검증](task04-home-university-news-20261111.md) · [작업04-B 운영 사전 검토](task04b-production-preflight-20261111.md) · [작업04-C 홈 A 운영 적용·UI 후속/C·D HOLD](task04c-home-production-20261111.md).
 

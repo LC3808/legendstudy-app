@@ -1,0 +1,1406 @@
+{
+  "version": "four-university-official-v1",
+  "publication_allowed": false,
+  "provider_allowed": false,
+  "exams": [
+    {
+      "exam_id": "168f2eb0-34be-5015-bf42-db002faa9868",
+      "exam_key": "source-konkuk-2024-admission-natural-b",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2024,
+      "exam_kind": "admission",
+      "field_or_division": "자연 B",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "28f34ddb-5de8-5d3d-8ae1-9578bd879174",
+        "488c350e-9c3f-5eba-96ef-01960ede29b6",
+        "beb96180-87b8-5877-94fe-1d8cce9db925",
+        "59855528-951c-516d-b4cf-721a086253bb"
+      ],
+      "questions": [
+        {
+          "question_id": "28f34ddb-5de8-5d3d-8ae1-9578bd879174",
+          "question_key": "source:konkuk-2024-admission-natural-b:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                1
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                5
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                6
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "physical_page": 1,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "488c350e-9c3f-5eba-96ef-01960ede29b6",
+          "question_key": "source:konkuk-2024-admission-natural-b:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                5
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                7
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "beb96180-87b8-5877-94fe-1d8cce9db925",
+          "question_key": "source:konkuk-2024-admission-natural-b:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                2,
+                3
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                5
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "physical_page": 2,
+              "crop_before": null
+            },
+            {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "physical_page": 3,
+              "crop_before": "3. 출제 의도"
+            }
+          ]
+        },
+        {
+          "question_id": "59855528-951c-516d-b4cf-721a086253bb",
+          "question_key": "source:konkuk-2024-admission-natural-b:q4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                3
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                5
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "pages": [
+                9,
+                10
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계B 문제,답안.pdf",
+              "sha256": "3091cead00f006094d78b187bf19a3889bff38200318afe6473543766087b5fe",
+              "page_count": 10,
+              "physical_page": 3,
+              "crop_before": "3. 출제 의도"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "9288300f-76c8-5321-8c28-2ed4f2587ef3",
+      "exam_key": "source-konkuk-2024-admission-natural-a",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2024,
+      "exam_kind": "admission",
+      "field_or_division": "자연 A",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "2837c76a-7fd1-51d3-9d89-567524e6d00a",
+        "7c74e44d-375d-5f9c-83c2-60b8fc06977f",
+        "1dcae52c-5937-5d83-854f-f77c0ede42d4",
+        "09140d75-579d-5570-bf90-7228c99478a6"
+      ],
+      "questions": [
+        {
+          "question_id": "2837c76a-7fd1-51d3-9d89-567524e6d00a",
+          "question_key": "source:konkuk-2024-admission-natural-a:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                1,
+                2
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                4
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                7
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 1,
+              "crop_before": null
+            },
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "7c74e44d-375d-5f9c-83c2-60b8fc06977f",
+          "question_key": "source:konkuk-2024-admission-natural-a:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                4
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "1dcae52c-5937-5d83-854f-f77c0ede42d4",
+          "question_key": "source:konkuk-2024-admission-natural-a:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                2,
+                3
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                4
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": null
+            },
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 3,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "09140d75-579d-5570-bf90-7228c99478a6",
+          "question_key": "source:konkuk-2024-admission-natural-a:q4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                4
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "pages": [
+                9,
+                10,
+                11
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2024학년도 건국대 논술_ 자연계A 문제,답안.pdf",
+              "sha256": "2b97aa8264cc4b455f0c77d232bc8d39b6b792982ee3269c307e8f698fb9dd01",
+              "page_count": 11,
+              "physical_page": 4,
+              "crop_before": "3. 출제 의도"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "321dfcff-62eb-564d-a40a-b683cf721316",
+      "exam_key": "source-9c09906aaa7579e85ab9390c2ee1ff3434dfb53362699ce390c489bf9a0fbba3",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2026,
+      "exam_kind": "mock",
+      "field_or_division": "자연",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "f8e90b86-1a36-533d-a8c1-9847e1dd4014",
+        "4ec222eb-b5be-5a50-b2c6-883fd359b31d",
+        "b3a88056-a671-57ea-9a59-03cf1fb322ff",
+        "011b01a5-3714-5aab-821d-b459979df5e2"
+      ],
+      "questions": [
+        {
+          "question_id": "f8e90b86-1a36-533d-a8c1-9847e1dd4014",
+          "question_key": "source:9c09906aaa7579e85ab9390c2ee1ff3434dfb53362699ce390c489bf9a0fbba3:1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "pages": [
+                1
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                3
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "physical_page": 1,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "4ec222eb-b5be-5a50-b2c6-883fd359b31d",
+          "question_key": "source:9c09906aaa7579e85ab9390c2ee1ff3434dfb53362699ce390c489bf9a0fbba3:2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "pages": [
+                1,
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                3
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "physical_page": 1,
+              "crop_before": null
+            },
+            {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "b3a88056-a671-57ea-9a59-03cf1fb322ff",
+          "question_key": "source:9c09906aaa7579e85ab9390c2ee1ff3434dfb53362699ce390c489bf9a0fbba3:3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                4
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "011b01a5-3714-5aab-821d-b459979df5e2",
+          "question_key": "source:9c09906aaa7579e85ab9390c2ee1ff3434dfb53362699ce390c489bf9a0fbba3:4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "pages": [
+                3
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 건국대 모의논술_자연 해설,답안.pdf",
+              "sha256": "b7ca545cd9b4390d90b6718b069c7914519a4651d241bbaf59c3bcab3ddd3aa7",
+              "page_count": 5,
+              "pages": [
+                5
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 건국대 모의논술_자연 문제.pdf",
+              "sha256": "8ba12305eb94d1d4bb8e03b8db1040edf990307c40c0a12e7a4334262d47101d",
+              "page_count": 3,
+              "physical_page": 3,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "529fc5f3-79b3-5ff4-8ef2-4a5ce843c7b8",
+      "exam_key": "source-konkuk-2024-mock-natural",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2024,
+      "exam_kind": "mock",
+      "field_or_division": "자연",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "3df812ba-7ac3-5737-a50e-3db7e6a2c733",
+        "404cfc21-77d6-55da-9ba6-84198a1b3a01",
+        "84f6b941-8aae-5663-a6db-ac0c2e17fedf",
+        "d685fdad-23c9-56bf-8f68-a372cdf3edfa"
+      ],
+      "questions": [
+        {
+          "question_id": "3df812ba-7ac3-5737-a50e-3db7e6a2c733",
+          "question_key": "source:konkuk-2024-mock-natural:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "pages": [
+                1
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                3
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "physical_page": 1,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "404cfc21-77d6-55da-9ba6-84198a1b3a01",
+          "question_key": "source:konkuk-2024-mock-natural:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "pages": [
+                1
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                4
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "physical_page": 1,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "84f6b941-8aae-5663-a6db-ac0c2e17fedf",
+          "question_key": "source:konkuk-2024-mock-natural:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                4
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "d685fdad-23c9-56bf-8f68-a372cdf3edfa",
+          "question_key": "source:konkuk-2024-mock-natural:q4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                3
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "0c4ae83f59a1242fd7aa38660355fe55e55d9285ac07c7ae202260d0d779c9f4",
+              "page_count": 5,
+              "pages": [
+                5
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "1a5fd346cb1c6256e828755897a914bd49bef8a0a7185ed862ad142ef266ffd4",
+              "page_count": 2,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "56402c57-6ecc-5e20-96d8-26a5fbeb957b",
+      "exam_key": "source-konkuk-2025-mock-natural",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2025,
+      "exam_kind": "mock",
+      "field_or_division": "자연",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "cfa4839f-c292-5a95-b8b0-e408aa1df009",
+        "707f9eea-3bcc-581e-b50e-4a5fccbdca7e",
+        "ddae2f2e-bbc6-5769-b779-bd9b997ab202",
+        "982a78ca-012f-5683-bd31-4f00bdf711e2"
+      ],
+      "questions": [
+        {
+          "question_id": "cfa4839f-c292-5a95-b8b0-e408aa1df009",
+          "question_key": "source:konkuk-2025-mock-natural:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                2,
+                3
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "physical_page": 1,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "707f9eea-3bcc-581e-b50e-4a5fccbdca7e",
+          "question_key": "source:konkuk-2025-mock-natural:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                3
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "ddae2f2e-bbc6-5769-b779-bd9b997ab202",
+          "question_key": "source:konkuk-2025-mock-natural:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "pages": [
+                3
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                3,
+                4
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "physical_page": 3,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "982a78ca-012f-5683-bd31-4f00bdf711e2",
+          "question_key": "source:konkuk-2025-mock-natural:q4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "pages": [
+                4
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                1
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                2
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 모의논술_자연계 해설,답안.pdf",
+              "sha256": "85972661a0d5dc58e9ae790855c72e24d2052e31ec72f4d02a25b6068e2fbdf4",
+              "page_count": 4,
+              "pages": [
+                4
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 모의논술_자연계 문제.pdf",
+              "sha256": "515cf294b195db540d3e7fb9dabd0a60aa809878d05c02bc6db6b23ae710522c",
+              "page_count": 4,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "b628acde-5861-5f14-8d35-31da62259867",
+      "exam_key": "source-konkuk-2025-admission-natural",
+      "university_id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "admission_year": 2025,
+      "exam_kind": "admission",
+      "field_or_division": "자연",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "konkuk",
+      "university_name": "건국대학교",
+      "registry_question_ids": [
+        "a42806ac-63c2-5fd5-a383-ca3c5df4468a",
+        "47d0af04-d836-5c5a-9cfa-4a5c4c986597",
+        "48937249-a641-5425-bffd-acaf096190a4",
+        "1bee0815-02e0-502a-b4ac-5090bfb69212"
+      ],
+      "questions": [
+        {
+          "question_id": "a42806ac-63c2-5fd5-a383-ca3c5df4468a",
+          "question_key": "source:konkuk-2025-admission-natural:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "pages": [
+                2
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                1,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                4
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                5
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "physical_page": 2,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "47d0af04-d836-5c5a-9cfa-4a5c4c986597",
+          "question_key": "source:konkuk-2025-admission-natural:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "pages": [
+                3
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                1,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                4
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                5,
+                6
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "physical_page": 3,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "48937249-a641-5425-bffd-acaf096190a4",
+          "question_key": "source:konkuk-2025-admission-natural:q3",
+          "label": "문제 3",
+          "display_order": 2,
+          "number": 3,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "pages": [
+                4
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                1,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                4
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                7
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        },
+        {
+          "question_id": "1bee0815-02e0-502a-b4ac-5090bfb69212",
+          "question_key": "source:konkuk-2025-admission-natural:q4",
+          "label": "문제 4",
+          "display_order": 3,
+          "number": 4,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "pages": [
+                5
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                1,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                4
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 건국대 논술_자연계 해설,답안.pdf",
+              "sha256": "30856a544e9f0820dffa0904212c310d13bcbd4f2d7c18484531806b51568e60",
+              "page_count": 9,
+              "pages": [
+                8,
+                9
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 건국대 논술_자연계 문제.pdf",
+              "sha256": "1ece830fc331ec6886cda395b0b16d5767ce3ce0ef6c0e919dd528ba82f0e93c",
+              "page_count": 5,
+              "physical_page": 5,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
