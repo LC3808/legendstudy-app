@@ -5899,3 +5899,7 @@ APP75 source c9b4830:55검사·렌더4·analyze PASS, iPhone 서명·설치·실
 APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/편집·드래그·계정 설정/공식 대학 소식 Native UI를 추가했다. 정확 매칭/KST/개정·철회/미확인·만료 분리, 운영 후보 SQL은 로컬 PostgreSQL17만 검증. 운영 DB·RPC·WEB·APP75 설치·스토어 변경0. [구현·25항 인계·테스트·잔여](task04-home-university-news-20261111.md), [후보 계약](../supabase/candidates/task04_home_20261111/README.md).
 
 작업04 최종 검증: 관련93항목PASS, 전체2505PASS/8SKIP/APP75 동일5FAIL, Analyze/iOS profile/Android debug/Wiki PASS. Native360px1x·2x 렌더 확인. 실기기·실서버 동기화·공식 자료 운영 제공은 미검증/미적용. [완료 근거](task04-home-university-news-20261111.md).
+
+
+## 2026-11-11 — 독립 이메일 인증 안정화
+APP75 이후4489603 기반 별도worktree/브랜치. Dashboard 기본 SMTP2/h·OTP3600초 확인,21개 request ID를 edge와 연결: signup18/magiclink3·주소 식별값4개. 미인증5개 E 유지, 전달 로그 NOT TESTED. 재발송/60초 중복 방지/한도·링크 안내/가입 이메일 보존,143격리 PASS·analyze PASS. 운영 메일/설정/DB/LAB 변경0. [상세·승인안·원복·미완료](email-verification-audit-20261111.md#독립-안정화-조사--2026-11-11).

@@ -13,10 +13,12 @@ const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 �
 /// Shown when a recovery link cannot be exchanged for a session. Deliberately
 /// broader than "expired": the same failure covers a link that was already
 /// used and one opened on a device that did not request it.
-const recoveryLinkUnusableMessage = '재설정 링크를 사용할 수 없어요. 다시 요청해 주세요.';
+const recoveryLinkUnusableMessage =
+    '인증 링크를 사용할 수 없어요. 이미 인증했다면 로그인해 주세요. 가입 인증 메일은 로그인 화면에서, 비밀번호 재설정 메일은 아래에서 다시 요청할 수 있어요.';
 
 const _byCode = <String, String>{
-  'google_sign_in_incomplete': 'Google 로그인을 완료하지 못했어요. 다른 로그인 방법을 이용하거나 다시 시도해 주세요.',
+  'google_sign_in_incomplete':
+      'Google 로그인을 완료하지 못했어요. 다른 로그인 방법을 이용하거나 다시 시도해 주세요.',
   'oauth_configuration_error': 'Google 로그인 설정을 확인해야 합니다. 다른 로그인 방법을 이용해 주세요.',
   'email_exists': '가입 정보를 확인해 주세요. 기존 계정이 있다면 로그인하거나 비밀번호를 재설정해 주세요.',
   'oauth_provider_not_supported': '현재 이 로그인 방식을 사용할 수 없습니다.',
@@ -25,9 +27,9 @@ const _byCode = <String, String>{
   'bad_oauth_state': '로그인 요청이 만료됐어요. 다시 시도해 주세요.',
   'invalid_credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
   'email_not_confirmed': '이메일 인증이 아직 완료되지 않았어요. 받은 편지함을 확인해 주세요.',
-  'over_email_send_rate_limit': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
+  'over_email_send_rate_limit': '현재 이메일 발송 한도에 도달해 메일을 요청하지 못했어요. 반복 요청을 멈추고 나중에 다시 시도해 주세요. 계속되면 문의해 주세요.',
   'over_request_rate_limit': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
-  'otp_expired': '재설정 링크가 만료되었어요. 다시 요청해 주세요.',
+  'otp_expired': '인증 링크가 만료되었거나 이미 사용됐어요. 인증을 마쳤다면 로그인하고, 아니라면 메일을 다시 요청해 주세요.',
   'weak_password': '비밀번호가 너무 단순해요. 더 긴 비밀번호를 사용해 주세요.',
   'same_password': '이전과 다른 비밀번호를 입력해 주세요.',
   'validation_failed': '입력한 정보를 다시 확인해 주세요.',

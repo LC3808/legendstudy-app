@@ -1,5 +1,7 @@
 # Auth Recovery Foundation
 
+2026-11-11: [독립 이메일 안정화·실제 SMTP 설정·코드 검증·남은 운영 게이트](email-verification-audit-20261111.md#독립-안정화-조사--2026-11-11). 기본 SMTP2/h 확인, 재발송·대기·오류 안내 보완. 아래 과거 설정 미확인 기록은 해당 시점의 증거다.
+
 ## App native/shared-account follow-up — 2026-09-21
 
 Google now uses the native SDK on Android/iOS; iOS Apple uses native ID-token

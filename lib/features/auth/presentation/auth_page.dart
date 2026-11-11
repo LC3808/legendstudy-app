@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../analytics/analytics_providers.dart';
 import '../../analytics/domain/analytics_events.dart';
 
@@ -32,9 +34,54 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   final _form = GlobalKey<FormState>();
   bool _signUp = false, _busy = false, _visible = false;
   String? _error, _notice;
+  Timer? _cooldownTimer;
+  int _lastCooldown = 0;
+  int get _cooldown => ref.read(emailRequestCooldownProvider).remainingSeconds;
+
+  @override
+  void initState() {
+    super.initState();
+    _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted && _lastCooldown != _cooldown) {
+        setState(() => _lastCooldown = _cooldown);
+      }
+    });
+  }
+
+  Future<void> _resendVerification() async {
+    if (_busy || _cooldown > 0) return;
+    if (!isPlausibleEmail(_email.text.trim())) {
+      setState(() => _error = '이메일 형식을 확인해 주세요.');
+      return;
+    }
+    final send = ref.read(resendSignupEmailProvider);
+    if (send == null) {
+      setState(() => _error = genericAuthFailure);
+      return;
+    }
+    ref.read(emailRequestCooldownProvider).start();
+    setState(() {
+      _busy = true;
+      _error = null;
+      _notice = null;
+    });
+    try {
+      await send(_email.text.trim());
+      if (mounted) {
+        setState(
+          () => _notice = '인증 메일 발송을 요청했어요. 인증이 필요한 계정이라면 받은 편지함과 스팸함을 확인해 주세요. 인증 후 이 화면에서 로그인할 수 있어요.',
+        );
+      }
+    } catch (error) {
+      if (mounted) setState(() => _error = authErrorMessage(error));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
 
   @override
   void dispose() {
+    _cooldownTimer?.cancel();
     _confirm.dispose();
     _email.dispose();
     _password.dispose();
@@ -42,7 +89,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   }
 
   Future<void> _passwordAuth() async {
-    if (_busy) return;
+    if (_busy || (_signUp && _cooldown > 0)) return;
     if (!_form.currentState!.validate()) return;
     final service = ref.read(emailAuthServiceProvider);
     if (service == null) {
@@ -51,6 +98,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
     final profile = ref.read(profileRepositoryProvider);
     final signingUp = _signUp;
+    final requestedEmail = _email.text.trim();
+    if (signingUp) ref.read(emailRequestCooldownProvider).start();
     ref.read(analyticsServiceProvider).logEvent(
       signingUp ? AnalyticsEvents.signUp : AnalyticsEvents.login,
       {'source': 'email', 'status': 'started'},
@@ -63,7 +112,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     });
     try {
       final authenticated = signingUp
-          ? await service.signUp(_email.text.trim(), _password.text)
+          ? await service.signUp(requestedEmail, _password.text)
           : await service
                 .login(_email.text.trim(), _password.text)
                 .then((_) => true);
@@ -80,6 +129,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           _password.clear();
           _confirm.clear();
           _form.currentState?.reset();
+          _email.text = requestedEmail;
         });
       }
     } catch (error) {
@@ -185,6 +235,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       authStateProvider,
       (_, next) => _onAuthStatus(next.value),
     );
+    _lastCooldown = _cooldown;
     final providers = ref.watch(availableOAuthProvidersProvider);
     return Form(
       key: _form,
@@ -290,7 +341,9 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             ],
             const SizedBox(height: 20),
             FilledButton(
-              onPressed: _busy ? null : _passwordAuth,
+              onPressed: _busy || (_signUp && _cooldown > 0)
+                  ? null
+                  : _passwordAuth,
               child: Text(
                 _busy
                     ? '처리 중…'
@@ -299,6 +352,19 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                     : '로그인',
               ),
             ),
+            if (!_signUp) ...[
+              TextButton(
+                onPressed: _busy || _cooldown > 0 ? null : _resendVerification,
+                child: Text(
+                  _cooldown > 0 ? '인증 메일 재요청까지 $_cooldown초' : '인증 메일 다시 요청',
+                ),
+              ),
+              const Text(
+                '메일에서 인증을 마쳤다면 로그인해 주세요. 앱으로 돌아오지 않거나 다른 기기에서 인증했어도 로그인으로 확인할 수 있어요.',
+                style: TextStyle(color: AppTokens.textSecondary),
+              ),
+            ] else if (_cooldown > 0)
+              Text('메일 요청 대기 중 · $_cooldown초 후 다시 시도할 수 있어요.'),
             // Account links on one centred line (회원가입 | 비밀번호 찾기 | 이메일
             // 찾기); wraps naturally on a small screen or at large text scale.
             Padding(

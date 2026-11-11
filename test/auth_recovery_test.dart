@@ -235,7 +235,7 @@ void main() {
           contains('이메일 인증'));
       expect(authErrorMessage(authError('over_email_send_rate_limit',
               code: 'over_email_send_rate_limit')),
-          contains('잠시 후'));
+          contains('이메일 발송 한도'));
       expect(
           authErrorMessage(
               authError('Email link is invalid or has expired')),
