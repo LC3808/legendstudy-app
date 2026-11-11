@@ -61,13 +61,23 @@ def content_case(c,rpc,new,scalar,A,B):
  c.execute('create trigger public_scope_admission before insert on public.math_evaluations for each row execute function math_private.evaluation_admission()')
  c.execute((PRIVATE/'apply-draft.private.sql').read_text())
  prior_catalog=scalar('select math_private.release_catalog(null)')
+ # Model the actual Production private-function boundary, not a verifier grant.
+ c.execute('alter function math_private.resolve_profile(uuid) owner to math_executor')
+ c.execute('revoke all on function math_private.resolve_profile(uuid) from public,postgres')
+ c.execute('create role public_release_verifier nologin nosuperuser noinherit bypassrls')
+ c.execute('grant usage on schema public,math_private to public_release_verifier')
+ c.execute('grant select on all tables in schema public,math_private to public_release_verifier')
+ c.execute('grant execute on function math_private.release_catalog(uuid),math_private.hanyang_worker_references(jsonb) to public_release_verifier')
+ assert not scalar("select has_function_privilege('public_release_verifier','math_private.resolve_profile(uuid)','execute')")
  c.execute((PRIVATE/'activate-public.private.sql').read_text())
  checks=[]
+ c.execute('set role public_release_verifier')
  cursor=c.execute((PUB/'verify.sql').read_text())
  while True:
   if cursor.description:
    for name,passed in cursor.fetchall():assert passed,name;checks.append(name)
   if not cursor.nextset():break
+ c.execute('reset role')
  assert len(checks)==72
  questions=[]
  for p in packages:
