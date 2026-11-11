@@ -979,3 +979,8 @@ Owner 작업02는 기존 Native 타이머를 유지하고 WEB 학생 RPC를 APP�
 작성하고 운영 DB·WEB·스토어 적용은 금지한다. 기존 [Study](study-v1.md),
 [장기 데이터 보존](longitudinal-learning-admissions-data-strategy.md) 결정의 후속이다.
 [구현과 검증 경계](app67-learning-integration-20261111.md).
+
+## 2026-11-11 — 작업02 운영 승인·작업03 조사 분리
+Owner가 누적·지원중복 두 함수 적용과 APP 누적 연결을 승인했다. 이전 작업02 운영 금지는 이 범위에서 해제한다.
+작업03 정답/등급컷은 실제 커버리지 보고 선행, 운영 DB/RPC 변경 금지·미검수 채점 공개 금지다.
+[후속 기록](app67-learning-integration-20261111.md), [조사](task03-mock-five-year-audit-20261111.md).

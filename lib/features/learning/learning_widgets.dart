@@ -58,6 +58,10 @@ class ConfirmedStudySummary extends ConsumerWidget {
               runSpacing: 12,
               children: [
                 _Stat('오늘 공부시간', learningDuration(s.today)),
+                _Stat(
+                  '누적 공부시간',
+                  s.allTime == null ? '조회 미연결' : learningDuration(s.allTime!),
+                ),
                 _Stat('이번 주 공부시간', learningDuration(s.week)),
               ],
             ),

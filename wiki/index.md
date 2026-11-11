@@ -372,3 +372,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 [APP63 출시 전 점검·TASK18 적용·TASK19 권한 차이·실기기](app63-prelaunch-readiness-20261105.md).
 
 [TASK21 자연계 상태·최종 빌드/기기 검수](task21-final-release-readiness-20261105.md).
+
+[작업03 최근5개년 운영 커버리지·확보 계획](task03-mock-five-year-audit-20261111.md).

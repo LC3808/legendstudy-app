@@ -5794,3 +5794,7 @@ Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/
 APP67 기준 별도 브랜치에서 학습 홈·서버 학교 순위·친구 초대 Native 통합을 구현했다.
 기존 타이머/학교 검색/모의고사/출시 산출물을 보존했다. SQL은 격리 후보이며 운영 적용0.
 [결과·검증·링크 수신 제한·후속](app67-learning-integration-20261111.md).
+
+## 2026-11-11 — 작업02 SQL 승인 적용·작업03 감사
+누적/지원중복 두 함수 적용 및 보존검사 PASS, APP 누적 표시29검사 PASS.
+[작업02 결과](app67-learning-integration-20261111.md), [작업03 읽기 감사](task03-mock-five-year-audit-20261111.md).

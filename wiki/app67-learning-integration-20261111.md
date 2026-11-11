@@ -116,3 +116,27 @@ WEB 기준은 운영 `9788a7ca` / 소스 `0eefc7d`이며 WEB을 수정/배포하
 - 최종 판정: **PARTIAL**. 승인된 로컬 구현/격리 검증 완료. 누적 SQL 운영 적용·앱 누적 연결,
   Universal/App Links·설치 후 복원·실기기 E2E는 위 후속 범위로 남겼다.
 - 원격 push·운영 DB/RPC·WEB 배포·스토어 제출 없음. 기존 미추적 캐시 두 폴더는 건드리지 않았다.
+
+## 작업02 후속 — 2026-11-11 운영 승인 적용
+
+Owner가 누적 공부시간·지원 중복 SQL 적용을 승인했다. 승인된 두 함수만 적용했으며
+작업03의 DB 변경 금지 범위를 침범하지 않았다.
+정확한 실행문: [production apply](../supabase/candidates/app67_learning_20261111/production-apply-20261111.sql).
+Supabase migration 이름 `app67_learning_summary_application_dedupe`, 응답 success=true.
+기준 함수 해시 일치 후 repeatable read 트랜잭션 안에서 적용 전후 검사:
+학습·지원·지원 이벤트 전체 내용 해시 동일, 함수 ACL 동일, 기존28명 요약의 누적 외 필드 동일.
+기존 데이터 UPDATE/DELETE 없음. 실제 지원/채점/지급/차감/결제/환불 실행 없음.
+적용 후 study_summary md5 a1622f936527c48df8c24d35a2163650,
+my_application_save md5 65edac758433cde4a123b95be3da42ee.
+54개 학습 기록/28명 전체 누적 조회33.365ms, 누적 필드 누락0·음수0.
+향후 대량 이력의 성능을 보장하는 수치는 아니다.
+
+APP은 명시적 all_time_source/all_time_ms만 누적 시간·분으로 표시한다.
+구 서버/누락 응답은 조회 미연결이며30일 합계나0으로 대체하지 않는다.
+학습·초대 집중 회귀29 PASS, analyze 문제0. 기존 전체1580 PASS는 이전 커밋의 증거이며 이번 재실행 수치와 구분한다.
+기존 rollback.sql은 새 함수 해시 확인 후 원함수 복원용으로 유지한다.
+
+실기기: devicectl iPhone12/17 Pro Max unavailable, adb 연결0. 설치/실기기 PASS 주장 없음.
+초대 후속: iOS Associated Domains와 WEB AASA/Android assetlinks가 아직 연결되지 않았다.
+기존 WEB landing은 유지하며 자동 앱 열기/설치 후 복원은 미완료다.
+기기 연결 및 도메인·Play 서명 검증을 이어가야 한다. Store 제출0.

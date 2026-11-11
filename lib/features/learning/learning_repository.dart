@@ -73,8 +73,9 @@ final ownSchoolCardProvider = FutureProvider.autoDispose<SchoolCard>((
 String learningDuration(int ms) => '${ms ~/ 3600000}시간 ${ms ~/ 60000 % 60}분';
 
 class LearningSummary {
-  LearningSummary(this.today, this.week);
+  LearningSummary(this.today, this.week, [this.allTime]);
   final int today, week;
+  final int? allTime;
   factory LearningSummary.parse(Object? value) {
     final row = object(value);
     if (row['version'] != 'study-summary-v1' ||
@@ -83,7 +84,13 @@ class LearningSummary {
         row['source'] != 'completed_synced_sessions') {
       throw const LearningFailure();
     }
-    return LearningSummary(integer(row['today_ms']), integer(row['week_ms']));
+    return LearningSummary(
+      integer(row['today_ms']),
+      integer(row['week_ms']),
+      row['all_time_source'] == 'completed_synced_sessions'
+          ? nullableInteger(row['all_time_ms'])
+          : null,
+    );
   }
 }
 

@@ -73,6 +73,32 @@ const school = School(
   address: '',
 );
 void main() {
+  test(
+    'lifetime uses only explicit server lifetime and never last30 fallback',
+    () {
+      final data = <String, Object?>{
+        'version': 'study-summary-v1',
+        'timezone': 'Asia/Seoul',
+        'unit': 'milliseconds',
+        'source': 'completed_synced_sessions',
+        'today_ms': 1,
+        'week_ms': 2,
+        'last30_ms': 999,
+      };
+      expect(LearningSummary.parse(data).allTime, isNull);
+      data.addAll({
+        'all_time_source': 'completed_synced_sessions',
+        'all_time_ms': 5400000,
+      });
+      expect(learningDuration(LearningSummary.parse(data).allTime!), '1시간 30분');
+      data['all_time_ms'] = -1;
+      expect(
+        () => LearningSummary.parse(data),
+        throwsA(isA<LearningFailure>()),
+      );
+    },
+  );
+
   testWidgets('new signup waits for profile bootstrap before attribution', (
     t,
   ) async {
