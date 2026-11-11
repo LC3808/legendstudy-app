@@ -1,5 +1,7 @@
 # 공통 공지사항 — TASK 01
 
+2026-11-11 [개인 알림 로딩 안정화](notification-loading-fix-20261111.md): 공지사항 목록/관리자/읽음 계약은 변경하지 않았다. 개인 알림 RPC 부재와 공지 운영 상태를 구분한다.
+
 
 2026-11-01 TASK14-B: Production 설치·검증 완료. 공지2건 게시, 베타 campaign은 미활성(운영 WEB에 이전 2회 안내 잔존). [설치·권한·백업·잔여 차단 근거](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects).
 

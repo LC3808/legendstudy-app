@@ -1,3 +1,11 @@
+## 2026-11-11 — 알림 안정화·이메일 인증 읽기 조사
+
+[알림 수정](notification-loading-fix-20261111.md): 운영 RPC 부재404와 기본 자동 재시도 확인, 단계별8초/4상태/재시도 중복 억제. 관련46 PASS,전체2532 PASS/8 SKIP/기존5 FAIL,analyze/iOS/Android build PASS. Android 오류·재시도·공지 이동 확인,iPhone 회신 대기. [이메일 조사](email-verification-audit-20261111.md): 현재19개 중5미인증,오늘 발송 한도 로그21; 수신·SMTP 미확인. 운영 변경0.
+
+## 2026-11-11 — 작업04-C 실계정·기기 검수
+
+[최종 검수 범위·미완료](task04c-device-verification-20261111.md): iPhone A 저장/재실행/재로그인/B격리 확인, Owner 일반 앱 초기화 확인+A revision8 기본값·B0행 읽기 검증. Android360dp guest 터치/로컬저장·LAB/학습 진입 PASS. 기존 APP75/Android67 보존. 테스트 harness 단일 run 실패와 수동 완료 구분. 신규 온보딩 이메일 인증 장애 NOT TESTED,C/D HOLD. SQL 재적용·운영 설정·배포0.
+
 ## 2026-11-11 — 작업04-C 홈 설정 제한 운영 적용
 
 [운영 영수증·UI·미검증](task04c-home-production-20261111.md). Owner 승인 수정 A만19:30:58 KST 적용(migration20261111103058). 기존371함수/119정책·9table1168행 지문 동일, pending3 read/save 거부. 실계정 저장/복원·ERASING 운영 검수 미완료. 홈 편집을 알림 옆으로 이동·카드 간격16dp, 회귀130PASS/analyze0. B 유지·C/D HOLD, WEB/릴리스/스토어 변경0.

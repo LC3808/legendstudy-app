@@ -1,0 +1,603 @@
+{
+  "tested_application_sha": "efb6b59e884de110254397be3318c9710ea3c754",
+  "full_suite": {
+    "pass": 2510,
+    "skip": 8,
+    "fail": 5,
+    "new_product_test_failures": 0,
+    "existing_failures": [
+      "D3 runner real routes restore history and do not resubmit",
+      "mobile IA mock 360.0 1.0",
+      "mobile IA mock 360.0 2.0",
+      "mobile IA mock 428.0 1.0",
+      "mobile IA mock 428.0 2.0"
+    ]
+  },
+  "analyze": "PASS",
+  "builds": {
+    "ios_profile": "PASS",
+    "android_debug": "PASS"
+  },
+  "android_guest": {
+    "scope": "real-device-guest-only",
+    "checks": {
+      "real_app_guest_boot": true,
+      "edit_left_of_notification": true,
+      "spacing_16dp": true,
+      "touch_hide_drag_save": true,
+      "native_storage_readback": true,
+      "reset_defaults": true,
+      "route_/lab": true,
+      "route_/lab/csat-mock": true,
+      "route_/lab/essay": true,
+      "route_/study": true,
+      "route_/study/schools": true,
+      "route_/my": true,
+      "dday_study_home_return": true
+    },
+    "production_account_writes": 0
+  },
+  "iphone_phase1": {
+    "scope": "real-iPhone-existing-production-test-accounts-only",
+    "checks": {
+      "production_authenticated_home_read": true,
+      "edit_left_of_notification": true,
+      "card_spacing_16dp": true,
+      "native_touch_hide_reorder_show_news_save": true,
+      "production_rpc_readback_matches_ui": true,
+      "next_step": "terminate_and_relaunch_QA_app"
+    }
+  },
+  "regression_groups": {
+    "score_summary_test.dart": {
+      "success": 5
+    },
+    "essay_voice_test.dart": {
+      "success": 1
+    },
+    "essay_workspace_test.dart": {
+      "success": 22
+    },
+    "study_home_polish_test.dart": {
+      "success": 14
+    },
+    "task03a_official_scoring_test.dart": {
+      "success": 412
+    },
+    "essay_service_preparing_test.dart": {
+      "success": 5
+    },
+    "essay_device_followup_test.dart": {
+      "success": 14
+    },
+    "study_core_test.dart": {
+      "success": 18
+    },
+    "task04c_home_layout_test.dart": {
+      "success": 4
+    },
+    "essay_refinement_test.dart": {
+      "success": 24
+    },
+    "essay_history_catalog_test.dart": {
+      "success": 3
+    },
+    "onboarding_page_test.dart": {
+      "success": 42
+    },
+    "my_profile_state_test.dart": {
+      "success": 5
+    },
+    "auth_lifecycle_sdk_test.dart": {
+      "success": 5
+    },
+    "essay_learning_round_test.dart": {
+      "success": 3
+    },
+    "question_pdf_test.dart": {
+      "success": 2
+    },
+    "shared_essay_history_test.dart": {
+      "success": 2
+    },
+    "pdf_download_action_test.dart": {
+      "success": 4
+    },
+    "task03_mixed_scoring_test.dart": {
+      "success": 18
+    },
+    "mock_scoring_test.dart": {
+      "success": 47
+    },
+    "student_pdf_catalog_test.dart": {
+      "success": 3
+    },
+    "essay_history_identity_test.dart": {
+      "success": 2
+    },
+    "day7_profile_test.dart": {
+      "success": 11
+    },
+    "mock_scoring_ui_test.dart": {
+      "success": 4
+    },
+    "auth_recovery_test.dart": {
+      "success": 30
+    },
+    "essay_credit_source_test.dart": {
+      "success": 4
+    },
+    "essay_beta_credit_test.dart": {
+      "success": 9
+    },
+    "home_customization_test.dart": {
+      "success": 14
+    },
+    "profile_completion_card_test.dart": {
+      "success": 10
+    },
+    "scoring_result_polish_test.dart": {
+      "success": 4
+    },
+    "onboarding_capture_test.dart": {
+      "success": 1
+    },
+    "server_student_pdfs_test.dart": {
+      "success": 2
+    },
+    "essay_live_local_test.dart": {
+      "skip": 1
+    },
+    "pdf_download_test.dart": {
+      "success": 9
+    },
+    "essay_image_ux_test.dart": {
+      "success": 1
+    },
+    "study_repository_test.dart": {
+      "success": 7
+    },
+    "study_trends_test.dart": {
+      "success": 11
+    },
+    "task04b_home_restore_test.dart": {
+      "success": 1
+    },
+    "task14b_profile_navigation_test.dart": {
+      "success": 2
+    },
+    "essay_live_gateway_test.dart": {
+      "success": 39
+    },
+    "essay_growth_ui_test.dart": {
+      "success": 5
+    },
+    "ios_kakao_auth_test.dart": {
+      "success": 13
+    },
+    "task03c_live_scoring_test.dart": {
+      "skip": 1
+    },
+    "essay_stability_p0_test.dart": {
+      "success": 12
+    },
+    "task03b_official_scoring_test.dart": {
+      "success": 443
+    },
+    "essay_test_environment_test.dart": {
+      "success": 2
+    },
+    "study_focus_test.dart": {
+      "success": 22
+    },
+    "auth_oauth_test.dart": {
+      "success": 19
+    },
+    "essay_multi_selection_test.dart": {
+      "success": 4
+    },
+    "essay_logo_assets_test.dart": {
+      "success": 1
+    },
+    "essay_history_pagination_test.dart": {
+      "success": 1
+    },
+    "day10_b_home_polish_test.dart": {
+      "success": 19
+    },
+    "study_ui_test.dart": {
+      "success": 4
+    },
+    "home_compact_test.dart": {
+      "success": 5
+    },
+    "essay_feedback_test.dart": {
+      "success": 3
+    },
+    "native_auth_test.dart": {
+      "success": 12
+    },
+    "university_news_test.dart": {
+      "success": 12
+    },
+    "personalization_onboarding_test.dart": {
+      "success": 13
+    },
+    "essay_submission_restore_test.dart": {
+      "success": 2
+    },
+    "essay_mixed_review_test.dart": {
+      "success": 3
+    },
+    "kakao_oauth_scope_test.dart": {
+      "success": 1
+    },
+    "approved_essay_result_test.dart": {
+      "success": 2,
+      "skip": 4
+    },
+    "essay_sentence_review_test.dart": {
+      "success": 5
+    },
+    "essay_history_badge_test.dart": {
+      "success": 5
+    },
+    "auth_lifecycle_ui_test.dart": {
+      "success": 3
+    }
+  },
+  "production_schema_changes_this_verification": 0,
+  "account_verification": "DONE_WITH_MANUAL_COMPLETION",
+  "iphone_account_phase2": {
+    "cold_process_restart_without_reinstall": "verified before SAME_ACCOUNT_A checkpoint in v2",
+    "same_account_relogin": "passed v3 before OTHER_ACCOUNT_B checkpoint",
+    "other_account_isolation": "passed v3 before RETURN_ACCOUNT_A_FOR_RESTORE checkpoint",
+    "return_A": "UI matched latest server revision4; frozen revision2 assertion failed",
+    "latest_A_restore": "revision8 defaults; Owner manual hide/save/reset/save confirmed",
+    "B_writes": 0,
+    "onboarding_new_account": "NOT TESTED - Owner reopened signup testing; email confirmation/rate-limit blocked entry; no existing profile reset",
+    "read_failure": "local injected transport failure preserved real native cache; no real production outage induced",
+    "single_script_entire_run_pass": false
+  },
+  "readonly_final_accounts": [
+    {
+      "test_account": "test_A",
+      "shared_profile_exists": true,
+      "onboarding_completed": true,
+      "latest_revision": 8,
+      "saved_kst": "2026-11-11 20:48:51.636608",
+      "cards": [
+        {
+          "card_id": "dday",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 3
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 6
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "university_news",
+          "visible": false,
+          "display_order": 8
+        }
+      ]
+    },
+    {
+      "test_account": "test_B",
+      "shared_profile_exists": true,
+      "onboarding_completed": false,
+      "latest_revision": null,
+      "saved_kst": null,
+      "cards": null
+    }
+  ],
+  "account_history_before_owner_reset": [
+    {
+      "test_account": "test_A",
+      "revision": 1,
+      "saved_kst": "2026-11-11 20:27:42.591166",
+      "cards": [
+        {
+          "card_id": "dday",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 3
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 6
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "university_news",
+          "visible": false,
+          "display_order": 8
+        }
+      ]
+    },
+    {
+      "test_account": "test_A",
+      "revision": 2,
+      "saved_kst": "2026-11-11 20:32:04.465416",
+      "cards": [
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "dday",
+          "visible": false,
+          "display_order": 3
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 6
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "university_news",
+          "visible": true,
+          "display_order": 8
+        }
+      ]
+    },
+    {
+      "test_account": "test_A",
+      "revision": 3,
+      "saved_kst": "2026-11-11 20:44:14.990646",
+      "cards": [
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "university_news",
+          "visible": true,
+          "display_order": 3
+        },
+        {
+          "card_id": "dday",
+          "visible": false,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 6
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 8
+        }
+      ]
+    },
+    {
+      "test_account": "test_A",
+      "revision": 4,
+      "saved_kst": "2026-11-11 20:44:21.359395",
+      "cards": [
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "university_news",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 3
+        },
+        {
+          "card_id": "dday",
+          "visible": false,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 6
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 8
+        }
+      ]
+    },
+    {
+      "test_account": "test_A",
+      "revision": 5,
+      "saved_kst": "2026-11-11 20:45:30.35935",
+      "cards": [
+        {
+          "card_id": "dday",
+          "visible": true,
+          "display_order": 0
+        },
+        {
+          "card_id": "study_summary",
+          "visible": true,
+          "display_order": 1
+        },
+        {
+          "card_id": "school_meals",
+          "visible": true,
+          "display_order": 2
+        },
+        {
+          "card_id": "materials_search",
+          "visible": true,
+          "display_order": 3
+        },
+        {
+          "card_id": "recent_documents",
+          "visible": true,
+          "display_order": 4
+        },
+        {
+          "card_id": "recent_updates",
+          "visible": true,
+          "display_order": 5
+        },
+        {
+          "card_id": "school_ranking",
+          "visible": false,
+          "display_order": 6
+        },
+        {
+          "card_id": "essay_lab",
+          "visible": false,
+          "display_order": 7
+        },
+        {
+          "card_id": "university_news",
+          "visible": false,
+          "display_order": 8
+        }
+      ]
+    }
+  ],
+  "owner_manual_reset": {
+    "confirmed": true,
+    "latest_revision": 8,
+    "saved_kst": "2026-11-11 20:48:51.636608"
+  },
+  "original_installations": {
+    "iphone_APP75_metadata_unchanged": true,
+    "android_original_version": 67,
+    "android_versionCode_unchanged": true,
+    "android_versionName_unchanged": true,
+    "android_firstInstallTime_unchanged": true,
+    "android_lastUpdateTime_unchanged": true,
+    "android_codePath_unchanged": true,
+    "android_dataDir_unchanged": true
+  }
+}

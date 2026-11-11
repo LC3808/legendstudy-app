@@ -24,10 +24,12 @@ class NotificationsPage extends ConsumerWidget {
         ),
         Expanded(
           child: feed.when(
+            skipLoadingOnRefresh: false,
+            skipLoadingOnReload: false,
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (_, _) => _Centered(
               children: [
-                const Text('알림을 불러오지 못했어요.', style: AppTokens.body),
+                const Text('알림을 불러오지 못했습니다.', style: AppTokens.body),
                 const SizedBox(height: AppTokens.space12),
                 OutlinedButton(
                   onPressed: () =>
@@ -46,7 +48,13 @@ class NotificationsPage extends ConsumerWidget {
                       color: AppTokens.textTertiary,
                     ),
                     SizedBox(height: AppTokens.space12),
-                    Text('받은 알림이 없어요.', style: AppTokens.secondary),
+                    Text('새로운 알림이 없습니다.', style: AppTokens.body),
+                    SizedBox(height: AppTokens.space8),
+                    Text(
+                      '새로운 소식이 도착하면\n이곳에서 확인할 수 있어요.',
+                      style: AppTokens.secondary,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 );
               }

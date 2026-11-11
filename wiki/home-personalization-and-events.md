@@ -1,6 +1,8 @@
 # Home Personalization and Event Collection — Architecture Audit
 
-2026-11-11 후속: [작업04 홈 설정·공식 대학 소식](task04-home-university-news-20261111.md)에서 동일 기본 홈/표시·드래그/온보딩 선택을 구현했다. 아래 역할별 preset·드래그 후순위는 과거 설계이며 최신 Owner 정책이 우선한다. 후보 DB는 운영 미적용.
+2026-11-11 후속: [작업04 홈 설정·공식 대학 소식](task04-home-university-news-20261111.md)에서 동일 기본 홈/표시·드래그/온보딩 선택을 구현했다. 아래 역할별 preset·드래그 후순위는 과거 설계이며 최신 Owner 정책이 우선한다. 홈 A는 [04-C 운영 영수증](task04c-home-production-20261111.md)에 따라 적용 완료, C/D는 HOLD. [실계정 검수](task04c-device-verification-20261111.md) 참조.
+
+2026-11-11 알림 상태 정정: APP 개인 알림 소비 화면은 구현돼 있으나 운영 전용 table/RPC는 없다. [로딩 수정·실제 API 확인](notification-loading-fix-20261111.md). 아래 planned 표현은 9/25 당시 감사다.
 
 Status: **PLANNED / FOUNDATION DESIGN ONLY — 2026-09-25**
 

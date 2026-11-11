@@ -7,6 +7,10 @@ Owner 승인: ef228c2의 수정 A만 운영 적용. B 기존 지원 RPC 유지, 
 [04-B 검토](task04b-production-preflight-20261111.md) · [홈 구현](task04-home-university-news-20261111.md) ·
 [운영 영수증·재검증 SQL](../supabase/verification/task04c_home_20261111/README.md).
 
+## 후속 실기기 검수
+
+[실제 계정·기기 검수 결과](task04c-device-verification-20261111.md)에서 기존 계정 저장/재시작/재로그인/격리/초기화와 최신 UI를 확인했다. 신규 온보딩·운영 ERASING 등 미검증은 분리한다. 아래 표는 **19:30 운영 적용 직후** 영수증이며, 당시 실제 기기 NOT TESTED 상태를 최신 상태로 오해하지 않는다.
+
 ## 운영 적용 결과
 
 |요청 항목|결과·근거|상태|

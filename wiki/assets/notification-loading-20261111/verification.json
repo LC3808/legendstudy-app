@@ -1,0 +1,39 @@
+{
+  "date_kst": "2026-11-11",
+  "source_base": "efb6b59e884de110254397be3318c9710ea3c754",
+  "production_readonly": {
+    "personal_notification_table_present": false,
+    "personal_notification_rpc_count": 0,
+    "list_http_status": 404,
+    "list_error_code": "PGRST202"
+  },
+  "checks": {
+    "focused_pass": 46,
+    "full_pass": 2532,
+    "full_skip": 8,
+    "full_fail": 5,
+    "new_product_failures": 0,
+    "analyze": "PASS",
+    "ios_profile_build": "PASS",
+    "android_debug_build": "PASS",
+    "android_native": [
+      "home_bell",
+      "error_state",
+      "retry_ends_loading",
+      "notices_list_five_items",
+      "reentry",
+      "force_stop_relaunch_then_error"
+    ],
+    "iphone_install_launch": "DONE",
+    "iphone_notification_interaction": "NOT TESTED - Owner confirmation pending"
+  },
+  "preservation": {
+    "original_iphone_APP75_metadata_unchanged": true,
+    "original_android_67_metadata_unchanged": true,
+    "production_schema_changes": 0,
+    "auth_configuration_changes": 0,
+    "web_deployments": 0,
+    "release_merges": 0,
+    "store_submissions": 0
+  }
+}

@@ -1,5 +1,7 @@
 # 작업04 확장 — 홈 커스터마이징·나의 대학 소식
 
+최신 [실계정·기기 검수](task04c-device-verification-20261111.md): 기존 계정 핵심 저장/복원 DONE, 신규 온보딩 NOT TESTED, C/D HOLD. 아래 사전 검토 문구는 당시 기록이다.
+
 후속 [작업04-C](task04c-home-production-20261111.md): 수정 A는 Owner 승인 후 운영 적용 완료. 아래 사전 검토/기존 구현 기록은 당시 근거이며, C/D HOLD·실계정 검수 잔여는 유지한다.
 
 2026-11-11 · 개발 구현 DONE / 운영 연결 PARTIAL. 후속 [작업04-B 검토](task04b-production-preflight-20261111.md): 원본 SQL HOLD, 보완 A 승인 대기·C/D 보류. 별도 iPhone 오프라인 설치/실행만 확인, 실계정 기능 검수 NOT TESTED.

@@ -226,11 +226,10 @@ void main() {
   });
 
   group('feed controller', () {
-    test('signed out yields an empty feed', () async {
+    test('signed out cannot fabricate an empty feed', () async {
       final c = _container(signedIn: false, api: _FakeApi(_feed([_n('1')])));
       await c.read(authStateProvider.future);
-      final feed = await _feedFuture(c);
-      expect(feed.items, isEmpty);
+      await expectLater(_feedFuture(c), throwsA(isA<SignedOutException>()));
     });
 
     test('mark read on an owned row reduces unread', () async {
@@ -321,7 +320,7 @@ void main() {
       await c.read(authStateProvider.future);
       await t.pumpWidget(host(const NotificationsPage(), c));
       await t.pumpAndSettle();
-      expect(find.text('받은 알림이 없어요.'), findsOneWidget);
+      expect(find.text('새로운 알림이 없습니다.'), findsOneWidget);
     });
 
     testWidgets('inbox lists items with a 모두 읽음 action under text scaling', (
