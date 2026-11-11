@@ -54,17 +54,10 @@ class ConfirmedStudySummary extends ConsumerWidget {
         data: (s) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Wrap(
-              spacing: 24,
-              runSpacing: 12,
-              children: [
-                _Stat('오늘 공부시간', learningDuration(s.today)),
-                _Stat(
-                  '누적 공부시간',
-                  s.allTime == null ? '조회 미연결' : learningDuration(s.allTime!),
-                ),
-                _Stat('이번 주 공부시간', learningDuration(s.week)),
-              ],
+            StudySummaryMetrics(
+              today: s.today,
+              allTime: s.allTime,
+              week: s.week,
             ),
             const SizedBox(height: 8),
             Align(
@@ -84,16 +77,88 @@ class ConfirmedStudySummary extends ConsumerWidget {
   }
 }
 
-class _Stat extends StatelessWidget {
-  const _Stat(this.label, this.value);
-  final String label, value;
+/// Uses existing server totals; this widget does no aggregation.
+class StudySummaryMetrics extends StatelessWidget {
+  const StudySummaryMetrics({
+    super.key,
+    required this.today,
+    required this.allTime,
+    required this.week,
+  });
+  final int today, week;
+  final int? allTime;
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(label),
-      Text(value, style: Theme.of(context).textTheme.titleLarge),
-    ],
+  Widget build(BuildContext context) {
+    final values = [
+      _Stat('오늘 공부시간', learningDuration(today), AppTokens.info),
+      _Stat(
+        '누적 공부시간',
+        allTime == null ? '조회 미연결' : learningDuration(allTime!),
+        AppTokens.primaryInk,
+      ),
+      _Stat('이번 주 공부시간', learningDuration(week), const Color(0xFF176B4A)),
+    ];
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 300 ||
+            MediaQuery.textScalerOf(context).scale(13) > 18) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final value in values)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: value,
+                ),
+            ],
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var i = 0; i < values.length; i++) ...[
+              if (i > 0) const SizedBox(width: 8),
+              Expanded(child: values[i]),
+            ],
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _Stat extends StatelessWidget {
+  const _Stat(this.label, this.value, this.color);
+  final String label, value;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.only(left: 10, top: 4, bottom: 4),
+    decoration: BoxDecoration(
+      border: Border(left: BorderSide(color: color, width: 3)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 13,
+            color: color,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 18,
+            color: color,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ],
+    ),
   );
 }
 

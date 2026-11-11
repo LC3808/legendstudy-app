@@ -11,6 +11,7 @@ import 'pause_resume_button.dart';
 import 'official_mock_selector.dart';
 import 'free_practice_results.dart';
 import '../scoring/scoring_pages.dart';
+import '../scoring/scoring_display_title.dart';
 import '../scoring/scoring_repository.dart';
 
 class MockExamPanel extends StatefulWidget {
@@ -253,7 +254,12 @@ class _MockExamPanelState extends State<MockExamPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(result.title!, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            study.attempts.any((a) => a.id == result.id)
+                ? scoringDisplayTitle(result.title!)
+                : result.title!,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           Text('${seconds ~/ 60}분 ${seconds % 60}초 응시했어요.'),
           if (study.freePractices.any((p) => p['id'] == result.id)) ...[
             const Text('자유 연습 · 직접 점수 입력'),
@@ -487,7 +493,13 @@ class _MockExamPanelState extends State<MockExamPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(d.mock!.title, maxLines: 2, overflow: TextOverflow.ellipsis),
+        Text(
+          d.answers == null
+              ? d.mock!.title
+              : scoringDisplayTitle(d.mock!.title),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
         if (d.mock!.subject != null)
           Text(
             d.mock!.subject!,

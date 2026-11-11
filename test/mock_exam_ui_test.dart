@@ -164,7 +164,8 @@ void main() {
       await press('종료 확인');
       expect(c.records.single.activeMs, 60000);
       expect(find.text('1분 0초 응시했어요.'), findsOneWidget);
-      expect(find.text('이 기기에 저장됨'), findsOneWidget);
+      expect(find.text('이 기기에 저장됨'), findsNothing);
+      expect(c.records, hasLength(1));
       expect(tester.takeException(), isNull);
     });
   }

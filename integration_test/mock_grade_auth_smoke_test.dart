@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,8 +13,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
-import 'package:legendstudy_app/core/links/external_link.dart';
-import 'package:legendstudy_app/features/resources/domain/content_resource.dart';
 import 'package:legendstudy_app/features/study/application/study_controller.dart';
 import 'package:legendstudy_app/features/study/data/study_local.dart';
 import 'package:legendstudy_app/features/study/data/study_repository.dart';
@@ -21,6 +20,7 @@ import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_repository.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
+
 import 'mock_scoring_auth_smoke_test.dart'
     show RegisteredStudy, RegisteredScoring;
 
@@ -221,10 +221,9 @@ void main() {
       Future<Map<String, dynamic>> fetch(String id) async =>
           Map<String, dynamic>.from(
             await current.rpc<dynamic>(
-                  'fetch_own_mock_attempt',
-                  params: {'p_attempt_id': id},
-                )
-                as Map,
+              'fetch_own_mock_attempt',
+              params: {'p_attempt_id': id},
+            ) as Map,
           );
       Future<void> openHistory(ScoringAttempt a) async {
         router!.go('/study');
@@ -269,54 +268,41 @@ void main() {
         expect(s.wrong, [2]);
         expect(s.unanswered, [3]);
         expect(find.text('2 / 9점'), findsOneWidget);
-        expect(find.text('정답 1 / 3'), findsOneWidget);
-        expect(find.text('오답 1'), findsOneWidget);
-        expect(find.text('미응답 1'), findsOneWidget);
-        expect(find.text(s.gradeLabel), findsOneWidget);
-        if (s.gradeExplanation != null) {
-          expect(find.text(s.gradeExplanation!), findsOneWidget);
-        }
+        expect(find.text('1 / 3'), findsOneWidget);
+        expect(find.text('정답'), findsOneWidget);
+        expect(find.text('오답'), findsOneWidget);
+        expect(find.text('미응답'), findsOneWidget);
+        expect(
+          find.text(s.gradeLabel),
+          s.gradeStatus == 'unavailable' ? findsNothing : findsOneWidget,
+        );
         stage = 'answer_review';
         await tap(find.text('답안 확인'));
-        const symbols = ['①', '②', '③', '④', '⑤'];
         for (final r in s.answers) {
           final outcome = r.submitted == null
               ? '미응답'
               : r.isCorrect
               ? '정답'
               : '오답';
-          await t.ensureVisible(find.text('${r.number}번 · $outcome'));
+          final title = find.text('${r.number}번 · $outcome');
+          await t.ensureVisible(title);
+          expect(title, findsOneWidget);
           expect(
             find.text(
-              '내 답 ${r.submitted == null ? '—' : symbols[r.submitted! - 1]}',
+              r.submitted == null ? '미응답' : r.formatAnswer(r.submitted),
             ),
-            findsOneWidget,
+            findsWidgets,
           );
-          expect(find.text('정답 ${symbols[r.correct! - 1]}'), findsOneWidget);
-          expect(find.text('배점 ${r.points}점'), findsOneWidget);
+          expect(find.text(r.correctLabel), findsWidgets);
+          expect(find.text('${r.points}점'), findsWidgets);
         }
         stage = 'provenance';
-        await tap(find.text('정답·등급 기준 출처'));
-        for (final entry in [
-          ('정답 기준', s.keySource),
-          ('등급 기준', s.cutoffSource),
-        ]) {
-          final source = entry.$2;
-          if (source == null) continue;
-          expect(find.text('${entry.$1}: ${source.name}'), findsOneWidget);
-          final date = source.verifiedAt.add(const Duration(hours: 9));
-          final label =
-              '확인: ${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
-          expect(find.text(label), findsWidgets);
-          final button = t.widget<ExternalLinkButton>(
-            find.widgetWithText(ExternalLinkButton, '${entry.$1} 원문 보기'),
-          );
-          expect(button.uri, publicWebUri(source.url));
-          expect(button.uri, isNotNull);
-          expect(button.uri!.userInfo, isEmpty);
-        }
+        expect(s.keySource, isNotNull);
+        expect(s.keySource!.toJson(), canonical.keySource!.toJson());
+        expect(s.cutoffSource?.toJson(), canonical.cutoffSource?.toJson());
         noInternalIds();
-        await tap(find.text('닫기'));
+        await t.pageBack();
+        await t.pumpAndSettle();
         noInternalIds();
         stage = outerStage;
       }
@@ -365,7 +351,7 @@ void main() {
         if (scenario.$1 == 'unavailable') {
           expect(a.result!.grade, isNull);
           expect(a.result!.cutoffSource, isNull);
-          expect(find.text('등급 정보 준비 중'), findsOneWidget);
+          expect(find.text('등급 산출 불가'), findsNothing);
         } else {
           expect(a.result!.grade, 8);
           expect(
@@ -378,7 +364,7 @@ void main() {
           );
           expect(
             find.text(scenario.$1 == 'confirmed' ? '확정 등급 기준' : '예상 등급컷 기준'),
-            findsOneWidget,
+            findsNothing,
           );
           if (scenario.$1 == 'estimated') {
             expect(find.text('8등급'), findsNothing);
@@ -387,7 +373,8 @@ void main() {
         mark(stage);
         stage = 'result_summary';
         await resultChecks(a, server);
-        await tap(find.text('다시 학습으로'));
+        await t.pageBack();
+        await t.pumpAndSettle();
         expect(router!.routeInformationProvider.value.uri.path, '/study');
         expect(c!.draft, isNull);
       }
@@ -402,7 +389,8 @@ void main() {
         expect(jsonEncode(restored.toJson()), jsonEncode(a.toJson()));
         await openHistory(a);
         await resultChecks(restored, await fetch(a.id));
-        await tap(find.text('다시 학습으로'));
+        await t.pageBack();
+        await t.pumpAndSettle();
       }
       mark(stage);
       stage = 'historical_version';
@@ -494,11 +482,12 @@ void main() {
         await mount(clients[0]);
         for (final a in attempts.take(2)) {
           await openHistory(a);
-          expect(find.text('등급 정보 준비 중'), findsOneWidget);
+          expect(find.text('등급 산출 불가'), findsNothing);
           expect(find.text('8등급'), findsNothing);
           expect(find.text('예상 8등급'), findsNothing);
-          expect(find.text('저장된 등급의 근거 정보를 확인할 수 없어요.'), findsOneWidget);
-          await tap(find.text('다시 학습으로'));
+          expect(find.text('저장된 등급의 근거 정보를 확인할 수 없어요.'), findsNothing);
+          await t.pageBack();
+          await t.pumpAndSettle();
         }
         var rejected = false;
         try {
@@ -519,11 +508,14 @@ void main() {
       await mount(clients[0]);
       final count = submitCalls;
       await openHistory(attempts.first);
-      await tap(find.text('다시 학습으로'));
+      await t.pageBack();
+      await t.pumpAndSettle();
       expect(router!.routeInformationProvider.value.uri.path, '/study');
       expect(c!.draft, isNull);
       await openHistory(attempts[1]);
-      await tap(find.text('홈으로'));
+      await t.pageBack();
+      await t.pumpAndSettle();
+      await tap(find.text('홈'));
       expect(router!.routeInformationProvider.value.uri.path, '/home');
       expect(c!.draft, isNull);
       router!.go('/study');

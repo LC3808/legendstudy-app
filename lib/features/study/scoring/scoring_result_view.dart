@@ -1,237 +1,319 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../core/links/external_link.dart';
+import '../../../core/theme/app_theme.dart';
+import 'scoring_display_title.dart';
 import 'scoring_models.dart';
 
-/// Shared presentation: authenticated results are already server-confirmed here.
-class ScoringResultView extends StatefulWidget {
+/// Presentation only; the immutable score, answer and provenance stay intact.
+class ScoringResultView extends StatelessWidget {
   const ScoringResultView({
     super.key,
     required this.attempt,
     required this.guest,
+    this.sessionChanges,
+    this.canReadResult,
   });
   final ScoringAttempt attempt;
   final bool guest;
-  @override
-  State<ScoringResultView> createState() => _ScoringResultViewState();
-}
+  final Listenable? sessionChanges;
+  final bool Function()? canReadResult;
 
-class _ScoringResultViewState extends State<ScoringResultView> {
-  final anchors = <int, GlobalKey>{};
-  void jump(int n) {
-    final target = anchors[n]?.currentContext;
-    if (target != null) {
-      Scrollable.ensureVisible(target, duration: Duration.zero);
-    }
+  void openAnswers(BuildContext context, [int? number]) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => ScoringAnswersPage(
+          attempt: attempt,
+          initialQuestion: number,
+          sessionChanges: sessionChanges,
+          canReadResult: canReadResult,
+        ),
+      ),
+    );
   }
 
-  String outcome(AnswerReview a) => a.allCredit
-      ? '전원 정답'
-      : a.submitted == null
-      ? '미응답'
-      : a.isCorrect
-      ? '정답'
-      : '오답';
-  Widget numbers(String label, List<int> values) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(label, style: Theme.of(context).textTheme.titleSmall),
-      if (values.isEmpty)
-        const Text('없음')
-      else
-        Wrap(
-          children: [
-            for (final n in values)
-              Semantics(
-                label: '$label $n번, 답안 확인',
-                button: true,
-                child: ExcludeSemantics(
-                  child: TextButton(
-                    key: ValueKey('review-jump-$n'),
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(48, 48),
+  Widget numbers(
+    BuildContext context,
+    String label,
+    List<int> values,
+    Color color,
+  ) {
+    if (values.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: AppTokens.sectionTitle),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final n in values)
+                Semantics(
+                  label: '$label $n번, 답안 확인',
+                  button: true,
+                  child: ExcludeSemantics(
+                    child: OutlinedButton(
+                      key: ValueKey('review-jump-$n'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: color,
+                        side: BorderSide(color: color),
+                        minimumSize: const Size(56, 48),
+                      ),
+                      onPressed: () => openAnswers(context, n),
+                      child: Text('$n번'),
                     ),
-                    onPressed: () => jump(n),
-                    child: Text('$n'),
                   ),
                 ),
-              ),
-          ],
-        ),
-      const SizedBox(height: 12),
-    ],
-  );
-  Widget source(String label, ScoringSource? source) {
-    if (source == null) return Text('$label: 저장된 출처 정보가 없어요.');
-    final date = source.verifiedAt.add(const Duration(hours: 9));
-    final formatted =
-        '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('$label: ${source.name}'),
-        Text('확인: $formatted'),
-        ExternalLinkButton(
-          uri: Uri.tryParse(source.url),
-          label: '$label 원문 보기',
-        ),
-        const SizedBox(height: 12),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final a = widget.attempt, score = widget.attempt.result!;
-    final router = GoRouter.maybeOf(context);
+    final score = attempt.result!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(a.title, style: Theme.of(context).textTheme.titleMedium),
-        if (a.subject?.trim().isNotEmpty == true) Text(a.subject!),
-        const SizedBox(height: 12),
-        Semantics(
-          label: '원점수 ${score.rawScore}점, 만점 ${score.maxScore}점',
-          child: ExcludeSemantics(
-            child: Text(
-              '${score.rawScore} / ${score.maxScore}점',
-              style: Theme.of(context).textTheme.headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
+        Text(scoringDisplayTitle(attempt.title), style: AppTokens.sectionTitle),
+        if (attempt.subject?.trim().isNotEmpty == true)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Text(attempt.subject!, style: AppTokens.body),
           ),
-        ),
-        Semantics(
-          label: [
-            score.gradeLabel,
-            if (score.gradeExplanation != null) score.gradeExplanation!,
-          ].join(', '),
-          child: ExcludeSemantics(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  score.gradeLabel,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                if (score.gradeExplanation != null)
-                  Text(score.gradeExplanation!),
-              ],
-            ),
+        const SizedBox(height: 20),
+        Container(
+          key: const Key('score-summary-banner'),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: const Color(0xFFEAF2FA),
+            border: Border.all(color: AppTokens.info, width: 1.5),
+            borderRadius: BorderRadius.circular(16),
           ),
-        ),
-        if (score.gradeStatus != 'unavailable' && !score.hasGradeBasis)
-          const Text('저장된 등급의 근거 정보를 확인할 수 없어요.'),
-        const SizedBox(height: 12),
-        Wrap(
-          spacing: 12,
-          runSpacing: 4,
-          children: [
-            Text('정답 ${score.correctCount} / ${score.answers.length}'),
-            Text('오답 ${score.wrong.length}'),
-            Text('미응답 ${score.unanswered.length}'),
-          ],
-        ),
-        Text(
-          widget.guest ? '이 기기에 저장됨' : '서버에서 채점한 결과',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        Wrap(
-          spacing: 8,
-          children: [
-            TextButton(onPressed: () => jump(1), child: const Text('답안 확인')),
-            TextButton(
-              onPressed: () => showDialog<void>(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: const Text('정답·등급 기준 출처'),
-                  content: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        source('정답 기준', score.keySource),
-                        if (score.cutoffSource != null)
-                          source('등급 기준', score.cutoffSource)
-                        else
-                          const Text('등급 산출 불가'),
-                        const Text('응시 당시 기준으로 계산한 결과예요. 공식 성적표가 아니에요.'),
-                      ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Semantics(
+                label: '원점수 ${score.rawScore}점, 만점 ${score.maxScore}점',
+                child: ExcludeSemantics(
+                  child: Text(
+                    '${score.rawScore} / ${score.maxScore}점',
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      color: AppTokens.info,
                     ),
                   ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(ctx),
-                      child: const Text('닫기'),
-                    ),
-                  ],
                 ),
               ),
-              child: const Text('정답·등급 기준 출처'),
-            ),
-            if (Navigator.of(context).canPop() || router != null)
-              TextButton(
-                onPressed: () {
-                  if (router != null) {
-                    Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).popUntil((r) => r.isFirst);
-                    router.go('/study');
-                  } else {
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: const Text('다시 학습으로'),
+              if (score.hasGradeBasis && score.grade != null) ...[
+                const SizedBox(height: 6),
+                Text(score.gradeLabel, style: AppTokens.sectionTitle),
+              ],
+              const SizedBox(height: 16),
+              Wrap(
+                spacing: 20,
+                runSpacing: 12,
+                children: [
+                  _ResultStat(
+                    '정답',
+                    '${score.correctCount} / ${score.answers.length}',
+                    AppTokens.info,
+                  ),
+                  _ResultStat(
+                    '오답',
+                    '${score.wrong.length}',
+                    AppTokens.dangerInk,
+                  ),
+                  _ResultStat(
+                    '미응답',
+                    '${score.unanswered.length}',
+                    AppTokens.textSecondary,
+                  ),
+                ],
               ),
-            if (router != null)
-              TextButton(
-                onPressed: () {
-                  Navigator.of(
-                    context,
-                    rootNavigator: true,
-                  ).popUntil((r) => r.isFirst);
-                  router.go('/home');
-                },
-                child: const Text('홈으로'),
-              ),
-          ],
-        ),
-        const Divider(),
-        numbers('틀린 문제', score.wrong),
-        numbers('미응답', score.unanswered),
-        Text('문항별 답안', style: Theme.of(context).textTheme.titleMedium),
-        for (final review in score.answers)
-          Padding(
-            key: anchors.putIfAbsent(review.number, () => GlobalKey()),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Semantics(
-              label:
-                  '${review.number}번, 내 답 ${review.submitted == null ? '미응답' : '${review.submitted}번'}, 정답 ${review.answerType == 'multiple_choice' && review.correct != null ? '${review.correct}번' : review.correctLabel}, ${outcome(review)}, ${review.points}점',
-              child: ExcludeSemantics(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${review.number}번 · ${outcome(review)}',
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 4,
-                      children: [
-                        Text('내 답 ${review.formatAnswer(review.submitted)}'),
-                        Text('정답 ${review.correctLabel}'),
-                        Text('배점 ${review.points}점'),
-                      ],
-                    ),
-                    const Divider(),
-                  ],
-                ),
-              ),
-            ),
+            ],
           ),
+        ),
+        const SizedBox(height: 16),
+        FilledButton.icon(
+          onPressed: () => openAnswers(context),
+          icon: const Icon(Icons.fact_check_outlined),
+          label: const Text('답안 확인'),
+          style: FilledButton.styleFrom(
+            backgroundColor: AppTokens.textPrimary,
+            foregroundColor: Colors.white,
+            minimumSize: const Size(48, 52),
+          ),
+        ),
+        numbers(context, '틀린 문제', score.wrong, AppTokens.dangerInk),
+        numbers(context, '미응답 문제', score.unanswered, AppTokens.textSecondary),
       ],
+    );
+  }
+}
+
+class _ResultStat extends StatelessWidget {
+  const _ResultStat(this.label, this.value, this.color);
+  final String label, value;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        value,
+        style: TextStyle(
+          color: color,
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+    ],
+  );
+}
+
+class ScoringAnswersPage extends StatefulWidget {
+  const ScoringAnswersPage({
+    super.key,
+    required this.attempt,
+    this.initialQuestion,
+    this.sessionChanges,
+    this.canReadResult,
+  });
+  final ScoringAttempt attempt;
+  final int? initialQuestion;
+  final Listenable? sessionChanges;
+  final bool Function()? canReadResult;
+  @override
+  State<ScoringAnswersPage> createState() => _ScoringAnswersPageState();
+}
+
+class _ScoringAnswersPageState extends State<ScoringAnswersPage> {
+  final anchors = <int, GlobalKey>{};
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final target = anchors[widget.initialQuestion]?.currentContext;
+      if (target != null) Scrollable.ensureVisible(target, alignment: 0.05);
+    });
+  }
+
+  Widget page(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('답안 확인')),
+    body: SafeArea(
+      child: widget.canReadResult?.call() == false
+          ? const Center(child: Text('이 계정의 결과를 확인할 수 없어요.'))
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    scoringDisplayTitle(widget.attempt.title),
+                    style: AppTokens.sectionTitle,
+                  ),
+                  if (widget.attempt.subject?.trim().isNotEmpty == true)
+                    Text(widget.attempt.subject!, style: AppTokens.body),
+                  const SizedBox(height: 16),
+                  for (final review in widget.attempt.result!.answers)
+                    Padding(
+                      key: anchors.putIfAbsent(
+                        review.number,
+                        () => GlobalKey(),
+                      ),
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: _AnswerCard(review),
+                    ),
+                ],
+              ),
+            ),
+    ),
+  );
+
+  @override
+  Widget build(BuildContext context) => widget.sessionChanges == null
+      ? page(context)
+      : ListenableBuilder(
+          listenable: widget.sessionChanges!,
+          builder: (context, _) => page(context),
+        );
+}
+
+class _AnswerCard extends StatelessWidget {
+  const _AnswerCard(this.review);
+  final AnswerReview review;
+  @override
+  Widget build(BuildContext context) {
+    final a = review;
+    final label = a.allCredit
+        ? '전원 정답'
+        : a.submitted == null
+        ? '미응답'
+        : a.isCorrect
+        ? '정답'
+        : '오답';
+    final color = a.isCorrect
+        ? AppTokens.info
+        : a.submitted == null
+        ? AppTokens.textSecondary
+        : AppTokens.dangerInk;
+    final own = a.submitted == null ? '미응답' : a.formatAnswer(a.submitted);
+    return Semantics(
+      label:
+          '${a.number}번, 내 답 $own, 정답 ${a.correctLabel}, $label, 배점 ${a.points}점',
+      child: ExcludeSemantics(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: a.isCorrect
+                ? const Color(0xFFF3F7FC)
+                : a.submitted == null
+                ? Colors.white
+                : const Color(0xFFFFF4F4),
+            border: Border.all(color: color, width: 1.2),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${a.number}번 · $label',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: color,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 24,
+                runSpacing: 12,
+                children: [
+                  _ResultStat('내 답', own, color),
+                  _ResultStat('정답', a.correctLabel, AppTokens.info),
+                  _ResultStat('배점', '${a.points}점', AppTokens.textSecondary),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

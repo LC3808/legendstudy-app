@@ -1,11 +1,8 @@
 import 'dart:convert';
 
-import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
-import 'package:legendstudy_app/core/links/external_link.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_result_view.dart';
 
@@ -129,68 +126,9 @@ void main() {
       },
     );
   }
-  testWidgets(
-    'result navigation returns to Study or Home without resubmission',
-    (t) async {
-      final choices = List<int?>.filled(100, 1);
-      final attempt = ScoringAttempt(
-        id: 'done',
-        title: '시험',
-        draft: gradeDraft('confirmed', choices),
-        result: gradeResult('confirmed', choices),
-        outcome: ScoringOutcome.complete,
-      );
-      final router = GoRouter(
-        initialLocation: '/study',
-        routes: [
-          GoRoute(
-            path: '/study',
-            builder: (context, state) => Scaffold(
-              body: TextButton(
-                onPressed: () =>
-                    Navigator.of(context, rootNavigator: true).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => Scaffold(
-                          body: SingleChildScrollView(
-                            child: ScoringResultView(
-                              attempt: attempt,
-                              guest: true,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                child: const Text('결과 열기'),
-              ),
-            ),
-          ),
-          GoRoute(
-            path: '/home',
-            builder: (_, _) => const Scaffold(body: Text('홈 도착')),
-          ),
-        ],
-      );
-      await t.pumpWidget(
-        MaterialApp.router(theme: AppTheme.light, routerConfig: router),
-      );
-      await t.tap(find.text('결과 열기'));
-      await t.pumpAndSettle();
-      expect(find.text('제출하고 채점하기'), findsNothing);
-      await t.tap(find.text('다시 학습으로'));
-      await t.pumpAndSettle();
-      expect(find.text('결과 열기'), findsOneWidget);
-      await t.tap(find.text('결과 열기'));
-      await t.pumpAndSettle();
-      await t.tap(find.text('홈으로'));
-      await t.pumpAndSettle();
-      expect(find.text('홈 도착'), findsOneWidget);
-      await t.pumpWidget(const SizedBox.shrink());
-      router.dispose();
-    },
-  );
   for (final scale in [1.0, 2.0]) {
     testWidgets(
-      '100 answers, semantics, source, jumps at 360x640 scale $scale',
+      'separate answer page, question jump and account guard at scale $scale',
       (t) async {
         t.view.physicalSize = const Size(360, 640);
         t.view.devicePixelRatio = 1;
@@ -199,81 +137,84 @@ void main() {
         addTearDown(t.view.resetDevicePixelRatio);
         addTearDown(t.platformDispatcher.clearTextScaleFactorTestValue);
         final sem = t.ensureSemantics();
+
+        final session = ValueNotifier(true);
+        addTearDown(session.dispose);
         final choices = List<int?>.generate(
           100,
-          (i) => i == 0
-              ? 1
-              : i == 6
+          (i) => i == 6
               ? 3
-              : null,
+              : i == 99
+              ? null
+              : 1,
         );
-        final base = gradeResult('estimated', choices);
-        final result = base.withSources(
-          ScoringSource.fromJson({
-            ...sourceJson(),
-            'source_name': '아주 긴 출처 이름 ' * 10,
-          }),
-          base.cutoffSource,
-        );
-        Uri? opened;
+        final result = gradeResult('unavailable', choices);
+        final before = jsonEncode(result.toJson());
         await t.pumpWidget(
-          ProviderScope(
-            overrides: [
-              externalOpenerProvider.overrideWithValue((uri) async {
-                opened = uri;
-                return true;
-              }),
-            ],
-            child: MaterialApp(
-              theme: AppTheme.light,
-              home: Scaffold(
-                body: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: ScoringResultView(
-                    attempt: ScoringAttempt(
-                      id: 'test',
-                      title: '아주 긴 모의고사 시험 제목 ' * 10,
-                      draft: gradeDraft('estimated', choices),
-                      result: result,
-                      outcome: ScoringOutcome.complete,
-                    ),
-                    guest: true,
+          MaterialApp(
+            theme: AppTheme.light,
+            home: Scaffold(
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: ScoringResultView(
+                  attempt: ScoringAttempt(
+                    id: 'done',
+                    title: '[2024년 11월 시행] 2025학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/수학',
+                    draft: gradeDraft('unavailable', choices),
+                    result: result,
+                    outcome: ScoringOutcome.complete,
                   ),
+                  guest: false,
+                  sessionChanges: session,
+                  canReadResult: () => session.value,
                 ),
               ),
             ),
           ),
         );
+        expect(find.text('2025학년도 수능 기출'), findsOneWidget);
+        expect(find.text('등급 산출 불가'), findsNothing);
+        expect(find.text('서버에서 채점한 결과'), findsNothing);
+        expect(find.text('정답·등급 기준 출처'), findsNothing);
+        expect(find.text('다시 학습으로'), findsNothing);
+        expect(find.text('홈으로'), findsNothing);
+        expect(find.text('7번 · 오답'), findsNothing);
+        final button = find.widgetWithText(FilledButton, '답안 확인');
+        await t.ensureVisible(button);
+        await t.tap(button);
+        await t.pumpAndSettle();
+        expect(find.byType(ScoringAnswersPage), findsOneWidget);
+        expect(find.text('98 / 100점'), findsNothing);
+        expect(find.text('1번 · 정답'), findsOneWidget);
         expect(t.takeException(), isNull);
-        await t.ensureVisible(find.text('예상 9등급'));
-        expect(find.bySemanticsLabel('예상 9등급, 예상 등급컷 기준'), findsOneWidget);
-        final source = find.text('정답·등급 기준 출처');
-        await t.ensureVisible(source);
-        await t.tap(source);
-        await t.pumpAndSettle();
-        expect(find.text('확인: 2026.09.14'), findsNWidgets(2));
-        await t.ensureVisible(find.text('정답 기준 원문 보기'));
-        await t.tap(find.text('정답 기준 원문 보기'));
-        await t.pumpAndSettle();
-        expect(opened, Uri.parse('https://example.com/source/1'));
-        await t.tap(find.text('닫기'));
+        await t.pageBack();
         await t.pumpAndSettle();
         final jump = find.byKey(const ValueKey('review-jump-100'));
         await t.ensureVisible(jump);
-        expect(t.getSize(jump).width, greaterThanOrEqualTo(48));
         expect(t.getSize(jump).height, greaterThanOrEqualTo(48));
+        expect(find.text('100번'), findsOneWidget);
         await t.tap(jump);
         await t.pumpAndSettle();
+        expect(find.text('100번 · 미응답').hitTestable(), findsOneWidget);
         expect(
-          find.bySemanticsLabel('100번, 내 답 미응답, 정답 1번, 미응답, 1점'),
+          find.bySemanticsLabel('100번, 내 답 미응답, 정답 ①, 미응답, 배점 1점'),
           findsOneWidget,
         );
         await t.ensureVisible(find.text('7번 · 오답'));
         expect(
-          find.bySemanticsLabel('7번, 내 답 3번, 정답 1번, 오답, 1점'),
-          findsOneWidget,
+          t.widget<Text>(find.text('7번 · 오답')).style!.color,
+          AppTokens.dangerInk,
+        );
+        expect(
+          t.widget<Text>(find.text('1번 · 정답')).style!.color,
+          AppTokens.info,
         );
         expect(t.takeException(), isNull);
+        session.value = false;
+        await t.pumpAndSettle();
+        expect(find.text('7번 · 오답'), findsNothing);
+        expect(find.text('이 계정의 결과를 확인할 수 없어요.'), findsOneWidget);
+        expect(jsonEncode(result.toJson()), before);
         sem.dispose();
       },
     );

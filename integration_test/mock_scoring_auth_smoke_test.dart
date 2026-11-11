@@ -1,6 +1,7 @@
 // Opt-in native runtime test. Production repositories, SDK login and server RPC.
 // Only fixture registration/lifecycle uses the runner's private loopback bridge.
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -194,10 +195,9 @@ void main() {
       Future<Map<String, dynamic>> fetch(String id) async =>
           Map<String, dynamic>.from(
             await current.rpc<dynamic>(
-                  'fetch_own_mock_attempt',
-                  params: {'p_attempt_id': id},
-                )
-                as Map,
+              'fetch_own_mock_attempt',
+              params: {'p_attempt_id': id},
+            ) as Map,
           );
 
       stage = 'auth_scoring_start';
@@ -263,14 +263,9 @@ void main() {
         jsonEncode(score.toJson()),
       );
       expect(find.text('2 / 9점'), findsOneWidget);
-      final sourceAction = find.text('정답·등급 기준 출처');
-      await t.ensureVisible(sourceAction);
-      await t.tap(sourceAction);
-      await t.pumpAndSettle();
-      expect(find.text('정답 기준: ${score.keySource!.name}'), findsOneWidget);
-      expect(find.text('등급 기준: ${score.cutoffSource!.name}'), findsOneWidget);
-      await t.tap(find.text('닫기'));
-      await t.pumpAndSettle();
+      expect(score.keySource!.name, isNotEmpty);
+      expect(score.cutoffSource!.name, isNotEmpty);
+      expect(find.text('정답·등급 기준 출처'), findsNothing);
       mark(stage);
       stage = 'auth_restore';
       await mount(clients[0]);

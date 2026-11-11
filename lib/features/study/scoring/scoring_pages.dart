@@ -6,6 +6,7 @@ import '../application/study_controller.dart';
 import '../domain/study_models.dart';
 import 'scoring_models.dart';
 import 'scoring_result_view.dart';
+import 'scoring_display_title.dart';
 
 Future<void> confirmScoringSubmit(
   BuildContext context,
@@ -79,7 +80,7 @@ class _AnswerEntryPageState extends State<AnswerEntryPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            d.mock!.title,
+            scoringDisplayTitle(d.mock!.title),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -306,7 +307,7 @@ class ScoringAttemptView extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(a.title),
+          Text(scoringDisplayTitle(a.title)),
           Text(
             a.outcome == ScoringOutcome.stale
                 ? '채점 기준이 업데이트되었어요. 답안과 시험 기록은 보관되어 있어요. 새 시험을 선택해 다시 응시할 수 있어요.'
@@ -332,7 +333,15 @@ class ScoringAttemptView extends StatelessWidget {
         ],
       );
     }
-    return ScoringResultView(attempt: a, guest: study.guest);
+    final epoch = study.viewGeneration;
+    return ScoringResultView(
+      attempt: a,
+      guest: study.guest,
+      sessionChanges: study,
+      canReadResult: () =>
+          study.viewGeneration == epoch &&
+          study.attempts.any((row) => row.id == a.id),
+    );
   }
 }
 
@@ -373,7 +382,7 @@ class ScoringHistory extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  '${attempt.title} · ${attempt.result == null ? '채점 확인' : '${attempt.result!.rawScore} / ${attempt.result!.maxScore}점'}',
+                  '${scoringDisplayTitle(attempt.title)} · ${attempt.result == null ? '채점 확인' : '${attempt.result!.rawScore} / ${attempt.result!.maxScore}점'}',
                 ),
               ),
           ],

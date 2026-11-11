@@ -36,6 +36,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+모의고사 결과/답안 확인 UI·예상 등급 대안: [학생 결과 UI 후속](task03-result-ux-20261111.md).
+
 작업03-C 자동채점 운영 적용 / READY 공개 / 실기기 검수: [운영 결과·검증·보존·원복](task03c-production-rollout-20261111.md).
 
 APP67 학습 통합 / 학교 순위 / 친구 초대: [구현·계약·검증·운영 미적용·후속](app67-learning-integration-20261111.md).

@@ -1,6 +1,7 @@
 // Native storage/clock and production Guest mapper with synthetic HTTP only.
 // No credentials, production requests or database fixture operations.
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +11,7 @@ import 'package:legendstudy_app/features/study/application/study_controller.dart
 import 'package:legendstudy_app/features/study/data/study_local.dart';
 import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_pages.dart';
+
 import '../test/support/grade_fixture.dart';
 import '../test/study_core_test.dart' show TestRepo;
 
@@ -66,30 +68,32 @@ void main() {
           );
           await t.pumpAndSettle();
           final a = c!.attempts.last, result = a.result!;
-          expect(find.text(result.gradeLabel), findsOneWidget);
+          expect(
+            find.text(result.gradeLabel),
+            status == 'unavailable' ? findsNothing : findsOneWidget,
+          );
           expect(result.gradeStatus, status);
           expect(result.rawScore, 1);
           debugPrint('D3_GUEST PASS $status');
-          final link = find.text('정답·등급 기준 출처');
-          await t.ensureVisible(link);
-          await t.tap(link);
-          await t.pumpAndSettle();
-          expect(find.text('정답 기준: 검증된 정답 출처'), findsOneWidget);
-          await t.tap(find.text('닫기'));
-          await t.pumpAndSettle();
+          expect(result.keySource!.name, '검증된 정답 출처');
           final jump = find.byKey(const ValueKey('review-jump-7'));
           await t.ensureVisible(jump);
           await t.tap(jump);
           await t.pumpAndSettle();
           expect(find.text('7번 · 오답'), findsOneWidget);
           debugPrint('D3_GUEST PASS ${status}_review_source');
+          await t.pageBack();
+          await t.pumpAndSettle();
           final snapshot = jsonEncode(a.toJson());
           fixture.version = 2;
           final requestCount = fixture.requests.length;
           await mount(fixture);
           expect(jsonEncode(c!.attempts.last.toJson()), snapshot);
           expect(fixture.requests.length, requestCount);
-          expect(find.text(result.gradeLabel), findsOneWidget);
+          expect(
+            find.text(result.gradeLabel),
+            status == 'unavailable' ? findsNothing : findsOneWidget,
+          );
           debugPrint('D3_GUEST PASS ${status}_historical_restore');
         } finally {
           fixture.transport.close();

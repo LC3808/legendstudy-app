@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../scoring/scoring_repository.dart';
+import '../scoring/scoring_display_title.dart';
 
 /// Presentation hierarchy only; all options retain their actual occurrence/key.
 class OfficialMockSelector extends StatefulWidget {
@@ -155,10 +156,19 @@ class _OfficialMockSelectorState extends State<OfficialMockSelector> {
         if (month != null && exams.length > 1)
           picker('official-exam', '시험 구분', exam, [
             for (final id in exams)
-              (id, mr.firstWhere((p) => p.examIdentity == id).title),
+              (
+                id,
+                scoringDisplayTitle(
+                  mr.firstWhere((p) => p.examIdentity == id).title,
+                ),
+              ),
           ], selectExam),
         if (exam != null) ...[
-          Text(rows.firstWhere((p) => p.examIdentity == exam).title),
+          Text(
+            scoringDisplayTitle(
+              rows.firstWhere((p) => p.examIdentity == exam).title,
+            ),
+          ),
           const SizedBox(height: 8),
           const Text('과목'),
           Wrap(
