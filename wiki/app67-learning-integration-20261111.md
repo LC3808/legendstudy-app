@@ -178,3 +178,7 @@ AppDelegate.window를 참조했다. 기존 PDF 정상 경로와 같은 foregroun
 keyWindow rootViewController를 사용하도록 수정. 정확한 실제 복구 판정은 새 빌드 Owner 검수 대기.
 공유창 재시도는 현재 계정의 미만료 링크를 재사용해 토큰 중복 생성 방지.
 집중49테스트 PASS(큰 글자 학교 카드/기존 타이머/공유 재시도 포함).
+
+빌드70(1.0.2), source9c23c49: iOS서명/컴파일/codesign 검증 PASS, 삭제 없는 설치·실행 PASS.
+[기기 설치 증거](../tool/app70-learning-qa-receipt-20261111.json). Owner 공유창 재검수 대기.
+flutter analyze No issues found. Store 제출0, 운영 DB변경0.
