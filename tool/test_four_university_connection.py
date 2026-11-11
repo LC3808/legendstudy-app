@@ -1,7 +1,7 @@
 """Negative identity/image contracts for official multi-PDF candidate preparation."""
 import base64,copy,json,unittest
 from pathlib import Path
-from essay_lab.four_university_connection import validate,validate_worker,student_page_bottom
+from essay_lab.four_university_connection import validate,validate_worker,student_page_bottom,student_page_clip
 from essay_lab.natural_expansion import ReviewError,digest
 R=Path(__file__).resolve().parents[1]
 class FourConnectionTest(unittest.TestCase):
@@ -43,5 +43,19 @@ class StudentBoundaryTest(unittest.TestCase):
   self.assertEqual(student_page_bottom(page,{'crop_before':'heading'}),292)
   page.search_for=lambda _:[SimpleNamespace(y0=300),SimpleNamespace(y0=301)]
   with self.assertRaises(ReviewError):student_page_bottom(page,{'crop_before':'heading'})
+
+ def test_spread_regions_preserve_left_page_and_right_continuation(self):
+  from types import SimpleNamespace
+  page=SimpleNamespace(rect=SimpleNamespace(width=841,height=595))
+  self.assertEqual(student_page_clip(page,{'crop_rect':[0,0,420.5,595]}),(0,0,420.5,595))
+  self.assertEqual(student_page_clip(page,{'crop_rect':[420.5,0,841,204]}),(420.5,0,841,204))
+ def test_invalid_or_ambiguous_rectangle_rejected(self):
+  from types import SimpleNamespace
+  page=SimpleNamespace(rect=SimpleNamespace(width=841,height=595))
+  for rect in [[-1,0,420,595],[0,0,842,595],[0,0,420,596],[0,0,20,20],[0,0,float('nan'),595],[0,0,float('inf'),595],[False,0,420,595],[0,0,420],None]:
+   if rect is None:continue
+   with self.assertRaises(ReviewError):student_page_clip(page,{'crop_rect':rect})
+  for extra in [{'crop_bottom':204},{'crop_before':'heading'}]:
+   with self.assertRaises(ReviewError):student_page_clip(page,dict(crop_rect=[0,0,420,595],**extra))
 
 if __name__=='__main__':unittest.main()

@@ -1,6 +1,6 @@
 # Current Status
 
-[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 현재 한국항공7문항·106행 운영 비공개 DRAFT 적재 DONE([영수증·검증](essay-kau-draft-production-20261112.md)). 사전116/사후122 PASS,기존 데이터·함수·권한20개 snapshot 동일,HOLD5 유지. 최신 기준은 대학별 TECH READY 후 다음 대학, 전체 REVIEW READY 후 Owner 통합 검수. 한국항공7 TECH READY/HOLD5, 검수 접근 [로컬53검사 PASS·운영 미적용](essay-owner-review-access-20261112.md). [순차 기술 결과](essay-natural-tech-ready-20261112.md): 건국24/경희3+부분4/성균관15/서강11·숭실16+부분3+자료보류1 계약 확인; 숙명44(DB889/WEB66/APP45)·기존6 보존, 동국21(DB429/WEB30/APP22) 확인, 다음 광운. 성균PDF15·서강2026자연2차PDF 보완 승인 대기,기완료4개교 재작업 제외.
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 현재 한국항공7문항·106행 운영 비공개 DRAFT 적재 DONE([영수증·검증](essay-kau-draft-production-20261112.md)). 사전116/사후122 PASS,기존 데이터·함수·권한20개 snapshot 동일,HOLD5 유지. 최신 기준은 대학별 TECH READY 후 다음 대학, 전체 REVIEW READY 후 Owner 통합 검수. 한국항공7 TECH READY/HOLD5, 검수 접근 [로컬53검사 PASS·운영 미적용](essay-owner-review-access-20261112.md). [순차 기술 결과](essay-natural-tech-ready-20261112.md): 건국24/경희3+부분4/성균관15/서강11·숭실16+부분3+자료보류1 계약 확인; 숙명44(DB889/WEB66/APP45)·기존6 보존, 동국21(DB429/WEB30/APP22) 확인, 광운42(DB849/WEB86/APP43) TECH READY·PDF42 승인 대기, 다음 서울여. 성균PDF15·서강2026자연2차PDF 보완 승인 대기,기완료4개교 재작업 제외.
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 

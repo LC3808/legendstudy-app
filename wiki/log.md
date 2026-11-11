@@ -5947,3 +5947,5 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12: 숙명 자연16시험44문항 TECH READY(DB889/WEB66/APP45), 기존6 연결 보존. PDF53쪽 원본 대조·신규PDF38 승인 대기, DRAFT702행 미적용. [증거/다음 동국](essay-natural-tech-ready-20261112.md#숙명-자연44-연결).
 
 - 2026-11-12: 동국 자연7시험21문항 TECH READY(DB429/WEB30/APP22).2025/2026모의 동일SHA를 기존2026 Registry에만 연결, 공식 정정문/승인PDF21 보존. 운영286행 미승인. [증거/다음 광운](essay-natural-tech-ready-20261112.md#동국-자연21-연결).
+
+- 2026-11-12: 광운21시험42문항 TECH READY(DB849/WEB86/APP43·Python26). 펼침면/문항경계 보정, 원본78쪽 보존·PDF42 승인 대기. DRAFT636행 미적용. [증거/다음 서울여](essay-natural-tech-ready-20261112.md#광운-자연42-연결).

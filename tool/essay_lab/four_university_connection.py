@@ -4,7 +4,7 @@ Only ignored .local output is accepted. Plans hold reviewed physical-page maps;
 original bytes/text/points are not corrected. Candidate metadata is not a release.
 """
 from __future__ import annotations
-import argparse, base64, copy, json
+import argparse, base64, copy, json, math
 from pathlib import Path
 from essay_lab.natural_expansion import build_review_package, digest, encode, require
 from essay_lab.natural_connection import ROLES
@@ -54,6 +54,7 @@ def validate_worker(payload,exam,q):
 
 def student_page_bottom(page,spec):
     """Reviewed explicit boundary for PDFs whose text coordinates are unreliable."""
+    require(spec.get('crop_rect') is None,'RECTANGLE_REQUIRES_CLIP')
     boundary=spec.get('crop_bottom')
     if boundary is not None:
         require(not spec.get('crop_before'),'AMBIGUOUS_CROP_MODE')
@@ -66,6 +67,19 @@ def student_page_bottom(page,spec):
         return bottom
     require(not any(page.search_for(h) for h in ['3. 출제 의도','6. 채점 기준','7. 예시 답안']),'UNREVIEWED_STUDENT_ANSWER_LEAK')
     return page.rect.height
+
+def student_page_clip(page,spec):
+    """Reviewed original region, including two-page spreads; no content rewriting."""
+    rect=spec.get('crop_rect')
+    if rect is None:
+        return (0,0,page.rect.width,student_page_bottom(page,spec))
+    require(not spec.get('crop_before') and spec.get('crop_bottom') is None,'AMBIGUOUS_CROP_MODE')
+    require(isinstance(rect,(list,tuple)) and len(rect)==4 and
+            all(type(v) in (int,float) and math.isfinite(v) for v in rect),'INVALID_CROP_RECT')
+    x0,y0,x1,y1=rect
+    require(0<=x0<x1<=page.rect.width and 0<=y0<y1<=page.rect.height and
+            x1-x0>50 and y1-y0>50,'INVALID_CROP_RECT')
+    return tuple(rect)
 
 def prepare(plan,registry,paths,out):
     import pymupdf
@@ -88,9 +102,9 @@ def prepare(plan,registry,paths,out):
             start=len(student)+1
             for spec in q['student_pages']:
                 page=docs[spec['sha256']][spec['physical_page']-1]
-                bottom=student_page_bottom(page,spec)
-                pix=page.get_pixmap(matrix=pymupdf.Matrix(2,2),clip=pymupdf.Rect(0,0,page.rect.width,bottom))
-                new=student.new_page(width=page.rect.width,height=bottom);new.insert_image(new.rect,stream=pix.tobytes('png'))
+                clip=pymupdf.Rect(student_page_clip(page,spec))
+                pix=page.get_pixmap(matrix=pymupdf.Matrix(2,2),clip=clip)
+                new=student.new_page(width=clip.width,height=clip.height);new.insert_image(new.rect,stream=pix.tobytes('png'))
             refs={role:{k:ref[k] for k in ['file','sha256','pages']} for role,ref in q['refs'].items()}
             # A flattened index allows reuse of the existing package builder; every
             # artifact is then rebound to its own original PDF and physical pages.

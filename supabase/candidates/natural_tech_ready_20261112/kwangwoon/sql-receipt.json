@@ -1,0 +1,13 @@
+{
+  "private_directory": ".local/natural-tech-20261112/kwangwoon",
+  "files": {
+    "apply-draft.private.sql": "827006f64c93cf4c59d4d878232b92d3ab5fc67533df21468e28e5ecc152fc62",
+    "register-draft.private.sql": "fcdae54b40bde421c713e32a0641c2da8dbd7dc72d1914df901d1c7662484823",
+    "worker-source.private.sql": "9b0d6c2814afa38e7c446804b000a122ab7d304bb845ba70d452a343c0e5ad87",
+    "rollback-retire.sql": "8aee3ad0a776da3d546f86b2b93c2a6cb24f0531a5c86edb66023d40a8ebdf17"
+  },
+  "production_applied": false,
+  "executable_scope_approved": false,
+  "pdf_existing_preserved": 0,
+  "pdf_approval_pending": 42
+}

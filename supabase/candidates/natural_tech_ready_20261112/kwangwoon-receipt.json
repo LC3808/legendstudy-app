@@ -1,0 +1,20 @@
+{
+  "university": "kwangwoon",
+  "technical_contract_questions": 42,
+  "exams": 21,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 849,
+  "web_pass": 86,
+  "web_skip": 1,
+  "app_pass": 43,
+  "app_log_sha256": "997ddf81242dde97cbf8c1424d2536a455028e2cb9520b4bf6fe54059bba69bc",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "6b5b8bf48031157be9fca6eef4970c58ff5a167f0aa73ef0bd0413bad2220577",
+  "sql_receipt_sha256": "7c910ae448e99bf7804b1e6471ecb54478bf24cf3b3f947c3485eee42f3186bd"
+}

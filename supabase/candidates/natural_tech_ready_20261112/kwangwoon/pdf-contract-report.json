@@ -1,0 +1,154 @@
+{
+  "exams": [
+    {
+      "exam_id": "10ade245-4c6a-552b-beae-5dc7af3b75bd",
+      "pages": 3,
+      "sha256": "b1561ebf9244a38ec6191a3acbe8140029af2d354b543fa823032a7c7c676547",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "1705c7d2-e11d-570f-9a4a-d220d0600acd",
+      "pages": 4,
+      "sha256": "e5ad8631d05134c59f3ef703601e4ea287ba10bbbed2df4991fc7839fc38ec4b",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "18902739-69fc-53c8-a9a7-6bf620c9008b",
+      "pages": 4,
+      "sha256": "58dd1106e6aa6f349d9ea7d960e09ec3bec754b5329c9100ab5b6c25d841012b",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "1a3a3532-8fa1-5d33-917c-e99d441e1788",
+      "pages": 4,
+      "sha256": "79faf5c3a9302e4919508b7a3d6db3335a2c0c644078d52312cd53d21c951685",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "1e66b782-4e74-5fd4-b36d-032991875522",
+      "pages": 4,
+      "sha256": "2af67f3bec3b98f9044d53ca8f252d8d51f1cfd6c06f094d6a025aadc1099152",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "3368bb8c-eaf7-5c8f-9e50-aa86c3eb36a1",
+      "pages": 4,
+      "sha256": "a303a7f8233419976bf9fdc7e1f1ce5a207b5755b008b5b8523483e38e4ec23a",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "44eba80d-09ed-5e8c-a988-01e90c78ffd4",
+      "pages": 4,
+      "sha256": "3ea6bb7c8c7d017eae94b787ea114ccd4e4aba98c129d5accbe118371ca68748",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "45febe31-1b94-5648-a081-e335f82e81a4",
+      "pages": 4,
+      "sha256": "7d97a816a627c25bfee969d2b8987349a1f539142c0469cc1868ae40edb47c16",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "5ebc33d1-1097-5ed4-b521-6b9a25d13eaf",
+      "pages": 4,
+      "sha256": "2b5c2ab1a026316a8047dbadcde250c8744dba094c57cff4d914b341e0e3ee3a",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "6f01f238-622d-5a85-9a04-8bb5a7b9759d",
+      "pages": 4,
+      "sha256": "1d4c8191419e1fc92c83895aeefa149703d73c2285a48b910f6a0574cba2ff19",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "76b32d03-e941-51e0-9355-46c139a0617a",
+      "pages": 4,
+      "sha256": "effab9442ff098bbe424752631c3732ef24c89feaf183b6b16efae0f4e82a1d5",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "91802b60-96bf-5cb6-abef-d1c1a738ae6f",
+      "pages": 3,
+      "sha256": "c5f65e77b4e52e1c3a2882cc6b14062a9840dd05a1b8ac1d303756b238c65ac3",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "a2a9d777-2237-50c2-af89-a617b88c5bff",
+      "pages": 4,
+      "sha256": "db382007377049b87b2043b2f64fc63e6ff03384361d13f10db8b7c4449afd8b",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "a68fa7e1-b701-5c7b-95ae-cfc46850614f",
+      "pages": 3,
+      "sha256": "735d85d363dadc2f45823a3eb8f48d2e96d8e7f58b1e03a35876499f39940b9f",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "b1e3505a-359e-5122-bf42-32b1cb49a174",
+      "pages": 5,
+      "sha256": "09852abf12ea068b85d9ad8745ad0f6861dd8cc2781bf087b340c82f9f9ed26a",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "baceb638-55ee-5d78-8ff4-93dad7832914",
+      "pages": 4,
+      "sha256": "783ef3b81004de0886fcea8a304c3b36af267d463c85d05ed9d344c404a92762",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "c435f96e-0ce0-5603-ac22-c0984662eb98",
+      "pages": 3,
+      "sha256": "bd6edd1dc3147816eeef72ca5365e58a44d127d42d5778f12950213f19374565",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "cb4dc5d6-df44-519d-82b4-64833a13304e",
+      "pages": 2,
+      "sha256": "947cc2bb957313b12bffc2a3f1bb4922e8f79a8b7c39ead656a64c8448ab4d91",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "d2abfee2-2412-5630-9af8-a858116b6759",
+      "pages": 4,
+      "sha256": "584435b16789dd6f421b8c345ed9665a8c2a6925963b434bd86bf2e443fd6df8",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "de78b082-d9b1-5234-8bb9-d7f7543294db",
+      "pages": 4,
+      "sha256": "1aca499ba8155af075e2b8a7b2d556b0875b48cd5f8775c033685367bd0b4fbe",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "eb9c551a-dd29-5454-9a55-8b58a2bb432d",
+      "pages": 3,
+      "sha256": "522d61a61e5f5db8e8aed6ebf431cae5e47e443a4ba271ce70b3aa2c039099b2",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    }
+  ],
+  "pages": 78,
+  "visual_review": "PASS",
+  "review_scope": "All original student regions and rubric reference pages; corrected 2021 session2 Q1 continuation and 2022 mock Q2 spread rechecked; 6 blank intent fragments and 6 cover pages omitted; original pixels preserved, no quality assessment."
+}

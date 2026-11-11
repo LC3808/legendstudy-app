@@ -21,3 +21,5 @@ Soongsil: five exams/twenty leaf contracts verified. Six official sources, inclu
 ## Dongguk
 
 7exams21questions; DB429/WEB30/APP22 PASS.12 official source PDFs;30 problem pages/44 unique rubric pages reviewed. ExistingPDF21 unchanged.2025/2026mock archives are byte-identical; only existing2026 Registry used. Math265+Worker21=286 DRAFT rows NOT APPROVED/NOT APPLIED.
+
+Kwangwoon: 21 exams/42 questions, DB849/WEB86/APP43 PASS. Original student regions78 pages preserved;2021session2 continuation and2022mockQ2 spread mapped correctly. All42 student PDF references require approval; Math594+Worker42 DRAFT636 rows are not applied.
