@@ -140,3 +140,13 @@ APP은 명시적 all_time_source/all_time_ms만 누적 시간·분으로 표시�
 초대 후속: iOS Associated Domains와 WEB AASA/Android assetlinks가 아직 연결되지 않았다.
 기존 WEB landing은 유지하며 자동 앱 열기/설치 후 복원은 미완료다.
 기기 연결 및 도메인·Play 서명 검증을 이어가야 한다. Store 제출0.
+
+## iPhone 내부 검수 빌드68 — 2026-11-11
+
+기기 연결 후 기존 설정 release63-ios.local.json을 device-qa로 검증했다.
+빌드1.0.2(68), APP source `2aa5fe1`, 기존 com.legendstudy.app/서명 팀 유지.
+iOS release 디바이스 빌드·codesign 검증 PASS. devicectl 삭제 없는 설치 및 실행 성공.
+APP67 원본 IPA/AAB 보존. 새 IPA/AAB나 스토어 제출 없음.
+[설치 기록](../tool/app68-learning-device-receipt-20261111.json).
+Owner에게 로그인 유지·오늘/누적/주 시간·학교 순위·초대 생성/복사/공유창 검수를 요청했다.
+설치 성공은 기능 E2E PASS가 아니다. 사용자 회신 대기.

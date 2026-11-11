@@ -16,7 +16,7 @@ Owner 작업02 후속 승인에 따라 누적·지원 중복 두 함수를 운�
   링크 입력과 전용 custom scheme 수신을 구현했다. Universal/App Links 운영 도메인 검증,
   설치 후 토큰 복원 및 실기기 E2E는 별도 미완료다.
 - 누적 표시 연결 완료. 두 함수 운영 적용 및 기존 데이터/ACL/요약 보존 검사 PASS.
-  학습·초대 집중29 PASS, analyze PASS. 실기기 연결 대기.
+  학습·초대 집중29 PASS, analyze PASS. iPhone12 Pro Max에 내부 빌드68 설치·실행 완료, Owner 기능 검수 대기.
 
 ## 다음 작업
 

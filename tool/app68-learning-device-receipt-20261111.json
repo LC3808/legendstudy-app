@@ -1,0 +1,20 @@
+{
+  "source_sha": "2aa5fe15096f72a8faeb0e6329d00e6e4afe4aaf",
+  "branch": "codex/app67-learning-integration-20261111",
+  "version": "1.0.2",
+  "build": "68",
+  "observation_v1_enabled": true,
+  "social_providers": [
+    "google",
+    "apple",
+    "kakao"
+  ],
+  "bundle_id": "com.legendstudy.app",
+  "framework_sha256": "368c27181d4421dcf7dfe5304e6725efa7fe2b2f7f5ee76aba2dd73bc74dadda",
+  "artifact": "build/ios/iphoneos/Runner.app",
+  "installed": true,
+  "uploaded": false,
+  "launched": true,
+  "device": "iPhone 12 Pro Max",
+  "owner_functional_verification": "PENDING"
+}
