@@ -1,5 +1,5 @@
 {
-  "scope": "isolated PG17; actual production function definitions and exact 93-row insert / 28-state activation / 2 allowlist changes",
+  "scope": "isolated PG17; actual production function definitions and exact 92-row insert / 28-state activation / 2 allowlist changes",
   "checks": [
     "0f1ef133-918b-566c-9a4a-024952ef78e8 public mapping",
     "0f1ef133-918b-566c-9a4a-024952ef78e8 profile",

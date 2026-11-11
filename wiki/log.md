@@ -5961,3 +5961,5 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12 02:37 KST: 건국6시험24문항 운영299행/ACTIVE96/기존2허용목록 및 WEB 공개 완료. 기존4·20snapshot/2049자산 보존,116/139/72검사·PDF6·공개24 PASS. 검증권한 오류 첫transaction rollback 후 SELECT로 교정·적용, ACL추가0. 실제AI0/Owner 품질 통합 대기. [운영 결과](essay-konkuk-public-20261112.md).
 
 - 2026-11-12: 경희3시험7문항92행 공개 사전116/격리21+7흐름·원복/WEB396 PASS, 과학12·기준미확인4제외. Owner 품질 검수와 분리. [적용 범위](essay-kyunghee-public-20261112.md).
+
+- 2026-11-12 02:49 KST: [경희7문항 공개 완료](essay-kyunghee-public-20261112.md),92행/ACTIVE28/Migration20261111174807/Pages532977a6.116/122/21·20보존snapshot·PDF3·일반계정7 PASS, WEB396/APP8. 과학12/기준미확인4 제외. 실제AI0, Mac잠금 UI NOT TESTED.

@@ -1,6 +1,6 @@
 # 자연·수리 TECH READY 순차 검증 — 2026-11-12
 
-최신 운영 상태: [건국 신규24문항 공개 완료](essay-konkuk-public-20261112.md). 아래 기술 후보/미적용 수치는 이전 검사 시점이며 현재 PUBLISHED 수를 뜻하지 않는다.
+최신 운영 상태: [건국 신규24문항 공개 완료](essay-konkuk-public-20261112.md), [경희 신규7문항 공개 완료](essay-kyunghee-public-20261112.md). 아래 기술 후보/미적용 수치는 이전 검사 시점이며 현재 PUBLISHED 수를 뜻하지 않는다.
 [Owner 최신 기준](decisions.md#2026-11-12--tech-ready-순차-연결-후-owner-통합-검수)에 따라 대학별 기술 연결을 먼저 검증한다. **전체 완료/REVIEW READY/AI 품질 PASS가 아니다.** 운영 DRAFT 적재·검수 권한·활성화·배포·사용자 공개는 별도 승인이다. 기존 완료4개교와 중앙 과학11 HOLD를 보존한다.
 
 ## 순차 확인 결과

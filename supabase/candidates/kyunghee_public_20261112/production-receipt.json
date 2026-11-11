@@ -1,0 +1,181 @@
+{
+  "status": "PUBLISHED",
+  "new_questions": 7,
+  "existing_questions_preserved": 3,
+  "new_rows": 92,
+  "active_state_rows": 28,
+  "migration": {
+    "version": "20261111174807",
+    "name": "kyunghee_7_math_public_release"
+  },
+  "draft": {
+    "mode": "draft",
+    "status": "PASS",
+    "sha256": "8fc2851734cd31109074ad5016b66c407e0b46793a2163ec8cd50c23a5569769",
+    "time_utc": "2026-11-11T17:47:48.303274+00:00"
+  },
+  "preflight_pass": 116,
+  "draft_postflight_pass": 122,
+  "preserved_snapshot_groups": 20,
+  "activation_postflight": {
+    "mode": "verify",
+    "status": "PASS",
+    "sha256": "ae6096c38542cfe561b51e5e06758765fb7074da1f9272ecea0ab906ed7d6318",
+    "time_utc": "2026-11-11T17:48:21.505383+00:00",
+    "results": [
+      {
+        "check_name": "0f1ef133-918b-566c-9a4a-024952ef78e8 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "0f1ef133-918b-566c-9a4a-024952ef78e8 profile",
+        "passed": true
+      },
+      {
+        "check_name": "0f1ef133-918b-566c-9a4a-024952ef78e8 Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "1dc8ec21-0d5c-5129-afef-6c6109215d4b public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "1dc8ec21-0d5c-5129-afef-6c6109215d4b profile",
+        "passed": true
+      },
+      {
+        "check_name": "1dc8ec21-0d5c-5129-afef-6c6109215d4b Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "694acb0a-4226-5a21-a340-377d3ea166d7 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "694acb0a-4226-5a21-a340-377d3ea166d7 profile",
+        "passed": true
+      },
+      {
+        "check_name": "694acb0a-4226-5a21-a340-377d3ea166d7 Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "8bc7d2fa-8147-5354-857f-1baa46d84355 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "8bc7d2fa-8147-5354-857f-1baa46d84355 profile",
+        "passed": true
+      },
+      {
+        "check_name": "8bc7d2fa-8147-5354-857f-1baa46d84355 Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "a4b76128-9a35-56cd-ad08-e4032eac6296 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "a4b76128-9a35-56cd-ad08-e4032eac6296 profile",
+        "passed": true
+      },
+      {
+        "check_name": "a4b76128-9a35-56cd-ad08-e4032eac6296 Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "d09383a2-bbe1-5dbf-b08d-dd730062c506 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "d09383a2-bbe1-5dbf-b08d-dd730062c506 profile",
+        "passed": true
+      },
+      {
+        "check_name": "d09383a2-bbe1-5dbf-b08d-dd730062c506 Worker evidence",
+        "passed": true
+      },
+      {
+        "check_name": "ec20faaf-5f4b-5675-8798-aa52a80c2fd6 public mapping",
+        "passed": true
+      },
+      {
+        "check_name": "ec20faaf-5f4b-5675-8798-aa52a80c2fd6 profile",
+        "passed": true
+      },
+      {
+        "check_name": "ec20faaf-5f4b-5675-8798-aa52a80c2fd6 Worker evidence",
+        "passed": true
+      }
+    ]
+  },
+  "deployment": {
+    "time_utc": "2026-11-11T17:49:23.376746+00:00",
+    "deployment": "532977a6-fbac-4975-a96b-2b3e7f6513fa",
+    "source": "2f585c0d003fc5d7eaac9d723acfff4586ce794a",
+    "status": "success",
+    "preserved_non_essay_assets": 2166,
+    "functions_routes_unchanged": true,
+    "only_three_plaintext_scopes_changed": true,
+    "public_catalog_exams": 3,
+    "catalog_metadata_questions": 19,
+    "public_math_questions": 7,
+    "excluded_science_questions": 12,
+    "checks": {
+      "/": {
+        "status": 200,
+        "bytes": 29327
+      },
+      "/essay-lab/": {
+        "status": 200,
+        "bytes": 27592
+      },
+      "/essay-lab/universities/kyunghee/": {
+        "status": 200,
+        "bytes": 28365
+      },
+      "/api/essay/catalog": {
+        "status": 200,
+        "bytes": 118833
+      }
+    }
+  },
+  "pdfs": [
+    {
+      "asset_id": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+      "sha256_verified": true,
+      "pages": 8,
+      "bytes": 554527
+    },
+    {
+      "asset_id": "d9f5497e5dc7ae859ffb23a462d17642de870375912288be1491040676161a45",
+      "sha256_verified": true,
+      "pages": 3,
+      "bytes": 278968
+    },
+    {
+      "asset_id": "65cf968450deb342090834cab743a15426efd41dc62184be108a9e379c57ab5c",
+      "sha256_verified": true,
+      "pages": 3,
+      "bytes": 198651
+    }
+  ],
+  "ordinary_account_public_questions": 7,
+  "ordinary_account_readable_pdfs": 3,
+  "web_tests": {
+    "pass": 396,
+    "skip": 1
+  },
+  "flutter_tests": {
+    "pass": 8
+  },
+  "provider_calls": 0,
+  "production_ai_submission_result_rewrite": "NOT TESTED; seven isolated DB mock flows passed",
+  "browser_ui": "NOT TESTED; Mac locked, no further Owner login requested",
+  "iphone_android": "NOT TESTED",
+  "not_ready": {
+    "science_questions": 12,
+    "unconfirmed_official_rubric": 4
+  },
+  "quality_review": "OWNER_INTEGRATED_REVIEW_PENDING"
+}
