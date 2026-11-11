@@ -5903,3 +5903,7 @@ APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/
 
 ## 2026-11-11 — 독립 이메일 인증 안정화
 APP75 이후4489603 기반 별도worktree/브랜치. Dashboard 기본 SMTP2/h·OTP3600초 확인,21개 request ID를 edge와 연결: signup18/magiclink3·주소 식별값4개. 미인증5개 E 유지, 전달 로그 NOT TESTED. 재발송/60초 중복 방지/한도·링크 안내/가입 이메일 보존,143격리 PASS·analyze PASS. 운영 메일/설정/DB/LAB 변경0. [상세·승인안·원복·미완료](email-verification-audit-20261111.md#독립-안정화-조사--2026-11-11).
+
+
+## 2026-11-11 — SMTP 도입 준비 승인·공급자 비교
+Resend/SES/Brevo 공식 최신 요금·quota·인증·로그 비교, Resend 우선/Free 검증 추천. 기존 feedback Resend 검수·Gabia DNS(Google MX/SPF,DMARC,Resend DKIM,send CNAME) 확인. 고객지원 주소 소스 확인/공개페이지403 미검증. [설정표·비용·10단계 전환·원복·Owner 승인](email-smtp-provider-plan-20261111.md). 계정/키/DNS/Auth/실제 발송0, c5cd349 코드 보존.
