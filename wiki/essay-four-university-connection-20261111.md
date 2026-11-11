@@ -1,5 +1,7 @@
 # 논술 자연계열 네 대학 연결 후보 — 2026-11-11
 
+최신: [운영 사전 검증 및53문항 승인안](essay-four-university-production-preflight-20261112.md). 아래58문항 전체 SQL은 이번 적용 범위가 아니다.
+
 **로컬 연결 후보 검증 DONE / 전체 운영 제공 PARTIAL. 운영 쓰기·배포·신규 공개·Provider 호출 0.**
 
 최신 Owner 지시에 따라 항공→건국→경희→성균관 순으로 기존 Registry와 공식 자료를 연결했다.

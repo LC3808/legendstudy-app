@@ -1,6 +1,6 @@
 # Current Status
 
-[네 대학 연결 후보·상태·검증·SQL·복구](essay-four-university-connection-20261111.md): 항공→건국→경희→성균관23시험81문항, 기존7보존/새후보58. 격리DB1196·Flutter77·WEB86 PASS, Python22·Analyze PASS. HOLD5/경희partial4/NOT_READY16, 운영쓰기·Provider·배포0.
+[네 대학 운영 사전 검증](essay-four-university-production-preflight-20261112.md): 81=기존7+후보58+NOT_READY16. HOLD5 제외한18시험53문항 DRAFT687+Worker53행 승인 제안. 운영SELECT116·격리238·Python22·WEB65 PASS. 운영쓰기/Provider/배포0. Owner 전용 ACTIVE 접근 제어는 GAP,2단계 별도 검토. [81개 UUID 처리표](essay-four-university-application-scope-20261112.md).
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 

@@ -5919,3 +5919,7 @@ APP75 별도 브랜치의 지원 관리1a07b70에 홈 Registry/온보딩6단계/
 ## 2026-11-11 — 네 대학 자연 논술 연결 후보
 
 [상세](essay-four-university-connection-20261111.md): 기존23시험81문항 조사, 기존ACTIVE7 보존, 후보58/760 DRAFT+58 Worker rows. 항공 Source누락·성균관별칭 연결, 경희partial2시험 제외. 기존PDF20자산/58문항 재사용(43승인/15보류). 격리DB1196/Python22/Flutter77/WEB86 PASS, Flutter4·WEB3 기존/비대상fixture SKIP, analyze PASS. 공식HOLD5·partial4·자료/라우팅NOT_READY16. Provider·운영쓰기·배포·릴리스병합0. 최종 SHA는 이 항목을 포함하는 Git commit 참조.
+
+## 2026-11-12 — 네 대학 운영 연결 사전 검증
+
+기준536a2fc에서81 UUID를 기존7/후보58/NOT READY16으로 재대조. HOLD5 제외53문항(경희partial4·성균관PDF대기15 포함)의 DRAFT687+Worker53 단일 적용 후보 준비. 운영SELECT116,격리 apply/retire238,Python22,WEB65 PASS. 기존7/이력/권한 보존,실패 원자성 검증. ACTIVE 직접 RPC의 Owner 전용 통제 GAP 재현;1단계와2·3단계 승인 분리. 운영쓰기/Provider/배포0. [보고·승인 범위](essay-four-university-production-preflight-20261112.md) · [81 UUID](essay-four-university-application-scope-20261112.md).
