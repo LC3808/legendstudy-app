@@ -1,6 +1,6 @@
 # Current Status
 
-[작업04 실제 지원](task04-applications-20261111.md) · [홈 개인화·나의 대학 소식](task04-home-university-news-20261111.md): APP75 기반 별도 개발. Native 지원/홈 Registry·선택/편집·공식 소식 계약 구현. 후보 SQL 격리 검증, 운영 미적용·공식 데이터 수집0. 계정 설정 실동기화/실기기/릴리스 검수 대기. 운영 변경0.
+[작업04 실제 지원](task04-applications-20261111.md) · [홈 개인화·나의 대학 소식](task04-home-university-news-20261111.md): APP75 기반 별도 개발. Native 지원/홈 Registry·선택/편집·공식 소식 계약 구현. [작업04-B 사전 검토](task04b-production-preflight-20261111.md): 원본 홈 lifecycle 누락·소식 pagination 반례 재현. 보완 A만 승인 요청, C/D HOLD. 관련94 PASS·APP75 동일5FAIL 재현. iPhone 별도 오프라인 앱 설치/실행, APP75 보존. 실계정 동기화·Android 미검증. 운영 변경0.
 
 ## APP67 학습 기능 통합 — 2026-11-11
 

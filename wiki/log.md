@@ -1,3 +1,7 @@
+## 2026-11-11 — 작업04-B 운영 사전 검토
+
+[SQL/RLS·APP75 비교·실기기·승인 범위](task04b-production-preflight-20261111.md). 원본 홈 lifecycle 누락·뉴스 snapshot 중복/누락 재현. 보완 A 후보 격리 검증 및 이력 보존 soft rollback PASS, C/D HOLD. 관련94 PASS/analyze0, 실제 APP75와 동일56PASS/5FAIL. iPhone12 별도 오프라인 앱 설치·실행·재실행/APP75 보존, Android 미연결. 운영 DB/WEB/릴리스/스토어 변경0.
+
 ## 2026-11-04 — 인하 Q1 공식 해설 한정 운영 적용
 
 [APP66 최종 빌드·운영 검증·스토어 인계](app66-final-release-20261106.md) · 실기기 최종 검수 진행.

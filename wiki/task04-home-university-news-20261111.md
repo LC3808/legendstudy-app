@@ -1,6 +1,6 @@
 # 작업04 확장 — 홈 커스터마이징·나의 대학 소식
 
-2026-11-11 · 개발 구현 DONE / 운영 연결 PARTIAL / 실기기 NOT TESTED.
+2026-11-11 · 개발 구현 DONE / 운영 연결 PARTIAL. 후속 [작업04-B 검토](task04b-production-preflight-20261111.md): 원본 SQL HOLD, 보완 A 승인 대기·C/D 보류. 별도 iPhone 오프라인 설치/실행만 확인, 실계정 기능 검수 NOT TESTED.
 Owner의 같은 날짜 확장 지시를 기존 [작업04 실제 지원](task04-applications-20261111.md)에 추가했다.
 APP75 기반 별도 `codex/task04-applications-app75`. 운영 DB/RPC/Auth/WEB/스토어/푸시/결제 변경0.
 
@@ -131,7 +131,7 @@ exact는 공식 instant, after는 '이후' 표시. after 종료시각이 없으�
 공식 URL이 없는 상태에서는 대학 slug로 입학처 URL을 만들어 내지 않는다.
 각 카드 독립 async. 뉴스는 영구 디스크 캐시 없음, 화면에서5분마다 재조회·resume/수동 refresh,
 분 단위 표시 재평가. 숨기면 autoDispose되어 타이머/추가 뉴스 요청 종료.
-서버 snapshot_at으로 pagination(100개)을 고정해 중간 개정/추가로 인한 누락을 피한다.
+서버 snapshot_at을 전달하는 pagination(100개)을 구현했으나, **04-B 동시 transaction 검증에서 늦은 commit으로 중복/누락이 재현됐다**. 시각 필터는 MVCC snapshot이 아니므로 원본 feed 운영 적용 HOLD. 불변 publication 단위 조회 후보가 필요하다.
 expires_at은 운영 검수자가 지정하는 재확인 기한이며 만료 시 현재 확정 정보로 표시하지 않는다.
 자동 수집·공지 변경 추적 운영 주기는 배포 전에 확정해야 한다.
 

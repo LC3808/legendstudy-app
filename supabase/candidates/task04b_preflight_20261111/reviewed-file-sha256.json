@@ -1,0 +1,13 @@
+{
+  "apply_a_home.sql": "b45fe80cbd0dd302db53fb9242649758a681f530cd443545dbddb1378ac572b5",
+  "disable_a_home.sql": "99b05e937a8b59bd36fd43952e6b3a6dd01d73f5bc72247d9f358fd575d1b09d",
+  "disable_c_news.sql": "a70dea4c5236362fa3a8075fcda3e2c2a935e33f083be50079b03899394e3f00",
+  "preflight_readonly.sql": "77a4aba12ea6eed09390cb11189e5b6eea130b6d594bdeaba9041825372c7ab2",
+  "restore_a_home.sql": "28a6a6c983444d01eb3e3d0a230d68e96c82e342eb9fd5dff078548e506f9b8a",
+  "restore_c_news.sql": "a226067eea7366d0ec74aff7fa75c46b1e25e002e784ece6113b001e9b0de430",
+  "run_isolated.py": "8c0770cd378eff14fce3d433d3681a6d97463f43ce16fcc58ca882781c2929c8",
+  "verify_a_local.py": "6c48d75bffd7539ea77257ba6f6e06106dd167fb20bd4dd5214611f37d4a1687",
+  "verify_a_readonly.sql": "7f1cd43caee862ac45a446986b434e5e983f1c5a3d9ad10d4c4687e6e4a214f3",
+  "verify_c_readonly.sql": "087f72ab017b2e19ed784261c699bee93a88734024c3693c3738abc107b99919",
+  "verify_original_local.py": "407e18a1a821fccf69c03f5c2b72bd73fa148b7869964011d0f80379cdb58ba8"
+}

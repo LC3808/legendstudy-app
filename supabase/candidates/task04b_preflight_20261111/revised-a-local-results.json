@@ -1,0 +1,14 @@
+{
+  "normal_new_and_existing_accounts": "PASS unset -> first save -> identical retry, cross-account read null",
+  "DELETION_PENDING": "PASS read and save rejected",
+  "ERASING": "PASS read and save rejected",
+  "missing_or_deleted_user": "PASS rejected",
+  "table_crud_and_truncate": "PASS denied both client roles",
+  "anonymous_rpc": "PASS denied",
+  "rls_predicate": "PASS owner plus lifecycle gate independently tested",
+  "lifecycle_concurrent_commit": "PASS waiting save observes pending state and refuses write",
+  "concurrent_cas_and_idempotence": "PASS same payload one revision; different payload stale rejected",
+  "soft_rollback_restore": "PASS execute revoked/restored, complete row digest unchanged",
+  "auth_deletion_cascade": "PASS all own revisions erased",
+  "readonly_validation_sql": "PASS parsed and ran on isolated candidate database"
+}

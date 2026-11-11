@@ -1,0 +1,66 @@
+{
+  "base_sha": "37eb530737e1676379f1d5446ac7af2c74d5f4d3",
+  "app75_sha": "c9b483018bcada179050595cf78c8ca4a3d213ba",
+  "sdk": "Flutter 3.47.6 stable",
+  "tests": {
+    "current_fail5": {
+      "pass": 56,
+      "fail": 5,
+      "skip": 0,
+      "failures": [
+        "D3 runner real routes restore history and do not resubmit",
+        "mobile IA mock 360.0 1.0",
+        "mobile IA mock 360.0 2.0",
+        "mobile IA mock 428.0 1.0",
+        "mobile IA mock 428.0 2.0"
+      ],
+      "log_sha256": "102f05e108198dcd4977f545d0baa79c077028357519c53afee568baae5df949"
+    },
+    "app75_fail5": {
+      "pass": 56,
+      "fail": 5,
+      "skip": 0,
+      "failures": [
+        "D3 runner real routes restore history and do not resubmit",
+        "mobile IA mock 360.0 1.0",
+        "mobile IA mock 360.0 2.0",
+        "mobile IA mock 428.0 1.0",
+        "mobile IA mock 428.0 2.0"
+      ],
+      "log_sha256": "1bbb91f6954827d7ffe76063c61cdc4e3bb8974f92edf9f9eab9bc6e13202632"
+    },
+    "focused": {
+      "pass": 93,
+      "fail": 0,
+      "skip": 0,
+      "failures": [],
+      "log_sha256": "d1d5d8bba55edede1ed70b4802e9c321aeefa44c55e8a1ed39bbf27c71092a7d"
+    },
+    "fresh_cache_restore": {
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "log_sha256": "28fd43e81dbfd36a79082f9564217bef489e9a895d081f1edb84582e25ca8f95"
+    }
+  },
+  "identical_baseline_files": {
+    "pubspec.lock": "96f0faefb945b5012fc1a1b5abb45c2cc54e8f8df27d5ff0153ce21fce6d6de0",
+    "test/grade_runner_navigation_test.dart": "6adb70dbf3fe813380a9140c8f14ac3fd3c40653dfe3e2d242cd06176b5017a7",
+    "test/mobile_ia_render_test.dart": "4e6015c1cd0a6c7ec0b2a95d50bb4fcd07c1a1f5526fef9dd6bb8d7bc4a8608a"
+  },
+  "analyze": "No issues found",
+  "production_candidate_objects_before": [],
+  "production_application_save_md5": "65edac758433cde4a123b95be3da42ee",
+  "original_candidate_sha256": "9feda7e00cd7d1837211ae3c699da540a986013363ab0aa1dbac1746e9e8e673",
+  "focused_total_pass": 94,
+  "device": {
+    "iphone12": "separate offline install/launch/running-process/relaunch PASS",
+    "original_app75_after": "com.legendstudy.app 1.0.2(75)",
+    "isolated_bundle": "com.legendstudy.app.task04b.offline",
+    "isolated_display_name": "LS04B Offline",
+    "isolated_version": "1.0.2(76), local smoke only",
+    "iphone17": "NOT TESTED connection reset",
+    "android": "NOT TESTED no connected device",
+    "production_sync": "NOT TESTED"
+  }
+}

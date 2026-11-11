@@ -1,0 +1,16 @@
+{
+  "direct_client_table_access": "DENIED both roles SELECT/INSERT/DELETE on 3 tables",
+  "anonymous_rpc": "DENIED",
+  "concurrent_identical_payload": "PASS one revision",
+  "concurrent_different_payload": "PASS stale revision rejected",
+  "owner_rls": "PASS other user sees zero rows with temporary SELECT grant",
+  "original_DELETION_PENDING": "BUG: account allowed=false but own read succeeds and changed config appends a new revision",
+  "original_ERASING": "BUG: account allowed=false but own read succeeds and changed config appends a new revision",
+  "snapshot_counterexample": {
+    "page1": 100,
+    "page2": 2,
+    "duplicates": 1,
+    "late_committed_series_missing_from_original_combined_pages": true,
+    "same_snapshot_changed": true
+  }
+}

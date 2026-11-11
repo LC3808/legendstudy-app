@@ -1,5 +1,7 @@
 # 작업04 홈·대학 소식 후보 계약
 
+**04-B 재검토: 원본 combined SQL HOLD.** 홈 lifecycle 누락·뉴스 동시 pagination 반례가 확인됐다. [보완 A/검증/비파괴 원복](../task04b_preflight_20261111/README.md)을 먼저 확인한다. 원본 SQL은 반례 재현용으로 보존하며 그대로 운영 적용하지 않는다.
+
 **CANDIDATE / PRODUCTION NOT APPLIED — 2026-11-11.**
 자동 migration 디렉터리가 아니다. 기존 WEB/application RPC, profiles, Auth 설정,
 Learning/Score/Credit/Payment를 수정하지 않는다. 앱 코드·격리 테스트만 승인된 범위다.
