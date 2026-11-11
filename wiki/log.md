@@ -1,3 +1,7 @@
+## 2026-11-12 — APP82 Owner 승인·main 통합·스토어 빌드
+
+[최종 승인·소스/산출물·서명·잔여 검증](app82-store-handoff-20261113.md): RC975b3c0 승인, 추가 Apple/Google·논술 실사용 검증 WAIVED, 기존46개 marker 영향 ACCEPTED/보호 로직 없음. 공개1.0.2 확인 후1.0.3(82), 코드 변경 없이 버전 metadata만 ce24bfd에 기록. 최신main 보존 fast-forward, 통합 후전체2557 PASS/8 SKIP/0 FAIL·Analyze/Python29/Android JVM2 PASS, 원격main 소스SHA 확인. 배포 IPA·서명 AAB/체크섬·설정 대조 완료. Android 공간 부족/잔여 잠금2회 실패는 현재 작업 캐시·해당 idle daemon만 정리하여 동일 소스 재시도 성공. 기존 앱/회원/운영DB/Auth/Provider 변경0. Wiki 결과 커밋 후 main Push, 스토어 업로드·심사·게시0. 배포 바이너리 설치/스토어 처리·Android Play 업데이트는 NOT TESTED.
+
 ## 2026-11-12 — APP82 전체 릴리스 후보 통합
 
 [기능/소스 정합성·검수·미완료·승인 경계](app-release-rc-20261113.md): Catalog 단독 통합 중단 후1eb8e1f+원격main aeb8be2를 별도RC에 충돌 없이 통합. main25파일/APP75 LAB·학습 제품 소스 보존, feature ancestry 확인. 기존5개 실패 재현 후 UI 기대값만 보정, 최종2557 PASS/8 SKIP/0 FAIL·analyze/Python26/liveCatalog2 PASS. APP82 iPhone17 삭제 없는 설치·실행, iPhone12 APP75 보존. Owner 신규 테스트 계정에서 N수 온보딩·한국교원대 양쪽 검색·지원 저장·MY·중단복원·완료/홈복원·알림오류/논술PDF 확인. 기존 회원 로그인·홈·계정 격리 확인, 소셜 실기기/marker 없는 기존 회원 영향은 미완료. 운영관리변경/기존회원쓰기/Provider/main merge·Push/스토어0, HOLD 유지.

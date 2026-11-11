@@ -1,0 +1,146 @@
+{
+  "approved_rc_sha": "975b3c026960c6cf89ec67db43f222e3474ffb21",
+  "artifact_source_sha": "ce24bfddd4abe379dd975117f54a51f94c58eaa5",
+  "main_before": "aeb8be2dade4dfd39ea6c98eba2d738a83fb7a85",
+  "version": "1.0.3",
+  "build": 82,
+  "changed_from_approved_rc": [
+    "pubspec.yaml: version only"
+  ],
+  "product_code_matches_approved_rc": true,
+  "main_merge": "fast-forward",
+  "main_push": "PASS",
+  "owner_waivers": [
+    "additional Apple/Google physical login",
+    "additional essay live evaluation"
+  ],
+  "legacy_46_onboarding_reappearance": "ACCEPTED; no protection/backfill",
+  "store_uploads": 0,
+  "production_admin_writes": 0,
+  "existing_user_writes": 0,
+  "provider_calls": 0,
+  "flutter_full_suite": {
+    "success": 2557,
+    "skip": 8
+  },
+  "test_duration_seconds": 128.648,
+  "skipped_tests": [
+    "public search repository live read-only contract",
+    "actual local Auth JWT → Dart SupabaseEssayGateway → public RPC / RLS",
+    "TASK03C live public app repository and guest grading",
+    "stored additional paid result renders without fabricating a free-rewrite comparison",
+    "saved operating result approved Native view comparison false scale 1.0",
+    "saved operating result approved Native view comparison false scale 2.0",
+    "saved operating result approved Native view comparison true scale 1.0",
+    "saved operating result approved Native view comparison true scale 2.0"
+  ],
+  "analyze": "PASS: No issues found",
+  "material_sync_python_tests": 26,
+  "store_config_python_tests": 3,
+  "test_log_sha256": "870d4b66b46f6b41cc9bf25283048003c0f13f6b9ca4b169936cd2a63ac917bd",
+  "analyze_log_sha256": "6f132a2b978611db9afff467108ec4390e48ff89a717469d36d0521e5f157b59",
+  "remote_main_after_source_push": "ce24bfddd4abe379dd975117f54a51f94c58eaa5",
+  "ios": {
+    "file": "legendstudy-1.0.3-82.ipa",
+    "bytes": 34435608,
+    "sha256": "3eac3acc16deb5020d113169eed3f6722afd1205a12cb01467ed2d860f707a05",
+    "version": "1.0.3",
+    "build": "82",
+    "bundle_id": "com.legendstudy.app",
+    "minimum_os": "15.0",
+    "codesign_deep_strict": "PASS",
+    "authority": [
+      "Apple Distribution: Copacabana Co. (VUKFS69GB4)",
+      "Apple Worldwide Developer Relations Certification Authority",
+      "Apple Root CA"
+    ],
+    "distribution_profile": true,
+    "profile_expiry": "2027-10-19T03:57:20",
+    "get_task_allow": false,
+    "apple_signin": "Default",
+    "google_redirect_matches": true,
+    "recovery_scheme_matches": true,
+    "public_runtime_config_embedded": true,
+    "archive_ipa_app_uuid_match": true,
+    "app_uuid": "A1FD6414-9534-5A0E-E15A-474B9E6E0ED5",
+    "privacy_plists_valid": true,
+    "installed": false,
+    "uploaded": false
+  },
+  "ios_compiler_config_matches_approved_qa": true,
+  "android_first_attempt": {
+    "result": "FAILED",
+    "reason": "No space left on device; follow-up Gradle cache lock shutdown error",
+    "recovery": "Only current worktree reproducible test/iOS dependency/build caches removed; retained IPA and archive; retry same source/config"
+  },
+  "android_retry_after_space_cleanup": {
+    "result": "FAILED",
+    "reason": "same idle Gradle daemon retained execution-history lock",
+    "recovery": "identified only this worktree lock owner, verified IDLE, terminated that daemon; retry unchanged source/config"
+  },
+  "android": {
+    "file": "legendstudy-1.0.3-82.aab",
+    "bytes": 101708897,
+    "sha256": "8b19edfb69a2d8d5f9dd8baf89e98f235839242e64bae964022c6bcc0e2d4d80",
+    "version": "1.0.3",
+    "build": 82,
+    "package": "com.legendstudy.app",
+    "sdk_manifest": "uses-sdk | minSdkVersion=24 | targetSdkVersion=36",
+    "release_not_debuggable": true,
+    "jarsigner": "PASS",
+    "upload_certificate_sha256": "C0:0F:42:60:D5:B9:5A:08:43:35:57:6C:03:BF:36:B8:91:4A:2F:33:CB:3D:A7:01:40:3E:0A:DB:AC:FB:8E:F1",
+    "matches_existing_upload_certificate": true,
+    "billing_permission": true,
+    "ad_id_permission": false,
+    "permissions_added_vs_app67": [],
+    "permissions_removed_vs_app67": [],
+    "public_runtime_config_embedded": true,
+    "elf_64bit_load_alignment": {
+      "base/lib/arm64-v8a/libapp.so": 65536,
+      "base/lib/arm64-v8a/libdartjni.so": 16384,
+      "base/lib/arm64-v8a/libdatastore_shared_counter.so": 16384,
+      "base/lib/arm64-v8a/libflutter.so": 65536,
+      "base/lib/arm64-v8a/libmlkit_google_ocr_pipeline.so": 16384,
+      "base/lib/arm64-v8a/libpdfium.so": 16384,
+      "base/lib/x86_64/libapp.so": 65536,
+      "base/lib/x86_64/libdartjni.so": 16384,
+      "base/lib/x86_64/libdatastore_shared_counter.so": 16384,
+      "base/lib/x86_64/libflutter.so": 65536,
+      "base/lib/x86_64/libmlkit_google_ocr_pipeline.so": 16384,
+      "base/lib/x86_64/libpdfium.so": 16384
+    },
+    "all_64bit_elf_at_least_16kb": true,
+    "installed": false,
+    "uploaded": false,
+    "upload_certificate_dates": [
+      "notBefore=Oct 15 12:11:50 2026 GMT",
+      "notAfter=Mar  2 12:11:50 2054 GMT"
+    ],
+    "upload_certificate_valid_now": true,
+    "jarsigner_warnings": {
+      "self_signed_upload_certificate": "also APP67",
+      "no_timestamp": "also APP67",
+      "jar_input_stream_manifest_order": "also APP67"
+    }
+  },
+  "build_log_sha256": {
+    "app82-release-ios.log": "4b7935ca7dd29364cb2c5bd31fadcf5b6b2590ad894a87714d3fddc6a77553e3",
+    "app82-release-android.log": "8f51f14d82ed5343299f1d9b489eb10d5e809518e05ce9ffc1da634918bc9356",
+    "app82-release-android-retry.log": "ad5eed11d6bd3b0df36a8b2fbc922646748659618430a4edd8da6e6d9463d6a4",
+    "app82-release-android-final.log": "2c4c2dfa815e9aa05aa6cb79533f10a280b97cc907cabee0158141e5c2392ff2"
+  },
+  "android_native_unit_tests": {
+    "success": 2,
+    "failures": 0,
+    "target": "testReleaseUnitTest",
+    "flutter_recompile_excluded": true
+  },
+  "wiki_handoff": {
+    "result": "PASS",
+    "internal_links": 3389,
+    "current_status_bytes": 10715
+  },
+  "artifact_code_diff_after_build": "none; wiki/validation records only",
+  "android_final_attempt": "PASS: bundleRelease 79.2s",
+  "native_test_log_sha256": "a507cc088d163c2c640586b5ec3bd95e2f7c2fb163a71e4e194163e2dbca58f2"
+}

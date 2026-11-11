@@ -1,4 +1,6 @@
-# APP82 릴리스 후보 통합 — 2026-11-13 목표 / HOLD
+# APP82 릴리스 후보 통합 — 2026-11-13 목표 / Owner 승인
+
+> 후속 Owner 결정: RC `975b3c026960c6cf89ec67db43f222e3474ffb21` 승인, main 병합·Push와 iOS/Android 릴리스 빌드 허용. 추가 Apple/Google 실기기 로그인·논술 실사용 첨삭 검증은 **WAIVED**, 기존 marker 없는46개 회원의 온보딩 재노출은 **ACCEPTED**. 보호 로직/backfill을 추가하지 않는다. 아래 HOLD/미승인 문구는 승인 전 검수 이력이다. 최신 진행과 산출물은 [APP82 스토어 인계](app82-store-handoff-20261113.md)를 따른다. 스토어 제출은 아직 수행하지 않는다.
 
 ## Owner 범위와 실제 작업
 

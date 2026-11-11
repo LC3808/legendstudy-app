@@ -1,8 +1,8 @@
 # LegendStudy Wiki Index
 
-[APP67 논술 공개 상태 · 출시 보류](app67-essay-admission-20261106.md)
+[과거 APP67 검수·당시 출시 보류 이력](app67-essay-admission-20261106.md) — 최신 APP 릴리스 판단은 아래 APP82 인계 문서를 따른다.
 
-[APP66 최종 빌드·운영 검증·스토어 인계](app66-final-release-20261106.md) · 실기기 최종 검수 진행.
+[APP82 Owner 승인·main 통합·스토어 빌드 인계](app82-store-handoff-20261113.md) · 업로드/심사 제출 전 결과 확인.
 
 [TASK08 통합·격리 검수·Analytics 계약·Owner 대기/HOLD](essay-beta-integration-task08-20261101.md).
 [2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-APP82 / 2026-11-13 릴리스 후보 / 인증·온보딩·홈·Catalog 통합: [소스 정합성·검증·실기기·main 승인 경계](app-release-rc-20261113.md).
+APP82 / 2026-11-13 릴리스 / 인증·온보딩·홈·Catalog 통합: [RC 소스·실기기 근거](app-release-rc-20261113.md) → [Owner 승인·main·IPA/AAB·서명·제출 전 인계](app82-store-handoff-20261113.md).
 
 대학 검색 / Catalog / 한국교원대 / 관심·실제 지원 대학: [main 통합 의존성·대안](university-catalog-main-integration-20261112.md) · [78개 확장 CLOSED·운영 근거·보류7·잔여 검증](university-catalog-closure-20261112.md). APP 릴리스 HOLD 유지.
 
