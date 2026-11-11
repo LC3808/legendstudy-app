@@ -1,0 +1,160 @@
+{
+  "scope": "2022-2026 academic years plus existing 2027 June/September",
+  "production_mutation": false,
+  "official_answers_verified": false,
+  "exams": [
+    {
+      "academic_year": 2022,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "b0f42638-ee2d-5934-a7ed-d721c9dc6755",
+      "title": "[2021년 6월 시행] 2022학년도 6월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/사탐/과탐",
+      "source_url": "https://legendstudy.com/1483",
+      "is_active": true
+    },
+    {
+      "academic_year": 2022,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "eb59be72-aaf5-583e-871b-ab1211839ba4",
+      "title": "[2021년 9월 시행] 2022학년도 9월 모의평가 - 문제, 답, 해설, 등급컷 - 국어/영어/수학/사탐/과탐",
+      "source_url": "https://legendstudy.com/1485",
+      "is_active": true
+    },
+    {
+      "academic_year": 2022,
+      "exam_month": 11,
+      "exam_type": "csat",
+      "id": "5a70a5c1-1bc7-55b3-8240-02d0c7c4166f",
+      "title": "[2021년 11월 시행] 2022학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1487",
+      "is_active": true
+    },
+    {
+      "academic_year": 2023,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "02e67848-cd05-5b3a-bb99-4de2e9198c2c",
+      "title": "[2022년 6월 시행] 2023학년도 6월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/사탐/과탐",
+      "source_url": "https://legendstudy.com/1501",
+      "is_active": true
+    },
+    {
+      "academic_year": 2023,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "689a5f19-a1f7-5c22-8a4d-9e5ff3a0fe84",
+      "title": "[2022년 9월 시행] 2023학년도 9월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/사탐/과탐",
+      "source_url": "https://legendstudy.com/1507",
+      "is_active": true
+    },
+    {
+      "academic_year": 2023,
+      "exam_month": 11,
+      "exam_type": "csat",
+      "id": "c90d9fa1-ce5d-5383-a126-6e458e2e8f70",
+      "title": "[2022년 11월 시행] 2023학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1509",
+      "is_active": true
+    },
+    {
+      "academic_year": 2024,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "66d59401-acf9-59ce-b497-ccfb89a9adf2",
+      "title": "[2023년 6월 시행] 2024학년도 6월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1516",
+      "is_active": true
+    },
+    {
+      "academic_year": 2024,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "79113561-dbb5-52b7-a63b-65e761569ec5",
+      "title": "[2023년 9월 시행] 2024학년도 9월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+      "source_url": "https://legendstudy.com/1525",
+      "is_active": true
+    },
+    {
+      "academic_year": 2024,
+      "exam_month": 11,
+      "exam_type": "csat",
+      "id": "32513dd3-264e-54b7-9156-02b7743c2fa1",
+      "title": "[2023년 11월 시행] 2024학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/수학/영어/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1574",
+      "is_active": true
+    },
+    {
+      "academic_year": 2025,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "1ce76c57-5025-541b-b190-cdc7cf485c5b",
+      "title": "[2024년 6월 시행] 2025학년도 6월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1618",
+      "is_active": true
+    },
+    {
+      "academic_year": 2025,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "6908d376-7494-53e1-8423-c30acd2b0b66",
+      "title": "[2024년 9월 시행] 2025학년도 9월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/수학/영어/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1634",
+      "is_active": true
+    },
+    {
+      "academic_year": 2025,
+      "exam_month": 11,
+      "exam_type": "csat",
+      "id": "02ab1c5b-f469-53f0-9eb8-1ed2aea5a79e",
+      "title": "[2024년 11월 시행] 2025학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1649",
+      "is_active": true
+    },
+    {
+      "academic_year": 2026,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "c605afac-0339-53bf-be77-0d39a9188d51",
+      "title": "[2025년 6월 시행] 2026학년도 6월 모의평가 문제, 답, 등급컷, 영어듣기 - 국어/영어/수학/사탐/과탐",
+      "source_url": "https://legendstudy.com/1665",
+      "is_active": true
+    },
+    {
+      "academic_year": 2026,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "dfaf04a5-7f35-5da6-9a86-4dc860c14f96",
+      "title": "[2025년 9월 시행] 2026학년도 9월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1686",
+      "is_active": true
+    },
+    {
+      "academic_year": 2026,
+      "exam_month": 11,
+      "exam_type": "csat",
+      "id": "c3686e6b-eee1-522a-92ee-278c81bf513e",
+      "title": "[2025년 11월 시행] 2026학년도 수능 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사회/과학",
+      "source_url": "https://legendstudy.com/1700",
+      "is_active": true
+    },
+    {
+      "academic_year": 2027,
+      "exam_month": 6,
+      "exam_type": "evaluation_mock",
+      "id": "68b84ef6-0d12-54dc-9dd6-9aea50f58a79",
+      "title": "[2026년 6월 시행] 2027학년도 6월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+      "source_url": "https://legendstudy.com/1706",
+      "is_active": true
+    },
+    {
+      "academic_year": 2027,
+      "exam_month": 9,
+      "exam_type": "evaluation_mock",
+      "id": "c968af3c-768c-5a0f-8eed-c14a9e83322c",
+      "title": "[2026년 9월 시행] 2027학년도 9월 모의평가 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐/제2외국어",
+      "source_url": "https://legendstudy.com/1710",
+      "is_active": true
+    }
+  ]
+}
