@@ -1,0 +1,13 @@
+{
+  "private_directory": ".local/natural-tech-20261112/dongguk",
+  "files": {
+    "apply-draft.private.sql": "c2edebabdbca5e3a499ee93b0a1161c3c12efa28ae6d01b549852286eea9629f",
+    "register-draft.private.sql": "aa06ddab5ea30cf47de15dda9d182e78211069b2b4fc7cb928c2faec3b7d10f3",
+    "worker-source.private.sql": "6d41834a55388843b69c0e86e47ff8f8883807a7d5161bdb0958e8f6292b8803",
+    "rollback-retire.sql": "8e7994ffceab2329b0efb962206b1e71bef722b6e93b6059f8d1727cf467c379"
+  },
+  "production_applied": false,
+  "executable_scope_approved": false,
+  "pdf_existing_preserved": 21,
+  "pdf_approval_pending": 0
+}

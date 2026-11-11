@@ -13,7 +13,8 @@
 |5|서강|9시험11문항|기술 계약 TECH READY; DB229/WEB38/APP12 PASS|운영 미적재; 2026자연2차 PDF 누락 보완 후보 승인 필요; REVIEW READY 아님|
 |6|숭실|4완성시험16문항 / 부분3 / HOLD1|완성16 TECH READY;20 leaf DB409/WEB18/APP21 PASS|2024Q2 공식 배점 불일치 검수 보류; 운영 미적재|
 |7|숙명|16시험44문항|기술 계약 TECH READY; DB889/WEB66/APP45 PASS|기존 운영6 보존; 신규 PDF38 승인·운영 미적재|
-|8–10|동국→광운→서울여|후속 순서|아직 TECH READY 미보고|순차 검증 필요|
+|8|동국|7시험21문항|TECH READY; DB429/WEB30/APP22 PASS|기존 승인PDF21 보존; DRAFT286행 미승인·미적재|
+|9–10|광운→서울여|후속 순서|아직 TECH READY 미보고|순차 검증 필요|
 
 위 검사 수는 각 대학의 명명 계약 검사 수다. DB는 기존 Worker 자료 매칭과 합성 답안/Mock 결과의 제출·결과·재작성·재첨삭·멱등성·권한·원복을 합산한다. 실제 Provider 호출/모델 품질/운영 WEB·APP 실계정 E2E가 아니다. WEB 각 대학1 SKIP은 대상에 없는 과거10대학 fixture이며 실패0. Flutter는 leaf별 기존 입력 진입과 계약 검사를 실행했다. 공통 Python 음성검사24 PASS. 기존 엔진·학생 기록·Credit·결제·APP75 코드 변경0.
 
@@ -62,3 +63,11 @@ Owner 검수 계정은 별도 지정된 계정으로 고정한다. [접근 제�
 문제 후보16PDF53쪽 및 고유 기준37쪽을 육안 대조했다. 2023모의Q2는2–3쪽,2024수시/모의Q2는2–3쪽·Q3는4–5쪽을 포함하여 다음 지면 누락을 방지했다. 전 후보 지면 픽셀 일치·숨김텍스트/주석 없음. 기존 승인 학생PDF6문항 메타데이터를 보존하고 신규38문항은 승인 대기로 유지했다. 업로드·교체0.
 
 Math658+Worker44=702행 DRAFT 후보는 **미승인·미적용**이다. 격리 DB889/WEB66(비대상1SKIP)/Flutter45 PASS; Provider0. 기존 사용자 기록·권한·엔진·운영 데이터 변경0. [숙명 영수증](../supabase/candidates/natural_tech_ready_20261112/sookmyung-receipt.json), [원본 지면계획](../supabase/candidates/natural_tech_ready_20261112/sookmyung-source-plan.json). 기술 계약 TECH READY이며 실제 검수 접근과 신규 PDF 승인 전 REVIEW READY가 아니다. 다음은 동국대.
+
+## 동국 자연21 연결
+
+7시험21개의 기존 Registry/문항 ID를 대조했다.2022/2023/2024모의의 hash형 Source Registry ID를 유지하고2024는 기존 source hash와 일치하는 온라인모의 자료를 선택했다. 보관본2025모의와2026모의 문제·해설은 각각SHA가 동일하며 원문은2025년 시행 표기다. 기존2026학년도 Registry에만 연결하고 별도2025시험을 만들지 않았다.
+
+기존 공식보관PDF12개,7개 문제후보30쪽,고유기준44쪽을 대조했다.2022모의Q2의 이어지는 표는물리3–4쪽, Q3는5쪽으로 연결했다.2025/2026수시는 출제의도 시작 전의 문제영역만 원본 그대로 보존했다.2025수시Q2 공식 정정문(원문 비만 표기 관련)은 그대로 포함하고 임의 수정하지 않았다. 기존 승인 학생PDF21문항 메타데이터 보존·업로드0.
+
+Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대상1SKIP)/Flutter22 PASS, Provider0·엔진변경0·운영쓰기0. [동국 영수증](../supabase/candidates/natural_tech_ready_20261112/dongguk-receipt.json). 기술 계약 TECH READY이며 실제 통합 검수 경로는 아직 미준비다. 다음은 광운대.

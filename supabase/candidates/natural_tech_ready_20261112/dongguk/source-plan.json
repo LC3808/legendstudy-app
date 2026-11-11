@@ -1,0 +1,1323 @@
+{
+  "exams": [
+    {
+      "admission_year": 2022,
+      "campus": null,
+      "exam_id": "0fa138ec-e8a0-56a6-b241-4c883c86eacc",
+      "exam_key": "source-1a2ca8e7f361b6f6ca3a7cf0f4899970362db2d8813b91f51dcb3710fab27397",
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+          "question_key": "source:1a2ca8e7f361b6f6ca3a7cf0f4899970362db2d8813b91f51dcb3710fab27397:1",
+          "refs": {
+            "intent": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                2
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "problem": {
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                2
+              ],
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            },
+            "rubric": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                2,
+                3
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "solution": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                3
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 2,
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "1dbd7967-f712-5185-aa8e-3656349706a4",
+          "question_key": "source:1a2ca8e7f361b6f6ca3a7cf0f4899970362db2d8813b91f51dcb3710fab27397:2",
+          "refs": {
+            "intent": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                5
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "problem": {
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                3,
+                4
+              ],
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            },
+            "rubric": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                7,
+                8
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "solution": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                8
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 3,
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            },
+            {
+              "crop_before": null,
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 4,
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51",
+          "question_key": "source:1a2ca8e7f361b6f6ca3a7cf0f4899970362db2d8813b91f51dcb3710fab27397:3",
+          "refs": {
+            "intent": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                10
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "problem": {
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                5
+              ],
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            },
+            "rubric": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                11,
+                12
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            },
+            "solution": {
+              "file": "2022학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 13,
+              "pages": [
+                12,
+                13
+              ],
+              "sha256": "04827d4a29070e83af90576d1fefd4fd4fca95ed78a262752bc3f56b6f07f408"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2022학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 5,
+              "sha256": "699145eee319e823b01edc21dd97d2a9e38460117d173d979ba9458af25e73dd"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+        "1dbd7967-f712-5185-aa8e-3656349706a4",
+        "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2026,
+      "campus": "서울",
+      "exam_id": "324dbf82-b4bc-5607-977b-2cf512812212",
+      "exam_key": "source-dongguk-2026-mock-natural",
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+          "question_key": "source:dongguk-2026-mock-natural:q1",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                2
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                2
+              ],
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                2,
+                3
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                3
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "physical_page": 2,
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "67388db9-9a5d-54a3-ace4-5ab35375105f",
+          "question_key": "source:dongguk-2026-mock-natural:q2",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                5
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                3
+              ],
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                5,
+                6,
+                7
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                7
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "physical_page": 3,
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "73f883bd-0e9d-51b3-a043-4c41f64544b1",
+          "question_key": "source:dongguk-2026-mock-natural:q3",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                9
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                4
+              ],
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                10,
+                11
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 11,
+              "pages": [
+                11
+              ],
+              "sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 4,
+              "physical_page": 4,
+              "sha256": "12efd22c5adb0ad79c8556e738d57da8e3fb361a020f9fc88194e35d3150c9af"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+        "67388db9-9a5d-54a3-ace4-5ab35375105f",
+        "73f883bd-0e9d-51b3-a043-4c41f64544b1"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2024,
+      "campus": null,
+      "exam_id": "3b9a5530-3362-5223-94f1-04922e6f5d11",
+      "exam_key": "source-16fff908b5d5ed4ebecec73fdb4281875845319a3eede448b64f9526be4d8be0",
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+          "question_key": "source:16fff908b5d5ed4ebecec73fdb4281875845319a3eede448b64f9526be4d8be0:1",
+          "refs": {
+            "intent": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                1
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "problem": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                2
+              ],
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            },
+            "rubric": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                3,
+                4
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "solution": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                4
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 2,
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "48836643-ef6b-5777-9b53-4a76342ec189",
+          "question_key": "source:16fff908b5d5ed4ebecec73fdb4281875845319a3eede448b64f9526be4d8be0:2",
+          "refs": {
+            "intent": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                6
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "problem": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                3
+              ],
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            },
+            "rubric": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                8,
+                9
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "solution": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                9
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 3,
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453",
+          "question_key": "source:16fff908b5d5ed4ebecec73fdb4281875845319a3eede448b64f9526be4d8be0:3",
+          "refs": {
+            "intent": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                11,
+                14
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "problem": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                4,
+                5
+              ],
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            },
+            "rubric": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                14
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            },
+            "solution": {
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                14,
+                15
+              ],
+              "sha256": "62da9b6908a29f921124ef359e5f69fa14157e2315e2fe48d663c2983006453b"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 4,
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            },
+            {
+              "crop_before": null,
+              "file": "2024학년도 동국대 모의논술(온)_자연계열 문제.pdf",
+              "page_count": 5,
+              "physical_page": 5,
+              "sha256": "ce912f581624e2d4afaa287055db01d9b813882ef680d0ae83e95b21beba2d30"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+        "48836643-ef6b-5777-9b53-4a76342ec189",
+        "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2025,
+      "campus": "서울",
+      "exam_id": "627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c",
+      "exam_key": "source-dongguk-2025-admission-natural",
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+          "question_key": "source:dongguk-2025-admission-natural:q1",
+          "refs": {
+            "intent": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                2
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "problem": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                1,
+                2
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "rubric": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                3
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "solution": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                3,
+                4
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 1,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            {
+              "crop_before": null,
+              "crop_bottom": 212,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 2,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "f2172ac5-f197-5a4f-a2a8-2452f094b5d0",
+          "question_key": "source:dongguk-2025-admission-natural:q2",
+          "refs": {
+            "intent": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                7
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "problem": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                5,
+                6
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "rubric": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                7,
+                8
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "solution": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                8,
+                9
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 5,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            {
+              "crop_before": null,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 6,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "24571e32-f295-5c2e-b69a-51f5138dbf35",
+          "question_key": "source:dongguk-2025-admission-natural:q3",
+          "refs": {
+            "intent": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                11
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "problem": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                10,
+                11
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "rubric": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                12,
+                13
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            "solution": {
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "pages": [
+                13,
+                14
+              ],
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 10,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            },
+            {
+              "crop_before": null,
+              "crop_bottom": 329,
+              "file": "2025학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 14,
+              "physical_page": 11,
+              "sha256": "a05aa64638a1b3db6d38378ab8f9345e927da16b444701793c4c1349b1e3321c"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+        "f2172ac5-f197-5a4f-a2a8-2452f094b5d0",
+        "24571e32-f295-5c2e-b69a-51f5138dbf35"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2027,
+      "campus": "서울",
+      "exam_id": "81f8d0b3-6751-542e-913e-b4169a247de6",
+      "exam_key": "source-dongguk-2027-mock-natural",
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+          "question_key": "source:dongguk-2027-mock-natural:q1",
+          "refs": {
+            "intent": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                2
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "problem": {
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                2
+              ],
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            },
+            "rubric": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                2,
+                3
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "solution": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                3
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "physical_page": 2,
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "95c1ec51-efa3-5f34-996a-192e6080271b",
+          "question_key": "source:dongguk-2027-mock-natural:q2",
+          "refs": {
+            "intent": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                5
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "problem": {
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                3,
+                4
+              ],
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            },
+            "rubric": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                7,
+                8
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "solution": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                8
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "physical_page": 3,
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            },
+            {
+              "crop_before": null,
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "physical_page": 4,
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "62d29f41-9b3b-5861-be1f-608133203bb3",
+          "question_key": "source:dongguk-2027-mock-natural:q3",
+          "refs": {
+            "intent": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                10
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "problem": {
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "pages": [
+                5
+              ],
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            },
+            "rubric": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                11,
+                12,
+                13
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            },
+            "solution": {
+              "file": "2027학년도 동국대 모의논술_자연계 해설,답안.pdf",
+              "page_count": 13,
+              "pages": [
+                13
+              ],
+              "sha256": "77cef7981c45592ced50d7491209f161697ff30a05769b1653cb912c4537c0fd"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2027학년도 동국대 모의논술_자연계 문제.pdf",
+              "page_count": 5,
+              "physical_page": 5,
+              "sha256": "07053e27f2bc1ade6d052e257542f72e43349af2808ab87813cdcb75b14cd73b"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+        "95c1ec51-efa3-5f34-996a-192e6080271b",
+        "62d29f41-9b3b-5861-be1f-608133203bb3"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2026,
+      "campus": "서울",
+      "exam_id": "8871c481-f6e2-5f87-b3c8-45c042f6a775",
+      "exam_key": "source-dongguk-2026-admission-natural",
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "b3c4b57d-b178-50ab-be64-3b939967fe82",
+          "question_key": "source:dongguk-2026-admission-natural:q1",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                2
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                1,
+                2
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                3,
+                4,
+                5
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                5,
+                6
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 1,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            {
+              "crop_before": null,
+              "crop_bottom": 489,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 2,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "0911229c-eb20-5831-a3a0-1a625a54489f",
+          "question_key": "source:dongguk-2026-admission-natural:q2",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                8
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                7,
+                8
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                9,
+                10
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                10,
+                11
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 7,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            {
+              "crop_before": null,
+              "crop_bottom": 359,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 8,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "6f4ac3f6-da5b-538c-a2f4-8376a942512e",
+          "question_key": "source:dongguk-2026-admission-natural:q3",
+          "refs": {
+            "intent": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                13
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "problem": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                12,
+                13
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "rubric": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                13,
+                14
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            "solution": {
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "pages": [
+                14,
+                15,
+                16,
+                17
+              ],
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 12,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            },
+            {
+              "crop_before": null,
+              "crop_bottom": 183,
+              "file": "2026학년도 동국대 수시 논술_자연계 문제,해설,답안.pdf",
+              "page_count": 17,
+              "physical_page": 13,
+              "sha256": "a0d70a8eb3e932b4cbf8df7d0e0c638be30ac41d9381bf9c631e69df220fb498"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "b3c4b57d-b178-50ab-be64-3b939967fe82",
+        "0911229c-eb20-5831-a3a0-1a625a54489f",
+        "6f4ac3f6-da5b-538c-a2f4-8376a942512e"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    },
+    {
+      "admission_year": 2023,
+      "campus": null,
+      "exam_id": "f5f512ab-79d1-50f9-8d79-039393226b00",
+      "exam_key": "source-7b3fccadc441925527d7d66cd5fa0a71118dc763bbb4a40950c279660a5ef899",
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "questions": [
+        {
+          "display_order": 0,
+          "hold": false,
+          "label": "문제 1",
+          "number": 1,
+          "question_id": "d0add313-5092-5acf-8882-065f29817c9b",
+          "question_key": "source:7b3fccadc441925527d7d66cd5fa0a71118dc763bbb4a40950c279660a5ef899:1",
+          "refs": {
+            "intent": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                2
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "problem": {
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                2
+              ],
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            },
+            "rubric": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                4,
+                5,
+                6
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "solution": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                6
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "physical_page": 2,
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            }
+          ]
+        },
+        {
+          "display_order": 1,
+          "hold": false,
+          "label": "문제 2",
+          "number": 2,
+          "question_id": "0e89f48c-26ca-5bb1-9b82-b55633783017",
+          "question_key": "source:7b3fccadc441925527d7d66cd5fa0a71118dc763bbb4a40950c279660a5ef899:2",
+          "refs": {
+            "intent": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                8
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "problem": {
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                3
+              ],
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            },
+            "rubric": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                9,
+                10
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "solution": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                10,
+                11
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "physical_page": 3,
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "hold": false,
+          "label": "문제 3",
+          "number": 3,
+          "question_id": "e494e7c5-b83e-5863-9aba-bc4da33d41b2",
+          "question_key": "source:7b3fccadc441925527d7d66cd5fa0a71118dc763bbb4a40950c279660a5ef899:3",
+          "refs": {
+            "intent": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                12
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "problem": {
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "pages": [
+                4
+              ],
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            },
+            "rubric": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                14,
+                15
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            },
+            "solution": {
+              "file": "2023학년도 동국대 모의논술_자연계열 해설,예시답안.pdf",
+              "page_count": 15,
+              "pages": [
+                15
+              ],
+              "sha256": "7061f59e3f987adaa1d85d3a364350286d915c439255d9e4de10fe5f134b874a"
+            }
+          },
+          "student_pages": [
+            {
+              "crop_before": null,
+              "file": "2023학년도 동국대 모의논술_자연계열 문제.pdf",
+              "page_count": 4,
+              "physical_page": 4,
+              "sha256": "e09b3bddf31f5754b815737bb9f0941889adeac05fc521cee7ab42144836e476"
+            }
+          ]
+        }
+      ],
+      "registry_question_ids": [
+        "d0add313-5092-5acf-8882-065f29817c9b",
+        "0e89f48c-26ca-5bb1-9b82-b55633783017",
+        "e494e7c5-b83e-5863-9aba-bc4da33d41b2"
+      ],
+      "session_label": null,
+      "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "university_name": "동국대학교",
+      "university_slug": "dongguk"
+    }
+  ],
+  "provider_allowed": false,
+  "publication_allowed": false,
+  "version": "dongguk-natural-connection-20261112-v1"
+}

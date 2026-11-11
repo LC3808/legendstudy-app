@@ -17,3 +17,7 @@ Soongsil: five exams/twenty leaf contracts verified. Six official sources, inclu
 ## Sookmyung
 
 44 new technical candidates /16exams; existing6 unchanged. DB889/WEB66/APP45 PASS, no Provider.32 source PDFs;53 problem pages/37 unique rubric pages reviewed. NewPDF38 Owner approval pending,6 existing references reused. Math658+Worker44=702 DRAFT rows NOT APPROVED/NOT APPLIED. See `sookmyung-receipt.json` and source plan.
+
+## Dongguk
+
+7exams21questions; DB429/WEB30/APP22 PASS.12 official source PDFs;30 problem pages/44 unique rubric pages reviewed. ExistingPDF21 unchanged.2025/2026mock archives are byte-identical; only existing2026 Registry used. Math265+Worker21=286 DRAFT rows NOT APPROVED/NOT APPLIED.

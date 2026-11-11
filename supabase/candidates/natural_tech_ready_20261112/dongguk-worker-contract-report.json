@@ -1,0 +1,365 @@
+{
+  "scope": "DISPOSABLE_LOCAL_PG17_EXISTING_WORKER_FUNCTION",
+  "worker_definition_md5": "54acd2a1914f360e6ecd62e39acc8222",
+  "questions": [
+    {
+      "question_id": "0911229c-eb20-5831-a3a0-1a625a54489f",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "0e89f48c-26ca-5bb1-9b82-b55633783017",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "1dbd7967-f712-5185-aa8e-3656349706a4",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+      "pages": 3,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "24571e32-f295-5c2e-b69a-51f5138dbf35",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "48836643-ef6b-5777-9b53-4a76342ec189",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+      "pages": 3,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "62d29f41-9b3b-5861-be1f-608133203bb3",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "67388db9-9a5d-54a3-ace4-5ab35375105f",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "6f4ac3f6-da5b-538c-a2f4-8376a942512e",
+      "pages": 6,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "73f883bd-0e9d-51b3-a043-4c41f64544b1",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "95c1ec51-efa3-5f34-996a-192e6080271b",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+      "pages": 3,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "b3c4b57d-b178-50ab-be64-3b939967fe82",
+      "pages": 6,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "d0add313-5092-5acf-8882-065f29817c9b",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "e494e7c5-b83e-5863-9aba-bc4da33d41b2",
+      "pages": 4,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    },
+    {
+      "question_id": "f2172ac5-f197-5a4f-a2a8-2452f094b5d0",
+      "pages": 5,
+      "status": "PASS",
+      "checks": [
+        "exact_source_context",
+        "image_hash_pages",
+        "no_student_source_access",
+        "missing_source_denied",
+        "foreign_question_denied",
+        "foreign_exam_denied",
+        "changed_hash_denied",
+        "old_locator_denied",
+        "changed_pages_denied",
+        "original_page_criteria_no_inferred_points"
+      ]
+    }
+  ],
+  "provider_calls": 0,
+  "production_writes": 0
+}

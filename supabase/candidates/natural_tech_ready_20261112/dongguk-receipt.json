@@ -1,0 +1,20 @@
+{
+  "university": "dongguk",
+  "technical_contract_questions": 21,
+  "exams": 7,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 429,
+  "web_pass": 30,
+  "web_skip": 1,
+  "app_pass": 22,
+  "app_log_sha256": "ca8ce6eb625a306f1bbba6674e8567e7b4a467983e3208e5b0306e38bf3380b8",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "9887a4064a43dfa579bf815b41c1b3f77b3509c48558f35b8ae66806a1942d83",
+  "sql_receipt_sha256": "b10eba9ca01062fca07157b2e96cb27ff9a900bc1402e2d305fa42cd9650cba2"
+}

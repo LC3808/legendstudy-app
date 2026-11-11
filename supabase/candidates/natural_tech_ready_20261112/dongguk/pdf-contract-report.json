@@ -1,0 +1,60 @@
+{
+  "exams": [
+    {
+      "exam_id": "0fa138ec-e8a0-56a6-b241-4c883c86eacc",
+      "pages": 4,
+      "sha256": "e60ecc756e9b98053ca6e0081b623f54f599235bb0ff4850dfcc953da9787ca2",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "324dbf82-b4bc-5607-977b-2cf512812212",
+      "pages": 3,
+      "sha256": "d71c875bb02c74eb0726626b6c7f5724a0686d23ab8276a4b62e03b1cc35ec27",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "3b9a5530-3362-5223-94f1-04922e6f5d11",
+      "pages": 4,
+      "sha256": "6634547318219aafef3fcd90502aa584e53c7e9c272de05757ee4979b4d4a3cf",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c",
+      "pages": 6,
+      "sha256": "39661e5e67e88c187f2a0358ba6b09d28e4924f7baa1299cc1a4cd0f1d4e21ca",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "81f8d0b3-6751-542e-913e-b4169a247de6",
+      "pages": 4,
+      "sha256": "16b429ce2e844a66240f3de6d9ed19f5d0339d6ae17fb8ce88158cbbd0379557",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "8871c481-f6e2-5f87-b3c8-45c042f6a775",
+      "pages": 6,
+      "sha256": "663f0b8d0559b010701564834929724d884fdbf33beda22b28adfe13d9132886",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "f5f512ab-79d1-50f9-8d79-039393226b00",
+      "pages": 3,
+      "sha256": "0efcc5433d3367a24ae1760a84a4fda4fae0fcb0acf1c82b8235ddde9eb00a62",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    }
+  ],
+  "pages": 30,
+  "visual_review": "PASS: all30 problem pages and44 unique rubric pages inspected; exact original pixels; no quality judgment",
+  "unique_rubric_pages": 44,
+  "reviewed_mapping_corrections": [
+    "2022mock Q2 includes physical3-4; Q3 uses5"
+  ],
+  "official_erratum_preserved": "2025admission Q2 official correction annotation retained without editing"
+}
