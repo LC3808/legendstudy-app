@@ -1,3 +1,4 @@
+import 'invite_page.dart' show InviteShareButton;
 import '../../core/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -66,9 +67,6 @@ class ConfirmedStudySummary extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 8),
-            const Text(
-              '한국 시간 기준 · 서버에 저장된 완료 기록입니다. 진행 중·동기화 대기 시간은 포함하지 않아요.',
-            ),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -153,10 +151,8 @@ class LearningHomeExtras extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text('친구를 초대하고 함께 공부 기록을 쌓아 보세요.'),
-              FilledButton(
-                onPressed: () => context.push('/study/invite'),
-                child: const Text('친구 초대하기'),
-              ),
+              const SizedBox(height: 20),
+              const InviteShareButton(),
             ],
           ),
         ),

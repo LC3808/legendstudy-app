@@ -56,7 +56,8 @@ import UserNotifications
         result(FlutterError(code: "SHARE_FAILED", message: "Sharing unavailable", details: nil)); return
       }
       while let presented = presenter.presentedViewController { presenter = presented }
-      let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+      let text = "레전드스터디+ 앱에서 함께 공부해요!\n\n친구 초대: \(url)\n\niPhone 앱 설치: https://apps.apple.com/app/id6820826957\nAndroid 앱 설치: https://play.google.com/store/apps/details?id=com.legendstudy.app"
+      let sheet = UIActivityViewController(activityItems: [text], applicationActivities: nil)
       sheet.popoverPresentationController?.sourceView = presenter.view
       sheet.popoverPresentationController?.sourceRect = CGRect(x: presenter.view.bounds.midX, y: presenter.view.bounds.midY, width: 1, height: 1)
       presenter.present(sheet, animated: true) { result(nil) }
@@ -144,7 +145,8 @@ import UserNotifications
           result(FlutterError(code: "EXPORT_FAILED", message: "No active window", details: nil)); return
         }
         while let current = presenter.presentedViewController { presenter = current }
-        let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        let text = "레전드스터디+ 앱에서 함께 공부해요!\n\n친구 초대: \(url)\n\niPhone 앱 설치: https://apps.apple.com/app/id6820826957\nAndroid 앱 설치: https://play.google.com/store/apps/details?id=com.legendstudy.app"
+      let sheet = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         sheet.popoverPresentationController?.sourceView = presenter.view
         sheet.popoverPresentationController?.sourceRect = CGRect(x: presenter.view.bounds.midX, y: presenter.view.bounds.midY, width: 1, height: 1)
         sheet.completionWithItemsHandler = { _, completed, _, error in

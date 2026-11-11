@@ -74,7 +74,7 @@ class MainActivity : FlutterActivity() {
                 val url = call.arguments as String
                 require(url.matches(Regex("https://lab\\.legendstudy\\.com/invite/\\?t=[0-9a-f]{64}")))
                 val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
-                    type = "text/plain"; putExtra(android.content.Intent.EXTRA_TEXT, url)
+                    type = "text/plain"; putExtra(android.content.Intent.EXTRA_TEXT, "레전드스터디+ 앱에서 함께 공부해요!\n\n친구 초대: $url\n\niPhone 앱 설치: https://apps.apple.com/app/id6820826957\nAndroid 앱 설치: https://play.google.com/store/apps/details?id=com.legendstudy.app")
                 }
                 startActivity(android.content.Intent.createChooser(intent, "친구 초대"))
                 result.success(null)

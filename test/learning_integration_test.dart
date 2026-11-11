@@ -522,54 +522,55 @@ void main() {
     expect(find.text('학교 등록하기'), findsOneWidget);
     expect(calls, 0);
   });
-  testWidgets('invite creation copy share failure are distinct from signup', (
+  testWidgets('Study invite opens share sheet in one tap and retries failure', (
     t,
   ) async {
-    String? copied;
-    var shared = 0;
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(SystemChannels.platform, (call) async {
-          if (call.method == 'Clipboard.setData') {
-            copied = (call.arguments as Map)['text'] as String;
-          }
-          return null;
-        });
-    addTearDown(
-      () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .setMockMethodCallHandler(SystemChannels.platform, null),
-    );
+    var calls = 0, shared = 0;
+    final pending = Completer<Object?>();
     await t.pumpWidget(
       ProviderScope(
         overrides: [
           authStateProvider.overrideWith(
             (_) => Stream.value(const AuthStatus('A')),
           ),
-          schoolSelectionProvider.overrideWith(() => SelectedSchool(school)),
-          inviteStoreProvider.overrideWithValue(MemoryInviteStore()),
-          learningRpcProvider.overrideWithValue(
-            (n, p) async => {
+          learningRpcProvider.overrideWithValue((n, p) async {
+            expect(n, 'invite_create');
+            calls++;
+            if (calls == 1) return pending.future;
+            return {
               'token': token,
               'expires_at': '2099-01-01T00:00:00Z',
               'has_school': true,
-            },
-          ),
+            };
+          }),
           inviteShareProvider.overrideWithValue((url) async {
+            expect(url, inviteUrl(token));
             shared++;
-            throw PlatformException(code: 'CANCELLED');
+            if (shared == 1) throw PlatformException(code: 'FAILED');
           }),
         ],
-        child: const MaterialApp(home: InvitePage()),
+        child: const MaterialApp(home: Scaffold(body: InviteShareButton())),
       ),
     );
     await t.pumpAndSettle();
-    await t.tap(find.text('초대 링크 만들기'));
-    await t.pumpAndSettle();
-    await t.tap(find.text('링크 복사'));
-    await t.pumpAndSettle();
-    expect(copied, inviteUrl(token));
-    await t.tap(find.text('친구에게 공유'));
+    expect(find.text('받은 초대 확인'), findsNothing);
+    expect(find.text('초대 링크 만들기'), findsNothing);
+    await t.tap(find.text('초대하기'));
+    await t.pump();
+    await t.tap(find.text('공유 준비 중…'));
+    await t.pump();
+    expect(calls, 1);
+    pending.complete({
+      'token': token,
+      'expires_at': '2099-01-01T00:00:00Z',
+      'has_school': true,
+    });
     await t.pumpAndSettle();
     expect(shared, 1);
-    expect(find.textContaining('공유하지 못했어요'), findsOneWidget);
+    expect(find.textContaining('공유창을 열지 못했어요'), findsOneWidget);
+    await t.tap(find.text('초대하기'));
+    await t.pumpAndSettle();
+    expect(shared, 2);
+    expect(find.textContaining('공유창을 열지 못했어요'), findsNothing);
   });
 }
