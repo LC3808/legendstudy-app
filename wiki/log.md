@@ -1,3 +1,7 @@
+## 2026-11-12 — Catalog main 통합 의존성 확인·병합 보류
+
+[검토·대안](university-catalog-main-integration-20261112.md): origin/main aeb8be2와 완료6e2f138 비교. main에 검색Repository/관심·지원UI가 없고 전체2161파일 차이. 데이터 증거는 분리 가능하나 검색 기능은 선행 개인화 의존. Owner의 미검증Auth/온보딩 제외 조건에 따라 임의main병합0. 운영Catalog CLOSED, APP HOLD 유지.
+
 ## 2026-11-12 — 대학 검색 Catalog 확장 CLOSED
 
 [최종 마감](university-catalog-closure-20261112.md): Owner 신규78 추가 완료 승인. 전체131/활성128, 양쪽 검색 PASS, 기존 ID·사용자·논술 LAB 보존. 보류7 사유·운영 영수증 정리. iPhone 검색/WEB 배포본 E2E NOT TESTED, 추가 DB·배포0, APP HOLD. Catalog 원래 브랜치만 커밋·원격 Push 대상으로 인계.

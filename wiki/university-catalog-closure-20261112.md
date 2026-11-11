@@ -47,6 +47,8 @@
 
 ## Git 인계와 제한
 
+후속 [main 통합 검토](university-catalog-main-integration-20261112.md): 작업 브랜치 Push는 완료됐으나 main은 검색 선행 기능 부재로 병합 보류. 운영 Catalog CLOSED 상태와 별개다.
+
 이 Catalog 작업 브랜치에 종료 문서 변경만 커밋하고 `origin`의 동일 브랜치로 Push한다. 원격 SHA는 `git ls-remote --heads origin refs/heads/codex/email-auth-stabilization-20261111`로 로컬 `git rev-parse HEAD`와 비교하며 최종 결과·SHA는 종료 응답에 보고한다. SHA를 current-status의 영구 HEAD로 고정하지 않는다.
 
 다른 작업 브랜치 변경 포함0, main 병합0, 이번 마감 중 추가 운영 DB 변경0, WEB·APP 배포0, 스토어 제출0. 잔여 NOT TESTED를 명시한 상태로 Owner 승인 범위의 Catalog 작업을 **CLOSED** 처리한다.

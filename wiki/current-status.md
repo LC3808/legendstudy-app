@@ -1,5 +1,7 @@
 # Current Status
 
+[Catalog main 통합 보류](university-catalog-main-integration-20261112.md): 최신main에 대학 검색/관심·지원 관리 선행 코드가 없어 Catalog 검색 연결만 분리 불가. main 변경0. 자료·영수증만 분리하거나 검증된 선행 기능 통합 후 재진행. 운영 Catalog CLOSED·APP HOLD 유지.
+
 [대학 검색 Catalog 확장 CLOSED](university-catalog-closure-20261112.md): Owner 완료 승인. 신규78·전체131·활성128, 관심/실제 지원 검색 PASS. 기존 ID·사용자·논술 LAB 보존. 보류7 정체성 검토 제외, iPhone 검색·WEB 배포본 E2E NOT TESTED. 추가 운영 변경 없이 마감, APP 릴리스 HOLD 유지.
 
 [온보딩 P0 UX](onboarding-p0-ux-20261112.md): 제목/설명 가운데 정렬·전체 카피, 지원 입력 중 다음 숨김/저장 우선, 건너뛰기는 현재 단계만 이동(중간 전체 완료 오류 수정). 집중80/렌더6/analyze PASS. Catalog78개 Owner 승인 운영 추가 완료(53→131/활성128), 기존53행·사용자 데이터 보존/보류7 제외. 공개78개·양쪽 Flutter 검색 PASS(실기기 재검색 미검증). 전체2552 PASS·8 SKIP·기존5 FAIL, iPhone17 APP81 설치·실행/MY 폼·이탈확인 PASS, 기존 완료계정이라 신규온보딩 실기기 NOT TESTED. Owner HOLD.
