@@ -5935,3 +5935,7 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 ## 2026-11-12 — Owner 검수 계정 지정·TECH READY 기준 변경
 
 지정 계정 존재/인증/계정 허용을 SELECT 확인. 한국항공7 제한 후보 private table/helper 및 admission4 함수의 격리53검사 PASS, 운영 변경0. 대학별 품질 검수 대기를 해제하고 TECH READY→다음 대학→전체 REVIEW READY→Owner 통합 검수로 기준 변경.7문항 후보는 접근 경계 증거로 보존하고 공통 검수 기능 준비와 대학별 연결을 분리. [접근 제어/미완료](essay-owner-review-access-20261112.md) · [새 순차 기준](essay-natural-sequential-order-20261112.md).
+
+## 2026-11-12 — TECH READY 순차 검증·서강 자연 신규 연결
+
+한국항공7 기존 증거 재사용 후 건국24(DB489/WEB26/APP25),경희7 leaf(DB149/WEB6/APP8; 완성3/부분4),성균15(DB309/WEB22/APP16),서강11(DB229/WEB38/APP12)을 순차 검증. Python22 PASS. 서강9시험11문항 기존 ID/공식9PDF/139Math+11Worker DRAFT 후보,문제22쪽 지면 보존. 기존 서강2026자연2차 승인PDF와 같은SHA 로컬본에서Q2-4 다음쪽 누락 확인,보완 후보 분리·운영 교체0. 새 운영쓰기/Provider/배포0. [상세·차단·다음 숭실](essay-natural-tech-ready-20261112.md).

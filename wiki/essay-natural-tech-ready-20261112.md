@@ -1,0 +1,44 @@
+# 자연·수리 TECH READY 순차 검증 — 2026-11-12
+
+[Owner 최신 기준](decisions.md#2026-11-12--tech-ready-순차-연결-후-owner-통합-검수)에 따라 대학별 기술 연결을 먼저 검증한다. **전체 완료/REVIEW READY/AI 품질 PASS가 아니다.** 운영 DRAFT 적재·검수 권한·활성화·배포·사용자 공개는 별도 승인이다. 기존 완료4개교와 중앙 과학11 HOLD를 보존한다.
+
+## 순차 확인 결과
+
+|순서|대학|이번 기술 범위|검증 상태|운영/잔여|
+|---|---|---|---|---|
+|1|한국항공|4시험7문항|TECH READY; 기존 Worker/WEB/APP 계약 및 운영 DRAFT 영수증 재사용|DRAFT106행 적용 완료; HOLD5; REVIEW READY 아님|
+|2|건국|6시험24문항|TECH READY; DB489/WEB26/APP25 PASS|기존 운영4 보존; 신규24 운영 미적재; DRAFT299행 승인 필요|
+|3|경희|1시험3문항|TECH READY; 후보7 leaf 계약 DB149/WEB6/APP8 PASS|기존3 보존; 의약4 leaf-only/시험 진입 차단, 과학12+기준 미확인4 NOT READY; 운영 미적재|
+|4|성균관|5시험15문항|기술 계약 TECH READY; DB309/WEB22/APP16 PASS|15 PDF 승인 대기 유지; 운영 미적재; 검수/공개 차단|
+|5|서강|9시험11문항|기술 계약 TECH READY; DB229/WEB38/APP12 PASS|운영 미적재; 2026자연2차 PDF 누락 보완 후보 승인 필요; REVIEW READY 아님|
+|6–10|숭실→숙명→동국→광운→서울여|후속 순서|아직 TECH READY 미보고|순차 검증 필요|
+
+위 검사 수는 각 대학의 명명 계약 검사 수다. DB는 기존 Worker 자료 매칭과 합성 답안/Mock 결과의 제출·결과·재작성·재첨삭·멱등성·권한·원복을 합산한다. 실제 Provider 호출/모델 품질/운영 WEB·APP 실계정 E2E가 아니다. WEB 각 대학1 SKIP은 대상에 없는 과거10대학 fixture이며 실패0. Flutter는 leaf별 기존 입력 진입과 계약 검사를 실행했다. 공통 Python 음성검사22 PASS. 기존 엔진·학생 기록·Credit·결제·APP75 코드 변경0.
+
+## 증거와 적용 경계
+
+[대학별 새 영수증/문항별 DB·Worker 결과](../supabase/candidates/natural_tech_ready_20261112/README.md). 건국→경희→성균관→서강을 순차로 검사했고, 같은 대학 내부의 독립 WEB/APP 검사는 함께 실행했다. 각 대학에서 현재 운영 Registry/leaf/공개 상태를 SELECT 대조했다. 일반 사용자 데이터 조회·수정0, 운영 쓰기0, Provider0, WEB 배포0, 앱 설치/스토어/릴리스 병합0.
+
+건국24/경희7/성균관15의 기존 package·SQL hash를 그대로 검증했다. 기존 운영 건국4(legacy Q1 포함)/경희3은 재생성하지 않았다. 대학별 공식 자료/학생 PDF 기준은 [기존 연결 검수](essay-four-university-connection-20261111.md)를 계승한다. 새 검사가 과거 승인 상태를 승격하지 않는다. 경희7 전체를 완성 시험 TECH READY로 보고하지 않는다.
+
+## 서강 신규 연결
+
+기존9시험11 Registry를 그대로 사용했다. WEB Source Registry에 자연시험 진입이 없음을 확인하여 **로컬 후보에만**9시험 연결을 추가했다. 공식 보관 PDF9개에서 문제·출제의도·기준·예시답안의 SHA/physical page를 명시했고, 기존8개 Math 테이블139행 + private Worker11행 = **150행 DRAFT 후보**를 만들었다. 새 평가 엔진·문항 분할·배점 추정·공식 내용 수정은 없다.
+
+2023모의1/2차,2024모의1차,2025모의1/2차,2026모의1차,2027모의 각1문항과 2026수시자연1/2차 각2문항이다. 각 Registry의 ‘문제1’은 기존 여러 소문항 묶음 그대로 유지한다.
+
+문제전용 후보9 PDF/22쪽은 원본 raster와 픽셀 일치, 숨김 텍스트/주석 없음, 전 문제쪽·11개 기준 지면 육안 확인. 공식 수식/도형은 이미지 그대로 보존하며 전사·정답 품질을 판정하지 않았다. 기존 승인 학생 PDF 메타데이터9문항을 재사용하고, 누락이 확인된2026자연2차의 공유 PDF2문항은 새 비공개 후보를 참조한다. 기존 운영/추적 WEB 메타데이터는 변경하지 않았다.
+
+### 서강2026 자연2차 Q2 PDF 누락 — 별도 승인 필요
+
+문항 `cf5f3f9a-66e1-5e52-881a-6dad8ed84eb8`,시험 `e08ff787-f4d4-5da9-8922-d78d2c45f443`. 기존 승인 asset `da2dabb259b03f409743ff6a9bd6dfc4dc190f58d57759895027c87c7f5c21dd`와 동일 SHA인 로컬 storage-readback은3쪽이고, 마지막쪽 Q2-4가 식 중간에서 끝난다. 공식 보관 원본 물리7쪽 상단의 나머지 조건과 질문이 빠져 있다. 현재 원격 Storage bytes는 NOT TESTED이며 운영에서 동일 결함을 새로 재현했다고 단정하지 않는다.
+
+보완 후보는 원본6쪽+7쪽의 문제 영역을 함께 보존한다. 시험 전체4쪽, Q1시작1/Q2시작3. 원문/해설을 고치지 않았으며 원래 승인 자산 삭제·교체·업로드0이다. 승인 전 기존 메타데이터를 새 자산으로 덮지 않는다. 문항 자체의 공식 문제/해설 불일치 HOLD와 구분되는 학생 PDF 지면 누락이다.
+
+공식 사이트 현재 재조회는 `admission.sogang.ac.kr/enter/html/rolling/data.asp`, `.../counsel/book.asp`에서502로 실패했다. 기존 Owner 제공 공식 보관 원본/SHA를 근거로 연결했으며 새 공식 다운로드 성공으로 보고하지 않는다. 출처·물리쪽·해시는 [서강 source plan](../supabase/candidates/natural_tech_ready_20261112/sogang-source-plan.json), PDF 검사는 [지면 영수증](../supabase/candidates/natural_tech_ready_20261112/sogang/pdf-contract-report.json)에 있다.
+
+## 보존 검토와 다음 단계
+
+[기존 보존7항](essay-four-university-production-preflight-20261112.md#보존-검토7항-및-승인-경계)을 계승한다. 학년도/작업일 분리, 원본SHA·지면·Registry 유지, 기존 학습/결과/원장 UPDATE0, 동일 auth identity, 기술 검증과 Learning/입시 결과 구분, private 원문/SQL 유지, Mock을 품질 사실로 승격하지 않는 원칙을 그대로 적용했다.
+
+Owner 검수 계정은 별도 지정된 계정으로 고정한다. [접근 제어 후보](essay-owner-review-access-20261112.md)는 공통 통합 검수용 후속이며 다음 대학 착수 조건이 아니다. 전체 대학 REVIEW READY가 확보된 뒤 통합 검수 목록을 전달한다. 운영 적용 시에는 대학별 최신 사전 SELECT와 정확한 대상/행수/SQL/복구 범위를 다시 제시하고 승인받는다.

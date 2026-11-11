@@ -1,0 +1,839 @@
+{
+  "version": "sogang-natural-connection-20261112-v1",
+  "provider_allowed": false,
+  "publication_allowed": false,
+  "exams": [
+    {
+      "exam_id": "1f52095a-2950-5e59-8302-9801c111dac2",
+      "exam_key": "source-sogang-2023-mock-natural-2",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2023,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "2차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "38855473-99d1-5b4d-8dd1-3af5c22b2102"
+      ],
+      "questions": [
+        {
+          "question_id": "38855473-99d1-5b4d-8dd1-3af5c22b2102",
+          "question_key": "source:sogang-2023-mock-natural-2:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "pages": [
+                5
+              ]
+            },
+            "rubric": {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "pages": [
+                5
+              ]
+            },
+            "solution": {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "pages": [
+                5,
+                6
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2023학년도 서강대 모의논술2차_자연계열 문제,예시답안.pdf",
+              "sha256": "26d395f0f0b4d952c06ec96208e82b5888ee6226da31dea9926c4ea922d43aaf",
+              "page_count": 6,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "237f04f0-00d2-5cc5-ad60-f319abaafe22",
+      "exam_key": "source-sogang-2026-admission-sg06",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2026,
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "session_label": "1차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "b16130e9-da51-5356-83d3-7ad3719c3a37",
+        "c1d581a5-d7d4-5414-8f14-47d6452d6712"
+      ],
+      "questions": [
+        {
+          "question_id": "b16130e9-da51-5356-83d3-7ad3719c3a37",
+          "question_key": "source:sogang-2026-admission-sg06:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                1,
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                2,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                3
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                4,
+                5,
+                6
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "physical_page": 1,
+              "crop_before": null
+            },
+            {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "physical_page": 2,
+              "crop_before": "출제의도"
+            }
+          ]
+        },
+        {
+          "question_id": "c1d581a5-d7d4-5414-8f14-47d6452d6712",
+          "question_key": "source:sogang-2026-admission-sg06:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                7
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                8,
+                9
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                9
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "pages": [
+                10,
+                11,
+                12
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서강대 수시 논술_자연1 문제,해설,답안.pdf",
+              "sha256": "c5679055cc96c58e4a8655ee72f5c77ba8b6a6100a1a51f4021de2af67fc3dc9",
+              "page_count": 12,
+              "physical_page": 7,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "24af7fab-5708-59b6-bf61-aaad03e99d37",
+      "exam_key": "source-sogang-2025-mock-natural-1",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2025,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "1차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "3b96a9ab-3629-5e4d-bec3-475928fa4a74"
+      ],
+      "questions": [
+        {
+          "question_id": "3b96a9ab-3629-5e4d-bec3-475928fa4a74",
+          "question_key": "source:sogang-2025-mock-natural-1:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "pages": [
+                6
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "pages": [
+                7,
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2025학년도 서강대 모의논술_자연계열 문제,답안.pdf",
+              "sha256": "e0ac24d4e473422d738ac193085aed534bde8761f0e308b649badaa1d3d36f0a",
+              "page_count": 8,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "6dbdaf3c-0188-56e7-9507-d828e8803ac9",
+      "exam_key": "source-sogang-2027-mock-sg10",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2027,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": null,
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "885fffa4-6922-5326-98fd-f0fb455c3dd9"
+      ],
+      "questions": [
+        {
+          "question_id": "885fffa4-6922-5326-98fd-f0fb455c3dd9",
+          "question_key": "source:sogang-2027-mock-sg10:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "pages": [
+                6
+              ]
+            },
+            "solution": {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "pages": [
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2027학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "a9b911fa8466eac69ce5888126ccf07786427d29fe8361cd13acad19295339e8",
+              "page_count": 10,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "71833056-873e-5bc3-8238-2f32792776ef",
+      "exam_key": "source-sogang-2024-mock-natural-1",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2024,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "1차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "e24c5c6c-c0ad-5723-a15c-61f5b2322044"
+      ],
+      "questions": [
+        {
+          "question_id": "e24c5c6c-c0ad-5723-a15c-61f5b2322044",
+          "question_key": "source:sogang-2024-mock-natural-1:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "pages": [
+                6
+              ]
+            },
+            "solution": {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "pages": [
+                7,
+                8,
+                9
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2024학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "6d2a730e7332e59e08591fb777d531bcae5faae2535536f43655901f80cd1234",
+              "page_count": 9,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "b271fd77-2fdd-5aab-b654-6e6d309ba8a2",
+      "exam_key": "source-sogang-2025-mock-natural-2",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2025,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "2차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "d74b47b8-87a1-587b-ae7d-623d08ccdb08"
+      ],
+      "questions": [
+        {
+          "question_id": "d74b47b8-87a1-587b-ae7d-623d08ccdb08",
+          "question_key": "source:sogang-2025-mock-natural-2:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "pages": [
+                3,
+                4,
+                5
+              ]
+            },
+            "intent": {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "pages": [
+                6,
+                7
+              ]
+            },
+            "rubric": {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "pages": [
+                7
+              ]
+            },
+            "solution": {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "pages": [
+                8,
+                9
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "physical_page": 4,
+              "crop_before": null
+            },
+            {
+              "file": "2025학년도 서강대 모의논술2차_자연계열 문제, 답안.pdf",
+              "sha256": "b5097deb1ea87ab28f673c94b6c4e4e0b371b94239264bae783d607b49ed83a1",
+              "page_count": 9,
+              "physical_page": 5,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "e08ff787-f4d4-5da9-8922-d78d2c45f443",
+      "exam_key": "source-sogang-2026-admission-sg07",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2026,
+      "exam_kind": "admission",
+      "field_or_division": "자연계열",
+      "session_label": "2차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "d79c31c0-4d95-54df-87bf-132082d25ea7",
+        "cf5f3f9a-66e1-5e52-881a-6dad8ed84eb8"
+      ],
+      "questions": [
+        {
+          "question_id": "d79c31c0-4d95-54df-87bf-132082d25ea7",
+          "question_key": "source:sogang-2026-admission-sg07:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                1,
+                2
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                2,
+                3
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                3
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                4,
+                5
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "physical_page": 1,
+              "crop_before": null
+            },
+            {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "physical_page": 2,
+              "crop_before": "출제의도"
+            }
+          ]
+        },
+        {
+          "question_id": "cf5f3f9a-66e1-5e52-881a-6dad8ed84eb8",
+          "question_key": "source:sogang-2026-admission-sg07:q2",
+          "label": "문제 2",
+          "display_order": 1,
+          "number": 2,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                6,
+                7
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                7,
+                8
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                8
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "pages": [
+                9,
+                10,
+                11
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "physical_page": 6,
+              "crop_before": null
+            },
+            {
+              "file": "2026학년도 서강대 수시 논술_자연2 문제,해설,답안.pdf",
+              "sha256": "8aeef5e82c2520b9060dae037c5eb8a24fecb9893b392a99eab7c56c2c93fce8",
+              "page_count": 11,
+              "physical_page": 7,
+              "crop_before": "출제의도"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "e57cfa3e-072a-5c64-ac14-e3b0118d4e7c",
+      "exam_key": "source-sogang-2023-mock-natural-1",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2023,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "1차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "fa0bd742-0c3c-5981-8525-e19976f67f7b"
+      ],
+      "questions": [
+        {
+          "question_id": "fa0bd742-0c3c-5981-8525-e19976f67f7b",
+          "question_key": "source:sogang-2023-mock-natural-1:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "pages": [
+                6
+              ]
+            },
+            "solution": {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "pages": [
+                7,
+                8,
+                9
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2023학년도 서강대 모의논술1차_자연계열 문제,예시답안.pdf",
+              "sha256": "a4ce1a7b724b0302a68e4e31ef2b43ed5bcaae9ff86f117db2c972e8e9800e46",
+              "page_count": 9,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "exam_id": "e7f8e4a3-5bdd-546a-b703-9cd274f581c1",
+      "exam_key": "source-sogang-2026-mock-sg03",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "admission_year": 2026,
+      "exam_kind": "mock",
+      "field_or_division": "자연계열",
+      "session_label": "1차",
+      "campus": null,
+      "university_slug": "sogang",
+      "university_name": "서강대학교",
+      "registry_question_ids": [
+        "d36e5405-2436-5f9c-a734-bceb1d3b188c"
+      ],
+      "questions": [
+        {
+          "question_id": "d36e5405-2436-5f9c-a734-bceb1d3b188c",
+          "question_key": "source:sogang-2026-mock-sg03:q1",
+          "label": "문제 1",
+          "display_order": 0,
+          "number": 1,
+          "hold": false,
+          "refs": {
+            "problem": {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "pages": [
+                3,
+                4
+              ]
+            },
+            "intent": {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "pages": [
+                5,
+                6
+              ]
+            },
+            "rubric": {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "pages": [
+                6
+              ]
+            },
+            "solution": {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "pages": [
+                7,
+                8
+              ]
+            }
+          },
+          "student_pages": [
+            {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "physical_page": 3,
+              "crop_before": null
+            },
+            {
+              "file": "2026학년도 서강대 모의논술_자연계 문제,해설,답안.pdf",
+              "sha256": "856c19d7353082742b10245ae1c3230d352cc6fdb97df846864f0ba5b5c5945e",
+              "page_count": 8,
+              "physical_page": 4,
+              "crop_before": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

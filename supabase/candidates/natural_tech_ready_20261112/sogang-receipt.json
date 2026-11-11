@@ -1,0 +1,20 @@
+{
+  "university": "sogang",
+  "technical_contract_questions": 11,
+  "exams": 9,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 229,
+  "web_pass": 38,
+  "web_skip": 1,
+  "app_pass": 12,
+  "app_log_sha256": "2e6dde1438e395e010735a84c35445ff8697da9c5460a5d729658ab845fc20d4",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "df5232a416e03b1047277fb373a989d2dd47e3d5adfc263f16b5aaa3000cea35",
+  "sql_receipt_sha256": "074ef2dfd4014733a167a3e81d4faf860b4ab672547f38a2a5dad5431b4b92c4"
+}

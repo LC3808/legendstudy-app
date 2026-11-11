@@ -1,0 +1,10 @@
+{
+  "private_directory": ".local/natural-tech-20261112/sogang",
+  "files": {
+    "apply-draft.private.sql": "edaaea336ac57f9f1f3176d7f4ca8ad87a7f295b7c1dbb3b5a91a360fcd0b2f9",
+    "register-draft.private.sql": "696f66df519b724cc1ade60cc59006895f3d3ec53de9c35cd5a07e581189ae02",
+    "worker-source.private.sql": "542b70cb614271497e623b3317341febdf00d526a34326a6b7f4177186cbf62c",
+    "rollback-retire.sql": "8a94642ec1e3c8bb48cc0fa5dc01d7b868fdd359abfa4467ce3922d133928049"
+  },
+  "production_applied": false
+}

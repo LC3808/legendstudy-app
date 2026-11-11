@@ -1,0 +1,20 @@
+{
+  "university": "kyunghee",
+  "technical_contract_questions": 7,
+  "exams": 3,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 149,
+  "web_pass": 6,
+  "web_skip": 1,
+  "app_pass": 8,
+  "app_log_sha256": "fa99cbbb1a7a5a7e340a174efde8643e196b57b02900dcbac1501eac3c3cf303",
+  "blocked_partial_exams": 2,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "10f41d1c0f730d33760c790256c99aeee204ca545055b9adee469cfa9d7bfae8",
+  "sql_receipt_sha256": "56ad0577f46edb99a57075bfb4b8a7c4a5cc85cdbeaa4ff08ee7905acc7dac87"
+}

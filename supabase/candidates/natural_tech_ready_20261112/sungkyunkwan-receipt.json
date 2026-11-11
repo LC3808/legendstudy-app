@@ -1,0 +1,20 @@
+{
+  "university": "sungkyunkwan",
+  "technical_contract_questions": 15,
+  "exams": 5,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 309,
+  "web_pass": 22,
+  "web_skip": 1,
+  "app_pass": 16,
+  "app_log_sha256": "2a3ffc009b5e50ab682a1b1c776d5ea0c1b3e56c68f3aed0f6ed125cef16e3db",
+  "blocked_partial_exams": 0,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "e4d6280cb7933b4b7f7b31fe6e8640ce6557c743555cefd2a8a9e27d113e2c67",
+  "sql_receipt_sha256": "afc0f65d3b3b63f7928b4396e43004a022ddc08f09b891e65599a28b014c370e"
+}
