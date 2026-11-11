@@ -1,7 +1,7 @@
-# 대학 Catalog 확대 후보 — Owner 승인 대기
+# 대학 Catalog 확대 — 78개 운영 적용 완료
 
-**NOT APPLIED / 운영 쓰기0.** 대상 LegendStudy(`stlhijzpjfgwwdgunlsd`)만.
-사용자 요청에 따라 기존 운영 Catalog53행(활성50/비활성3)을 읽기 전용 전수 확인했다.
+**APPLIED 2026-11-12 / Owner 명시 승인: 신규78행 INSERT.** 대상 LegendStudy(`stlhijzpjfgwwdgunlsd`)만.
+적용 전 사용자 요청에 따라 기존 운영 Catalog53행(활성50/비활성3)을 읽기 전용 전수 확인했다.
 [원본 메타데이터](../../../wiki/assets/university-catalog-audit-20261112.json), [대조표](audit.csv), [SQL 후보](candidate.sql).
 
 ## 범위와 근거
@@ -31,8 +31,7 @@
 
 LAB 지원 확대는 승인 대상이 아니다. APP 논술 목록은 별도 `essayUniversityCatalog`/SourceCatalog의42개 매핑을 사용한다.
 새 Catalog 행에는 시험/문항/Registry를 생성하지 않으며 해당 ID에 essay_exams가 있으면 후보 SQL이 중단된다.
-기존 대학 is_active나 LAB 관련 파일/정책은 수정하지 않는다. WEB의 모든 소비자까지 동일함을 검증한 것은 아니므로
-적용 전 WEB 담당자의 Catalog 소비 영향 검토도 필요하다.
+기존 대학 is_active나 LAB 관련 파일/정책은 수정하지 않았다. WEB 로컬 public-discovery.ts는 별도 essay-public-catalog.json을 사용함을 읽기 확인했다. WEB 배포본 E2E는 NOT TESTED이며 배포/코드 변경은 없다.
 
 ## 실행·검증·원복
 
@@ -49,5 +48,5 @@ LAB 지원 확대는 승인 대상이 아니다. APP 논술 목록은 별도 `es
 
 로컬 PostgreSQL17 격리검사: 운영 공개53행 복제 → 후보78 추가/ROLLBACK후53 PASS;
 로컬commit131 PASS; 재적용추가0 PASS; 기존서울대 이름 충돌 fail-closed PASS.
-운영 SQL 실행/리허설도 하지 않았다. RLS/JWT 실운영 읽기와 WEB 통합은 NOT TESTED.
+후속 운영 리허설 ROLLBACK 및 승인 COMMIT 완료. 기존 전체행/보호 테이블 검증은 [적용 SQL](applied.sql), [영수증](../../../wiki/assets/university-catalog-applied-20261112.json) 참조. applied.sql은 초기53행을 요구하는 일회 실행 영수증으로 재실행하지 않는다. WEB 배포본 통합은 NOT TESTED.
 기존7항 보존: 시점/원본/current projection/identity/관심≠지원≠결과/권한·retention/파생 표시 의미 유지.

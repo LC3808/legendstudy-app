@@ -1,0 +1,35 @@
+{
+  "added": 78,
+  "after": 131,
+  "active": 128,
+  "before": 53,
+  "new_essay_links": 0,
+  "protected_tables": [
+    {
+      "rows": 535,
+      "digest": "823cf1857632828a46863a389c4a048d",
+      "table_name": "profiles"
+    },
+    {
+      "rows": 0,
+      "digest": "d41d8cd98f00b204e9800998ecf8427e",
+      "table_name": "student_applications"
+    },
+    {
+      "rows": 281,
+      "digest": "e2b5e3fbec90be7ee3fe9244a0096009",
+      "table_name": "student_target_universities"
+    },
+    {
+      "rows": 450,
+      "digest": "66d30111a9d48d4ef1b1231ff6fba058",
+      "table_name": "essay_exams"
+    },
+    {
+      "rows": 1232,
+      "digest": "cb3cb3a50e80aee75784f412a53a2aac",
+      "table_name": "essay_questions"
+    }
+  ],
+  "existing_rows_unchanged": true
+}

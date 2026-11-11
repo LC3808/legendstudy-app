@@ -51,14 +51,14 @@
 ## 대학 Catalog
 
 [읽기 전수 감사·78개 SQL 후보·원복/승인](../supabase/candidates/university_catalog_20261112/README.md).
-운영53행/활성50. 한국교원대0, 교육대10개 모두0. 기존 과학기술5개 활성.
+적용 전 운영53행/활성50. 당시 한국교원대0, 교육대10개 모두0. 기존 과학기술5개 활성.
 교육청116+공식2개 비교:118 중 기존33/후보78/identity보류7. 국가전체 대학 목록 완전 커버리지는 아직 검증하지 않았다.
 기존 비활성2개 실제대학과 합성1개는 유지. 국립부경대는 기존 부경대ID 재사용.
 
-한국교원대 **후보 추가 DONE / 운영 검색 NOT APPLIED**. 기존 Repository 검색어 정규화는 관심·실제 지원 양쪽 재사용.
+2026-11-12 Owner78개 승인 후 한국교원대 **운영 추가 DONE**(전체131/활성128). 기존 Repository 검색어 정규화는 관심·실제 지원 양쪽 재사용.
 국립/공백/카이스트·교대·KNUE 별칭 처리, 서버ID/활성필터 유지. Backend/RPC/새 저장소0.
 APP LAB42개 매핑·시험·Registry는 변경0. 후보SQL에 새대학 essay_exams 연결0 검사.
-운영 적용과 WEB 소비자 검수는 별도 Owner 승인. 승인 전에 검색 UI에 가짜 저장가능 대학을 표시하지 않는다.
+승인된78개만 INSERT했다. 아래 운영 반영 영수증 참조. 기존 ID·사용자 데이터·LAB 범위 유지.
 
 ## 7항 보존 검토
 
@@ -105,5 +105,23 @@ APP LAB42개 매핑·시험·Registry는 변경0. 후보SQL에 새대학 essay_e
   [미저장 이탈 확인](assets/onboarding-p0-20261112/iphone-app81-unsaved-guard.png).
   위 격리 렌더와 구분하며 실제 운영 저장 성공 근거로 사용하지 않는다.
 - build receipt의 installed:false는 빌드 시점 값이며 install81/launch81 영수증과 metadata81로 설치를 별도 검증했다.
-- Catalog78개 추가 운영 승인 대기. 국내 전체대학 커버리지·보류7 정체성·WEB 소비자 영향은 미완료.
-  APP 릴리스 HOLD, 스토어/병합/운영DB·Auth·LAB·Credit 변경0.
+- Catalog78개 추가는 후속 Owner 승인으로 운영 적용 완료. 국내 전체대학 커버리지·보류7 정체성·WEB 배포본 E2E는 미완료.
+  APP 릴리스 HOLD, 스토어/병합/Auth·LAB·Credit 변경0. 운영 DB 변경은 승인된 Catalog INSERT78만.
+
+## Catalog 운영 반영 — 2026-11-12 Owner 후속 승인
+
+Owner는 한국교원대 포함78개 INSERT만 명시 승인했다. 보류7 제외, 기존 ID/사용자 데이터/논술 LAB 보존 조건을 적용했다.
+[실행 SQL](../supabase/candidates/university_catalog_20261112/applied.sql) · [운영 영수증](assets/university-catalog-applied-20261112.json).
+
+- DONE: 운영 트랜잭션 ROLLBACK 리허설 후 동일 보호 조건으로 COMMIT. 독립 재조회131행/활성128/보류7 해당행0.
+- DONE: 기존53행은 모든 컬럼(시각 포함) 그대로. 기존 비활성3행 유지. 한국교원대 ID `d8c6085f-eb45-5d6e-82f9-e5033d82963e`, slug `knue`.
+- DONE: REPEATABLE READ 스냅샷 내 profiles535/관심281/지원0/essay_exams450/essay_questions1232의 행 수 및 전체행 해시 전후 일치.
+  새 대학 essay_exams 연결0. 사용자 행은 추출/변경하지 않고 집계만 확인했다. 동시 사용자의 별도 쓰기를 막는 검사가 아니라 이 트랜잭션의 비변경 검증이다.
+- DONE: 신규78개 이름별 공개 API 검색에서 승인 UUID와 일치. 한국교원대/공백 포함/KNUE 별칭도 같은 ID.
+- DONE: 실제 `InterestedUniversitiesField`와 `ApplicationEditor`에 공개 Supabase 검색 Repository를 연결한 Flutter 위젯 검증에서 한국교원대학교 표시/ID 일치.
+  관심 검색 provider를 실제 네트워크 영역에서 미리 조회하여 가상시간과 HTTP 대기를 분리했다. 지원 폼은 실제 search() 호출. 사용자 저장 RPC는 테스트에서 실패하도록 차단했다.
+  [읽기 전용 재현 검사](../tool/qa/university_catalog_live_read_test.dart): `./tool/flutterw test --no-pub tool/qa/university_catalog_live_read_test.dart test/university_search_query_test.dart --reporter expanded`.
+  최종2 tests PASS, 검증 도구 analyze PASS, Wiki handoff PASS. 로컬 ignored public-client 설정이 필요하다. 테스트 초기 네트워크/종료 타이머 동기화 실패를 수정한 뒤 최종 결과로 판정한다.
+- LAB: APP 별도42개 catalog/source 매핑 유지. WEB 로컬 `src/lib/essay-runtime/public-discovery.ts`는 정적 essay-public-catalog.json 사용 확인. Registry/시험/문항/WEB 코드·배포 변경0.
+- NOT TESTED: 이번 추가 이후 iPhone 물리 화면 검색 및 WEB 배포본 E2E. 위 검색 결과는 실제 운영 공개 API + 호스트 Flutter 위젯 검증이며 실기기 결과와 구분한다.
+- 앱 재설치 없이 새 검색 요청부터 반영. 국내 전체 대학 완전성/보류7 identity 검토는 후속. Owner 실기기 UX 확인 전 APP 릴리스 HOLD 유지.

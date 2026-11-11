@@ -1,6 +1,6 @@
 # Current Status
 
-[온보딩 P0 UX](onboarding-p0-ux-20261112.md): 제목/설명 가운데 정렬·전체 카피, 지원 입력 중 다음 숨김/저장 우선, 건너뛰기는 현재 단계만 이동(중간 전체 완료 오류 수정). 집중80/렌더6/analyze PASS. Catalog53행 전수 감사·한국교원대 포함78개 후보 SQL 로컬 검증, 운영 미적용. 전체2552 PASS·8 SKIP·기존5 FAIL, iPhone17 APP81 설치·실행/MY 폼·이탈확인 PASS, 기존 완료계정이라 신규온보딩 실기기 NOT TESTED. Owner HOLD.
+[온보딩 P0 UX](onboarding-p0-ux-20261112.md): 제목/설명 가운데 정렬·전체 카피, 지원 입력 중 다음 숨김/저장 우선, 건너뛰기는 현재 단계만 이동(중간 전체 완료 오류 수정). 집중80/렌더6/analyze PASS. Catalog78개 Owner 승인 운영 추가 완료(53→131/활성128), 기존53행·사용자 데이터 보존/보류7 제외. 공개78개·양쪽 Flutter 검색 PASS(실기기 재검색 미검증). 전체2552 PASS·8 SKIP·기존5 FAIL, iPhone17 APP81 설치·실행/MY 폼·이탈확인 PASS, 기존 완료계정이라 신규온보딩 실기기 NOT TESTED. Owner HOLD.
 
 [지원 대학 카피·컴팩트 폼](onboarding-compact-layout-20261111.md): Owner 지정 따뜻한 문구, 검색 아이콘 통합, 학년도/모집 시기2열(큰 글자 세로), 카드·간격 축소. 기존 저장/진행 복원·Backend 유지. 집중66 PASS/렌더3 PASS/analyze PASS, 전체2551 PASS·8 SKIP·기존5 FAIL. iPhone17 APP80 삭제 없는 설치·실행/버전 확인 PASS, iPhone12 APP75 보존. 미러링 사용 중으로 실기기 UI 검수 NOT TESTED; Owner UX 확인 전 HOLD.
 
