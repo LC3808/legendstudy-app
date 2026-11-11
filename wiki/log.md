@@ -5939,3 +5939,7 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 ## 2026-11-12 — TECH READY 순차 검증·서강 자연 신규 연결
 
 한국항공7 기존 증거 재사용 후 건국24(DB489/WEB26/APP25),경희7 leaf(DB149/WEB6/APP8; 완성3/부분4),성균15(DB309/WEB22/APP16),서강11(DB229/WEB38/APP12)을 순차 검증. Python22 PASS. 서강9시험11문항 기존 ID/공식9PDF/139Math+11Worker DRAFT 후보,문제22쪽 지면 보존. 기존 서강2026자연2차 승인PDF와 같은SHA 로컬본에서Q2-4 다음쪽 누락 확인,보완 후보 분리·운영 교체0. 새 운영쓰기/Provider/배포0. [상세·차단·다음 숭실](essay-natural-tech-ready-20261112.md).
+
+## 2026-11-12 — 숭실 자연 순차 기술 검증
+
+기존20 Registry/공식6자료 재사용,230Math+20Worker 로컬 fixture. 공식2025보고서 직접 확보·지면/원본SHA 보존. 텍스트좌표가 잘못된 PDF의 검토 crop 좌표 지원과 음성검사2 추가. DB409/WEB18/APP21·공통Python24 PASS.2024Q2 문제25점/기준25+15 원본불일치 기록,수정0·해당시험 진입 제외. 완성16 TECH READY/부분3/자료검수보류1,운영쓰기·Provider·배포0. 다음숙명. [상세](essay-natural-tech-ready-20261112.md#숭실-자연20-기술-계약공식-기준-불일치).

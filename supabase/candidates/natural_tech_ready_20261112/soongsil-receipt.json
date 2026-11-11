@@ -1,0 +1,20 @@
+{
+  "university": "soongsil",
+  "technical_contract_questions": 20,
+  "exams": 5,
+  "package_hashes_verified": true,
+  "sql_hashes_verified": true,
+  "db_checks": 409,
+  "web_pass": 18,
+  "web_skip": 1,
+  "app_pass": 21,
+  "app_log_sha256": "09a071edc047f55ac31661bf4c402c63fcedb23da1a056084caf29212425b1d9",
+  "blocked_partial_exams": 1,
+  "production_new_connections": 0,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "review_ready": false,
+  "quality_review": "DEFERRED_OWNER_INTEGRATED_REVIEW",
+  "source_manifest_sha256": "1450076d3fdbe2a5ab93656cce3c2f0c36f139beafd748decd06b14ea6466cfa",
+  "sql_receipt_sha256": "f14ef8fbb43f6af7d24475cd06f6cd861cb2c65ccbfbfed92d9a74c2d66f1895"
+}

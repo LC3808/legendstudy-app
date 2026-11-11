@@ -1,0 +1,51 @@
+{
+  "exams": [
+    {
+      "exam_id": "1e754392-59da-5daa-80ec-58225c188eee",
+      "pages": 5,
+      "sha256": "d5d9599295773b8e7914416d52d34b0b34deb124e397cd11641acd5c884110dd",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "2825efbe-25c9-5881-94bb-3c46f542e7ce",
+      "pages": 4,
+      "sha256": "62647cb7cc2914253a2f85a7b7e06ce7dfaac24f7eb4c1bc3c627dbac66f950a",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "34bf13e8-76b8-534a-8d87-12b2cd92e6f2",
+      "pages": 4,
+      "sha256": "1c4b4f8159aab34d3ffe6ff9d6dc3882c109fea81fc77264fdb9f735bf3ffaf8",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "44c4905f-c774-589e-9ad5-83507d15befe",
+      "pages": 4,
+      "sha256": "b58a5fd73b68039a64d88564986f39bb2d4bc4e4a8a68a960f80e746fd97205e",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    },
+    {
+      "exam_id": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+      "pages": 4,
+      "sha256": "8980182dbb438ec469ae910babbd07a1905ea3291c7a1469983383c548dc12c8",
+      "pixel_identical": true,
+      "hidden_text_or_annotations": false
+    }
+  ],
+  "pages": 21,
+  "visual_review": "PASS: all21 candidate problem pages and20 rubric references inspected; exact original pixels; no quality judgment",
+  "official_source_issue": {
+    "question_id": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+    "question_points": 25,
+    "rubric_entries": [
+      25,
+      15
+    ],
+    "status": "HOLD_PENDING_OWNER_SOURCE_REVIEW",
+    "correction_applied": false
+  }
+}

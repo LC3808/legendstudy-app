@@ -11,9 +11,10 @@
 |3|경희|1시험3문항|TECH READY; 후보7 leaf 계약 DB149/WEB6/APP8 PASS|기존3 보존; 의약4 leaf-only/시험 진입 차단, 과학12+기준 미확인4 NOT READY; 운영 미적재|
 |4|성균관|5시험15문항|기술 계약 TECH READY; DB309/WEB22/APP16 PASS|15 PDF 승인 대기 유지; 운영 미적재; 검수/공개 차단|
 |5|서강|9시험11문항|기술 계약 TECH READY; DB229/WEB38/APP12 PASS|운영 미적재; 2026자연2차 PDF 누락 보완 후보 승인 필요; REVIEW READY 아님|
-|6–10|숭실→숙명→동국→광운→서울여|후속 순서|아직 TECH READY 미보고|순차 검증 필요|
+|6|숭실|4완성시험16문항 / 부분3 / HOLD1|완성16 TECH READY;20 leaf DB409/WEB18/APP21 PASS|2024Q2 공식 배점 불일치 검수 보류; 운영 미적재|
+|7–10|숙명→동국→광운→서울여|후속 순서|아직 TECH READY 미보고|순차 검증 필요|
 
-위 검사 수는 각 대학의 명명 계약 검사 수다. DB는 기존 Worker 자료 매칭과 합성 답안/Mock 결과의 제출·결과·재작성·재첨삭·멱등성·권한·원복을 합산한다. 실제 Provider 호출/모델 품질/운영 WEB·APP 실계정 E2E가 아니다. WEB 각 대학1 SKIP은 대상에 없는 과거10대학 fixture이며 실패0. Flutter는 leaf별 기존 입력 진입과 계약 검사를 실행했다. 공통 Python 음성검사22 PASS. 기존 엔진·학생 기록·Credit·결제·APP75 코드 변경0.
+위 검사 수는 각 대학의 명명 계약 검사 수다. DB는 기존 Worker 자료 매칭과 합성 답안/Mock 결과의 제출·결과·재작성·재첨삭·멱등성·권한·원복을 합산한다. 실제 Provider 호출/모델 품질/운영 WEB·APP 실계정 E2E가 아니다. WEB 각 대학1 SKIP은 대상에 없는 과거10대학 fixture이며 실패0. Flutter는 leaf별 기존 입력 진입과 계약 검사를 실행했다. 공통 Python 음성검사24 PASS. 기존 엔진·학생 기록·Credit·결제·APP75 코드 변경0.
 
 ## 증거와 적용 경계
 
@@ -42,3 +43,13 @@
 [기존 보존7항](essay-four-university-production-preflight-20261112.md#보존-검토7항-및-승인-경계)을 계승한다. 학년도/작업일 분리, 원본SHA·지면·Registry 유지, 기존 학습/결과/원장 UPDATE0, 동일 auth identity, 기술 검증과 Learning/입시 결과 구분, private 원문/SQL 유지, Mock을 품질 사실로 승격하지 않는 원칙을 그대로 적용했다.
 
 Owner 검수 계정은 별도 지정된 계정으로 고정한다. [접근 제어 후보](essay-owner-review-access-20261112.md)는 공통 통합 검수용 후속이며 다음 대학 착수 조건이 아니다. 전체 대학 REVIEW READY가 확보된 뒤 통합 검수 목록을 전달한다. 운영 적용 시에는 대학별 최신 사전 SELECT와 정확한 대상/행수/SQL/복구 범위를 다시 제시하고 승인받는다.
+
+## 숭실 자연20 기술 계약·공식 기준 불일치
+
+기존5시험20문항을 재사용해 Math230+Worker20 =250행 로컬 계약 fixture를 구성했다. 운영 적용 대상 확정 SQL이 아니며 HOLD1을 포함하므로 **250행 전체 실행 금지**다. 원본 질문·배점·해설 수정0. 기존2026 인문 v3 기준 불일치 이슈는 별도이며 건드리지 않았다. 신규 자연 소스는 기존 보관본5개와 [입학처2025 공식 보고서](https://iphak.ssu.ac.kr/board/exam_view.asp?flag2=1&number=127&page=1&page_no=1_2_7)의 직접 다운로드1개를 사용했다. 다운로드 SHA와 원본51–67쪽 연결은 [영수증](../supabase/candidates/natural_tech_ready_20261112/soongsil/official-download-receipt.json)에 있다.
+
+원본 PDF 일부의 추출 텍스트 좌표가 실제 렌더 지면과 달라 잘못된 자동 crop 위험을 확인했다. 로컬 후보 생성기의 명시 `crop_bottom`(실제 검토 지면 좌표) 지원을 추가하고 모드충돌/범위/NaN·무한대/잘못된 형식을 거부하는 검사2개를 추가했다. 기존 heading 방식은 유지한다. 5개 문제 후보PDF21쪽은 원본 해당 영역과 픽셀 일치·숨김텍스트/주석 없음,21문제쪽/20기준쪽을 육안 확인했다. 실제 연결은 기존 승인 PDF20문항 메타데이터를 보존하여 재사용하며 업로드0이다.
+
+2024자연Q2 `815bc344-cdbb-5b7f-82c1-dc528de46f51`: 문제PDF 물리3쪽은25점, 해설PDF 물리4쪽(인쇄40쪽)의 기준은(1)25점+(2)15점이다. 원본 raster와 추출을 함께 확인했고 재계산/정정하지 않았다. **공식 근거 검수 보류1**로 분리한다. 해당2024시험의 나머지3문항은 leaf 계약 PASS이나 부분 시험 진입 보완 전까지 전체 시험 TECH READY에 포함하지 않는다. 로컬 expansion 목록에서2024시험을 제거하고 차단 검사를 통과했다. 나머지4시험16문항 TECH READY, 실제 품질/운영검수는 통합 단계다.
+
+숭실 DB409/WEB18 PASS(1비대상SKIP)/Flutter21 PASS. Provider0·운영쓰기0·배포0. 다음 대학은 숙명여대다.

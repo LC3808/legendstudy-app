@@ -52,6 +52,21 @@ def validate_worker(payload,exam,q):
         require(i['roles'] and all(role in refs and i['source_sha256']==refs[role]['sha256'] and i['physical_page'] in refs[role]['pages'] for role in i['roles']),'IMAGE_ROLE_DRIFT')
     return len(images)
 
+def student_page_bottom(page,spec):
+    """Reviewed explicit boundary for PDFs whose text coordinates are unreliable."""
+    boundary=spec.get('crop_bottom')
+    if boundary is not None:
+        require(not spec.get('crop_before'),'AMBIGUOUS_CROP_MODE')
+        require(type(boundary) in (int,float) and 50<boundary<=page.rect.height,'INVALID_CROP')
+        return boundary
+    if spec.get('crop_before'):
+        matches=page.search_for(spec['crop_before']);require(len(matches)==1,'CROP_HEADING_AMBIGUOUS')
+        bottom=matches[0].y0-8
+        require(bottom>50,'INVALID_CROP')
+        return bottom
+    require(not any(page.search_for(h) for h in ['3. 출제 의도','6. 채점 기준','7. 예시 답안']),'UNREVIEWED_STUDENT_ANSWER_LEAK')
+    return page.rect.height
+
 def prepare(plan,registry,paths,out):
     import pymupdf
     require('.local' in out.resolve().parts and not out.exists(),'FRESH_PRIVATE_OUTPUT_REQUIRED')
@@ -73,13 +88,7 @@ def prepare(plan,registry,paths,out):
             start=len(student)+1
             for spec in q['student_pages']:
                 page=docs[spec['sha256']][spec['physical_page']-1]
-                bottom=page.rect.height
-                if spec['crop_before']:
-                    matches=page.search_for(spec['crop_before']);require(len(matches)==1,'CROP_HEADING_AMBIGUOUS')
-                    bottom=matches[0].y0-8
-                else:
-                    require(not any(page.search_for(h) for h in ['3. 출제 의도','6. 채점 기준','7. 예시 답안']),'UNREVIEWED_STUDENT_ANSWER_LEAK')
-                require(bottom>50,'INVALID_CROP')
+                bottom=student_page_bottom(page,spec)
                 pix=page.get_pixmap(matrix=pymupdf.Matrix(2,2),clip=pymupdf.Rect(0,0,page.rect.width,bottom))
                 new=student.new_page(width=page.rect.width,height=bottom);new.insert_image(new.rect,stream=pix.tobytes('png'))
             refs={role:{k:ref[k] for k in ['file','sha256','pages']} for role,ref in q['refs'].items()}

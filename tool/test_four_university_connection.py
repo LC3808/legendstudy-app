@@ -1,7 +1,7 @@
 """Negative identity/image contracts for official multi-PDF candidate preparation."""
 import base64,copy,json,unittest
 from pathlib import Path
-from essay_lab.four_university_connection import validate,validate_worker
+from essay_lab.four_university_connection import validate,validate_worker,student_page_bottom
 from essay_lab.natural_expansion import ReviewError,digest
 R=Path(__file__).resolve().parents[1]
 class FourConnectionTest(unittest.TestCase):
@@ -29,4 +29,19 @@ class FourConnectionTest(unittest.TestCase):
   for edit in [lambda a:a[0].update(source_sha256='0'*64),lambda a:a.pop(),lambda a:a.append(a[0]),lambda a:a[0].update(data='broken')]:
    e,q,p=self.payload();images=json.loads(p['images_text']);edit(images);p['images_text']=json.dumps(images);p['sha256']=digest((p['manifest_text']+p['images_text']).encode())
    with self.assertRaises((ReviewError,ValueError)):validate_worker(p,e,q)
+class StudentBoundaryTest(unittest.TestCase):
+ def test_reviewed_coordinate_avoids_unreliable_text_search(self):
+  from types import SimpleNamespace
+  page=SimpleNamespace(rect=SimpleNamespace(height=728.52),search_for=lambda _:self.fail('explicit crop must not use text coordinates'))
+  self.assertEqual(student_page_bottom(page,{'crop_bottom':568}),568)
+  for value in [True,0,50,729,float('nan'),float('inf'),'568']:
+   with self.assertRaises(ReviewError):student_page_bottom(page,{'crop_bottom':value})
+  with self.assertRaises(ReviewError):student_page_bottom(page,{'crop_bottom':568,'crop_before':'heading'})
+ def test_legacy_heading_boundary_and_ambiguity(self):
+  from types import SimpleNamespace
+  page=SimpleNamespace(rect=SimpleNamespace(height=800),search_for=lambda _:[SimpleNamespace(y0=300)])
+  self.assertEqual(student_page_bottom(page,{'crop_before':'heading'}),292)
+  page.search_for=lambda _:[SimpleNamespace(y0=300),SimpleNamespace(y0=301)]
+  with self.assertRaises(ReviewError):student_page_bottom(page,{'crop_before':'heading'})
+
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,15 @@
+{
+  "private_directory": ".local/natural-tech-20261112/soongsil",
+  "files": {
+    "apply-draft.private.sql": "64571df310b4f90f279b8dc67e3828651bcd7e631d6b25d333500210ccce981c",
+    "register-draft.private.sql": "8b8e96f270403bf6f178bbdf1b128fbbac7d8cfae804419ca640cf5bd43ee13d",
+    "worker-source.private.sql": "0c3db090db189534f09c065476f094aa40aa9fb41394b150e532d62baee507e4",
+    "rollback-retire.sql": "a25c182e4c83f7728c9d2434adddaad93b661e0c1e6597e915fdf6710237a596"
+  },
+  "production_applied": false,
+  "executable_scope_approved": false,
+  "hold_included_contract_fixture_only": [
+    "815bc344-cdbb-5b7f-82c1-dc528de46f51"
+  ],
+  "warning": "Do not apply20-question fixture. Fresh separate candidate excludingHOLD required before approval."
+}
