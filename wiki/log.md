@@ -1,6 +1,6 @@
 ## 2026-11-11 — 실제 지원 카피·컴팩트 폼
 
-[구현·화면·검증](onboarding-compact-layout-20261111.md): 따뜻한 Owner 카피, 검색 suffix아이콘/키보드 action, 학년도1900~2200·모집 시기2열과 접근성 세로 전환, 간격 축소·저장 카드. 집중66 PASS/렌더3 PASS/analyze PASS, 운영 변경0. 최종 전체·기기 후속,Owner 확인 전 HOLD.
+[구현·화면·검증](onboarding-compact-layout-20261111.md): 따뜻한 Owner 카피, 검색 suffix아이콘/키보드 action, 학년도1900~2200·모집 시기2열과 접근성 세로 전환, 간격 축소·저장 카드. 집중66 PASS/렌더3 PASS/analyze PASS, 운영 변경0. 전체2551 PASS·8 SKIP·기존5 FAIL. iPhone17 APP80 삭제 없는 설치·실행/버전 확인 PASS, iPhone12 APP75 보존. 미러링 사용 중으로 실기기 UI 검수 NOT TESTED,Owner 확인 전 HOLD.
 
 ## 2026-11-11 — 온보딩 inline APP79 검수본
 

@@ -38,7 +38,8 @@ Owner 지정 문구를 사용했다. 실시간 합격 조회·자동 알림·발
 집중66 PASS(온보딩·MY·inline CRUD·진행 복원), 렌더/큰 글자·키보드3 PASS, analyze No issues found.
 추가 검사는 키보드 검색→대학 선택→2028학년도/정시 선택→저장 payload 확인,
 기본2열/200% 세로 전환/키보드300dp 상태에서 실제 스크롤로 저장 접근을 포함한다.
-최종 전체 및 기기 영수증은 아래 후속 절에 기록한다.
+전체 테스트: **2551 PASS / 8 SKIP / 기존5 FAIL**. 이전 APP79와 동일한 D3 runner navigation1, mobile IA mock4 실패이며 새 실패0. 전체 suite가 모두 성공한 것은 아니다.
+최종 기기 영수증은 아래 후속 절에 기록한다.
 
 ## 화면
 
@@ -55,3 +56,14 @@ Owner 지정 문구를 사용했다. 실시간 합격 조회·자동 알림·발
 `application_management_test.dart`, `onboarding_applications_inline_test.dart`, `onboarding_page_test.dart`.
 Wiki index/current-status/log/decisions와 본 문서·화면 자료 갱신.
 논술/수능 LAB·Backend·Auth·스토어·릴리스 병합 변경0. Owner 실기기 확인 전 **HOLD**.
+
+## APP80 최종 영수증 (2026-11-12 KST)
+
+- DONE: 앱 소스 `11e84e92e8ec56d2d20c5c9e0bd7855e3a50d151`, 버전1.0.2(80), bundle `com.legendstudy.app`. device-qa 서명/identity 검증과 iOS release build PASS(44.8MB).
+- Framework SHA256 `2059138b3828f895ba88b1e1d8b0e3e7a349ddf69e9718aaf7f6b93c43bf7b53`.
+- DONE: iPhone17 Pro Max APP79→80 삭제 없는 업데이트 설치, devicectl 실제 metadata80 재조회 및 process launch 성공. 기존 앱 데이터 초기화/삭제0. 별도 iPhone12 Pro Max APP75 읽기 재확인·변경0.
+- PARTIAL: 설치/실행 성공과 화면 내 실제 동작 검수는 구분한다. 미러링 연결 재시도 결과 ‘iPhone 사용 중, 연결하려면 iPhone을 잠그십시오’로 UI 접근 불가.
+- NOT TESTED: APP80 실기기 대학 검색·선택/CRUD/앱 종료 복원/MY 연동/글자 확대/키보드 연속 흐름. Owner 최종 실기기 UX 확인 대기. 저장 상태·계정 데이터는 강제로 변경하지 않았다.
+- 격리 회귀: 집중66 PASS, 화면/200%·키보드3 PASS, analyze PASS. 전체2551 PASS/8 SKIP/기존5 FAIL. Wiki handoff 및 diff whitespace 검사 PASS.
+- build receipt의 installed:false는 빌드 시점 값이며 이후 install80/launch80 성공 영수증과 설치 metadata로 실제 설치를 확인했다. 로컬 영수증은 `.local/onboarding-device/`, 키/설정 값은 Wiki·Git 미기록.
+- 릴리스 **HOLD**. 스토어 제출/릴리스 병합/운영 Backend·Auth·DB·RPC 변경0. 완료된 회원의 온보딩을 강제로 초기화하지 않음. 미저장 입력의 프로세스 종료 복원은 기존 제한 유지.

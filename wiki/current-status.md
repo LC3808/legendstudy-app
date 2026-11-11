@@ -1,6 +1,6 @@
 # Current Status
 
-[지원 대학 카피·컴팩트 폼](onboarding-compact-layout-20261111.md): Owner 지정 따뜻한 문구, 검색 아이콘 통합, 학년도/모집 시기2열(큰 글자 세로), 카드·간격 축소. 기존 저장/진행 복원·Backend 유지. 집중66 PASS/렌더3 PASS/analyze PASS, 최종 전체·기기 후속; Owner UX 확인 전 HOLD.
+[지원 대학 카피·컴팩트 폼](onboarding-compact-layout-20261111.md): Owner 지정 따뜻한 문구, 검색 아이콘 통합, 학년도/모집 시기2열(큰 글자 세로), 카드·간격 축소. 기존 저장/진행 복원·Backend 유지. 집중66 PASS/렌더3 PASS/analyze PASS, 전체2551 PASS·8 SKIP·기존5 FAIL. iPhone17 APP80 삭제 없는 설치·실행/버전 확인 PASS, iPhone12 APP75 보존. 미러링 사용 중으로 실기기 UI 검수 NOT TESTED; Owner UX 확인 전 HOLD.
 
 [APP78 Native UX 후속](onboarding-inline-applications-20261111.md): N수·기타 학교 단계 자동 생략, 온보딩 내부 실제 지원 추가/수정/삭제, MY 공통 카드 폼·외부 라벨·미저장 이탈 확인. 기존 repository/운영 데이터 변경0. 계정별 단계 복원 유지. 집중62 PASS/전체2548 PASS·8 SKIP·기존5 FAIL,analyze PASS. iPhone17 APP79 설치 확인/iPhone12 APP75 보존. 기기 잠금·미러링 사용 중으로 화면 검증 NOT TESTED; Owner 최종 UX 검수 대기,릴리스 HOLD.
 
