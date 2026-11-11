@@ -317,7 +317,7 @@ class ScoringAttemptView extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(scoringDisplayTitle(a.title)),
+          Text(scoringResultTitle(a.title, a.subject)),
           Text(
             a.outcome == ScoringOutcome.stale
                 ? '채점 기준이 업데이트되었어요. 답안과 시험 기록은 보관되어 있어요. 새 시험을 선택해 다시 응시할 수 있어요.'
@@ -392,7 +392,7 @@ class ScoringHistory extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  '${scoringDisplayTitle(attempt.title)} · ${attempt.result == null ? '채점 확인' : '${attempt.result!.rawScore} / ${attempt.result!.maxScore}점'}',
+                  '${scoringResultTitle(attempt.title, attempt.subject)} · ${attempt.result == null ? '채점 확인' : '${attempt.result!.rawScore} / ${attempt.result!.maxScore}점'}',
                 ),
               ),
           ],

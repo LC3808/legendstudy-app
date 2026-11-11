@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'scoring_display_title.dart';
 
 class ExamTitleBanner extends StatelessWidget {
-  const ExamTitleBanner({super.key, required this.title});
+  const ExamTitleBanner({super.key, required this.title, this.subject});
   final String title;
+  final String? subject;
   @override
   Widget build(BuildContext context) => Container(
     width: double.infinity,
@@ -15,7 +16,7 @@ class ExamTitleBanner extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
     ),
     child: Text(
-      scoringDisplayTitle(title),
+      scoringResultTitle(title, subject),
       textAlign: TextAlign.center,
       style: const TextStyle(
         fontSize: 21,

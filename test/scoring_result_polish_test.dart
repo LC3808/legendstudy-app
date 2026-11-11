@@ -54,6 +54,9 @@ void main() {
     expect(scoringDisplayTitle('2025학년도 수능 기출'), '2025학년도 수능 기출');
     expect(scoringDisplayTitle('낯선 시험명'), '낯선 시험명');
     expect(title, contains('문제, 답'));
+    expect(scoringResultTitle(title, ' 국어 '), '2025학년도 수능 기출 · 국어');
+    expect(scoringResultTitle(title, null), '2025학년도 수능 기출');
+    expect(scoringResultTitle(title, '  '), '2025학년도 수능 기출');
   });
   testWidgets('grade reference banner preview', (t) async {
     t.view.physicalSize = const Size(428, 926);
@@ -145,6 +148,8 @@ void main() {
       );
       await t.pumpAndSettle();
       expect(find.text('88 / 100점'), findsOneWidget);
+      expect(find.text('2025학년도 수능 기출 · 수학 · 기하'), findsOneWidget);
+      expect(find.text('수학 · 기하'), findsNothing);
       expect(t.takeException(), isNull);
       if (scale == 1) await capture(t, 'result');
       await t.ensureVisible(find.text('답안 확인'));

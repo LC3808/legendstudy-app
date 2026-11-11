@@ -82,12 +82,7 @@ class ScoringResultView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ExamTitleBanner(title: attempt.title),
-        if (attempt.subject?.trim().isNotEmpty == true)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text(attempt.subject!, style: AppTokens.body),
-          ),
+        ExamTitleBanner(title: attempt.title, subject: attempt.subject),
         const SizedBox(height: 20),
         Container(
           key: const Key('score-summary-banner'),
@@ -243,11 +238,12 @@ class _ScoringAnswersPageState extends State<ScoringAnswersPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    scoringDisplayTitle(widget.attempt.title),
+                    scoringResultTitle(
+                      widget.attempt.title,
+                      widget.attempt.subject,
+                    ),
                     style: AppTokens.sectionTitle,
                   ),
-                  if (widget.attempt.subject?.trim().isNotEmpty == true)
-                    Text(widget.attempt.subject!, style: AppTokens.body),
                   const SizedBox(height: 16),
                   for (final review in widget.attempt.result!.answers)
                     Padding(

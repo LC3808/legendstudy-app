@@ -12,3 +12,9 @@ String scoringDisplayTitle(String title) {
   // Use the same mock-exam trimming as the materials search/list.
   return materialDisplayTitle(withoutDate, 'exam');
 }
+
+/// Use the saved subject, never infer it from a title or score.
+String scoringResultTitle(String title, String? subject) => [
+  scoringDisplayTitle(title),
+  if (subject?.trim().isNotEmpty == true) subject!.trim(),
+].join(' · ');
