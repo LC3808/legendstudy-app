@@ -48,11 +48,15 @@ import UserNotifications
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
     let inviteShare = FlutterMethodChannel(name: "com.legendstudy.app/invite-share", binaryMessenger: binaryMessenger)
-    inviteShare.setMethodCallHandler { [weak self] call, result in
+    inviteShare.setMethodCallHandler { call, result in
       guard call.method == "share" else { result(FlutterMethodNotImplemented); return }
       guard let url = call.arguments as? String,
         url.range(of: "^https://lab\\.legendstudy\\.com/invite/\\?t=[0-9a-f]{64}$", options: .regularExpression) != nil,
-        var presenter = self?.window?.rootViewController else {
+        var presenter = UIApplication.shared.connectedScenes
+          .compactMap({ $0 as? UIWindowScene })
+          .filter({ $0.activationState == .foregroundActive })
+          .flatMap({ $0.windows })
+          .first(where: { $0.isKeyWindow })?.rootViewController else {
         result(FlutterError(code: "SHARE_FAILED", message: "Sharing unavailable", details: nil)); return
       }
       while let presented = presenter.presentedViewController { presenter = presented }

@@ -144,7 +144,9 @@ class StudyPage extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 12),
               child: Text('${studyDuration(study.lastCompletedMs)} 공부했어요'),
             ),
-          if (study.storageLabel.isNotEmpty)
+          if (study.storageLabel.isNotEmpty &&
+              study.savePhase != SavePhase.saved &&
+              study.savePhase != SavePhase.local)
             Semantics(
               liveRegion: true,
               child: Text(
@@ -337,7 +339,7 @@ class StudyWeekSummary extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () => context.push('/my/trends'),
-            child: const Text('자세히 보기'),
+            child: const Text('학습 추이 자세히 보기'),
           ),
         ),
       ],

@@ -501,6 +501,52 @@ void main() {
       );
     }
   }
+  testWidgets(
+    'own school compact card emphasizes rank and preserves hidden time',
+    (t) async {
+      t.view.physicalSize = const Size(360, 640);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await t.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (_) => Stream.value(const AuthStatus('A')),
+            ),
+            schoolSelectionProvider.overrideWith(() => SelectedSchool(school)),
+            schoolRanksProvider.overrideWith(
+              (ref, q) async => SchoolRanks.parse(
+                ranking(
+                  q,
+                  mine: {
+                    ...row(12, 1, own: true, ms: 3660000),
+                    'active_users': 3,
+                  },
+                ),
+                q,
+              ),
+            ),
+          ],
+          child: MaterialApp(
+            home: MediaQuery(
+              data: const MediaQueryData(textScaler: TextScaler.linear(2)),
+              child: Scaffold(
+                body: SingleChildScrollView(child: const OwnSchoolRank()),
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      expect(find.text('1위'), findsOneWidget);
+      expect(find.text('참여 3명'), findsOneWidget);
+      expect(find.text('총 공부시간 1시간 1분'), findsOneWidget);
+      expect(find.textContaining('가입 학생'), findsNothing);
+      expect(find.text('학교별 순위 보기'), findsOneWidget);
+      expect(t.takeException(), isNull);
+    },
+  );
   testWidgets('unset school shows setup, never requests ranks', (t) async {
     var calls = 0;
     await t.pumpWidget(
@@ -571,6 +617,11 @@ void main() {
     await t.tap(find.text('초대하기'));
     await t.pumpAndSettle();
     expect(shared, 2);
+    expect(
+      calls,
+      1,
+      reason: 'Retry reuses the valid link instead of creating another token',
+    );
     expect(find.textContaining('공유창을 열지 못했어요'), findsNothing);
   });
 }

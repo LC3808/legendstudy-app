@@ -119,6 +119,8 @@ class InviteShareButton extends ConsumerStatefulWidget {
 class _InviteShareButtonState extends ConsumerState<InviteShareButton> {
   bool busy = false;
   String? error;
+  InviteLink? cached;
+  String? cachedOwner;
   Future<void> share() async {
     if (busy) return;
     final auth = ref.read(authStateProvider);
@@ -133,14 +135,22 @@ class _InviteShareButtonState extends ConsumerState<InviteShareButton> {
       error = null;
     });
     try {
-      final link = InviteLink.parse(
-        await ref.read(learningRpcProvider)('invite_create', {
-          'p_campaign': 'school_rank',
-        }),
-      );
-      if (!mounted || ref.read(authStateProvider).value?.userId != owner)
+      final link =
+          cachedOwner == owner &&
+              cached != null &&
+              cached!.expires.isAfter(DateTime.now())
+          ? cached!
+          : InviteLink.parse(
+              await ref.read(learningRpcProvider)('invite_create', {
+                'p_campaign': 'school_rank',
+              }),
+            );
+      if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
         return;
+      }
       if (!link.expires.isAfter(DateTime.now())) throw const LearningFailure();
+      cached = link;
+      cachedOwner = owner;
       await ref.read(inviteShareProvider)(link.url);
       // Opening/dismissing the share sheet is not a signup or successful send.
     } catch (_) {

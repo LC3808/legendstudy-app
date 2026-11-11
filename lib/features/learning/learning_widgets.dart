@@ -101,48 +101,9 @@ class LearningHomeExtras extends ConsumerWidget {
   const LearningHomeExtras({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final study = ref.watch(studyControllerProvider);
-    final records = [...study.records]
-      ..sort((a, b) => b.startedMs.compareTo(a.startedMs));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const LearningSectionHeader('최근 학습 기록'),
-        LearningCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text('최근 7일 중 최대 5개 · 각 기록의 공부 시간'),
-              if (study.historyError || study.historyLimit)
-                LearningError(retry: study.sync)
-              else if (records.isEmpty)
-                const Text('최근 학습 기록이 없어요.'),
-              for (final r in records.take(5))
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${_date(r.startedMs)} · ${r.title ?? (r.mode == 'study' ? '공부' : '모의고사')}',
-                      ),
-                      Text(
-                        '${learningDuration(r.activeMs)} · ${study.guest
-                            ? '기기 임시 기록'
-                            : r.synced
-                            ? '동기화 완료'
-                            : '동기화 대기'}${r.includeInStudyTotal ? '' : ' · 공부시간 합산 제외'}',
-                      ),
-                    ],
-                  ),
-                ),
-              TextButton(
-                onPressed: () => context.push('/my/trends'),
-                child: const Text('학습 추이 자세히 보기'),
-              ),
-            ],
-          ),
-        ),
         const LearningSectionHeader('우리 학교 공부 순위'),
         const LearningCard(child: OwnSchoolRank()),
         const LearningSectionHeader('친구와 함께 공부하기'),
@@ -158,14 +119,6 @@ class LearningHomeExtras extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  String _date(int ms) {
-    final d = DateTime.fromMillisecondsSinceEpoch(
-      ms,
-      isUtc: true,
-    ).add(const Duration(hours: 9));
-    return '${d.month}/${d.day} ${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
   }
 }
 
@@ -201,27 +154,60 @@ class OwnSchoolRank extends ConsumerWidget {
                       school.name,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    ref
-                        .watch(ownSchoolCardProvider)
-                        .when(
-                          skipLoadingOnRefresh: false,
-                          data: (card) =>
-                              Text('우리 학교 가입 학생 ${card.registered}명'),
-                          loading: () => const LinearProgressIndicator(),
-                          error: (_, _) => LearningError(
-                            retry: () => ref.invalidate(ownSchoolCardProvider),
-                          ),
-                        ),
-                    const Text('전체 기간 · 참여 학생 수 순위'),
+
                     ref
                         .watch(schoolRanksProvider(defaultRankQuery))
                         .when(
                           skipLoadingOnRefresh: false,
-                          data: (r) => Text(
-                            r.mine == null
-                                ? '아직 참여 순위가 없어요. 공부를 완료하면 순위에 반영돼요.'
-                                : '${r.mine!.rank}위 · 참여 ${r.mine!.active?.toString() ?? '**'}명',
-                          ),
+                          data: (r) => r.mine == null
+                              ? const Text('아직 참여 순위가 없어요.')
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
+                                  child: Wrap(
+                                    spacing: 24,
+                                    runSpacing: 12,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      Semantics(
+                                        label:
+                                            '전체 기간 참여 학생 수 순위 ${r.mine!.rank}위',
+                                        child: Text(
+                                          '${r.mine!.rank}위',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineLarge
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.w800,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '참여 ${r.mine!.active?.toString() ?? '**'}명',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            r.mine!.ms == null
+                                                ? '총 공부시간 비공개'
+                                                : '총 공부시간 ${learningDuration(r.mine!.ms!)}',
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                           loading: () => const LinearProgressIndicator(),
                           error: (_, _) => LearningError(
                             retry: () => ref.invalidate(schoolRanksProvider),

@@ -125,7 +125,9 @@ void main() {
         await tester.ensureVisible(find.text('종료'));
         await tester.tap(find.text('종료'));
         await tester.pumpAndSettle();
-        expect(find.text('이 기기에 저장됨'), findsOneWidget);
+        expect(find.text('이 기기에 저장됨'), findsNothing);
+        expect(find.text('최근 학습 기록'), findsNothing);
+        expect(find.text('학습 추이 자세히 보기'), findsOneWidget);
         expect(study.week.last, greaterThan(0));
         expect(tester.takeException(), isNull);
         semantics.dispose();
