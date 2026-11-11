@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
 import 'scoring_display_title.dart';
 import 'scoring_models.dart';
+import 'exam_title_banner.dart';
+import 'practice_grade.dart';
 
 /// Presentation only; the immutable score, answer and provenance stay intact.
 class ScoringResultView extends StatelessWidget {
@@ -76,10 +78,11 @@ class ScoringResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final score = attempt.result!;
+    final referenceGrade = PracticeGrade.forAttempt(attempt);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(scoringDisplayTitle(attempt.title), style: AppTokens.sectionTitle),
+        ExamTitleBanner(title: attempt.title),
         if (attempt.subject?.trim().isNotEmpty == true)
           Padding(
             padding: const EdgeInsets.only(top: 6),
@@ -113,6 +116,21 @@ class ScoringResultView extends StatelessWidget {
               if (score.hasGradeBasis && score.grade != null) ...[
                 const SizedBox(height: 6),
                 Text(score.gradeLabel, style: AppTokens.sectionTitle),
+              ] else if (referenceGrade != null) ...[
+                const SizedBox(height: 10),
+                Text(
+                  referenceGrade.label,
+                  style: const TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF8E4600),
+                  ),
+                ),
+                if (referenceGrade.estimated)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Text('유사 시험 원점수 기준', style: TextStyle(fontSize: 13)),
+                  ),
               ],
               const SizedBox(height: 16),
               Wrap(

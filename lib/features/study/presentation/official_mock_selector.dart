@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../scoring/scoring_repository.dart';
 import '../scoring/scoring_display_title.dart';
+import '../scoring/exam_title_banner.dart';
 
 /// Presentation hierarchy only; all options retain their actual occurrence/key.
 class OfficialMockSelector extends StatefulWidget {
@@ -164,10 +165,8 @@ class _OfficialMockSelectorState extends State<OfficialMockSelector> {
               ),
           ], selectExam),
         if (exam != null) ...[
-          Text(
-            scoringDisplayTitle(
-              rows.firstWhere((p) => p.examIdentity == exam).title,
-            ),
+          ExamTitleBanner(
+            title: rows.firstWhere((p) => p.examIdentity == exam).title,
           ),
           const SizedBox(height: 8),
           const Text('과목'),

@@ -104,6 +104,13 @@ void main() {
       }
 
       await press('모의고사');
+      expect(
+        tester
+            .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '공식 기출'))
+            .selected,
+        isTrue,
+      );
+      await press('자유 연습');
       await tester.enterText(find.byKey(const Key('mock-title')), '');
       await press('연습 시작');
       expect(find.text('시험명은 1~80자로 입력해 주세요.'), findsOneWidget);

@@ -12,6 +12,7 @@ import 'package:legendstudy_app/features/study/scoring/scoring_result_view.dart'
 import 'package:legendstudy_app/features/study/scoring/scoring_models.dart';
 
 import 'support/grade_fixture.dart';
+import 'practice_grade_test.dart' show sampleAttempt;
 
 const render = bool.fromEnvironment('SCORING_UX_RENDER');
 final frame = GlobalKey();
@@ -53,6 +54,33 @@ void main() {
     expect(scoringDisplayTitle('2025학년도 수능 기출'), '2025학년도 수능 기출');
     expect(scoringDisplayTitle('낯선 시험명'), '낯선 시험명');
     expect(title, contains('문제, 답'));
+  });
+  testWidgets('grade reference banner preview', (t) async {
+    t.view.physicalSize = const Size(428, 926);
+    t.view.devicePixelRatio = 1;
+    addTearDown(t.view.resetPhysicalSize);
+    addTearDown(t.view.resetDevicePixelRatio);
+    await t.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light.copyWith(
+          textTheme: AppTheme.light.textTheme.apply(
+            fontFamily: render ? 'ScoringPreview' : null,
+          ),
+        ),
+        builder: (context, child) => RepaintBoundary(key: frame, child: child!),
+        home: Scaffold(
+          appBar: AppBar(title: const Text('시험 결과')),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: ScoringResultView(attempt: sampleAttempt(), guest: true),
+          ),
+        ),
+      ),
+    );
+    await t.pumpAndSettle();
+    expect(find.text('추정 등급 · 1등급'), findsOneWidget);
+    expect(t.takeException(), isNull);
+    await capture(t, 'estimated-grade');
   });
   for (final scale in [1.0, 2.0]) {
     testWidgets('score, numeric answers and time metrics readable at $scale', (
@@ -157,6 +185,12 @@ void main() {
       expect(find.text('0시간 20분'), findsOneWidget);
       expect(find.text('10시간 2분'), findsOneWidget);
       expect(find.text('3시간 0분'), findsOneWidget);
+      final labels = t
+          .widgetList<Text>(find.byType(Text))
+          .map((w) => w.data)
+          .toList();
+      expect(labels.indexOf('오늘 공부시간'), lessThan(labels.indexOf('이번 주 공부시간')));
+      expect(labels.indexOf('이번 주 공부시간'), lessThan(labels.indexOf('누적 공부시간')));
       expect(
         t.widget<Text>(find.text('0시간 20분')).style!.color,
         isNot(t.widget<Text>(find.text('10시간 2분')).style!.color),

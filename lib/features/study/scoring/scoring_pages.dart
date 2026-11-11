@@ -221,10 +221,20 @@ class _AnswerEntryPageState extends State<AnswerEntryPage> {
                                               padding: EdgeInsets.zero,
                                               backgroundColor:
                                                   draft.answers[n - 1] == choice
-                                                  ? AppTokens.primarySoft
+                                                  ? const Color(0xFF161616)
+                                                  : null,
+                                              disabledForegroundColor:
+                                                  draft.answers[n - 1] == choice
+                                                  ? Colors.white
+                                                  : null,
+                                              disabledBackgroundColor:
+                                                  draft.answers[n - 1] == choice
+                                                  ? const Color(0xFF161616)
                                                   : null,
                                               foregroundColor:
-                                                  AppTokens.textPrimary,
+                                                  draft.answers[n - 1] == choice
+                                                  ? Colors.white
+                                                  : AppTokens.textPrimary,
                                             ),
                                             onPressed: enabled
                                                 ? () => c.selectAnswer(

@@ -35,7 +35,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
   final subject = TextEditingController();
   final minutes = TextEditingController(text: '80');
   String preset = '국어';
-  bool official = false;
+  bool official = true;
   bool includeInStudyTotal = true;
   bool alert = false, notificationBusy = false, starting = false;
   String? error, alertMessage;

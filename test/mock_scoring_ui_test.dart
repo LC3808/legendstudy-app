@@ -4,6 +4,7 @@ import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/study/application/study_controller.dart';
 import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_pages.dart';
+
 import 'mock_scoring_test.dart' show FakeScoring, availability;
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
 
@@ -58,11 +59,26 @@ void main() {
         await t.tap(choice);
         await t.pumpAndSettle();
         expect(c.draft!.answers!.answered, 1);
+        final selectedStyle = t.widget<TextButton>(choice).style!;
+        expect(
+          selectedStyle.backgroundColor!.resolve({}),
+          const Color(0xFF161616),
+        );
+        expect(selectedStyle.foregroundColor!.resolve({}), Colors.white);
         await t.tap(find.text('일시정지'));
         await t.pumpAndSettle();
         await t.tap(choice);
         await t.pumpAndSettle();
         expect(c.draft!.answers!.answered, 1);
+        final pausedStyle = t.widget<TextButton>(choice).style!;
+        expect(
+          pausedStyle.foregroundColor!.resolve({WidgetState.disabled}),
+          Colors.white,
+        );
+        expect(
+          pausedStyle.backgroundColor!.resolve({WidgetState.disabled}),
+          const Color(0xFF161616),
+        );
         await t.tap(find.text('계속하기'));
         await t.pumpAndSettle();
         clock.advance(61000);

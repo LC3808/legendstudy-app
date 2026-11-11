@@ -132,6 +132,8 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    await tester.tap(find.text('자유 연습'));
+    await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('mock-subject-')), findsOneWidget);
     expect(
       tester
@@ -299,6 +301,7 @@ void main() {
           await capture(tester, 'paused-$tag');
           await press('종료');
           await press('모의고사');
+          await press('자유 연습');
           expect(c.mockSetup!.subject, '국어');
           expect(c.mockSetup!.plannedSeconds, 4800);
           expect(find.text('시험 시간'), findsOneWidget);

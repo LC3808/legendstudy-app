@@ -91,12 +91,12 @@ class StudySummaryMetrics extends StatelessWidget {
   Widget build(BuildContext context) {
     final values = [
       _Stat('오늘 공부시간', learningDuration(today), AppTokens.info),
+      _Stat('이번 주 공부시간', learningDuration(week), const Color(0xFF176B4A)),
       _Stat(
         '누적 공부시간',
         allTime == null ? '조회 미연결' : learningDuration(allTime!),
         AppTokens.primaryInk,
       ),
-      _Stat('이번 주 공부시간', learningDuration(week), const Color(0xFF176B4A)),
     ];
     return LayoutBuilder(
       builder: (context, constraints) {
