@@ -1,5 +1,7 @@
 # TASK03-B — Owner approval candidate (NOT APPLIED)
 
+> 2026-11-11 후속: Owner 승인 범위가 운영 적용됐다. 아래는 승인 전 후보의 역사적 기록이다. [작업03-C 실제 적용·검증](../../../wiki/task03c-production-rollout-20261111.md)
+
 **Do not execute against production without Owner approval.**
 Scope: existing mixed-v2 schema/RPC extension, 443 keys / 11,170 questions / 1,029 new reference
 cutoffs. No Registry merges, no taxonomy writes, no actual student submissions, no Credit/Ledger/payment

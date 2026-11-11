@@ -1004,3 +1004,10 @@ Owner는 LegendStudy 자료를 활용한2025수능 잔여 검수·별칭/코드�
 승인용 SQL 준비를 지시했다. 미검증 과목은 NOT_READY, 기존 READY/ID/참조 보존,
 운영 DB/RPC 변경·스토어 제출 금지, 완료 후 별도 승인 요청이다.
 [검수 결과·운영 후보·미확정 분리](task03b-ready-candidate-20261111.md).
+
+
+## 2026-11-11 — 작업03-C 검증 범위 운영 적용 승인
+[03-B 결정](task03b-ready-candidate-20261111.md)을 이어 Owner는443키/11,170문항/1,029참고행과
+396READY과목 공개·운영 검증을 승인했다. PARTIAL12/NOT_READY9 제외, 기존2,457행/권한/원장 보존.
+검증용계정은 Owner 지정 review 계정이다. 실제JWT/기기 검증과 DBrole 검증을 구분한다.
+스토어 제출은 미승인. [운영 결과](task03c-production-rollout-20261111.md).

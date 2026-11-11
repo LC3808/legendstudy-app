@@ -36,6 +36,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+작업03-C 자동채점 운영 적용 / READY 공개 / 실기기 검수: [운영 결과·검증·보존·원복](task03c-production-rollout-20261111.md).
+
 APP67 학습 통합 / 학교 순위 / 친구 초대: [구현·계약·검증·운영 미적용·후속](app67-learning-integration-20261111.md).
 
 TASK20 건국·경희 자연 전체 문항 복구: [공식자료·실제12회·격리 적용/원복·운영 승인안](task20-priority-natural-connection-20261106.md).

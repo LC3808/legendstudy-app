@@ -40,23 +40,19 @@ WEB 운영/인수인계는 WEB 저장소가 소유하며 이 APP 브랜치에서
 [작업 전 기록](history/app67-learning-input-20261111.md#daily-sync-status)에 보존했다.
 11/8 이후 수집 운영 변경은 APP main의 별도 자료 동기화 작업이 소유하며 이 브랜치로 덮어쓰지 않는다.
 
-## 작업03-B — 자동채점 운영 후보 (PARTIAL · 승인 대기)
+## 작업03-C — 자동채점 운영 적용 완료 · 실기기 검수 진행
 
-[최신 검수·후보·미해결](task03b-ready-candidate-20261111.md) ·
-[적용/검증/원복 SQL](../supabase/candidates/task03b_ready_20261111/README.md) ·
-[이전03-A 증거](task03a-official-ready-20261111.md).
+[운영 결과·검증·남은 일](task03c-production-rollout-20261111.md) ·
+[검수 원본](task03b-ready-candidate-20261111.md) ·
+[SQL·원복](../supabase/candidates/task03b_ready_20261111/README.md).
 
-- 17시험417Registry 과목: **로컬 READY396 / PARTIAL12 / NOT_READY9**.
-  기존372과목/412표 보존 +2025수능24과목31형830문항 추가 →443표/11,170문항.
-- generic12행은 검증된 선택과목 상위묶음1:N. 병합/삭제/중복키 없음.
-  제2외국어·한문9과목 공식명/정답은 확인했으나 canonical코드 미확정으로 NOT_READY.
-- 원점수816·백분위304셀 전사 검수, 원문빈값160개 null. 공식 표준점수1,026사실 보존.
-  기존scalar계약으로 정확히 표시 가능한 참고1,029행 후보; 미만114·미배정3행 제외.
-  raw→공식등급 변환 없음. 기존2,457행 보존, 자동등급키 추가0.
-- 운영 읽기 검사: PG17.6, 키/문항/채점결과0건, 참고2,457행,417Registry 매핑 일치.
-  운영의 계정제한/잠금이 초기후보에서 빠진 점을 발견하여03-B 후보에 정확히 보존.
-- Flutter522 + 학습회귀120/analyze PASS, Python22 PASS.
-  격리PG:1,329실제자료 제출·동시중복·본인격리·계정제한·재적재·공개/원복 PASS.
-  대상스키마 계약 검사이며 운영전체 clone/실기기E2E와 구분한다.
-- 다음: Owner 승인 → 최신preflight/백업 →03-B SQL·검증자료 적재/공개 → 별도실기기.
-  **운영 DB/RPC 쓰기·WEB/APP 배포·스토어 제출0. APP67/검수APP71 보존.**
+- Owner 승인 범위 적용: migration20261111041154,443정답표/11,170문항/396READY과목/17시험 공개.
+  PARTIAL12·NOT_READY9 제외. 기존372READY 검수자료/417Registry 유지.
+- 참고1,029행 추가, 총3,486. 기존2,457행 전체행해시 동일. 자동등급키0, 등급 산출 불가 유지.
+- 실제 운영1,329RPC 점수·저장·재조회 검사 후ROLLBACK. review검수11건 별도보존,
+  동시중복1건·새ID재제출·다른계정DBrole 접근차단 PASS. 실제JWT E2E와 구분.
+- 실제 Flutter Repository 운영조회443표/과목396/시험17 + Guest MCQ/단답/전원정답 PASS.
+  기존 학습회귀100 PASS. 기존RLS정책동일·새security advisory0. Auth/원장/평가 변경없음.
+- APP67/71 보존. 내부APP72(1.0.2/72) 서명·iPhone 삭제 없는 설치/실행 PASS.
+  Owner 화면 검수 회신 대기, authenticated JWT 제출 E2E 미확인, 스토어제출0.
+- 다음: iOS 로그인 TEST 저장·재조회 실기기 확인, Android 별도검수. 미검증 과목 공개금지.

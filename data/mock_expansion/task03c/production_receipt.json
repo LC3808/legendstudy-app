@@ -1,0 +1,251 @@
+{
+  "rls": [
+    {
+      "name": "answer_key_versions",
+      "enabled": true
+    },
+    {
+      "name": "exam_questions",
+      "enabled": true
+    },
+    {
+      "name": "grade_cutoff_versions",
+      "enabled": true
+    },
+    {
+      "name": "mock_exam_attempts",
+      "enabled": true
+    },
+    {
+      "name": "mock_exam_answers",
+      "enabled": true
+    },
+    {
+      "name": "grade_cutoff_references",
+      "enabled": true
+    }
+  ],
+  "keys": 443,
+  "exams": 17,
+  "subjects": 396,
+  "migration": [
+    {
+      "name": "task03c_verified_mixed_scoring_engine",
+      "version": "20261111041154"
+    }
+  ],
+  "questions": 11170,
+  "checked_at": "2026-11-11T04:41:06.178745+00:00",
+  "references": 3486,
+  "anon_submit": false,
+  "auth_submit": true,
+  "test_attempts": [
+    {
+      "id": "0afbec76-8851-3db3-ee29-a7da2a33e123",
+      "key": "019ae03d-9969-5f2a-bcc9-dfebe1d27c91",
+      "grade": null,
+      "score": 100,
+      "maximum": 100,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:39:19.148521+00:00"
+    },
+    {
+      "id": "2e207e99-a3ff-c0e9-31be-8ea5272fc761",
+      "key": "019ae03d-9969-5f2a-bcc9-dfebe1d27c91",
+      "grade": null,
+      "score": 100,
+      "maximum": 100,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:53.607248+00:00"
+    },
+    {
+      "id": "40bc36fc-8707-abeb-41fa-f563fcc64d49",
+      "key": "009bc384-e241-57be-a64f-f9d23fb72ae3",
+      "grade": null,
+      "score": 50,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "4a9830a2-da69-f521-385f-68e8ea855c71",
+      "key": "375ccc2a-1095-5cbb-bb84-80b6a89bdaf2",
+      "grade": null,
+      "score": 2,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "7159d3df-3163-ce9f-af2c-1ca5f1764cb1",
+      "key": "019ae03d-9969-5f2a-bcc9-dfebe1d27c91",
+      "grade": null,
+      "score": 0,
+      "maximum": 100,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "7daad6e2-edef-a384-2900-17a50aac7ff4",
+      "key": "019ae03d-9969-5f2a-bcc9-dfebe1d27c91",
+      "grade": null,
+      "score": 100,
+      "maximum": 100,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "9e6a93ef-0316-6ef2-e60f-86fce92b50d5",
+      "key": "009bc384-e241-57be-a64f-f9d23fb72ae3",
+      "grade": null,
+      "score": 0,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "ba168eb3-6976-0cc4-e998-f68718f0f3e9",
+      "key": "375ccc2a-1095-5cbb-bb84-80b6a89bdaf2",
+      "grade": null,
+      "score": 2,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "d87fa437-e388-f29f-f1b7-dee31d068883",
+      "key": "009bc384-e241-57be-a64f-f9d23fb72ae3",
+      "grade": null,
+      "score": 0,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "e0ef2ce2-d1c6-5bd7-73a8-f24523e76ab0",
+      "key": "019ae03d-9969-5f2a-bcc9-dfebe1d27c91",
+      "grade": null,
+      "score": 0,
+      "maximum": 100,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    },
+    {
+      "id": "e566da65-6270-baef-c094-40859f674906",
+      "key": "375ccc2a-1095-5cbb-bb84-80b6a89bdaf2",
+      "grade": null,
+      "score": 50,
+      "maximum": 50,
+      "grade_status": "unavailable",
+      "submitted_at": "2026-11-11T04:38:33.676264+00:00"
+    }
+  ],
+  "other_attempts": 0,
+  "old_reference_count": 2457,
+  "old_reference_digest": "6e2db2a78ea3ca5a6856afb4f816b616",
+  "automatic_grade_versions": 0,
+  "baseline_commit": "0a6864b",
+  "new_security_findings": 0,
+  "policies_unchanged": true,
+  "production_vectors_rolled_back": 1329,
+  "test_account_label": "Owner-designated review account",
+  "store_submitted": false,
+  "authenticated_jwt_e2e": "NOT_TESTED",
+  "ios_device_e2e": "PENDING",
+  "android_device_e2e": "NOT_TESTED",
+  "live_flutter_repository_guest": "PASS",
+  "learning_regression_tests": 100,
+  "sql_hashes": {
+    "04_validate.sql": "4444d49f8ebc268e2fb00ad78874399dbec7129926ffc28fae98989ff30754bf",
+    "01_engine.sql": "1052ac6137cfe3d1335b14120914344848af36795d532f5cd27a35ad7f6a7f12",
+    "payload.sql": "7bebef6ea42a8bf8018165b0554f2782d6edc0344a1e4c18339641cb485f5eb3",
+    "check_complete.sql": "ca1196085c1adb47d0ea9a797ce9b43d4e2bb8c212e4a4b4468b9d50f789b0ce",
+    "00_preflight.sql": "fe45ddf57ac5d216121b7fb9ef270537afdcda8cd4b4c34a8427d918a300627e",
+    "03_publish.sql": "53ea63c242058638b74a449e3c3868f371a3601a4adc882daf215ac5ba44a623",
+    "05_rollback_visibility.sql": "3d6681c2e68a81983b04db596fd946c92c52ab7cd36e66a78a93d56339e5d508",
+    "02_seed_drafts.sql": "607a0245a57f29c2f7f94328629b3b80a3d1a231e3c3d80938ba39ddc1bdf767",
+    "check_staged.sql": "655fede91fc00f0a0032074487fdf179a33cff40b090dfb422c09d494fe23600"
+  },
+  "transport_hashes": {
+    "04_validate-expanded.sql": "99e75ed8e2e2df711ffbae8c4922d06f50d37b55f06f10c2ad1c4beac6fa84bc",
+    "03_publish-expanded.sql": "f0e381c7b87ad9088f509d85842d4d035976b98b7b6ff774c33f5c1a267500a0",
+    "02_seed_drafts-expanded.sql": "37f5030b7441522bce7d5fddd9774c80115f4906c57be653b9bdae986f31a54d"
+  },
+  "advisories": {
+    "before": [
+      {
+        "name": "rls_enabled_no_policy",
+        "count": 56
+      },
+      {
+        "name": "extension_in_public",
+        "count": 1
+      },
+      {
+        "name": "anon_security_definer_function_executable",
+        "count": 9
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "count": 151
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "count": 1
+      }
+    ],
+    "after": [
+      {
+        "name": "rls_enabled_no_policy",
+        "count": 56
+      },
+      {
+        "name": "extension_in_public",
+        "count": 1
+      },
+      {
+        "name": "anon_security_definer_function_executable",
+        "count": 9
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "count": 151
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "count": 1
+      }
+    ]
+  },
+  "keys_per_subject_distribution": {
+    "1": 353,
+    "2": 39,
+    "3": 4
+  },
+  "question_entries_include_elective_common_and_odd_even_duplicates": true,
+  "unaffected_function_definitions_preserved": 13,
+  "analyze": "PASS",
+  "wiki_check": "PASS",
+  "internal_ios": {
+    "version": "1.0.2",
+    "build": "72",
+    "bundle_id": "com.legendstudy.app",
+    "compiled_app_source_commit": "0a6864b",
+    "signed_verified": true,
+    "installed": true,
+    "launched": true,
+    "app71_preserved_framework_sha256": "529a7735c20c38425df67ff958a27998c60722671a7a48bdc42155701965a9e8",
+    "app72_framework_sha256": "b4eeee7f19c38b9d8e87b67db951612bf1d6b869a0da42ca3b17a613410f417f",
+    "artifact": "build/ios/iphoneos/Runner.app",
+    "device": "iPhone 12 Pro Max",
+    "owner_ui_verification": "PENDING"
+  },
+  "verification_log_hashes": {
+    "compact-local-test.log": "427a73dc5410443c807078fb218c5729e41bd6c725f89e1fdcb40a083a4a302a",
+    "flutter-live.log": "1ebfe434367dfa793b712fca43dc93c4556b99a9f993ef878631f776c67b89f4",
+    "learning-regression.log": "72a7aca24e07201665b592433c6fe06a3adc8bce0e4eec0a3658b44cd5dc65e4",
+    "analyze.log": "c9ad6948b6614e4314546a27779da8053c9e5adc9660741e33b07bd7a63fda4f",
+    "wiki-check.log": "6b6d3223c94ec4d226f6eb0a1c9e5be2d9cbdd880adbb5a9d7b34d032263903b",
+    "ios-build72.log": "26813de793dc705d6c0b93c0ea43c62b645a54b608bcf8bf779c197046d9b77a"
+  }
+}

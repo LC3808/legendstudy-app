@@ -5840,3 +5840,11 @@ Flutter504/학습회귀112/analyze/Python14 PASS. 운영 변경·앱 배포·스
 참고1,029행 후보·미만/미배정117사실 별도보존. 운영읽기만 수행, 실제계정제한 보존후보 보완.
 Flutter522/학습120/analyze/Python22/격리1,329저장·권한·중복·원복 PASS.
 운영DB/RPC 쓰기·배포·스토어0. [승인 범위·증거·재개](task03b-ready-candidate-20261111.md).
+
+
+## 2026-11-11 — 작업03-C 운영 SQL·검수자료 공개
+Owner 승인 후 최신preflight/백업→엔진→draft적재→exact검사→READY공개→postflight.
+443키/11,170문항/396과목/17시험, 참고1,029추가·기존2,457해시보존. 전송413은 값동일 compact SQL로 해결.
+운영RPC1,329검사ROLLBACK, review검수11건만보존·동시중복/재제출/RLS PASS. Flutter운영Guest 연결PASS,
+학습회귀100 PASS·analyze PASS. 신규security advisory0. APP72 서명/설치/실행 PASS, Owner 화면 검수 대기·스토어0.
+[결과·후속](task03c-production-rollout-20261111.md).
