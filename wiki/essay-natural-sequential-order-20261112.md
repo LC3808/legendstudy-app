@@ -1,5 +1,7 @@
 # 자연·수리 논술 대학별 순차 작업 — 최신 Owner 결정
 
+
+최신 공개 결과: [건국24](essay-konkuk-public-20261112.md), [경희7](essay-kyunghee-public-20261112.md) PUBLISHED. [성균관15](essay-sungkyunkwan-rights-hold-20261112.md)는 기존 PDF RIGHTS_HOLD 확인으로 별도 Owner 판단 필요. 아래 기술 단계 기록을 현재 운영 공개로 혼동하지 않는다.
 기록일2026-11-12. [최신 결정](decisions.md#2026-11-12--tech-ready-순차-연결-후-owner-통합-검수)이 이전 대학별 SERVICE READY/Owner 검수 대기 조건을 대체한다. **한 대학씩 TECH READY → 다음 대학 → 전체 REVIEW READY → Owner 통합 품질 검수 → 사용자 공개 승인** 순서다. 실제 품질 검수를 다음 대학 착수 조건으로 삼지 않는다. 기완료 대학 재작업·Provider 반복 호출·엔진 변경은 하지 않는다.
 
 ## 확정 순서와 현재 상태

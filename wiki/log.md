@@ -5963,3 +5963,5 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12: 경희3시험7문항92행 공개 사전116/격리21+7흐름·원복/WEB396 PASS, 과학12·기준미확인4제외. Owner 품질 검수와 분리. [적용 범위](essay-kyunghee-public-20261112.md).
 
 - 2026-11-12 02:49 KST: [경희7문항 공개 완료](essay-kyunghee-public-20261112.md),92행/ACTIVE28/Migration20261111174807/Pages532977a6.116/122/21·20보존snapshot·PDF3·일반계정7 PASS, WEB396/APP8. 과학12/기준미확인4 제외. 실제AI0, Mac잠금 UI NOT TESTED.
+
+- 2026-11-12: [성균관15 PDF RIGHTS_HOLD 확인](essay-sungkyunkwan-rights-hold-20261112.md). 기존20261022권리보류/15 PENDING 유지, 원본5 SHA확인·2026수리9문항 원문 이용조건·Storage4/5·일반조회0. 새공개/운영쓰기0, Owner 이용허락 범위 확인 필요. AI 품질 검수와 무관.
