@@ -207,7 +207,7 @@ void main() {
       );
       await t.pumpAndSettle();
       expect(find.text('홈에 표시할 카드를 선택해 주세요.'), findsOneWidget);
-      expect(find.text('홈 편집'), findsOneWidget);
+      expect(find.byTooltip('홈 편집'), findsOneWidget);
       expect(calls, 0);
     },
   );
@@ -236,7 +236,7 @@ void main() {
       );
       await t.pump();
       expect(requests, 0);
-      expect(find.text('홈 편집'), findsOneWidget);
+      expect(find.byTooltip('홈 편집'), findsOneWidget);
       settings.add(
         HomeConfigurationState(hidden, confirmed: true, exists: true),
       );

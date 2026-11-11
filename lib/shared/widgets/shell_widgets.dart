@@ -75,14 +75,16 @@ class AppHeader extends StatelessWidget {
 
 /// A semantic section title; surface grouping carries the visual boundary.
 class SectionHeader extends StatelessWidget {
-  const SectionHeader(this.title, {super.key});
+  const SectionHeader(
+    this.title, {
+    super.key,
+    this.topPadding = AppTokens.sectionGap,
+  });
   final String title;
+  final double topPadding;
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(
-      top: AppTokens.sectionGap,
-      bottom: AppTokens.space12,
-    ),
+    padding: EdgeInsets.only(top: topPadding, bottom: AppTokens.space12),
     child: Semantics(
       header: true,
       child: Text(

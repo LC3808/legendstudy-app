@@ -1,5 +1,7 @@
 # 작업04 확장 — 홈 커스터마이징·나의 대학 소식
 
+후속 [작업04-C](task04c-home-production-20261111.md): 수정 A는 Owner 승인 후 운영 적용 완료. 아래 사전 검토/기존 구현 기록은 당시 근거이며, C/D HOLD·실계정 검수 잔여는 유지한다.
+
 2026-11-11 · 개발 구현 DONE / 운영 연결 PARTIAL. 후속 [작업04-B 검토](task04b-production-preflight-20261111.md): 원본 SQL HOLD, 보완 A 승인 대기·C/D 보류. 별도 iPhone 오프라인 설치/실행만 확인, 실계정 기능 검수 NOT TESTED.
 Owner의 같은 날짜 확장 지시를 기존 [작업04 실제 지원](task04-applications-20261111.md)에 추가했다.
 APP75 기반 별도 `codex/task04-applications-app75`. 운영 DB/RPC/Auth/WEB/스토어/푸시/결제 변경0.

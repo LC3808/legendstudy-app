@@ -12,11 +12,10 @@ import '../../study/domain/study_models.dart';
 import '../../content/presentation/content_results.dart';
 import '../../notifications/presentation/notification_bell.dart';
 
-/// Trailing slot is reserved for a real notification entry once delivery exists.
-/// A non-interactive planned icon carries no unread count or delivery claim.
+/// Greeting with adjacent editing and notification actions.
 class HomeGreeting extends ConsumerWidget {
-  const HomeGreeting({super.key, this.notificationEntry});
-  final Widget? notificationEntry;
+  const HomeGreeting({super.key, this.notificationEntry, this.editEntry});
+  final Widget? notificationEntry, editEntry;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
@@ -42,6 +41,7 @@ class HomeGreeting extends ConsumerWidget {
               ),
             ),
           ),
+          if (editEntry != null) editEntry!,
           notificationEntry ?? const NotificationBell(),
         ],
       ),
@@ -92,7 +92,7 @@ class HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [SectionHeader(title), child],
+    children: [SectionHeader(title, topPadding: 0), child],
   );
 }
 

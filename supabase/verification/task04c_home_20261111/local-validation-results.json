@@ -1,0 +1,37 @@
+{
+  "focused": {
+    "counts": {
+      "success": 126
+    },
+    "log_sha256": "01db968a281b8193569ad8ff959a6eb0ab2ff6dbf4a503f7689c9d39f3d867e1"
+  },
+  "layout": {
+    "counts": {
+      "success": 4
+    },
+    "log_sha256": "f0d3c5485a26e29ffed116da31a55111ef3be238cffbffbfe6ac0a3fa9a1e0be"
+  },
+  "analyze": {
+    "result": "PASS",
+    "log_sha256": "aa8fdd124a374bdbd465cba44d7a2f29b0b79219a9267e378f6e7a9068fcec4d"
+  },
+  "ios_profile_unsigned": {
+    "result": "PASS",
+    "log_sha256": "f884b2f2711f71019510d295a5a5c466dd5ab26fbf246b19690a941cb615a6e6"
+  },
+  "android_debug": {
+    "result": "PASS",
+    "log_sha256": "2291692ce1f06d10760a66243bdc7728fcb47f98a093b336461e783549619d7d"
+  },
+  "wiki": {
+    "result": "PASS",
+    "log_sha256": "28b598a32412275dffcf1099c591c585c20b078320e693af428351a361301705"
+  },
+  "isolated_sql": {
+    "result": "PASS",
+    "log_sha256": "bb40f01bb339a683c126bf87132ed67cf662e43a821c94b7f408a5fc3673f8cd"
+  },
+  "device_install": "NOT TESTED in task04-C; APP75 not replaced",
+  "live_account_write_restore": "NOT TESTED",
+  "build_version": "1.0.2(76) local validation only, not a reserved/store release"
+}

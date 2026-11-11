@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../customization/home_configuration.dart';
 import '../customization/home_registry.dart';
@@ -18,19 +19,18 @@ class HomePage extends ConsumerWidget {
         configurationState.isLoading || ref.watch(authStateProvider).isLoading;
     final state = configurationState.asData?.value;
     final config = state?.configuration ?? HomeConfiguration.defaults();
-    final visible = config.cards.where(
-      (c) => c.visible && homeCards.any((d) => d.id == c.id),
-    );
+    final visible = config.cards
+        .where((c) => c.visible && homeCards.any((d) => d.id == c.id))
+        .toList();
     return ShellPage(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
       children: [
-        const HomeGreeting(),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton.icon(
+        HomeGreeting(
+          editEntry: IconButton(
+            key: const ValueKey('home-edit-action'),
+            tooltip: '홈 편집',
             onPressed: () => openHomeEditor(context),
-            icon: const Icon(Icons.tune, size: 18),
-            label: const Text('홈 편집'),
+            icon: const Icon(Icons.tune),
           ),
         ),
         if (loading)
@@ -43,13 +43,15 @@ class HomePage extends ConsumerWidget {
           ),
         ],
         if (!loading)
-          for (final card in visible)
+          for (final (index, card) in visible.indexed) ...[
+            if (index > 0) const SizedBox(height: AppTokens.space16),
             KeyedSubtree(
               key: ValueKey(card.id),
               child: homeCards
                   .firstWhere((d) => d.id == card.id)
                   .component(context),
             ),
+          ],
       ],
     );
   }

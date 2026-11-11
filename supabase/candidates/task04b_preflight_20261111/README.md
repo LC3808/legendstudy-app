@@ -1,5 +1,7 @@
 # 작업04-B 운영 적용 검토 패키지
 
+**후속:** 수정 A는 [작업04-C](../../../wiki/task04c-home-production-20261111.md)에서 승인·운영 적용됐다. 이 패키지는 승인 전 검토 근거이며 재실행 금지. C/D HOLD 유지.
+
 **운영 미적용. 원본 combined candidate는 HOLD.**
 기준 `codex/task04-applications-app75` / `37eb530737e1676379f1d5446ac7af2c74d5f4d3`.
 [검토·실기기·승인 범위](../../../wiki/task04b-production-preflight-20261111.md).

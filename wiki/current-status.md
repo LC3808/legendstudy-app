@@ -1,6 +1,6 @@
 # Current Status
 
-[작업04 실제 지원](task04-applications-20261111.md) · [홈 개인화·나의 대학 소식](task04-home-university-news-20261111.md): APP75 기반 별도 개발. Native 지원/홈 Registry·선택/편집·공식 소식 계약 구현. [작업04-B 사전 검토](task04b-production-preflight-20261111.md): 원본 홈 lifecycle 누락·소식 pagination 반례 재현. 보완 A만 승인 요청, C/D HOLD. 관련94 PASS·APP75 동일5FAIL 재현. iPhone 별도 오프라인 앱 설치/실행, APP75 보존. 실계정 동기화·Android 미검증. 운영 변경0.
+[작업04 실제 지원](task04-applications-20261111.md) · [홈 개인화·대학 소식](task04-home-university-news-20261111.md) · [작업04-C 운영 결과](task04c-home-production-20261111.md): Owner 제한 승인으로 수정 A table1/RPC2 운영 적용. 기존371함수/119정책·주요9개 table 데이터 지문 동일. pending3 차단, 실계정 저장/복원·ERASING 운영 검수 미완료. B 유지·C/D HOLD. 홈 편집을 알림 옆으로 이동, 카드 간격16dp. Flutter130 PASS/analyze0, 릴리스·스토어 변경0.
 
 ## APP67 학습 기능 통합 — 2026-11-11
 

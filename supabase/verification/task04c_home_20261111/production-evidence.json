@@ -1,0 +1,402 @@
+{
+  "base_sha": "ef228c253dc4934bc69bcd0b9d0629c9b4118546",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "migration": "20261111103058_task04c_home_configuration",
+  "approved_sql_sha256": "b45fe80cbd0dd302db53fb9242649758a681f530cd443545dbddb1378ac572b5",
+  "apply_start": {
+    "current_time": "2026-11-11 10:30:52 UTC"
+  },
+  "apply_end": {
+    "current_time": "2026-11-11 10:30:58 UTC"
+  },
+  "preflight": [
+    {
+      "preflight": {
+        "parents": [
+          {
+            "type": "uuid",
+            "table": "users",
+            "column": "id",
+            "schema": "auth"
+          },
+          {
+            "type": "uuid",
+            "table": "universities",
+            "column": "id",
+            "schema": "public"
+          },
+          {
+            "type": "text",
+            "table": "universities",
+            "column": "name",
+            "schema": "public"
+          }
+        ],
+        "lifecycle": [
+          {
+            "hash": "4bc4e4ef8067186bbfb20e6460070cd7",
+            "signature": "account_service_allowed()"
+          },
+          {
+            "hash": "5bb28e0026f17746239e4369a772a5ce",
+            "signature": "account_private.allowed(uuid)"
+          },
+          {
+            "hash": "e48a7203c22b570c80e65ed51a7d20c9",
+            "signature": "account_private.lock_subject(uuid)"
+          }
+        ],
+        "checked_at_kst": "2026-11-11 19:29:19",
+        "candidate_functions": [],
+        "candidate_relations": [],
+        "candidate_data_tables": [
+          {
+            "table": "public.profiles",
+            "estimated_rows": 522
+          },
+          {
+            "table": "public.study_sessions",
+            "estimated_rows": 65
+          },
+          {
+            "table": "public.day_targets",
+            "estimated_rows": 105
+          },
+          {
+            "table": "public.account_deletion_requests",
+            "estimated_rows": 3
+          },
+          {
+            "table": "public.math_scoring_criteria",
+            "estimated_rows": 547
+          },
+          {
+            "table": "public.student_applications",
+            "estimated_rows": 0
+          },
+          {
+            "table": "public.student_application_events",
+            "estimated_rows": 0
+          }
+        ],
+        "lifecycle_false_negative": 0,
+        "lifecycle_denied_existing": 3
+      }
+    }
+  ],
+  "before": {
+    "data": [
+      {
+        "name": "account_deletion_requests",
+        "rows": 3,
+        "digest": "aacf279040955c1a9c3cd0e2b1e8011d"
+      },
+      {
+        "name": "day_targets",
+        "rows": 105,
+        "digest": "f1f8dc95bcbad00aa3f20cf45dfc5191"
+      },
+      {
+        "name": "mock_exam_answers",
+        "rows": 405,
+        "digest": "d412e1138ea8905e8aea4c25feb52ff5"
+      },
+      {
+        "name": "mock_exam_attempts",
+        "rows": 15,
+        "digest": "fc5d447507164796371e43489b562efe"
+      },
+      {
+        "name": "profiles",
+        "rows": 522,
+        "digest": "a665f91f1eaa0f5ff96ce24611a78bc9"
+      },
+      {
+        "name": "student_application_events",
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      {
+        "name": "student_applications",
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      {
+        "name": "study_sessions",
+        "rows": 65,
+        "digest": "36ecdaf2ba1b3501f3b99747a7f4a484"
+      },
+      {
+        "name": "universities",
+        "rows": 53,
+        "digest": "3d5157a0310f51cc55cf0c61c7462c02"
+      }
+    ],
+    "tables": {
+      "count": 87,
+      "digest": "12ce4bccfcf26419bcee387a573ab080"
+    },
+    "policies": {
+      "count": 119,
+      "digest": "03fa2e6ffd5b44f29caf623097730f37"
+    },
+    "functions": {
+      "count": 371,
+      "digest": "9cfa8e1c1f9c5d2968cc1cc068b4365f"
+    },
+    "critical_rpcs": [
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "d27ad21f793fe4f951d3055d4c05d9ad",
+        "signature": "my_application_delete(uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "acc3526305dd6981d1ef85b834c9466c",
+        "signature": "my_application_event(uuid,text,timestamp with time zone,uuid,uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "5cc6659d757adf6aec8eb01f869812ac",
+        "signature": "my_application_events(uuid,integer)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "65edac758433cde4a123b95be3da42ee",
+        "signature": "my_application_save(uuid,integer,integer,uuid,text,text,text,uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "fcec97ef2cf3028a0843d25b7a2a1756",
+        "signature": "my_applications(integer)"
+      }
+    ],
+    "checked_at_kst": "2026-11-11 19:30:24"
+  },
+  "after": {
+    "data": [
+      {
+        "name": "account_deletion_requests",
+        "rows": 3,
+        "digest": "aacf279040955c1a9c3cd0e2b1e8011d"
+      },
+      {
+        "name": "day_targets",
+        "rows": 105,
+        "digest": "f1f8dc95bcbad00aa3f20cf45dfc5191"
+      },
+      {
+        "name": "mock_exam_answers",
+        "rows": 405,
+        "digest": "d412e1138ea8905e8aea4c25feb52ff5"
+      },
+      {
+        "name": "mock_exam_attempts",
+        "rows": 15,
+        "digest": "fc5d447507164796371e43489b562efe"
+      },
+      {
+        "name": "profiles",
+        "rows": 522,
+        "digest": "a665f91f1eaa0f5ff96ce24611a78bc9"
+      },
+      {
+        "name": "student_application_events",
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      {
+        "name": "student_applications",
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e"
+      },
+      {
+        "name": "study_sessions",
+        "rows": 65,
+        "digest": "36ecdaf2ba1b3501f3b99747a7f4a484"
+      },
+      {
+        "name": "universities",
+        "rows": 53,
+        "digest": "3d5157a0310f51cc55cf0c61c7462c02"
+      }
+    ],
+    "tables": {
+      "count": 87,
+      "digest": "12ce4bccfcf26419bcee387a573ab080"
+    },
+    "policies": {
+      "count": 119,
+      "digest": "03fa2e6ffd5b44f29caf623097730f37"
+    },
+    "functions": {
+      "count": 371,
+      "digest": "9cfa8e1c1f9c5d2968cc1cc068b4365f"
+    },
+    "critical_rpcs": [
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "d27ad21f793fe4f951d3055d4c05d9ad",
+        "signature": "my_application_delete(uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "acc3526305dd6981d1ef85b834c9466c",
+        "signature": "my_application_event(uuid,text,timestamp with time zone,uuid,uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "5cc6659d757adf6aec8eb01f869812ac",
+        "signature": "my_application_events(uuid,integer)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "65edac758433cde4a123b95be3da42ee",
+        "signature": "my_application_save(uuid,integer,integer,uuid,text,text,text,uuid)"
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}",
+        "hash": "fcec97ef2cf3028a0843d25b7a2a1756",
+        "signature": "my_applications(integer)"
+      }
+    ],
+    "checked_at_kst": "2026-11-11 19:31:47"
+  },
+  "verification": [
+    {
+      "verification": {
+        "rls": true,
+        "policy": [
+          {
+            "cmd": "SELECT",
+            "qual": "((user_id = ( SELECT auth.uid() AS uid)) AND ( SELECT account_service_allowed() AS account_service_allowed))",
+            "roles": [
+              "authenticated"
+            ],
+            "tablename": "home_configuration_revisions",
+            "permissive": "PERMISSIVE",
+            "policyname": "home_configuration_owner_read",
+            "schemaname": "public",
+            "with_check": null
+          }
+        ],
+        "functions": [
+          {
+            "acl": "{postgres=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+            "hash": "dd86b20e7ef547a061a67459f6252083",
+            "config": [
+              "search_path=\"\""
+            ],
+            "definer": true,
+            "signature": "my_home_configuration()",
+            "definition": "CREATE OR REPLACE FUNCTION public.my_home_configuration()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare v_result jsonb;\nbegin\n  if not account_private.allowed(auth.uid()) then raise insufficient_privilege; end if;\n  select jsonb_build_object('config_version', config_version, 'cards', cards, 'revision', revision, 'updated_at', updated_at) into v_result\n  from public.home_configuration_revisions where user_id = auth.uid() order by revision desc limit 1;\n  return v_result;\nend;\n$function$\n"
+          },
+          {
+            "acl": "{postgres=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+            "hash": "12d3286751b7bc9f11bdc1c9f2e0ff9e",
+            "config": [
+              "search_path=\"\""
+            ],
+            "definer": true,
+            "signature": "save_my_home_configuration(jsonb,bigint)",
+            "definition": "CREATE OR REPLACE FUNCTION public.save_my_home_configuration(p_config jsonb, p_revision bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare v_owner uuid := auth.uid(); v_current jsonb; v_card jsonb; v_ids text[] := '{}'; v_revision bigint;\nbegin\n  if v_owner is null then raise exception 'Authentication required' using errcode='28000'; end if;\n  -- Same lock order as the existing account lifecycle: subject, then home.\n  perform account_private.lock_subject(v_owner);\n  if not account_private.allowed(v_owner) then raise insufficient_privilege; end if;\n  if p_revision is null or p_revision < 0 or p_config is null or jsonb_typeof(p_config) <> 'object'\n    or p_config->>'config_version' is distinct from '1' or jsonb_typeof(p_config->'cards') is distinct from 'array'\n    then raise exception 'Invalid configuration' using errcode='22023'; end if;\n  if pg_column_size(p_config) > 65536 or jsonb_array_length(p_config->'cards') > 100 then raise exception 'Too many cards' using errcode='22023'; end if;\n  for v_card in select value from jsonb_array_elements(p_config->'cards') loop\n    if jsonb_typeof(v_card->'card_id') is distinct from 'string' or not (v_card->>'card_id' ~ '^[a-z][a-z0-9_]{0,79}$')\n      or jsonb_typeof(v_card->'visible') is distinct from 'boolean'\n      or jsonb_typeof(v_card->'display_order') is distinct from 'number'\n      or not (v_card->>'display_order' ~ '^[0-9]{1,3}$')\n      or (v_card->>'card_id') = any(v_ids)\n      then raise exception 'Invalid card' using errcode='22023'; end if;\n    v_ids := array_append(v_ids, v_card->>'card_id');\n  end loop;\n  perform pg_advisory_xact_lock(hashtextextended('home-configuration:' || v_owner::text, 0));\n  v_current := public.my_home_configuration();\n  v_revision := coalesce((v_current->>'revision')::bigint, 0);\n  -- A lost response can be retried safely without duplicating history.\n  if v_current is not null and v_current->'cards' = p_config->'cards' then return v_current; end if;\n  if v_revision <> p_revision then raise exception 'Configuration changed' using errcode='40001'; end if;\n  insert into public.home_configuration_revisions(user_id, revision, config_version, cards)\n    values(v_owner, v_revision + 1, 1, p_config->'cards');\n  return public.my_home_configuration();\nend;\n$function$\n"
+          }
+        ],
+        "home_rows": 0,
+        "migration": [
+          {
+            "name": "task04c_home_configuration",
+            "version": "20261111103058"
+          }
+        ],
+        "privileges": [
+          {
+            "role": "anon",
+            "delete": false,
+            "insert": false,
+            "select": false,
+            "update": false,
+            "read_rpc": false,
+            "save_rpc": false,
+            "truncate": false
+          },
+          {
+            "role": "authenticated",
+            "delete": false,
+            "insert": false,
+            "select": false,
+            "update": false,
+            "read_rpc": true,
+            "save_rpc": true,
+            "truncate": false
+          }
+        ],
+        "news_absent": true,
+        "invalid_rows": 0,
+        "checked_at_kst": "2026-11-11 19:31:29"
+      }
+    }
+  ],
+  "readonly_smoke": [
+    {
+      "result": "PASS: read-only DB-role smoke; existing blocked users denied; active read/shared application read valid; direct table/anon denied",
+      "blocked_states": {
+        "DELETION_PENDING": 3
+      },
+      "home_rows": 0
+    }
+  ],
+  "advisor_diff": [
+    {
+      "name": "rls_enabled_no_policy",
+      "count": 56,
+      "newFindings": [],
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "extension_in_public",
+      "count": 1,
+      "newFindings": [],
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public"
+    },
+    {
+      "name": "anon_security_definer_function_executable",
+      "count": 9,
+      "newFindings": [],
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable"
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "count": 153,
+      "newFindings": [
+        {
+          "metadata": {
+            "name": "my_home_configuration",
+            "schema": "public",
+            "language": "plpgsql",
+            "arguments": "",
+            "security_definer": true
+          },
+          "detail": "Function `public.my_home_configuration()` can be executed by the `authenticated` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/my_home_configuration`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional."
+        },
+        {
+          "metadata": {
+            "name": "save_my_home_configuration",
+            "schema": "public",
+            "language": "plpgsql",
+            "arguments": "p_config jsonb, p_revision bigint",
+            "security_definer": true
+          },
+          "detail": "Function `public.save_my_home_configuration(p_config jsonb, p_revision bigint)` can be executed by the `authenticated` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/save_my_home_configuration`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional."
+        }
+      ],
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "count": 1,
+      "newFindings": [],
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ]
+}

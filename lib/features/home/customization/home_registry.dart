@@ -47,8 +47,7 @@ final homeCards = <HomeCardDefinition>[
     '나의 공부 시간',
     '오늘의 공부 기록과 학습 시작',
     Icons.timer_outlined,
-    (_) =>
-        const Padding(padding: EdgeInsets.only(top: 8), child: HomeStudyCard()),
+    (_) => const HomeStudyCard(),
     ['studyController'],
     route: '/study',
   ),
@@ -57,8 +56,7 @@ final homeCards = <HomeCardDefinition>[
     '학교 급식',
     '등록한 학교의 급식 · 학교가 없으면 설정 안내',
     Icons.restaurant,
-    (_) =>
-        const Padding(padding: EdgeInsets.only(top: 8), child: HomeMealCard()),
+    (_) => const HomeMealCard(),
     ['schoolSelection', 'meals'],
   ),
   HomeCardDefinition(
@@ -134,10 +132,7 @@ final homeCards = <HomeCardDefinition>[
     '논술 LAB',
     '기존 논술 학습과 첨삭으로 이동',
     Icons.edit_note,
-    (_) => const Padding(
-      padding: EdgeInsets.only(top: 16),
-      child: LegendStudyLabEntry(),
-    ),
+    (_) => const LegendStudyLabEntry(),
     [],
     route: '/lab/essay',
   ),
@@ -151,13 +146,10 @@ final homeCards = <HomeCardDefinition>[
     availability: 'official-data-required',
   ),
 ];
-Widget _entry(BuildContext context, String title, String route) => Padding(
-  padding: const EdgeInsets.only(top: 16),
-  child: LsCard(
-    child: ListTile(
-      title: Text(title),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => context.push(route),
-    ),
+Widget _entry(BuildContext context, String title, String route) => LsCard(
+  child: ListTile(
+    title: Text(title),
+    trailing: const Icon(Icons.chevron_right),
+    onTap: () => context.push(route),
   ),
 );

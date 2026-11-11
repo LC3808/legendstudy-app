@@ -15,10 +15,8 @@ import 'university_news.dart';
 class UniversityNewsCard extends ConsumerWidget {
   const UniversityNewsCard({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) => const Padding(
-    padding: EdgeInsets.only(top: 16),
-    child: LsCard(child: _NewsBody(home: true)),
-  );
+  Widget build(BuildContext context, WidgetRef ref) =>
+      const LsCard(child: _NewsBody(home: true));
 }
 
 class UniversityNewsPage extends StatelessWidget {

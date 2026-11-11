@@ -1,3 +1,7 @@
+## 2026-11-11 — 작업04-C 홈 설정 제한 운영 적용
+
+[운영 영수증·UI·미검증](task04c-home-production-20261111.md). Owner 승인 수정 A만19:30:58 KST 적용(migration20261111103058). 기존371함수/119정책·9table1168행 지문 동일, pending3 read/save 거부. 실계정 저장/복원·ERASING 운영 검수 미완료. 홈 편집을 알림 옆으로 이동·카드 간격16dp, 회귀130PASS/analyze0. B 유지·C/D HOLD, WEB/릴리스/스토어 변경0.
+
 ## 2026-11-11 — 작업04-B 운영 사전 검토
 
 [SQL/RLS·APP75 비교·실기기·승인 범위](task04b-production-preflight-20261111.md). 원본 홈 lifecycle 누락·뉴스 snapshot 중복/누락 재현. 보완 A 후보 격리 검증 및 이력 보존 soft rollback PASS, C/D HOLD. 관련94 PASS/analyze0, 실제 APP75와 동일56PASS/5FAIL. iPhone12 별도 오프라인 앱 설치·실행·재실행/APP75 보존, Android 미연결. 운영 DB/WEB/릴리스/스토어 변경0.
