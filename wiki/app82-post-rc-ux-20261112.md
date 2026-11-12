@@ -1,5 +1,7 @@
 # APP82 Post-RC UI/UX 개선
 
+> 후속 Owner 승인으로 APP83 main 통합·빌드까지 완료했다. 최신 파일·검증·미실행 범위는 [APP83 인계](app83-store-handoff-20261112.md)를 따른다. 아래 HOLD/미승인은 당시 이력이며 신규 RPC 운영 적용은 여전히 미승인이다.
+
 ## 기준과 승인 경계
 
 Owner 원문(2026-11-12): APP82 v1.0.3/82, main `02977efc1aa0a61d4e9d261d9e089879b2fbfba5` 기반 학교 순위·개인 공부시간 백분위·스플래시·홈 순위·첫 홈 메뉴 가이드. `codex/app82-post-rc-ux-20261112`에서 구현한다. 기존 [APP82 서명 산출물](app82-store-handoff-20261113.md)은 SHA-256 대조/별도 로컬 보관 완료. main 병합·새 릴리스 빌드·스토어 제출은 후속 Owner 승인 대상이다. 운영 DB/Auth/RPC·기존 회원/기록·논술 엔진 변경 금지.

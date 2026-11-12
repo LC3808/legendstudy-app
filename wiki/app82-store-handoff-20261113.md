@@ -1,5 +1,7 @@
 # APP82 릴리스 결과·스토어 제출 전 인계
 
+> 후속 Owner 승인으로 APP83 main 통합·빌드까지 완료했다. 최신 파일·검증·미실행 범위는 [APP83 인계](app83-store-handoff-20261112.md)를 따른다. 아래 HOLD/미승인은 당시 이력이며 신규 RPC 운영 적용은 여전히 미승인이다.
+
 ## 승인과 범위
 
 Owner 승인 RC: `975b3c026960c6cf89ec67db43f222e3474ffb21`, 브랜치 `codex/app-release-rc-20261113`. [RC 기능별 커밋·APP75/78 대조·실기기 검증](app-release-rc-20261113.md)을 유지한다. 이번 단계는 main 통합/Push와 스토어용 빌드까지이며 업로드·심사 제출·게시를 수행하지 않는다. 운영 DB/RPC/Auth·WEB·기존 회원 데이터·Credit·논술 평가 엔진 변경0, 신규 기능0.

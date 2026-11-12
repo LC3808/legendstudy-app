@@ -1,3 +1,7 @@
+## 2026-11-12 — APP83 main 통합·서명 빌드·Owner 인계
+
+[APP83](app83-store-handoff-20261112.md): 중앙 스플래시6962c0f 포함, 원격main02977ef 보존 fast-forward→제품소스dbbb52e Push 확인. 1.0.3(83) IPA/AAB·버전/서명/공개설정 PASS. 전체2580 PASS/8 SKIP·Analyze·Python33·격리SQL71/42·JVM2 PASS. 신규RPC 미배포·기존TOP10 fallback 유지. Owner 최종 지시로 빌드/파일 인계까지만, 최종산출물 기기설치/스토어 업로드·제출0. 기존설치·사용자·APP82 산출물 보존.
+
 ## 2026-11-12 — Post-RC 중앙 스플래시 정정·iPhone 격리 검증
 
 Owner 현행3/1 임계·Android 시스템 중앙 배치 예외 승인. 후속 시각 검수로 스플래시 그룹 상단1/3을 중앙으로 정정(20dp/navy+ 유지). [후속 검증](app82-post-rc-ux-20261112.md#owner-후속-정정iphone-실기기-검증): 관련32/렌더2·Analyze PASS, iPhone17ProMax/iOS27.0.1 격리6항목 PASS. 별도QA 앱으로 검증 후 제거, 기존1.0.2(82) 설치본 경로/버전·APP82 IPA/AAB 해시 보존. Android 실물·운영RPC/live E2E NOT TESTED. 운영 변경·main통합·신규 릴리스 빌드0. 신규RPC2 적용 승인은 별도 대기.

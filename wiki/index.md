@@ -1,5 +1,7 @@
 # LegendStudy Wiki Index
 
+[APP83 최종 릴리스·main Push·IPA/AAB·Owner 업로드 인계](app83-store-handoff-20261112.md).
+
 [과거 APP67 검수·당시 출시 보류 이력](app67-essay-admission-20261106.md) — 최신 APP 릴리스 판단은 아래 APP82 인계 문서를 따른다.
 
 [APP82 Owner 승인·main 통합·스토어 빌드 인계](app82-store-handoff-20261113.md) · 업로드/심사 제출 전 결과 확인.
@@ -35,6 +37,8 @@ Newest explicit Owner decisions supersede historical scope; record exact scope,
 not an inferred promotion of a whole roadmap. Current is not historical evidence.
 
 ## Task Routing Map
+
+APP83 / 최종 빌드 / 1.0.3(83) / 스토어 업데이트: [소스·검증·서명·파일 위치·RPC 미활성](app83-store-handoff-20261112.md).
 
 APP82 Post-RC / 학교 순위·개인 백분위·중앙 스플래시·첫 홈 가이드: [구현·iPhone 격리 검증·운영 승인 후보](app82-post-rc-ux-20261112.md).
 
