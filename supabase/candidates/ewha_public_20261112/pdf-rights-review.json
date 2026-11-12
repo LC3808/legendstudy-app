@@ -1,0 +1,491 @@
+{
+  "scope": "21 admission problem PDFs + 21 internal solution/rubric PDFs; mock 24 questions excluded",
+  "reviewedOriginalFiles": 42,
+  "allPagesTextReviewed": true,
+  "firstPagesVisuallyReviewed": 42,
+  "explicitRestrictionFound": 0,
+  "userPublicationAuthorization": "Owner authorized operating connection and public access of 63 official-rubric questions on 2026-11-12; known per-question PDF rights problems must remain isolated",
+  "limits": "No embedded restriction found is not an independent legal license determination. Original PDF bytes are preserved. Only 21 question-only PDFs enter the student viewer; all solution/rubric originals stay internal.",
+  "files": [
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "2b1eca967ca222ecc567d0bafab1537ec19727f584735a6d16da6816daafa5f8",
+      "pages": 5,
+      "exam_id": "14dbab04-aff0-592d-9c6a-3de8b91b2161",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "3f81a073613966e8cedb6b8e7bd62a705b8028d8e4a565ab71c3b9dcdd5ae11d",
+      "pages": 10,
+      "exam_id": "14dbab04-aff0-592d-9c6a-3de8b91b2161",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "c7ad3a4da5ab95f21af36b4a19a4c1199df43728d94301fde85d064ea09cdac2",
+      "pages": 5,
+      "exam_id": "bceb58d6-b237-5b62-86a0-dd7bb7f248bb",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "a358107fa0bd00ff0d8125a4d68c3fbdff5e2e89a05f622e9bd3f5a87c750a9f",
+      "pages": 13,
+      "exam_id": "bceb58d6-b237-5b62-86a0-dd7bb7f248bb",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "104687f5018623d61db75e932f7c582f1fa873a361613e9eb8984021dff64522",
+      "pages": 5,
+      "exam_id": "2d10f32f-4e2c-5889-9f4a-289bb6cecf29",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "742ebdcda290227af55211182fe55a74d06160a9f57d4be3496448c02b696e72",
+      "pages": 20,
+      "exam_id": "2d10f32f-4e2c-5889-9f4a-289bb6cecf29",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "e5d614083b9005439e0d7dc8f83117b3f4064d2eca78b7b7d0ab825638848b88",
+      "pages": 4,
+      "exam_id": "643a3669-4a68-5440-aa7e-4eb96df875dd",
+      "role": "problem",
+      "hits": [
+        {
+          "page": 2,
+          "line": "전의 형이상학 ― 원본과 복제, 대상과 표상, 실재와 사유의 일치 ― 을 전제한다면, 원본이 없는 복제인 상사성은 근대적"
+        },
+        {
+          "page": 2,
+          "line": "음이 있어도 그 닮음은 유사성, 즉 모델과 복제 사이의 닮음이 아니라, 원본 없는 복제들 사이의 닮음이 된다."
+        }
+      ],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "philosophical source passage: reproduction is content, not a license condition",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "bee82082dae473ec3e9a15923458217b81b7c6db734ee75ee8ed36e68818d175",
+      "pages": 10,
+      "exam_id": "643a3669-4a68-5440-aa7e-4eb96df875dd",
+      "role": "solution",
+      "hits": [
+        {
+          "page": 4,
+          "line": "제시문 [다]에서는 원본을 전제로 가까움을 추구하는 유사성과 원본이 없는 복제인 상사"
+        },
+        {
+          "page": 4,
+          "line": "기서는 닮음이 있다고 하더라도 원본이 없는 복제들 사이의 닮음이다."
+        }
+      ],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "philosophical source passage: reproduction is content, not a license condition",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "339b9ecf28064493aff99973ffea907fc4f09c406ff79777c157f7dcc1c39a1b",
+      "pages": 4,
+      "exam_id": "dc67a4fe-3e62-5b89-bee1-fa6d1ea31591",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "4e8b4b308c1cf8ef60a3f18e0f065b1266c0065e61511404dfc2d70d1d4a4ebb",
+      "pages": 11,
+      "exam_id": "dc67a4fe-3e62-5b89-bee1-fa6d1ea31591",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "f32a5c8d98e646c63af03b7d9b31212bb330f216e9f429fd965f02aec3517649",
+      "pages": 4,
+      "exam_id": "ec8491a2-b96d-5e0f-9e93-b63a95f9bf33",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "9743449288d1dc8b898f9a10f63cf701d83570d8890a9c9ceaa572542e1f2fdd",
+      "pages": 18,
+      "exam_id": "ec8491a2-b96d-5e0f-9e93-b63a95f9bf33",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "a05ee31e407504f6e308bdc0b736a24d71c8d99bc912392a9de3000f4b95928b",
+      "pages": 6,
+      "exam_id": "e57a30ce-2c9d-540b-83aa-8a6d4ee22526",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "a90caafb5ede729d7b79bc62c9370fdd2270658d6d7982319855bc1956912bc5",
+      "pages": 10,
+      "exam_id": "e57a30ce-2c9d-540b-83aa-8a6d4ee22526",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "91c3be977c7da371aad75ff98b3d781f3c136f7dd6e37c10a1ef6ba2fb309001",
+      "pages": 5,
+      "exam_id": "6a83e460-dde4-587c-9a27-3ad84c005610",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "fe44fdf81802bb74ca997a0662c39c566e33832f4aa1dcca4a898c1c8e37069b",
+      "pages": 11,
+      "exam_id": "6a83e460-dde4-587c-9a27-3ad84c005610",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "7090a647f86765f510064f4108854fb915ee24569f09591670f0dd31bfe43026",
+      "pages": 5,
+      "exam_id": "b4c9f56b-556a-5a5a-932f-2f1933459e20",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "46b0da709224045798ba340e68e022050f98582f61f16ed68bf34aa6192c7e4b",
+      "pages": 21,
+      "exam_id": "b4c9f56b-556a-5a5a-932f-2f1933459e20",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "0ae894a300d6331d1f349db967299e1e781a66b75a487caa5c01af4c1a722cd3",
+      "pages": 5,
+      "exam_id": "af986ccc-3580-541b-95fb-4a2cbb02ea1c",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "e954bb88f708880887ec7b94933e080a0e8d68e9948bce241d9d1873d15f844f",
+      "pages": 10,
+      "exam_id": "af986ccc-3580-541b-95fb-4a2cbb02ea1c",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "b1ada3da85433375bac309a28d7286fc7552868da7b8a58726ee969415d6ed44",
+      "pages": 5,
+      "exam_id": "c7eb6525-ab80-5013-bac5-5c0628567263",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열2 해설,답안.pdf",
+      "sha256": "61aefe456e31e36debd90fd15b74cfe2125f05a6b3fc0670e19d9f5db9f1bdbc",
+      "pages": 10,
+      "exam_id": "c7eb6525-ab80-5013-bac5-5c0628567263",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "1be81f39d2843be0a32b8bd4a611adc1d71469f062a29a9ef256881e760f2a93",
+      "pages": 5,
+      "exam_id": "81855888-e7f7-578d-93e5-f6e70e224dab",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "2524f06fa41d9f0aaae9487aa9c5cc654eae29d228afd6888fb1a9a1de372e46",
+      "pages": 17,
+      "exam_id": "81855888-e7f7-578d-93e5-f6e70e224dab",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "1f095178815c31bd71c72e1b5b80ca9066925dbaa301bbd277b8565a4c23e452",
+      "pages": 5,
+      "exam_id": "24391507-6a12-5e32-aa3f-337343ccb02e",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열2 해설,답안.pdf",
+      "sha256": "7113760f01605ed91ed2b671d81c48e796cc94684216e6b7371e22c6dc2c5e30",
+      "pages": 16,
+      "exam_id": "24391507-6a12-5e32-aa3f-337343ccb02e",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "f38c1c87e9e53b8d69a859f18653d0e3ec1dae8cec307ed6831c482c8a3df7ae",
+      "pages": 5,
+      "exam_id": "c9eb2d4f-25c2-5bc0-a307-e324764286cd",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "0ec70589f4c0973635558bb3efe04b1551e25397e4265e33ffa860dd49f9e032",
+      "pages": 9,
+      "exam_id": "c9eb2d4f-25c2-5bc0-a307-e324764286cd",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "f974f09e265f0db415966e2993883ee8dc8b307ff38b2cdd9a190e73b6b40793",
+      "pages": 5,
+      "exam_id": "99364190-42b9-5cd2-8ca8-22e9c430f238",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열2 해설,답안.pdf",
+      "sha256": "2083de85285a98340a2fe1a2b5aebd1a0e029aee208955d29f36130936a01d2b",
+      "pages": 11,
+      "exam_id": "99364190-42b9-5cd2-8ca8-22e9c430f238",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "a053335bd059c25e0aea302b82c05cf14bbfb07bb571c234331fc42a7bca52c5",
+      "pages": 5,
+      "exam_id": "445b836b-09f3-5e8e-b815-264295e04c72",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "b9296bbf9fd5edc74fb7adc4bdcde9bd6bfb944d2521536189c0d07c6745adef",
+      "pages": 12,
+      "exam_id": "445b836b-09f3-5e8e-b815-264295e04c72",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "334f4f6ef04704f6443fa7a017747607cce5fdff1b41ce10b432021338a0c8f8",
+      "pages": 5,
+      "exam_id": "905eeb7c-b915-5396-b381-ce13aa47a732",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열2 해설답안.pdf",
+      "sha256": "0e7f9640c715cbb6558ac4a4eab1c2b7d30a648a0b94ca31cb21923adb6acd1e",
+      "pages": 13,
+      "exam_id": "905eeb7c-b915-5396-b381-ce13aa47a732",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "aae4f0ab38da6e1808154014e084d683980702887d663c0b9ee4076e974de3d9",
+      "pages": 5,
+      "exam_id": "9d291a8c-c5fb-5abf-961f-3081b052509e",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "a538b88a603d44b9401c12e1db5a614a3d24dd0ee12089247c595853848ce141",
+      "pages": 12,
+      "exam_id": "9d291a8c-c5fb-5abf-961f-3081b052509e",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "eef683099cafa3d1ca8a4de16cfad5bbd1ad66eacbcc905bfdff7e140f43ca59",
+      "pages": 5,
+      "exam_id": "1ca30c16-af49-5310-b95c-2513d847b362",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열 해설,답안.pdf",
+      "sha256": "25ffcd727f6fec06fe4aa31f86e250fc09572b605fd45933fa51dae0c9494f1c",
+      "pages": 11,
+      "exam_id": "1ca30c16-af49-5310-b95c-2513d847b362",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "1b4a08e94c7b14042382f4a594c98b10bc7d86bf19f9787bb030e61833a4fb51",
+      "pages": 5,
+      "exam_id": "28d0625d-312c-52eb-b162-057569b9b783",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "a35deed47305bae7b32326a7aed2285e69e18da4c09cc86e419a70ef3ddcc7de",
+      "pages": 18,
+      "exam_id": "28d0625d-312c-52eb-b162-057569b9b783",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "2da18389ca27eae1b040eab013c055042f846380181283b54cd8e0ce6a0326c6",
+      "pages": 5,
+      "exam_id": "9b828531-7201-582e-98f7-23df50f412d9",
+      "role": "problem",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열2 해설,답안.pdf",
+      "sha256": "d511741d3889474cc80af421bef8b91c76aefc752c7953bc696d97957a7b1e73",
+      "pages": 15,
+      "exam_id": "9b828531-7201-582e-98f7-23df50f412d9",
+      "role": "solution",
+      "hits": [],
+      "explicit_restriction_found": false,
+      "text_keyword_disposition": "no restriction keyword hit",
+      "cover_visual_review": "no explicit restriction on rendered first page"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "active",
+    "pending",
+    "erasing",
+    "unknown",
+    "no_uid",
+    "anon"
+  ],
+  "wrong_bucket_and_file_denied": true,
+  "rollback_access_revoked": true,
+  "objects_preserved": true,
+  "provider_calls": 0
+}

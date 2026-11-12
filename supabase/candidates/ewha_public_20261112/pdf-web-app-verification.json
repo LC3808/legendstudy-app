@@ -1,0 +1,93 @@
+{
+  "baselineWebHead": "aaeb700",
+  "status": "CONTRACT_VERIFIED_NOT_BROWSER_OR_DEVICE_VERIFIED",
+  "catalogPreservation": [
+    {
+      "path": "src/data/essay-source-registry.json",
+      "preservedExistingRows": 160,
+      "addedRows": 21,
+      "allExistingFieldsUnchanged": true
+    },
+    {
+      "path": "src/data/essay-beta-expansion.json",
+      "preservedExistingRows": 164,
+      "addedRows": 21,
+      "allExistingFieldsUnchanged": true
+    },
+    {
+      "path": "src/data/essay-student-pdf-candidates.json",
+      "preservedExistingRows": 1085,
+      "addedRows": 63,
+      "allExistingFieldsUnchanged": true
+    }
+  ],
+  "webTests": {
+    "passed": 1965,
+    "failed": 10,
+    "skipped": 5,
+    "total": 1980,
+    "newFailures": 0,
+    "baselineFailureReproduction": {
+      "head": "aaeb700",
+      "sameDependencyTree": true,
+      "testFiles": 3,
+      "failed": 10,
+      "sameFailureNames": true,
+      "sameUnhandledAdminMsError": true
+    },
+    "existingFailedCases": [
+      "src/components/admin/admin-analytics.test.tsx > integrated analytics read-only surface > keeps missing RPC distinct from zero and reuses existing quality routes",
+      "src/components/admin/admin-analytics.test.tsx > integrated analytics read-only surface > unmounts private reports on logout",
+      "src/components/admin/admin-console.test.tsx > AdminDashboardView > renders observed metrics and marks an uninstalled subsystem",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > lists a member and opens the detail with credit history",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > loads a bounded directory immediately with total count and school names",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > passes search, status, grade, sort and server offsets without filtering page rows",
+      "src/components/essay-beta-credit.test.tsx > inactive campaign never promises a free allowance",
+      "src/components/essay-beta-credit.test.tsx > same-user auth refresh keeps the first-entry introduction open",
+      "src/components/essay-beta-credit.test.tsx > start is read-only, hide preference does not hide the allowance",
+      "src/components/essay-beta-credit.test.tsx > start rechecks and never claims an exhausted allowance"
+    ]
+  },
+  "appTests": {
+    "passed": 3,
+    "originalBytesVerified": 21,
+    "questionPdfDtoRoundtrips": 63,
+    "duplicateAndMalformedManifestRejected": true
+  },
+  "typescript": "PASS",
+  "nextBuild": {
+    "webpack": "PASS",
+    "turbopack": "ENVIRONMENT_FAILURE_existing_external_node_modules_symlink"
+  },
+  "pagesFunctionsCompile": "PASS",
+  "preservationPlan": {
+    "sha": "aaeb700b5c40cd329faa444ac7feaa2c2ea59043",
+    "counts": {
+      "ESSAY_PUBLIC_EXAMS": [
+        334,
+        355
+      ],
+      "ESSAY_BETA_EXPANSION_EXAMS": [
+        164,
+        185
+      ],
+      "MATH_PUBLIC_LEAVES": [
+        393,
+        420
+      ]
+    },
+    "preservedStaticAssets": 2195,
+    "previous": "844798cb-e04b-4f2c-82ec-16fc45cc200a",
+    "scope": "Ewha 21 exams / 63 questions / 27 Math leaves; existing static assets, APIs and private bindings preserved",
+    "api_source": "aaeb700b5c40cd329faa444ac7feaa2c2ea59043",
+    "worker_sha256": "74b6dc3a7071342638b8e3844c9bbfa62d9b2b987d78fbfd015980b1fe2b31a3",
+    "only_three_plaintext_scopes_changed": true,
+    "changedAssetCount": 461
+  },
+  "browserUI": "NOT TESTED",
+  "iPhone": "NOT TESTED",
+  "Android": "NOT TESTED",
+  "providerCalls": 0,
+  "aiQualityReview": "NOT TESTED_OWNER",
+  "deploymentExecuted": false
+}

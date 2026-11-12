@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source": "exact production multipart source to preserved worker-stage",
+  "modules": 73,
+  "preserved_modules": 71,
+  "changed_modules": [
+    "registry_asset.py",
+    "essay_lab/material_runtime.py"
+  ],
+  "syntax_checked_python_files": 47,
+  "stage_package_ready": 36,
+  "module_mime_counts": {
+    "text/x-python": 28,
+    "application/octet-stream": 44,
+    "application/javascript+module": 1
+  },
+  "dry_run": "Wrangler 4.136.1 Node22 local deploy --dry-run PASS; 73 modules; 726.65KiB total / 158.18KiB gzip",
+  "sdk_preservation": "all python_modules source bytes unchanged; vendor .py uses octet-stream",
+  "provider_calls": 0,
+  "production_writes": 0
+}

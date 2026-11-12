@@ -96,8 +96,8 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
             require(type(image['data']) is str and len(image['data'])<=8_000_000,'OFFICIAL_IMAGE_LIMIT')
             require(type(image['startPage']) is int and type(image['endPage']) is int and 1<=image['startPage']<=image['endPage'],'INVALID_PAGE_RANGE')
             matches=[e['binding']['id'] for e in evidence
-                     if e['binding']['hash']==image['sourceHash'] and e['binding']['role'] in ('question','passage')
-                     and any(m['role'] in ('question','shared_passage') and m['sourceHash']==image['sourceHash']
+                     if e['binding']['hash']==image['sourceHash'] and e['binding']['role'] in ('question','passage','exam_intent','scoring_criteria')
+                     and any(ROLE.get(m['role'])==e['binding']['role'] and m['sourceHash']==image['sourceHash']
                              and m['startPage']<=image['startPage'] and m['endPage']>=image['endPage']
                              and e['binding']['locator']==f"PDF {m['startPage']}-{m['endPage']}" for m in mappings)]
             require(matches,'FOREIGN_OFFICIAL_IMAGE')
