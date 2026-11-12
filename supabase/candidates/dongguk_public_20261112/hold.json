@@ -1,0 +1,18 @@
+{
+  "question_id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+  "exam_id": "324dbf82-b4bc-5607-977b-2cf512812212",
+  "registry_key": "source:dongguk-2026-mock-natural:q1",
+  "status": "HOLD_OFFICIAL_CORRECTION",
+  "source": "https://ipsi.dongguk.edu/admission/html/counsel/dataView.asp?BOARD_IDX=34784",
+  "problem_url": "https://ipsi.dongguk.edu/upload/file/20250704164740DUSCBA.PDF",
+  "corrected_source_url": "https://ipsi.dongguk.edu/upload/file/20250822131429MDPC5L.HWP",
+  "old_reference_sha256": "4a945d64bdb2338a2749db7f17b49cbea48712112cfaa4d07de1963ef22e2393",
+  "corrected_hwp_sha256": "7843457d01caaac1e5e7f560b39197e632988cbbbfc750ffa603c9656d141df1",
+  "old_equation": "x^2/4 + y^2 = 1",
+  "official_corrected_equation": "x^2 + 4y^2 = 1",
+  "old_area": "3 sqrt(3) / 2",
+  "official_corrected_area": "3 sqrt(3) / 8",
+  "resolution": "Replace only Q1 evidence from the verified official correction, validate formula rendering and existing Worker contract; no model quality judgment. Existing candidate left unchanged; not loaded or activated.",
+  "year_verification": "2025 calendar-year execution, 2026 admission year; original problem SHA exact official download; Registry unchanged",
+  "converter": "LibreOffice did not parse HWP correctly; output rejected. HWP structured paragraphs/equation records inspected with olefile0.47; no converted PDF used in service"
+}

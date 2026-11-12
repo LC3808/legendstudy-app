@@ -70,3 +70,5 @@
 Git: WEB 배포소스 `cf59c6207cdcd287993aa7949aa3e74d341670cf`, APP 사전검증 `d114d23`. 최종 증빙·Wiki 커밋은 이 문서를 포함하는 Git 커밋 및 완료 보고 HEAD를 참조한다.
 
 [최종 영수증](../supabase/candidates/sookmyung_public_20261112/final-release.json) · [운영 목록 검증](../supabase/candidates/sookmyung_public_20261112/browse-production-verification.json) · [WEB 공개 검증](../supabase/candidates/sookmyung_public_20261112/web-production-receipt.json) · [목록 적용 SQL](../supabase/candidates/sookmyung_public_20261112/browse-open.sql) · [목록 롤백](../supabase/candidates/sookmyung_public_20261112/browse-rollback.sql).
+
+Owner 후속 확인: 숙명16시험44문항 **DONE**, 기존6문항·사용자기록 보존. 다음 동국 운영 연결·공개 승인.

@@ -1,0 +1,71 @@
+{
+  "exams": [
+    "0fa138ec-e8a0-56a6-b241-4c883c86eacc",
+    "324dbf82-b4bc-5607-977b-2cf512812212",
+    "3b9a5530-3362-5223-94f1-04922e6f5d11",
+    "627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c",
+    "81f8d0b3-6751-542e-913e-b4169a247de6",
+    "8871c481-f6e2-5f87-b3c8-45c042f6a775",
+    "f5f512ab-79d1-50f9-8d79-039393226b00"
+  ],
+  "questions": [
+    "0911229c-eb20-5831-a3a0-1a625a54489f",
+    "0e89f48c-26ca-5bb1-9b82-b55633783017",
+    "1dbd7967-f712-5185-aa8e-3656349706a4",
+    "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+    "24571e32-f295-5c2e-b69a-51f5138dbf35",
+    "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+    "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51",
+    "48836643-ef6b-5777-9b53-4a76342ec189",
+    "62d29f41-9b3b-5861-be1f-608133203bb3",
+    "67388db9-9a5d-54a3-ace4-5ab35375105f",
+    "6f4ac3f6-da5b-538c-a2f4-8376a942512e",
+    "73f883bd-0e9d-51b3-a043-4c41f64544b1",
+    "95c1ec51-efa3-5f34-996a-192e6080271b",
+    "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+    "b3c4b57d-b178-50ab-be64-3b939967fe82",
+    "d0add313-5092-5acf-8882-065f29817c9b",
+    "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453",
+    "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+    "e494e7c5-b83e-5863-9aba-bc4da33d41b2",
+    "f2172ac5-f197-5a4f-a2a8-2452f094b5d0"
+  ],
+  "leaves": [
+    "057e0ce4-7210-53df-9a8f-bf0ea6396266",
+    "eb3f1439-a063-5b20-b0c8-614cb3d2636d",
+    "808ee1b8-f48b-5451-946c-3d3da0a2d5b3",
+    "da5f3769-13f3-5e0e-8bc7-bb66296c40e2",
+    "606c1403-7d40-5810-9ec3-6edbd6d0aaed",
+    "640b7fb7-4ffc-5ed2-90a1-9c14554ff616",
+    "dc5ec9ad-9415-52d2-b081-ffd89bacd06f",
+    "75dedf21-043d-5cb7-b45f-c32c88685c54",
+    "279a0ca3-b243-55f3-8d80-f197f6c5770e",
+    "74dd7008-780c-5d4a-8ecd-c18b41cb166d",
+    "f0dbfd4c-639b-5169-b796-131aa82e9f4c",
+    "d59e3374-efb3-5a59-8cde-429931a6f30d",
+    "e2e344de-3ccc-5cb7-8ffe-f93150c27d49",
+    "7b3cbb83-f811-51ec-96dc-06ae66b17b4b",
+    "8ae684b6-e8a9-5d41-a1ac-0ea134e358b2",
+    "c0d29411-ec29-528b-82cc-16fb9ca36e75",
+    "56fedee5-641f-50a3-8c31-7ca9bcd72a5d",
+    "012854d9-297f-5aa0-88f6-459670001ed1",
+    "18d34967-37b8-568f-929e-5a01f3e6bd78",
+    "030b7cc4-a731-5142-b0a5-93b705d34b3e"
+  ],
+  "new_rows": 273,
+  "active_state_rows": 80,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before": "87a58e5db9d35dfafd2fbb5a4dcf9092",
+      "after": "a8bb5430a4748abb16db97e6711af50f"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before": "cca8a3d912dad59dc60ada1fdb82d16b",
+      "after": "75cebee0cfffc38059cb4c12dd193cd3"
+    }
+  ],
+  "draft_sql_sha256": "e3360e0501c2f8b04b9e0297fccb04ce534a516413cfffd7c9faa5de7a061008",
+  "activate_sql_sha256": "5734e9efe4d4ba8a9dc26f9ca97ae56ea02708137f64eb9da14a635356378560"
+}

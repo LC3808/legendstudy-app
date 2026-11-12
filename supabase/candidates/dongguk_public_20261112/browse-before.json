@@ -1,0 +1,398 @@
+{
+  "function": {
+    "digest": "8f827314118d114578e23f8712fe1931",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}"
+  },
+  "rows": [
+    {
+      "kind": "mock",
+      "year": 2027,
+      "title": "동국대학교 2027학년도 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "87058efb-35ef-54a8-b945-ba7e578aea7f",
+      "questions": [
+        {
+          "id": "061ea301-cf32-5b4f-9119-7fbf4d4996fc",
+          "label": "문제 1"
+        },
+        {
+          "id": "55b3c565-4754-5fd2-88c7-0998ef52cac9",
+          "label": "문제 2"
+        },
+        {
+          "id": "02679494-6ee7-58f6-9dae-8169453d5ded",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2027,
+      "title": "동국대학교 2027학년도 모의논술 자연계열",
+      "track": "자연계열",
+      "examId": "81f8d0b3-6751-542e-913e-b4169a247de6",
+      "questions": [
+        {
+          "id": "1e509ee9-7a77-5c64-b4b5-3553d853b35e",
+          "label": "문제 1"
+        },
+        {
+          "id": "95c1ec51-efa3-5f34-996a-192e6080271b",
+          "label": "문제 2"
+        },
+        {
+          "id": "62d29f41-9b3b-5861-be1f-608133203bb3",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2026,
+      "title": "동국대학교 2026학년도 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "f747473a-7700-5abd-8de9-a066654ab3b5",
+      "questions": [
+        {
+          "id": "d4fa36b1-c77b-5f25-b366-ad1017436713",
+          "label": "문제 1"
+        },
+        {
+          "id": "3796715a-0714-5065-aac0-014b54a14f48",
+          "label": "문제 2"
+        },
+        {
+          "id": "dcb0bfe6-e8c2-5e00-9835-2c1b353016cc",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2026,
+      "title": "동국대학교 2026학년도 모의논술 자연계열",
+      "track": "자연계열",
+      "examId": "324dbf82-b4bc-5607-977b-2cf512812212",
+      "questions": [
+        {
+          "id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+          "label": "문제 1"
+        },
+        {
+          "id": "67388db9-9a5d-54a3-ace4-5ab35375105f",
+          "label": "문제 2"
+        },
+        {
+          "id": "73f883bd-0e9d-51b3-a043-4c41f64544b1",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2026,
+      "title": "동국대학교 2026학년도 수시 논술 인문계열Ⅰ",
+      "track": "인문계열Ⅰ",
+      "examId": "e75f643f-034b-5dc0-afc2-0a0ddeabc3dc",
+      "questions": [
+        {
+          "id": "e7b04480-638e-56ad-9d15-1201007bd461",
+          "label": "문제 1"
+        },
+        {
+          "id": "67b9faa8-a781-5d9f-956b-030f033396a0",
+          "label": "문제 2"
+        },
+        {
+          "id": "09cdd3fa-a044-531a-bbcd-6b6789fb874e",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2026,
+      "title": "동국대학교 2026학년도 수시 논술 인문계열Ⅱ",
+      "track": "인문계열Ⅱ",
+      "examId": "552bf931-8014-53ca-b085-e6ad1509a2ed",
+      "questions": [
+        {
+          "id": "1809e18b-9937-5dcd-8ce1-244c6f33d043",
+          "label": "문제 1"
+        },
+        {
+          "id": "91459263-85f1-538d-b3a7-aec52bd26c55",
+          "label": "문제 2"
+        },
+        {
+          "id": "b896126c-8306-562c-8f62-83cc7eccbab7",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2026,
+      "title": "동국대학교 2026학년도 수시 논술 자연계열",
+      "track": "자연계열",
+      "examId": "8871c481-f6e2-5f87-b3c8-45c042f6a775",
+      "questions": [
+        {
+          "id": "b3c4b57d-b178-50ab-be64-3b939967fe82",
+          "label": "문제 1"
+        },
+        {
+          "id": "0911229c-eb20-5831-a3a0-1a625a54489f",
+          "label": "문제 2"
+        },
+        {
+          "id": "6f4ac3f6-da5b-538c-a2f4-8376a942512e",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2025,
+      "title": "동국대학교 2025학년도 수시 논술 인문계열Ⅰ",
+      "track": "인문계열Ⅰ",
+      "examId": "283c6773-7c17-5f5a-9e24-9e0e4165fa55",
+      "questions": [
+        {
+          "id": "b630bc48-83ce-5197-9c65-b523b59aca90",
+          "label": "문제 1"
+        },
+        {
+          "id": "a5315fd3-75f1-5e09-af06-a152be7ba44f",
+          "label": "문제 2"
+        },
+        {
+          "id": "9f44553d-5d93-575a-9616-0576966ebc97",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2025,
+      "title": "동국대학교 2025학년도 수시 논술 인문계열Ⅱ",
+      "track": "인문계열Ⅱ",
+      "examId": "8d662c71-9b26-5b5c-b23b-b8f2f6eabe50",
+      "questions": [
+        {
+          "id": "cb88d04a-525b-547a-8540-cb51c4f837e4",
+          "label": "문제 1"
+        },
+        {
+          "id": "76fe019a-5343-59a3-b76c-560c6279c0bf",
+          "label": "문제 2"
+        },
+        {
+          "id": "427f7862-6590-5b65-b87d-3016b0eaddd1",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2025,
+      "title": "동국대학교 2025학년도 수시 논술 자연계열",
+      "track": "자연계열",
+      "examId": "627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c",
+      "questions": [
+        {
+          "id": "df83fa5c-fc88-570b-99b5-45f3c97f3647",
+          "label": "문제 1"
+        },
+        {
+          "id": "f2172ac5-f197-5a4f-a2a8-2452f094b5d0",
+          "label": "문제 2"
+        },
+        {
+          "id": "24571e32-f295-5c2e-b69a-51f5138dbf35",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2024,
+      "title": "동국대학교 · 2024 · mock · 인문계열",
+      "track": "인문계열",
+      "examId": "4bbdad30-d144-5dc5-be5b-63870524ab31",
+      "questions": [
+        {
+          "id": "e9557bf7-5f68-5d3c-a196-79b61c8341d3",
+          "label": "문제 1"
+        },
+        {
+          "id": "86bb48e9-df12-5cf4-9714-b1051390e7cd",
+          "label": "문제 2"
+        },
+        {
+          "id": "24a7e291-65ae-51d0-b6a7-3f3c71b2ff63",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2024,
+      "title": "동국대학교 · 2024 · mock · 자연계열",
+      "track": "자연계열",
+      "examId": "3b9a5530-3362-5223-94f1-04922e6f5d11",
+      "questions": [
+        {
+          "id": "30ad4db9-7bd2-586a-a5a4-088c31846fdf",
+          "label": "문제 1"
+        },
+        {
+          "id": "48836643-ef6b-5777-9b53-4a76342ec189",
+          "label": "문제 2"
+        },
+        {
+          "id": "dc2dd24c-f5c0-5f28-ab3b-8532fe2ad453",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2023,
+      "title": "동국대학교 · 2023 · mock · 인문계열",
+      "track": "인문계열",
+      "examId": "d1934943-41d0-5895-ab29-6cb272c04957",
+      "questions": [
+        {
+          "id": "e4e9bcd5-7385-5d05-8784-0b7798be0557",
+          "label": "문제 1"
+        },
+        {
+          "id": "f627a94b-bb02-55ec-9dac-9e6b3d81b804",
+          "label": "문제 2"
+        },
+        {
+          "id": "a3f98cc5-a49d-5dd6-b414-f22ca1350ec5",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2023,
+      "title": "동국대학교 · 2023 · mock · 자연계열",
+      "track": "자연계열",
+      "examId": "f5f512ab-79d1-50f9-8d79-039393226b00",
+      "questions": [
+        {
+          "id": "d0add313-5092-5acf-8882-065f29817c9b",
+          "label": "문제 1"
+        },
+        {
+          "id": "0e89f48c-26ca-5bb1-9b82-b55633783017",
+          "label": "문제 2"
+        },
+        {
+          "id": "e494e7c5-b83e-5863-9aba-bc4da33d41b2",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2022,
+      "title": "동국대학교 · 2022 · mock · 인문계열",
+      "track": "인문계열",
+      "examId": "4ad0f8f5-370f-5b13-9905-beabb28f23ac",
+      "questions": [
+        {
+          "id": "a07b983d-a446-57d9-b1ef-ebba736e5c70",
+          "label": "문제 1"
+        },
+        {
+          "id": "843a37d0-f2ca-5904-bbd6-1ebcb896ba53",
+          "label": "문제 2"
+        },
+        {
+          "id": "b938ccd9-618e-50f4-91d0-f485e4d7178d",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2022,
+      "title": "동국대학교 · 2022 · mock · 자연계열",
+      "track": "자연계열",
+      "examId": "0fa138ec-e8a0-56a6-b241-4c883c86eacc",
+      "questions": [
+        {
+          "id": "95fbb8a2-beda-58e0-a2fd-9d4e27827882",
+          "label": "문제 1"
+        },
+        {
+          "id": "1dbd7967-f712-5185-aa8e-3656349706a4",
+          "label": "문제 2"
+        },
+        {
+          "id": "30cd3e19-6dae-5cf1-ad83-1b45dbe87d51",
+          "label": "문제 3"
+        }
+      ],
+      "universityId": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "questionCount": 3,
+      "evaluationReady": false
+    }
+  ],
+  "selected_exams": 7,
+  "selected_metadata_questions": 21,
+  "evaluation_ready": 20,
+  "hold": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+  "new_browse_changes_required": false
+}

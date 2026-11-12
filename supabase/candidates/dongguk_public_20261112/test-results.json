@@ -1,0 +1,20 @@
+{
+  "web_pass": 410,
+  "web_skip": 1,
+  "app_pass": 39,
+  "typecheck": "PASS",
+  "next_build": "PASS",
+  "functions_build": "PASS",
+  "isolated_worker_questions": 20,
+  "db_contract_checks": 60,
+  "baseline_existing_test_failures": 5,
+  "baseline_reproduced": true,
+  "baseline_fix": "Explicitly select 2025 mock humanities test fixture after expanded source catalog",
+  "provider_calls": 0,
+  "logs_sha256": {
+    "dongguk-web-tests.log": "4ba5c22874d965d17c4208b37456a21f2646c1db420283b320e06bd51bf3aec0",
+    "dongguk-flutter.log": "de77388926799f2fb536d9bd6e1852ceec723a88de7d59e8b3558054e88dd5eb",
+    "dongguk-db-test.log": "1a74eb85f2bbfc104ecb21455de9db11507fc34bbd1b6d1c223315a7c14f5617",
+    "dongguk-baseline-tests.log": "503d2ff22b8fd1c2c1c629d3312aa7059efe276966daf94f1bf6bd5fe599b3b1"
+  }
+}
