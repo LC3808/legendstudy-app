@@ -1,0 +1,32 @@
+{
+  "verified_scope": "Current APP/WEB repositories and all local Git refs, Wiki, canonical source root, prior private inventory/Worker material records and current production question-linked tables; external unrecorded experiments not asserted absent",
+  "archive_inventory": "/Users/woojinchang/.codex/visualizations/2026/10/10/01a1251c-454a-7b31-adee-e269258659e0/essay-materials-private/inventory.json",
+  "prior_files": 26,
+  "prior_exams": 13,
+  "prior_questions": 39,
+  "all_prior_hashes_preserved": true,
+  "new_to_archive_files": 32,
+  "canonical_migration": "20261012212352_essay_source_registration_76_234",
+  "commits": {
+    "web_inventory": "7d62bb5975a0602e5b043dff0083339bc77478d4",
+    "web_source_selection": "89dcbe737245e3063503dafcdf4c7dabe7dd3cdb",
+    "web_registration": "146727f7c6db6ba94e96a92e81ffa4ea38613258",
+    "web_brand": "86282c7f352a7fafbffcb6f3fd99288fbc7a13a2",
+    "app_registration": "b0aa1ee7",
+    "app_package_contract": "0b99cdd4"
+  },
+  "existing_registry": {
+    "exam": "c15360f1-571e-5fa4-8314-dde3022f9594",
+    "questions": [
+      "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "4a432fdf-d601-5230-b045-d2123c614773",
+      "e7362b80-3f05-5d84-8768-826ab7136233"
+    ]
+  },
+  "existing_prepared_ewha_ai_package_records": 0,
+  "existing_question_linked_rows": 0,
+  "checked_question_linked_tables": 15,
+  "verified_provider_or_model_prompt_experiment_records": 0,
+  "normal_partial_wrong_answer_cases": "NOT FOUND IN SEARCHED RECORDS",
+  "training_complete_claim": false
+}

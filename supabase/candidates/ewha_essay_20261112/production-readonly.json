@@ -1,0 +1,107 @@
+{
+  "checked_at_kst": "2026-11-12T18:32:23.504223+09:00",
+  "mode": "READ_ONLY",
+  "original_pdf_hashes_checked": 58,
+  "storage_exact_hash_objects": 0,
+  "storage": [],
+  "existing_exams": 1,
+  "existing_questions": 3,
+  "canonical_university_id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+  "canonical_registry_unchanged": true,
+  "question_link_counts": [
+    {
+      "table_schema": "analytics_private",
+      "table_name": "evaluations",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "analytics_private",
+      "table_name": "sessions",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "math_private",
+      "table_name": "mixed_coaching_disclosures",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "math_private",
+      "table_name": "mixed_coaching_hints",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "math_private",
+      "table_name": "session_members",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "math_private",
+      "table_name": "task20_hanyang_source_pages",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_evaluation_criteria",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_evaluation_dimensions",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_evaluation_evidence",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_evaluations",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_practice_sessions",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "essay_question_evidence",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "exam_questions",
+      "column_name": "question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "math_subproblems",
+      "column_name": "essay_question_id",
+      "rows": 0
+    },
+    {
+      "table_schema": "public",
+      "table_name": "mock_exam_answers",
+      "column_name": "question_id",
+      "rows": 0
+    }
+  ],
+  "prior_evaluations": [],
+  "provider_calls": 0,
+  "production_changes": 0,
+  "new_candidate_ids_registered": 0
+}
