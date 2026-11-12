@@ -1,0 +1,29 @@
+{
+  "checked_at_kst": "2026-11-12T12:43:39.425251+09:00",
+  "preflight_checks": 127,
+  "draft_postchecks": 137,
+  "activation_checks": 33,
+  "draft_preservation_groups": 20,
+  "post_activation_unchanged_groups": 19,
+  "changed_only_two_function_allowlists": true,
+  "existing_function_acl_preserved": "atomic activation checks",
+  "new_rows": 150,
+  "questions": 11,
+  "active_state_rows": 44,
+  "normal_user_math_catalog_count": 257,
+  "normal_user_new_questions": 11,
+  "normal_user_history_read": true,
+  "new_production_submissions": 0,
+  "provider_calls": 0,
+  "migrations": [
+    {
+      "version": "20261112034047",
+      "name": "sogang_complete_q2_pdf_read"
+    },
+    {
+      "version": "20261112034210",
+      "name": "sogang_11_math_public_release"
+    }
+  ],
+  "ui": "NOT TESTED"
+}

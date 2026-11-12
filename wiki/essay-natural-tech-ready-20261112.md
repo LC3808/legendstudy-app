@@ -87,3 +87,7 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 2023–2025의6문항은 물리/생명/통합과학 서술형이다. [기존 과학 경계](essay-mixed-mode-foundation.md#oct18-release-quality-audit--read-only) 및 실제 `science.ts`/composition/persistence 코드를 확인했다. 기존 SCIENCE_REASONING 후보 모듈은 있으나 해당6문항의 reviewed criterion binding·영속 제출/결과·WEB/APP 서비스 경로는 검증되지 않았다. 자연계열이라는 이유로 Math나 인문 엔진에 배정하지 않고 **NOT READY**로 유지한다. 새 엔진·기존 인문 서울여 운영 연결 변경0.
 
 [6문항 원본 지면/차단 목록](../supabase/candidates/natural_tech_ready_20261112/seoul-women-science-gaps.json)에 문제·기준·예시답안 SHA/쪽을 남겼다.2024Q2의 표/그림3은물리9쪽까지 포함한다.2023Q2 예시답안은물리10쪽 이미지에 존재하지만 추출 텍스트에 빠져 있었다. 최초 텍스트만으로 판단한 자료누락 보고는 원본 확인 후 정정했으며 원본부재/HOLD로 계산하지 않는다. 실제 과학 연결은 기존 후보의 서비스 결합 범위 검토가 필요하다. 전체10개교 검토 순서는 끝났으나 NOT READY/부분/승인 대기 때문에 전체 REVIEW READY는 아니다.
+
+## 2026-11-12 운영 공개 후속
+
+건국24·경희7공개는 완료,기존4/3보존. 성균관15 RIGHTS_HOLD 유지. [서강9시험11문항 공개 완료 및 Q2누락 해결](essay-sogang-public-20261112.md). 이 문서의 서강 PDF미해결/로컬TECH 표기는 이전 시점 이력이다. 다음은숭실. Owner AI품질 검수는전체이후.

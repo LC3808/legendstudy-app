@@ -1,0 +1,35 @@
+{
+  "web": {
+    "passed": 414,
+    "skipped": 1,
+    "failed": 0,
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "static_build": "PASS",
+    "functions_build": "PASS"
+  },
+  "app": {
+    "pdf_tests_passed": 5,
+    "flow_regressions_passed": 25,
+    "skipped": 4,
+    "failed": 0,
+    "device": "NOT TESTED"
+  },
+  "isolated": {
+    "questions": 11,
+    "connection_checks": 33,
+    "storage_cases": 6,
+    "rollback": "PASS"
+  },
+  "production": {
+    "preflight": 127,
+    "draft_postchecks": 137,
+    "active_postchecks": 33,
+    "preserved_groups_draft": 20,
+    "preserved_groups_active": 19,
+    "old_policies_unchanged": 269,
+    "provider_calls": 0
+  },
+  "browser_ui": "NOT TESTED",
+  "owner_quality_review": "DEFERRED"
+}

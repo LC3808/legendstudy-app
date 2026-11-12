@@ -1,0 +1,33 @@
+{
+  "existing_policies_unchanged": 269,
+  "new_exact_file_policy": 1,
+  "role_checks": [
+    {
+      "account_class": "normal",
+      "visible": 9
+    },
+    {
+      "account_class": "anon",
+      "visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "visible": 0
+    }
+  ],
+  "old_file_preserved": true,
+  "migrations": [
+    {
+      "version": "20261112034047",
+      "name": "sogang_complete_q2_pdf_read"
+    }
+  ]
+}

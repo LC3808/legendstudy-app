@@ -46,5 +46,6 @@
     }
   ],
   "approval": "Owner 2026-11-12: fix missing 2026 natural round2 Q2 from official original and publish service",
-  "production_applied": false
+  "production_applied": true,
+  "deployment": "0e5f4280-19b1-4660-b75f-d2d6f39a3fa4"
 }
