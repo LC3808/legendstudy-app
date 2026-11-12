@@ -39,5 +39,10 @@
   "android": "NOT TESTED",
   "actual_login_submit_result_rewrite": "NOT TESTED",
   "ai_quality": "NOT TESTED_OWNER",
-  "rollback": "Isolated verified; production not executed"
+  "rollback": "Isolated verified; production not executed",
+  "ewha_total_exams": 29,
+  "ewha_total_questions": 87,
+  "ewha_connection_work": "DONE",
+  "ewha_new_source_connection": "CLOSED",
+  "closure_checked_at_kst": "2026-11-12T20:28:46.168923+09:00"
 }

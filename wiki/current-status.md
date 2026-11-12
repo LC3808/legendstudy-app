@@ -1,5 +1,7 @@
 # Current Status
 
+[이화 종료·잔여43](essay-ewha-closure-20261112.md): 이화29시험87(63+24,중복0) DONE/CLOSED. 기존3 ID·실제Math공개 확인. 전체265공개43잔여; Owner AI통합검수 별도. 종료 운영쓰기/Provider0.
+
 [이화 모의24 운영 공개](essay-ewha-mock-public-20261112.md):8시험24(Math12/Essay12) PUBLISHED. 전체265공개43잔여.218행·기존241/데이터/ACL/Credit보존. Provider0,UI·실기기·실제AI NT.
 
 [성균15·이화모의24 원본 재검증](essay-skku-ewha-hold-reaudit-20261112.md): 성균은 언어형 개별승인과 자연15 Owner HOLD를 구분. 이화24 문제/예시·해설·평가설명 확보,95쪽 직접판독·원문역할 추출 보완. 자료미확보 일괄표현 정정,평가용criterion 미확정.241공개/67잔여·추가공개/운영쓰기/Provider0.

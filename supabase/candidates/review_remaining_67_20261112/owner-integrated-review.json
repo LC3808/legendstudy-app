@@ -2,7 +2,7 @@
   "version": "owner-review-remaining67-v1",
   "prepared_at_kst": "2026-11-12T19:27:40.240834+09:00",
   "scope": "Original natural expansion 221 plus separate Ewha 87; precompleted Hanyang/Chungang/Korea/Inha and prior extra connections remain outside this denominator.",
-  "overall": "PARTIAL",
+  "overall": "PARTIAL_OTHER_UNIVERSITIES",
   "status_counts": {
     "HOLD": 6,
     "PUBLISHED": 265,
@@ -22,13 +22,15 @@
       "questions": 63,
       "Math": 27,
       "Essay": 36,
-      "state": "PUBLISHED"
+      "state": "PUBLISHED",
+      "connection_work": "DONE"
     },
     "ewha_mock": {
       "exams": 8,
       "questions": 24,
       "state": "PUBLISHED",
-      "existing_1_exam_3_question_registry_preserved": true
+      "existing_1_exam_3_question_registry_preserved": true,
+      "connection_work": "DONE"
     }
   },
   "published_total": 265,
@@ -38844,5 +38846,53 @@
     "SCIENCE_RUNTIME": 18,
     "PDF_RIGHTS": 15
   },
-  "reaudited_at_kst": "2026-11-12T19:39:55.967866+09:00"
+  "reaudited_at_kst": "2026-11-12T19:39:55.967866+09:00",
+  "ewha_closure": {
+    "status": "DONE",
+    "new_source_connection": "CLOSED",
+    "checked_at_kst": "2026-11-12T20:28:46.168923+09:00",
+    "exams": 29,
+    "questions": 87,
+    "official": 63,
+    "mock": 24,
+    "overlap": 0,
+    "math_public": 39,
+    "essay_runtime": 48,
+    "registry_exact": 87,
+    "public_catalog_exact": 87,
+    "existing_three": [
+      {
+        "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      },
+      {
+        "id": "4a432fdf-d601-5230-b045-d2123c614773",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      },
+      {
+        "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      }
+    ],
+    "production_writes": 0,
+    "provider_calls": 0,
+    "ai_quality": "NOT TESTED_OWNER",
+    "browser_ui": "NOT TESTED",
+    "actual_submission": "NOT TESTED"
+  }
 }

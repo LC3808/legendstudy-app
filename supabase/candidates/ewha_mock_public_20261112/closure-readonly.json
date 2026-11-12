@@ -1,0 +1,48 @@
+{
+  "status": "DONE",
+  "new_source_connection": "CLOSED",
+  "checked_at_kst": "2026-11-12T20:28:46.168923+09:00",
+  "exams": 29,
+  "questions": 87,
+  "official": 63,
+  "mock": 24,
+  "overlap": 0,
+  "math_public": 39,
+  "essay_runtime": 48,
+  "registry_exact": 87,
+  "public_catalog_exact": 87,
+  "existing_three": [
+    {
+      "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "is_published": false,
+      "is_active": false,
+      "math_public": true,
+      "public_catalog": true
+    },
+    {
+      "id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "is_published": false,
+      "is_active": false,
+      "math_public": true,
+      "public_catalog": true
+    },
+    {
+      "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "is_published": false,
+      "is_active": false,
+      "math_public": true,
+      "public_catalog": true
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0,
+  "ai_quality": "NOT TESTED_OWNER",
+  "browser_ui": "NOT TESTED",
+  "actual_submission": "NOT TESTED"
+}
