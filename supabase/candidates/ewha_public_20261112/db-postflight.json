@@ -1,0 +1,44 @@
+{
+  "checked_at_kst": "2026-11-12T19:08:25.420511+09:00",
+  "existing_3_registry_rows_exact": true,
+  "registry_questions": 63,
+  "math_catalog": 420,
+  "existing_math_catalog_preserved": 393,
+  "essay_packages": 12,
+  "student_problem_pdfs": 21,
+  "existing_storage_objects_preserved": 745,
+  "storage_roles": [
+    {
+      "account_class": "normal",
+      "files_visible": 21
+    },
+    {
+      "account_class": "anon",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "unknown",
+      "files_visible": 0
+    },
+    {
+      "account_class": "no_uid",
+      "files_visible": 0
+    }
+  ],
+  "public_solution_files_added": 0,
+  "provider_calls": 0,
+  "production_test_submissions": 0,
+  "actual_login_browser": "NOT TESTED"
+}

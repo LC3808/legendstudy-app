@@ -1,5 +1,7 @@
 # 이화여대 원본 전수 조사·기존 package 연결 후보 · 2026-11-12
 
+> 후속 운영 상태: [21시험63문항 공개 완료](essay-ewha-public-20261112.md). 아래 수치는 원본 조사 당시의 기록이며, 운영 상태는 후속 문서를 따른다.
+
 **조사·로컬 후보 DONE / 운영 연결 PARTIAL / 공개0.** Owner 지정 원본 폴더 `~/development/legendstudy-materials/essay-2026-10/이화여대/`의59파일을 조사했다. PDF58개476쪽, 비내용 `.DS_Store`1개다. 원본 수정·이동·이름 변경0, 빌드 전후58개 SHA·수정시각 보존. 예전 임시 저장소에서 발견한26PDF 모두 동일 SHA로 재사용하며32파일이 이전목록에 추가됐다.
 
 후보는 APP/common repository의 [supabase/candidates/ewha_essay_20261112](../supabase/candidates/ewha_essay_20261112/README.md) 한 곳에서 관리한다. 잔여51 운영 후보와 디렉터리·commits를 구분하고 동일 Worker/engine 파일을 수정하지 않았다. WEB 브랜치에 이화 후보를 복제하거나 다른 브랜치를 병합하지 않았다. 원문 이미지는 ignored `.local/ewha-essay-20261112`에만 둔다.

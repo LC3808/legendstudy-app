@@ -1,3 +1,7 @@
+## 2026-11-12 — 이화 공식 기준 63문항 운영 공개
+
+[운영 결과](essay-ewha-public-20261112.md):21시험63문항(Math27/Essay36) 공개.535행single-TX 20261112100444,DB19:07:59KST/공개사후19:11:05KST.기존Registry3/사용자기록/함수359·ACL362·RLS272·Credit보존.문제PDF21신규 exact정책,해설공개0.기존Worker71/73modules불변,2자료연결파일만변경. WEBdcda9cf·Pagesf1c64b82 기존2195자산/160시험보존.실제Provider0/로그인실제제출·UI·기기·AI품질NT. [통합목록](essay-ewha-owner-integrated-review-20261112.md):기존자연178공개43잔여+이화63공개24보류.원복격리검증PASS/운영실행0.
+
 ## 2026-11-12 — 잔여51 후속 공개·이화 지정 원본 조사
 
 [잔여51 최종](essay-remaining-51-20261112.md): 항공7(기존106행재사용)+동국공식정정Q1(13행) 실제공개,누적178/221·43잔여. 기존385공개·224Registry·RLS272·권한/Credit/Worker엔진보존. WEB65ab29f→7987a46 배포·비논술자산보존. 격리8흐름·원복/관련테스트PASS,실제로그인/실기기/AI품질NT,Provider0. [이화원본](essay-ewha-source-audit-20261112.md):58PDF476쪽·29시험87문항,기존1/3재사용·26과거SHA일치. Math27/Essay36로컬package·5unit/81Worker검사PASS,모의24공식기준없음. 이화운영/공개0,원본/이력불변.

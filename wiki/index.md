@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md) → [잔여51 처리·178공개43잔여](essay-remaining-51-20261112.md) → [Owner178 검수목록](essay-natural-owner-review-20261112.md). 항공7·동국Q1 추가공개,기존자료·권한·Credit보존. [이화여대58PDF·과거이력·63로컬package](essay-ewha-source-audit-20261112.md)는별도운영승인전단계. 과거TECH/DRAFT상태와운영공개를구분한다.
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md) → [잔여51 처리·178공개43잔여](essay-remaining-51-20261112.md) → [Owner178 검수목록](essay-natural-owner-review-20261112.md). 항공7·동국Q1 추가공개,기존자료·권한·Credit보존. [이화여대21시험·63문항 운영 공개](essay-ewha-public-20261112.md) → [자연178+이화63 공개·잔여43+24 문항별 Owner 통합 검수](essay-ewha-owner-integrated-review-20261112.md). [58PDF 원본·과거 이력](essay-ewha-source-audit-20261112.md)은 인수 시점 증거로 보존한다. 과거TECH/DRAFT상태와운영공개를구분한다.
 
 [이전 확장 감사와 범위 이력](essay-connection-owner-verification-20261111.md) · [공식 불일치·원문 보존·중앙 과학11 HOLD](essay-natural-expansion-20261111.md).
 

@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "source": "Actual operating read-only essay_material_runtime_package SELECT response",
+  "exams": 12,
+  "questions": 36,
+  "checks": [
+    {
+      "exam_id": "14dbab04-aff0-592d-9c6a-3de8b91b2161",
+      "questions": 3,
+      "digest": "82f9ea3eac478971aa7c41016de1d52c2fa1fb313ec95be40648fad7b6050d71",
+      "ready": true
+    },
+    {
+      "exam_id": "1ca30c16-af49-5310-b95c-2513d847b362",
+      "questions": 3,
+      "digest": "93cac96233ac9acee2788d9018d1e964b06beb5b4008080695163f72e840e15b",
+      "ready": true
+    },
+    {
+      "exam_id": "643a3669-4a68-5440-aa7e-4eb96df875dd",
+      "questions": 3,
+      "digest": "e34c3a75e424100a8536c8c310ae7f3ced1c8c1f1f20628be247a115907cc2b0",
+      "ready": true
+    },
+    {
+      "exam_id": "6a83e460-dde4-587c-9a27-3ad84c005610",
+      "questions": 3,
+      "digest": "6809ee0ad873c489166d1d974dc0676a33218433dcd7fb6418de3d81e2c593b6",
+      "ready": true
+    },
+    {
+      "exam_id": "99364190-42b9-5cd2-8ca8-22e9c430f238",
+      "questions": 3,
+      "digest": "0c2011743ca02db5ea99a0eabf1e005c8d157e29ca04d472e5f3e2e74f4ff0fe",
+      "ready": true
+    },
+    {
+      "exam_id": "9d291a8c-c5fb-5abf-961f-3081b052509e",
+      "questions": 3,
+      "digest": "e4d5dfac079d5d1991821601f809c88a8fc1075dd93ad681d8143653ff05cd85",
+      "ready": true
+    },
+    {
+      "exam_id": "af986ccc-3580-541b-95fb-4a2cbb02ea1c",
+      "questions": 3,
+      "digest": "a60d2a16b74eaf5ea7fc2cd376f9389b426ccc82bcbd7bee73f071e545b22fba",
+      "ready": true
+    },
+    {
+      "exam_id": "bceb58d6-b237-5b62-86a0-dd7bb7f248bb",
+      "questions": 3,
+      "digest": "31394b18c447931b4344cdf514f333acb1c322fee7975c93c80e14edd48e22af",
+      "ready": true
+    },
+    {
+      "exam_id": "c7eb6525-ab80-5013-bac5-5c0628567263",
+      "questions": 3,
+      "digest": "535beee220d84cab0e2249a5449eb5b1e7fae7864b33b6fb524cece67256c094",
+      "ready": true
+    },
+    {
+      "exam_id": "c9eb2d4f-25c2-5bc0-a307-e324764286cd",
+      "questions": 3,
+      "digest": "c83ded919d088df1069922386a7f70fbf60ae645697ba27e50c1c5bd30b67f80",
+      "ready": true
+    },
+    {
+      "exam_id": "dc67a4fe-3e62-5b89-bee1-fa6d1ea31591",
+      "questions": 3,
+      "digest": "c5bf3e6a9710a4d168aabcd904b6d5f776313d196e8dfc498b523702f24a7dec",
+      "ready": true
+    },
+    {
+      "exam_id": "e57a30ce-2c9d-540b-83aa-8a6d4ee22526",
+      "questions": 3,
+      "digest": "bf62c077d2eb4e3a29d37f6efd0df02ead83832fd3fef044a1d12255f1d1fed1",
+      "ready": true
+    }
+  ],
+  "provider_calls": 0,
+  "production_writes": 0,
+  "quality": "NOT TESTED",
+  "browser": "NOT TESTED",
+  "device": "NOT TESTED"
+}

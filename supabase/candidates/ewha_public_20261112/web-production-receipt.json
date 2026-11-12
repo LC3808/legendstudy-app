@@ -1,0 +1,278 @@
+{
+  "status": "PUBLIC_CONNECTION_CHECK_PASS",
+  "checked_at_kst": "2026-11-12T19:11:05.271966+09:00",
+  "deployment": "f1c64b82-3feb-4b49-8775-ab6d945cd1db",
+  "source": "dcda9cf36ba526f8e14d17377a267ed08f788d0a",
+  "exams": 21,
+  "questions": 63,
+  "mathQuestions": 27,
+  "essayQuestions": 36,
+  "excludedMockQuestions": 24,
+  "preservedExistingPublicExams": 160,
+  "preservedNonEssayStaticAssets": 2195,
+  "configurationExact": true,
+  "functionRoutesExact": true,
+  "scopeCounts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      334,
+      355
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      164,
+      185
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      393,
+      420
+    ]
+  },
+  "http": [
+    {
+      "path": "/essay-lab/",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/student-pdfs",
+      "status": 401
+    },
+    {
+      "path": "/api/essay/public-service-status",
+      "status": 401
+    },
+    {
+      "path": "/login/",
+      "status": 200
+    }
+  ],
+  "anonymousPdfChecks": [
+    {
+      "assetId": "2b1eca967ca222ecc567d0bafab1537ec19727f584735a6d16da6816daafa5f8",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "2b1eca967ca222ecc567d0bafab1537ec19727f584735a6d16da6816daafa5f8",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "c7ad3a4da5ab95f21af36b4a19a4c1199df43728d94301fde85d064ea09cdac2",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "c7ad3a4da5ab95f21af36b4a19a4c1199df43728d94301fde85d064ea09cdac2",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "104687f5018623d61db75e932f7c582f1fa873a361613e9eb8984021dff64522",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "104687f5018623d61db75e932f7c582f1fa873a361613e9eb8984021dff64522",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "e5d614083b9005439e0d7dc8f83117b3f4064d2eca78b7b7d0ab825638848b88",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "e5d614083b9005439e0d7dc8f83117b3f4064d2eca78b7b7d0ab825638848b88",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "339b9ecf28064493aff99973ffea907fc4f09c406ff79777c157f7dcc1c39a1b",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "339b9ecf28064493aff99973ffea907fc4f09c406ff79777c157f7dcc1c39a1b",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "f32a5c8d98e646c63af03b7d9b31212bb330f216e9f429fd965f02aec3517649",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "f32a5c8d98e646c63af03b7d9b31212bb330f216e9f429fd965f02aec3517649",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "a05ee31e407504f6e308bdc0b736a24d71c8d99bc912392a9de3000f4b95928b",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "a05ee31e407504f6e308bdc0b736a24d71c8d99bc912392a9de3000f4b95928b",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "91c3be977c7da371aad75ff98b3d781f3c136f7dd6e37c10a1ef6ba2fb309001",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "91c3be977c7da371aad75ff98b3d781f3c136f7dd6e37c10a1ef6ba2fb309001",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "7090a647f86765f510064f4108854fb915ee24569f09591670f0dd31bfe43026",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "7090a647f86765f510064f4108854fb915ee24569f09591670f0dd31bfe43026",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "0ae894a300d6331d1f349db967299e1e781a66b75a487caa5c01af4c1a722cd3",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "0ae894a300d6331d1f349db967299e1e781a66b75a487caa5c01af4c1a722cd3",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "b1ada3da85433375bac309a28d7286fc7552868da7b8a58726ee969415d6ed44",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "b1ada3da85433375bac309a28d7286fc7552868da7b8a58726ee969415d6ed44",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "1be81f39d2843be0a32b8bd4a611adc1d71469f062a29a9ef256881e760f2a93",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "1be81f39d2843be0a32b8bd4a611adc1d71469f062a29a9ef256881e760f2a93",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "1f095178815c31bd71c72e1b5b80ca9066925dbaa301bbd277b8565a4c23e452",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "1f095178815c31bd71c72e1b5b80ca9066925dbaa301bbd277b8565a4c23e452",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "f38c1c87e9e53b8d69a859f18653d0e3ec1dae8cec307ed6831c482c8a3df7ae",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "f38c1c87e9e53b8d69a859f18653d0e3ec1dae8cec307ed6831c482c8a3df7ae",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "f974f09e265f0db415966e2993883ee8dc8b307ff38b2cdd9a190e73b6b40793",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "f974f09e265f0db415966e2993883ee8dc8b307ff38b2cdd9a190e73b6b40793",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "a053335bd059c25e0aea302b82c05cf14bbfb07bb571c234331fc42a7bca52c5",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "a053335bd059c25e0aea302b82c05cf14bbfb07bb571c234331fc42a7bca52c5",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "334f4f6ef04704f6443fa7a017747607cce5fdff1b41ce10b432021338a0c8f8",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "334f4f6ef04704f6443fa7a017747607cce5fdff1b41ce10b432021338a0c8f8",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "aae4f0ab38da6e1808154014e084d683980702887d663c0b9ee4076e974de3d9",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "aae4f0ab38da6e1808154014e084d683980702887d663c0b9ee4076e974de3d9",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "eef683099cafa3d1ca8a4de16cfad5bbd1ad66eacbcc905bfdff7e140f43ca59",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "eef683099cafa3d1ca8a4de16cfad5bbd1ad66eacbcc905bfdff7e140f43ca59",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "1b4a08e94c7b14042382f4a594c98b10bc7d86bf19f9787bb030e61833a4fb51",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "1b4a08e94c7b14042382f4a594c98b10bc7d86bf19f9787bb030e61833a4fb51",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "2da18389ca27eae1b040eab013c055042f846380181283b54cd8e0ce6a0326c6",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "2da18389ca27eae1b040eab013c055042f846380181283b54cd8e0ce6a0326c6",
+      "route": "authenticated",
+      "status": 400
+    }
+  ],
+  "localAppDtoIdentities": {
+    "status": "PASS",
+    "questions": 63,
+    "pdfAssets": 21
+  },
+  "authenticatedStudentPdfManifest": {
+    "status": "NOT TESTED",
+    "reason": "No existing test-account access token; no login or Provider request performed"
+  },
+  "browserUI": "NOT TESTED",
+  "iPhone": "NOT TESTED",
+  "Android": "NOT TESTED",
+  "loggedInSubmitResultRewrite": "NOT TESTED",
+  "providerCalls": 0,
+  "actualAIQuality": "NOT TESTED_OWNER"
+}

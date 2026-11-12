@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "version": "c56d06b8-6e11-4e19-ac09-e36c1d16dee1",
+  "deployment": "e597663a-a7f4-4a1e-815d-c45727a32d03",
+  "actual_downloaded_modules": 73,
+  "preserved_modules": 71,
+  "changed_modules": [
+    "registry_asset.py",
+    "essay_lab/material_runtime.py"
+  ],
+  "existing_bindings_preserved": 13,
+  "public_exam_scope": [
+    212,
+    224
+  ],
+  "engine_prompts_sdk_preserved": true,
+  "provider_calls": 0
+}
