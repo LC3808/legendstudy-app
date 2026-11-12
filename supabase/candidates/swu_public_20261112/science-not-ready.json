@@ -1,0 +1,299 @@
+[
+  {
+    "question_id": "dd144dfa-d36a-5393-a966-f4968b773485",
+    "exam_id": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+    "year": 2023,
+    "label": "문제 1",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          2,
+          3
+        ]
+      },
+      "intent": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          4
+        ]
+      },
+      "rubric": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          5,
+          6
+        ]
+      },
+      "solution": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          6
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  },
+  {
+    "question_id": "b8a5061c-b06d-57c7-b2e1-8e41d248eb17",
+    "exam_id": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+    "year": 2023,
+    "label": "문제 2",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          7,
+          8
+        ]
+      },
+      "intent": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          9
+        ]
+      },
+      "rubric": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          10
+        ]
+      },
+      "solution": {
+        "file": "2023학년도 서울여대 논술_자연계열 문제,예시답안.pdf",
+        "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+        "page_count": 10,
+        "pages": [
+          10
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "note": "Official solution is visible in raster; absent from extracted text, not missing from original.",
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  },
+  {
+    "question_id": "137e2e86-6d84-5e88-a276-b0479e435556",
+    "exam_id": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+    "year": 2025,
+    "label": "문제 1",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 문제.pdf",
+        "sha256": "cfaa64c82066c76420ffc36f52cac5bc888d9f61444bb1be0a215b6c266802d7",
+        "page_count": 3,
+        "pages": [
+          2,
+          3
+        ]
+      },
+      "intent": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          1
+        ]
+      },
+      "rubric": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          2
+        ]
+      },
+      "solution": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          3
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  },
+  {
+    "question_id": "44610023-7a33-50e6-9924-e06a57f78a84",
+    "exam_id": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+    "year": 2025,
+    "label": "문제 2",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          4,
+          5
+        ]
+      },
+      "intent": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          6
+        ]
+      },
+      "rubric": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          7
+        ]
+      },
+      "solution": {
+        "file": "2025학년도 서울여대 논술_자연계열(오후) 해설,답안.pdf",
+        "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+        "page_count": 8,
+        "pages": [
+          8
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  },
+  {
+    "question_id": "8ba18b30-2a9a-5eba-a8ff-f3544ce67134",
+    "exam_id": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+    "year": 2024,
+    "label": "문제 1",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          2,
+          3
+        ]
+      },
+      "intent": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          4
+        ]
+      },
+      "rubric": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          5
+        ]
+      },
+      "solution": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          6
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  },
+  {
+    "question_id": "9bb9c3b5-9a18-52b5-a8fb-befbe86573c5",
+    "exam_id": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+    "year": 2024,
+    "label": "문제 2",
+    "status": "NOT_READY_SCIENCE_RUNTIME",
+    "reasons": [
+      "SCIENCE_REASONING_REVIEWED_BINDING_AND_PERSISTED_RESULT_PATH_UNPROVEN"
+    ],
+    "refs": {
+      "problem": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          7,
+          8,
+          9
+        ]
+      },
+      "intent": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          10
+        ]
+      },
+      "rubric": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          11
+        ]
+      },
+      "solution": {
+        "file": "2024학년도 서울여대 논술_자연계열(오후).pdf",
+        "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+        "page_count": 12,
+        "pages": [
+          12
+        ]
+      }
+    },
+    "math_package_created": false,
+    "production_applied": false,
+    "public": false,
+    "current_verification": "Archived SHA and all problem/intent/rubric/solution page bounds valid; all official rubric pages visually rechecked. Existing science module is candidate-only and has no production caller for these IDs."
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "kind": "admission",
+    "year": 2026,
+    "title": "서울여자대학교 2026학년도 수시 논술 인문사회계열",
+    "track": "인문사회계열",
+    "examId": "6679b5ff-d797-53c9-8a2a-424375d7210c",
+    "questions": [
+      {
+        "id": "a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6",
+        "label": "문제 1"
+      },
+      {
+        "id": "d0862954-4d0d-5811-9b48-5dc8e319634d",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2026,
+    "title": "서울여자대학교 2026학년도 수시 논술 자연계열",
+    "track": "자연계열",
+    "examId": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+    "questions": [
+      {
+        "id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+        "label": "문제 1"
+      },
+      {
+        "id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+        "label": "문제 2"
+      },
+      {
+        "id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+        "label": "문제 3"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 3,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2025,
+    "title": "서울여자대학교 2025학년도 수시 논술 인문사회계열 오전반",
+    "track": "인문사회계열",
+    "examId": "609ae458-e84f-58b9-b7ae-f2f02cd4c6ad",
+    "questions": [
+      {
+        "id": "21523136-26f9-58b4-94ae-7fa8d809b360",
+        "label": "문제 1"
+      },
+      {
+        "id": "242baaa2-40f5-5fd3-8e3d-6727b4a607fb",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2025,
+    "title": "서울여자대학교 2025학년도 수시 논술 인문사회계열 오후반",
+    "track": "인문사회계열",
+    "examId": "36183314-dc5a-5470-ad52-4b8396ad9e9b",
+    "questions": [
+      {
+        "id": "7473d880-028a-5487-abd8-de522022d7ca",
+        "label": "문제 1"
+      },
+      {
+        "id": "66b5a4fc-cc0c-5f18-ae9d-c6fb169487cf",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2025,
+    "title": "서울여자대학교 2025학년도 수시 논술 자연계열 오후반",
+    "track": "자연계열",
+    "examId": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+    "questions": [
+      {
+        "id": "137e2e86-6d84-5e88-a276-b0479e435556",
+        "label": "문제 1"
+      },
+      {
+        "id": "44610023-7a33-50e6-9924-e06a57f78a84",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2024,
+    "title": "서울여자대학교 2024학년도 수시 논술 인문사회계열 오전반",
+    "track": "인문사회계열",
+    "examId": "5afa7beb-a1f6-5d9c-b90b-1329e30d4a86",
+    "questions": [
+      {
+        "id": "bd3b96f5-5760-5856-8c43-24cda8651867",
+        "label": "문제 1"
+      },
+      {
+        "id": "8e28f97d-1eae-59ff-9077-967780b59d70",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2024,
+    "title": "서울여자대학교 2024학년도 수시 논술 인문사회계열 정오반",
+    "track": "인문사회계열",
+    "examId": "f93e63f7-b925-5392-9f6c-ea8d44c0b0b7",
+    "questions": [
+      {
+        "id": "7527664a-8181-51f2-86ab-702c08fd35f1",
+        "label": "문제 1"
+      },
+      {
+        "id": "d555e3fe-77c0-57c7-b061-3b0f551d2988",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2024,
+    "title": "서울여자대학교 2024학년도 수시 논술 자연계열 오후반",
+    "track": "자연계열",
+    "examId": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+    "questions": [
+      {
+        "id": "8ba18b30-2a9a-5eba-a8ff-f3544ce67134",
+        "label": "문제 1"
+      },
+      {
+        "id": "9bb9c3b5-9a18-52b5-a8fb-befbe86573c5",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2023,
+    "title": "서울여자대학교 2023학년도 수시 논술 인문사회계열 오전반",
+    "track": "인문사회계열",
+    "examId": "d4d3ad73-72c2-5bf8-9095-4e096facd9e8",
+    "questions": [
+      {
+        "id": "9ad2239f-f143-59bf-8844-21c1abec02b2",
+        "label": "문제 1"
+      },
+      {
+        "id": "2bab8bfb-756d-58ac-8a26-402c40904f25",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2023,
+    "title": "서울여자대학교 2023학년도 수시 논술 인문사회계열 정오반",
+    "track": "인문사회계열",
+    "examId": "7b1cdaba-b15d-5352-af9f-fd14f8fbe74b",
+    "questions": [
+      {
+        "id": "c941c94e-2602-5c8f-a7d1-ddf8c678a68d",
+        "label": "문제 1"
+      },
+      {
+        "id": "7d580dba-2c5d-5440-83aa-00063ef11813",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  },
+  {
+    "kind": "admission",
+    "year": 2023,
+    "title": "서울여자대학교 2023학년도 수시 논술 자연계열 오후반",
+    "track": "자연계열",
+    "examId": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+    "questions": [
+      {
+        "id": "dd144dfa-d36a-5393-a966-f4968b773485",
+        "label": "문제 1"
+      },
+      {
+        "id": "b8a5061c-b06d-57c7-b2e1-8e41d248eb17",
+        "label": "문제 2"
+      }
+    ],
+    "universityId": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "questionCount": 2,
+    "evaluationReady": false
+  }
+]

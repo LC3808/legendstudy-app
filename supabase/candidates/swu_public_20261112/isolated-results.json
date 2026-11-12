@@ -1,0 +1,70 @@
+{
+  "scope": "isolated PG17; actual production function definitions and exact 36-row insert / 12-state activation / 2 allowlist changes",
+  "checks": [
+    "318473c0-46ea-55e7-ab06-53520ea2373f public mapping",
+    "318473c0-46ea-55e7-ab06-53520ea2373f profile",
+    "318473c0-46ea-55e7-ab06-53520ea2373f Worker evidence",
+    "6c7d310f-d055-595c-8aa5-49d901b19f36 public mapping",
+    "6c7d310f-d055-595c-8aa5-49d901b19f36 profile",
+    "6c7d310f-d055-595c-8aa5-49d901b19f36 Worker evidence",
+    "ee907ec5-88f2-5097-83be-9b8c9a03ec93 public mapping",
+    "ee907ec5-88f2-5097-83be-9b8c9a03ec93 profile",
+    "ee907ec5-88f2-5097-83be-9b8c9a03ec93 Worker evidence"
+  ],
+  "questions": [
+    {
+      "question_id": "318473c0-46ea-55e7-ab06-53520ea2373f",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "rollback": {
+    "old_catalog_exact": true,
+    "histories_exact": true,
+    "new_evaluation_denied": true,
+    "existing_result_read": true,
+    "function_hashes_exact": true
+  },
+  "provider_calls": 0,
+  "production_writes": 0
+}

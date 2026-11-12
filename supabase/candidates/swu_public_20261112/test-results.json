@@ -1,0 +1,56 @@
+{
+  "related_web": {
+    "pass_count": 447,
+    "skip": 1,
+    "fail": 0
+  },
+  "app": {
+    "pass_count": 29,
+    "fail": 0
+  },
+  "whole_web": {
+    "pass_count": 1957,
+    "skip": 5,
+    "fail": 10,
+    "unhandled": 1
+  },
+  "unchanged_baseline": {
+    "sha": "4e967b4cc400812c80027a8b83c955c3a2b630c3",
+    "fail": 10,
+    "unhandled": 1,
+    "exact_same_failure_names": true,
+    "failed_tests": [
+      "src/components/essay-beta-credit.test.tsx > start is read-only, hide preference does not hide the allowance",
+      "src/components/essay-beta-credit.test.tsx > start rechecks and never claims an exhausted allowance",
+      "src/components/essay-beta-credit.test.tsx > inactive campaign never promises a free allowance",
+      "src/components/essay-beta-credit.test.tsx > same-user auth refresh keeps the first-entry introduction open",
+      "src/components/admin/admin-analytics.test.tsx > integrated analytics read-only surface > keeps missing RPC distinct from zero and reuses existing quality routes",
+      "src/components/admin/admin-analytics.test.tsx > integrated analytics read-only surface > unmounts private reports on logout",
+      "src/components/admin/admin-console.test.tsx > AdminDashboardView > renders observed metrics and marks an uninstalled subsystem",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > loads a bounded directory immediately with total count and school names",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > passes search, status, grade, sort and server offsets without filtering page rows",
+      "src/components/admin/admin-console.test.tsx > AdminMembersView > lists a member and opens the detail with credit history"
+    ],
+    "analysis": {
+      "beta_credit_4": "Expired fixed campaign date; dialog expectations are stale after 2026-11-11 KST. No campaign or credit policy changed.",
+      "admin_analytics_2": "Old GA4 connection copy no longer matches existing dashboard.",
+      "admin_console_4": "Old labels/columns/detail expectations and incomplete study KPI fixture total.ms; same TypeError in baseline."
+    }
+  },
+  "new_failures": 0,
+  "typecheck": "PASS",
+  "next_build": "PASS",
+  "functions_build": "PASS",
+  "eslint": "PASS",
+  "isolated_db": "3 questions / 9 activation checks / submit / mock result / rewrite / reevaluation / non-destructive rollback PASS",
+  "provider_calls": 0,
+  "production_writes": 0,
+  "log_sha256": {
+    "db-test": "2e1c241d295dba13029206812db6d7e1de2153fadd854a9462285a9b7e132613",
+    "related-tests": "ba5739ce65119eb67b08f9302f2c86bd53d33bf54c3c11b8697edddc842e9ef2",
+    "web-tests": "5767a99ab493feb749326d73e1decde301f64826ff7053faf03fd5fe032cbbc3",
+    "baseline-failures": "72c08fa2dca16336c3afb8b4ab8d3c225f6ae10b28f2619b48cb4228f8beb0b4",
+    "flutter": "3462816435efc890866a101d174f6f5c36fc93fe20b10278853211afd91a0f1f",
+    "lint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

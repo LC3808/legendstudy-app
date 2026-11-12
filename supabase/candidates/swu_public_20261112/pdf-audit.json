@@ -1,0 +1,74 @@
+{
+  "assets": [
+    {
+      "sha256": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185",
+      "pages": 1,
+      "existing_approval": true,
+      "new_upload": false,
+      "download_sha_verified": true
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "dab3001dd275226a8d092a0cfe8236b1a74fbf48956b24bfa1abfec951555767",
+      "pages": 11,
+      "official_archive_reused": true
+    },
+    {
+      "sha256": "74e673dfc7908417531488dccc846d00ec5e53f60329cd156ee918bb3a6cd7e6",
+      "pages": 10,
+      "official_archive_reused": true
+    },
+    {
+      "sha256": "cfaa64c82066c76420ffc36f52cac5bc888d9f61444bb1be0a215b6c266802d7",
+      "pages": 3,
+      "official_archive_reused": true
+    },
+    {
+      "sha256": "de7e0713043b7cd00e792474afdc323ade0533ac86cedecb368ce39ff1c8ba7d",
+      "pages": 8,
+      "official_archive_reused": true
+    },
+    {
+      "sha256": "7da7d5baacba25eb60ae8974f08918b4ae00e26520714feaa140618109c955e4",
+      "pages": 12,
+      "official_archive_reused": true
+    }
+  ],
+  "student_question_mappings": [
+    {
+      "examId": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "questionId": "ee907ec5-88f2-5097-83be-9b8c9a03ec93",
+      "assetId": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185",
+      "pageCount": 1,
+      "startPage": 1,
+      "verification": "VERIFIED",
+      "studentDisplay": "APPROVED",
+      "storageRead": "APPROVED"
+    },
+    {
+      "examId": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "questionId": "6c7d310f-d055-595c-8aa5-49d901b19f36",
+      "assetId": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185",
+      "pageCount": 1,
+      "startPage": 1,
+      "verification": "VERIFIED",
+      "studentDisplay": "APPROVED",
+      "storageRead": "APPROVED"
+    },
+    {
+      "examId": "3643b295-3b63-5b77-bd1b-d3ce68de4885",
+      "questionId": "318473c0-46ea-55e7-ab06-53520ea2373f",
+      "assetId": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185",
+      "pageCount": 1,
+      "startPage": 1,
+      "verification": "VERIFIED",
+      "studentDisplay": "APPROVED",
+      "storageRead": "APPROVED"
+    }
+  ],
+  "science_questions": 6,
+  "science_official_problem_and_rubric_refs_valid": true,
+  "visual_review": "PASS: existing student page with all three math questions; seven official rubric pages for six science questions inspected this turn",
+  "new_storage_policy": 0
+}

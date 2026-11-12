@@ -1,0 +1,21 @@
+{
+  "private_apply": "/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/.local/swu-production-preflight-20261112/apply-draft.private.sql",
+  "sha256": "fefe319387e59e02d23f90546445f2a87d4827d28a63f1c90e611e0bb5c9e9b1",
+  "bytes": 806654,
+  "files": {
+    "preflight.sql": "33e7afeae8fae7d73ba02f6c89e49ce3acba80a1005a2b3fa750a434bbac79f7",
+    "verify.sql": "3aaf3613e16cca3685054cc208f76b7d08dab01a808e723e6ddf5f7294e9aa3c",
+    "rollback-retire.sql": "ee4c333f055771ceb291f9221f8ced852a11e29bad11fcd6fbede93f550be1b6",
+    "verify-retired.sql": "46c35f1c47aaa55db99f27bc5eedbfc330f53922397d71377d0c4f37a567a95e"
+  },
+  "source_metadata_sha256": {
+    "supabase/candidates/natural_expansion_20261111/four-university/question-review.json": "e0efff89b053344c399db89863c50b8796027282936f5f4515f95889c56a29a1",
+    "supabase/candidates/natural_expansion_20261111/four-university/leaf-contract-candidate.json": "05d78f816e6d9a009802c5ccf4c882424f4510dd43562c376f95eb731e83daa4",
+    "supabase/candidates/natural_expansion_20261111/four-university/existing-pdf-reuse-verification.json": "d843925a4314b4c35e254063c896ef43e085e2120e0bdde57b2d55285a56dab0"
+  },
+  "candidate_packages": {
+    "ee907ec5-88f2-5097-83be-9b8c9a03ec93": "a92dbc53ad088a81a95135132bd2b0ac9ab8f9ac10f1a59e2bc93dc337338c71",
+    "6c7d310f-d055-595c-8aa5-49d901b19f36": "b7def77ae3e25eb95aa2cf508b565e55f89ac9dd3e6448903ef513a0838aca6f",
+    "318473c0-46ea-55e7-ab06-53520ea2373f": "f2675665111234e74961bc5e22ed5bb07fb30dbb97c28b26615ea6effc41964a"
+  }
+}

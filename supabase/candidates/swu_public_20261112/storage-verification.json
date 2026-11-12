@@ -1,0 +1,1647 @@
+{
+  "objects": [
+    {
+      "name": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185.pdf",
+      "bytes": "82070"
+    }
+  ],
+  "normal_account_read": true,
+  "anon_rows": 0,
+  "existing_policies": [
+    {
+      "schemaname": "cron",
+      "tablename": "job",
+      "policyname": "cron_job_policy",
+      "digest": "14d21b16ce51d09cda449cef3be32357"
+    },
+    {
+      "schemaname": "cron",
+      "tablename": "job_run_details",
+      "policyname": "cron_job_run_details_policy",
+      "digest": "e1acd427c57e021057d5189f383c75e9"
+    },
+    {
+      "schemaname": "ingestion_ops",
+      "tablename": "changes",
+      "policyname": "sync_changes",
+      "digest": "0dfc55d252dcd6503a3aba496dff8842"
+    },
+    {
+      "schemaname": "ingestion_ops",
+      "tablename": "config",
+      "policyname": "sync_config",
+      "digest": "e3f70fafeeec5b4c45de8a8612beeb47"
+    },
+    {
+      "schemaname": "ingestion_ops",
+      "tablename": "config",
+      "policyname": "sync_schedule_update",
+      "digest": "efbad0d440081412aca1c22b12bf7658"
+    },
+    {
+      "schemaname": "ingestion_ops",
+      "tablename": "observations",
+      "policyname": "sync_observations",
+      "digest": "584ca05ab6bd4b829706b4394d080309"
+    },
+    {
+      "schemaname": "ingestion_ops",
+      "tablename": "runs",
+      "policyname": "sync_runs",
+      "digest": "ecccb5afa83e768df4d8cbc2e260b873"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "answer_key_versions",
+      "policyname": "answer_key_versions_public_select",
+      "digest": "1b65ae9ba45f0a692bf3914aaa6c02f0"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "bookmarks",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "d7761d03c3a702056e7b80a58c847331"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "bookmarks",
+      "policyname": "bookmarks_owner_delete",
+      "digest": "1cbeac5365156cf72a80b62477e10cde"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "bookmarks",
+      "policyname": "bookmarks_owner_insert",
+      "digest": "3ab09af0c77c38492330bb2923672ff2"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "bookmarks",
+      "policyname": "bookmarks_owner_select",
+      "digest": "a55a26b8b92a4d09fc64e716a8872707"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "content_items",
+      "policyname": "content_items_public_active_select",
+      "digest": "c4e6bfa2b4f2236d7be6b7146b633707"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "content_items",
+      "policyname": "material_sync_worker",
+      "digest": "d8a10f4827757d87a2c0621b01fae615"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_accounts",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "01881a6b4e4df19bc9ed238545dd4677"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_accounts",
+      "policyname": "credit_accounts_owner_read",
+      "digest": "f51a354e154f0a416e7ade1bc0cf39b0"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_grants",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "575c8aca6be383f76f4d3a3fbdf2ffc5"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_grants",
+      "policyname": "credit_grants_owner_read",
+      "digest": "276f3ea211ecb5f96dba083dce5cfe57"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_transactions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "8ead7ae2e0371ecef961920544550d67"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "credit_transactions",
+      "policyname": "credit_transactions_owner_read",
+      "digest": "2dd5435fa7cc672de5e9ce071a6ec431"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "8d910d0f68809aaaeafc930705ec0130"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "policyname": "day_targets_owner_delete",
+      "digest": "de1710134eb9bf51403b9c586e511c52"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "policyname": "day_targets_owner_insert",
+      "digest": "6967d401d163034139c30eeb2199cb38"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "policyname": "day_targets_owner_select",
+      "digest": "0a2be82a51e2b2278b240f47fee24cad"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "policyname": "day_targets_owner_update",
+      "digest": "3b064de50226a6f59ed3d3248855b78e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_ai_processing_runs",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "4d0dd7916d4dde07553a4287b10a5468"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_attempts",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "d4dd2391097fa2f53b252548dd0557c4"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_attempts",
+      "policyname": "essay_attempts_read",
+      "digest": "e372e4a420645ce9be575bb71ecca33b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_billing_decisions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "380eb00177cafdcb31771c569f494e93"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_billing_decisions",
+      "policyname": "essay_billing_decisions_owner_read",
+      "digest": "85b0d7e934438319a4662fe9d4146d43"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_drafts",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "17adfbd1d92986521422fdc9dc093f25"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_drafts",
+      "policyname": "essay_drafts_delete",
+      "digest": "3ade214fe81bc583b460b1675c90a58e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_drafts",
+      "policyname": "essay_drafts_insert",
+      "digest": "a2766242c324f9b973a07cc12f217800"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_drafts",
+      "policyname": "essay_drafts_read",
+      "digest": "9056307a4c5c421d3edcada14e116ec7"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_drafts",
+      "policyname": "essay_drafts_update",
+      "digest": "d9b2ad07f5bb5830a02f9cf42ab445dc"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluation_criteria",
+      "policyname": "essay_evaluation_criteria_read",
+      "digest": "15535d735fce41e0ecb4ac7971a555af"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluation_dimensions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "5feb8e9dc3154f7f6d1e02df487d24c2"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluation_dimensions",
+      "policyname": "essay_evaluation_dimensions_read",
+      "digest": "536e5bcdfd4093fd06235f918e1cfc78"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluation_evidence",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "b9ff7d57208f29b982a343aff8ebd207"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluation_evidence",
+      "policyname": "essay_evaluation_evidence_read",
+      "digest": "61a7e8aca54bd24c6996232413c09ca0"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluations",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "03c6b8c3acc19ddd83829936a48e615c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_evaluations",
+      "policyname": "essay_evaluations_read",
+      "digest": "920106bedfa5dabbfdbca24f0fe570d5"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_exam_resources",
+      "policyname": "essay_exam_resources_public_select",
+      "digest": "6a1435af3d9651defe84b13b26323f57"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_exams",
+      "policyname": "essay_exams_public_select",
+      "digest": "889653095490d0896148318ec2d7978a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_generated_rewrites",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "0d543cbbf07eea67bb92bf563066e4d0"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_generated_rewrites",
+      "policyname": "essay_generated_rewrites_read",
+      "digest": "4d0f39800cfa210930ea918d181a395e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_improvement_items",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "cdf60d3046716d9a07e4f818570025d9"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_improvement_items",
+      "policyname": "essay_improvement_items_read",
+      "digest": "517193be9964b72d4de3b317d2ff759c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_improvement_progress",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "45d8bae57ce9a904e4abf0bb76789437"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_improvement_progress",
+      "policyname": "essay_improvement_progress_read",
+      "digest": "0fce57caa54af0e1c1c63c7d9d52f127"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_learning_events",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "5dd113f5a54a9b6312772b37850edd1b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_learning_events",
+      "policyname": "essay_learning_events_read",
+      "digest": "6ab4f6effc05391a17ed479a6cc17d9a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_practice_sessions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "be5cc4ef7a9f88fb85307b64943bef32"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_practice_sessions",
+      "policyname": "essay_practice_sessions_read",
+      "digest": "9a1ec0ddbb7deb19cf151961c23ee8de"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_question_evidence",
+      "policyname": "essay_question_evidence_read",
+      "digest": "de53daea912c5873ef20bb72e8e7a910"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "essay_questions",
+      "policyname": "essay_questions_read",
+      "digest": "1df2abfc93033f42c196cc8d90ba601e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "exam_questions",
+      "policyname": "exam_questions_public_select",
+      "digest": "cfba08495f3509730de963210605d768"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "exam_subjects",
+      "policyname": "exam_subjects_public_active_select",
+      "digest": "a95e1ed30056f70c55e1e9ffbf22908a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "exam_subjects",
+      "policyname": "material_sync_worker",
+      "digest": "8b013f050bf1fbb89aa38775bc737572"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "exams",
+      "policyname": "exams_public_active_select",
+      "digest": "f45d3ebe7352884ca639e7d4dc3768ea"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "exams",
+      "policyname": "material_sync_worker",
+      "digest": "c37f795146d9aee3e4e1550827681245"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "f2657eba36d33d9349b4bffa229609c3"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "feedback_admin_select",
+      "digest": "695e3a8381a3a8669dde6c3b8cebcd85"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "feedback_admin_status",
+      "digest": "b609ea010227e5a48e66d88749ada6e2"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "feedback_insert_guest",
+      "digest": "ff33886486719944f2aeede1a71e9839"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "feedback_insert_owner",
+      "digest": "fe89e1fb87f08bf6002662644c25133a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "feedback_submissions",
+      "policyname": "feedback_owner_select",
+      "digest": "168e759051309192b77a1aad4b91e4d1"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "grade_cutoff_versions",
+      "policyname": "grade_cutoff_versions_public_select",
+      "digest": "eb3fccc1f7ee78d8618238599040589d"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "home_configuration_revisions",
+      "policyname": "home_configuration_owner_read",
+      "digest": "32e47e95ac9d46b9b198903528f95066"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_attempt_artifacts",
+      "policyname": "math_executor_scope",
+      "digest": "ccb7ac28714128956a4e916826950064"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_attempts",
+      "policyname": "math_executor_scope",
+      "digest": "f8c5671b2c26cc5d50445c9e3bf67fb5"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_billing_bindings",
+      "policyname": "math_executor_scope",
+      "digest": "2dafd2c23361c35a189a7b6a34a49e02"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_canonical_solution_steps",
+      "policyname": "math_executor_scope",
+      "digest": "c1774c14c07ad80f152a044834c86757"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_canonical_solutions",
+      "policyname": "math_executor_scope",
+      "digest": "3764554a23d641e63b6db5c660c1876c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_considered_references",
+      "policyname": "math_executor_scope",
+      "digest": "c161be5b6860e58fa973a5dccdbefb06"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_core",
+      "policyname": "math_executor_scope",
+      "digest": "c42e460b297f730beeabab20cd798a68"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_error_propagations",
+      "policyname": "math_executor_scope",
+      "digest": "4ed5b4ab6632ed5707724c40ee33320d"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_errors",
+      "policyname": "math_executor_scope",
+      "digest": "f07d95075e0254714ab6796599e90a0a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_evaluated_paths",
+      "policyname": "math_executor_scope",
+      "digest": "f41b280cc9edf1002dea2c8f092bcb18"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_evaluation_criteria",
+      "policyname": "math_executor_scope",
+      "digest": "415c4c8b5453aa1820dfe7dc66311ed0"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_evaluation_profiles",
+      "policyname": "math_executor_scope",
+      "digest": "3026ecbcfb55d40c62d040cc620f3d11"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_evaluation_sources",
+      "policyname": "math_executor_scope",
+      "digest": "dc3eb717a17a4ca49d37e757c5d8636b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_evaluations",
+      "policyname": "math_executor_scope",
+      "digest": "5889ada35dd8c0ca564e61f620b6871b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_extraction_regions",
+      "policyname": "math_executor_scope",
+      "digest": "4fbba878ce3a00a8bbf466b69b66d19b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_extraction_runs",
+      "policyname": "math_executor_scope",
+      "digest": "d1a5fc0708fb2185a55262e9fdcfd795"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_hint_exposures",
+      "policyname": "math_executor_scope",
+      "digest": "03d49f244e7783b7eec57fec460da92e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_hints",
+      "policyname": "math_executor_scope",
+      "digest": "dc9729a0b854d2061efc31e5d344518a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_problem_sets",
+      "policyname": "math_executor_scope",
+      "digest": "350c1c4a899084f9fb87325bafe4db8e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_problems",
+      "policyname": "math_executor_scope",
+      "digest": "5e1960f47d4de07e1eb68f61aff00797"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_scoring_criteria",
+      "policyname": "math_executor_scope",
+      "digest": "ecb5757df720bcc54cde563d2f4b6507"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_solution_exposures",
+      "policyname": "math_executor_scope",
+      "digest": "e2f86455b999c20cdbe05b12e43ebaae"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_solution_steps",
+      "policyname": "math_executor_scope",
+      "digest": "ac406092c1efdacba0523a21b7f0265f"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_source_artifacts",
+      "policyname": "math_executor_scope",
+      "digest": "01aef5be2e61daad05c00513f81ab821"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_step_dependencies",
+      "policyname": "math_executor_scope",
+      "digest": "127ab0ffbdcf137ba88a97ca77bba5bb"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_step_regions",
+      "policyname": "math_executor_scope",
+      "digest": "d57bc4a0a43bcd2d19adcb97cb21cdfe"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "math_subproblems",
+      "policyname": "math_executor_scope",
+      "digest": "f4f8d4ce1b2a613008e9f1cec69033a9"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "mock_exam_answers",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "b22a01312b0365f2364a829c59eec125"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "mock_exam_answers",
+      "policyname": "mock_exam_answers_owner_select",
+      "digest": "829b1aedc7a18f9116e041ea4c9cfd49"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "mock_exam_attempts",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "7d3cbf5079e377ec93460351c0a5e2dc"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "mock_exam_attempts",
+      "policyname": "mock_exam_attempts_owner_delete",
+      "digest": "75daae62eb6bd656207b44f40efde33a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "mock_exam_attempts",
+      "policyname": "mock_exam_attempts_owner_select",
+      "digest": "a1ecdec6681e05968a05eb8cbc0f38ba"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "profiles",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "abdc22bb5a94ad9f146455020622eee5"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "profiles",
+      "policyname": "profiles_owner_delete",
+      "digest": "7188038e1be69af7b88e8cc1f60c2f50"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "profiles",
+      "policyname": "profiles_owner_insert",
+      "digest": "cc7fbbc53e47f3c08514ee4300537e1a"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "profiles",
+      "policyname": "profiles_owner_select",
+      "digest": "308745c8296ead8fa2b6a9a94410c3fe"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "profiles",
+      "policyname": "profiles_owner_update",
+      "digest": "635f0510fb71c4818c748403462abb0e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "recent_views",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "b7d489e87847e34f9cc4e6911397f64c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "recent_views",
+      "policyname": "recent_views_owner_delete",
+      "digest": "2f8bcac2aa8683af82dc26b3061d1660"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "recent_views",
+      "policyname": "recent_views_owner_insert",
+      "digest": "6c9eb47f3992422f797c6f69b758eb4b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "recent_views",
+      "policyname": "recent_views_owner_select",
+      "digest": "1bf493fdeea5d8212f1bb96a8a3ed7a8"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "recent_views",
+      "policyname": "recent_views_owner_update",
+      "digest": "816cdf83fd6cf1cc7df3b22019f50f07"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "resources",
+      "policyname": "material_sync_worker",
+      "digest": "1b39b013e4835ee088f2d3a1acfc5cd4"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "resources",
+      "policyname": "resources_public_active_select",
+      "digest": "4b32300ff86002e44dd69ec2da229ef5"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "source_posts",
+      "policyname": "material_sync_worker",
+      "digest": "70f962e3ea342ac89aa6d41450137c2f"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_application_events",
+      "policyname": "application_event_owner_read",
+      "digest": "ac2c664dfb0ef3afd82c7abeb8a1e929"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_applications",
+      "policyname": "application_owner_read",
+      "digest": "807a143bd36c7f02f37bc442183ac3cd"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_target_universities",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "06438110eec8c110b354b05cfbf6bc23"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_target_universities",
+      "policyname": "student_target_universities_delete",
+      "digest": "fc4162ec6d1127f1bef674300985b6e7"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_target_universities",
+      "policyname": "student_target_universities_insert",
+      "digest": "a17087cab9239346d91ca2e1dd5af9ae"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_target_universities",
+      "policyname": "student_target_universities_read",
+      "digest": "4979fa2b89c3c48aa1255d0ff50cdd6b"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "student_target_universities",
+      "policyname": "student_target_universities_update",
+      "digest": "518edf5c1b4951ec75d82d24c314516c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "study_sessions",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "2a2d98a3fa892fcf8f81422a25dcce9e"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "study_sessions",
+      "policyname": "study_sessions_owner_delete",
+      "digest": "a768e52d1faa3e1d05afebc9c302b879"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "study_sessions",
+      "policyname": "study_sessions_owner_insert",
+      "digest": "d25e7ca36f7d0c3a708660a474c35bac"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "study_sessions",
+      "policyname": "study_sessions_owner_select",
+      "digest": "423907180a749c6bc565f64a892ce97c"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "subjects",
+      "policyname": "subjects_public_active_select",
+      "digest": "4fba1cbbf3c24a2edcb0544509eb51f2"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "universities",
+      "policyname": "universities_public_select",
+      "digest": "b1a67e6074be91eb9af6469b518f81fb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "account_lifecycle_restriction",
+      "digest": "7ac836ea0919b73e22d794c41bd3265d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "avatar_owner_delete",
+      "digest": "ab36511ef4c208d6e5c3f7f24404c289"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "avatar_owner_insert",
+      "digest": "b06a9e678df0450e28a9074af05423b2"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "avatar_owner_read",
+      "digest": "8d0cab37496572eb92c8f4e52ea3ab68"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "avatar_owner_update",
+      "digest": "a3ad1dcc4bcc0f2091bbe274ebbe6da8"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_0_problem_read",
+      "digest": "38059b7af1e115e38c30867663455aae"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_1_problem_read",
+      "digest": "d78c34736f211c7f508ed7dbb9faf338"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_2_problem_read",
+      "digest": "064e25d1cdd271dad9c5e85f4aac5f77"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_3_problem_read",
+      "digest": "75060a2d0dcc3b399ed5174e9d37bb2c"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_4_problem_read",
+      "digest": "3c6edc3bc94c9537054ee888dd2bdc88"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "central_missing_20261026_5_problem_read",
+      "digest": "b4c834462bfdc57ffb7b25951353cf9d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_group1a_central_humanities_question_read",
+      "digest": "d8689f2688a928510e7b23c8e1b8e09c"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_group1a_skku2027_language_read",
+      "digest": "63933c6c6dd41f4b73303ad7394f5c89"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_khu_continuous_text_question_read",
+      "digest": "3c37cfeb098276915a567316a3604f5a"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_khu_social_question_read",
+      "digest": "f600d7d24a7b18528e93feb60436711d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_kwangwoon_question_pdfs_20261027",
+      "digest": "9f61c633cc5f8c2909d6f3da1dec72a3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_material_operator_insert",
+      "digest": "505359fbfde168f18a4b641df35d79b5"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_material_operator_read",
+      "digest": "b05a6431807f20428cb0991c2912596a"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_normal_batch01_problem_read",
+      "digest": "87b2613291c6d61c514b7a556aac8935"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_skku_language_a_read",
+      "digest": "ac7ea5d606a78c7718d9ad27fe6b7611"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "essay_skku_language_b_read",
+      "digest": "b125638696ee1ef942eeb62e263c9a8f"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_2024_natural_am_question",
+      "digest": "d2e8991db94bce4c93b71afbeda503b0"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_2024_question_read",
+      "digest": "7ff3014a6473dc993e04556a457a3da7"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_2026_natural_mock_question",
+      "digest": "51630758f99c9440ad84aa68e9a27a6b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_2026_natural_morning_question",
+      "digest": "1dffeecdca99aef53914ab46145b07d3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_2027_natural_mock_question",
+      "digest": "38ec6f825192318e4397eb3c94010b4e"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_humanities_batch_a_problem_read",
+      "digest": "103acd110fbbb3a3e885fa479208d7b4"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_humanities_batch_b_problem_read",
+      "digest": "989a891d0e8269ca9607ed656aa8c6ec"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "hanyang_mixed_20261026_problem_read",
+      "digest": "ada7bc4349564e49daed7004e8a9c42b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "humanities_partial_recovery_20261027",
+      "digest": "b64d83a9e2ff7d6bae279932f46fa8d7"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "humanities_recovery_20261027",
+      "digest": "d901e69413f2fdf74f683da49f6fcf1b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_0",
+      "digest": "630b4d5f72cf8136d8db4d12efe575a9"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_1",
+      "digest": "2c25fd8147bee0f4ae78cddb1a17c1b5"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_10",
+      "digest": "0fe99bef01cf1569ccbe7c85e4c7c96a"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_11",
+      "digest": "fdaf4ae67d2bad88d46d11006b83764f"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_12",
+      "digest": "fb8218281ffee8e98a52df13ce00d1a3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_13",
+      "digest": "d0d7708a2bf121e53862502888685dc6"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_14",
+      "digest": "2f37cc0708c4b2e723c0a4e44c7390b1"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_15",
+      "digest": "20867e5b2972d7a3c45c15ad43d12eb3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_16",
+      "digest": "ec5d5688b52f562faea6dd97e7031fbb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_17",
+      "digest": "980afc7be18e9d2eca875d2a75b63d28"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_18",
+      "digest": "7feafa4b92fccaea288e9cb46637c44d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_19",
+      "digest": "5250c175f482b714bc8b81f1736c366b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_2",
+      "digest": "3f1a5d2413483b7ad12a2236eaae7b04"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_20",
+      "digest": "2a5574fe457d68682d12d1783f39c4cd"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_21",
+      "digest": "9477aae68734fd6962aad0251ed18811"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_22",
+      "digest": "587bb6c5fb7898619bddd58c3b0d830f"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_23",
+      "digest": "d8b1b590f8fc01e9e8fe89eed62e86be"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_24",
+      "digest": "41181673d45d9712e33310dc3000da64"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_25",
+      "digest": "a0642bb45556aebef5ee4085e109e41d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_26",
+      "digest": "0b8cc63f0a7e9714de1a580a23990cef"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_27",
+      "digest": "c07db396e9d4c1c28708e9cfb08e42f0"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_28",
+      "digest": "2ffd40b7cef89a5f17c1071c07d6ddee"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_29",
+      "digest": "68ab6e7c714a2692bf25ecb4f4b2be0d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_3",
+      "digest": "520873fea540112ab366bdc7de36eb57"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_30",
+      "digest": "a6f47789c975848c57b6be875139be6b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_31",
+      "digest": "22517ae4c669caca57b60a5f97fbc173"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_32",
+      "digest": "4c2cea4f2342149fc2350ce9cec590db"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_33",
+      "digest": "a434a4aed70b75cfcfb833bef64d6620"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_4",
+      "digest": "6efddad733bbb92c9cefe4f08a5dd92c"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_5",
+      "digest": "a6c91e8ebcb5cbf49eb6b0284c2373a8"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_6",
+      "digest": "45dd88ade74b61ea9328df27b1432e11"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_7",
+      "digest": "3c97b80e3a469b57910f18089ef47fe6"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_8",
+      "digest": "7093adf5344c568910562371604be7c4"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "inha_standby_20261026_9",
+      "digest": "7b0d9a135f0c08d90de2b6fc18b0ab3c"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "kau_social_standby_20261027",
+      "digest": "5528fd9e3fcdbce6970ba6b6a7a5369d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "khu_missing_20261026_problem_read",
+      "digest": "a158a6d55be0fa3f7344dab5ff14db30"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "korea_humanities_20261026",
+      "digest": "b96d24f054956d7911a621abdae7f7d5"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "kwangwoon_21_official_problem_pdfs_20261112_read",
+      "digest": "d58f2148bbecd23cc4d2a568e9ddd6f2"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_owner_insert",
+      "digest": "3ee5ec0c8b866a898c142c10bed9d661"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_owner_read",
+      "digest": "570ecd3187d4af4758bc833242226bf0"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_restrict_anon",
+      "digest": "6bcb181370b8f8ef5fccaeef2cf84cdf"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_restrict_delete",
+      "digest": "a845422ccbbd95bb94ee833e589cef25"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_restrict_insert",
+      "digest": "b3af7fbd00e4acdbb352aa327fb19ce9"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_restrict_select",
+      "digest": "92c00dec2871f6eae6aa48552c908d8a"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_restrict_update",
+      "digest": "2d75f8d5ef0fef73e8ddd5974195a600"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "math_worker_read",
+      "digest": "c31705b98801fea95282594823128e7f"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_delete_guard",
+      "digest": "8b998d96fd17619adc759bc46c4463c2"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_insert",
+      "digest": "5f991c7f2afac3f10adc2b3ade981b69"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_insert_guard",
+      "digest": "6046db8ab19b21edb9c704f33c9a737e"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_select",
+      "digest": "96a150622d061e172000808aca1b27a5"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_select_guard",
+      "digest": "fbe64849cf5813236fc530929efe3fa8"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "notice_media_update_guard",
+      "digest": "28158a89d27250eb14cf982bfab604a4"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "skku_2026_language1_problem_read",
+      "digest": "0211571a46c54b01b597700333103d0b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "sogang_problem_q2_complete_20261112_read",
+      "digest": "2d8cd391b83582476c7ca47b8fb8dbf0"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "sookmyung_14_official_problem_pdfs_20261112_read",
+      "digest": "5170ca6d7c9fca22102c42b60532943b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_0",
+      "digest": "084eefd9dcbfcf2d90f4567c05da333d"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_1",
+      "digest": "585af4d78e572dc917c3b7825d46c6eb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_10",
+      "digest": "197842666d63d463a4693e70e62aa257"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_11",
+      "digest": "5cb1c66ea4d135670de5bfdd8b7289f8"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_12",
+      "digest": "3f16feda763e1a844709f385738e62ee"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_13",
+      "digest": "009afa5499e5c94398674d5ff07bfeab"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_14",
+      "digest": "fe16cebbfe2159af5b3786b6b243aa84"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_15",
+      "digest": "143cb38ae0f7026be3e6d37e7e3c3b58"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_16",
+      "digest": "2cac3e658508708579ab1f6629052333"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_17",
+      "digest": "5930f0bc0de17864a15a946f6446a505"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_18",
+      "digest": "a2541dcca7472cbad1a4e02d68440bee"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_19",
+      "digest": "1ad5b83925fd18297630eb77b7759437"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_2",
+      "digest": "c9b009f0aca234f2f18ea356f25b4fba"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_3",
+      "digest": "7ac7992bfcafe9f8ba04d9e91fe90bc4"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_4",
+      "digest": "2d567eab3897f4a5f8263296653ee147"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_5",
+      "digest": "7bace4276e3a15b4cf29af64a4bce76c"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_6",
+      "digest": "d9a3030739fe53da65c921dd8a9a1fdb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_7",
+      "digest": "1602ba0aa03a2dac9827ac2f18c89010"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_8",
+      "digest": "72f9209e09023bca0f6683c08842998b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_hufs_20261026_9",
+      "digest": "3388c46b96e949662a8213a5d4bb1b01"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_0",
+      "digest": "b8acc0d2952033237e50cd3b68fbf93e"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_1",
+      "digest": "ad6eb7151f853d388e24bc52d0717f46"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_10",
+      "digest": "ca9322479abb0048387d84e72bc82ba2"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_11",
+      "digest": "ade8a390b357b6a3f275ae37af604080"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_12",
+      "digest": "037f082f4c4bbcc23806478368996342"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_2",
+      "digest": "951bd54ead43f6f12c9e451d3e0e7d9b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_3",
+      "digest": "3d134d592cdb654f97ce605005661668"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_4",
+      "digest": "fd900a37529a342e6913544507941fbb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_5",
+      "digest": "a6203c4ff9813665e41d5cf05fe67770"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_6",
+      "digest": "61a06b8575b684d8fc866be62c775f89"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_7",
+      "digest": "57c20b5a2cb96c2950aab34ff7791372"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_8",
+      "digest": "6820aa0bfb4337cfb86820d404e70aa2"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_konkuk_20261026_9",
+      "digest": "90f4e0561324d1c24d40741f6f0bbc22"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_0",
+      "digest": "c1d1647a2d638e75b1b0c1dc6ac72c6a"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_1",
+      "digest": "776471ad9166dea15a3f15f77b046d41"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_10",
+      "digest": "e6f726a0411ec11f90d605be44733d32"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_11",
+      "digest": "798bb0209806e718cfe8b8ee0293dd53"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_12",
+      "digest": "151dce18ade9970da8aabb2bf8cb1ad3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_13",
+      "digest": "01f1f5ce95a6885a9e3f6ea4e7effeb3"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_14",
+      "digest": "4e841995c37c160df2d6ca54ab1a5b47"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_15",
+      "digest": "06b8fc7e364d30ae8d99d178621475ae"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_16",
+      "digest": "b61265e333b58698f4bb5e34dc1b4809"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_17",
+      "digest": "011ccded452c66ae39451e37474c10e1"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_18",
+      "digest": "9dfbeedf8b08f82183dbc151da8fcd18"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_19",
+      "digest": "4f2f73dd3e8fea3e627b8661b5d89cfa"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_2",
+      "digest": "8841d97cb6c73476908cc19ca3d54547"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_3",
+      "digest": "62d438e1a007cf96940c7bd3814a2810"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_4",
+      "digest": "a2a1e67c82fa2cfff7095bd1def20245"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_5",
+      "digest": "6dc7de660c30117f34b8f145f4087060"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_6",
+      "digest": "d38dd307418eddd6469bc52c5bf15f2b"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_7",
+      "digest": "cbe1ec719db317ca16a014d0e1833018"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_8",
+      "digest": "9c373f781d02bc41f24710445e45a0c1"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_20261026_9",
+      "digest": "9a92d52cce5ecb70e29b6b1ada9b6feb"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_guide_20261026_0",
+      "digest": "c6b7d8d81f42d8c7beb4546187b98de7"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "standby_sogang_guide_20261026_1",
+      "digest": "b73e060cdd16916076ea5ef52c1118d9"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "student_problem_verified_20261022_read",
+      "digest": "a1e1c899756f481090163b8d0241ea78"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "task20_chungang_question_pdfs",
+      "digest": "5b825a5f04e6a5a801670b0a46dfc47e"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "task20_hanyang_16_question_pdfs",
+      "digest": "53e0664490b74ed48fc08f3c0b94ffbe"
+    },
+    {
+      "schemaname": "storage",
+      "tablename": "objects",
+      "policyname": "task20_hanyang_2024_pm1_question_pdf",
+      "digest": "0f348ce3ea94e8492ec7444d6cafc55c"
+    }
+  ],
+  "new_policy": 0,
+  "upload": 0,
+  "existing_sha": "3359d587acfc910c566fd79f8f3b8ffe027635b5a0846367243d92f60ff86185"
+}

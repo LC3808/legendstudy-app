@@ -415,3 +415,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [동국7시험20문항 공개연결·2026모의Q1 공식수정 HOLD](essay-dongguk-public-20261112.md). 다음광운.
 
 - [광운21시험42문항 PUBLISHED·검증](essay-kwangwoon-public-20261112.md). 다음서울여대.
+
+- [서울여대 수리3 공개 연결·과학6 NOT READY](essay-swu-public-20261112.md). 최종 운영 영수증을 확인한다.
