@@ -1,0 +1,722 @@
+[
+  [
+    {
+      "check_name": "public.math_submit_attempt(jsonb)",
+      "passed": true
+    },
+    {
+      "check_name": "math_private.resolve_profile(uuid)",
+      "passed": true
+    },
+    {
+      "check_name": "math_private.require_active(uuid[])",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_input(jsonb)",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_catalog(integer)",
+      "passed": true
+    },
+    {
+      "check_name": "math_private.release_catalog(uuid)",
+      "passed": true
+    },
+    {
+      "check_name": "math_private.hanyang_worker_references(jsonb)",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_canonical_solution_steps ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_canonical_solutions ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_evaluation_profiles ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_problem_sets ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_problems ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_scoring_criteria ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_source_artifacts ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "public.math_subproblems ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "math_private.task20_hanyang_source_pages ACL/RLS",
+      "passed": true
+    },
+    {
+      "check_name": "private Worker execute",
+      "passed": true
+    },
+    {
+      "check_name": "74e16370-a1be-57f9-b6c7-b2e035bfbb06 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f Registry",
+      "passed": true
+    },
+    {
+      "check_name": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ff6226fc-32ac-5903-ab0f-b1560803efbb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8744f2ad-02c4-51d4-83de-6d5ab245cec5 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8c11754b-d3af-56bf-9b66-d72092468f70 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "48512d94-959c-5a94-b985-7e1bd005c6b7 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b Registry",
+      "passed": true
+    },
+    {
+      "check_name": "28f34ddb-5de8-5d3d-8ae1-9578bd879174 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "488c350e-9c3f-5eba-96ef-01960ede29b6 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "beb96180-87b8-5877-94fe-1d8cce9db925 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "59855528-951c-516d-b4cf-721a086253bb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "3df812ba-7ac3-5737-a50e-3db7e6a2c733 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "404cfc21-77d6-55da-9ba6-84198a1b3a01 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "84f6b941-8aae-5663-a6db-ac0c2e17fedf Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d685fdad-23c9-56bf-8f68-a372cdf3edfa Registry",
+      "passed": true
+    },
+    {
+      "check_name": "2837c76a-7fd1-51d3-9d89-567524e6d00a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "7c74e44d-375d-5f9c-83c2-60b8fc06977f Registry",
+      "passed": true
+    },
+    {
+      "check_name": "1dcae52c-5937-5d83-854f-f77c0ede42d4 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "09140d75-579d-5570-bf90-7228c99478a6 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "cfa4839f-c292-5a95-b8b0-e408aa1df009 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "707f9eea-3bcc-581e-b50e-4a5fccbdca7e Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ddae2f2e-bbc6-5769-b779-bd9b997ab202 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "982a78ca-012f-5683-bd31-4f00bdf711e2 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "a42806ac-63c2-5fd5-a383-ca3c5df4468a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "47d0af04-d836-5c5a-9cfa-4a5c4c986597 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "48937249-a641-5425-bffd-acaf096190a4 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "1bee0815-02e0-502a-b4ac-5090bfb69212 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "7c112225-51cc-59d8-a985-6c459a1e0a0a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "7c112225-51cc-59d8-a985-6c459a1e0a0a existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "40290efd-36af-55a9-beb7-8c90bbb04ee4 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "40290efd-36af-55a9-beb7-8c90bbb04ee4 existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "a7d06546-9d61-5317-afff-e656c25964f7 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "a7d06546-9d61-5317-afff-e656c25964f7 existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "f8e90b86-1a36-533d-a8c1-9847e1dd4014 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "4ec222eb-b5be-5a50-b2c6-883fd359b31d Registry",
+      "passed": true
+    },
+    {
+      "check_name": "b3a88056-a671-57ea-9a59-03cf1fb322ff Registry",
+      "passed": true
+    },
+    {
+      "check_name": "011b01a5-3714-5aab-821d-b459979df5e2 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "f7733560-15d9-530e-aaae-6d04da444d51 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ed63c506-ee9b-5ce7-967f-a1d53b9feac6 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ed63c506-ee9b-5ce7-967f-a1d53b9feac6 existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "4df1296d-abe4-5499-af35-20ba573fd6ae Registry",
+      "passed": true
+    },
+    {
+      "check_name": "4df1296d-abe4-5499-af35-20ba573fd6ae existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "101a7dcc-1c05-5c1d-b926-3f5729158f54 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "101a7dcc-1c05-5c1d-b926-3f5729158f54 existing ACTIVE",
+      "passed": true
+    },
+    {
+      "check_name": "ec20faaf-5f4b-5675-8798-aa52a80c2fd6 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8bc7d2fa-8147-5354-857f-1baa46d84355 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "7873aab1-1245-52c4-919e-0cc2888e70bd Registry",
+      "passed": true
+    },
+    {
+      "check_name": "dc618430-fc97-5868-ad1d-cc168ed0cf13 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "a3d0ca59-1ac8-534c-b30a-74da00810686 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "24a038de-b10a-5f62-af31-4214d12c093a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "f67348c2-6c17-550d-a806-64bcfde64af9 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "213cc62c-629a-580b-b83c-9846024db47d Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d09383a2-bbe1-5dbf-b08d-dd730062c506 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "1dc8ec21-0d5c-5129-afef-6c6109215d4b Registry",
+      "passed": true
+    },
+    {
+      "check_name": "0f1ef133-918b-566c-9a4a-024952ef78e8 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "694acb0a-4226-5a21-a340-377d3ea166d7 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "a4b76128-9a35-56cd-ad08-e4032eac6296 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ae3aa413-1fdf-5274-a0a6-4c4f59c5af8a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "2eece199-d608-5e4d-90f3-8b188543b851 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "04321068-ec5c-528d-b211-b5c6d4e44894 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "22f61110-4d80-5faa-be59-fab0855fa0cf Registry",
+      "passed": true
+    },
+    {
+      "check_name": "fed0bf52-4242-52e9-9a1e-6a35d8f309ca Registry",
+      "passed": true
+    },
+    {
+      "check_name": "fc09f3ae-3aa8-501d-8a82-05f8449b2140 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "40cb9125-a195-5540-a650-60f0cc6f7518 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d0e47369-676a-5347-94f3-bb7a2dcd6814 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8121b47e-4a8c-5767-b90c-90bde3327d74 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "e8deaca8-512a-56d8-82fa-fa11993883bc Registry",
+      "passed": true
+    },
+    {
+      "check_name": "b36ee18b-15cd-53bf-ba79-62bccf56510e Registry",
+      "passed": true
+    },
+    {
+      "check_name": "0ee85c19-7d9f-5186-8ff7-6f9353f21097 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8633896c-7611-5eeb-ae69-ab2672f1d867 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "337b7c8a-1c15-5f67-b542-f82877aad6df Registry",
+      "passed": true
+    },
+    {
+      "check_name": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8215d793-884f-5392-ba34-39b2c934c7db Registry",
+      "passed": true
+    },
+    {
+      "check_name": "1bb7bbff-fdf4-5205-b779-ccb29e756479 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "9ea7243c-f209-5341-a334-347cda833409 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "fda4849f-0f49-5553-99bb-1c78985ab5cb Registry",
+      "passed": true
+    },
+    {
+      "check_name": "b01f7a32-bc0e-5980-9190-14c15376de8a Registry",
+      "passed": true
+    },
+    {
+      "check_name": "918203f8-f289-5fbd-add7-6fb464767f2f Registry",
+      "passed": true
+    },
+    {
+      "check_name": "a183ac01-316d-54c2-9d22-1552540abc44 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "17d687d8-0a2d-59a9-ac9f-f5c0d4c273ed Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d758749d-1b70-56c3-a4bd-8f8deae44a7b Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8e725482-0731-52e2-a5bc-f985976e9689 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "753b737b-4b38-53e8-ac84-aa1200c823bc Registry",
+      "passed": true
+    },
+    {
+      "check_name": "7c888400-a224-5f31-b289-7882b01fd75f Registry",
+      "passed": true
+    },
+    {
+      "check_name": "3f29026e-f974-5355-bf90-e8c02cf369c9 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "bfcfaecc-ddd8-5a05-9e0c-cba14493104b Registry",
+      "passed": true
+    },
+    {
+      "check_name": "54949986-9666-5bc3-ae0c-45e521c68c89 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "8d70db7f-98ac-5f4f-a20a-0d0fd06b6e0e Registry",
+      "passed": true
+    },
+    {
+      "check_name": "d15a72e9-14fc-532d-aa28-a29669a83534 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "da0e3b82-0a26-5f4c-ab08-4d273160dcf6 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "30fe8e8a-3a9d-5857-a2ae-1a12f1d93be0 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "f96695e2-7c6d-504c-8f50-a82b0d04fbda Registry",
+      "passed": true
+    },
+    {
+      "check_name": "ca641fbc-126d-58d3-85ee-cd6a50613d23 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "815bc344-cdbb-5b7f-82c1-dc528de46f51 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "acb61559-3e3c-53fe-9bf6-75c9ac48da58 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "7c3fb259-ee90-55dc-bc1a-765d0358d030 Registry",
+      "passed": true
+    },
+    {
+      "check_name": "new leaves outside release allowlist",
+      "passed": true
+    },
+    {
+      "check_name": "math_canonical_solution_steps exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_canonical_solutions exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_evaluation_profiles exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_problem_sets exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_problems exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_scoring_criteria exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_source_artifacts exact count",
+      "passed": true
+    },
+    {
+      "check_name": "math_subproblems exact count",
+      "passed": true
+    },
+    {
+      "check_name": "Worker exact count",
+      "passed": true
+    },
+    {
+      "check_name": "b01f7a32-bc0e-5980-9190-14c15376de8a Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "918203f8-f289-5fbd-add7-6fb464767f2f Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "a183ac01-316d-54c2-9d22-1552540abc44 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "17d687d8-0a2d-59a9-ac9f-f5c0d4c273ed Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "d758749d-1b70-56c3-a4bd-8f8deae44a7b Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "8e725482-0731-52e2-a5bc-f985976e9689 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "753b737b-4b38-53e8-ac84-aa1200c823bc Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "7c888400-a224-5f31-b289-7882b01fd75f Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "3f29026e-f974-5355-bf90-e8c02cf369c9 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "bfcfaecc-ddd8-5a05-9e0c-cba14493104b Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "54949986-9666-5bc3-ae0c-45e521c68c89 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "8d70db7f-98ac-5f4f-a20a-0d0fd06b6e0e Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "d15a72e9-14fc-532d-aa28-a29669a83534 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "da0e3b82-0a26-5f4c-ab08-4d273160dcf6 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "30fe8e8a-3a9d-5857-a2ae-1a12f1d93be0 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "f96695e2-7c6d-504c-8f50-a82b0d04fbda Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "ca641fbc-126d-58d3-85ee-cd6a50613d23 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "acb61559-3e3c-53fe-9bf6-75c9ac48da58 Worker identity/digest",
+      "passed": true
+    },
+    {
+      "check_name": "7c3fb259-ee90-55dc-bc1a-765d0358d030 Worker identity/digest",
+      "passed": true
+    }
+  ],
+  [
+    {
+      "name": "public.math_canonical_solution_steps",
+      "n": 521,
+      "digest": "0332f1d736e66296672fc75d2915519a"
+    },
+    {
+      "name": "public.math_canonical_solutions",
+      "n": 193,
+      "digest": "14a55ed4911702a29b1c3762ca842ef3"
+    },
+    {
+      "name": "public.math_evaluation_profiles",
+      "n": 244,
+      "digest": "1ca3f16690f3aae8b2304c40a371f56a"
+    },
+    {
+      "name": "public.math_problem_sets",
+      "n": 243,
+      "digest": "c016fd0b86fd3da7f56ba6ff85107551"
+    },
+    {
+      "name": "public.math_problems",
+      "n": 292,
+      "digest": "03d5e230c9d906656182918e43e42340"
+    },
+    {
+      "name": "public.math_scoring_criteria",
+      "n": 602,
+      "digest": "ca88c766a79b8d4aa8121f58155dabbe"
+    },
+    {
+      "name": "public.math_source_artifacts",
+      "n": 853,
+      "digest": "48d687276d3013b4c6b681501626522c"
+    },
+    {
+      "name": "public.math_subproblems",
+      "n": 292,
+      "digest": "74a1f52fc130b4d38a4980bfe10ed282"
+    },
+    {
+      "name": "math_private.task20_hanyang_source_pages",
+      "n": 152,
+      "digest": "df23eb49480babb099cef5e02d338881"
+    },
+    {
+      "name": "public.universities",
+      "n": 131,
+      "digest": "a5c16ac558383edfa370a610e2520dfa"
+    },
+    {
+      "name": "public.essay_exams",
+      "n": 450,
+      "digest": "22d9518a30376a49f4c999d8736af860"
+    },
+    {
+      "name": "public.essay_questions",
+      "n": 1232,
+      "digest": "c9445d0accf1d07da0cb7ba581ab93d4"
+    },
+    {
+      "name": "public.essay_attempts",
+      "n": 0,
+      "digest": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "name": "public.essay_evaluations",
+      "n": 0,
+      "digest": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "name": "public.credit_transactions",
+      "n": 663,
+      "digest": "fe7d09cdfa0942739466dea083353bf6"
+    },
+    {
+      "name": "public.math_attempts",
+      "n": 69,
+      "digest": "f677d1ca68f1f67bbc6eefc8c8db37b4"
+    },
+    {
+      "name": "public.math_evaluations",
+      "n": 13,
+      "digest": "305cd43d7ff30d51abfa988749b59560"
+    },
+    {
+      "name": "function definitions/owners/ACL",
+      "n": 346,
+      "digest": "bfbae5d2938d361333d22d45a29a57d6"
+    },
+    {
+      "name": "RLS policies",
+      "n": 270,
+      "digest": "3ff5ff1a12d343d0d064a986941871db"
+    },
+    {
+      "name": "table owners/RLS/ACL",
+      "n": 107,
+      "digest": "ed5aeb072da0d680a99c725f0aa3c079"
+    }
+  ]
+]

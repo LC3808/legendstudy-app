@@ -1,0 +1,47 @@
+{
+  "status": "PUBLISHED",
+  "checked_at_kst": "2026-11-12T13:00:57.867704+09:00",
+  "deployment": "4d7145df-7bc0-414b-b42a-7f21a5264940",
+  "source": "535c34c62fcd4c8c62ec0bd9c2a2393375d06b32",
+  "exams": 5,
+  "questions": 19,
+  "preserved_non_essay_static_assets": 2172,
+  "configuration_exact": true,
+  "function_routes_exact": true,
+  "http": [
+    {
+      "path": "/essay-lab/",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/student-pdfs",
+      "status": 401
+    },
+    {
+      "path": "/login/",
+      "status": 200
+    }
+  ],
+  "scope_counts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      280,
+      285
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      110,
+      115
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      257,
+      276
+    ]
+  },
+  "provider_calls": 0,
+  "browser_ui": "PARTIAL: anonymous university/natural exam/answer field observed; authenticated PDF/submission NOT TESTED",
+  "actual_ai_quality": "Owner review deferred",
+  "pdf_metadata_contract": "WEB416+APP34+live Storage role verified; real logged-in browser NOT TESTED"
+}

@@ -1,0 +1,42 @@
+{
+  "web": {
+    "pass_count": 416,
+    "skip": 1,
+    "fail": 0,
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "static_build": "PASS",
+    "functions": "PASS"
+  },
+  "app": {
+    "pass_count": 34,
+    "skip": 4,
+    "fail": 0
+  },
+  "db": {
+    "isolated_questions": 19,
+    "public_mapping_checks": 57,
+    "preflight": 136,
+    "post_insert": 154,
+    "production_checks": 57,
+    "hold_math_worker_absent": true,
+    "rollback": "PASS"
+  },
+  "storage": {
+    "existing_assets": 5,
+    "new_uploads": 0,
+    "policy_changes": 0,
+    "sha_pages": "PASS",
+    "rendered_pages": 21
+  },
+  "ui": {
+    "anonymous_university_search": "PASS",
+    "anonymous_university_entry": "PASS",
+    "natural_exam_selection": "PASS",
+    "answer_field_display": "PASS",
+    "logged_in_pdf_submission_ui": "NOT TESTED: no signed-in session in accessible browser",
+    "device": "NOT TESTED",
+    "production_submission": 0,
+    "provider_calls": 0
+  }
+}

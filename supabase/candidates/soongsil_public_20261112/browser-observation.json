@@ -1,0 +1,10 @@
+{
+  "anonymous_university_search": "PASS",
+  "anonymous_university_entry": "PASS",
+  "natural_exam_selection": "PASS",
+  "answer_field_display": "PASS",
+  "logged_in_pdf_submission_ui": "NOT TESTED: no signed-in session in accessible browser",
+  "device": "NOT TESTED",
+  "production_submission": 0,
+  "provider_calls": 0
+}
