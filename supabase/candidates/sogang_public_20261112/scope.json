@@ -1,0 +1,55 @@
+{
+  "exams": [
+    "1f52095a-2950-5e59-8302-9801c111dac2",
+    "237f04f0-00d2-5cc5-ad60-f319abaafe22",
+    "24af7fab-5708-59b6-bf61-aaad03e99d37",
+    "6dbdaf3c-0188-56e7-9507-d828e8803ac9",
+    "71833056-873e-5bc3-8238-2f32792776ef",
+    "b271fd77-2fdd-5aab-b654-6e6d309ba8a2",
+    "e08ff787-f4d4-5da9-8922-d78d2c45f443",
+    "e57cfa3e-072a-5c64-ac14-e3b0118d4e7c",
+    "e7f8e4a3-5bdd-546a-b703-9cd274f581c1"
+  ],
+  "questions": [
+    "38855473-99d1-5b4d-8dd1-3af5c22b2102",
+    "3b96a9ab-3629-5e4d-bec3-475928fa4a74",
+    "885fffa4-6922-5326-98fd-f0fb455c3dd9",
+    "b16130e9-da51-5356-83d3-7ad3719c3a37",
+    "c1d581a5-d7d4-5414-8f14-47d6452d6712",
+    "cf5f3f9a-66e1-5e52-881a-6dad8ed84eb8",
+    "d36e5405-2436-5f9c-a734-bceb1d3b188c",
+    "d74b47b8-87a1-587b-ae7d-623d08ccdb08",
+    "d79c31c0-4d95-54df-87bf-132082d25ea7",
+    "e24c5c6c-c0ad-5723-a15c-61f5b2322044",
+    "fa0bd742-0c3c-5981-8525-e19976f67f7b"
+  ],
+  "leaves": [
+    "6e31140f-d119-5ca5-961e-6b9874024153",
+    "04f642a7-2ad4-5790-a817-098a3c4fe5b5",
+    "ad3894b0-f8d8-527e-8277-eca2465698dd",
+    "01bb740b-4516-5483-9925-db4dd6dd2876",
+    "64b83a5a-f526-5640-b535-33131e774502",
+    "94b0bbe1-49ce-5714-9129-4c484c11b985",
+    "f1b9d9cf-8240-5c40-af25-745394268d82",
+    "60702f3d-7e62-5e12-ad76-f25cceb5a402",
+    "d67124eb-9f3f-5b52-8764-0467e854ea4a",
+    "5094b23a-822c-5703-a2d1-c530c87c0017",
+    "87a6a1ad-9f1e-56d3-82b8-a74023d7f854"
+  ],
+  "new_rows": 150,
+  "active_state_rows": 44,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before": "c12496eb4bb4d84e823c82540b62433e",
+      "after": "a099b5e23f2851a5752e421f5690cf22"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before": "4aadca3ec3133e4235071865a7236c91",
+      "after": "5ad2dba7ca703f7f8cb4a62db94b7049"
+    }
+  ],
+  "draft_sql_sha256": "b00682d564783550ef286e268477699c4c163d7d018b5c1e2c7c6dca37ce850f",
+  "activate_sql_sha256": "d2ce81b405ce433f97adcbab3e6954a70de9073f65e12afae1076bd2bb085120"
+}

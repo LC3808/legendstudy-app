@@ -401,3 +401,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [경희대 자연·수리 공개 연결](essay-kyunghee-public-20261112.md) — 건국 다음 순차 적용·부분 공개/제외·검증·원복.
 
 - [성균관15문항 PDF 이용승인 차단](essay-sungkyunkwan-rights-hold-20261112.md) — 기존 RIGHTS_HOLD·원문 조건·운영 객체4/5·정확 승인 범위.
+
+- 2026-11-12 [서강대9시험11문항 공개 준비·Q2 공식PDF 교정·검증](essay-sogang-public-20261112.md). 성균관15 RIGHTS_HOLD 유지.

@@ -1,0 +1,1 @@
+create policy sogang_problem_q2_complete_20261112_read on storage.objects for select to authenticated using ((select public.account_service_allowed()) and bucket_id='essay-material-originals' and name='2bbadaf676cb022a98e4b81ea527332940b7862a95d95c38ff392c665ef8bc5a.pdf');
