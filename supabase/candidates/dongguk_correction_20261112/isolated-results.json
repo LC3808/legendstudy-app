@@ -1,0 +1,34 @@
+{
+  "scope": "isolated PG17; official corrected Dongguk Q1 / 13 new rows / 2 existing allowlists / unchanged Registry and student PDF",
+  "checks": [
+    "49ea9aaa-1c46-51e7-b148-a03aef20ae4e public mapping",
+    "49ea9aaa-1c46-51e7-b148-a03aef20ae4e profile",
+    "49ea9aaa-1c46-51e7-b148-a03aef20ae4e Worker evidence"
+  ],
+  "questions": [
+    {
+      "question_id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "rollback": {
+    "old_catalog_exact": true,
+    "histories_exact": true,
+    "new_evaluation_denied": true,
+    "existing_result_read": true,
+    "function_hashes_exact": true
+  },
+  "provider_calls": 0,
+  "production_writes": 0
+}

@@ -1,0 +1,34 @@
+{
+  "exams": [
+    "324dbf82-b4bc-5607-977b-2cf512812212"
+  ],
+  "questions": [
+    "49ea9aaa-1c46-51e7-b148-a03aef20ae4e"
+  ],
+  "leaves": [
+    "645d7b6a-2c7a-5a0e-9d34-0eead5c142e5"
+  ],
+  "active_state_rows": 4,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before": "0bcc2951152ae52cd127170f596e67fc",
+      "after": "5f85267406798fafe24b58b7ab5b638f"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before": "b69d362a56e6134af77969e340f9c3e9",
+      "after": "c4cd7d5e5f9ab2e507965baaf0b31da0"
+    }
+  ],
+  "new_rows": 13,
+  "existing_draft_rows_reused": 0,
+  "activate_sql_sha256": "aea827e909f92d7b639c3fe06392d9c01e7ad5f53a1f727437da6dda31b97af0",
+  "apply_sql_sha256": "2ce1f9bad2589e39faf2cf2b6a65f513398ef2572b7d591e8bce27a706e746aa",
+  "preflight_checks": 14,
+  "original_hwp_sha256": "7843457d01caaac1e5e7f560b39197e632988cbbbfc750ffa603c9656d141df1",
+  "rendered_pdf_sha256": "5ada1e6e7b68e4477a9c00b711bc1fb0cbc8308325248d8ebca82bff0dc38e17",
+  "student_pdf_changed": false,
+  "existing_registry_id": "49ea9aaa-1c46-51e7-b148-a03aef20ae4e",
+  "provider_calls": 0
+}
