@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "source": "Actual operating read-only essay_material_runtime_package SELECT response",
+  "exams": 4,
+  "questions": 12,
+  "checks": [
+    {
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "questions": 3,
+      "digest": "bec9c17caf1c00fd67ec4b313a921e375fd7ec1ea5d528bc648015ad01642ac9",
+      "ready": true
+    },
+    {
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "questions": 3,
+      "digest": "6cfe7aeff6e3dbd037563efeaf8783e007a09b52dd1f01312b089503a6d8f011",
+      "ready": true
+    },
+    {
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "questions": 3,
+      "digest": "456dac8ff183d13190d16ef929978fc4ebb01e54a2a65f979ab4e3d5b8641e7b",
+      "ready": true
+    },
+    {
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "questions": 3,
+      "digest": "c6b844d47554cfaaaf696ff8d75f48d76aae4dbc0ac598f83339717b6f84a69e",
+      "ready": true
+    }
+  ],
+  "provider_calls": 0,
+  "production_writes": 0,
+  "quality": "NOT TESTED",
+  "browser": "NOT TESTED",
+  "device": "NOT TESTED"
+}

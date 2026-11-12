@@ -1,0 +1,138 @@
+{
+  "files": [
+    {
+      "file": "supabase/candidates/ewha_mock_public_20261112/registry-apply.sql",
+      "sha256": "470a70c94a5167d5a2fe9d23074e0f892204f1ae989ff75786d99183fde386c6",
+      "bytes": 59209
+    },
+    {
+      "file": ".local/ewha-mock-public-20261112/math-apply-public.private.sql",
+      "sha256": "603dc6742408f99ada36565cfcdf61905911a5d2fee9887598a9090ba69e3cde",
+      "bytes": 3855509
+    },
+    {
+      "file": ".local/ewha-mock-public-20261112/essay-apply.private.sql",
+      "sha256": "aa59c7bbca46cfa637a573c0677d23304c030c5d5ddc8a2c2b04a6a24fa0789e",
+      "bytes": 10285453
+    },
+    {
+      "file": "supabase/candidates/ewha_mock_public_20261112/storage-policy.sql",
+      "sha256": "a486b844f985221bedde93b9429ef569920ed9d63fea21d058c6e7c6e6ddb09c",
+      "bytes": 3485
+    }
+  ],
+  "migration": "20261112110747_ewha_mock_24_service_connections_public.sql",
+  "combined_sha256": "1153d74ae4328c43ebfb369af71981446b6ba2aa8c1c9c81a714732fbdc64cde",
+  "expected_new_rows": 218,
+  "registry_questions": 24,
+  "math_questions": 12,
+  "essay_questions": 12,
+  "new_storage_policy": 1,
+  "changed_internal_functions": 3,
+  "new_rpc": 0,
+  "provider_calls": 0,
+  "checks": {
+    "registry_pre": 12,
+    "registry_post": 28,
+    "math_pre": 26,
+    "math_post": 56,
+    "essay_pre": 9,
+    "essay_post": 7
+  },
+  "preservation": {
+    "tables": {
+      "public.math_problem_sets": {
+        "old_rows_preserved": 399,
+        "new_rows": 12
+      },
+      "public.math_problems": {
+        "old_rows_preserved": 448,
+        "new_rows": 12
+      },
+      "public.math_subproblems": {
+        "old_rows_preserved": 448,
+        "new_rows": 12
+      },
+      "public.math_source_artifacts": {
+        "old_rows_preserved": 1477,
+        "new_rows": 48
+      },
+      "public.math_evaluation_profiles": {
+        "old_rows_preserved": 400,
+        "new_rows": 12
+      },
+      "public.math_scoring_criteria": {
+        "old_rows_preserved": 920,
+        "new_rows": 25
+      },
+      "public.math_canonical_solutions": {
+        "old_rows_preserved": 349,
+        "new_rows": 12
+      },
+      "public.math_canonical_solution_steps": {
+        "old_rows_preserved": 943,
+        "new_rows": 29
+      },
+      "math_private.task20_hanyang_source_pages": {
+        "old_rows_preserved": 308,
+        "new_rows": 12
+      },
+      "public.universities": {
+        "old_rows_preserved": 131,
+        "new_rows": 0
+      },
+      "public.essay_exams": {
+        "old_rows_preserved": 471,
+        "new_rows": 7
+      },
+      "public.essay_questions": {
+        "old_rows_preserved": 1295,
+        "new_rows": 21
+      },
+      "public.essay_attempts": {
+        "old_rows_preserved": 0,
+        "new_rows": 0
+      },
+      "public.essay_evaluations": {
+        "old_rows_preserved": 0,
+        "new_rows": 0
+      },
+      "public.credit_transactions": {
+        "old_rows_preserved": 681,
+        "new_rows": 0
+      },
+      "public.math_attempts": {
+        "old_rows_preserved": 69,
+        "new_rows": 0
+      },
+      "public.math_evaluations": {
+        "old_rows_preserved": 13,
+        "new_rows": 0
+      },
+      "essay_material_private.documents": {
+        "old_rows_preserved": 473,
+        "new_rows": 8
+      },
+      "essay_material_private.reviews": {
+        "old_rows_preserved": 296,
+        "new_rows": 4
+      },
+      "essay_material_private.revisions": {
+        "old_rows_preserved": 367,
+        "new_rows": 4
+      }
+    },
+    "functions_preserved": 359,
+    "function_identities_acls_preserved": 362,
+    "policies_preserved": 273,
+    "allowed_new_policy": [
+      "storage.objects.ewha_mock_8_problem_pdfs_20261112_read"
+    ],
+    "relations_preserved": 127,
+    "private_history_tables_preserved": 13
+  },
+  "applied_at_kst": "2026-11-12T20:10:22.142356+09:00",
+  "transaction": "COMMITTED",
+  "worker_activation": "pending",
+  "web_publication": "pending"
+}

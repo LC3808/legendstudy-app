@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "file": "supabase/candidates/ewha_mock_public_20261112/registry-apply.sql",
+      "sha256": "470a70c94a5167d5a2fe9d23074e0f892204f1ae989ff75786d99183fde386c6",
+      "bytes": 59209
+    },
+    {
+      "file": ".local/ewha-mock-public-20261112/math-apply-public.private.sql",
+      "sha256": "603dc6742408f99ada36565cfcdf61905911a5d2fee9887598a9090ba69e3cde",
+      "bytes": 3855509
+    },
+    {
+      "file": ".local/ewha-mock-public-20261112/essay-apply.private.sql",
+      "sha256": "aa59c7bbca46cfa637a573c0677d23304c030c5d5ddc8a2c2b04a6a24fa0789e",
+      "bytes": 10285453
+    },
+    {
+      "file": "supabase/candidates/ewha_mock_public_20261112/storage-policy.sql",
+      "sha256": "a486b844f985221bedde93b9429ef569920ed9d63fea21d058c6e7c6e6ddb09c",
+      "bytes": 3485
+    }
+  ],
+  "migration": "20261112110747_ewha_mock_24_service_connections_public.sql",
+  "combined_sha256": "1153d74ae4328c43ebfb369af71981446b6ba2aa8c1c9c81a714732fbdc64cde",
+  "expected_new_rows": 218,
+  "registry_questions": 24,
+  "math_questions": 12,
+  "essay_questions": 12,
+  "new_storage_policy": 1,
+  "changed_internal_functions": 3,
+  "new_rpc": 0,
+  "provider_calls": 0
+}

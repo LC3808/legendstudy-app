@@ -5,10 +5,9 @@
   "overall": "PARTIAL",
   "status_counts": {
     "HOLD": 6,
-    "PUBLISHED": 241,
+    "PUBLISHED": 265,
     "NOT READY": 22,
-    "RIGHTS_HOLD": 15,
-    "HOLD_SCORING_ROLE_REVIEW": 24
+    "RIGHTS_HOLD": 15
   },
   "cohorts": {
     "natural_expansion": {
@@ -28,15 +27,15 @@
     "ewha_mock": {
       "exams": 8,
       "questions": 24,
-      "state": "HOLD_SCORING_ROLE_REVIEW",
+      "state": "PUBLISHED",
       "existing_1_exam_3_question_registry_preserved": true
     }
   },
-  "published_total": 241,
-  "published_exams": 93,
+  "published_total": 265,
+  "published_exams": 101,
   "published_universities": 10,
   "publication_pending": 0,
-  "remaining_material_or_rights": 67,
+  "remaining_material_or_rights": 43,
   "owner_quality": "NOT TESTED",
   "provider_calls_during_this_task": 0,
   "actual_production_test_submissions": 0,
@@ -33536,8 +33535,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33563,10 +33562,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "examId": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+          "pageCount": 5,
+          "questionId": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -33576,8 +33586,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
@@ -33591,7 +33601,14 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        2,
+        3
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33607,8 +33624,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33634,10 +33651,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "examId": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+          "pageCount": 5,
+          "questionId": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -33647,8 +33675,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
@@ -33662,7 +33690,14 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        4,
+        5
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33678,8 +33713,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33705,10 +33740,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "examId": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+          "pageCount": 5,
+          "questionId": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -33718,8 +33764,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
@@ -33733,7 +33779,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        6,
+        7,
+        8
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33749,8 +33803,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33776,10 +33830,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "examId": "be108151-16e2-556e-b645-ace485c48624",
+          "pageCount": 5,
+          "questionId": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -33789,8 +33854,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
@@ -33804,7 +33869,14 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        2,
+        3
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33820,8 +33892,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33847,10 +33919,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "examId": "be108151-16e2-556e-b645-ace485c48624",
+          "pageCount": 5,
+          "questionId": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -33860,8 +33943,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
@@ -33875,7 +33958,14 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        4,
+        5
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33891,8 +33981,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -33918,10 +34008,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "examId": "be108151-16e2-556e-b645-ace485c48624",
+          "pageCount": 5,
+          "questionId": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -33931,8 +34032,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
@@ -33946,7 +34047,14 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        6,
+        7
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -33962,8 +34070,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -33989,10 +34097,21 @@
         "pages": 9
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "examId": "c15360f1-571e-5fa4-8314-dde3022f9594",
+          "pageCount": 2,
+          "questionId": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -34002,8 +34121,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
@@ -34017,7 +34136,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1,
+        2,
+        3
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -34033,8 +34160,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -34060,10 +34187,21 @@
         "pages": 9
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "examId": "c15360f1-571e-5fa4-8314-dde3022f9594",
+          "pageCount": 2,
+          "questionId": "4a432fdf-d601-5230-b045-d2123c614773",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -34073,8 +34211,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
@@ -34088,7 +34226,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        4,
+        5,
+        6
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -34104,8 +34250,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -34131,10 +34277,21 @@
         "pages": 9
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "examId": "c15360f1-571e-5fa4-8314-dde3022f9594",
+          "pageCount": 2,
+          "questionId": "e7362b80-3f05-5d84-8768-826ab7136233",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -34144,8 +34301,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
@@ -34159,7 +34316,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        7,
+        8,
+        9
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -34175,8 +34340,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -34202,10 +34367,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "examId": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+          "pageCount": 2,
+          "questionId": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -34215,8 +34391,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
@@ -34230,7 +34406,16 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -34246,8 +34431,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -34273,10 +34458,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "examId": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+          "pageCount": 2,
+          "questionId": "086eab54-62a6-5b20-969b-d45410e37a39",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -34286,8 +34482,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
@@ -34301,7 +34497,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        5,
+        6,
+        7
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -34317,8 +34521,8 @@
       "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -34344,10 +34548,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "examId": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+          "pageCount": 2,
+          "questionId": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -34357,8 +34572,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
@@ -34372,7 +34587,15 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        8,
+        9,
+        10
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_official_63",
@@ -37570,8 +37793,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37597,10 +37820,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "examId": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+          "pageCount": 4,
+          "questionId": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -37610,8 +37844,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
@@ -37625,7 +37859,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37641,8 +37881,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37668,10 +37908,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "examId": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+          "pageCount": 4,
+          "questionId": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -37681,8 +37932,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
@@ -37696,7 +37947,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        4
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37712,8 +37969,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37739,10 +37996,21 @@
         "pages": 7
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "examId": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+          "pageCount": 4,
+          "questionId": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -37752,8 +38020,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
@@ -37767,7 +38035,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        6
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37783,8 +38057,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37810,10 +38084,21 @@
         "pages": 6
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "examId": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+          "pageCount": 4,
+          "questionId": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -37823,8 +38108,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
@@ -37838,7 +38123,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37854,8 +38145,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37881,10 +38172,21 @@
         "pages": 6
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "examId": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+          "pageCount": 4,
+          "questionId": "c008580f-85ee-5149-96d7-ed316b107324",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -37894,8 +38196,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
@@ -37909,7 +38211,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        3
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37925,8 +38233,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "essay",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -37952,10 +38260,21 @@
         "pages": 6
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "examId": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+          "pageCount": 4,
+          "questionId": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -37965,8 +38284,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
@@ -37980,7 +38299,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        5
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -37996,8 +38321,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38023,10 +38348,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "examId": "466a360a-5814-55cf-91cb-69c99ba2e081",
+          "pageCount": 4,
+          "questionId": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -38036,8 +38372,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
@@ -38051,7 +38387,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -38067,8 +38409,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38094,10 +38436,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "examId": "466a360a-5814-55cf-91cb-69c99ba2e081",
+          "pageCount": 4,
+          "questionId": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+          "startPage": 3,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -38107,8 +38460,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
@@ -38122,7 +38475,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        4
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -38138,8 +38497,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38165,10 +38524,21 @@
         "pages": 8
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "examId": "466a360a-5814-55cf-91cb-69c99ba2e081",
+          "pageCount": 4,
+          "questionId": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+          "startPage": 4,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -38178,8 +38548,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
@@ -38193,7 +38563,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        7
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -38209,8 +38585,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
       "label": "문제 1",
       "display_order": 0,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38236,10 +38612,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "examId": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+          "pageCount": 4,
+          "questionId": "afe3a716-f643-5571-9b12-0227d3bb0297",
+          "startPage": 2,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -38249,8 +38636,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
@@ -38264,7 +38651,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        1
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -38280,8 +38673,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
       "label": "문제 2",
       "display_order": 1,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38307,10 +38700,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "examId": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+          "pageCount": 4,
+          "questionId": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+          "startPage": 3,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -38320,8 +38724,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
@@ -38335,7 +38739,13 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        5
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     },
     {
       "cohort": "ewha_mock_24",
@@ -38351,8 +38761,8 @@
       "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
       "label": "문제 3",
       "display_order": 2,
-      "mode": "NOT READY",
-      "status": "HOLD_SCORING_ROLE_REVIEW",
+      "mode": "math",
+      "status": "PUBLISHED",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -38378,10 +38788,21 @@
         "pages": 10
       },
       "official_rubric_pages": [],
-      "pdf_mapping": [],
-      "production_change_in_this_task": false,
-      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
-      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "pdf_mapping": [
+        {
+          "assetId": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "examId": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+          "pageCount": 4,
+          "questionId": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+          "startPage": 4,
+          "storageRead": "APPROVED",
+          "studentDisplay": "APPROVED",
+          "verification": "VERIFIED"
+        }
+      ],
+      "production_change_in_this_task": true,
+      "cause": null,
+      "resolution": "Owner-approved service-derived evaluation grounded in official intent; operating connection and publication verified",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -38391,8 +38812,8 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
-      "release_eligible_now": false,
+      "blocker_category": null,
+      "release_eligible_now": true,
       "official_material": {
         "problem": {
           "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
@@ -38406,17 +38827,22 @@
         }
       },
       "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
-      "official_assessment_guidance_present": true
+      "official_assessment_guidance_present": true,
+      "evaluation_origin": "legendstudy_derived_from_official_guidance",
+      "official_numeric_weights": null,
+      "service_evidence_pages": [
+        8
+      ],
+      "publication_receipt": "../ewha_mock_public_20261112/final-status.json"
     }
   ],
-  "newly_published_this_task": 0,
-  "production_writes_this_task": 0,
+  "newly_published_this_task": 24,
+  "production_writes_this_task": 218,
   "blocker_counts": {
     "OFFICIAL_CONFLICT": 6,
     "MISSING_OFFICIAL_RUBRIC": 4,
     "SCIENCE_RUNTIME": 18,
-    "PDF_RIGHTS": 15,
-    "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL": 24
+    "PDF_RIGHTS": 15
   },
   "reaudited_at_kst": "2026-11-12T19:39:55.967866+09:00"
 }

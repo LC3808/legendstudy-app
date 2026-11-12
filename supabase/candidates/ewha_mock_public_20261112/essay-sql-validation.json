@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "environment": "isolated PostgreSQL17 Unix socket",
+  "prechecks": 9,
+  "postchecks": 7,
+  "inserted_documents": 8,
+  "inserted_reviews": 4,
+  "inserted_revisions": 4,
+  "runtime_connected_questions": 12,
+  "legacy_registry_flags_preserved": true,
+  "old_runtime_entries_preserved": 225,
+  "all_4_jsonb_digests_verified": true,
+  "reapply_blocked": true,
+  "existing_runs_block_apply": true,
+  "rollback_idempotent": true,
+  "rollback_keeps_all_materials_and_histories": true,
+  "existing_question_publication_unchanged": true,
+  "existing_RLS_unchanged": true,
+  "production_writes": 0
+}

@@ -1,0 +1,1966 @@
+{
+  "version": "ewha-source-candidates-v1",
+  "source_root": "~/development/legendstudy-materials/essay-2026-10/이화여대/",
+  "publication_allowed": false,
+  "provider_allowed": false,
+  "production_changes": 0,
+  "files": [
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "2b1eca967ca222ecc567d0bafab1537ec19727f584735a6d16da6816daafa5f8",
+      "bytes": 642733,
+      "pages": 5,
+      "year": 2021,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "3f81a073613966e8cedb6b8e7bd62a705b8028d8e4a565ab71c3b9dcdd5ae11d",
+      "bytes": 335035,
+      "pages": 10,
+      "year": 2021,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "c7ad3a4da5ab95f21af36b4a19a4c1199df43728d94301fde85d064ea09cdac2",
+      "bytes": 626548,
+      "pages": 5,
+      "year": 2021,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "a358107fa0bd00ff0d8125a4d68c3fbdff5e2e89a05f622e9bd3f5a87c750a9f",
+      "bytes": 393054,
+      "pages": 13,
+      "year": 2021,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "104687f5018623d61db75e932f7c582f1fa873a361613e9eb8984021dff64522",
+      "bytes": 155490,
+      "pages": 5,
+      "year": 2021,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2021학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "742ebdcda290227af55211182fe55a74d06160a9f57d4be3496448c02b696e72",
+      "bytes": 293135,
+      "pages": 20,
+      "year": 2021,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "e5d614083b9005439e0d7dc8f83117b3f4064d2eca78b7b7d0ab825638848b88",
+      "bytes": 310092,
+      "pages": 4,
+      "year": 2022,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "bee82082dae473ec3e9a15923458217b81b7c6db734ee75ee8ed36e68818d175",
+      "bytes": 324247,
+      "pages": 10,
+      "year": 2022,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "339b9ecf28064493aff99973ffea907fc4f09c406ff79777c157f7dcc1c39a1b",
+      "bytes": 282098,
+      "pages": 4,
+      "year": 2022,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "4e8b4b308c1cf8ef60a3f18e0f065b1266c0065e61511404dfc2d70d1d4a4ebb",
+      "bytes": 352020,
+      "pages": 11,
+      "year": 2022,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "f32a5c8d98e646c63af03b7d9b31212bb330f216e9f429fd965f02aec3517649",
+      "bytes": 147951,
+      "pages": 4,
+      "year": 2022,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2022학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "9743449288d1dc8b898f9a10f63cf701d83570d8890a9c9ceaa572542e1f2fdd",
+      "bytes": 357688,
+      "pages": 18,
+      "year": 2022,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열1 문제.pdf",
+      "sha256": "a05ee31e407504f6e308bdc0b736a24d71c8d99bc912392a9de3000f4b95928b",
+      "bytes": 512039,
+      "pages": 6,
+      "year": 2023,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열1 해설,답안.pdf",
+      "sha256": "a90caafb5ede729d7b79bc62c9370fdd2270658d6d7982319855bc1956912bc5",
+      "bytes": 1219717,
+      "pages": 10,
+      "year": 2023,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열2 문제.pdf",
+      "sha256": "91c3be977c7da371aad75ff98b3d781f3c136f7dd6e37c10a1ef6ba2fb309001",
+      "bytes": 464245,
+      "pages": 5,
+      "year": 2023,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_인문계열2 해설,답안.pdf",
+      "sha256": "fe44fdf81802bb74ca997a0662c39c566e33832f4aa1dcca4a898c1c8e37069b",
+      "bytes": 1511573,
+      "pages": 11,
+      "year": 2023,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_자연계열 문제.pdf",
+      "sha256": "7090a647f86765f510064f4108854fb915ee24569f09591670f0dd31bfe43026",
+      "bytes": 356294,
+      "pages": 5,
+      "year": 2023,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2023학년도 이화여대 논술_자연계열 해설,답안.pdf",
+      "sha256": "46b0da709224045798ba340e68e022050f98582f61f16ed68bf34aa6192c7e4b",
+      "bytes": 2252759,
+      "pages": 21,
+      "year": 2023,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "자연계열",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "0ae894a300d6331d1f349db967299e1e781a66b75a487caa5c01af4c1a722cd3",
+      "bytes": 403551,
+      "pages": 5,
+      "year": 2024,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "e954bb88f708880887ec7b94933e080a0e8d68e9948bce241d9d1873d15f844f",
+      "bytes": 301165,
+      "pages": 10,
+      "year": 2024,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "b1ada3da85433375bac309a28d7286fc7552868da7b8a58726ee969415d6ed44",
+      "bytes": 478980,
+      "pages": 5,
+      "year": 2024,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_인문계열2 해설,답안.pdf",
+      "sha256": "61aefe456e31e36debd90fd15b74cfe2125f05a6b3fc0670e19d9f5db9f1bdbc",
+      "bytes": 305284,
+      "pages": 10,
+      "year": 2024,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "1be81f39d2843be0a32b8bd4a611adc1d71469f062a29a9ef256881e760f2a93",
+      "bytes": 145881,
+      "pages": 5,
+      "year": 2024,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "2524f06fa41d9f0aaae9487aa9c5cc654eae29d228afd6888fb1a9a1de372e46",
+      "bytes": 291508,
+      "pages": 17,
+      "year": 2024,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "1f095178815c31bd71c72e1b5b80ca9066925dbaa301bbd277b8565a4c23e452",
+      "bytes": 141325,
+      "pages": 5,
+      "year": 2024,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 수시 논술_자연계열2 해설,답안.pdf",
+      "sha256": "7113760f01605ed91ed2b671d81c48e796cc94684216e6b7371e22c6dc2c5e30",
+      "bytes": 283993,
+      "pages": 16,
+      "year": 2024,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+      "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+      "bytes": 435192,
+      "pages": 5,
+      "year": 2024,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+      "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+      "bytes": 398891,
+      "pages": 8,
+      "year": 2024,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+      "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+      "bytes": 455037,
+      "pages": 5,
+      "year": 2024,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+      "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+      "bytes": 390187,
+      "pages": 7,
+      "year": 2024,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+      "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+      "bytes": 316512,
+      "pages": 2,
+      "year": 2024,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+      "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+      "bytes": 424821,
+      "pages": 9,
+      "year": 2024,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+      "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+      "bytes": 316532,
+      "pages": 2,
+      "year": 2024,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": true,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+      "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+      "bytes": 430892,
+      "pages": 10,
+      "year": 2024,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": true,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "f38c1c87e9e53b8d69a859f18653d0e3ec1dae8cec307ed6831c482c8a3df7ae",
+      "bytes": 294619,
+      "pages": 5,
+      "year": 2025,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "0ec70589f4c0973635558bb3efe04b1551e25397e4265e33ffa860dd49f9e032",
+      "bytes": 215774,
+      "pages": 9,
+      "year": 2025,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "f974f09e265f0db415966e2993883ee8dc8b307ff38b2cdd9a190e73b6b40793",
+      "bytes": 314910,
+      "pages": 5,
+      "year": 2025,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_인문계열2 해설,답안.pdf",
+      "sha256": "2083de85285a98340a2fe1a2b5aebd1a0e029aee208955d29f36130936a01d2b",
+      "bytes": 231028,
+      "pages": 11,
+      "year": 2025,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "a053335bd059c25e0aea302b82c05cf14bbfb07bb571c234331fc42a7bca52c5",
+      "bytes": 143463,
+      "pages": 5,
+      "year": 2025,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "b9296bbf9fd5edc74fb7adc4bdcde9bd6bfb944d2521536189c0d07c6745adef",
+      "bytes": 292139,
+      "pages": 12,
+      "year": 2025,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "334f4f6ef04704f6443fa7a017747607cce5fdff1b41ce10b432021338a0c8f8",
+      "bytes": 138748,
+      "pages": 5,
+      "year": 2025,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2025학년도 이화여대 수시 논술_자연계열2 해설답안.pdf",
+      "sha256": "0e7f9640c715cbb6558ac4a4eab1c2b7d30a648a0b94ca31cb21923adb6acd1e",
+      "bytes": 291555,
+      "pages": 13,
+      "year": 2025,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열 해설,답안.pdf",
+      "sha256": "25ffcd727f6fec06fe4aa31f86e250fc09572b605fd45933fa51dae0c9494f1c",
+      "bytes": 493240,
+      "pages": 11,
+      "year": 2026,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열1 문제.pdf",
+      "sha256": "aae4f0ab38da6e1808154014e084d683980702887d663c0b9ee4076e974de3d9",
+      "bytes": 310421,
+      "pages": 5,
+      "year": 2026,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열1 해설,답안.pdf",
+      "sha256": "a538b88a603d44b9401c12e1db5a614a3d24dd0ee12089247c595853848ce141",
+      "bytes": 484209,
+      "pages": 12,
+      "year": 2026,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열2 문제.pdf",
+      "sha256": "eef683099cafa3d1ca8a4de16cfad5bbd1ad66eacbcc905bfdff7e140f43ca59",
+      "bytes": 277109,
+      "pages": 5,
+      "year": 2026,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열1 문제.pdf",
+      "sha256": "1b4a08e94c7b14042382f4a594c98b10bc7d86bf19f9787bb030e61833a4fb51",
+      "bytes": 316135,
+      "pages": 5,
+      "year": 2026,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열1 해설,답안.pdf",
+      "sha256": "a35deed47305bae7b32326a7aed2285e69e18da4c09cc86e419a70ef3ddcc7de",
+      "bytes": 413295,
+      "pages": 18,
+      "year": 2026,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열2 문제.pdf",
+      "sha256": "2da18389ca27eae1b040eab013c055042f846380181283b54cd8e0ce6a0326c6",
+      "bytes": 260015,
+      "pages": 5,
+      "year": 2026,
+      "kind": "admission",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2026학년도 이화여대 수시 논술_자연계열2 해설,답안.pdf",
+      "sha256": "d511741d3889474cc80af421bef8b91c76aefc752c7953bc696d97957a7b1e73",
+      "bytes": 418379,
+      "pages": 15,
+      "year": 2026,
+      "kind": "admission",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent",
+        "rubric"
+      ],
+      "official_rubric_available": true
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+      "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+      "bytes": 278435,
+      "pages": 4,
+      "year": 2027,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+      "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+      "bytes": 139779,
+      "pages": 7,
+      "year": 2027,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+      "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+      "bytes": 323519,
+      "pages": 4,
+      "year": 2027,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+      "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+      "bytes": 164069,
+      "pages": 6,
+      "year": 2027,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "인문계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+      "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+      "bytes": 134134,
+      "pages": 4,
+      "year": 2027,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+      "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+      "bytes": 178068,
+      "pages": 8,
+      "year": 2027,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅰ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+      "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+      "bytes": 134560,
+      "pages": 4,
+      "year": 2027,
+      "kind": "mock",
+      "role": "problem",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "problem"
+      ],
+      "official_rubric_available": false
+    },
+    {
+      "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+      "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+      "bytes": 182482,
+      "pages": 10,
+      "year": 2027,
+      "kind": "mock",
+      "role": "solution",
+      "historical_inventory_match": false,
+      "track": "자연계열Ⅱ",
+      "content_roles": [
+        "solution",
+        "intent"
+      ],
+      "official_rubric_available": false
+    }
+  ],
+  "exams": [
+    {
+      "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b",
+      "examId": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af"
+      ],
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "questions": [
+        {
+          "id": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+          "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 2,
+            "end": 3,
+            "rubric_pages": [],
+            "intent_pages": [
+              2
+            ],
+            "solution_start": 2
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              2
+            ],
+            "rubric": [],
+            "solution": [
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+          "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 4,
+            "end": 5,
+            "rubric_pages": [],
+            "intent_pages": [
+              4
+            ],
+            "solution_start": 4
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              4
+            ],
+            "rubric": [],
+            "solution": [
+              4,
+              5
+            ]
+          }
+        },
+        {
+          "id": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+          "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 6,
+            "end": 8,
+            "rubric_pages": [],
+            "intent_pages": [
+              6,
+              7
+            ],
+            "solution_start": 6
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              6,
+              7
+            ],
+            "rubric": [],
+            "solution": [
+              6,
+              7,
+              8
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b",
+      "examId": "be108151-16e2-556e-b645-ace485c48624",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9"
+      ],
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "questions": [
+        {
+          "id": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+          "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 2,
+            "end": 3,
+            "rubric_pages": [],
+            "intent_pages": [
+              2
+            ],
+            "solution_start": 2
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              2
+            ],
+            "rubric": [],
+            "solution": [
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+          "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 4,
+            "end": 5,
+            "rubric_pages": [],
+            "intent_pages": [
+              4
+            ],
+            "solution_start": 4
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              4
+            ],
+            "rubric": [],
+            "solution": [
+              4,
+              5
+            ]
+          }
+        },
+        {
+          "id": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+          "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 6,
+            "end": 7,
+            "rubric_pages": [],
+            "intent_pages": [
+              6
+            ],
+            "solution_start": 7
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "intent": [
+              6
+            ],
+            "rubric": [],
+            "solution": [
+              7
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81",
+      "examId": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "existingExam": true,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020"
+      ],
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "questions": [
+        {
+          "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+          "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": true,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 3,
+            "rubric_pages": [],
+            "intent_pages": [
+              1
+            ],
+            "solution_start": 2
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              1
+            ],
+            "rubric": [],
+            "solution": [
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "4a432fdf-d601-5230-b045-d2123c614773",
+          "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": true,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 4,
+            "end": 6,
+            "rubric_pages": [],
+            "intent_pages": [
+              4
+            ],
+            "solution_start": 5
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              4
+            ],
+            "rubric": [],
+            "solution": [
+              5,
+              6
+            ]
+          }
+        },
+        {
+          "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+          "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": true,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 7,
+            "end": 9,
+            "rubric_pages": [],
+            "intent_pages": [
+              7
+            ],
+            "solution_start": 8
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              7
+            ],
+            "rubric": [],
+            "solution": [
+              8,
+              9
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f",
+      "examId": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5"
+      ],
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "questions": [
+        {
+          "id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+          "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 4,
+            "rubric_pages": [],
+            "intent_pages": [
+              1
+            ],
+            "solution_start": 2
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              1
+            ],
+            "rubric": [],
+            "solution": [
+              2,
+              3,
+              4
+            ]
+          }
+        },
+        {
+          "id": "086eab54-62a6-5b20-969b-d45410e37a39",
+          "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 5,
+            "end": 7,
+            "rubric_pages": [],
+            "intent_pages": [
+              5
+            ],
+            "solution_start": 6
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              5
+            ],
+            "rubric": [],
+            "solution": [
+              6,
+              7
+            ]
+          }
+        },
+        {
+          "id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+          "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 8,
+            "end": 10,
+            "rubric_pages": [],
+            "intent_pages": [
+              8
+            ],
+            "solution_start": 9
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              8
+            ],
+            "rubric": [],
+            "solution": [
+              9,
+              10
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec",
+      "examId": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54"
+      ],
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "questions": [
+        {
+          "id": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+          "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 3,
+            "rubric_pages": [],
+            "intent_pages": [
+              1,
+              2
+            ],
+            "solution_start": 1
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              1,
+              2
+            ],
+            "rubric": [],
+            "solution": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+          "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 4,
+            "end": 5,
+            "rubric_pages": [],
+            "intent_pages": [
+              4
+            ],
+            "solution_start": 4
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              4
+            ],
+            "rubric": [],
+            "solution": [
+              4,
+              5
+            ]
+          }
+        },
+        {
+          "id": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+          "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 6,
+            "end": 7,
+            "rubric_pages": [],
+            "intent_pages": [
+              6
+            ],
+            "solution_start": 6
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              6
+            ],
+            "rubric": [],
+            "solution": [
+              6,
+              7
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65",
+      "examId": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d"
+      ],
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "questions": [
+        {
+          "id": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+          "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 2,
+            "rubric_pages": [],
+            "intent_pages": [
+              1
+            ],
+            "solution_start": 1
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              1
+            ],
+            "rubric": [],
+            "solution": [
+              1,
+              2
+            ]
+          }
+        },
+        {
+          "id": "c008580f-85ee-5149-96d7-ed316b107324",
+          "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 3,
+            "end": 4,
+            "rubric_pages": [],
+            "intent_pages": [
+              3
+            ],
+            "solution_start": 3
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              3
+            ],
+            "rubric": [],
+            "solution": [
+              3,
+              4
+            ]
+          }
+        },
+        {
+          "id": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+          "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 5,
+            "end": 6,
+            "rubric_pages": [],
+            "intent_pages": [
+              5
+            ],
+            "solution_start": 6
+          },
+          "evidence": {
+            "problem": [
+              2,
+              3,
+              4
+            ],
+            "intent": [
+              5
+            ],
+            "rubric": [],
+            "solution": [
+              6
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300",
+      "examId": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8"
+      ],
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "questions": [
+        {
+          "id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+          "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 3,
+            "rubric_pages": [],
+            "intent_pages": [
+              1
+            ],
+            "solution_start": 1
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              1
+            ],
+            "rubric": [],
+            "solution": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        {
+          "id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+          "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 4,
+            "end": 6,
+            "rubric_pages": [],
+            "intent_pages": [
+              4
+            ],
+            "solution_start": 4
+          },
+          "evidence": {
+            "problem": [
+              3
+            ],
+            "intent": [
+              4
+            ],
+            "rubric": [],
+            "solution": [
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        {
+          "id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+          "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 7,
+            "end": 8,
+            "rubric_pages": [],
+            "intent_pages": [
+              7
+            ],
+            "solution_start": 7
+          },
+          "evidence": {
+            "problem": [
+              4
+            ],
+            "intent": [
+              7
+            ],
+            "rubric": [],
+            "solution": [
+              7,
+              8
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5",
+      "examId": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "existingExam": false,
+      "universityId": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "session": null,
+      "campus": null,
+      "sourceHashes": [
+        "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1"
+      ],
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "questions": [
+        {
+          "id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+          "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+          "label": "문제 1",
+          "number": 1,
+          "order": 0,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 1,
+            "start": 1,
+            "end": 4,
+            "rubric_pages": [],
+            "intent_pages": [
+              1
+            ],
+            "solution_start": 1
+          },
+          "evidence": {
+            "problem": [
+              2
+            ],
+            "intent": [
+              1
+            ],
+            "rubric": [],
+            "solution": [
+              1,
+              2,
+              3,
+              4
+            ]
+          }
+        },
+        {
+          "id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+          "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+          "label": "문제 2",
+          "number": 2,
+          "order": 1,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 2,
+            "start": 5,
+            "end": 7,
+            "rubric_pages": [],
+            "intent_pages": [
+              5
+            ],
+            "solution_start": 6
+          },
+          "evidence": {
+            "problem": [
+              3
+            ],
+            "intent": [
+              5
+            ],
+            "rubric": [],
+            "solution": [
+              6,
+              7
+            ]
+          }
+        },
+        {
+          "id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+          "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+          "label": "문제 3",
+          "number": 3,
+          "order": 2,
+          "production_registry_exists": false,
+          "official_rubric_available": false,
+          "solution_section": {
+            "number": 3,
+            "start": 8,
+            "end": 10,
+            "rubric_pages": [],
+            "intent_pages": [
+              8
+            ],
+            "solution_start": 9
+          },
+          "evidence": {
+            "problem": [
+              4
+            ],
+            "intent": [
+              8
+            ],
+            "rubric": [],
+            "solution": [
+              9,
+              10
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "history": {
+    "archive_files": 26,
+    "archive_hashes_preserved": 26,
+    "new_to_archive": 32
+  },
+  "filename_corrections": [
+    {
+      "filename": "2026학년도 이화여대 수시 논술_인문계열 해설,답안.pdf",
+      "verified_track": "인문계열Ⅱ",
+      "evidence": "PDF 1쪽 머리말 및 출제의도 제목; 원본 파일명 변경0"
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 # 성균관15·이화 모의24 원본·결정 재검증 · 2026-11-12
 
+> 후속: [이화 모의24 운영 공개](essay-ewha-mock-public-20261112.md):8시험24(Math12/Essay12) PUBLISHED. 전체265공개43잔여.218행·기존241/데이터/ACL/Credit보존. Provider0,UI·실기기·실제AI NT.
+
+
 **재검증 DONE / 운영 추가공개0 / 공개241·잔여67 유지.** 원본/기존 결정과 실제 운영 연결을 분리했다. 이번 DB·RPC·Storage·배포·Provider 변경0. AI품질 검수 미실시. 기존 공식 evidence 역할 검증27테스트 PASS.
 
 ## 결론과 기존 보고 정정

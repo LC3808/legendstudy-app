@@ -1,0 +1,148 @@
+{
+  "status": "PUBLIC_CONNECTION_CHECK_PASS",
+  "checked_at_kst": "2026-11-12T20:13:41.119994+09:00",
+  "deployment": "2b6e0c2d-9ded-4033-af87-3abf543ae330",
+  "source": "b5a5ac527052d342faca11fc1b4bc5d4fd200d92",
+  "exams": 8,
+  "questions": 24,
+  "mathQuestions": 12,
+  "essayQuestions": 12,
+  "excludedMockQuestions": 0,
+  "preservedExistingPublicExams": 181,
+  "preservedNonEssayStaticAssets": 2206,
+  "configurationExact": true,
+  "functionRoutesExact": true,
+  "scopeCounts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      355,
+      363
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      185,
+      193
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      420,
+      432
+    ]
+  },
+  "http": [
+    {
+      "path": "/essay-lab/",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/student-pdfs",
+      "status": 401
+    },
+    {
+      "path": "/api/essay/public-service-status",
+      "status": 401
+    },
+    {
+      "path": "/login/",
+      "status": 200
+    }
+  ],
+  "anonymousPdfChecks": [
+    {
+      "assetId": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+      "route": "authenticated",
+      "status": 400
+    },
+    {
+      "assetId": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+      "route": "public",
+      "status": 400
+    },
+    {
+      "assetId": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+      "route": "authenticated",
+      "status": 400
+    }
+  ],
+  "localAppDtoIdentities": {
+    "status": "PASS",
+    "questions": 24,
+    "pdfAssets": 8
+  },
+  "authenticatedStudentPdfManifest": {
+    "status": "NOT TESTED",
+    "reason": "No existing test-account access token; no login or Provider request performed"
+  },
+  "browserUI": "NOT TESTED",
+  "iPhone": "NOT TESTED",
+  "Android": "NOT TESTED",
+  "loggedInSubmitResultRewrite": "NOT TESTED",
+  "providerCalls": 0,
+  "actualAIQuality": "NOT TESTED_OWNER"
+}

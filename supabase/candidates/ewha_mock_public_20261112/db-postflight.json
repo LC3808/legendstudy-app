@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "checked_at_kst": "2026-11-12T20:11:46.991814",
+  "registry_questions": 24,
+  "existing_math_catalog_preserved": 420,
+  "new_math_catalog": 432,
+  "essay_packages": 4,
+  "essay_preflight": 4,
+  "pdf_role_checks": [
+    {
+      "account_class": "normal",
+      "files_visible": 8
+    },
+    {
+      "account_class": "anon",
+      "files_visible": 0
+    },
+    {
+      "account_class": "unknown",
+      "files_visible": 0
+    },
+    {
+      "account_class": "no_uid",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    }
+  ],
+  "provider_calls": 0,
+  "actual_logged_in_submission": "NOT TESTED"
+}

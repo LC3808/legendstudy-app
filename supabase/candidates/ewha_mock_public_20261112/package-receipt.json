@@ -1,0 +1,1304 @@
+{
+  "status": "LOCAL_ONLY_NOT_TECH_READY",
+  "counts": {
+    "source_exams": 8,
+    "source_questions": 24,
+    "production_registry_exams": 1,
+    "production_registry_questions": 3,
+    "local_package_questions": 24,
+    "math_packages": 12,
+    "essay_packages": 12,
+    "rubric_missing": 0,
+    "published": 0,
+    "publication_ready_now": 0,
+    "provider_calls": 0,
+    "source_files_unchanged": 58
+  },
+  "questions": [
+    {
+      "id": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+      "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          2
+        ],
+        "rubric": [],
+        "solution": [
+          2,
+          3
+        ]
+      },
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "50c30531617df7c67c85d5f99083900a170439ac96088caa5e9552339efb6daf",
+      "images": 8,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 2,
+          "clip": [
+            25.0,
+            147.11703491210938,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 3,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            142.39564514160156
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+      "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          4
+        ],
+        "rubric": [],
+        "solution": [
+          4,
+          5
+        ]
+      },
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "47e8a40f60b4a8a891e69a623c68cc03f48d0aa18a896fd5d7dbee9f0cf311fb",
+      "images": 8,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            156.33151245117188,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+      "sourceKey": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          6,
+          7
+        ],
+        "rubric": [],
+        "solution": [
+          6,
+          7,
+          8
+        ]
+      },
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "c10584586057349865424a3dacb0fec392c7725492c0e4a63e00772d7bd731f1",
+      "images": 10,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 6,
+          "clip": [
+            25.0,
+            145.06381225585938,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 7,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 8,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            124.41527557373047
+          ]
+        }
+      ]
+    },
+    {
+      "id": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+      "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          2
+        ],
+        "rubric": [],
+        "solution": [
+          2,
+          3
+        ]
+      },
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "b7b90d13389642d567a8e927603ae0d2c155651d841923e6b43c636c8d8ca7bc",
+      "images": 8,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 2,
+          "clip": [
+            25.0,
+            169.157470703125,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 3,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+      "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          4
+        ],
+        "rubric": [],
+        "solution": [
+          4,
+          5
+        ]
+      },
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "11ffb098758480b285347b2e52f05b0cdd1b3ca3dd64e87172314c8a08baf60e",
+      "images": 8,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            154.7886505126953,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+      "sourceKey": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "intent": [
+          6
+        ],
+        "rubric": [],
+        "solution": [
+          7
+        ]
+      },
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "year": 2024,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 business",
+      "package_sha256": "c868c7d30813797450eeeb8e7f2149243b01e74a5d56acf0f6b2ec8835875b2b",
+      "images": 8,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 6,
+          "clip": [
+            25.0,
+            621.1989135742188,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 7,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": true,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          1
+        ],
+        "rubric": [],
+        "solution": [
+          2,
+          3
+        ]
+      },
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "1441cc7ca4ac08745bba7d1096c48193d4affb3542f46f2a6d7fc8b5db96a011",
+      "worker_sha256": "5a0bf996350ebc0956491fe53a5435a82f382e71058fc3126f750b956944ccce",
+      "images": 4,
+      "image_bytes": 264805,
+      "leaf_id": "e08fa839-0f46-5275-ab19-fe660078eb5b",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            372.59063720703125,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 2,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 3,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": true,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          4
+        ],
+        "rubric": [],
+        "solution": [
+          5,
+          6
+        ]
+      },
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "6987775b452c6a2e8e21330feb29f5b45759a41b9968cff5ba2544eed33c5cde",
+      "worker_sha256": "19155ff4adccb83801ac6cf0e8e8d907316ce014d6dc44757963040947519f93",
+      "images": 4,
+      "image_bytes": 288789,
+      "leaf_id": "0bea8abd-73bb-50e8-a23f-41a593dcb69b",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            333.9927978515625,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 6,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "sourceKey": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": true,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          7
+        ],
+        "rubric": [],
+        "solution": [
+          8,
+          9
+        ]
+      },
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "5d9ec77518136b29b6312815c18b3bb71592b3a87845cd0e10138f2df40a63eb",
+      "worker_sha256": "da315aba4d990d44c21a6ea81c9759cb485e366ea28d596122e81cb5b5ceec06",
+      "images": 4,
+      "image_bytes": 245017,
+      "leaf_id": "be8e6872-1031-5c1e-b3e9-6fa796afa687",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 7,
+          "clip": [
+            25.0,
+            242.77249145507812,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 8,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 9,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+      "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          1
+        ],
+        "rubric": [],
+        "solution": [
+          2,
+          3,
+          4
+        ]
+      },
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "32d85e21e40d299612d62d1b80a3f5e66cb1aa614a2960e82a8dd8fa4cb6ddce",
+      "worker_sha256": "b3f4a9139125c6d9a4c736da66f0348650232f536398051298a84aff51e3a58e",
+      "images": 5,
+      "image_bytes": 286128,
+      "leaf_id": "d28da4e4-86fb-5700-84b2-1566db3bb8ba",
+      "schema_rows": 16,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            392.6087341308594,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 2,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 3,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "086eab54-62a6-5b20-969b-d45410e37a39",
+      "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          5
+        ],
+        "rubric": [],
+        "solution": [
+          6,
+          7
+        ]
+      },
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "61749b0896d99297037da75d67a23237afbfec2fbe05d9460913814bf45885f2",
+      "worker_sha256": "223fb0d8a60b413abf166fdbc44a0a4d131886d43f677655a0eb81fce966ad16",
+      "images": 4,
+      "image_bytes": 290397,
+      "leaf_id": "523220f5-273d-5ee3-b432-3957c67f6cf7",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            333.9927978515625,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 6,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 7,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+      "sourceKey": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          8
+        ],
+        "rubric": [],
+        "solution": [
+          9,
+          10
+        ]
+      },
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "year": 2024,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "2ca47eed70a894561574a5bccfd8d00b07652f692353ed9b51a960c26622f6b1",
+      "worker_sha256": "65c9918b0cda6e054ef9e7fe458bc286a1c05c42b9c48af669febea3b792d05c",
+      "images": 4,
+      "image_bytes": 291546,
+      "leaf_id": "6203b58a-a9bb-5336-81da-609578f16aa4",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 8,
+          "clip": [
+            25.0,
+            242.77249145507812,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 9,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        },
+        {
+          "page": 10,
+          "clip": [
+            25.0,
+            35.0,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+      "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          1,
+          2
+        ],
+        "rubric": [],
+        "solution": [
+          1,
+          2,
+          3
+        ]
+      },
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "12bc9562d6337d167e6d51d4aa96553c1b34f51e506a0370bf7857de45d584fd",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            216.83680725097656,
+            570.0,
+            690.2367553710938
+          ]
+        }
+      ]
+    },
+    {
+      "id": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+      "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          4
+        ],
+        "rubric": [],
+        "solution": [
+          4,
+          5
+        ]
+      },
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "c535b9d947f2161ce74fc68e3526e9162e71c0e0fbb221b4079b587ba5d08aa0",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            134.03680419921875,
+            570.0,
+            607.436767578125
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+      "sourceKey": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          6
+        ],
+        "rubric": [],
+        "solution": [
+          6,
+          7
+        ]
+      },
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "1bbdb5d6001d1092add8cdb829a788c6e3f83f41fca3539f9e511c2ef6f62eba",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 6,
+          "clip": [
+            25.0,
+            132.95680236816406,
+            570.0,
+            624.3567504882812
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+      "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          1
+        ],
+        "rubric": [],
+        "solution": [
+          1,
+          2
+        ]
+      },
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "0e78944f46e332a6190b2ca671805f8885579531dff08334d7bd7d23a4adb885",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            204.716796875,
+            570.0,
+            730.3167724609375
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c008580f-85ee-5149-96d7-ed316b107324",
+      "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          3
+        ],
+        "rubric": [],
+        "solution": [
+          3,
+          4
+        ]
+      },
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 humanities",
+      "package_sha256": "d47ee9fdbb1d5644e018627c0df34ac2e2703b76075f188dc6f2fdefe150ef78",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 3,
+          "clip": [
+            25.0,
+            154.6768035888672,
+            570.0,
+            700.0767822265625
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+      "sourceKey": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2,
+          3,
+          4
+        ],
+        "intent": [
+          5
+        ],
+        "rubric": [],
+        "solution": [
+          6
+        ]
+      },
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "year": 2027,
+      "kind": "mock",
+      "track": "인문계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Essay 1.3 business",
+      "package_sha256": "0bf35c4c10200c4d903e4de8f28efeacf88767f4931a23fb997cc3f9b1648767",
+      "images": 5,
+      "criteria": 1,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            646.6767578125,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+      "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          1
+        ],
+        "rubric": [],
+        "solution": [
+          1,
+          2,
+          3
+        ]
+      },
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "5aefa5d7438d4d743e2506a1babe97b3689310f63bb6699cc7941a7a95f47678",
+      "worker_sha256": "a5df6978db0aa63c5936fdfbb70760e6c0788e285661d36cf86c92c8800c28d2",
+      "images": 4,
+      "image_bytes": 204518,
+      "leaf_id": "bd0c42bd-c3a6-57df-87da-9f1ccf7b4460",
+      "schema_rows": 13,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            265.6767883300781,
+            570.0,
+            505.0767822265625
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+      "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          3
+        ],
+        "intent": [
+          4
+        ],
+        "rubric": [],
+        "solution": [
+          4,
+          5,
+          6
+        ]
+      },
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "3f43d7ed7bac7329de2bf42e95b0326951597030db5f6a9627a616ee4e5d4f71",
+      "worker_sha256": "bfedf2ba495fb4f14b0aaeb79d16f8fb70a9061606d16b1ab600af361d77c846",
+      "images": 4,
+      "image_bytes": 209262,
+      "leaf_id": "a3f5ec15-cd2c-5752-9d67-cd26143a8501",
+      "schema_rows": 13,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 4,
+          "clip": [
+            25.0,
+            223.31680297851562,
+            570.0,
+            460.9167785644531
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+      "sourceKey": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          4
+        ],
+        "intent": [
+          7
+        ],
+        "rubric": [],
+        "solution": [
+          7,
+          8
+        ]
+      },
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅰ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "627952d57d93ad85839e5ae9d79daa3a85ef64079ae92b2bed30908154ca6069",
+      "worker_sha256": "a8fc05e65da1d81045ecdb3c5ec59381d9d6a9738f27661af5e0e670b0b5b11a",
+      "images": 3,
+      "image_bytes": 165348,
+      "leaf_id": "56963d7a-66c5-5137-a152-758c89337bd6",
+      "schema_rows": 12,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 7,
+          "clip": [
+            25.0,
+            241.7967987060547,
+            570.0,
+            641.3967895507812
+          ]
+        }
+      ]
+    },
+    {
+      "id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+      "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+      "label": "문제 1",
+      "number": 1,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          2
+        ],
+        "intent": [
+          1
+        ],
+        "rubric": [],
+        "solution": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "f136eb3b21f5caad1502d04c0f5021612bdecf4c5796444be272319a07a27e43",
+      "worker_sha256": "f7d4df5f7187483a97270e420f29aa970102024e9bb02e53234de23f61db5474",
+      "images": 5,
+      "image_bytes": 324764,
+      "leaf_id": "d53201ae-6b98-56b1-b1b3-4227c2d66308",
+      "schema_rows": 14,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 1,
+          "clip": [
+            25.0,
+            296.75677490234375,
+            570.0,
+            590.1567993164062
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+      "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+      "label": "문제 2",
+      "number": 2,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          3
+        ],
+        "intent": [
+          5
+        ],
+        "rubric": [],
+        "solution": [
+          6,
+          7
+        ]
+      },
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "1dc363b4c78bd3f7f089e1829212778e37ce84bfde37b8ec57e3241ded0cf4da",
+      "worker_sha256": "d9240fad11bf3a977026414f6e1c31385c8c51fc2609b4e800e6722314e6f76b",
+      "images": 4,
+      "image_bytes": 251031,
+      "leaf_id": "65828b94-5168-5966-8ea4-470d06b93107",
+      "schema_rows": 12,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 5,
+          "clip": [
+            25.0,
+            262.4367980957031,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+      "sourceKey": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+      "label": "문제 3",
+      "number": 3,
+      "production_registry_exists": false,
+      "evidence": {
+        "problem": [
+          4
+        ],
+        "intent": [
+          8
+        ],
+        "rubric": [],
+        "solution": [
+          9,
+          10
+        ]
+      },
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "year": 2027,
+      "kind": "mock",
+      "track": "자연계열Ⅱ",
+      "publication_allowed": false,
+      "provider_allowed": false,
+      "status": "LOCAL_PACKAGE_READY",
+      "worker_contract": "existing Math v1 official references",
+      "package_sha256": "e76b30f6adef8b999a3d99bfeaa6a3a7e151a6bafb99eded2ffa0b1ed865dcfc",
+      "worker_sha256": "372a7758317d67b7c13cf82fa4c491ee3d27a0351e435c3b72d7cf12e44508e4",
+      "images": 4,
+      "image_bytes": 256780,
+      "leaf_id": "4bd75a66-e980-5de0-937a-87494c584bfe",
+      "schema_rows": 12,
+      "rubric_representation": "official_guidance_with_explicitly_service_derived_evaluation_no_official_weights",
+      "rubric_geometry": [
+        {
+          "page": 8,
+          "clip": [
+            25.0,
+            329.39678955078125,
+            570.0,
+            806.0
+          ]
+        }
+      ]
+    }
+  ]
+}

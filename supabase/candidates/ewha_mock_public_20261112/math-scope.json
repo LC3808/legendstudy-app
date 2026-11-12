@@ -1,0 +1,72 @@
+{
+  "exams": [
+    "466a360a-5814-55cf-91cb-69c99ba2e081",
+    "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+    "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+    "c15360f1-571e-5fa4-8314-dde3022f9594"
+  ],
+  "questions": [
+    "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+    "086eab54-62a6-5b20-969b-d45410e37a39",
+    "09223a1e-ebab-5f67-b0cf-6730053c53da",
+    "4a432fdf-d601-5230-b045-d2123c614773",
+    "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+    "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+    "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+    "8b4f615f-98ab-592f-9762-4c9920036bc7",
+    "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+    "afe3a716-f643-5571-9b12-0227d3bb0297",
+    "e7362b80-3f05-5d84-8768-826ab7136233",
+    "f32f7b67-6fcf-52ab-b6b7-06074712c702"
+  ],
+  "leaves": [
+    "65828b94-5168-5966-8ea4-470d06b93107",
+    "523220f5-273d-5ee3-b432-3957c67f6cf7",
+    "a3f5ec15-cd2c-5752-9d67-cd26143a8501",
+    "0bea8abd-73bb-50e8-a23f-41a593dcb69b",
+    "4bd75a66-e980-5de0-937a-87494c584bfe",
+    "d28da4e4-86fb-5700-84b2-1566db3bb8ba",
+    "56963d7a-66c5-5137-a152-758c89337bd6",
+    "bd0c42bd-c3a6-57df-87da-9f1ccf7b4460",
+    "6203b58a-a9bb-5336-81da-609578f16aa4",
+    "d53201ae-6b98-56b1-b1b3-4227c2d66308",
+    "be8e6872-1031-5c1e-b3e9-6fa796afa687",
+    "e08fa839-0f46-5275-ab19-fe660078eb5b"
+  ],
+  "new_rows": {
+    "math_problem_sets": 12,
+    "math_problems": 12,
+    "math_subproblems": 12,
+    "math_source_artifacts": 48,
+    "math_evaluation_profiles": 12,
+    "math_scoring_criteria": 25,
+    "math_canonical_solutions": 12,
+    "math_canonical_solution_steps": 29
+  },
+  "worker_rows": 12,
+  "total_new_math_rows": 174,
+  "registry_new_rows": 28,
+  "state_updates": 48,
+  "registry_public_updates": 0,
+  "existing_public_preserved": 420,
+  "new_public_count": 432,
+  "preflight_checks": 26,
+  "postflight_checks": 56,
+  "preservation_groups": 21,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before_md5": "1aafe615b3841cd292507834f62180c0",
+      "after_md5": "7b4641e14f2682ca527d59a4a1f3b0e7"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before_md5": "6c4f5611c5ee6da43067d4e23209a17b",
+      "after_md5": "3cd913d0d558c14ce0363f9a35b2f2c2"
+    }
+  ],
+  "apply_sql_sha256": "603dc6742408f99ada36565cfcdf61905911a5d2fee9887598a9090ba69e3cde",
+  "rollback_sql_sha256": "f92b03572f4ff1cc2b0c6a417f504ca4edbf7b7c0a3f3acd854192698ae894fa",
+  "provider_calls": 0,
+  "production_writes": 0
+}

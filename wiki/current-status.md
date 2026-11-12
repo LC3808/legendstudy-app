@@ -1,5 +1,7 @@
 # Current Status
 
+[이화 모의24 운영 공개](essay-ewha-mock-public-20261112.md):8시험24(Math12/Essay12) PUBLISHED. 전체265공개43잔여.218행·기존241/데이터/ACL/Credit보존. Provider0,UI·실기기·실제AI NT.
+
 [성균15·이화모의24 원본 재검증](essay-skku-ewha-hold-reaudit-20261112.md): 성균은 언어형 개별승인과 자연15 Owner HOLD를 구분. 이화24 문제/예시·해설·평가설명 확보,95쪽 직접판독·원문역할 추출 보완. 자료미확보 일괄표현 정정,평가용criterion 미확정.241공개/67잔여·추가공개/운영쓰기/Provider0.
 
 [최신 통합 검수241·잔여67](essay-remaining-67-owner-review-20261112.md): 자연43/이화모의24 문항별 사유·해결조건, 운영읽기241연결 확인. 신규공개0·DB쓰기0·Provider0. 공식불일치6/권리15/과학운영미연결18/별도기준미확인4/이화공식자료확보·기준역할미확정24; 과학후보24Mock PASS·실제AI/제출·기기NT.

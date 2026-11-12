@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "version": "c3795154-697d-4448-a044-c0dbfcc05150",
+  "deployment": "ad2c04a6-3264-4b11-bfe0-1e500784359e",
+  "actual_downloaded_modules": 73,
+  "preserved_modules": 72,
+  "changed_modules": [
+    "registry_asset.py"
+  ],
+  "existing_bindings_preserved": 13,
+  "public_exam_scope": [
+    224,
+    228
+  ],
+  "engine_prompts_sdk_preserved": true,
+  "provider_calls": 0
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "original_live_adapter_rejections": 12,
+  "proposed_adapter_questions": 12,
+  "official_images_preserved": 80,
+  "request_mock_result_rewrite_cycles": 24,
+  "tamper_rejections": 4,
+  "prior_question_image_bindings_unchanged": true,
+  "provider_calls": 0,
+  "actual_quality": "NOT TESTED",
+  "browser": "NOT TESTED",
+  "device": "NOT TESTED"
+}

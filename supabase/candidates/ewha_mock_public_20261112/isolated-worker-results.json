@@ -1,0 +1,94 @@
+{
+  "database": "isolated Unix-socket PG17",
+  "math_questions": 12,
+  "source_lookup_checks": 36,
+  "registration_replay": "PASS",
+  "production_changes": 0,
+  "provider_calls": 0,
+  "questions": [
+    {
+      "question_id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "086eab54-62a6-5b20-969b-d45410e37a39",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    },
+    {
+      "question_id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+      "lookup": "PASS",
+      "hash_tamper_denied": true,
+      "foreign_question_denied": true,
+      "draft_only": true
+    }
+  ]
+}
