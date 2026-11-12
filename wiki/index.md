@@ -419,3 +419,8 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [서울여대 수리3 PUBLISHED·과학6 NOT READY](essay-swu-public-20261112.md). 최종 운영 영수증을 확인한다.
 
 - [자연·수리 10대학 통합 공개·잔여 현황](essay-natural-publication-summary-20261112.md) · [Owner AI 품질 검수 68시험 목록](essay-natural-owner-review-20261112.md).
+
+## 논술 통합 검수 최신 인계
+
+- [공개241 검수·잔여67](essay-remaining-67-owner-review-20261112.md)
+- [문항별 Owner 검수 목록](essay-owner-review-241-20261112.md)

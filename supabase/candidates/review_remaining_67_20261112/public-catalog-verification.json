@@ -1,0 +1,81 @@
+{
+  "source_exam_count": 181,
+  "source_question_count": 509,
+  "canonical_nonnull_question_count": 288,
+  "target_published_present": 241,
+  "registry_key_mismatches": 0,
+  "remaining_existing_metadata_count": 14,
+  "remaining_existing_metadata": [
+    {
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "registry_id": "source:kau-2024-admission-science:q1",
+      "previously_present": true
+    },
+    {
+      "question_id": "7873aab1-1245-52c4-919e-0cc2888e70bd",
+      "registry_id": "source:kyunghee-2026-admission-medical:q물리 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "dc618430-fc97-5868-ad1d-cc168ed0cf13",
+      "registry_id": "source:kyunghee-2026-admission-medical:q물리 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "a3d0ca59-1ac8-534c-b30a-74da00810686",
+      "registry_id": "source:kyunghee-2026-admission-medical:q화학 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "24a038de-b10a-5f62-af31-4214d12c093a",
+      "registry_id": "source:kyunghee-2026-admission-medical:q화학 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "f67348c2-6c17-550d-a806-64bcfde64af9",
+      "registry_id": "source:kyunghee-2026-admission-medical:q생명과학 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "213cc62c-629a-580b-b83c-9846024db47d",
+      "registry_id": "source:kyunghee-2026-admission-medical:q생명과학 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "ae3aa413-1fdf-5274-a0a6-4c4f59c5af8a",
+      "registry_id": "source:kyunghee-2027-mock-medical:q물리 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "2eece199-d608-5e4d-90f3-8b188543b851",
+      "registry_id": "source:kyunghee-2027-mock-medical:q물리 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "04321068-ec5c-528d-b211-b5c6d4e44894",
+      "registry_id": "source:kyunghee-2027-mock-medical:q화학 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "22f61110-4d80-5faa-be59-fab0855fa0cf",
+      "registry_id": "source:kyunghee-2027-mock-medical:q화학 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "fed0bf52-4242-52e9-9a1e-6a35d8f309ca",
+      "registry_id": "source:kyunghee-2027-mock-medical:q생명과학 Ⅲ",
+      "previously_present": true
+    },
+    {
+      "question_id": "fc09f3ae-3aa8-501d-8a82-05f8449b2140",
+      "registry_id": "source:kyunghee-2027-mock-medical:q생명과학 Ⅳ",
+      "previously_present": true
+    },
+    {
+      "question_id": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+      "registry_id": "source:soongsil-2024-admission-natural:q2",
+      "previously_present": true
+    }
+  ],
+  "note": "source catalog metadata is not Worker admission. Existing 14 held/not-ready canonical IDs already present before Ewha release; not newly published. All67 absent from Math release. Live submission not tested."
+}

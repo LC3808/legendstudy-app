@@ -1,5 +1,7 @@
 # Current Status
 
+[최신 통합 검수241·잔여67](essay-remaining-67-owner-review-20261112.md): 자연43/이화모의24 문항별 사유·해결조건, 운영읽기241연결 확인. 신규공개0·DB쓰기0·Provider0. 공식불일치6/권리15/과학운영미연결18/기준미확보28; 과학후보24Mock PASS·실제AI/제출·기기NT.
+
 [잔여51 처리](essay-remaining-51-20261112.md): 항공7+DRAFT재적재0·동국공식정정Q1 공개8추가. 10대학83시험221 중72시험178 PUBLISHED/43잔여(공식HOLD6·권리15·NOT READY22). 기존385catalog·224Registry·RLS272·Credit/Worker엔진보존,Provider0. [Owner178목록](essay-natural-owner-review-20261112.md). 실제로그인제출·기기·AI품질NT.
 
 [이화 운영 공개](essay-ewha-public-20261112.md): **21시험63문항 PUBLISHED**(Math27/Essay36), 신규535행·기존1시험3문항/사용자기록·Credit 보존. migration20261112100444, WEBdcda9cf/Pagesf1c64b82·Worker c56d06b8. 기존함수359/ACL362/RLS272·정적2195자산보존, 신규문제PDF21 exact SELECT정책1. Provider0. WEB1965PASS/기존10FAIL/5SKIP, 신규FAIL0·APP3PASS. 브라우저/기기/실제로그인제출/AI품질NT. 모의24기준미확보HOLD;자연잔여43과분리한 [통합Owner검수목록](essay-ewha-owner-integrated-review-20261112.md). [원본58PDF476쪽 조사이력](essay-ewha-source-audit-20261112.md)은당시상태를보존한다.

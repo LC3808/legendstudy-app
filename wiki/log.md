@@ -1,3 +1,7 @@
+## 2026-11-12 — 통합 검수241 및 잔여67 재점검
+
+[최신 통합 검수241·잔여67](essay-remaining-67-owner-review-20261112.md): 자연43/이화모의24 문항별 사유·해결조건, 운영읽기241연결 확인. 신규공개0·DB쓰기0·Provider0. 공식불일치6/권리15/과학운영미연결18/기준미확보28; 과학후보24Mock PASS·실제AI/제출·기기NT.
+
 ## 2026-11-12 — 이화 공식 기준 63문항 운영 공개
 
 [운영 결과](essay-ewha-public-20261112.md):21시험63문항(Math27/Essay36) 공개.535행single-TX 20261112100444,DB19:07:59KST/공개사후19:11:05KST.기존Registry3/사용자기록/함수359·ACL362·RLS272·Credit보존.문제PDF21신규 exact정책,해설공개0.기존Worker71/73modules불변,2자료연결파일만변경. WEBdcda9cf·Pagesf1c64b82 기존2195자산/160시험보존.실제Provider0/로그인실제제출·UI·기기·AI품질NT. [통합목록](essay-ewha-owner-integrated-review-20261112.md):기존자연178공개43잔여+이화63공개24보류.원복격리검증PASS/운영실행0.

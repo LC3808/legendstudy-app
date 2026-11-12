@@ -1,0 +1,4095 @@
+{
+  "checked_at_kst": "2026-11-12T19:27:40.240834+09:00",
+  "natural": 43,
+  "ewha_mock": 24,
+  "blocker_counts": {
+    "OFFICIAL_CONFLICT": 6,
+    "MISSING_OFFICIAL_RUBRIC": 28,
+    "SCIENCE_RUNTIME": 18,
+    "PDF_RIGHTS": 15
+  },
+  "questions": [
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "registry_key": "source:kau-2024-admission-engineering:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "두 로그 합을 정리하는 중간 줄과 이후 곱 형태 사이 부호 표기 차이. Codex 정정 없이 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "registry_key": "source:kau-2024-admission-engineering:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "문제의 거리·정의역과 공식 예시풀이의 부호 있는 차이/최댓값 결론이 충돌할 가능성. 공식 답을 수정하지 않음.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "registry_key": "source:kau-2024-admission-science:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+          "questionId": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+          "assetId": "ca34fb284fcde2f9f18cfac1820bb6fb234305451ded6ed57b0602da6b31dc25",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "1-3(1): 기준 2+2+2 / 풀이 1.5+1.5+3. 1-3(3): 기준 2+1+2 / 풀이 1+1+3. 1-3 제목17점과 세부합16점. 1-4(3) 기준5점/풀이 과정2+답3. 양쪽 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "registry_key": "source:kau-2026-admission-science:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "8c11754b-d3af-56bf-9b66-d72092468f70",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "1-2 풀이 계산 마지막 음수와 최종 답 줄 양수의 부호 불일치. 1-1(1) 모든 빈칸 미기재: 기준표3점/예시풀이0점. 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "registry_key": "source:kau-2026-admission-science:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "주 풀이의 이차식 일차항 -17m, 이후 근/다른 풀이의 +17m 표기 차이. 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "question_id": "f7733560-15d9-530e-aaae-6d04da444d51",
+      "registry_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:1",
+      "year": 2022,
+      "label": "문제 1",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 · 2022 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+          "questionId": "f7733560-15d9-530e-aaae-6d04da444d51",
+          "assetId": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pageCount": 3,
+          "startPage": 2,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2022 모의 자연 공식 문제는 있으나 문항별 공식 평가 기준 미확인.",
+      "resolution": "공식 기준·배점 확보 후 기존 Math package·Worker·PDF·시험 진입 검증. 예시 답안에서 기준을 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 · 2022 · mock · 자연계",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "question_id": "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d",
+      "registry_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:2",
+      "year": 2022,
+      "label": "문제 2",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 · 2022 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+          "questionId": "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d",
+          "assetId": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pageCount": 3,
+          "startPage": 2,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2022 모의 자연 공식 문제는 있으나 문항별 공식 평가 기준 미확인.",
+      "resolution": "공식 기준·배점 확보 후 기존 Math package·Worker·PDF·시험 진입 검증. 예시 답안에서 기준을 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 · 2022 · mock · 자연계",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "question_id": "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5",
+      "registry_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:3",
+      "year": 2022,
+      "label": "문제 3",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 · 2022 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+          "questionId": "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5",
+          "assetId": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pageCount": 3,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2022 모의 자연 공식 문제는 있으나 문항별 공식 평가 기준 미확인.",
+      "resolution": "공식 기준·배점 확보 후 기존 Math package·Worker·PDF·시험 진입 검증. 예시 답안에서 기준을 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 · 2022 · mock · 자연계",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "question_id": "c6b54603-e483-5a5d-b4c3-d4044b40a0d2",
+      "registry_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:4",
+      "year": 2022,
+      "label": "문제 4",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 · 2022 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:4",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+          "questionId": "c6b54603-e483-5a5d-b4c3-d4044b40a0d2",
+          "assetId": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pageCount": 3,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2022 모의 자연 공식 문제는 있으나 문항별 공식 평가 기준 미확인.",
+      "resolution": "공식 기준·배점 확보 후 기존 Math package·Worker·PDF·시험 진입 검증. 예시 답안에서 기준을 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 · 2022 · mock · 자연계",
+        "question": "문제 4",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "7873aab1-1245-52c4-919e-0cc2888e70bd",
+      "registry_key": "source:kyunghee-2026-admission-medical:q물리 Ⅲ",
+      "year": 2026,
+      "label": "논제 물리 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q물리 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "7873aab1-1245-52c4-919e-0cc2888e70bd",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 물리 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "dc618430-fc97-5868-ad1d-cc168ed0cf13",
+      "registry_key": "source:kyunghee-2026-admission-medical:q물리 Ⅳ",
+      "year": 2026,
+      "label": "논제 물리 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q물리 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "dc618430-fc97-5868-ad1d-cc168ed0cf13",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 물리 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "a3d0ca59-1ac8-534c-b30a-74da00810686",
+      "registry_key": "source:kyunghee-2026-admission-medical:q화학 Ⅲ",
+      "year": 2026,
+      "label": "논제 화학 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q화학 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "a3d0ca59-1ac8-534c-b30a-74da00810686",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 5,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 화학 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "24a038de-b10a-5f62-af31-4214d12c093a",
+      "registry_key": "source:kyunghee-2026-admission-medical:q화학 Ⅳ",
+      "year": 2026,
+      "label": "논제 화학 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q화학 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "24a038de-b10a-5f62-af31-4214d12c093a",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 5,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 화학 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "f67348c2-6c17-550d-a806-64bcfde64af9",
+      "registry_key": "source:kyunghee-2026-admission-medical:q생명과학 Ⅲ",
+      "year": 2026,
+      "label": "논제 생명과학 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q생명과학 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "f67348c2-6c17-550d-a806-64bcfde64af9",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 7,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 생명과학 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+      "question_id": "213cc62c-629a-580b-b83c-9846024db47d",
+      "registry_key": "source:kyunghee-2026-admission-medical:q생명과학 Ⅳ",
+      "year": 2026,
+      "label": "논제 생명과학 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "admission",
+      "exam_name": "경희대학교 2026학년도 수시 논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2026-admission-medical:q생명과학 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "0b5b9aea-e23f-5644-84df-5e5f6f5a2782",
+          "questionId": "213cc62c-629a-580b-b83c-9846024db47d",
+          "assetId": "f55f4523ea62734ee0ae19965c27b219f274ebf80b5992b6c9600bd99f6ce7db",
+          "pageCount": 8,
+          "startPage": 7,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2026학년도 수시 논술 의·약학계",
+        "question": "논제 생명과학 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "ae3aa413-1fdf-5274-a0a6-4c4f59c5af8a",
+      "registry_key": "source:kyunghee-2027-mock-medical:q물리 Ⅲ",
+      "year": 2027,
+      "label": "논제 물리 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q물리 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "ae3aa413-1fdf-5274-a0a6-4c4f59c5af8a",
+          "assetId": "cbb2b28fce5cebff55b57be80d9c92d0a5171e4aef1392d0b56791a6a5189f84",
+          "pageCount": 4,
+          "startPage": 2,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 물리 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "2eece199-d608-5e4d-90f3-8b188543b851",
+      "registry_key": "source:kyunghee-2027-mock-medical:q물리 Ⅳ",
+      "year": 2027,
+      "label": "논제 물리 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q물리 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "2eece199-d608-5e4d-90f3-8b188543b851",
+          "assetId": "cbb2b28fce5cebff55b57be80d9c92d0a5171e4aef1392d0b56791a6a5189f84",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 물리 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "04321068-ec5c-528d-b211-b5c6d4e44894",
+      "registry_key": "source:kyunghee-2027-mock-medical:q화학 Ⅲ",
+      "year": 2027,
+      "label": "논제 화학 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q화학 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "04321068-ec5c-528d-b211-b5c6d4e44894",
+          "assetId": "0288ba2fe685a9253238c3d7af82d9bc30589d954828826626abf7545ecc7baf",
+          "pageCount": 3,
+          "startPage": 2,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 화학 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "22f61110-4d80-5faa-be59-fab0855fa0cf",
+      "registry_key": "source:kyunghee-2027-mock-medical:q화학 Ⅳ",
+      "year": 2027,
+      "label": "논제 화학 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q화학 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "22f61110-4d80-5faa-be59-fab0855fa0cf",
+          "assetId": "0288ba2fe685a9253238c3d7af82d9bc30589d954828826626abf7545ecc7baf",
+          "pageCount": 3,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 화학 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "fed0bf52-4242-52e9-9a1e-6a35d8f309ca",
+      "registry_key": "source:kyunghee-2027-mock-medical:q생명과학 Ⅲ",
+      "year": 2027,
+      "label": "논제 생명과학 Ⅲ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q생명과학 Ⅲ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "fed0bf52-4242-52e9-9a1e-6a35d8f309ca",
+          "assetId": "3d92f4a07e5b810a4dd37eab2fdeb6555ef5a222b893b876f4d329af4653dc39",
+          "pageCount": 3,
+          "startPage": 2,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 생명과학 Ⅲ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "kyunghee",
+      "name": "경희대학교",
+      "exam_id": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+      "question_id": "fc09f3ae-3aa8-501d-8a82-05f8449b2140",
+      "registry_key": "source:kyunghee-2027-mock-medical:q생명과학 Ⅳ",
+      "year": 2027,
+      "label": "논제 생명과학 Ⅳ",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "의·약학계",
+      "exam_kind": "mock",
+      "exam_name": "경희대학교 2027학년도 모의논술 의·약학계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kyunghee-2027-mock-medical:q생명과학 Ⅳ",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+      "pdf_mapping": [
+        {
+          "examId": "c71cb668-d9c6-52a9-b771-c48c3efd7dc3",
+          "questionId": "fc09f3ae-3aa8-501d-8a82-05f8449b2140",
+          "assetId": "3d92f4a07e5b810a4dd37eab2fdeb6555ef5a222b893b876f4d329af4653dc39",
+          "pageCount": 3,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kyunghee/",
+        "exam": "경희대학교 2027학년도 모의논술 의·약학계",
+        "question": "논제 생명과학 Ⅳ",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+      "registry_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:1",
+      "year": 2023,
+      "label": "문제 1",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 · 2023 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+          "questionId": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+          "assetId": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+          "pageCount": 6,
+          "startPage": 2,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 · 2023 · mock · 자연계",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "40cb9125-a195-5540-a650-60f0cc6f7518",
+      "registry_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:2",
+      "year": 2023,
+      "label": "문제 2",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 · 2023 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+          "questionId": "40cb9125-a195-5540-a650-60f0cc6f7518",
+          "assetId": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+          "pageCount": 6,
+          "startPage": 3,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 · 2023 · mock · 자연계",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "d0e47369-676a-5347-94f3-bb7a2dcd6814",
+      "registry_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:3",
+      "year": 2023,
+      "label": "문제 3",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "자연계",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 · 2023 · mock · 자연계",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+          "questionId": "d0e47369-676a-5347-94f3-bb7a2dcd6814",
+          "assetId": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+          "pageCount": 6,
+          "startPage": 4,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 · 2023 · mock · 자연계",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "8121b47e-4a8c-5767-b90c-90bde3327d74",
+      "registry_key": "source:skku-2026-admission-sk05:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk05:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+          "questionId": "8121b47e-4a8c-5767-b90c-90bde3327d74",
+          "assetId": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+          "pageCount": 4,
+          "startPage": 2,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "e8deaca8-512a-56d8-82fa-fa11993883bc",
+      "registry_key": "source:skku-2026-admission-sk05:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk05:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+          "questionId": "e8deaca8-512a-56d8-82fa-fa11993883bc",
+          "assetId": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "b36ee18b-15cd-53bf-ba79-62bccf56510e",
+      "registry_key": "source:skku-2026-admission-sk05:q3",
+      "year": 2026,
+      "label": "문제 3",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk05:q3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+          "questionId": "b36ee18b-15cd-53bf-ba79-62bccf56510e",
+          "assetId": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+          "pageCount": 4,
+          "startPage": 4,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 3교시",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+      "registry_key": "source:skku-2026-admission-sk03:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk03:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+          "questionId": "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+          "assetId": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+          "pageCount": 4,
+          "startPage": 2,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "8633896c-7611-5eeb-ae69-ab2672f1d867",
+      "registry_key": "source:skku-2026-admission-sk03:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk03:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+          "questionId": "8633896c-7611-5eeb-ae69-ab2672f1d867",
+          "assetId": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "337b7c8a-1c15-5f67-b542-f82877aad6df",
+      "registry_key": "source:skku-2026-admission-sk03:q3",
+      "year": 2026,
+      "label": "문제 3",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk03:q3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+          "questionId": "337b7c8a-1c15-5f67-b542-f82877aad6df",
+          "assetId": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+          "pageCount": 4,
+          "startPage": 4,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 2교시",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+      "registry_key": "source:skku-2026-admission-sk01:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk01:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+          "questionId": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+          "assetId": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+          "pageCount": 4,
+          "startPage": 2,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "8215d793-884f-5392-ba34-39b2c934c7db",
+      "registry_key": "source:skku-2026-admission-sk01:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk01:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+          "questionId": "8215d793-884f-5392-ba34-39b2c934c7db",
+          "assetId": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "1bb7bbff-fdf4-5205-b779-ccb29e756479",
+      "registry_key": "source:skku-2026-admission-sk01:q3",
+      "year": 2026,
+      "label": "문제 3",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "admission",
+      "exam_name": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2026-admission-sk01:q3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+          "questionId": "1bb7bbff-fdf4-5205-b779-ccb29e756479",
+          "assetId": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+          "pageCount": 4,
+          "startPage": 4,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2026학년도 수시 논술 수리형 1교시",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "9ea7243c-f209-5341-a334-347cda833409",
+      "registry_key": "source:skku-2027-mock-sk12:q1",
+      "year": 2027,
+      "label": "문제 1",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 2027학년도 모의논술 수리형",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2027-mock-sk12:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "f4674c42-defb-57df-9356-611138d2be85",
+          "questionId": "9ea7243c-f209-5341-a334-347cda833409",
+          "assetId": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+          "pageCount": 8,
+          "startPage": 3,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2027학년도 모의논술 수리형",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+      "registry_key": "source:skku-2027-mock-sk12:q2",
+      "year": 2027,
+      "label": "문제 2",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 2027학년도 모의논술 수리형",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2027-mock-sk12:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "f4674c42-defb-57df-9356-611138d2be85",
+          "questionId": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+          "assetId": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+          "pageCount": 8,
+          "startPage": 4,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2027학년도 모의논술 수리형",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "sungkyunkwan",
+      "name": "성균관대학교",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "fda4849f-0f49-5553-99bb-1c78985ab5cb",
+      "registry_key": "source:skku-2027-mock-sk12:q3",
+      "year": 2027,
+      "label": "문제 3",
+      "source_state": "SERVICE READY (LOCAL)",
+      "status": "RIGHTS_HOLD",
+      "live_math_catalog": false,
+      "previous_status": "RIGHTS_HOLD",
+      "track": "수리형",
+      "exam_kind": "mock",
+      "exam_name": "성균관대학교 2027학년도 모의논술 수리형",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:skku-2027-mock-sk12:q3",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+      "pdf_mapping": [
+        {
+          "examId": "f4674c42-defb-57df-9356-611138d2be85",
+          "questionId": "fda4849f-0f49-5553-99bb-1c78985ab5cb",
+          "assetId": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+          "pageCount": 8,
+          "startPage": 5,
+          "verification": "VISUAL_REVIEWED",
+          "studentDisplay": "PENDING",
+          "storageRead": "PENDING"
+        }
+      ],
+      "cause": "기존 RIGHTS_HOLD 유지. 2026 수리형 표지에 상업 사용·변형·발췌 제한; 모의 포함 이용 허락/표시 승인 미확인.",
+      "resolution": "Owner 이용 허락 근거·범위 확정, 정확 PDF 접근 승인 후 자료·공개 범위 검증. 외부 링크만으로 Worker 처리 권한까지 해소되지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/",
+        "exam": "성균관대학교 2027학년도 모의논술 수리형",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "PDF_RIGHTS",
+      "release_eligible_now": false
+    },
+    {
+      "university": "soongsil",
+      "name": "숭실대학교",
+      "exam_id": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+      "question_id": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+      "registry_key": "source:soongsil-2024-admission-natural:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "TECH READY",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "숭실대학교 2024학년도 수시 논술 자연계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:soongsil-2024-admission-natural:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+      "pdf_mapping": [
+        {
+          "examId": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+          "questionId": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+          "assetId": "ec70db336d7bae25d2e413302d1a1c4b0eeba60208ae47e87612425f1a52cc05",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2024 자연 Q2 문제25점과 공식 평가기준 합계40점(25+15) 불일치. 현재 공식 PDF도 동일.",
+      "resolution": "대학의 공식 배점 정정 필요. 임의 점수 선택·조정하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+        "exam": "숭실대학교 2024학년도 수시 논술 자연계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+      "question_id": "dd144dfa-d36a-5393-a966-f4968b773485",
+      "registry_key": "source:swu-2023-admission-natural-pm:q1",
+      "year": 2023,
+      "label": "문제 1",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2023학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2023-admission-natural-pm:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+          "questionId": "dd144dfa-d36a-5393-a966-f4968b773485",
+          "assetId": "f441e245515b385d30077bba6ff2fef6bd3e8a4062fae5f3290d4d62a628f4ae",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2023학년도 수시 논술 자연계열 오후반",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+      "question_id": "b8a5061c-b06d-57c7-b2e1-8e41d248eb17",
+      "registry_key": "source:swu-2023-admission-natural-pm:q2",
+      "year": 2023,
+      "label": "문제 2",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2023학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2023-admission-natural-pm:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "a16f832e-20b1-5ee3-b3dc-9e0973e7483c",
+          "questionId": "b8a5061c-b06d-57c7-b2e1-8e41d248eb17",
+          "assetId": "f441e245515b385d30077bba6ff2fef6bd3e8a4062fae5f3290d4d62a628f4ae",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2023학년도 수시 논술 자연계열 오후반",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+      "question_id": "137e2e86-6d84-5e88-a276-b0479e435556",
+      "registry_key": "source:swu-2025-admission-natural-pm:q1",
+      "year": 2025,
+      "label": "문제 1",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2025학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2025-admission-natural-pm:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+          "questionId": "137e2e86-6d84-5e88-a276-b0479e435556",
+          "assetId": "6f3da7239faaf450966beb8116c5ee9accd318b8ab52741f6dd734f492f87679",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2025학년도 수시 논술 자연계열 오후반",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+      "question_id": "44610023-7a33-50e6-9924-e06a57f78a84",
+      "registry_key": "source:swu-2025-admission-natural-pm:q2",
+      "year": 2025,
+      "label": "문제 2",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2025학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2025-admission-natural-pm:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "c7ffdcd0-54fe-5c84-9a12-3df64985d2bc",
+          "questionId": "44610023-7a33-50e6-9924-e06a57f78a84",
+          "assetId": "6f3da7239faaf450966beb8116c5ee9accd318b8ab52741f6dd734f492f87679",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2025학년도 수시 논술 자연계열 오후반",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+      "question_id": "8ba18b30-2a9a-5eba-a8ff-f3544ce67134",
+      "registry_key": "source:swu-2024-admission-natural-pm:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2024학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2024-admission-natural-pm:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+          "questionId": "8ba18b30-2a9a-5eba-a8ff-f3544ce67134",
+          "assetId": "2c0d724f68a498fbfffa81527fd4a4a7c493b30c3ce176aa22e6f317071e12ab",
+          "pageCount": 5,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2024학년도 수시 논술 자연계열 오후반",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "university": "swu",
+      "name": "서울여자대학교",
+      "exam_id": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+      "question_id": "9bb9c3b5-9a18-52b5-a8fb-befbe86573c5",
+      "registry_key": "source:swu-2024-admission-natural-pm:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "NOT READY",
+      "status": "NOT READY",
+      "live_math_catalog": false,
+      "previous_status": "NOT READY",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "서울여자대학교 2024학년도 수시 논술 자연계열 오후반",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:swu-2024-admission-natural-pm:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+      "pdf_mapping": [
+        {
+          "examId": "ebb3dead-13e3-5e19-993f-0a7459431aec",
+          "questionId": "9bb9c3b5-9a18-52b5-a8fb-befbe86573c5",
+          "assetId": "2c0d724f68a498fbfffa81527fd4a4a7c493b30c3ce176aa22e6f317071e12ab",
+          "pageCount": 5,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "공식 문제·출제의도·평가자료는 있으나 SCIENCE_REASONING 검수된 바인딩과 운영 결과 저장·재첨삭 연결 미구현.",
+      "resolution": "기존 과학 후보/Provider transport/소유권·원자적 부모 결과 저장/재작성 구조 재사용. 문항별 과목·근거 바인딩 및 WEB·APP 결과 계약 구현·검증 필요. Math로 우회 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+        "exam": "서울여자대학교 2024학년도 수시 논술 자연계열 오후반",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "SCIENCE_RUNTIME",
+      "release_eligible_now": false,
+      "technical_gap": "기존 science/composition/persistence 후보 재사용 가능. 운영 essay_claim_components·essay_finalize_components 0개, production 호출 연결 없음. 문항별 공식 근거 바인딩·원자적 결과 저장·재첨삭/Credit 회귀 및 별도 운영 변경 검토 필요."
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+      "registry_key": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+          "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+          "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+      "registry_key": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+          "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+          "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+      "registry_key": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+          "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+          "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+      "registry_key": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+          "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+          "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+      "registry_key": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+          "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+          "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+      "registry_key": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+          "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+          "pages": 5
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+          "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "registry_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": true,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+          "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+          "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+          "pages": 9
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "registry_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": true,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+          "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+          "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+          "pages": 9
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "registry_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": true,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+          "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+          "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+          "pages": 9
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+      "registry_key": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+          "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+          "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+          "pages": 10
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "086eab54-62a6-5b20-969b-d45410e37a39",
+      "registry_key": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+          "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+          "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+          "pages": 10
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+      "registry_key": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "official_solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+          "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+          "pages": 2
+        },
+        "solution": {
+          "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+          "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+          "pages": 10
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+      "registry_key": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+          "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+          "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+      "registry_key": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+          "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+          "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+      "registry_key": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+          "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+          "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+          "pages": 7
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+      "registry_key": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+          "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+          "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+          "pages": 6
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "c008580f-85ee-5149-96d7-ed316b107324",
+      "registry_key": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+          "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+          "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+          "pages": 6
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+      "registry_key": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+          "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+          "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+          "pages": 6
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+      "registry_key": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+          "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+          "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+      "registry_key": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+          "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+          "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+      "registry_key": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+          "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+          "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+          "pages": 8
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+      "registry_key": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+      "label": "문제 1",
+      "display_order": 0,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+          "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+          "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+          "pages": 10
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+      "registry_key": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+      "label": "문제 2",
+      "display_order": 1,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+          "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+          "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+          "pages": 10
+        }
+      }
+    },
+    {
+      "cohort": "ewha_mock_24",
+      "university": "ewha",
+      "name": "이화여자대학교",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+      "registry_key": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "exam_kind": "mock",
+      "exam_name": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+      "label": "문제 3",
+      "display_order": 2,
+      "mode": "NOT READY",
+      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+      "existing_registry_preserved": false,
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "official_problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "official_solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "official_rubric_pages": [],
+      "pdf_mapping": [],
+      "production_change_in_this_task": false,
+      "cause": "모의논술 문항별 공식 채점기준 미확보",
+      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
+        "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
+        "question": "문제 3",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "release_eligible_now": false,
+      "official_material": {
+        "problem": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+          "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+          "pages": 4
+        },
+        "solution": {
+          "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+          "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+          "pages": 10
+        }
+      }
+    }
+  ]
+}
