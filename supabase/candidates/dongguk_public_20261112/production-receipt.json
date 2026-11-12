@@ -1,0 +1,30 @@
+{
+  "checked_at_kst": "2026-11-12T14:11:03.309112+09:00",
+  "preflight_checks": 137,
+  "draft_postchecks": 156,
+  "activation_checks": 60,
+  "draft_preservation_groups": 20,
+  "post_activation_unchanged_groups": 19,
+  "changed_only_two_function_allowlists": true,
+  "existing_function_acl_preserved": "atomic activation checks",
+  "new_rows": 273,
+  "questions": 20,
+  "active_state_rows": 80,
+  "normal_user_math_catalog_count": 340,
+  "normal_user_new_questions": 20,
+  "normal_user_history_read": true,
+  "all_320_prior_math_catalog_rows_exact": true,
+  "hold_worker_math_rows": 0,
+  "browse_function_owner_acl_exact": true,
+  "browse_all_16_dongguk_exams_exact": true,
+  "new_production_submissions": 0,
+  "provider_calls": 0,
+  "migrations": [
+    {
+      "version": "20261112051055",
+      "name": "dongguk_20_math_public_release"
+    }
+  ],
+  "ui": "NOT TESTED",
+  "preservation_note": "20 groups guarded atomically during INSERT and activation. Between separate preflight and draft SELECT a legitimate new Credit transaction arrived; original 669 rows exact. Postactivation 19 groups compared to postdraft baseline."
+}

@@ -1,0 +1,11 @@
+{
+  "prior_669_rows_exact": true,
+  "additional_rows": {
+    "n": 1,
+    "first_at": "2026-11-12 05:10:01.674808+00:00",
+    "last_at": "2026-11-12 05:10:01.674808+00:00"
+  },
+  "task_credit_writes": 0,
+  "atomic_insert_preservation_groups": 20,
+  "explanation": "One separate transaction arrived between preflight and post-draft SELECT. Original 669 rows match exactly by full-row digest; approved INSERT did not write Credit and its in-transaction 20-group guard passed."
+}

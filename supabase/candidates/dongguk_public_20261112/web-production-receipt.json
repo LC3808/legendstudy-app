@@ -1,0 +1,48 @@
+{
+  "status": "PUBLISHED",
+  "checked_at_kst": "2026-11-12T14:11:51.830702+09:00",
+  "deployment": "8d313832-7b00-4a9f-864c-69fda576dea9",
+  "source": "e7575f00affe98a9e8a2ca50a7850e3f94cde258",
+  "exams": 7,
+  "questions": 20,
+  "hold_questions": 1,
+  "preserved_non_essay_static_assets": 2179,
+  "configuration_exact": true,
+  "function_routes_exact": true,
+  "http": [
+    {
+      "path": "/essay-lab/",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/student-pdfs",
+      "status": 401
+    },
+    {
+      "path": "/login/",
+      "status": 200
+    }
+  ],
+  "scope_counts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      301,
+      308
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      131,
+      138
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      320,
+      340
+    ]
+  },
+  "provider_calls": 0,
+  "browser_ui": "PARTIAL: anonymous Dongguk university page, natural 7 sessions, 2027 and 2026 mock question cards, Q2 photo/formula/text input and approved PDF page reference visible. Authenticated PDF/render, submission/result/rewrite UI NOT TESTED.",
+  "actual_ai_quality": "Owner review deferred",
+  "pdf_metadata_contract": "WEB410+APP39+live Storage role verified; real logged-in browser NOT TESTED"
+}

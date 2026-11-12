@@ -1,0 +1,9 @@
+{
+  "migration_version": "20261112051055",
+  "name": "dongguk_20_math_public_release",
+  "sql_sha256": "5734e9efe4d4ba8a9dc26f9ca97ae56ea02708137f64eb9da14a635356378560",
+  "sql_bytes": 576465,
+  "transport": "Direct TLS PostgreSQL; exact verified file and migration history inserted in same transaction",
+  "prior_mcp_attempts": [],
+  "provider_calls": 0
+}

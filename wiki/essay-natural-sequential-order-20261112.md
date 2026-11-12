@@ -1,8 +1,7 @@
 # 자연·수리 논술 대학별 순차 작업 — 최신 Owner 결정
 
 
-최신 공개 결과: [건국24](essay-konkuk-public-20261112.md), [경희7](essay-kyunghee-public-20261112.md) PUBLISHED. [성균관15](essay-sungkyunkwan-rights-hold-20261112.md)는 기존 PDF RIGHTS_HOLD 확인으로 별도 Owner 판단 필요. 아래 기술 단계 기록을 현재 운영 공개로 혼동하지 않는다.
-기록일2026-11-12. [최신 결정](decisions.md#2026-11-12--tech-ready-순차-연결-후-owner-통합-검수)이 이전 대학별 SERVICE READY/Owner 검수 대기 조건을 대체한다. **한 대학씩 TECH READY → 다음 대학 → 전체 REVIEW READY → Owner 통합 품질 검수 → 사용자 공개 승인** 순서다. 실제 품질 검수를 다음 대학 착수 조건으로 삼지 않는다. 기완료 대학 재작업·Provider 반복 호출·엔진 변경은 하지 않는다.
+최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
 
 ## 확정 순서와 현재 상태
 
@@ -10,15 +9,15 @@
 
 |순번|대학|현재 상태|다음 행동|
 |---|---|---|---|
-|1|한국항공대학교|7문항 TECH READY / 운영 DRAFT DONE / HOLD5 / REVIEW READY 미달|건국대 기술 검증; 검수 접근은 통합 준비|
-|2|건국대학교|24 TECH READY / 기존 운영4 보존|운영299행 승인 별도; 경희 순서 진행|
-|3|경희대학교|3 TECH READY / 의약4 부분 / 기존3·NOT READY16 보존|부분 진입 차단 기록; 성균관 순서 진행|
-|4|성균관대학교|15 기술 계약 TECH READY / PDF 승인 대기15|검수·공개 보류; 서강 순서 진행|
-|5|서강대학교|11 기술 계약 TECH READY / PDF 보완 승인 대기|숭실 순서 진행|
-|6|숭실대학교|16 TECH READY / 부분3 / 공식 자료 검수보류1|숙명 순서 진행|
-|7|숙명여자대학교|44 기술 계약 TECH READY / 기존6 보존|신규 PDF38 승인·702행 운영 적재 승인 별도|
-|8|동국대학교|21 TECH READY|기존PDF21 보존·286행 운영 승인 별도|
-|9|광운대학교|42 TECH READY|PDF42·DRAFT636행 승인 별도|
+|1|한국항공대학교|7문항 운영 DRAFT / HOLD5|후속공개연결미완료;재적재금지|
+|2|건국대학교|신규24 PUBLISHED / 기존4 보존|DONE|
+|3|경희대학교|신규7 PUBLISHED / 기존3 보존 / NOT READY16|공개대상DONE,미준비16별도|
+|4|성균관대학교|15 TECH READY / PDF RIGHTS_HOLD|권한확인전공개금지|
+|5|서강대학교|9시험11 PUBLISHED|DONE|
+|6|숭실대학교|5시험19 PUBLISHED / 2024Q2 HOLD1|공개대상DONE,HOLD유지|
+|7|숙명여자대학교|16시험44 PUBLISHED / 기존6 보존|Owner확인DONE|
+|8|동국대학교|7시험20 PUBLISHED / 2026모의Q1 HOLD1|PARTIAL;공식수정근거보완,다음광운|
+|9|광운대학교|42 TECH READY|다음순서:공식PDF·권한·운영범위재검증후공개연결|
 |10|서울여자대학교|수리3 TECH READY / 과학6 NOT READY|36행 운영 승인 별도·과학 기존 경로 결합 미완료|
 
 후순위 대학의 기존 산출물은 폐기하거나 다시 만들지 않는다. 실제 차례에 기존 운영/Registry/공식 근거를 대조해 미완료만 처리한다. 현재 뒤 대학 개발·운영 적용은 진행하지 않는다.

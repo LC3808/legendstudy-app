@@ -99,3 +99,7 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 ## 숙명 후속 운영 공개 결과
 
 2026-11-12 [16시험44문항 PUBLISHED](essay-sookmyung-public-20261112.md). 기존6문항 보존. 앞 절의 미승인·미적용은 이전 시점 기록이다. 공식 원본14PDF를 연결하고 기존 목록의14시험 숨김을 해제했다. 일반계정 권한·격리 제출/결과/재첨삭 PASS. 로그인 브라우저/실기기 NOT TESTED, Provider0, AI품질은 Owner 통합검수 대기. 다음 동국대학교.
+
+## 동국 후속 운영 공개 결과
+
+2026-11-12 [동국20문항 PUBLISHED/1 HOLD](essay-dongguk-public-20261112.md). 위21 TECH READY는이전자료기준의기술계약기록이다. 공식수정HWP 확인후2026모의Q1을제외한273행만연결·공개했다.2025시행/2026학년도정합성PASS,기존승인PDF·Registry·기존320Math보존. 다음광운.
