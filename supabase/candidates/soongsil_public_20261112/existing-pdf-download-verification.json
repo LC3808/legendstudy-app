@@ -1,0 +1,32 @@
+[
+  {
+    "sha256": "220fce181337d49322c9ff9d2125f63ed8aa39514cb296899b71f7cc68eaa1d8",
+    "bytes": 613827,
+    "pages": 4,
+    "verified": true
+  },
+  {
+    "sha256": "42eff02d86ddaa298f755fee9a60b373a0d5be08727cb4c12d9d2b1c500a98f4",
+    "bytes": 436199,
+    "pages": 4,
+    "verified": true
+  },
+  {
+    "sha256": "48e1fb1ad4b16162016a41c3f2987d2cf9a5caa512d8e203325c02a9a75c1536",
+    "bytes": 890763,
+    "pages": 5,
+    "verified": true
+  },
+  {
+    "sha256": "e9d3faa267f333001da3b6641d63b5425a3c77c8f9fd7b32bd6cdbc58a3ac80f",
+    "bytes": 904904,
+    "pages": 4,
+    "verified": true
+  },
+  {
+    "sha256": "ec70db336d7bae25d2e413302d1a1c4b0eeba60208ae47e87612425f1a52cc05",
+    "bytes": 345682,
+    "pages": 4,
+    "verified": true
+  }
+]

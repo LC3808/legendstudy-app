@@ -1,0 +1,15 @@
+{
+  "storage_checks": [
+    {
+      "role": "authenticated",
+      "pdf_objects": 5
+    },
+    {
+      "role": "anon",
+      "pdf_objects": 0
+    }
+  ],
+  "new_storage_policies": 0,
+  "hold_math_absent": true,
+  "hold_worker_absent": true
+}
