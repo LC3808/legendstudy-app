@@ -10,6 +10,8 @@ import '../../shared/widgets/shell_widgets.dart';
 import '../school/school_providers.dart';
 import '../study/study_providers.dart';
 import 'learning_repository.dart';
+import 'school_rank_feed.dart';
+import 'study_percentile.dart';
 
 class LearningError extends StatelessWidget {
   const LearningError({super.key, required this.retry});
@@ -40,11 +42,13 @@ class ConfirmedStudySummary extends ConsumerWidget {
       ),
       (_, _) {
         ref.invalidate(learningSummaryProvider);
+        ref.invalidate(studyPercentileProvider);
         ref.invalidate(schoolRanksProvider);
+        ref.invalidate(schoolRankFeedProvider);
       },
     );
     ref.listen(studyControllerProvider.select((s) => s.nowMs ~/ 60000), (_, _) {
-      // Keep the server-confirmed day/week current across KST boundaries.
+      // Keep day/week current; lifetime percentile refreshes on sync or explicit retry.
       ref.invalidate(learningSummaryProvider);
     });
     final summary = ref.watch(learningSummaryProvider);
@@ -59,11 +63,16 @@ class ConfirmedStudySummary extends ConsumerWidget {
               allTime: s.allTime,
               week: s.week,
             ),
+            const SizedBox(height: 16),
+            StudyPercentileCard(allTime: s.allTime),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () => ref.invalidate(learningSummaryProvider),
+                onPressed: () {
+                  ref.invalidate(learningSummaryProvider);
+                  ref.invalidate(studyPercentileProvider);
+                },
                 child: const Text('학습 현황 새로고침'),
               ),
             ),
@@ -225,7 +234,7 @@ class OwnSchoolRank extends ConsumerWidget {
                         .when(
                           skipLoadingOnRefresh: false,
                           data: (r) => r.mine == null
-                              ? const Text('아직 참여 순위가 없어요.')
+                              ? const Text('아직 총 공부시간 순위가 없어요.')
                               : Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 16,
@@ -238,7 +247,7 @@ class OwnSchoolRank extends ConsumerWidget {
                                     children: [
                                       Semantics(
                                         label:
-                                            '전체 기간 참여 학생 수 순위 ${r.mine!.rank}위',
+                                            '전체 기간 총 공부시간 순위 ${r.mine!.rank}위',
                                         child: Text(
                                           '${r.mine!.rank}위',
                                           style: Theme.of(context)
@@ -303,6 +312,117 @@ class SchoolRequired extends StatelessWidget {
   );
 }
 
+/// Scoped selection treatment. Other chips retain the existing design system.
+class RankingChoiceChip extends StatelessWidget {
+  const RankingChoiceChip({
+    super.key,
+    required this.label,
+    required this.selected,
+    required this.onSelected,
+  });
+  final Widget label;
+  final bool selected;
+  final ValueChanged<bool> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    return ChoiceChip(
+      label: label,
+      selected: selected,
+      onSelected: onSelected,
+      showCheckmark: true,
+      selectedColor: dark ? const Color(0xff334155) : const Color(0xffe6e9ee),
+      backgroundColor: dark
+          ? Theme.of(context).colorScheme.surface
+          : Colors.white,
+      side: BorderSide(
+        color: selected
+            ? (dark ? const Color(0xffcbd5e1) : const Color(0xff1f2937))
+            : Theme.of(context).colorScheme.outlineVariant,
+        width: selected ? 1.75 : 1,
+      ),
+      elevation: selected ? 2 : 0,
+      shadowColor: const Color(0x200d1b2a),
+    );
+  }
+}
+
+class HomeSchoolRankCard extends ConsumerWidget {
+  const HomeSchoolRankCard({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    String? rankLabel;
+    final auth = ref.watch(authStateProvider);
+    if (!auth.isLoading &&
+        !auth.hasError &&
+        auth.value?.isAuthenticated == true) {
+      final school = ref.watch(schoolSelectionProvider);
+      if (!school.isLoading && !school.hasError && school.value != null) {
+        final rank = ref.watch(schoolRankFeedProvider(defaultRankQuery));
+        if (!rank.isLoading &&
+            !rank.hasError &&
+            rank.hasValue &&
+            !rank.value!.refreshFailed) {
+          rankLabel = rank.value!.page.mine == null
+              ? '순위권 밖'
+              : '${rank.value!.page.mine!.rank}위';
+        }
+      }
+    }
+    return LearningCard(
+      child: InkWell(
+        onTap: () => context.push('/study/schools'),
+        borderRadius: BorderRadius.circular(10),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 48),
+          child: Row(
+            children: [
+              Expanded(
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    const Text(
+                      '학교별 공부 순위',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    if (rankLabel != null)
+                      Semantics(
+                        label: '우리 학교 전체 기간 총 공부시간 $rankLabel',
+                        child: ExcludeSemantics(
+                          child: Text(
+                            rankLabel,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color(0xff5eead4)
+                                  : const Color(0xff0f766e),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class SchoolRankingPage extends ConsumerStatefulWidget {
   const SchoolRankingPage({super.key});
   @override
@@ -311,6 +431,12 @@ class SchoolRankingPage extends ConsumerStatefulWidget {
 
 class _SchoolRankingPageState extends ConsumerState<SchoolRankingPage> {
   RankQuery query = defaultRankQuery;
+  void selectQuery(RankQuery next) {
+    if (next == query) return;
+    ref.invalidate(schoolRankFeedProvider(next));
+    setState(() => query = next);
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
@@ -351,15 +477,13 @@ class _SchoolRankingPageState extends ConsumerState<SchoolRankingPage> {
                                 runSpacing: 8,
                                 children: [
                                   for (final m in RankMetric.values)
-                                    ChoiceChip(
+                                    RankingChoiceChip(
                                       label: Text(m.label),
                                       selected: query.metric == m,
-                                      onSelected: (_) => setState(
-                                        () => query = (
-                                          period: query.period,
-                                          metric: m,
-                                        ),
-                                      ),
+                                      onSelected: (_) => selectQuery((
+                                        period: query.period,
+                                        metric: m,
+                                      )),
                                     ),
                                 ],
                               ),
@@ -369,77 +493,20 @@ class _SchoolRankingPageState extends ConsumerState<SchoolRankingPage> {
                                 runSpacing: 8,
                                 children: [
                                   for (final p in RankPeriod.values)
-                                    ChoiceChip(
+                                    RankingChoiceChip(
                                       label: Text(p.label),
                                       selected: query.period == p,
-                                      onSelected: (_) => setState(
-                                        () => query = (
-                                          period: p,
-                                          metric: query.metric,
-                                        ),
-                                      ),
+                                      onSelected: (_) => selectQuery((
+                                        period: p,
+                                        metric: query.metric,
+                                      )),
                                     ),
                                 ],
                               ),
-                              TextButton(
-                                onPressed: () =>
-                                    ref.invalidate(schoolRanksProvider),
-                                child: const Text('순위 새로고침'),
+                              _SchoolRankResults(
+                                query: query,
+                                ownIdentity: school.identity,
                               ),
-                              ref
-                                  .watch(schoolRanksProvider(query))
-                                  .when(
-                                    skipLoadingOnRefresh: false,
-                                    loading: () =>
-                                        const LinearProgressIndicator(),
-                                    error: (_, _) => LearningError(
-                                      retry: () => ref.invalidate(
-                                        schoolRanksProvider(query),
-                                      ),
-                                    ),
-                                    data: (r) => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Text(
-                                          '${query.metric.label} TOP 10',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                        ),
-                                        if (r.top.isEmpty)
-                                          const Text('선택 기간에 공개할 순위가 없어요.'),
-                                        for (final row in r.top)
-                                          RankTile(
-                                            row: row,
-                                            metric: query.metric,
-                                            own:
-                                                row.identity == school.identity,
-                                          ),
-                                        if (r.around.isNotEmpty) ...[
-                                          const LearningSectionHeader(
-                                            '우리 학교 주변 순위',
-                                          ),
-                                          for (final row in r.around)
-                                            RankTile(
-                                              row: row,
-                                              metric: query.metric,
-                                              own:
-                                                  row.identity ==
-                                                  school.identity,
-                                            ),
-                                        ],
-                                        if (r.mine == null)
-                                          const Text(
-                                            '우리 학교는 아직 선택한 순위의 공개 기준을 충족하지 않았어요.',
-                                          ),
-                                        const SizedBox(height: 12),
-                                        const Text(
-                                          '다른 학교의 가입·참여 인원은 **로 표시해요. 총 공부 시간과 평균은 기록자 3명 이상일 때 공개돼요. 공동 순위와 표시 순서는 서버 기준이에요.',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                             ],
                           ),
                   ),
@@ -448,6 +515,159 @@ class _SchoolRankingPageState extends ConsumerState<SchoolRankingPage> {
       ),
     );
   }
+}
+
+class _SchoolRankResults extends ConsumerWidget {
+  const _SchoolRankResults({required this.query, required this.ownIdentity});
+  final RankQuery query;
+  final String ownIdentity;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = schoolRankFeedProvider(query);
+    return ref
+        .watch(provider)
+        .when(
+          skipLoadingOnRefresh: false,
+          loading: () => const LinearProgressIndicator(),
+          error: (_, _) => LearningError(retry: () => ref.invalidate(provider)),
+          data: (feed) {
+            final p = feed.page;
+            final controller = ref.read(provider.notifier);
+            final busy =
+                feed.refreshing || feed.loadingMore || feed.loadingOutside;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextButton(
+                  onPressed: busy ? null : controller.refresh,
+                  child: const Text('순위 새로고침'),
+                ),
+                if (feed.refreshing) const LinearProgressIndicator(),
+                if (feed.refreshFailed)
+                  const Text('새 순위를 불러오지 못했어요. 기존 목록을 유지했어요.'),
+                Text(
+                  '${query.metric.label} ${p.rows.length <= 10 ? 'TOP 10' : '순위'}',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                if (p.rows.isEmpty) const Text('선택 기간에 공개할 순위가 없어요.'),
+                for (final row in p.rows)
+                  RankTile(
+                    row: row,
+                    metric: query.metric,
+                    own: row.identity == ownIdentity,
+                  ),
+                if (feed.changed) ...[
+                  const Text('순위가 바뀌었어요. 새로고침해 주세요.'),
+                  TextButton(
+                    onPressed: busy ? null : controller.refresh,
+                    child: const Text('최신 순위 보기'),
+                  ),
+                ] else if (p.nextOffset != null) ...[
+                  if (feed.moreFailed)
+                    const Text('추가 순위를 불러오지 못했어요. 기존 목록은 유지돼요.'),
+                  TextButton.icon(
+                    key: const ValueKey('rank-load-more'),
+                    onPressed: busy ? null : () => controller.more(),
+                    icon: feed.loadingMore
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.keyboard_arrow_down),
+                    label: Text(feed.moreFailed ? '순위 다시 불러오기' : '순위 더 보기'),
+                  ),
+                ],
+                if (p.around.isNotEmpty) ...[
+                  const LearningSectionHeader('우리 학교 주변 순위'),
+                  for (final row in p.around)
+                    RankTile(
+                      row: row,
+                      metric: query.metric,
+                      own: row.identity == ownIdentity,
+                    ),
+                ],
+                if (p.outside.isNotEmpty) ...[
+                  const LearningSectionHeader('순위권 밖'),
+                  for (final row in p.outside)
+                    _UnrankedSchoolTile(
+                      row: row,
+                      own: row.identity == ownIdentity,
+                    ),
+                  if (p.outsideNextOffset != null && !feed.changed) ...[
+                    if (feed.outsideFailed) const Text('학교 목록을 더 불러오지 못했어요.'),
+                    TextButton(
+                      onPressed: busy
+                          ? null
+                          : () => controller.more(outside: true),
+                      child: Text(
+                        feed.loadingOutside
+                            ? '불러오는 중'
+                            : feed.outsideFailed
+                            ? '학교 목록 다시 불러오기'
+                            : '학교 더 보기',
+                      ),
+                    ),
+                  ],
+                  if (p.minRecorders != null && p.minRankRecorders != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        p.minRecorders == p.minRankRecorders
+                            ? '${p.minRecorders}명 이상 기록하면 학교 공부시간과 순위가 공개돼요.'
+                            : '${p.minRecorders}명 이상 기록하면 학교 공부시간이 공개되고, ${p.minRankRecorders}명 이상 기록하면 순위에 참여할 수 있어요.',
+                      ),
+                    ),
+                ],
+                if (p.mine == null)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 12),
+                    child: Text('우리 학교는 아직 선택한 순위의 공개 기준을 충족하지 않았어요.'),
+                  ),
+              ],
+            );
+          },
+        );
+  }
+}
+
+class _UnrankedSchoolTile extends ConsumerWidget {
+  const _UnrankedSchoolTile({required this.row, required this.own});
+  final UnrankedSchool row;
+  final bool own;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 6),
+    child: LearningCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ref
+              .watch(rankSchoolNameProvider((row.office, row.school)))
+              .when(
+                data: (name) => Text(
+                  '$name${own ? ' · 우리 학교' : ''}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                loading: () => const Text('학교명 확인 중'),
+                error: (_, _) => TextButton(
+                  onPressed: () => ref.invalidate(
+                    rankSchoolNameProvider((row.office, row.school)),
+                  ),
+                  child: const Text('학교명 다시 확인'),
+                ),
+              ),
+          const SizedBox(height: 8),
+          Text(
+            own && row.active != null ? '참여 학생 ${row.active}명' : '참여 학생 수 비공개',
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class RankTile extends ConsumerWidget {

@@ -21,8 +21,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="width" constant="180" id="lgw-180-pt0"/>
+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="height" constant="180" id="lgh-180-pt0"/>
+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ydg-fD-yQy" secondAttribute="bottom" constant="16" id="saf-eT-op0"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
-                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
+                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="2:3" constant="-24.3" priority="750" id="4X2-HB-R7a"/>
                         </constraints>
                     </view>
                 </viewController>

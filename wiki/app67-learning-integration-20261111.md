@@ -1,5 +1,7 @@
 # APP67 학습 홈·학교 순위·친구 초대 — 2026-11-11
 
+후속 개발 후보: [APP82 Post-RC 순위·백분위·홈 UX](app82-post-rc-ux-20261112.md). 기본all/total·페이지 조회·개인 백분위는 별도 브랜치 후보이며 운영 신규RPC 미적용. 아래 APP67 운영/검수 이력과 기존3/1 정책은 보존한다.
+
 Owner 작업02. 기준 `codex/app-update-final-integration-20261105` / `53b2a3a`,
 APP67 `1.0.2+67`. 동일 지정 작업 폴더에서 `codex/app67-learning-integration-20261111`
 브랜치를 분리했다. 기존 미추적 캐시·APP67 IPA/AAB/Archive·기존 브랜치는 보존했다.

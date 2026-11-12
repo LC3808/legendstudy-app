@@ -1,0 +1,115 @@
+{
+  "base_commit": "02977efc1aa0a61d4e9d261d9e089879b2fbfba5",
+  "branch": "codex/app82-post-rc-ux-20261112",
+  "flutter": {
+    "passed": 2580,
+    "skipped": 8,
+    "failed": 0,
+    "new_tests": 23
+  },
+  "analyze": "PASS",
+  "python_passed": 33,
+  "postgres_isolated": {
+    "new_sql_checks": 71,
+    "existing_sql_checks": 42,
+    "production_mutations": 0
+  },
+  "android_jvm": {
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  "native": {
+    "ios_simulator": "PASS",
+    "android_read_only_emulator": "PASS",
+    "physical_ios": "NOT TESTED",
+    "physical_android": "NOT TESTED",
+    "production_rpc_e2e": "NOT TESTED",
+    "capture_checks": "Image decode and compositor frame awaited; screenshots visually inspected."
+  },
+  "operations": {
+    "production_database_changes": 0,
+    "auth_changes": 0,
+    "member_changes": 0,
+    "provider_evaluation_calls": 0,
+    "main_merge": false,
+    "push": false,
+    "new_release_build": false,
+    "store_submission": false
+  },
+  "rank_policy": {
+    "school_card_min_recorders": 3,
+    "rank_total_average_min_recorders": 3,
+    "participation_min_recorders": 1,
+    "changed": false
+  },
+  "percentile_candidate": {
+    "minimum_population": 20,
+    "formula": "ceil(100*(greater+equal)/population)",
+    "deployed": false
+  },
+  "artifacts_preserved": [
+    {
+      "name": "legendstudy-1.0.3-82.ipa",
+      "bytes": 34435608,
+      "sha256": "3eac3acc16deb5020d113169eed3f6722afd1205a12cb01467ed2d860f707a05",
+      "backup_matches": true
+    },
+    {
+      "name": "legendstudy-1.0.3-82.aab",
+      "bytes": 101708897,
+      "sha256": "8b19edfb69a2d8d5f9dd8baf89e98f235839242e64bae964022c6bcc0e2d4d80",
+      "backup_matches": true
+    }
+  ],
+  "log_sha256": {
+    "flutter_all_2580_pass_8_skip": "e7541de07ba474462a38f97a70a6165afbb83f55e03bd4f5f934d29800109d4b",
+    "analyze": "1975880e196905bd978991d59a8f3d0f09c668e79c6fe37629fc1a9e0990625b",
+    "python_33": "7ab9d47eceec2a5a77731481ec3e01bb25239c7f3d936163cbd7b6a0dc1a68c6",
+    "old_sql_42": "73011109ed7a53668681aefe209408a8ade331900454aca00e38ec82c58f8eb3",
+    "android_unit": "720f4cbffc9e345c5bfd7a759817803485e6420928d2a09bf9cf6feb5991b3be",
+    "android_native": "94831ced3df55d9edf712c01555ec376a445183a417035ad076481084d03346f",
+    "ios_native": "bc058a04928fbebef90ac5ce46d91e94206b282c3b8a0c31242d51903768a10d",
+    "new_sql_71": "299f2038c91abf2e45d4a371cea320a2023c293c5675d0c292b2ed1a01344d3d"
+  },
+  "wiki_handoff": {
+    "status": "PASS",
+    "current_status_bytes": 11276,
+    "internal_links": 3420
+  },
+  "candidate_checksums": {
+    "supabase/candidates/app82_post_rc_ux_20261112/private_baseline.json": "7cd4383019329ea71c54584d7dd488e604a8bc5fbd9159e0c593cf3533e6d29b",
+    "supabase/candidates/app82_post_rc_ux_20261112/verify.sql": "64b957978c9aeded9467f9256539c9c8b9d68385f51c00280c862fdb5d778df5",
+    "supabase/candidates/app82_post_rc_ux_20261112/README.md": "af11a097601a2e7f736166be218302b9b783371d08318c4360d8133090ec8835",
+    "supabase/candidates/app82_post_rc_ux_20261112/baseline.json": "67886ecc24c4575f6cfb756b75ff5f11ed6e771d33dfa86604746ea665b22341",
+    "supabase/candidates/app82_post_rc_ux_20261112/apply.sql": "5ca7113f02bc842e2d4f0638d6dc134c3cae0ce22aab8f40ec7d8fca2421cc7b",
+    "supabase/candidates/app82_post_rc_ux_20261112/rollback.sql": "77ffc6f9c6c7bc14d5e5470a3b118f4e16fb5a19cc64d1527ea88a544566ea34"
+  },
+  "product_file_sha256": {
+    "lib/app/navigation_shell.dart": "851c74379f098837e41ca542086e26ed4cd08a05404be85e8f31b9461ae871a0",
+    "lib/main.dart": "02b3b1c95e2c3765d8bb4073168d272f2213fbd5deef37af21b949e4ccfa93ca",
+    "lib/features/brand/brand_frame.dart": "c6d24efc9ab8ca76ae289dad4d177885f4b02640dbea28375b148e3d31fbb308",
+    "lib/features/brand/brand_wordmark.dart": "866ca8526049fd91dffa91100f0215e4ccae19d795847ee30e34848ec8714e35",
+    "lib/features/home/customization/home_registry.dart": "19eb485ada24d3920c95c76a94f5d85e43fcc4fabf49c099f7a1fc97e344e970",
+    "lib/features/home/guide/home_menu_guide.dart": "2146dd7ce5ddb4e35074e7ce6191a9a0cf483a46fde62179992512f8c490e587",
+    "lib/features/learning/invite_page.dart": "32d5cb19aef37db899d58cdc8eefea1a13e0dbe6b0f8e717322cf7f199ae620d",
+    "lib/features/learning/learning_repository.dart": "a426c5aa7772e7df86023176dd05d391f7c4d4997978d0915836faa69b392755",
+    "lib/features/learning/learning_widgets.dart": "970ac0a3873f9596324b3b3745213636e48ebc014cea4871560d944604f99862",
+    "lib/features/learning/school_rank_feed.dart": "f8416b14260f671e0fb62c58652f921740af47856a31f13dcb10449f851078da",
+    "lib/features/learning/study_percentile.dart": "196c075c310de53460d2e4d577b14631b2a26394c0abeea17c7e317704b0621d",
+    "ios/Runner/Base.lproj/LaunchScreen.storyboard": "9bb4eaf2ee06c3a66335711617b94fa76c02c92da102b8326393f5dfeef811f3"
+  },
+  "screenshots_sha256": {
+    "android-guide.png": "3735a1070bcc7d9da396e17ceb460ad7878d60a40b5f140039f1412c1cf74859",
+    "android-percentile.png": "4abebbb7db0310a14e4140c0ef08550fd8a32a52deaac722babac4ced53bc5de",
+    "android-splash.png": "e33e51133c0528673befaeffe02bd44f8db2e33bfc581d5863218aa5c578a00c",
+    "guide-320-2x.png": "18aa5bf14d699ca956184df31a60e95def0cbe6d10654ecbe16400e250e89d5f",
+    "ios-guide.png": "fa42931926cef1fd613e0c5cf5a0d58e8ee4246f8a3d3dc1e19c0f8f12441a8b",
+    "ios-home.png": "299c7b98624fd030b09876027924970dfb1c95c9d2c1774efc7c0a33e0ac182e",
+    "ios-percentile.png": "687612607f06e70b6b601e02a918b00b93498345a13e3c43160c35dce3c0ef68",
+    "ios-ranking.png": "36e424d8757f0d3afeb854344d5179103e88a2c9b296c30906bd5867d5e37918",
+    "ios-splash.png": "85cc9317f006c198e62568b6711d58d226ebb47a25f5a350d5e729a3afec2e64",
+    "ranking-360.png": "2f28e4a276ba3b0633c1c2eed4adad7e5fe5635a589cbcdbd5eaf6b5ca7fffcc"
+  }
+}

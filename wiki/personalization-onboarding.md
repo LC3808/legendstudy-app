@@ -1,5 +1,7 @@
 # Personalization Foundation & First-Login Onboarding
 
+2026-11-12 후속 후보: [첫 홈 메뉴 가이드](app82-post-rc-ux-20261112.md#가이드-신규-사용자-판별)는 기존 브랜드3페이지·계정 온보딩을 유지하는 별도 설치-local 안내다. 기존 계정은 자동 노출에서 제외하며 프로필/완료 marker를 수정하지 않는다. 운영/릴리스 미적용.
+
 2026-11-12 최신: [P0 UX·단계skip](onboarding-p0-ux-20261112.md). 아래 과거 skip==전체완료 계약은 폐기. 현재 단계만 이동, 최종 완료에서만 marker기록. 선택 입력/기존 값·복원 유지.
 
 2026-11-11 최신 UX: [온보딩 내부 실제 지원 UI](onboarding-inline-applications-20261111.md). N수/기타 학교 단계 자동 생략, N수6·기타5·재학생6단계. N수 지원은 별도 MY 이동 대신 inline 공통 폼·카드·수정/삭제. 아래7단계 기록은 APP78 당시 이력이다.

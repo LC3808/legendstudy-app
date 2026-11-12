@@ -105,8 +105,8 @@ enum RankPeriod {
 }
 
 enum RankMetric {
-  participation('participation', '참여 학생 수'),
   total('total', '총 공부 시간'),
+  participation('participation', '참여 학생 수'),
   average('average', '1인당 평균 공부 시간');
 
   const RankMetric(this.value, this.label);
@@ -114,10 +114,7 @@ enum RankMetric {
 }
 
 typedef RankQuery = ({RankPeriod period, RankMetric metric});
-const defaultRankQuery = (
-  period: RankPeriod.all,
-  metric: RankMetric.participation,
-);
+const defaultRankQuery = (period: RankPeriod.all, metric: RankMetric.total);
 
 class SchoolRank {
   SchoolRank(

@@ -1,3 +1,7 @@
+## 2026-11-12 — APP82 Post-RC UX 후보·격리 검증
+
+[학교/개인 순위·스플래시·홈 가이드](app82-post-rc-ux-20261112.md): main02977ef 기반 별도 브랜치, APP82 IPA/AAB 체크섬 보존. 운영 읽기에서 실제3/1임계 확인·유지, 새조회RPC2는 후보만 준비. 전체Flutter2580 PASS/8 SKIP·Analyze·Python33·신규격리SQL71/기존42·Android JVM2 PASS, 양OS Native 격리 검증. 기존 MY 테스트 harness/가이드 의미구조·초기로딩/심벌 투명여백 보완. 실물·운영 신조회/live E2E NOT TESTED. 운영DB/Auth/사용자/Provider/배포0, main/newrelease HOLD. 후속 승인 범위와 원복은 상세 문서.
+
 ## 2026-11-12 — APP82 Owner 승인·main 통합·스토어 빌드
 
 [최종 승인·소스/산출물·서명·잔여 검증](app82-store-handoff-20261113.md): RC975b3c0 승인, 추가 Apple/Google·논술 실사용 검증 WAIVED, 기존46개 marker 영향 ACCEPTED/보호 로직 없음. 공개1.0.2 확인 후1.0.3(82), 코드 변경 없이 버전 metadata만 ce24bfd에 기록. 최신main 보존 fast-forward, 통합 후전체2557 PASS/8 SKIP/0 FAIL·Analyze/Python29/Android JVM2 PASS, 원격main 소스SHA 확인. 배포 IPA·서명 AAB/체크섬·설정 대조 완료. Android 공간 부족/잔여 잠금2회 실패는 현재 작업 캐시·해당 idle daemon만 정리하여 동일 소스 재시도 성공. 기존 앱/회원/운영DB/Auth/Provider 변경0. Wiki 결과 커밋 후 main Push, 스토어 업로드·심사·게시0. 배포 바이너리 설치/스토어 처리·Android Play 업데이트는 NOT TESTED.

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../../shared/widgets/legendstudy_lab_entry.dart';
@@ -8,6 +7,10 @@ import '../../personal/personal_list_providers.dart';
 import '../../personal/presentation/personal_material_list.dart';
 import '../../school/presentation/home_meal_card.dart';
 import '../presentation/day_target_card.dart';
+import '../../learning/learning_widgets.dart' show HomeSchoolRankCard;
+
+import 'package:go_router/go_router.dart';
+
 import '../presentation/home_components.dart';
 import '../university_news/university_news_widgets.dart';
 import 'home_configuration.dart';
@@ -123,8 +126,8 @@ final homeCards = <HomeCardDefinition>[
     '학교별 공부 순위',
     '학교별 학습 현황 보기',
     Icons.leaderboard_outlined,
-    (context) => _entry(context, '학교별 공부 순위', '/study/schools'),
-    [],
+    (_) => const HomeSchoolRankCard(),
+    ['schoolSelection', 'schoolRanks:all/total'],
     route: '/study/schools',
   ),
   HomeCardDefinition(
@@ -146,10 +149,3 @@ final homeCards = <HomeCardDefinition>[
     availability: 'official-data-required',
   ),
 ];
-Widget _entry(BuildContext context, String title, String route) => LsCard(
-  child: ListTile(
-    title: Text(title),
-    trailing: const Icon(Icons.chevron_right),
-    onTap: () => context.push(route),
-  ),
-);

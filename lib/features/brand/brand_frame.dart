@@ -24,7 +24,7 @@ Duration? brandFrameDuration(DateTime processStart, DateTime now) {
   return remaining <= _minShow ? null : remaining;
 }
 
-/// Wraps the app and shows [_BrandSplash] once per process (cold start only).
+/// Wraps the app and shows [BrandSplashFrame] once per process (cold start only).
 ///
 /// - `processStart` is captured at the top of `main()`, before initialization.
 ///   The frame is visible for `brandFrameTarget - elapsed`, so:
@@ -104,7 +104,7 @@ class _BrandGateState extends State<BrandGate> {
                 onEnd: () {
                   if (mounted && _opacity == 0) setState(() => _show = false);
                 },
-                child: const _BrandSplash(),
+                child: const BrandSplashFrame(),
               ),
             ),
         ],
@@ -113,44 +113,72 @@ class _BrandGateState extends State<BrandGate> {
   }
 }
 
-/// Light cold-start frame: the LegendStudy brand lockup — centred orange symbol
-/// (position/size matched to the native launch symbol) with the 레전드스터디⁺
-/// wordmark (Pretendard, navy body + orange `+`) directly beneath it. Owner
-/// 2026-10-08/10-16: one simple brand screen — no tagline, no version/loading/
-/// features/ads, no extra animation; logo and service name shown *together*.
-///
-/// Background is white and the symbol is held SOLID at the exact centre, matched
-/// to the native launch symbol, so the native→Flutter handoff shows no jump,
-/// flicker or background flip — the lockup simply *completes* as the wordmark
-/// appears beneath the symbol. The whole frame fades out once (see [_fade]).
-class _BrandSplash extends StatelessWidget {
-  const _BrandSplash();
-
+/// The symbol and wordmark form one responsive lockup. Native iOS uses the
+/// same symbol centre at normal text scale; Android's OS-owned launch phase
+/// retains its required centred icon, then hands off to this shared frame.
+class BrandSplashFrame extends StatelessWidget {
+  const BrandSplashFrame({super.key});
   @override
   Widget build(BuildContext context) {
-    return const ColoredBox(
+    final padding = MediaQuery.maybeOf(context)?.padding ?? EdgeInsets.zero;
+    return ColoredBox(
       color: Colors.white,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Symbol centred and solid → continuous with the native splash symbol.
-          Center(
-            child: Image(
-              image: AssetImage(
-                'assets/brand/generated/legendstudy_symbol.png',
+      child: CustomSingleChildLayout(
+        delegate: _BrandPosition(padding),
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Source alpha bounds are 136..376 of 512px. Trim only the
+            // transparent layout margin, keeping the existing symbol scale.
+            ClipRect(
+              key: ValueKey('brand-visible-symbol'),
+              child: Align(
+                widthFactor: 240 / 512,
+                heightFactor: 240 / 512,
+                child: Image(
+                  image: AssetImage(
+                    'assets/brand/generated/legendstudy_symbol.png',
+                  ),
+                  width: 180,
+                  height: 180,
+                  filterQuality: FilterQuality.medium,
+                ),
               ),
-              width: 180,
-              height: 180,
-              filterQuality: FilterQuality.medium,
             ),
-          ),
-          // Wordmark sits just below centre, shown together with the symbol.
-          Align(
-            alignment: Alignment(0, 0.34),
-            child: BrandWordmark(fontSize: 26),
-          ),
-        ],
+            SizedBox(height: 20),
+            BrandWordmark(fontSize: 26, plusColor: BrandWordmark.brandNavy),
+          ],
+        ),
       ),
     );
   }
+}
+
+class _BrandPosition extends SingleChildLayoutDelegate {
+  const _BrandPosition(this.padding);
+  final EdgeInsets padding;
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      BoxConstraints(
+        maxWidth: (constraints.maxWidth - padding.horizontal - 32).clamp(
+          0,
+          double.infinity,
+        ),
+      );
+  @override
+  Offset getPositionForChild(Size size, Size childSize) {
+    final minTop = padding.top + 16;
+    final maxTop = (size.height - padding.bottom - childSize.height - 16).clamp(
+      minTop,
+      double.infinity,
+    );
+    return Offset(
+      (size.width - childSize.width) / 2,
+      (size.height / 3 - childSize.height / 2).clamp(minTop, maxTop),
+    );
+  }
+
+  @override
+  bool shouldRelayout(_BrandPosition oldDelegate) =>
+      oldDelegate.padding != padding;
 }

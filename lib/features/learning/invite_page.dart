@@ -1,3 +1,5 @@
+import 'school_rank_feed.dart';
+
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
@@ -77,6 +79,7 @@ class _InviteListenerState extends ConsumerState<InviteListener>
     if (state == AppLifecycleState.resumed) {
       ref.invalidate(learningSummaryProvider);
       ref.invalidate(schoolRanksProvider);
+      ref.invalidate(schoolRankFeedProvider);
       ref.invalidate(ownSchoolCardProvider);
     }
   }

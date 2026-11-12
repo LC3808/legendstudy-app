@@ -5,6 +5,8 @@ import 'core_ux_test.dart' as preview;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show PostgrestException;
+import 'package:legendstudy_app/features/learning/school_rank_feed.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -187,29 +189,32 @@ void main() {
     },
   );
 
-  test('explicit default all/participation; every period and metric passed unchanged', () async {
-    final requests = <Map<String, dynamic>>[];
-    final repo = LearningRepository((name, params) async {
-      expect(name, 'student_school_ranking');
-      requests.add(params);
-      return ranking((
-        period: RankPeriod.values.firstWhere(
-          (v) => v.value == params['p_period'],
-        ),
-        metric: RankMetric.values.firstWhere(
-          (v) => v.value == params['p_metric'],
-        ),
-      ));
-    });
-    await repo.ranks(defaultRankQuery);
-    expect(requests.first, {'p_period': 'all', 'p_metric': 'participation'});
-    for (final p in RankPeriod.values) {
-      for (final m in RankMetric.values) {
-        await repo.ranks((period: p, metric: m));
+  test(
+    'explicit default all/total; every period and metric passed unchanged',
+    () async {
+      final requests = <Map<String, dynamic>>[];
+      final repo = LearningRepository((name, params) async {
+        expect(name, 'student_school_ranking');
+        requests.add(params);
+        return ranking((
+          period: RankPeriod.values.firstWhere(
+            (v) => v.value == params['p_period'],
+          ),
+          metric: RankMetric.values.firstWhere(
+            (v) => v.value == params['p_metric'],
+          ),
+        ));
+      });
+      await repo.ranks(defaultRankQuery);
+      expect(requests.first, {'p_period': 'all', 'p_metric': 'total'});
+      for (final p in RankPeriod.values) {
+        for (final m in RankMetric.values) {
+          await repo.ranks((period: p, metric: m));
+        }
       }
-    }
-    expect(requests.length, 13);
-  });
+      expect(requests.length, 13);
+    },
+  );
   test('server ties order preserved, around deduped, no null to zero', () {
     final data = SchoolRanks.parse(
       ranking(
@@ -444,16 +449,28 @@ void main() {
                 schoolSelectionProvider.overrideWith(
                   () => SelectedSchool(school),
                 ),
-                schoolRanksProvider.overrideWith(
-                  (ref, q) async => SchoolRanks.parse(
-                    ranking(
-                      q,
+                schoolRankPageRepositoryProvider.overrideWithValue(
+                  SchoolRankPageRepository((name, params) async {
+                    if (name == 'student_school_ranking_page') {
+                      throw const PostgrestException(
+                        message: 'Missing candidate',
+                        code: 'PGRST202',
+                      );
+                    }
+                    return ranking(
+                      (
+                        period: RankPeriod.values.firstWhere(
+                          (p) => p.value == params['p_period'],
+                        ),
+                        metric: RankMetric.values.firstWhere(
+                          (m) => m.value == params['p_metric'],
+                        ),
+                      ),
                       top: [row(1, 1), row(2, 1)],
                       around: [row(12, 11, own: true)],
                       mine: row(12, 11, own: true),
-                    ),
-                    q,
-                  ),
+                    );
+                  }),
                 ),
                 rankSchoolNameProvider.overrideWith(
                   (_, key) async => '길고 긴 학교 이름 테스트 고등학교',
@@ -488,6 +505,8 @@ void main() {
           );
           await t.pumpAndSettle();
           expect(t.takeException(), isNull);
+          await t.tap(find.widgetWithText(ChoiceChip, '참여 학생 수'));
+          await t.pumpAndSettle();
           expect(find.text('참여 **명'), findsNWidgets(2));
           expect(find.text('참여 2명'), findsOneWidget);
           expect(

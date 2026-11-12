@@ -21,6 +21,7 @@ import 'features/analytics/domain/analytics_service.dart';
 import 'features/auth/identity_diagnostic.dart';
 import 'features/brand/brand_frame.dart';
 import 'features/onboarding/device_intro.dart';
+import 'features/home/guide/home_menu_guide.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -118,8 +119,13 @@ class _AppBootstrapState extends State<AppBootstrap> {
         ),
       );
     }
+    final guideStore = await HomeGuideStore.initialize(
+      now: processStart,
+      freshGuest: !introDone && client?.auth.currentUser == null,
+    );
     return ProviderScope(
       overrides: [
+        homeGuideStoreProvider.overrideWithValue(guideStore),
         introRequiredAtBootProvider.overrideWithValue(!introDone),
         deviceIntroStoreProvider.overrideWithValue(introStore),
         appConfigProvider.overrideWithValue(config),
