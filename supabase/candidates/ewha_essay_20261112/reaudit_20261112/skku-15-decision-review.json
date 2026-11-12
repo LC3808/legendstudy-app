@@ -1,0 +1,282 @@
+{
+  "checked_at_kst": "2026-11-12T19:39:55.967866+09:00",
+  "questions": [
+    {
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:1",
+      "year": 2023,
+      "file": "2023학년도 성균관대 모의논술_자연계 문제.pdf",
+      "sha256": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+      "pages": 6,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "40cb9125-a195-5540-a650-60f0cc6f7518",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:2",
+      "year": 2023,
+      "file": "2023학년도 성균관대 모의논술_자연계 문제.pdf",
+      "sha256": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+      "pages": 6,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_id": "d0e47369-676a-5347-94f3-bb7a2dcd6814",
+      "registry_id": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:3",
+      "year": 2023,
+      "file": "2023학년도 성균관대 모의논술_자연계 문제.pdf",
+      "sha256": "75e9730711eab035b1cfcb08f9ea5ea0a1c455eed0b2ebf4b5601eaa7246410f",
+      "pages": 6,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "8121b47e-4a8c-5767-b90c-90bde3327d74",
+      "registry_id": "source:skku-2026-admission-sk05:q1",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형3 문제.pdf",
+      "sha256": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "e8deaca8-512a-56d8-82fa-fa11993883bc",
+      "registry_id": "source:skku-2026-admission-sk05:q2",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형3 문제.pdf",
+      "sha256": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_id": "b36ee18b-15cd-53bf-ba79-62bccf56510e",
+      "registry_id": "source:skku-2026-admission-sk05:q3",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형3 문제.pdf",
+      "sha256": "494d52fb0c9dbee2f6e18b0f42bc55ba471af00e543eb63b04e19528941d5924",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+      "registry_id": "source:skku-2026-admission-sk03:q1",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형2 문제.pdf",
+      "sha256": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "8633896c-7611-5eeb-ae69-ab2672f1d867",
+      "registry_id": "source:skku-2026-admission-sk03:q2",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형2 문제.pdf",
+      "sha256": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_id": "337b7c8a-1c15-5f67-b542-f82877aad6df",
+      "registry_id": "source:skku-2026-admission-sk03:q3",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형2 문제.pdf",
+      "sha256": "b04a8dd35be34f8205e2d66527d415d08411b6570e70cd7970b5b2d5b481e1a4",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+      "registry_id": "source:skku-2026-admission-sk01:q1",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형1 문제.pdf",
+      "sha256": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "8215d793-884f-5392-ba34-39b2c934c7db",
+      "registry_id": "source:skku-2026-admission-sk01:q2",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형1 문제.pdf",
+      "sha256": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_id": "1bb7bbff-fdf4-5205-b779-ccb29e756479",
+      "registry_id": "source:skku-2026-admission-sk01:q3",
+      "year": 2026,
+      "file": "2026학년도 성균관대 수시 논술_수리형1 문제.pdf",
+      "sha256": "21cf7b5e88c8c66840f22b12a726061f0876422ab755f58491fe19c2a2d13908",
+      "pages": 4,
+      "explicit_restriction_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "9ea7243c-f209-5341-a334-347cda833409",
+      "registry_id": "source:skku-2027-mock-sk12:q1",
+      "year": 2027,
+      "file": "2027학년도 성균관대 모의논술_수리형 문제.pdf",
+      "sha256": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+      "pages": 8,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+      "registry_id": "source:skku-2027-mock-sk12:q2",
+      "year": 2027,
+      "file": "2027학년도 성균관대 모의논술_수리형 문제.pdf",
+      "sha256": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+      "pages": 8,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    },
+    {
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_id": "fda4849f-0f49-5553-99bb-1c78985ab5cb",
+      "registry_id": "source:skku-2027-mock-sk12:q3",
+      "year": 2027,
+      "file": "2027학년도 성균관대 모의논술_수리형 문제.pdf",
+      "sha256": "0ff97ea1406202ab8236572e4ad6b1acd3024def73aa4a01423d8bec0fbcf2b8",
+      "pages": 8,
+      "explicit_restriction_pages": [],
+      "student_display": "PENDING",
+      "storage_read": "PENDING",
+      "operative_owner_decision": "Owner 성균관대 처리 및 서강대 진행: 15문항 PDF RIGHTS_HOLD 유지, 권한 확인 전 임의 공개 금지",
+      "current_status": "OWNER_RIGHTS_HOLD",
+      "registry": true
+    }
+  ],
+  "policy_findings": [
+    "동국2025/26 제한문구에도 기존 exact PDF 승인과 Owner 재사용 결정 적용",
+    "성균 언어형 개별승인은 이번15 ID/SHA와 불일치",
+    "2023/2027모의6의 별도 제한문구 미발견. 처음 PENDING을 선택한 Owner 원문 기록은 현재 Git/Wiki에서 미확인",
+    "현재15 HOLD는 이 대화 Owner 명시 유지 결정으로 확인됨; 학교전체 영구금지 아님"
+  ],
+  "new_policy": false
+}

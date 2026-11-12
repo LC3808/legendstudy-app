@@ -1,0 +1,130 @@
+{
+  "registry": [
+    {
+      "id": "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+      "essay_exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_key": "source:skku-2026-admission-sk03:q1",
+      "is_published": false
+    },
+    {
+      "id": "1bb7bbff-fdf4-5205-b779-ccb29e756479",
+      "essay_exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_key": "source:skku-2026-admission-sk01:q3",
+      "is_published": false
+    },
+    {
+      "id": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+      "essay_exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:1",
+      "is_published": false
+    },
+    {
+      "id": "337b7c8a-1c15-5f67-b542-f82877aad6df",
+      "essay_exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_key": "source:skku-2026-admission-sk03:q3",
+      "is_published": false
+    },
+    {
+      "id": "40cb9125-a195-5540-a650-60f0cc6f7518",
+      "essay_exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:2",
+      "is_published": false
+    },
+    {
+      "id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "is_published": false
+    },
+    {
+      "id": "8121b47e-4a8c-5767-b90c-90bde3327d74",
+      "essay_exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_key": "source:skku-2026-admission-sk05:q1",
+      "is_published": false
+    },
+    {
+      "id": "8215d793-884f-5392-ba34-39b2c934c7db",
+      "essay_exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_key": "source:skku-2026-admission-sk01:q2",
+      "is_published": false
+    },
+    {
+      "id": "8633896c-7611-5eeb-ae69-ab2672f1d867",
+      "essay_exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "question_key": "source:skku-2026-admission-sk03:q2",
+      "is_published": false
+    },
+    {
+      "id": "9ea7243c-f209-5341-a334-347cda833409",
+      "essay_exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_key": "source:skku-2027-mock-sk12:q1",
+      "is_published": false
+    },
+    {
+      "id": "b36ee18b-15cd-53bf-ba79-62bccf56510e",
+      "essay_exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_key": "source:skku-2026-admission-sk05:q3",
+      "is_published": false
+    },
+    {
+      "id": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+      "essay_exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_key": "source:skku-2027-mock-sk12:q2",
+      "is_published": false
+    },
+    {
+      "id": "d0e47369-676a-5347-94f3-bb7a2dcd6814",
+      "essay_exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "question_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:3",
+      "is_published": false
+    },
+    {
+      "id": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+      "essay_exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "question_key": "source:skku-2026-admission-sk01:q1",
+      "is_published": false
+    },
+    {
+      "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "is_published": false
+    },
+    {
+      "id": "e8deaca8-512a-56d8-82fa-fa11993883bc",
+      "essay_exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "question_key": "source:skku-2026-admission-sk05:q2",
+      "is_published": false
+    },
+    {
+      "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "is_published": false
+    },
+    {
+      "id": "fda4849f-0f49-5553-99bb-1c78985ab5cb",
+      "essay_exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "question_key": "source:skku-2027-mock-sk12:q3",
+      "is_published": false
+    }
+  ],
+  "math_worker_rows": [],
+  "math_leaves": [],
+  "essay_policies": {
+    "be108151-16e2-556e-b645-ace485c48624": null,
+    "24e1ae27-fb31-591a-b3fc-6f73e92a2564": null,
+    "c15360f1-571e-5fa4-8314-dde3022f9594": null,
+    "7d0b2102-0239-5529-95ec-7d0e93d05ef8": null,
+    "b459d8b0-db7f-5198-a8ce-dc25fd799729": null,
+    "7b20c77f-3e34-5b8d-9da9-26e976b14230": null,
+    "466a360a-5814-55cf-91cb-69c99ba2e081": null,
+    "759dc80b-540b-535c-8ca5-e8f8c1bceb91": null
+  },
+  "checked_at_kst": "2026-11-12T19:36:48.457779+09:00",
+  "public_241_connected": true,
+  "published_math": 205,
+  "published_essay": 36,
+  "production_writes": 0,
+  "provider_calls": 0
+}

@@ -1,5 +1,8 @@
 # 통합 Owner 검수 241문항 및 잔여67 · 2026-11-12
 
+[성균15·이화모의24 원본 재검증](essay-skku-ewha-hold-reaudit-20261112.md): 성균은 언어형 개별승인과 자연15 Owner HOLD를 구분. 이화24 문제/예시·해설·평가설명 확보,95쪽 직접판독·원문역할 추출 보완. 자료미확보 일괄표현 정정,평가용criterion 미확정.241공개/67잔여·추가공개/운영쓰기/Provider0.
+
+
 **검수 목록 준비 DONE / 전체 확장 PARTIAL.** 공개241·잔여67·전체308. 이화21시험63문항 연결은 DONE이다. 이번 재점검 신규 공개0, 운영 쓰기0, Provider0. 기존 자연43과 이화 모의24를 구분했다. 중앙대 과학11 HOLD 및 기존 대학의 보존 문항은 이308 분모 밖이다.
 
 [문항별 전체 검수표](essay-owner-review-241-20261112.md) · [308문항 JSON](../supabase/candidates/review_remaining_67_20261112/owner-integrated-review.json) · [운영 읽기 증거](../supabase/candidates/review_remaining_67_20261112/review-runtime-evidence.json)

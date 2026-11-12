@@ -1,0 +1,1107 @@
+{
+  "checked_at_kst": "2026-11-12T19:39:55.967866+09:00",
+  "review_scope": "Original mock16PDF95pages visually reviewed, all58PDF hashes/text crosschecked; all476pages visual review not claimed",
+  "example_answers": 24,
+  "official_assessment_guidance": 24,
+  "answer_analysis": 6,
+  "separate_scoring_rule_confirmed": 0,
+  "new_criteria": 0,
+  "provider_calls": 0,
+  "questions": [
+    {
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        2,
+        3
+      ],
+      "official_intent_pages": [
+        2
+      ],
+      "official_answer_analysis_pages": [
+        3
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "f901e6cf776443dba41e5c8bb168d4b333bd1004c48eb5189d3926dbf84e068c",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        4,
+        5
+      ],
+      "official_intent_pages": [
+        4
+      ],
+      "official_answer_analysis_pages": [
+        5
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "214a5012387456674b8e72d604b1d63f2901de716583d443486c441584ce4290",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "question_id": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+      "year": 2024,
+      "track": "인문계열Ⅰ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 문제.pdf",
+        "sha256": "ee6ae3b46e247f68ea26232e769137c03b443f9531aa30ab6844bb7756059dfa",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문1 해설,답안.pdf",
+        "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+        "pages": 8
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        6,
+        7,
+        8
+      ],
+      "official_intent_pages": [
+        6,
+        7
+      ],
+      "official_answer_analysis_pages": [
+        6,
+        8
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "25f972bf28a631e3956e956307db44385e8c4048c93466f7466f1be41a58607e",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        2,
+        3
+      ],
+      "official_intent_pages": [
+        2
+      ],
+      "official_answer_analysis_pages": [
+        3
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "4135a827414895af5e141127a61887003d3da75c52ba282229ead17af8a24a73",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        4,
+        5
+      ],
+      "official_intent_pages": [
+        4
+      ],
+      "official_answer_analysis_pages": [
+        5
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "f20b39282927c74e536a6ead0f2e9b3e57b6df4457df3d2c62959a3a52dfd1ed",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "question_id": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+      "year": 2024,
+      "track": "인문계열Ⅱ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 문제.pdf",
+        "sha256": "fec0960eb236ae7e786070f8953ad605d603fe14779dc85dade8a2255626af6e",
+        "pages": 5
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_인문2 해설,답안.pdf",
+        "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        7
+      ],
+      "official_intent_pages": [
+        6
+      ],
+      "official_answer_analysis_pages": [
+        7
+      ],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "64be4c834bae6e8d99c188dd59745219b960cceec5879420953bbca47844a13f",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        2,
+        3
+      ],
+      "official_intent_pages": [
+        1
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "511b256ff7c91ae739cb401ac2a77ae19ffa6014b23a405b9c83e99c29c187f6",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "PRODUCTION_EXISTING",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        5,
+        6
+      ],
+      "official_intent_pages": [
+        4
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "f243de1bb2b115b19669413744614bced851a31a17f51e98587d3a3f4dff5d5b",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "PRODUCTION_EXISTING",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "question_id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "year": 2024,
+      "track": "자연계열Ⅰ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 문제.pdf",
+        "sha256": "f0700c5dd3dffe58b45ffe6a5bf06c47914248406c0450909d645f26ab3c6f24",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연1 해설,답안.pdf",
+        "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+        "pages": 9
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        8,
+        9
+      ],
+      "official_intent_pages": [
+        7
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "97ba9a451124da6aa47eede7cf787651b30e62dbcf50befb7720f2d575088fe7",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "PRODUCTION_EXISTING",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        2,
+        3,
+        4
+      ],
+      "official_intent_pages": [
+        1
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "c3805bcddcdbf9dd1b3d0dfaf5b0111c00d28c126224e1195033ec89a1c86d76",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "086eab54-62a6-5b20-969b-d45410e37a39",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        6,
+        7
+      ],
+      "official_intent_pages": [
+        5
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "21b82fc4c5e69449e8fe3239402ba83910588188c2133ce2530bd131c43d01fb",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "question_id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+      "year": 2024,
+      "track": "자연계열Ⅱ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 문제.pdf",
+        "sha256": "3f13fe7a3510506d633e81f84387ff0227986a9d56c5be2d090491e9341f2ab9",
+        "pages": 2
+      },
+      "solution": {
+        "filename": "2024학년도 이화여대 모의논술_자연2 해설,답안.pdf",
+        "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+        "pages": 10
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        9,
+        10
+      ],
+      "official_intent_pages": [
+        8
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "9cff1b80b43933bd20d807cee3bcb0fd558ad730f38e57239ec543716a0538f1",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        1,
+        2,
+        3
+      ],
+      "official_intent_pages": [
+        1,
+        2
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        1,
+        2
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "8bb006fc2a2fb77c17e3395cda97795811a1d2302ab47ffda3f4670cd8887df4",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        4,
+        5
+      ],
+      "official_intent_pages": [
+        4
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        4
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "31ae86337df51ff50f6776cd645e795ba788c1e082a53ea9c9b6e1d60500f852",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "question_id": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+      "year": 2027,
+      "track": "인문계열Ⅰ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 문제.pdf",
+        "sha256": "c29e06329b1586fc34efa28bd5442a4ba4883c300b5738092f6553ce732c5a64",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열1 해설,답안.pdf",
+        "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+        "pages": 7
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        6,
+        7
+      ],
+      "official_intent_pages": [
+        6
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        6
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "e8e341b3ac43b981a2a4777b7070505b4c7d1104c5f66a744528c8087369a69b",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        1,
+        2
+      ],
+      "official_intent_pages": [
+        1
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        1
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "db984324a5c96527ee9b7f7b4386ac19966eea1299fd634a30a3e6e240deed43",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "c008580f-85ee-5149-96d7-ed316b107324",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        3,
+        4
+      ],
+      "official_intent_pages": [
+        3
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        3
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "094d368978a746b042303d438895f93c29aa5174809bb9ef85d7c1cbecaacca1",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "question_id": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+      "year": 2027,
+      "track": "인문계열Ⅱ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 문제.pdf",
+        "sha256": "a5f02580b5aecc2ede32b6fa92b3251d8f525b95d4a6b2bfa40f2d7e7575238d",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_인문계열2 해설,답안.pdf",
+        "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+        "pages": 6
+      },
+      "problem_pages": [
+        2,
+        3,
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        6
+      ],
+      "official_intent_pages": [
+        5
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [
+        6
+      ],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "5d320dac85314adb0f5e0dec66d5cc3b16f55f56eb35f597740ac45181678020",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        1,
+        2,
+        3
+      ],
+      "official_intent_pages": [
+        1
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "957ace2cfffd2ae09fc5cac3be7a02d277dc3cb4af79dd8cd332d4992ddfeb0d",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "problem_pages": [
+        3
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        4,
+        5,
+        6
+      ],
+      "official_intent_pages": [
+        4
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "890787a4855a9bbdadee078866d91e52db2aa9a7e10fcb5dfe4f88f07e8d0d52",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "question_id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+      "year": 2027,
+      "track": "자연계열Ⅰ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 문제.pdf",
+        "sha256": "0458b13daf1e095ec8ab113a018f3cf76a0f6c6ce8777943ed406c0b000f966c",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf",
+        "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+        "pages": 8
+      },
+      "problem_pages": [
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        7,
+        8
+      ],
+      "official_intent_pages": [
+        7
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "b50693a0e7d3b822e50459533e2eeaa89cc294b49bd3ab76a69ee8b67e0d6f8c",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "question_number": 1,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "problem_pages": [
+        2
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "official_intent_pages": [
+        1
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "76d8c50dd02f35d7bbfa8b2dcd387a9f5af79e1fb6ca8fb051174d5a51445452",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "question_number": 2,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "problem_pages": [
+        3
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        6,
+        7
+      ],
+      "official_intent_pages": [
+        5
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "99148c2d145fb1854225929f7f53544352fbba4b558f3241cb797ddc0b5327bd",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    },
+    {
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "question_id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+      "year": 2027,
+      "track": "자연계열Ⅱ",
+      "question_number": 3,
+      "problem": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 문제.pdf",
+        "sha256": "f5c0eea95d97b7b497d3fa4635d198a57cc343f3cdf592b2940f60fa149746b8",
+        "pages": 4
+      },
+      "solution": {
+        "filename": "2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf",
+        "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+        "pages": 10
+      },
+      "problem_pages": [
+        4
+      ],
+      "example_answer_present": true,
+      "example_section_pages": [
+        9,
+        10
+      ],
+      "official_intent_pages": [
+        8
+      ],
+      "official_answer_analysis_pages": [],
+      "official_commentary_pages": [],
+      "separate_scoring_rule_confirmed": false,
+      "numeric_partial_credit_rule_confirmed": false,
+      "assessment_guidance_present": true,
+      "extraction_status": "SOURCE_TEXT_AND_RENDER_REVIEWED",
+      "extraction_sha256": "fd069757ad95bdd5a60e6f381de6666e95b3ea49ae096a597be124812a2a968e",
+      "math_glyph_limitation": "원본 수식 이미지를 권위 자료로 유지; 텍스트 private glyph 임의 교정0",
+      "registry": "LOCAL_ID_ONLY",
+      "worker": "NOT_CONNECTED",
+      "publication": "HOLD",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
+      "immediately_publishable": false
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 # Current Status
 
-[최신 통합 검수241·잔여67](essay-remaining-67-owner-review-20261112.md): 자연43/이화모의24 문항별 사유·해결조건, 운영읽기241연결 확인. 신규공개0·DB쓰기0·Provider0. 공식불일치6/권리15/과학운영미연결18/기준미확보28; 과학후보24Mock PASS·실제AI/제출·기기NT.
+[성균15·이화모의24 원본 재검증](essay-skku-ewha-hold-reaudit-20261112.md): 성균은 언어형 개별승인과 자연15 Owner HOLD를 구분. 이화24 문제/예시·해설·평가설명 확보,95쪽 직접판독·원문역할 추출 보완. 자료미확보 일괄표현 정정,평가용criterion 미확정.241공개/67잔여·추가공개/운영쓰기/Provider0.
+
+[최신 통합 검수241·잔여67](essay-remaining-67-owner-review-20261112.md): 자연43/이화모의24 문항별 사유·해결조건, 운영읽기241연결 확인. 신규공개0·DB쓰기0·Provider0. 공식불일치6/권리15/과학운영미연결18/별도기준미확인4/이화공식자료확보·기준역할미확정24; 과학후보24Mock PASS·실제AI/제출·기기NT.
 
 [잔여51 처리](essay-remaining-51-20261112.md): 항공7+DRAFT재적재0·동국공식정정Q1 공개8추가. 10대학83시험221 중72시험178 PUBLISHED/43잔여(공식HOLD6·권리15·NOT READY22). 기존385catalog·224Registry·RLS272·Credit/Worker엔진보존,Provider0. [Owner178목록](essay-natural-owner-review-20261112.md). 실제로그인제출·기기·AI품질NT.
 
-[이화 운영 공개](essay-ewha-public-20261112.md): **21시험63문항 PUBLISHED**(Math27/Essay36), 신규535행·기존1시험3문항/사용자기록·Credit 보존. migration20261112100444, WEBdcda9cf/Pagesf1c64b82·Worker c56d06b8. 기존함수359/ACL362/RLS272·정적2195자산보존, 신규문제PDF21 exact SELECT정책1. Provider0. WEB1965PASS/기존10FAIL/5SKIP, 신규FAIL0·APP3PASS. 브라우저/기기/실제로그인제출/AI품질NT. 모의24기준미확보HOLD;자연잔여43과분리한 [통합Owner검수목록](essay-ewha-owner-integrated-review-20261112.md). [원본58PDF476쪽 조사이력](essay-ewha-source-audit-20261112.md)은당시상태를보존한다.
+[이화 운영 공개](essay-ewha-public-20261112.md): **21시험63문항 PUBLISHED**(Math27/Essay36), 신규535행·기존1시험3문항/사용자기록·Credit 보존. migration20261112100444, WEBdcda9cf/Pagesf1c64b82·Worker c56d06b8. 기존함수359/ACL362/RLS272·정적2195자산보존, 신규문제PDF21 exact SELECT정책1. Provider0. WEB1965PASS/기존10FAIL/5SKIP, 신규FAIL0·APP3PASS. 브라우저/기기/실제로그인제출/AI품질NT. 모의24공식자료확보·기준역할미확정HOLD;자연잔여43과분리한 [통합Owner검수목록](essay-ewha-owner-integrated-review-20261112.md). [원본58PDF476쪽 조사이력](essay-ewha-source-audit-20261112.md)은당시상태를보존한다.
 
 [광운21시험42문항 PUBLISHED](essay-kwangwoon-public-20261112.md):636행·공식문제PDF21파일78쪽·목록20시험숨김해제. 기존340문항·다른41대학목록·RLS271·권한/Credit보존. 운영158/199/126·WEB410/APP39 PASS,Provider0.로그인제출/실기기NOT TESTED. 광운DONE;서울여후속은상단참조.동국Q1 후속해소·공개는상단참조.
 

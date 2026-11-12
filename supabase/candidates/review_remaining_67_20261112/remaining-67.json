@@ -4,9 +4,10 @@
   "ewha_mock": 24,
   "blocker_counts": {
     "OFFICIAL_CONFLICT": 6,
-    "MISSING_OFFICIAL_RUBRIC": 28,
+    "MISSING_OFFICIAL_RUBRIC": 4,
     "SCIENCE_RUNTIME": 18,
-    "PDF_RIGHTS": 15
+    "PDF_RIGHTS": 15,
+    "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL": 24
   },
   "questions": [
     {
@@ -2450,7 +2451,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2478,8 +2479,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -2489,7 +2490,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2502,7 +2503,9 @@
           "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2519,7 +2522,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2547,8 +2550,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -2558,7 +2561,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2571,7 +2574,9 @@
           "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2588,7 +2593,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2616,8 +2621,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅰ",
@@ -2627,7 +2632,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2640,7 +2645,9 @@
           "sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2657,7 +2664,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2685,8 +2692,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -2696,7 +2703,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2709,7 +2716,9 @@
           "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2726,7 +2735,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2754,8 +2763,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -2765,7 +2774,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2778,7 +2787,9 @@
           "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2795,7 +2806,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -2823,8 +2834,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 우수답안 분석에 평가 관점이 실제 존재. 이전 일괄 자료미확보 표현은 부정확. 별도 점수/등급/부분점수 규칙과 평가용 criterion 역할은 확인되지 않음.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 인문계열Ⅱ",
@@ -2834,7 +2845,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2847,7 +2858,9 @@
           "sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2864,7 +2877,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -2892,8 +2905,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -2903,7 +2916,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2916,7 +2929,9 @@
           "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
           "pages": 9
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -2933,7 +2948,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -2961,8 +2976,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -2972,7 +2987,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -2985,7 +3000,9 @@
           "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
           "pages": 9
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3002,7 +3019,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": true,
       "owner_review": {
@@ -3030,8 +3047,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅰ",
@@ -3041,7 +3058,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3054,7 +3071,9 @@
           "sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
           "pages": 9
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3071,7 +3090,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3099,8 +3118,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -3110,7 +3129,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3123,7 +3142,9 @@
           "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3140,7 +3161,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3168,8 +3189,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -3179,7 +3200,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3192,7 +3213,9 @@
           "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3209,7 +3232,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3237,8 +3260,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2024학년도 모의 자연계열Ⅱ",
@@ -3248,7 +3271,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3261,7 +3284,9 @@
           "sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3278,7 +3303,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3306,8 +3331,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -3317,7 +3342,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3330,7 +3355,9 @@
           "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3347,7 +3374,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3375,8 +3402,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -3386,7 +3413,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3399,7 +3426,9 @@
           "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3416,7 +3445,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3444,8 +3473,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅰ",
@@ -3455,7 +3484,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3468,7 +3497,9 @@
           "sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
           "pages": 7
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3485,7 +3516,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3513,8 +3544,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -3524,7 +3555,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3537,7 +3568,9 @@
           "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
           "pages": 6
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3554,7 +3587,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3582,8 +3615,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -3593,7 +3626,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3606,7 +3639,9 @@
           "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
           "pages": 6
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3623,7 +3658,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3651,8 +3686,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문항 해설·출제의도·예시답안 확보. 자료누락/OCR 실패 아님. 기존 Worker에 보낼 scoring_criterion 구간은 미확정.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 인문계열Ⅱ",
@@ -3662,7 +3697,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3675,7 +3710,9 @@
           "sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
           "pages": 6
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3692,7 +3729,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3720,8 +3757,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -3731,7 +3768,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3744,7 +3781,9 @@
           "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3761,7 +3800,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3789,8 +3828,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -3800,7 +3839,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3813,7 +3852,9 @@
           "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3830,7 +3871,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3858,8 +3899,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅰ",
@@ -3869,7 +3910,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3882,7 +3923,9 @@
           "sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
           "pages": 8
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3899,7 +3942,7 @@
       "label": "문제 1",
       "display_order": 0,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3927,8 +3970,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -3938,7 +3981,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -3951,7 +3994,9 @@
           "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -3968,7 +4013,7 @@
       "label": "문제 2",
       "display_order": 1,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -3996,8 +4041,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -4007,7 +4052,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -4020,7 +4065,9 @@
           "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     },
     {
       "cohort": "ewha_mock_24",
@@ -4037,7 +4084,7 @@
       "label": "문제 3",
       "display_order": 2,
       "mode": "NOT READY",
-      "status": "HOLD_MISSING_OFFICIAL_RUBRIC",
+      "status": "HOLD_SCORING_ROLE_REVIEW",
       "entry_url": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
       "existing_registry_preserved": false,
       "owner_review": {
@@ -4065,8 +4112,8 @@
       "official_rubric_pages": [],
       "pdf_mapping": [],
       "production_change_in_this_task": false,
-      "cause": "모의논술 문항별 공식 채점기준 미확보",
-      "resolution": "해당 모의·계열·문항에 대응하는 공식 채점기준 확보 후 기존 Math/Essay package에 연결·격리 검증. 예시답안이나 출제의도로 채점기준을 대신 생성하지 않음.",
+      "cause": "공식 문제·답안·출제의도 확보. 별도 채점 규칙은 검토한 원본에서 확인되지 않음. 기존 기준 전용 추출기가 모의 package를 건너뜀.",
+      "resolution": "기존 공식 설명을 scoring_criterion으로 승격하지 않고 역할·페이지를 보존. 해당 설명의 기준 역할을 확정하거나 정확한 시험의 별도 공식 채점 규칙이 연결되어야 기존 Worker package 조립 가능.",
       "review_path": {
         "entry": "https://lab.legendstudy.com/essay-lab/universities/ewha/",
         "exam": "이화여자대학교 2027학년도 모의 자연계열Ⅱ",
@@ -4076,7 +4123,7 @@
         "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
         "actual_submission_result_rewrite": "NOT TESTED"
       },
-      "blocker_category": "MISSING_OFFICIAL_RUBRIC",
+      "blocker_category": "SCORING_ROLE_UNRESOLVED_WITH_OFFICIAL_MATERIAL",
       "release_eligible_now": false,
       "official_material": {
         "problem": {
@@ -4089,7 +4136,10 @@
           "sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
           "pages": 10
         }
-      }
+      },
+      "material_reaudit": "../ewha_essay_20261112/reaudit_20261112/mock-24-source-review.json",
+      "official_assessment_guidance_present": true
     }
-  ]
+  ],
+  "reaudited_at_kst": "2026-11-12T19:39:55.967866+09:00"
 }

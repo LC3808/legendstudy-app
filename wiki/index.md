@@ -424,3 +424,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 - [공개241 검수·잔여67](essay-remaining-67-owner-review-20261112.md)
 - [문항별 Owner 검수 목록](essay-owner-review-241-20261112.md)
+
+- [성균15·이화모의24 원본·기존 결정 재검증](essay-skku-ewha-hold-reaudit-20261112.md)
