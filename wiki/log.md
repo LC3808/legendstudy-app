@@ -5969,3 +5969,5 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12 14:11 KST: [동국7시험20문항 PUBLISHED/1HOLD](essay-dongguk-public-20261112.md).273행/ACTIVE80/기존2허용목록,Migration20261112051055,Pages8d313832.137/156/60·WEB410/APP39 PASS. 기존320문항/RLS271/비논술2179자산보존;Credit동시1건추가·기존669동일.2026모의Q1 공식수정근거HOLD,연도는정상.Provider0,로그인UI/실기기NOT TESTED. 숙명DONE인수,다음광운.
 
 - 2026-11-12T14:35:45.758954+09:00: [광운21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md).636행/168ACTIVE/PDF21/목록20시험해제.운영158/199/126·WEB410/APP39 PASS.기존340문항/다른41대학/RLS271보존.신규HOLD0,Provider0,로그인제출·실기기NOT TESTED.다음서울여대.
+
+- 2026-11-12T15:39:30.340185+09:00: [서울여 수리3 PUBLISHED / 과학6 NOT READY](essay-swu-public-20261112.md). 운영119/121/9·WEB447/APP29 PASS,기존382/RLS272/42대학목록보존. [통합](essay-natural-publication-summary-20261112.md):221중170공개·51잔여,Owner품질검수목록인계. Provider0,실제제출/실기기NOT TESTED.

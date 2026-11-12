@@ -1,7 +1,7 @@
 # 자연·수리 논술 대학별 순차 작업 — 최신 Owner 결정
 
 
-최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md), [광운42](essay-kwangwoon-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
+최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md), [광운42](essay-kwangwoon-public-20261112.md), [서울여3](essay-swu-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
 
 ## 확정 순서와 현재 상태
 
@@ -17,8 +17,8 @@
 |6|숭실대학교|5시험19 PUBLISHED / 2024Q2 HOLD1|공개대상DONE,HOLD유지|
 |7|숙명여자대학교|16시험44 PUBLISHED / 기존6 보존|Owner확인DONE|
 |8|동국대학교|7시험20 PUBLISHED / 2026모의Q1 HOLD1|공개 작업 종료; Q1 공식 수정 근거 보완 대기|
-|9|광운대학교|[21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md)|DONE,다음서울여대|
-|10|서울여자대학교|수리3 TECH READY / 과학6 NOT READY|36행 운영 승인 별도·과학 기존 경로 결합 미완료|
+|9|광운대학교|[21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md)|Owner 확인 DONE|
+|10|서울여자대학교|[수리3 PUBLISHED / 과학6 NOT READY](essay-swu-public-20261112.md)|공개 대상 DONE; 과학 계약 별도, 통합 현황 인계|
 
 후순위 대학의 기존 산출물은 폐기하거나 다시 만들지 않는다. 실제 차례에 기존 운영/Registry/공식 근거를 대조해 미완료만 처리한다. 현재 뒤 대학 개발·운영 적용은 진행하지 않는다.
 HOLD 또는 운영 승인으로 막히면 즉시 Owner에게 보고한다. HOLD를 해제하거나 대학 전체 완료로 표시하지 않는다. TECH READY가 확인된 범위와 HOLD/NOT READY를 분리해 다음 순번으로 진행한다. Owner 품질 검수 대기만으로 중단하지 않는다.
@@ -70,3 +70,7 @@ Git HEAD는 `git log -1`로 확인한다. SQL 실행 파일·SHA·대상 UUID·�
 [대학별 TECH READY 결과·검사 수·서강 PDF 누락](essay-natural-tech-ready-20261112.md): 한국항공→건국→경희→성균관→서강 순차 검증, 실제 품질 검수는 통합 단계로 유예. 숭실16/부분3/검수보류1을 후속 확인했고 다음은 숙명.
 
 현재 지정10개교 순차 검토 결과와 다음 실행은 [통합 검수 준비](essay-natural-integrated-review-20261112.md)에 있다. TECH186/부분7/HOLD6/NOTREADY22/기존보존13. 전체 REVIEW READY 아님.
+
+## 전체 순차 결과 통합
+
+[10대학 83시험221문항 중170 공개·51잔여](essay-natural-publication-summary-20261112.md), [Owner 검수 68시험 목록](essay-natural-owner-review-20261112.md). 전체 확장은 PARTIAL이다. 과거 TECH/DRAFT 승인 문구는 당시 이력이며 최신 Owner 공개 지시와 실제 운영 영수증을 따른다.

@@ -52,5 +52,6 @@
     "baseline-failures": "72c08fa2dca16336c3afb8b4ab8d3c225f6ae10b28f2619b48cb4228f8beb0b4",
     "flutter": "3462816435efc890866a101d174f6f5c36fc93fe20b10278853211afd91a0f1f",
     "lint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-  }
+  },
+  "scope": "Test executions only; actual approved production release has a separate receipt"
 }

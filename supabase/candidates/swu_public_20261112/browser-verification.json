@@ -1,0 +1,20 @@
+{
+  "status": "PARTIAL",
+  "url": "https://lab.legendstudy.com/essay-lab/universities/swu/",
+  "browser": "IAB anonymous",
+  "checked": [
+    "Natural track four exam entries",
+    "2026 natural Q1 Q2 Q3 exact Registry keys and image/math input panels",
+    "Existing official PDF source label and page marker",
+    "2025 science existing registered metadata/text draft panel still visible; no new math connection"
+  ],
+  "not_tested": [
+    "Authenticated PDF browser rendering",
+    "Login submission/results/rewrite",
+    "iPhone",
+    "Android",
+    "AI quality"
+  ],
+  "production_submissions": 0,
+  "provider_calls": 0
+}

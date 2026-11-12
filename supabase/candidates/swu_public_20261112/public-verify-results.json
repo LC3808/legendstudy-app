@@ -1,0 +1,40 @@
+[
+  [
+    {
+      "check_name": "318473c0-46ea-55e7-ab06-53520ea2373f public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "318473c0-46ea-55e7-ab06-53520ea2373f profile",
+      "passed": true
+    },
+    {
+      "check_name": "318473c0-46ea-55e7-ab06-53520ea2373f Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "6c7d310f-d055-595c-8aa5-49d901b19f36 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "6c7d310f-d055-595c-8aa5-49d901b19f36 profile",
+      "passed": true
+    },
+    {
+      "check_name": "6c7d310f-d055-595c-8aa5-49d901b19f36 Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "ee907ec5-88f2-5097-83be-9b8c9a03ec93 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "ee907ec5-88f2-5097-83be-9b8c9a03ec93 profile",
+      "passed": true
+    },
+    {
+      "check_name": "ee907ec5-88f2-5097-83be-9b8c9a03ec93 Worker evidence",
+      "passed": true
+    }
+  ]
+]

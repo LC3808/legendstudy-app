@@ -1,0 +1,34 @@
+{
+  "checked_at_kst": "2026-11-12T15:37:14.588432+09:00",
+  "preflight_checks": 119,
+  "draft_postchecks": 121,
+  "activation_checks": 9,
+  "draft_preservation_groups": 20,
+  "post_activation_unchanged_groups": 19,
+  "changed_only_two_internal_allowlists": true,
+  "new_rpc": 0,
+  "existing_function_acl_preserved": true,
+  "new_rows": 36,
+  "questions": 3,
+  "exams": 1,
+  "active_state_rows": 12,
+  "normal_account_role_catalog_count": 385,
+  "normal_account_role_new_questions": 3,
+  "normal_account_role_history_read": true,
+  "prior_382_catalog_rows_exact": true,
+  "science_six_exact": true,
+  "science_math_worker_bindings": 0,
+  "all_42_university_catalogs_exact": true,
+  "browse_function_owner_acl_exact": true,
+  "existing_rls_policies": 272,
+  "new_rls_policies": 0,
+  "production_test_submissions": 0,
+  "provider_calls": 0,
+  "migrations": [
+    {
+      "version": "20261112063650",
+      "name": "swu_3_math_public_release"
+    }
+  ],
+  "authenticated_browser": "NOT TESTED"
+}

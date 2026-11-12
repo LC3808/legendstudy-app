@@ -107,3 +107,7 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 ## 광운 후속 운영 공개 결과
 
 [21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md).636행/기존후보PDF21파일78쪽/기존목록20시험숨김해제적용.위TECH/미적용은이전시점기록이다.운영158/199/126·WEB410/APP39 PASS,기존340문항보존. 다음서울여대.
+
+## 서울여대 후속 운영 공개 및 통합
+
+[수리1시험3 PUBLISHED·과학6 NOT READY](essay-swu-public-20261112.md). 공식 자료·기준은 모두 확보했으나 과학 Worker·결과 저장 계약은 미완성이다. [전체10대학 통합](essay-natural-publication-summary-20261112.md):170공개·51잔여. 위 TECH/미적용 표는 이전 시점 이력이다.

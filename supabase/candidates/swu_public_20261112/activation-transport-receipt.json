@@ -1,0 +1,9 @@
+{
+  "migration_version": "20261112063650",
+  "name": "swu_3_math_public_release",
+  "sql_sha256": "8bafd9422dbe2033543034ea905755f4ac43ccf61cca9d7584379f2f2016aedf",
+  "sql_bytes": 104884,
+  "transport": "Direct TLS PostgreSQL; exact verified file and migration history inserted in same transaction",
+  "prior_mcp_attempts": [],
+  "provider_calls": 0
+}
