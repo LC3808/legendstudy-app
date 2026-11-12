@@ -1,0 +1,808 @@
+{
+  "scope": "isolated PG17; actual production function definitions and exact 702-row insert / 176-state activation / 2 allowlist changes",
+  "checks": [
+    "0b6409e5-0456-5965-b3ae-840d37c59b52 public mapping",
+    "0b6409e5-0456-5965-b3ae-840d37c59b52 profile",
+    "0b6409e5-0456-5965-b3ae-840d37c59b52 Worker evidence",
+    "0bb0e263-5de8-50ee-b61f-32668b504e47 public mapping",
+    "0bb0e263-5de8-50ee-b61f-32668b504e47 profile",
+    "0bb0e263-5de8-50ee-b61f-32668b504e47 Worker evidence",
+    "160867f9-bd9d-511b-b9f1-68e387ae8df3 public mapping",
+    "160867f9-bd9d-511b-b9f1-68e387ae8df3 profile",
+    "160867f9-bd9d-511b-b9f1-68e387ae8df3 Worker evidence",
+    "173f1ee4-18e1-5b97-9974-888925c91e4b public mapping",
+    "173f1ee4-18e1-5b97-9974-888925c91e4b profile",
+    "173f1ee4-18e1-5b97-9974-888925c91e4b Worker evidence",
+    "1c279c86-167b-5873-a2ef-01efe77ac82d public mapping",
+    "1c279c86-167b-5873-a2ef-01efe77ac82d profile",
+    "1c279c86-167b-5873-a2ef-01efe77ac82d Worker evidence",
+    "1d25219b-a954-54e1-bfca-63d41fcca980 public mapping",
+    "1d25219b-a954-54e1-bfca-63d41fcca980 profile",
+    "1d25219b-a954-54e1-bfca-63d41fcca980 Worker evidence",
+    "1e8b4d61-0a53-59ae-a7b2-c387cc5676ea public mapping",
+    "1e8b4d61-0a53-59ae-a7b2-c387cc5676ea profile",
+    "1e8b4d61-0a53-59ae-a7b2-c387cc5676ea Worker evidence",
+    "24b846d7-6e1f-5a9c-ac08-0cfb1d2058e3 public mapping",
+    "24b846d7-6e1f-5a9c-ac08-0cfb1d2058e3 profile",
+    "24b846d7-6e1f-5a9c-ac08-0cfb1d2058e3 Worker evidence",
+    "256ebc83-09fb-5c47-9813-b9b67ca4155d public mapping",
+    "256ebc83-09fb-5c47-9813-b9b67ca4155d profile",
+    "256ebc83-09fb-5c47-9813-b9b67ca4155d Worker evidence",
+    "271aea88-776b-5cc2-9e35-95bf38047fb8 public mapping",
+    "271aea88-776b-5cc2-9e35-95bf38047fb8 profile",
+    "271aea88-776b-5cc2-9e35-95bf38047fb8 Worker evidence",
+    "27cb0371-2c9f-5c35-a207-a7762d8d93d5 public mapping",
+    "27cb0371-2c9f-5c35-a207-a7762d8d93d5 profile",
+    "27cb0371-2c9f-5c35-a207-a7762d8d93d5 Worker evidence",
+    "285a4076-66e1-579e-90c1-39fdcbc55571 public mapping",
+    "285a4076-66e1-579e-90c1-39fdcbc55571 profile",
+    "285a4076-66e1-579e-90c1-39fdcbc55571 Worker evidence",
+    "32b555e0-c382-5e37-ae36-89776d945d3b public mapping",
+    "32b555e0-c382-5e37-ae36-89776d945d3b profile",
+    "32b555e0-c382-5e37-ae36-89776d945d3b Worker evidence",
+    "342f6175-9755-5b85-b5f3-915b5a1f0880 public mapping",
+    "342f6175-9755-5b85-b5f3-915b5a1f0880 profile",
+    "342f6175-9755-5b85-b5f3-915b5a1f0880 Worker evidence",
+    "3776f1e9-7286-5995-be20-225ad60fdbf3 public mapping",
+    "3776f1e9-7286-5995-be20-225ad60fdbf3 profile",
+    "3776f1e9-7286-5995-be20-225ad60fdbf3 Worker evidence",
+    "3d5b560d-3c20-59ec-b669-51d5e9a10e1f public mapping",
+    "3d5b560d-3c20-59ec-b669-51d5e9a10e1f profile",
+    "3d5b560d-3c20-59ec-b669-51d5e9a10e1f Worker evidence",
+    "47501a70-0d53-5377-8105-da806dac184c public mapping",
+    "47501a70-0d53-5377-8105-da806dac184c profile",
+    "47501a70-0d53-5377-8105-da806dac184c Worker evidence",
+    "48c5d506-38a1-5c26-9590-16d82c8e297e public mapping",
+    "48c5d506-38a1-5c26-9590-16d82c8e297e profile",
+    "48c5d506-38a1-5c26-9590-16d82c8e297e Worker evidence",
+    "523b6663-f918-5c29-aa6e-14e3e296b198 public mapping",
+    "523b6663-f918-5c29-aa6e-14e3e296b198 profile",
+    "523b6663-f918-5c29-aa6e-14e3e296b198 Worker evidence",
+    "56206981-3f89-5739-a3bb-ee3e6a6248e1 public mapping",
+    "56206981-3f89-5739-a3bb-ee3e6a6248e1 profile",
+    "56206981-3f89-5739-a3bb-ee3e6a6248e1 Worker evidence",
+    "6a4613da-4eb8-5e9b-a8db-fdfcb9e4eb9b public mapping",
+    "6a4613da-4eb8-5e9b-a8db-fdfcb9e4eb9b profile",
+    "6a4613da-4eb8-5e9b-a8db-fdfcb9e4eb9b Worker evidence",
+    "6eaa7428-3686-51f6-8efb-0e5127e0d3d0 public mapping",
+    "6eaa7428-3686-51f6-8efb-0e5127e0d3d0 profile",
+    "6eaa7428-3686-51f6-8efb-0e5127e0d3d0 Worker evidence",
+    "6fb0c914-efe2-57b2-bb8f-eddee79ea858 public mapping",
+    "6fb0c914-efe2-57b2-bb8f-eddee79ea858 profile",
+    "6fb0c914-efe2-57b2-bb8f-eddee79ea858 Worker evidence",
+    "83c71d35-af92-5333-a82b-a703e87f8df7 public mapping",
+    "83c71d35-af92-5333-a82b-a703e87f8df7 profile",
+    "83c71d35-af92-5333-a82b-a703e87f8df7 Worker evidence",
+    "8746b128-64ef-5656-935b-29b6a7b4ed03 public mapping",
+    "8746b128-64ef-5656-935b-29b6a7b4ed03 profile",
+    "8746b128-64ef-5656-935b-29b6a7b4ed03 Worker evidence",
+    "91c8ef90-168a-5505-936d-3939b9c88683 public mapping",
+    "91c8ef90-168a-5505-936d-3939b9c88683 profile",
+    "91c8ef90-168a-5505-936d-3939b9c88683 Worker evidence",
+    "9290038b-accc-5b7a-914e-56b9bc2628a5 public mapping",
+    "9290038b-accc-5b7a-914e-56b9bc2628a5 profile",
+    "9290038b-accc-5b7a-914e-56b9bc2628a5 Worker evidence",
+    "9eb9138b-980c-5f92-8142-e3010c1adfd0 public mapping",
+    "9eb9138b-980c-5f92-8142-e3010c1adfd0 profile",
+    "9eb9138b-980c-5f92-8142-e3010c1adfd0 Worker evidence",
+    "a7763fd9-db6e-5541-adc5-59bf3b45d38c public mapping",
+    "a7763fd9-db6e-5541-adc5-59bf3b45d38c profile",
+    "a7763fd9-db6e-5541-adc5-59bf3b45d38c Worker evidence",
+    "ac4280ba-0b6b-5546-8a58-a696e6bf53a8 public mapping",
+    "ac4280ba-0b6b-5546-8a58-a696e6bf53a8 profile",
+    "ac4280ba-0b6b-5546-8a58-a696e6bf53a8 Worker evidence",
+    "ace8ee6a-8b7e-526f-884a-18ae936b0fe7 public mapping",
+    "ace8ee6a-8b7e-526f-884a-18ae936b0fe7 profile",
+    "ace8ee6a-8b7e-526f-884a-18ae936b0fe7 Worker evidence",
+    "b30e117f-6240-54a1-98ab-ab392e36f239 public mapping",
+    "b30e117f-6240-54a1-98ab-ab392e36f239 profile",
+    "b30e117f-6240-54a1-98ab-ab392e36f239 Worker evidence",
+    "b944a252-a747-5048-a19a-308cfc2e5c30 public mapping",
+    "b944a252-a747-5048-a19a-308cfc2e5c30 profile",
+    "b944a252-a747-5048-a19a-308cfc2e5c30 Worker evidence",
+    "bc37bc35-afbc-57a2-9a78-c34363b8d3ef public mapping",
+    "bc37bc35-afbc-57a2-9a78-c34363b8d3ef profile",
+    "bc37bc35-afbc-57a2-9a78-c34363b8d3ef Worker evidence",
+    "c1bce14d-1e5f-5c50-8a34-fff319499d49 public mapping",
+    "c1bce14d-1e5f-5c50-8a34-fff319499d49 profile",
+    "c1bce14d-1e5f-5c50-8a34-fff319499d49 Worker evidence",
+    "c656f4b4-c255-56fc-936c-89e4ab2b18a9 public mapping",
+    "c656f4b4-c255-56fc-936c-89e4ab2b18a9 profile",
+    "c656f4b4-c255-56fc-936c-89e4ab2b18a9 Worker evidence",
+    "d18140c2-a0f8-53f7-af82-b236ad6e0a08 public mapping",
+    "d18140c2-a0f8-53f7-af82-b236ad6e0a08 profile",
+    "d18140c2-a0f8-53f7-af82-b236ad6e0a08 Worker evidence",
+    "d7a1a8f4-8fba-5ece-9f20-946ece988ea5 public mapping",
+    "d7a1a8f4-8fba-5ece-9f20-946ece988ea5 profile",
+    "d7a1a8f4-8fba-5ece-9f20-946ece988ea5 Worker evidence",
+    "dd5889bb-a785-5039-b511-e81e041da071 public mapping",
+    "dd5889bb-a785-5039-b511-e81e041da071 profile",
+    "dd5889bb-a785-5039-b511-e81e041da071 Worker evidence",
+    "eb24d5aa-04a9-56a9-bc97-bf556c5bfb0e public mapping",
+    "eb24d5aa-04a9-56a9-bc97-bf556c5bfb0e profile",
+    "eb24d5aa-04a9-56a9-bc97-bf556c5bfb0e Worker evidence",
+    "eb89752e-1fe4-5b24-be01-0a2dfd1bb728 public mapping",
+    "eb89752e-1fe4-5b24-be01-0a2dfd1bb728 profile",
+    "eb89752e-1fe4-5b24-be01-0a2dfd1bb728 Worker evidence",
+    "ef01787b-275b-5d1e-965a-34696816b83a public mapping",
+    "ef01787b-275b-5d1e-965a-34696816b83a profile",
+    "ef01787b-275b-5d1e-965a-34696816b83a Worker evidence",
+    "f90a2b99-3acc-52db-80dd-dd04ef64e077 public mapping",
+    "f90a2b99-3acc-52db-80dd-dd04ef64e077 profile",
+    "f90a2b99-3acc-52db-80dd-dd04ef64e077 Worker evidence",
+    "fee14e99-2500-56d2-91b9-66341935a4a4 public mapping",
+    "fee14e99-2500-56d2-91b9-66341935a4a4 profile",
+    "fee14e99-2500-56d2-91b9-66341935a4a4 Worker evidence"
+  ],
+  "questions": [
+    {
+      "question_id": "0b6409e5-0456-5965-b3ae-840d37c59b52",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "0bb0e263-5de8-50ee-b61f-32668b504e47",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "160867f9-bd9d-511b-b9f1-68e387ae8df3",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "173f1ee4-18e1-5b97-9974-888925c91e4b",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "1c279c86-167b-5873-a2ef-01efe77ac82d",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "1d25219b-a954-54e1-bfca-63d41fcca980",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "1e8b4d61-0a53-59ae-a7b2-c387cc5676ea",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "24b846d7-6e1f-5a9c-ac08-0cfb1d2058e3",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "256ebc83-09fb-5c47-9813-b9b67ca4155d",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "271aea88-776b-5cc2-9e35-95bf38047fb8",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "27cb0371-2c9f-5c35-a207-a7762d8d93d5",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "285a4076-66e1-579e-90c1-39fdcbc55571",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "32b555e0-c382-5e37-ae36-89776d945d3b",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "342f6175-9755-5b85-b5f3-915b5a1f0880",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "3776f1e9-7286-5995-be20-225ad60fdbf3",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "3d5b560d-3c20-59ec-b669-51d5e9a10e1f",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "47501a70-0d53-5377-8105-da806dac184c",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "48c5d506-38a1-5c26-9590-16d82c8e297e",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "523b6663-f918-5c29-aa6e-14e3e296b198",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "56206981-3f89-5739-a3bb-ee3e6a6248e1",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "6a4613da-4eb8-5e9b-a8db-fdfcb9e4eb9b",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "6eaa7428-3686-51f6-8efb-0e5127e0d3d0",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "6fb0c914-efe2-57b2-bb8f-eddee79ea858",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "83c71d35-af92-5333-a82b-a703e87f8df7",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "8746b128-64ef-5656-935b-29b6a7b4ed03",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "91c8ef90-168a-5505-936d-3939b9c88683",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "9290038b-accc-5b7a-914e-56b9bc2628a5",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "9eb9138b-980c-5f92-8142-e3010c1adfd0",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "a7763fd9-db6e-5541-adc5-59bf3b45d38c",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "ac4280ba-0b6b-5546-8a58-a696e6bf53a8",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "ace8ee6a-8b7e-526f-884a-18ae936b0fe7",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "b30e117f-6240-54a1-98ab-ab392e36f239",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "b944a252-a747-5048-a19a-308cfc2e5c30",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "bc37bc35-afbc-57a2-9a78-c34363b8d3ef",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "c1bce14d-1e5f-5c50-8a34-fff319499d49",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "c656f4b4-c255-56fc-936c-89e4ab2b18a9",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "d18140c2-a0f8-53f7-af82-b236ad6e0a08",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "d7a1a8f4-8fba-5ece-9f20-946ece988ea5",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "dd5889bb-a785-5039-b511-e81e041da071",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "eb24d5aa-04a9-56a9-bc97-bf556c5bfb0e",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "eb89752e-1fe4-5b24-be01-0a2dfd1bb728",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "ef01787b-275b-5d1e-965a-34696816b83a",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "f90a2b99-3acc-52db-80dd-dd04ef64e077",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "fee14e99-2500-56d2-91b9-66341935a4a4",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "rollback": {
+    "old_catalog_exact": true,
+    "histories_exact": true,
+    "new_evaluation_denied": true,
+    "existing_result_read": true,
+    "function_hashes_exact": true
+  },
+  "provider_calls": 0,
+  "production_writes": 0
+}
