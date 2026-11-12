@@ -1,0 +1,31 @@
+{
+  "checked_at_kst": "2026-11-12T13:28:55.586719+09:00",
+  "preflight_checks": 160,
+  "draft_postchecks": 203,
+  "activation_checks": 132,
+  "draft_preservation_groups": 20,
+  "post_activation_unchanged_groups": 19,
+  "changed_only_two_function_allowlists": true,
+  "existing_function_acl_preserved": "atomic activation checks",
+  "new_rows": 702,
+  "questions": 44,
+  "active_state_rows": 176,
+  "normal_user_math_catalog_count": 320,
+  "normal_user_new_questions": 44,
+  "normal_user_history_read": true,
+  "existing_six_exact": true,
+  "new_production_submissions": 0,
+  "provider_calls": 0,
+  "migrations": [
+    {
+      "version": "20261112042509",
+      "name": "sookmyung_14_official_problem_pdfs_read"
+    },
+    {
+      "version": "20261112042841",
+      "name": "sookmyung_44_math_public_release"
+    }
+  ],
+  "ui": "NOT TESTED",
+  "stage": "Math activation checkpoint before separate catalog visibility patch; see browse-production-verification.json for final third function"
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "label": "\uc219\uba85\uc5ec\uc790\ub300\ud559\uad50 2026\ud559\ub144\ub3c4 \uc218\uc2dc \uc790\uc5f0\uacc4\uc5f4(\uc57d\ud559\ubd80) \ubb38\uc81c 2 \u00b7 \ubb38\ud56d 2 (\uc18c\ubb38\ud56d 2-1\u00b72-2 \ud3ec\ud568)",
+    "leaf_id": "b2cc8e7e-0ba1-5229-aebd-ae0bce90c4cf",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "7484fbea-4c68-5285-b525-227f835ca4cc",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "7f6c8eb5-2e96-58b8-9a43-5407203339bb",
+    "problem_statement": "f(x)=exp(\u2212x). 2-1. [0,2\u03c0]\uc5d0\uc11c sin x\u22641/2\uc778 \uad6c\uac04\uacfc \uadf8 \uc704\uc758 f \uc801\ubd84\uc744 \uad6c\ud55c\ub2e4. 2-2. [0,100\u03c0]\uc5d0\uc11c sin x\u2264\u22121/2\uc778 \uad6c\uac04 \uc704\uc758 \uc801\ubd84\uc774 (exp(5\u03c0/6)\u2212exp(\u03c0/6))k\uc77c \ub54c k\ub97c \uad6c\ud55c\ub2e4."
+  },
+  {
+    "label": "\uc219\uba85\uc5ec\uc790\ub300\ud559\uad50 2026\ud559\ub144\ub3c4 \uc218\uc2dc \uc790\uc5f0\uacc4\uc5f4(\uc57d\ud559\ubd80) \ubb38\uc81c 3 \u00b7 \ubb38\ud56d 3 (\uc18c\ubb38\ud56d 3-1\u00b73-2 \ud3ec\ud568)",
+    "leaf_id": "ff7e3c02-f2de-52e0-8a3c-ea1ad1ff8475",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "7484fbea-4c68-5285-b525-227f835ca4cc",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "b96792e7-59cb-565d-adb7-afcb987e18ee",
+    "problem_statement": "f(x)=ln \u221a((1+x)/(1\u2212x)), g\ub294 \uc5ed\ud568\uc218. 3-1. \uc815\uc758\uc5ed\uc5d0\uc11c x>0\uc774\uba74 f(x)>x\uc784\uc744 \ubcf4\uc774\uace0 3-2. g\uc758 \uadf8\ub798\ud504\ub97c \uadf8\ub824\ub77c."
+  },
+  {
+    "label": "sookmyung-general 2026 \uc790\uc5f0 Q1 \u00b7 \ubb38\ud56d 1 (\uc18c\ubb38\ud56d 1-1\u00b71-2 \ud3ec\ud568)",
+    "leaf_id": "7a3f5d7d-1980-52f0-a170-6a8308c1f0e7",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "5f002de0-5b59-50b8-8e05-684428e1e96d",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "48360807-927c-5f89-8b15-ca0761775f02",
+    "problem_statement": "\uc81c\uc2dc\ubb38: \uc0ac\uc787\uac12 \uc815\ub9ac, \ud3c9\uade0\uac12 \uc815\ub9ac (f(b)-f(a))/(b-a)=f'(c), \uadc0\ub958\ubc95. (1-1) y=x^2+a\uc640 y=sqrt(x+1)\uc774 \uc5f4\ub9b0\uad6c\uac04 (1,3)\uc5d0\uc11c \ub9cc\ub098\ub3c4\ub85d \ud558\ub294 \uc2e4\uc218 a\uc758 \ubc94\uc704\ub97c \uad6c\ud558\uc2dc\uc624. (1-2) f\ub294 [0,1]\uc5d0\uc11c \uc5f0\uc18d\uc774\uace0 (0,1)\uc5d0\uc11c \ubbf8\ubd84\uac00\ub2a5\ud558\uba70 \ubaa8\ub4e0 x in (0,1)\uc5d0 \ub300\ud574 |f'(x)|<1\uc774\ub2e4. f(c)=2c\uc778 c\uac00 [0,1]\uc5d0\uc11c \ud558\ub098 \uc774\ud558\uc784\uc744 \uadc0\ub958\ubc95\uc73c\ub85c \uc99d\uba85\ud558\uc2dc\uc624."
+  },
+  {
+    "label": "\uc219\uba85\uc5ec\uc790\ub300\ud559\uad50 2026\ud559\ub144\ub3c4 \uc218\uc2dc \uc790\uc5f0\uacc4\uc5f4(\uc57d\ud559\ubd80) \ubb38\uc81c 1 \u00b7 \ubb38\ud56d 1 (\uc18c\ubb38\ud56d 1-1\u00b71-2 \ud3ec\ud568)",
+    "leaf_id": "793cb69a-80f6-53f4-bca7-de66d92da79f",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "7484fbea-4c68-5285-b525-227f835ca4cc",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "47c30af2-c2ff-5d4a-a94d-48034d332076",
+    "problem_statement": "1-1. x\u00b2+a\uc640 \u221a(x+1)\uc758 \uadf8\ub798\ud504\uac00 1<x<3\uc5d0\uc11c \ub9cc\ub098\uac8c \ud558\ub294 a\uc758 \ubc94\uc704. 1-2. [0,1] \uc5f0\uc18d, (0,1) \ubbf8\ubd84 \uac00\ub2a5, |f\u2032|<1\uc774\uba74 f(c)=2c\uc758 \ud574\uac00 [0,1]\uc5d0 \ud558\ub098 \uc774\ud558\uc784\uc744 \uadc0\ub958\ubc95\uc73c\ub85c \uc99d\uba85\ud558\ub77c."
+  },
+  {
+    "label": "sookmyung-general 2026 \uc790\uc5f0 Q3 \u00b7 \ubb38\ud56d 3 (\uc18c\ubb38\ud56d 3-1\u00b73-2 \ud3ec\ud568)",
+    "leaf_id": "9d1518b7-ec66-5d20-a823-b87b4d7037c6",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "5f002de0-5b59-50b8-8e05-684428e1e96d",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "b87278f6-aa62-5245-8fce-b01924a2d9c7",
+    "problem_statement": "\uc81c\uc2dc\ubb38: \uc77c\ub300\uc77c\ub300\uc751\uc758 \uc5ed\ud568\uc218 \uc815\uc758; \uc591\uc758 \ucd5c\uace0\ucc28\ud56d \uacc4\uc218\uc778 \uc0bc\ucc28\ud568\uc218\uac00 \uc2e4\uc218 \uc804\uccb4\uc5d0\uc11c \ub3c4\ud568\uc218>=0\uc774\uba74 \uc5ed\ud568\uc218\ub97c \uac16\ub294\ub2e4(\uc74c\uc758 \uacc4\uc218\ub294 \ub3c4\ud568\uc218<=0). f(x)=x^3+2*x+4\ub294 \uc2e4\uc218 \uc804\uccb4\uc5d0\uc11c \uc815\uc758\ub41c\ub2e4. (3-1) \uc5ed\ud568\uc218 \uc874\uc7ac\ub97c \ubcf4\uc774\uace0 f_inverse(t^2+5*t+1)=t-1\uc778 \ubaa8\ub4e0 \uc2e4\uc218 t\ub97c \uad6c\ud558\uc2dc\uc624. (3-2) f_inverse(t^2+2)+f_inverse(t^2-2)=0\uc778 \ubaa8\ub4e0 \uc2e4\uc218 t\ub97c \uad6c\ud558\uc2dc\uc624."
+  },
+  {
+    "label": "sookmyung-general 2026 \uc790\uc5f0 Q2 \u00b7 \ubb38\ud56d 2 (\uc18c\ubb38\ud56d 2-1\u00b72-2 \ud3ec\ud568)",
+    "leaf_id": "98e31b7e-5eb6-52b1-8adc-392ad6ae02c3",
+    "statement": "\ubaa8\ub4e0 \ud558\uc704 \ubb38\ud56d\uc758 \ud480\uc774\uacfc\uc815\uc744 \ud3ec\ud568\ud558\uc5ec \ub2f5\uc548\uc744 \uc791\uc131\ud558\uc2dc\uc624.",
+    "essay_exam_id": "5f002de0-5b59-50b8-8e05-684428e1e96d",
+    "response_format": "FULL_SOLUTION",
+    "essay_question_id": "551c083d-b8e4-503b-83ee-0d63020a986f",
+    "problem_statement": "\uc81c\uc2dc\ubb38: \ub450 \ube44\uc218\uc9c1 \uc9c1\uc120\uc758 \uae30\uc6b8\uae30 \uacf1\uc774 -1\uc774\uba74 \uc11c\ub85c \uc218\uc9c1, \uace1\uc120 \uc0ac\uc774 \ub113\uc774\ub294 integral_a^b |f(x)-g(x)| dx. \uc790\uc5f0\uc218 n\uc5d0 \ub300\ud574 y=n*x^2 \uc704\uc758 P_n(a_n,b_n)\uc744 \uc9c0\ub098\uba70 \uadf8 \uc810\uc758 \uc811\uc120\uc5d0 \uc218\uc9c1\uc778 \uc9c1\uc120\uc774 (0,1)\uc744 \uc9c0\ub09c\ub2e4. a_n>0. (2-1) a_n,b_n\uc744 \uac01\uac01 \uad6c\ud558\uc2dc\uc624. (2-2) y=n*x^2\uc640 x\ucd95 \ubc0f P_n\uc5d0\uc11c\uc758 \uc811\uc120\uc73c\ub85c \ub458\ub7ec\uc2f8\uc778 \uc601\uc5ed\uc758 \ub113\uc774\ub97c A_n\uc774\ub77c \ud560 \ub54c lim(n->infinity) A_n/a_n\uc744 \uad6c\ud558\uc2dc\uc624."
+  }
+]

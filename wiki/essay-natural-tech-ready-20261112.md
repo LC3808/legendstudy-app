@@ -13,7 +13,7 @@
 |4|성균관|5시험15문항|기술 계약 TECH READY; DB309/WEB22/APP16 PASS|15 PDF 승인 대기 유지; 운영 미적재; 검수/공개 차단|
 |5|서강|9시험11문항|기술 계약 TECH READY; DB229/WEB38/APP12 PASS|운영 미적재; 2026자연2차 PDF 누락 보완 후보 승인 필요; REVIEW READY 아님|
 |6|숭실|4완성시험16문항 / 부분3 / HOLD1|완성16 TECH READY;20 leaf DB409/WEB18/APP21 PASS|2024Q2 공식 배점 불일치 검수 보류; 운영 미적재|
-|7|숙명|16시험44문항|기술 계약 TECH READY; DB889/WEB66/APP45 PASS|기존 운영6 보존; 신규 PDF38 승인·운영 미적재|
+|7|숙명|16시험44문항|[PUBLISHED](essay-sookmyung-public-20261112.md); WEB416/APP35 PASS|기존6 보존; 공식PDF14·702행·목록14시험 해제 완료|
 |8|동국|7시험21문항|TECH READY; DB429/WEB30/APP22 PASS|기존 승인PDF21 보존; DRAFT286행 미승인·미적재|
 |9|광운|21시험42문항|TECH READY; DB849/WEB86/APP43 PASS|신규PDF42 승인 대기; DRAFT636행 미적용|
 |10|서울여|1시험3수리문항|TECH READY; DB69/WEB6/APP4 PASS|2023–2025과학6 NOT READY; 수리DRAFT36행 미적용|
@@ -95,3 +95,7 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 ## 숭실 운영 공개 후속
 
 2026-11-12 [5시험19문항 실제 공개](essay-soongsil-public-20261112.md). 기존16 TECH READY 및부분3 공개완료. 2024Q2 공식 배점불일치 HOLD1 유지. 이 문서의 부분시험 미연결/운영미적재 표시는 이전 시점 기록이다. 다음 숙명여대.
+
+## 숙명 후속 운영 공개 결과
+
+2026-11-12 [16시험44문항 PUBLISHED](essay-sookmyung-public-20261112.md). 기존6문항 보존. 앞 절의 미승인·미적용은 이전 시점 기록이다. 공식 원본14PDF를 연결하고 기존 목록의14시험 숨김을 해제했다. 일반계정 권한·격리 제출/결과/재첨삭 PASS. 로그인 브라우저/실기기 NOT TESTED, Provider0, AI품질은 Owner 통합검수 대기. 다음 동국대학교.

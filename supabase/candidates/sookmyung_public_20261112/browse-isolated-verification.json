@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "environment": "isolated Unix-only PG17; metadata fixtures; no Provider",
+  "universities": 42,
+  "roles": [
+    "anon",
+    "authenticated"
+  ],
+  "new_questions": 44,
+  "new_exam_scope": 16,
+  "exclusions_removed": 14,
+  "other_exclusions_preserved": 36,
+  "existing_catalog_rows_preserved": true,
+  "rollback_exact": true,
+  "data_counts_preserved": true,
+  "acl_owner_preserved": true,
+  "duplicate_apply_rejected": true
+}

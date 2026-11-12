@@ -1,0 +1,41 @@
+{
+  "status": "PUBLISHED",
+  "checked_at_kst": "2026-11-12T13:37:45.727171+09:00",
+  "new_exams": 16,
+  "new_questions": 44,
+  "new_rows": 702,
+  "existing_math_questions_preserved": 6,
+  "unpublished_target_questions": 0,
+  "existing_other_universities_and_holds_preserved": true,
+  "functions_changed": [
+    "math_private.evaluation_admission()",
+    "math_private.release_catalog(uuid)",
+    "public.essay_browse_catalog(text)"
+  ],
+  "function_changes": "Existing allowlists only: add44 leaves to two Math functions; remove14 approved exam exclusions from browse; signatures/owners/ACL unchanged",
+  "storage_policies_added": 1,
+  "existing_rls_policies_preserved": 270,
+  "provider_calls": 0,
+  "production_test_submissions": 0,
+  "tests": {
+    "web_pass": 416,
+    "web_skip": 1,
+    "app_pass": 35,
+    "app_skip": 4,
+    "db_preflight": 160,
+    "db_postdraft": 203,
+    "db_activation": 132,
+    "browse_universities": 42,
+    "browse_roles": 2,
+    "isolated_rollback": "PASS"
+  },
+  "browser_ui": "PARTIAL: anonymous university selection, 2021-2027 exam list, 2026 mock natural question cards and image/text input visible; authenticated PDF/submission NOT TESTED",
+  "iphone": "NOT TESTED",
+  "android": "NOT TESTED",
+  "ai_quality": "Owner integrated review pending",
+  "deployment": "67544a80-ce5e-41d5-a2f1-f6714bcc7a45",
+  "deployed_web_sha": "cf59c6207cdcd287993aa7949aa3e74d341670cf",
+  "app_preflight_sha": "d114d23",
+  "next_university": "Dongguk",
+  "all_universities_complete": false
+}

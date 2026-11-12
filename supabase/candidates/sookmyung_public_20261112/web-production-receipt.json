@@ -1,0 +1,47 @@
+{
+  "status": "PUBLISHED",
+  "checked_at_kst": "2026-11-12T13:36:49.176619+09:00",
+  "deployment": "67544a80-ce5e-41d5-a2f1-f6714bcc7a45",
+  "source": "cf59c6207cdcd287993aa7949aa3e74d341670cf",
+  "exams": 16,
+  "questions": 44,
+  "preserved_non_essay_static_assets": 2175,
+  "configuration_exact": true,
+  "function_routes_exact": true,
+  "http": [
+    {
+      "path": "/essay-lab/",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/catalog",
+      "status": 200
+    },
+    {
+      "path": "/api/essay/student-pdfs",
+      "status": 401
+    },
+    {
+      "path": "/login/",
+      "status": 200
+    }
+  ],
+  "scope_counts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      285,
+      301
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      115,
+      131
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      276,
+      320
+    ]
+  },
+  "provider_calls": 0,
+  "browser_ui": "PARTIAL: anonymous university selection, 2021-2027 exam list, 2026 mock natural question cards and image/text input visible; authenticated PDF/submission NOT TESTED",
+  "actual_ai_quality": "Owner review deferred",
+  "pdf_metadata_contract": "WEB416+APP35; original SHA/download and live Storage role PASS; authenticated browser PDF NOT TESTED"
+}

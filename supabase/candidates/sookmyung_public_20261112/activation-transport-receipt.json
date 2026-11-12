@@ -1,0 +1,12 @@
+{
+  "migration_version": "20261112042841",
+  "name": "sookmyung_44_math_public_release",
+  "sql_sha256": "012b962a36363766324de30d865fd525b4e1b3c6d208e6eb08dd0ffdb8e82102",
+  "sql_bytes": 1750745,
+  "transport": "Direct TLS PostgreSQL; exact verified file and migration history inserted in same transaction",
+  "prior_mcp_attempts": [
+    "truncated terminal tool output: transaction rolled back, 203 checks passed",
+    "exact full SQL exceeds API request-body limit; no database mutation"
+  ],
+  "provider_calls": 0
+}

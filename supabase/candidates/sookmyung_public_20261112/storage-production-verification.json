@@ -1,0 +1,32 @@
+{
+  "existing_policies_unchanged": 270,
+  "new_exact_file_policy": 1,
+  "role_checks": [
+    {
+      "account_class": "normal",
+      "files_visible": 14
+    },
+    {
+      "account_class": "anon",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    }
+  ],
+  "migration": [
+    {
+      "version": "20261112042509",
+      "name": "sookmyung_14_official_problem_pdfs_read"
+    }
+  ]
+}

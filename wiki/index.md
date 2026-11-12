@@ -410,4 +410,4 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 - [숭실5시험19문항 PUBLISHED / Q2 HOLD1](essay-soongsil-public-20261112.md):237행,부분3보완,운영검증PASS. 다음숙명.
 
-- [숙명44문항 공개준비·기존6보존·공식PDF14](essay-sookmyung-public-20261112.md). 다음동국.
+- [숙명16시험44문항 PUBLISHED·기존6보존·공식PDF14](essay-sookmyung-public-20261112.md). 다음동국.
