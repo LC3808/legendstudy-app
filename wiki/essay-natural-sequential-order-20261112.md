@@ -1,7 +1,9 @@
 # 자연·수리 논술 대학별 순차 작업 — 최신 Owner 결정
 
 
-최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md), [광운42](essay-kwangwoon-public-20261112.md), [서울여3](essay-swu-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
+최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국21](essay-dongguk-correction-20261112.md), [광운42](essay-kwangwoon-public-20261112.md), [서울여3](essay-swu-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
+
+한국항공7과 동국 정정Q1은 [후속 공개 완료](essay-remaining-51-20261112.md). 아래 DRAFT 검수 접근 제한 설명은 당시 이력이며 현재 공개 상태는 최신 표/운영 영수증을 따른다.
 
 ## 확정 순서와 현재 상태
 
@@ -9,14 +11,14 @@
 
 |순번|대학|현재 상태|다음 행동|
 |---|---|---|---|
-|1|한국항공대학교|7문항 운영 DRAFT / HOLD5|후속공개연결미완료;재적재금지|
+|1|한국항공대학교|7문항 PUBLISHED / HOLD5|기존106행 재사용·재적재0|
 |2|건국대학교|신규24 PUBLISHED / 기존4 보존|DONE|
 |3|경희대학교|신규7 PUBLISHED / 기존3 보존 / NOT READY16|공개대상DONE,미준비16별도|
 |4|성균관대학교|15 TECH READY / PDF RIGHTS_HOLD|권한확인전공개금지|
 |5|서강대학교|9시험11 PUBLISHED|DONE|
 |6|숭실대학교|5시험19 PUBLISHED / 2024Q2 HOLD1|공개대상DONE,HOLD유지|
 |7|숙명여자대학교|16시험44 PUBLISHED / 기존6 보존|Owner확인DONE|
-|8|동국대학교|7시험20 PUBLISHED / 2026모의Q1 HOLD1|공개 작업 종료; Q1 공식 수정 근거 보완 대기|
+|8|동국대학교|7시험21 PUBLISHED|공식 수정HWP 기준 Q1 추가공개|
 |9|광운대학교|[21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md)|Owner 확인 DONE|
 |10|서울여자대학교|[수리3 PUBLISHED / 과학6 NOT READY](essay-swu-public-20261112.md)|공개 대상 DONE; 과학 계약 별도, 통합 현황 인계|
 
@@ -31,9 +33,9 @@ HOLD 또는 운영 승인으로 막히면 즉시 Owner에게 보고한다. HOLD�
 - 운영 DRAFT, 검수 접근/활성화, 배포, 사용자 공개는 별도 승인이다. 검수 기능은 공통 재사용 구조로 준비하며 대학별 연결을 막지 않는다.
 - 일반 진행 보고는 생략하고 대학별 TECH READY, 운영 승인 필요, 공식 자료 불일치/차단을 보고한다.
 
-## 한국항공대 — DRAFT 적용 결과와 남은 HOLD
+## 한국항공대 — 초기 DRAFT 적용 이력과 남은 HOLD
 
-현재12문항 중7문항·106행은 Owner 승인 후 운영 비공개 DRAFT로 적재했고5문항은 HOLD다. **현재 실제 SERVICE READY 확인0**,실제 WEB/APP 계정 검수 NOT TESTED다. [적용 결과·전후 검증](essay-kau-draft-production-20261112.md).
+초기 승인 시12문항 중7문항·106행은 Owner 승인 후 운영 비공개 DRAFT로 적재했고5문항은 HOLD다. **당시 실제 SERVICE READY 확인0**,실제 WEB/APP 계정 검수 NOT TESTED다. [적용 결과·전후 검증](essay-kau-draft-production-20261112.md).
 [기존 공식 이슈5개](../supabase/candidates/natural_expansion_20261111/connection/official-source-issues.json) · [문항별 근거](essay-four-university-question-review-20261111.md).
 
 |HOLD|이유/Owner 판단|
@@ -73,4 +75,4 @@ Git HEAD는 `git log -1`로 확인한다. SQL 실행 파일·SHA·대상 UUID·�
 
 ## 전체 순차 결과 통합
 
-[10대학 83시험221문항 중170 공개·51잔여](essay-natural-publication-summary-20261112.md), [Owner 검수 68시험 목록](essay-natural-owner-review-20261112.md). 전체 확장은 PARTIAL이다. 과거 TECH/DRAFT 승인 문구는 당시 이력이며 최신 Owner 공개 지시와 실제 운영 영수증을 따른다.
+[10대학83시험221문항 중178공개·43잔여](essay-natural-publication-summary-20261112.md), [Owner 검수72시험 목록](essay-natural-owner-review-20261112.md). 전체 확장은 PARTIAL이다. 과거 TECH/DRAFT 승인 문구는 당시 이력이며 최신 Owner 공개 지시와 실제 운영 영수증을 따른다.

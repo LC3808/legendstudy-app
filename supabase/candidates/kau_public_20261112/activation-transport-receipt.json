@@ -1,0 +1,13 @@
+{
+  "migration_version": "20261112085916",
+  "name": "kau_7_existing_draft_public_release",
+  "sql_sha256": "62ff48fcddd0636dfe30dcfdfd9b34bcd836b2df1921c872cbd6ae9133217908",
+  "sql_bytes": 273152,
+  "transport": "Direct TLS PostgreSQL; exact verified SQL and migration history in the same transaction",
+  "checked_at_kst": "2026-11-12T17:59:16.546888+09:00",
+  "provider_calls": 0,
+  "new_content_rows": 0,
+  "existing_draft_rows": 106,
+  "active_state_updates": 28,
+  "allowlist_functions": 2
+}

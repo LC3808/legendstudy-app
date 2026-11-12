@@ -1,12 +1,14 @@
 # Current Status
 
-[서울여 수리1시험3 PUBLISHED / 과학6 NOT READY](essay-swu-public-20261112.md):36행·기존 PDF 재사용,운영119/121/9·WEB447/APP29 PASS.기존382문항·42대학목록·RLS272·Credit보존.전체WEB10FAIL/예외1은변경전재현. [10대학 통합](essay-natural-publication-summary-20261112.md):83시험221문항 중68시험170공개,항공7DRAFT·공식HOLD7·권리HOLD15·NOT READY22.전체PARTIAL,Provider0. [Owner 검수목록](essay-natural-owner-review-20261112.md) 인계; 실제AI/로그인제출/실기기NOT TESTED.
+[잔여51 처리](essay-remaining-51-20261112.md): 항공7+DRAFT재적재0·동국공식정정Q1 공개8추가. 10대학83시험221 중72시험178 PUBLISHED/43잔여(공식HOLD6·권리15·NOT READY22). 기존385catalog·224Registry·RLS272·Credit/Worker엔진보존,Provider0. [Owner178목록](essay-natural-owner-review-20261112.md). 실제로그인제출·기기·AI품질NT.
 
-[광운21시험42문항 PUBLISHED](essay-kwangwoon-public-20261112.md):636행·공식문제PDF21파일78쪽·목록20시험숨김해제. 기존340문항·다른41대학목록·RLS271·권한/Credit보존. 운영158/199/126·WEB410/APP39 PASS,Provider0.로그인제출/실기기NOT TESTED. 광운DONE;서울여후속은상단참조.동국Q1 등HOLD유지.
+[이화 원본·이력·후보](essay-ewha-source-audit-20261112.md): 지정폴더58PDF476쪽/29시험87문항,기존1시험3ID보존. 공식기준63 로컬package(Math27/Essay36),모의24기준없음. 5unit·격리81 PASS,원본불변,운영/TECH/PUBLISHED0. 운영연결·PDF권한·WEB/APP검증별도.
 
-[동국 자연7시험 공개20/HOLD1](essay-dongguk-public-20261112.md):273행 연결·기존320문항/Registry/RLS271보존.2026모의는2025년시행/2026학년도 일치,Q1공식수정해설 불일치로HOLD.운영137/156/60·WEB410/APP39 PASS,Provider0.비로그인목록/입력UI 확인,로그인제출/실기기 NOT TESTED. 숙명16시험44문항 DONE(기존6보존),서강9시험11·숭실5시험19 DONE(숭실Q2HOLD). 광운후속공개완료는상단참조;전체완료아님.
+[광운21시험42문항 PUBLISHED](essay-kwangwoon-public-20261112.md):636행·공식문제PDF21파일78쪽·목록20시험숨김해제. 기존340문항·다른41대학목록·RLS271·권한/Credit보존. 운영158/199/126·WEB410/APP39 PASS,Provider0.로그인제출/실기기NOT TESTED. 광운DONE;서울여후속은상단참조.동국Q1 후속해소·공개는상단참조.
 
-[자연·수리 운영 공개](essay-konkuk-public-20261112.md): 건국 신규6시험24문항/299행 **PUBLISHED**, 기존4문항 보존. 운영 사전116·사후139/72·기존20snapshot·PDF6개·공개API24·일반계정 조회 PASS. Pages802acf70, 신규실제AI/실기기 검사는 미실행. 격리24흐름/원복·WEB381 PASS/1SKIP. 실제 AI 품질은 전체 대학 후 Owner 통합 검수이며 진행 조건이 아니다. [경희 신규7 PUBLISHED](essay-kyunghee-public-20261112.md): 기존3보존, 운영116/122/21·WEB396/APP8 PASS, 과학12/기준미확인4 제외. [성균관15 PDF RIGHTS_HOLD](essay-sungkyunkwan-rights-hold-20261112.md): 이용 허락/표시 승인 미확인, 운영 객체4/5·일반조회0, 변경0. 서강·숭실·숙명·동국의 후속 공개결과는 상단참조. 광운DONE;서울여후속및통합잔여는상단참조. [기술 범위](essay-natural-integrated-review-20261112.md) 재사용, 한국항공7/106 DRAFT와 HOLD5·중앙과학11 보존. PDF/자료 미해결은 문항별 분리.
+[동국 자연7시험 초기공개20/HOLD1](essay-dongguk-public-20261112.md):273행 연결·기존320문항/Registry/RLS271보존.2026모의는2025년시행/2026학년도 일치,Q1당시HOLD→후속정정공개는상단참조.운영137/156/60·WEB410/APP39 PASS,Provider0.비로그인목록/입력UI 확인,로그인제출/실기기 NOT TESTED. 숙명16시험44문항 DONE(기존6보존),서강9시험11·숭실5시험19 DONE(숭실Q2HOLD). 광운후속공개완료는상단참조;전체완료아님.
+
+[자연·수리 운영 공개](essay-konkuk-public-20261112.md): 건국 신규6시험24문항/299행 **PUBLISHED**, 기존4문항 보존. 운영 사전116·사후139/72·기존20snapshot·PDF6개·공개API24·일반계정 조회 PASS. Pages802acf70, 신규실제AI/실기기 검사는 미실행. 격리24흐름/원복·WEB381 PASS/1SKIP. 실제 AI 품질은 전체 대학 후 Owner 통합 검수이며 진행 조건이 아니다. [경희 신규7 PUBLISHED](essay-kyunghee-public-20261112.md): 기존3보존, 운영116/122/21·WEB396/APP8 PASS, 과학12/기준미확인4 제외. [성균관15 PDF RIGHTS_HOLD](essay-sungkyunkwan-rights-hold-20261112.md): 이용 허락/표시 승인 미확인, 운영 객체4/5·일반조회0, 변경0. 서강·숭실·숙명·동국의 후속 공개결과는 상단참조. 광운DONE;서울여후속및통합잔여는상단참조. [기술 범위](essay-natural-integrated-review-20261112.md) 재사용, 한국항공7/106 초기DRAFT이력과 HOLD5·중앙과학11 보존. PDF/자료 미해결은 문항별 분리.
 
 [작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
 

@@ -1,0 +1,19 @@
+{
+  "checked_at_kst": "2026-11-12T18:26:12.241558+09:00",
+  "status": "PUBLISHED",
+  "new_public_questions": 1,
+  "total_math_catalog": 393,
+  "old_392_exact": true,
+  "preflight_checks": 14,
+  "postflight_checks": 3,
+  "preservation_groups": 21,
+  "existing_rls_policies": 272,
+  "registry_and_browse_unchanged": true,
+  "normal_role_catalog_verified": true,
+  "actual_login_submission": "NOT TESTED",
+  "provider_calls": 0,
+  "new_content_rows": 13,
+  "web_deployment": "844798cb-e04b-4f2c-82ec-16fc45cc200a",
+  "web_source_commit": "7987a4639dcb18fbbf3a8a9e771a0bcaa8e68c5c",
+  "web_verified_at_kst": "2026-11-12T18:26:54.555567+09:00"
+}

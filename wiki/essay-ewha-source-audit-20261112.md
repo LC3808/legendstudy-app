@@ -67,3 +67,5 @@ C의63개는 공식 표를 그대로 연결한 상태이며 모든 배점을 숫
 원본 수집일/시험 학년도/변경시각을 혼용하지 않고, SHA·파일명·물리페이지·candidate버전을 고정한다. Registry·학생 신원·답안·평가 계보·원장을 덮어쓰지 않는다. 학습 사실/평가/진학 결과를 섞지 않고 공식 원문과 후보 해석을 구분한다. 개인정보 수집/보존기간·Credit·동의 목적 변경0. 신규 공개 사실은 운영 영수증이 있을 때만 기록한다.
 
 APP branch `codex/essay-natural-expansion-20261111`, WEB branch `codex/essay-public-natural-20261112`. 이화 코드·manifest commit은 별도이며 최종 HEAD는 Git 로그/완료보고로 확인한다. WEB 운영 source HEAD는 `7987a4639dcb18fbbf3a8a9e771a0bcaa8e68c5c`(동국 정정), 이화 운영 배포는 없다.
+
+구현·원본 감사 commit: `3b1add1ce4407273bbdfd5f0ca493b1423c51a88`. 아래 후속 문서 커밋은 후보/운영 상태를 승격하지 않는다.

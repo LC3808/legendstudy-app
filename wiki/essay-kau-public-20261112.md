@@ -15,3 +15,11 @@ WEB 변경은 Source Registry4시험8문항 메타데이터 추가와 첨삭허�
 [비파괴 허용목록 원복](../supabase/candidates/kau_public_20261112/rollback-admission.sql)은 신규7leaf 진입만 닫으며 기존106행·새답안·결과·Credit를 삭제하지 않는다. WEB의 신규범위를 먼저 닫고 해당SQL의 함수해시 가드를 확인한다. 이미 시작한 결과 읽기와 이력은 유지한다. 격리 원복 PASS. 운영 적용 실패 시 transaction 전체 취소하며 드리프트가 있으면 원복SQL을 강행하지 않는다.
 
 운영 적용 결과와 최종Git은 아래 후속 기록으로 확정한다. 실제Provider0, 로그인 제출/실기기/AI품질은 NOT TESTED. AI품질 검수는 Owner 담당이다.
+
+## 운영 적용 확정
+
+**PUBLISHED**. Migration `20261112085916_kau_7_existing_draft_public_release`, WEB 배포 `136d6c4a-6187-495e-bedd-7c6ee7f8951c`, 소스 `65ab29fc8e5f78f1400426974f8be6b240056896`. 운영 검증 2026-11-12T18:00:41.023198+09:00, 공개 HTTP 확인 2026-11-12T18:01:02.827534+09:00. [적용 영수증](../supabase/candidates/kau_public_20261112/activation-transport-receipt.json) · [운영 사후 검증](../supabase/candidates/kau_public_20261112/production-receipt.json) · [WEB 보존 검증](../supabase/candidates/kau_public_20261112/web-production-receipt.json).
+
+사후 21개/보존21개 PASS, RLS272개·기존 사용자 데이터·함수 ACL 보존. 일반 authenticated 역할의 공개 catalog 조회 PASS이며 실제 로그인 브라우저 검수와 구분한다. 비논술 정적 자산 2189개 보존, API 소스·Secrets·Preview·함수 라우팅 불변. /essay-lab, /api/essay/catalog, /login HTTP200, 비로그인 PDF API401. 운영 Provider 호출0, 실제 로그인 제출·결과·재첨삭·실기기는 NOT TESTED. 원복은 실행하지 않았다.
+
+관련 WEB449 PASS/1SKIP(61파일), APP29 PASS(5파일), 격리7문항×9흐름 및 원복 PASS. 기존4PDF/16쪽 SHA 일치·표시 원본 확인. 전체 테스트 재실행 수치가 아니다.

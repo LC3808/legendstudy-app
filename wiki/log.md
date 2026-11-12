@@ -1,3 +1,7 @@
+## 2026-11-12 — 잔여51 후속 공개·이화 지정 원본 조사
+
+[잔여51 최종](essay-remaining-51-20261112.md): 항공7(기존106행재사용)+동국공식정정Q1(13행) 실제공개,누적178/221·43잔여. 기존385공개·224Registry·RLS272·권한/Credit/Worker엔진보존. WEB65ab29f→7987a46 배포·비논술자산보존. 격리8흐름·원복/관련테스트PASS,실제로그인/실기기/AI품질NT,Provider0. [이화원본](essay-ewha-source-audit-20261112.md):58PDF476쪽·29시험87문항,기존1/3재사용·26과거SHA일치. Math27/Essay36로컬package·5unit/81Worker검사PASS,모의24공식기준없음. 이화운영/공개0,원본/이력불변.
+
 ## 2026-11-11 — Owner 실제 연결 상태 검증
 
 [Owner 연결 상태 재검증](essay-connection-owner-verification-20261111.md): 항공12 Registry만 운영등록/Math·Worker0/비공개. 로컬PG198·Flutter24·WEB후보25 PASS, 실제 Source 시험진입 가정1 FAIL. 대상22개교153시험572문항, 운영연결 미완료503; 신규 기능·Provider·운영쓰기0.

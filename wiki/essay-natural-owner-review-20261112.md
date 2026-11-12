@@ -1,11 +1,15 @@
 # Owner 통합 AI 첨삭 품질 검수 목록 — 2026-11-12
 
-공개 8개 대학·68시험·170문항의 검수 목록이다. 미공개 51문항은 [통합 잔여 목록](essay-natural-publication-summary-20261112.md)에 분리했다. 모든 실제 AI 품질 검수 상태는 **NOT TESTED / Owner 대기**다. Codex는 Provider를 호출하거나 품질을 대신 판정하지 않았다.
+공개 9개 대학·72시험·178문항의 검수 목록이다. 미공개 43문항은 [통합 잔여 목록](essay-natural-publication-summary-20261112.md)에 분리했다. 모든 실제 AI 품질 검수 상태는 **NOT TESTED / Owner 대기**다. Codex는 Provider를 호출하거나 품질을 대신 판정하지 않았다.
 
 기존 논술 LAB에서 대학→학년도·시험→계열·회차→아래 문항 순서로 진입한다. 문제 PDF·답안 입력을 확인한 뒤 정상·오답·부분 답안의 피드백 및 재작성·재첨삭을 Owner가 검수한다. 실제 서비스 이용은 기존 Credit 정책을 따르며 무료 권한이나 정책을 추가하지 않았다.
 
 | 대학·진입 | 학년도·시험·계열·회차 | 시험 ID | 공개 문항 | Owner 품질 |
 |---|---|---|---|---|
+| [한국항공대학교](https://lab.legendstudy.com/essay-lab/universities/kau/) | 2025 수시 공학계열 | `3005e0cd-0a3b-5f8c-98ed-ae4a6736f0af` | 문제 1, 문제 2 | NOT TESTED |
+| [한국항공대학교](https://lab.legendstudy.com/essay-lab/universities/kau/) | 2024 수시 이학계열 | `51d7f36d-a011-5279-8c5d-f731b2900af3` | 문제 2 | NOT TESTED |
+| [한국항공대학교](https://lab.legendstudy.com/essay-lab/universities/kau/) | 2026 수시 공학계열 | `6815943a-42c1-5eae-b711-449ac403b9fb` | 문제 1, 문제 2 | NOT TESTED |
+| [한국항공대학교](https://lab.legendstudy.com/essay-lab/universities/kau/) | 2025 수시 이학계열 | `85a8468d-2141-52b1-9d70-3bcf6f340f8e` | 문제 1, 문제 2 | NOT TESTED |
 | [건국대학교](https://lab.legendstudy.com/essay-lab/universities/konkuk/) | 2024 수시 자연 A | `9288300f-76c8-5321-8c28-2ed4f2587ef3` | 문제 1, 문제 2, 문제 3, 문제 4 | NOT TESTED |
 | [건국대학교](https://lab.legendstudy.com/essay-lab/universities/konkuk/) | 2024 수시 자연 B | `168f2eb0-34be-5015-bf42-db002faa9868` | 문제 1, 문제 2, 문제 3, 문제 4 | NOT TESTED |
 | [건국대학교](https://lab.legendstudy.com/essay-lab/universities/konkuk/) | 2024 모의 자연 | `529fc5f3-79b3-5ff4-8ef2-4a5ce843c7b8` | 문제 1, 문제 2, 문제 3, 문제 4 | NOT TESTED |
@@ -50,7 +54,7 @@
 | [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2024 모의 자연계열 | `3b9a5530-3362-5223-94f1-04922e6f5d11` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
 | [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2025 수시 자연계열 | `627bbcc2-707c-5b4f-b3a7-d504c4dd5a4c` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
 | [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2026 수시 자연계열 | `8871c481-f6e2-5f87-b3c8-45c042f6a775` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
-| [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2026 모의 자연계열 | `324dbf82-b4bc-5607-977b-2cf512812212` | 문제 2, 문제 3 | NOT TESTED |
+| [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2026 모의 자연계열 | `324dbf82-b4bc-5607-977b-2cf512812212` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
 | [동국대학교](https://lab.legendstudy.com/essay-lab/universities/dongguk/) | 2027 모의 자연계열 | `81f8d0b3-6751-542e-913e-b4169a247de6` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
 | [광운대학교](https://lab.legendstudy.com/essay-lab/universities/kwangwoon/) | 2021 수시 자연계열 1교시 | `c435f96e-0ce0-5603-ac22-c0984662eb98` | 문제 1, 문제 2 | NOT TESTED |
 | [광운대학교](https://lab.legendstudy.com/essay-lab/universities/kwangwoon/) | 2021 수시 자연계열 2교시 | `a68fa7e1-b701-5c7b-95ae-cfc46850614f` | 문제 1, 문제 2 | NOT TESTED |
@@ -75,4 +79,4 @@
 | [광운대학교](https://lab.legendstudy.com/essay-lab/universities/kwangwoon/) | 2027 모의 자연계열 | `6f01f238-622d-5a85-9a04-8bb5a7b9759d` | 문제 1, 문제 2 | NOT TESTED |
 | [서울여자대학교](https://lab.legendstudy.com/essay-lab/universities/swu/) | 2026 수시 자연계열 오후반 | `3643b295-3b63-5b77-bd1b-d3ce68de4885` | 문제 1, 문제 2, 문제 3 | NOT TESTED |
 
-문항 Registry ID와 정확한 상태는 [221문항 통합 영수증](../supabase/candidates/swu_public_20261112/integrated-expansion-status.json)을 참조한다. 부분 공개 시험은 위 공개 문항만 검수 대상이다. 기존 학생 답안·결과·과금 기록을 테스트 데이터로 바꾸지 않는다.
+문항 Registry ID와 정확한 상태는 [221문항 통합 영수증](../supabase/candidates/remaining_51_20261112/integrated-expansion-status.json)을 참조한다. 부분 공개 시험은 위 공개 문항만 검수 대상이다. 기존 학생 답안·결과·과금 기록을 테스트 데이터로 바꾸지 않는다.

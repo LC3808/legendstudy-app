@@ -1,6 +1,6 @@
 # 동국대 2026 모의 Q1 공식 정정 연결 · 2026-11-12
 
-[기존 20문항 공개](essay-dongguk-public-20261112.md) 후 잔여51 정리 Owner 승인 범위다. 기존 Registry `49ea9aaa-1c46-51e7-b148-a03aef20ae4e`와 학생용 문제 PDF를 유지한다. 신규 시험/문항0, 새 RPC/Storage정책0, Provider0. 공개 예정 범위는 Q1 13행, 기존 두 내부 허용목록에 leaf1 추가(392→393), 기존 WEB 시험의 Q1 진입 허용이다.
+[기존 20문항 공개](essay-dongguk-public-20261112.md) 후 잔여51 정리 Owner 승인 범위다. 기존 Registry `49ea9aaa-1c46-51e7-b148-a03aef20ae4e`와 학생용 문제 PDF를 유지한다. 신규 시험/문항0, 새 RPC/Storage정책0, Provider0. 공개 적용 범위는 Q1 13행, 기존 두 내부 허용목록에 leaf1 추가(392→393), 기존 WEB 시험의 Q1 진입 허용이다.
 
 ## 공식 정정 근거
 
@@ -17,3 +17,9 @@
 [허용목록 원복 SQL](../supabase/candidates/dongguk_correction_20261112/rollback-admission.sql)은 Q1 신규 평가 진입만 닫는다. 공식 자료13행·사용자 답안·결과·Credit는 삭제하지 않는다. WEB Q1 범위를 먼저 닫고 함수 해시 가드를 검증한다. 격리 원복 후 기존 결과 조회/이력·기존 catalog 보존 PASS.
 
 실제 로그인 제출·결과 화면·실기기·AI 품질은 NOT TESTED. 운영 적용 영수증은 아래 확정 기록에 추가한다.
+
+## 운영 적용 확정
+
+**PUBLISHED**. Migration `20261112092154_dongguk_mock_q1_official_correction_public`, WEB 배포 `844798cb-e04b-4f2c-82ec-16fc45cc200a`, 소스 `7987a4639dcb18fbbf3a8a9e771a0bcaa8e68c5c`. 운영 검증 2026-11-12T18:26:12.241558+09:00, 공개 HTTP 확인 2026-11-12T18:26:54.555567+09:00. [적용 영수증](../supabase/candidates/dongguk_correction_20261112/activation-transport-receipt.json) · [운영 사후 검증](../supabase/candidates/dongguk_correction_20261112/production-receipt.json) · [WEB 보존 검증](../supabase/candidates/dongguk_correction_20261112/web-production-receipt.json).
+
+사후 3개/보존21개 PASS, RLS272개·기존 사용자 데이터·함수 ACL 보존. 일반 authenticated 역할의 공개 catalog 조회 PASS이며 실제 로그인 브라우저 검수와 구분한다. 비논술 정적 자산 2192개 보존, API 소스·Secrets·Preview·함수 라우팅 불변. /essay-lab, /api/essay/catalog, /login HTTP200, 비로그인 PDF API401. 운영 Provider 호출0, 실제 로그인 제출·결과·재첨삭·실기기는 NOT TESTED. 원복은 실행하지 않았다.

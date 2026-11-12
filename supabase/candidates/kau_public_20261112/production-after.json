@@ -1,0 +1,195 @@
+{
+  "checks": [
+    {
+      "check_name": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b profile",
+      "passed": true
+    },
+    {
+      "check_name": "6eaec5d3-4786-55a2-8dc6-a457edd5b16b Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "8744f2ad-02c4-51d4-83de-6d5ab245cec5 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "8744f2ad-02c4-51d4-83de-6d5ab245cec5 profile",
+      "passed": true
+    },
+    {
+      "check_name": "8744f2ad-02c4-51d4-83de-6d5ab245cec5 Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a profile",
+      "passed": true
+    },
+    {
+      "check_name": "d3909209-b5ee-50ce-b5cb-5cbbb8e0a65a Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77 profile",
+      "passed": true
+    },
+    {
+      "check_name": "ebd76ca2-dbb4-5c0f-a203-4c77650e8a77 Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9 profile",
+      "passed": true
+    },
+    {
+      "check_name": "ed096a20-52a7-5f27-a71b-4c7c2401cdc9 Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36 public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36 profile",
+      "passed": true
+    },
+    {
+      "check_name": "fccb2d75-d4e6-54ec-b0fe-f3eced268b36 Worker evidence",
+      "passed": true
+    },
+    {
+      "check_name": "ff6226fc-32ac-5903-ab0f-b1560803efbb public mapping",
+      "passed": true
+    },
+    {
+      "check_name": "ff6226fc-32ac-5903-ab0f-b1560803efbb profile",
+      "passed": true
+    },
+    {
+      "check_name": "ff6226fc-32ac-5903-ab0f-b1560803efbb Worker evidence",
+      "passed": true
+    }
+  ],
+  "preservation": [
+    {
+      "name": "public.math_canonical_solution_steps",
+      "n": 841,
+      "digest": "d9eccce8288512530568e1dd3d59734a"
+    },
+    {
+      "name": "public.math_canonical_solutions",
+      "n": 314,
+      "digest": "85fc32eb425d4f4664554d9d0e20aef9"
+    },
+    {
+      "name": "public.math_evaluation_profiles",
+      "n": 365,
+      "digest": "8ea1875213df2f4dd6bbece976d8cc8b"
+    },
+    {
+      "name": "public.math_problem_sets",
+      "n": 364,
+      "digest": "7c045c3d2da9d24b603b6bec8cdb1f12"
+    },
+    {
+      "name": "public.math_problems",
+      "n": 413,
+      "digest": "c4de9596abfbb74b9e36c6c4cf9bfef2"
+    },
+    {
+      "name": "public.math_scoring_criteria",
+      "n": 850,
+      "digest": "938169a9640a225b5dff29a5df62e69f"
+    },
+    {
+      "name": "public.math_source_artifacts",
+      "n": 1337,
+      "digest": "cce67c54227b4e85b85fdd73e9c8de5e"
+    },
+    {
+      "name": "public.math_subproblems",
+      "n": 413,
+      "digest": "fc86952e3cff59b4725757f9ec2fc8ad"
+    },
+    {
+      "name": "math_private.task20_hanyang_source_pages",
+      "n": 273,
+      "digest": "89ae26fb82687b78fb261331707cdc25"
+    },
+    {
+      "name": "public.universities",
+      "n": 131,
+      "digest": "a5c16ac558383edfa370a610e2520dfa"
+    },
+    {
+      "name": "public.essay_exams",
+      "n": 450,
+      "digest": "22d9518a30376a49f4c999d8736af860"
+    },
+    {
+      "name": "public.essay_questions",
+      "n": 1232,
+      "digest": "c9445d0accf1d07da0cb7ba581ab93d4"
+    },
+    {
+      "name": "public.essay_attempts",
+      "n": 0,
+      "digest": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "name": "public.essay_evaluations",
+      "n": 0,
+      "digest": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "name": "public.credit_transactions",
+      "n": 678,
+      "digest": "af5fe29cf29bb95fdf5df5d568f5bd06"
+    },
+    {
+      "name": "public.math_attempts",
+      "n": 69,
+      "digest": "f677d1ca68f1f67bbc6eefc8c8db37b4"
+    },
+    {
+      "name": "public.math_evaluations",
+      "n": 13,
+      "digest": "305cd43d7ff30d51abfa988749b59560"
+    },
+    {
+      "name": "function definitions/owners/ACL",
+      "n": 344,
+      "digest": "5adc98072034eb1a045b2dd83f04156c"
+    },
+    {
+      "name": "RLS policies",
+      "n": 272,
+      "digest": "1e6cc4e7c714fbfd11679f6556793867"
+    },
+    {
+      "name": "table owners/RLS/ACL",
+      "n": 107,
+      "digest": "ed5aeb072da0d680a99c725f0aa3c079"
+    },
+    {
+      "name": "changed functions identity/ACL",
+      "n": 2,
+      "digest": "84f34402efc5575607a7a08b758ea4c0"
+    }
+  ]
+}

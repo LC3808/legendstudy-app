@@ -1,0 +1,12 @@
+{
+  "migration_version": "20261112092154",
+  "name": "dongguk_mock_q1_official_correction_public",
+  "sql_sha256": "2ce1f9bad2589e39faf2cf2b6a65f513398ef2572b7d591e8bce27a706e746aa",
+  "sql_bytes": 346222,
+  "applied_at_kst": "2026-11-12T18:25:52.527673+09:00",
+  "new_content_rows": 13,
+  "new_questions": 0,
+  "active_state_updates": 4,
+  "existing_allowlist_functions": 2,
+  "provider_calls": 0
+}
