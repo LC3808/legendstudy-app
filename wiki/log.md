@@ -1,3 +1,7 @@
+## 2026-11-12 — APP83 Android 심사 전송 요청
+
+Owner가 제출 지원을 재요청하고 IPA/AAB 업로드 완료를 보고했다. [플랫폼별 결과](app83-store-handoff-20261112.md#스토어-제출-후속--2026-11-12): Android83(1.0.3) 서버 수락·지원기기 감소0 확인, 출시 노트 저장·프로덕션 변경1개 심사 전송 요청 완료. Console은 검토 중/빠른 자동 검사 중(최대14분)을 표시했다. 기존100%·대상국가·관리형 게시 비활성 유지, 승인 후 자동 출시. iOS는 Owner 직접 진행하여 심사 결과 미확인. 소스/재빌드/DB/RPC/Auth/회원 변경0, 최종 바이너리 실기기·심사 승인·실제 공개 NOT TESTED 유지.
+
 ## 2026-11-12 — APP83 main 통합·서명 빌드·Owner 인계
 
 [APP83](app83-store-handoff-20261112.md): 중앙 스플래시6962c0f 포함, 원격main02977ef 보존 fast-forward→제품소스dbbb52e Push 확인. 1.0.3(83) IPA/AAB·버전/서명/공개설정 PASS. 전체2580 PASS/8 SKIP·Analyze·Python33·격리SQL71/42·JVM2 PASS. 신규RPC 미배포·기존TOP10 fallback 유지. Owner 최종 지시로 빌드/파일 인계까지만, 최종산출물 기기설치/스토어 업로드·제출0. 기존설치·사용자·APP82 산출물 보존.
