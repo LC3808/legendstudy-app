@@ -413,3 +413,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [숙명16시험44문항 PUBLISHED·기존6보존·공식PDF14](essay-sookmyung-public-20261112.md). 다음동국.
 
 - [동국7시험20문항 공개연결·2026모의Q1 공식수정 HOLD](essay-dongguk-public-20261112.md). 다음광운.
+
+- [광운21시험42문항 운영공개·검증](essay-kwangwoon-public-20261112.md). 다음서울여대.

@@ -1,0 +1,372 @@
+{
+  "function": {
+    "definition": "CREATE OR REPLACE FUNCTION public.essay_browse_catalog(p_university text)\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n with catalog(source_id,db_id,name) as (values\n('gachon','a9e38cdc-9593-4c60-b8a6-698133f48518','가천대학교'),\n('catholic','c5850ef5-616e-4ebb-aeac-3f6a3e7c4d0a','가톨릭대학교'),\n('kangnam',null,'강남대학교'),\n('konkuk','77fe30b2-f693-4612-a6d3-50e8be5c8f6c','건국대학교'),\n('kyonggi','295f71b3-12da-4122-b743-f0c2c8bebe44','경기대학교'),\n('knu','72bc4be0-6e72-4c72-adc5-8ee54279f3bd','경북대학교'),\n('kyunghee','b401cc24-dd17-575e-8ac6-0fd8c9c8405d','경희대학교'),\n('korea','a93ec9df-2096-4550-801f-07a25b9a437b','고려대학교'),\n('kwangwoon','3d35489f-2e90-47b8-af1b-48928ee2269a','광운대학교'),\n('kookmin','88aa2231-6a1c-47ee-a063-b168cdaf85ad','국민대학교'),\n('dankook','bdae801b-e46e-449f-9211-0a440f8eb78d','단국대학교'),\n('duksung',null,'덕성여자대학교'),\n('dongguk','cd1ba908-2b5f-4063-a111-2da53d7d358b','동국대학교'),\n('dongduk',null,'동덕여자대학교'),\n('pnu','08303fd3-ec87-4976-a9a9-547a1d52f996','부산대학교'),\n('syu',null,'삼육대학교'),\n('sangmyung',null,'상명대학교'),\n('sogang','816c1cb8-b54d-4f05-ae64-e82abfec0ada','서강대학교'),\n('seokyeong',null,'서경대학교'),\n('seoultech','52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2','서울과학기술대학교'),\n('uos','0598e08a-20d6-4814-9511-6abe22814355','서울시립대학교'),\n('swu',null,'서울여자대학교'),\n('skku','4acee829-94d4-5f8a-b440-a72e423d439f','성균관대학교'),\n('sungshin',null,'성신여자대학교'),\n('sejong','447d2f79-fb0a-4a02-bce6-d214244b683d','세종대학교'),\n('suwon',null,'수원대학교'),\n('sookmyung','c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b','숙명여자대학교'),\n('soongsil','6ae1fd3f-22da-43f4-a796-1cfe960c5fcb','숭실대학교'),\n('shinhan',null,'신한대학교'),\n('ajou','25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6','아주대학교'),\n('yonsei','9076637b-d827-5bb6-8e4e-954bd2a05805','연세대학교'),\n('eulji',null,'을지대학교'),\n('ewha','fdc7e693-15a2-47fc-b080-4f14e9274d95','이화여자대학교'),\n('inha','e40f4b8f-8949-4726-a774-2b6f0e6d8939','인하대학교'),\n('cau','ffad67a6-107f-47b7-a1cb-ab61687ffb9f','중앙대학교'),\n('tukorea',null,'한국공학대학교'),\n('koreatech',null,'한국기술교육대학교'),\n('hufs','1fd29b0d-1141-4ff0-b1b3-c4f201854476','한국외국어대학교'),\n('kau',null,'한국항공대학교'),\n('hanshin',null,'한신대학교'),\n('hanyang','1090e1be-174e-5042-abd3-ca929c6e26f8','한양대학교'),\n('hongik','15f50d54-001d-49b9-836b-a5d9c76b9c0a','홍익대학교')\n ), selected as (\n select u.id from public.universities u join catalog c\n on (c.db_id is not null and u.id=c.db_id::uuid)\n or (c.db_id is null and u.slug=c.source_id and u.name=c.name)\n where c.source_id=p_university\n ), exams as (\n select e.id,e.university_id,e.admission_year,e.exam_kind,coalesce(e.field_or_division,e.admission_track) admission_track,e.exam_name,\n (select jsonb_agg(jsonb_build_object('id',q.id,'label',q.label) order by q.display_order,q.id)\n from public.essay_questions q where q.essay_exam_id=e.id) questions\n from public.essay_exams e join selected s on s.id=e.university_id\n where e.id <> all(array['c435f96e-0ce0-5603-ac22-c0984662eb98'::uuid,'a68fa7e1-b701-5c7b-95ae-cfc46850614f'::uuid,'eb9c551a-dd29-5454-9a55-8b58a2bb432d'::uuid,'cb4dc5d6-df44-519d-82b4-64833a13304e'::uuid,'de78b082-d9b1-5234-8bb9-d7f7543294db'::uuid,'1a3a3532-8fa1-5d33-917c-e99d441e1788'::uuid,'18902739-69fc-53c8-a9a7-6bf620c9008b'::uuid,'a2a9d777-2237-50c2-af89-a617b88c5bff'::uuid,'5ebc33d1-1097-5ed4-b521-6b9a25d13eaf'::uuid,'3368bb8c-eaf7-5c8f-9e50-aa86c3eb36a1'::uuid,'d2abfee2-2412-5630-9af8-a858116b6759'::uuid,'baceb638-55ee-5d78-8ff4-93dad7832914'::uuid,'10ade245-4c6a-552b-beae-5dc7af3b75bd'::uuid,'b1e3505a-359e-5122-bf42-32b1cb49a174'::uuid,'1705c7d2-e11d-570f-9a4a-d220d0600acd'::uuid,'91802b60-96bf-5cb6-abef-d1c1a738ae6f'::uuid,'44eba80d-09ed-5e8c-a988-01e90c78ffd4'::uuid,'45febe31-1b94-5648-a081-e335f82e81a4'::uuid,'1e66b782-4e74-5fd4-b36d-032991875522'::uuid,'6f01f238-622d-5a85-9a04-8bb5a7b9759d'::uuid,'65c60943-796e-59d0-a3e6-12a43411356b'::uuid,'52a6cbdf-dc7b-5b03-b42f-ec24d88adcb3'::uuid,'e172d96f-0567-560d-8b80-63660e655a9a'::uuid,'afc6578e-a531-5719-8706-b57f53921998'::uuid,'452155b0-b752-5dca-8912-49b37a5c6bef'::uuid,'423a09b8-b89e-578e-9744-e3c96d0dd611'::uuid,'5a565963-98db-5f0f-a7b0-5c879f4eaedb'::uuid,'06379378-b27e-510d-8027-abef96a08564'::uuid,'49fd76ae-48d9-5f33-a7f9-3873203847d1'::uuid,'b462a69f-b52d-5b81-b934-3157e4eb9e7f'::uuid,'bb865f39-f41b-57a3-91b9-e96d2cb86478'::uuid,'4de2b4ff-7ce4-57f4-a864-14627899cdf9'::uuid,'d01c91a0-2867-5f20-9df3-2eecc94cc329'::uuid,'9e3bf5ce-eeeb-51e2-abad-addf41ad1973'::uuid,'47c0b9ff-5d09-5bb9-a1d2-052f87e9803a'::uuid,'dcbe742e-c418-5081-ad06-44953ec2ffac'::uuid])\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n 'examId',id,'universityId',university_id,'year',admission_year,\n 'kind',exam_kind,'track',admission_track,'title',exam_name,\n 'questionCount',jsonb_array_length(questions),'questions',questions,\n 'evaluationReady',false) order by admission_year desc,exam_name,id)\n filter(where questions is not null),'[]'::jsonb) from exams;\n$function$\n",
+    "digest": "8f827314118d114578e23f8712fe1931",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}"
+  },
+  "rows": [
+    {
+      "kind": "mock",
+      "year": 2027,
+      "title": "2027학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "95487036-722b-5f90-bd14-106312f16c43",
+      "questions": [
+        {
+          "id": "f6a063bc-9fb4-597b-a03a-e5f8b4ae6fc2",
+          "label": "문제 1"
+        },
+        {
+          "id": "63c3b290-0709-5374-9acf-888c957828a2",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2026,
+      "title": "2026학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "b86df57f-a88e-5a11-a230-db15ee9a4f8e",
+      "questions": [
+        {
+          "id": "0eb4031f-bdd7-59b6-8454-5ce9a1915b9d",
+          "label": "문제 1"
+        },
+        {
+          "id": "f7e2c0f0-5f1e-515c-86b4-da2c035618b9",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2026,
+      "title": "2026학년도 광운대학교 수시논술 인문계열 1교시",
+      "track": "인문계열",
+      "examId": "cc5dfe4e-63ec-5877-be9a-8bdafbb97e8d",
+      "questions": [
+        {
+          "id": "f529765c-7d71-5993-bef9-d2e9e926e020",
+          "label": "문제 1"
+        },
+        {
+          "id": "19e67592-af8f-5231-b7d1-e20f91c6a523",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2026,
+      "title": "2026학년도 광운대학교 수시논술 인문계열 2교시",
+      "track": "인문계열",
+      "examId": "6a3cd3be-25b0-5431-98ad-eb2003ce841d",
+      "questions": [
+        {
+          "id": "125144d0-5423-5ef9-bd00-f9abe71dc3a6",
+          "label": "문제 1"
+        },
+        {
+          "id": "40631017-108b-578c-9275-149442a83ca2",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2025,
+      "title": "2025학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "65e879cd-0f1d-57cd-8735-77f8f988fa39",
+      "questions": [
+        {
+          "id": "3f7a4f8c-3608-57e9-8aa1-7be5f2c4e83a",
+          "label": "문제 1"
+        },
+        {
+          "id": "af1c038f-1095-5807-a418-0b2abe72bf05",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2025,
+      "title": "2025학년도 광운대학교 수시논술 인문계열 1교시",
+      "track": "인문계열",
+      "examId": "ebf16e22-1367-558c-96fe-7f12df395743",
+      "questions": [
+        {
+          "id": "318bb43a-0a00-557e-97b4-e8fb08726bec",
+          "label": "문제 1"
+        },
+        {
+          "id": "159b1c00-215a-575f-bce5-2477b8b0d54f",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2025,
+      "title": "2025학년도 광운대학교 수시논술 인문계열 2교시",
+      "track": "인문계열",
+      "examId": "86fe45b6-60d4-59e4-a7d7-2f8da353e52e",
+      "questions": [
+        {
+          "id": "045c512e-c3a2-56be-8570-36c27a8ff734",
+          "label": "문제 1"
+        },
+        {
+          "id": "2eca50fa-2fcb-59cc-9824-c1127af18a8d",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2024,
+      "title": "2024학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "1875970c-8310-5e9f-8936-aabadb8f6c37",
+      "questions": [
+        {
+          "id": "715bb0ba-fb04-530d-9b08-cc2537307788",
+          "label": "문제 1"
+        },
+        {
+          "id": "081a7d03-7682-51fe-831d-50d60378c650",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2024,
+      "title": "2024학년도 광운대학교 수시논술 인문계열 1교시",
+      "track": "인문계열",
+      "examId": "5fb16b6a-1fa3-59b0-afed-c3125ec32908",
+      "questions": [
+        {
+          "id": "20ac4042-0c64-5cf9-af2a-1441007f6e6e",
+          "label": "문제 1"
+        },
+        {
+          "id": "5f33d83c-ef01-5bcb-a145-0a51d39b1352",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2024,
+      "title": "2024학년도 광운대학교 수시논술 인문계열 2교시",
+      "track": "인문계열",
+      "examId": "d64c8d28-44d9-57be-91e0-2670f5151c63",
+      "questions": [
+        {
+          "id": "7df7f362-6bbc-598f-a42a-c12647fc8768",
+          "label": "문제 1"
+        },
+        {
+          "id": "57ccc767-9290-5d21-a592-b7cb83837176",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2023,
+      "title": "2023학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "95d7e221-ca1d-58e3-8021-0f83a4e350e3",
+      "questions": [
+        {
+          "id": "78173389-9b28-55b3-9407-009036b6ae8b",
+          "label": "문제 1"
+        },
+        {
+          "id": "44823f60-4ff5-5548-b9e7-483c47247e72",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2023,
+      "title": "2023학년도 광운대학교 수시논술 인문계열 1교시",
+      "track": "인문계열",
+      "examId": "499fc506-e77a-5b43-8e6e-53cc12b70b24",
+      "questions": [
+        {
+          "id": "c316e018-e93b-54a1-bbfc-a758408032ed",
+          "label": "문제 1"
+        },
+        {
+          "id": "a4cff99b-ba8c-5cb3-b7e9-f9dfdcaa3ad7",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2023,
+      "title": "2023학년도 광운대학교 수시논술 인문계열 2교시",
+      "track": "인문계열",
+      "examId": "19cd4b49-0485-5be2-8493-976bf3571a95",
+      "questions": [
+        {
+          "id": "399204a7-5bde-533c-93c0-313ba0f8e309",
+          "label": "문제 1"
+        },
+        {
+          "id": "63f810da-b6ce-58d0-aa23-f265eb499708",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2022,
+      "title": "2022학년도 광운대학교 모의논술 인문계열",
+      "track": "인문계열",
+      "examId": "453ef860-10b8-5006-b9c1-a6f23570e1a3",
+      "questions": [
+        {
+          "id": "5977105e-e27a-5e8f-b471-9d6601ce3834",
+          "label": "문제 1"
+        },
+        {
+          "id": "fec96889-b079-543b-9efa-2183cd8fb620",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2022,
+      "title": "2022학년도 광운대학교 수시논술 인문계열 1교시",
+      "track": "인문계열",
+      "examId": "de46f947-c033-5ec8-82ef-963f1742879e",
+      "questions": [
+        {
+          "id": "dd53705e-1dec-52b1-bef0-710891ce5fb3",
+          "label": "문제 1"
+        },
+        {
+          "id": "84b62658-4994-5c50-8b2b-3592666d66a7",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "admission",
+      "year": 2022,
+      "title": "2022학년도 광운대학교 수시논술 인문계열 2교시",
+      "track": "인문계열",
+      "examId": "ab5c4937-b96d-598e-97aa-ede8c3b2c79f",
+      "questions": [
+        {
+          "id": "5b2ee506-6f00-56e7-a551-a38841c46e45",
+          "label": "문제 1"
+        },
+        {
+          "id": "d6f7fd14-edd7-542d-a1b0-6aa31821fa12",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    },
+    {
+      "kind": "mock",
+      "year": 2022,
+      "title": "광운대학교 · 2022 · mock · 자연계열",
+      "track": "자연계열",
+      "examId": "76b32d03-e941-51e0-9355-46c139a0617a",
+      "questions": [
+        {
+          "id": "49a092ef-9d72-5cbc-8079-45fba6009481",
+          "label": "문제 1"
+        },
+        {
+          "id": "ae1d6f23-34da-5692-b9f0-254deb64a31f",
+          "label": "문제 2"
+        }
+      ],
+      "universityId": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "questionCount": 2,
+      "evaluationReady": false
+    }
+  ],
+  "missing": [
+    "cb4dc5d6-df44-519d-82b4-64833a13304e",
+    "eb9c551a-dd29-5454-9a55-8b58a2bb432d",
+    "a68fa7e1-b701-5c7b-95ae-cfc46850614f",
+    "3368bb8c-eaf7-5c8f-9e50-aa86c3eb36a1",
+    "b1e3505a-359e-5122-bf42-32b1cb49a174",
+    "d2abfee2-2412-5630-9af8-a858116b6759",
+    "de78b082-d9b1-5234-8bb9-d7f7543294db",
+    "a2a9d777-2237-50c2-af89-a617b88c5bff",
+    "baceb638-55ee-5d78-8ff4-93dad7832914",
+    "5ebc33d1-1097-5ed4-b521-6b9a25d13eaf",
+    "45febe31-1b94-5648-a081-e335f82e81a4",
+    "c435f96e-0ce0-5603-ac22-c0984662eb98",
+    "6f01f238-622d-5a85-9a04-8bb5a7b9759d",
+    "1a3a3532-8fa1-5d33-917c-e99d441e1788",
+    "1705c7d2-e11d-570f-9a4a-d220d0600acd",
+    "1e66b782-4e74-5fd4-b36d-032991875522",
+    "10ade245-4c6a-552b-beae-5dc7af3b75bd",
+    "44eba80d-09ed-5e8c-a988-01e90c78ffd4",
+    "91802b60-96bf-5cb6-abef-d1c1a738ae6f",
+    "18902739-69fc-53c8-a9a7-6bf620c9008b"
+  ]
+}
