@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-APP82 Post-RC / 학교 순위·개인 백분위·스플래시·첫 홈 가이드: [구현·격리 검증·운영 승인 후보](app82-post-rc-ux-20261112.md).
+APP82 Post-RC / 학교 순위·개인 백분위·중앙 스플래시·첫 홈 가이드: [구현·iPhone 격리 검증·운영 승인 후보](app82-post-rc-ux-20261112.md).
 
 APP82 / 2026-11-13 릴리스 / 인증·온보딩·홈·Catalog 통합: [RC 소스·실기기 근거](app-release-rc-20261113.md) → [Owner 승인·main·IPA/AAB·서명·제출 전 인계](app82-store-handoff-20261113.md).
 

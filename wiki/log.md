@@ -1,3 +1,7 @@
+## 2026-11-12 — Post-RC 중앙 스플래시 정정·iPhone 격리 검증
+
+Owner 현행3/1 임계·Android 시스템 중앙 배치 예외 승인. 후속 시각 검수로 스플래시 그룹 상단1/3을 중앙으로 정정(20dp/navy+ 유지). [후속 검증](app82-post-rc-ux-20261112.md#owner-후속-정정iphone-실기기-검증): 관련32/렌더2·Analyze PASS, iPhone17ProMax/iOS27.0.1 격리6항목 PASS. 별도QA 앱으로 검증 후 제거, 기존1.0.2(82) 설치본 경로/버전·APP82 IPA/AAB 해시 보존. Android 실물·운영RPC/live E2E NOT TESTED. 운영 변경·main통합·신규 릴리스 빌드0. 신규RPC2 적용 승인은 별도 대기.
+
 ## 2026-11-12 — APP82 Post-RC UX 후보·격리 검증
 
 [학교/개인 순위·스플래시·홈 가이드](app82-post-rc-ux-20261112.md): main02977ef 기반 별도 브랜치, APP82 IPA/AAB 체크섬 보존. 운영 읽기에서 실제3/1임계 확인·유지, 새조회RPC2는 후보만 준비. 전체Flutter2580 PASS/8 SKIP·Analyze·Python33·신규격리SQL71/기존42·Android JVM2 PASS, 양OS Native 격리 검증. 기존 MY 테스트 harness/가이드 의미구조·초기로딩/심벌 투명여백 보완. 실물·운영 신조회/live E2E NOT TESTED. 운영DB/Auth/사용자/Provider/배포0, main/newrelease HOLD. 후속 승인 범위와 원복은 상세 문서.

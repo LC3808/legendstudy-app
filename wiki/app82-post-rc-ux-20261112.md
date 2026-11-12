@@ -11,7 +11,7 @@ LegendStudy 프로젝트 `stlhijzpjfgwwdgunlsd`의 실제 함수 정의를 확�
 |항목|실제 계약|이번 처리|
 |---|---|---|
 |학교 카드|`student_school_card()`, 이번 주 기록자3명 이상 시간/순위, 자기 학교만 인원 노출|기존 계약 보존|
-|학교 순위|`student_school_ranking(period,metric)`, 총/평균3명, 참여1명, 타 학교 인원NULL|지시서의 공개랭킹5명과 다름. Owner에게 즉시 보고/확인 요청|
+|학교 순위|`student_school_ranking(period,metric)`, 총/평균3명, 참여1명, 타 학교 인원NULL|지시서의 공개랭킹5명과 다름. 후속 Owner 회신으로 현행3/1 유지 확정|
 |추가 순위|TOP10·자기 학교·주변만 반환, 페이지 인자 없음|기존 결과에서 전체 목록을 추측하지 않고 별도 읽기 후보 필요|
 |순위권 밖|서버가 미충족 학교 목록을 반환하지 않음|학교 목록/인원을 client에서 역산하지 않음|
 |개인 요약|`my_study_summary()` → `student_private.study_summary`, 완료/동기화된 유효 구간 합계|기존 원본·중복 구간 제거·누적/기간 계약 재사용|
@@ -38,7 +38,7 @@ LegendStudy 프로젝트 `stlhijzpjfgwwdgunlsd`의 실제 함수 정의를 확�
 |더 보기·순위권 밖|서버10개 단위 페이지, 공유 timestamp/revision, 중복 제거, 실패 시 기존 목록/재시도, 필터 변경 초기화|신규 조회 RPC 미적용이면 기존TOP10/주변 목록으로 복귀. 가짜 추가 목록 없음|
 |홈 카드|중복 ListTile padding 제거,16dp+border1, 제목18/w700, teal 순위20/w800|상세 기본값과 동일 provider. 미등록/오류면 숫자 없음, 미충족은 순위권 밖|
 |개인 공부시간|누적 지표 아래 서버 백분위,0기록/집계/실패/표본부족 상태|새 RPC 미적용은 백분위 숨김. 프런트 추정/다른 학생 기록 다운로드 없음|
-|스플래시|로고와 이름을 그룹으로 상단1/3,20dp 간격, navy+, 기존 Pretendard/심벌 보존|원본 PNG의 투명 여백만 Flutter 레이아웃에서 제외. 에셋 재제작 없음. 기존1.8초 cold-start 예산/게이트 보존|
+|스플래시|Owner 후속 정정으로 로고와 이름 그룹을 **화면 중앙**,20dp 간격, navy+, 기존 Pretendard/심벌 보존|상단1/3 후보는 철회. 원본 PNG 투명 여백만 레이아웃에서 제외, 기존1.8초 cold-start 예산/게이트 보존|
 |첫 홈 가이드|실제 NavigationDestination 좌표 강조·화살표·5단계 Next/Skip/Start, 작고 큰 화면/글자2배 스크롤|브랜드3페이지/계정 온보딩/하단 탭 구조와 MY 재진입 규칙 보존|
 
 ### 백분위 후보 계약
@@ -61,14 +61,15 @@ LegendStudy 프로젝트 `stlhijzpjfgwwdgunlsd`의 실제 함수 정의를 확�
 
 iOS LaunchScreen의 심벌 중심은 Flutter 그룹의 표준 크기 중심과 맞추고, 상단 안전 여백 제약을 추가했다. 흰 배경/기존 심벌/180dp 원본 렌더 크기를 유지한다. 스플래시 문자의 fallback 디버그 밑줄도 명시적으로 제거했다.
 
-[Android 공식 시스템 스플래시](https://developer.android.com/develop/ui/views/launch/splash-screen)는 OS 중앙 아이콘 배치이므로 Android 시작 테마는 보존한다. 공통 Flutter 화면은 양 OS 모두 상단1/3이다. **Android OS→Flutter 구간 위치 이동 예외는 Owner 확인 대상으로 남긴다.** 완전히 같은 시작 위치라고 주장하지 않는다. native→Flutter cold-start 전환/실물 Dynamic Island는 NOT TESTED다.
+[Android 공식 시스템 스플래시](https://developer.android.com/develop/ui/views/launch/splash-screen)는 OS 중앙 아이콘 배치이므로 Android 시작 테마는 보존한다. Owner는 Android 시스템 배치 예외를 승인한 뒤, **공통 Flutter 로고·이름 그룹도 화면 중앙으로 배치하도록 정정**했다. iOS LaunchScreen의 상단1/3 multiplier를 제거하고 정상 글자 크기의 Flutter 심벌 중심에 맞춘다. OS의 단일 아이콘과 Flutter의 아이콘+이름 그룹은 구성 자체가 다르므로 픽셀 단위 동일 전환이라고 주장하지 않는다. native→Flutter cold-start 전환은 아래 실기기 검증 범위와 구분한다.
 
 ## 검증
 
 |검사|상태|근거|
 |---|---|---|
 |최종 Flutter Analyze|DONE / PASS|No issues found|
-|전체 Flutter 자동 회귀|DONE / PASS|2,580 PASS / 8 SKIP / 0 FAIL. 기존2,557에 신규23. 기존 SKIP8 유지|
+|전체 Flutter 자동 회귀|DONE / PASS — 중앙 배치 정정 전|2,580 PASS / 8 SKIP / 0 FAIL. 기존2,557에 신규23. 기존 SKIP8 유지|
+|중앙 배치 후 관련 자동 회귀|DONE / PASS|Post-RC·brand frame·bootstrap·identity32 PASS, 320/440폭 중앙 렌더2 PASS. 전체 회귀를 다시 실행했다고 기록하지 않음|
 |신규 화면·상태|DONE / PASS|기본/필터/페이지/동률/개인정보/재시도/이전 학교 늦은 응답/백분위 상태/가이드1회/320·440폭·글자2배/스플래시|
 |Python 기존 배포설정·자료 동기화|DONE / PASS|33 tests|
 |신규 RPC 격리 PostgreSQL17|DONE / PASS|71 SQL checks+권한/3·1임계/동률/스냅샷/구간중복/표본/원복 assertions|
@@ -76,13 +77,14 @@ iOS LaunchScreen의 심벌 중심은 Flutter 그룹의 표준 크기 중심과 �
 |Android JVM 집중 모드|DONE / PASS|Debug unit2, 실패0. 제품 Kotlin 변경0|
 |iOS 시뮬레이터 Native|DONE / PASS|전용iPhone17Pro/iOS26.5, 운영 호출0, 스플래시/가이드5단계/홈/10→20개/백분위/재진입|
 |Android 에뮬레이터 Native|DONE / PASS|기존LS_phone AVD read-only, 운영 호출0, 동일6시나리오|
-|실제 iPhone·Android|NOT TESTED|iPhone17ProMax 연결불가, 실물Android 미연결. 연결 요청 상태이며 설치 앱/데이터 변경0|
+|실제 iPhone17ProMax|DONE / PASS — 격리 화면6항목|iOS27.0.1, 별도 식별자 Profile 앱. 중앙 스플래시/가이드5단계/홈/10→20개/백분위/재진입. 운영 서비스 E2E와 구분|
+|실제 Android|NOT TESTED|연결 기기0. 중앙 배치 변경 전 에뮬레이터 근거 및 변경 후 공통 위젯 테스트와 구분|
 |운영 신규 RPC·실계정 E2E·부하|NOT TESTED|후속 운영 적용 승인 필요. 가상 fixture 통과를 운영 PASS로 쓰지 않음|
-|새 릴리스 빌드/스토어|NOT TESTED / HOLD|디버그 격리 빌드만 사용, 기존APP82 IPA/AAB 보존. main merge/Push0, 업로드/제출0|
+|새 릴리스 빌드/스토어|NOT TESTED / HOLD|Debug/Profile 격리 검증 앱만 사용, 기존APP82 IPA/AAB 보존. main merge/Push0, 업로드/제출0|
 
 초기 실패는 숨기지 않는다: 전체 테스트1건은 NavigationShell의 Provider 의존성 추가에 맞춰 MY 탭 테스트 harness에 ProviderScope를 추가하여 해결(기존 검증문 유지). 가이드 접근성 `explicitChildNodes`·초기 Auth loading 경합을 수정했다. Android 최초 Native smoke는 테스트 스크린샷 Surface 중복 전환으로 실패하여 1회 전환으로 수정. Android release JVM 시도는 동시 integration 플러그인 generated 등록과 release 의존성 불일치로 실패했으며 최종 동일 Kotlin 테스트를 Debug 구성에서 통과했다. iOS 초기 캡처는 이미지 디코딩 전 프레임을 수집하여 precache/네이티브 프레임 대기 후 정상 심벌·탭 그림을 다시 확인했다. 손상된 예전Brand AVD 대신 기존LS_phone을 read-only 실행했다. 이 실패들은 운영/제품 데이터 변경으로 우회하지 않았다.
 
-[검증 영수증](assets/app82-post-rc-ux-20261112/validation.json). 아래 화면은 **격리 테스트 데이터**이며 실회원·실기기 스크린샷이 아니다.
+[최초 검증 영수증](assets/app82-post-rc-ux-20261112/validation.json). 아래 최초 화면은 **격리 테스트 데이터**이며 실회원·실기기 스크린샷이 아니다. 최초 iOS/Android 스플래시 캡처는 철회된 상단1/3 배치의 역사적 근거이며, 현재 배치는 아래 후속 실기기 캡처를 따른다.
 
 - [iOS 메뉴 가이드](assets/app82-post-rc-ux-20261112/ios-guide.png)
 - [iOS 홈 카드](assets/app82-post-rc-ux-20261112/ios-home.png)
@@ -94,6 +96,25 @@ iOS LaunchScreen의 심벌 중심은 Flutter 그룹의 표준 크기 중심과 �
 - [Android 스플래시](assets/app82-post-rc-ux-20261112/android-splash.png)
 - [작은 화면·글자2배 가이드](assets/app82-post-rc-ux-20261112/guide-320-2x.png)
 - [순위 기본 화면](assets/app82-post-rc-ux-20261112/ranking-360.png)
+
+## Owner 후속 정정·iPhone 실기기 검증
+
+Owner는 현행3/1 임계·Android 시스템 중앙 배치 예외를 승인했고, 이어 스플래시 로고·이름 그룹도 화면 중앙으로 바꾸도록 정정했다. 기존20dp 간격과 남색+는 유지했다. 중앙 배치 관련32 tests·320/440폭 렌더2·최종 Analyze PASS. 최초 전체2,580 PASS는 정정 전 근거로 보존한다.
+
+iPhone17ProMax/iOS27.0.1에서 실제 제품 위젯과 격리 provider fixture로 Native6항목을 실행했다. 스플래시·가이드5단계·홈·10→20개 더보기·백분위·가이드 재진입 미노출 PASS. 데이터는 합성 fixture이며 실계정/운영 신조회/공부기록 저장/로그인 검증이 아니다. 실물 Android는 연결되지 않았다. 시스템 시작 화면에서 Flutter로 넘어가는 실제 cold-start 전환은 별도 NOT TESTED다.
+
+기존 설치 앱 `com.legendstudy.app` 1.0.2(82)을 보존하기 위해 `com.legendstudy.app.postrcqa` / **LS PostRC QA** 1.0.3(82) 별도 앱을 사용했다. 이82는 격리 패키지의 메타데이터이며 새 스토어 빌드 번호가 아니다. 기존 와일드카드 개발 프로필을 재사용했고 Apple 계정/운영 bundle 설정은 바꾸지 않았다. 격리 복사본에서만 URL scheme과 Auth entitlement를 제거했으며 제품 Dart/LaunchScreen 소스 동일성을 해시 대조했다.
+
+최초 Xcode 수동 서명은 관리형 프로필과의 설정 충돌로 실패했다. 별도 앱을 no-codesign 컴파일 후 기존 유효 프로필로 서명해 해결했다. Debug는 LLDB 연결 대기로 중단, Profile AOT 실행으로 검증 완료했다. 최초 관련 테스트 명령의 존재하지 않는 파일명1건을 실제 brand 테스트 파일로 바로잡아 최종32 PASS를 확인했다. iPhone 캡처의 전환 중간 프레임은 실제 합성 대기500ms를 테스트에 추가해 다시 촬영/확인했다. 테스트 종료 후 driver의 앱 종료 실패 메시지가 있어 해당 QA 앱만 제거하고 `include-all-apps` 조회로 제거를 확인했다. 기존 앱 식별자·버전·bundle 경로와 기존 APP82 IPA/AAB SHA-256이 전후 동일하다. 기존 사용자 데이터 접근/변경0.
+
+[후속 검증 영수증·소스/로그 해시](assets/app82-post-rc-ux-20261112/physical-validation.json).
+
+- [현재 중앙 스플래시 — iPhone 실기기](assets/app82-post-rc-ux-20261112/iphone-physical-splash.png)
+- [메뉴 가이드 — iPhone 격리 화면](assets/app82-post-rc-ux-20261112/iphone-physical-guide.png)
+- [홈 카드 — iPhone 격리 화면](assets/app82-post-rc-ux-20261112/iphone-physical-home.png)
+- [학교 순위 — iPhone 격리 화면](assets/app82-post-rc-ux-20261112/iphone-physical-ranking.png)
+- [개인 백분위 — iPhone 격리 화면](assets/app82-post-rc-ux-20261112/iphone-physical-percentile.png)
+- [320폭 중앙 배치](assets/app82-post-rc-ux-20261112/center-splash-320.png) · [440폭 중앙 배치](assets/app82-post-rc-ux-20261112/center-splash-440.png)
 
 ## 수정 파일
 
@@ -107,12 +128,12 @@ iOS LaunchScreen의 심벌 중심은 Flutter 그룹의 표준 크기 중심과 �
 
 ## 운영 승인·릴리스 게이트
 
-로컬 구현 및 격리 검증은 완료한 후보로 보존한다. 전체 제품 출시 준비는 **PARTIAL**: 새 조회 함수 운영 적용과 실기기/live 서비스 확인이 남았다.
+로컬 구현 및 iPhone 격리 검증은 완료한 후보로 보존한다. 전체 제품 출시 준비는 **PARTIAL**: 새 조회 함수 운영 적용, Android 실물 및 live 서비스 확인이 남았다.
 
 Owner 최종 판단 항목:
-1. 현재 운영 총/평균3명·참여1명 기준 보존(5명 변경은 미포함).
+1. **승인 완료**: 현재 운영 총/평균3명·참여1명 기준 보존(5명 변경은 미포함).
 2. additive 조회 RPC2개 적용: 위 최소20/동률 상한 백분위·masked 순위권 밖/스냅샷 계약. 원복은 두 함수만 제거.
-3. Android OS 중앙 시작 화면 예외 허용 여부.
+3. **승인 완료**: Android OS 중앙 시작 화면 예외 허용.
 4. 적용 후 실계정 읽기 전용/실기기 확인, 그 다음 main 통합·새 빌드 번호 릴리스 후보 승인.
 
 지금 기존APP82 배포 바이너리를 교체하거나 main을 변경하지 않는다. 인증·온보딩 저장·자료/PDF·LAB·Credit·학습 기록·기존 회원 데이터 변경0. [기존 릴리스 승인](decisions.md#2026-11-12--app82-릴리스-승인검수-면제기존-회원-영향-수용)과 [이번 후속 결정](decisions.md#2026-11-12--app82-post-rc-학습홈-ux-개선)을 구분한다.

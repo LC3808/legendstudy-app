@@ -722,7 +722,7 @@ void main() {
     expect(closed, true);
   });
   for (final size in [const Size(320, 568), const Size(440, 956)]) {
-    testWidgets('splash lockup upper third/navy plus/safe area ${size.width}', (
+    testWidgets('splash lockup centred/navy plus/safe area ${size.width}', (
       t,
     ) async {
       screen(t, width: size.width, height: size.height);
@@ -736,7 +736,7 @@ void main() {
       );
       expect(
         (t.getTopLeft(symbol).dy + t.getBottomLeft(word).dy) / 2,
-        closeTo(size.height / 3, 1),
+        closeTo(size.height / 2, 1),
       );
       expect(t.widget<BrandWordmark>(word).plusColor, BrandWordmark.brandNavy);
       expect(t.takeException(), isNull);

@@ -113,7 +113,7 @@ class _BrandGateState extends State<BrandGate> {
   }
 }
 
-/// The symbol and wordmark form one responsive lockup. Native iOS uses the
+/// The symbol and wordmark form one centred responsive lockup. Native iOS uses the
 /// same symbol centre at normal text scale; Android's OS-owned launch phase
 /// retains its required centred icon, then hands off to this shared frame.
 class BrandSplashFrame extends StatelessWidget {
@@ -174,7 +174,7 @@ class _BrandPosition extends SingleChildLayoutDelegate {
     );
     return Offset(
       (size.width - childSize.width) / 2,
-      (size.height / 3 - childSize.height / 2).clamp(minTop, maxTop),
+      ((size.height - childSize.height) / 2).clamp(minTop, maxTop),
     );
   }
 

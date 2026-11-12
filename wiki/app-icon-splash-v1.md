@@ -1,6 +1,6 @@
 # App Icon & Splash — v1 (Claude UI/UX Lead)
 
-2026-11-12 후속 후보: [APP82 Post-RC 스플래시](app82-post-rc-ux-20261112.md#플랫폼-시작-화면-차이). 심벌/폰트 보존, 그룹 상단1/3·20dp·navy+로 개선. Android OS 중앙배치 예외·실물 cold-start 검수는 남아 있다. 아래는 기존 APP82에 포함된 이력이며 새 릴리스는 미승인.
+2026-11-12 후속 후보: [APP82 Post-RC 스플래시](app82-post-rc-ux-20261112.md#플랫폼-시작-화면-차이). Owner 후속 정정으로 상단1/3을 철회하고 **그룹 중앙·20dp·navy+**를 적용한다. Android OS 중앙배치 예외 승인, iPhone17ProMax 격리 화면 검증 PASS. OS→Flutter 실제 cold-start 전환 검수는 별도 미완료다. 아래는 기존 APP82에 포함된 이력이며 새 릴리스는 미승인.
 
 2026-09-29 · **IMPLEMENTED (Owner-approved) — pending device screenshot QA.** No
 new logo/symbol/color; no app version/build change; no Store submission. The

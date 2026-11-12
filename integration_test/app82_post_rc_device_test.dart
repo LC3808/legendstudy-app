@@ -31,6 +31,12 @@ void main() {
       // Allow the final animation/image frame to reach the native compositor.
       await t.pump(const Duration(milliseconds: 350));
       await t.pumpAndSettle();
+      // A physical iPhone may still be presenting a previous layer transaction
+      // after the test clock settles (notably when removing the guide overlay).
+      await t.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 500)),
+      );
+      await t.pump();
       if (Platform.isAndroid && !surfaceConverted) {
         await binding.convertFlutterSurfaceToImage();
         surfaceConverted = true;

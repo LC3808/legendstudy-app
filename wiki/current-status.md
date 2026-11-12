@@ -1,6 +1,6 @@
 # Current Status
 
-[APP82 Post-RC UX 후보](app82-post-rc-ux-20261112.md): 별도 브랜치에서 학교 all/total·홈 순위·백분위·스플래시·첫 홈 가이드 구현. 전체2580 PASS/8 SKIP, Analyze·Python33·격리SQL71/기존42·Android JVM2 PASS. 양 OS 시뮬레이터/에뮬레이터 격리 Native PASS; 실물·운영RPC/live E2E NOT TESTED. 실제 운영임계3/1 유지(지시서5와 차이), 신규읽기RPC2/최소표본20·Android OS 중앙배치 예외 Owner 판단 대기. 운영 변경0/main통합·새릴리스 HOLD, 기존APP82 바이너리 보존.
+[APP82 Post-RC UX 후보](app82-post-rc-ux-20261112.md): 학교 all/total·홈 순위·백분위·첫 홈 가이드 구현. 최초 전체2580 PASS/8 SKIP, Analyze·Python33·격리SQL71/기존42·Android JVM2 PASS. Owner 현행3/1임계·Android OS 중앙배치 승인, 스플래시 그룹은 후속 지시로 중앙 복귀. 후속32/렌더2·Analyze PASS, iPhone17ProMax 별도앱 격리6항목 PASS. 기존 설치본·APP82 산출물 보존. Android 실물·운영RPC/live E2E NOT TESTED; 신규RPC2 승인 대기. 운영 변경0/main통합·새릴리스 HOLD.
 
 [APP82 릴리스 승인·main Push·빌드 완료](app82-store-handoff-20261113.md): 최신main 보존 fast-forward/원격 Push 완료. 1.0.3(82) 배포 IPA·서명 AAB 생성·버전/서명/운영 연결 설정 확인. 통합 후2557 PASS/8 SKIP/0 FAIL·Analyze·Python29·Android JVM2 PASS. 기존 [RC 실기기 근거](app-release-rc-20261113.md) 유지. 추가 소셜 로그인/논술 실사용 검증 WAIVED, marker 없는46개 회원 재노출 ACCEPTED(보호/backfill 없음). 운영 DB/RPC/Auth·회원 데이터·평가 엔진 변경0. 스토어 업로드/제출0, 새 배포 바이너리 설치·Play 업데이트 NOT TESTED. Owner 제출 전 인계.
 
