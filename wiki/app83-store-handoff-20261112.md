@@ -7,7 +7,7 @@ Owner가 빠른 스토어 신청 진행을 요청해 기존 빌드 전용 인계
 - **Android 서버 수락 확인:** 기존 LegendStudy Play Console 앱에 `legendstudy-1.0.3-83.aab`, **83 (1.0.3)** 표시. API24+/target36, ReTrace·native symbols 첨부 확인. 출시 검토 화면에서 지원 제외/추가 기기 모두0, 신규 설치24.7MB·업데이트3.28MB 표시. 업로드는 Owner 수행이다.
 - **심사 전송 요청 완료:** 한국어 출시 노트를 저장하고 변경사항1개(프로덕션83)를 전송했다. 18:08 KST 기록 시점 [게시 개요](https://play.google.com/console/u/6/developers/6807727077532562397/app/4972317086113621808/publishing)에 **검토 중인 변경사항 → 83 (1.0.3) / 전체 출시 시작** 표시를 확인했다.
 - **자동 검사 진행 중:** 화면은 최대14분 남음과 검사 성공 후 심사 전송을 안내했다. 자동 검사 통과·심사 승인·실제 공개는 아직 확인하지 않았으며 완료로 기록하지 않는다. 관리형 게시 사용 중지, 기존 대상 국가 전체·출시율100%를 유지했다. 심사 승인 후 자동 전체 출시 설정이다.
-- **iOS:** Owner가 Transporter 업로드 완료를 보고했고 App Store Connect1.0.3 제출 준비 화면과 업데이트 설명을 준비했다. 이후 Owner 직접 진행 지시에 따라 조작을 중단했다. 빌드83 선택·심사 제출·승인·실제 공개 결과는 **NOT TESTED / Owner 진행**이다.
+- **iOS 심사 신청 완료 — Owner 보고:** Transporter 업로드 후 Owner가 직접 제출을 진행했고, 2026-11-12 “ios도 신청완료”로 완료를 확인했다. Codex가 제출 완료 화면을 별도 조회한 것은 아니므로 **Owner 확인**으로 기록한다. 빌드83 선택 화면의 독립 검증·심사 승인·실제 공개 결과는 **NOT TESTED**이며 제출 완료와 구분한다.
 - 제품 소스·바이너리 재빌드, 운영 DB/RPC/Auth/WEB, 사용자 데이터 변경0. 최종 스토어 바이너리 실기기 검증은 기존 **NOT TESTED**를 유지한다.
 
 제출한 한국어 출시 노트:
@@ -51,7 +51,7 @@ Owner는 APP82 후속과 중앙 스플래시 `6962c0f`의 전체 검증·main �
 |최종 IPA/AAB 설치·실기기|**NOT TESTED** — 최신 Owner 빌드 전용 인계 지시, 설치본 보존|
 |Android 업로드·서버 수락|Owner 업로드, Console83(1.0.3) 수락 확인|
 |Android 심사 전송|요청 완료 / Google 자동 검사 진행 중 / 승인·공개 미확인|
-|iOS 스토어 제출|Owner 업로드 완료 보고 / 심사·실제 업데이트 NOT TESTED|
+|iOS 스토어 제출|Owner 심사 신청 완료 확인 / 승인·실제 업데이트 NOT TESTED|
 
 [검증 영수증·SKIP8·로그/산출물 해시](assets/app83-store-handoff-20261112/release-validation.json). 이전 `6962c0f`의 iPhone17ProMax 격리6항목 PASS를 최종 배포 바이너리 설치 PASS로 바꾸지 않는다. 공개 버전은 Apple 공식 조회에서1.0.2였으며, 미공개 빌드83 점유 여부/서버 수락은 Owner 업로드 단계에서 확인한다.
 
@@ -64,7 +64,7 @@ Owner는 APP82 후속과 중앙 스플래시 `6962c0f`의 전체 검증·main �
 |`legendstudy-1.0.3-83.ipa`|1.0.3 / 83|34459315|`f598f46e5df50f0654b54070a12acfe38fe4ee1f376ae0032311b0a41905c97e`|
 |`legendstudy-1.0.3-83.aab`|1.0.3 / 83|101852736|`7396b2c0ca55247c593b97c9bd894f954690a52fc8a85fc9b43419a5374b67fe`|
 
-같은 폴더에 `SHA256SUMS`, `README.txt`, `Runner.xcarchive`/dSYM, export 설정/결과를 보관한다. Owner가 IPA/AAB 업로드를 완료했다고 보고했다. Android는 Codex가 Console83 수락 확인과 심사 전송 요청을 완료했고, iOS는 Owner가 App Store Connect에서 계속 진행한다.
+같은 폴더에 `SHA256SUMS`, `README.txt`, `Runner.xcarchive`/dSYM, export 설정/결과를 보관한다. Owner가 IPA/AAB 업로드를 완료했다고 보고했다. Android는 Codex가 Console83 수락 확인과 심사 전송 요청을 완료했고, iOS는 Owner가 App Store Connect 심사 신청 완료를 확인했다.
 
 - iOS bundle `com.legendstudy.app`, iOS15+, SDK27.2, Distribution profile/Apple Sign in/Google URL/복구 scheme 확인. `get-task-allow=false`, codesign deep/strict PASS. archive와 IPA App.framework UUID 일치, privacy plist26개 정상.
 - Android package 동일, minSDK24/targetSDK36, debuggable=false. APP82와 같은 업로드 인증서, 권한 변화0/Billing 유지/AD_ID 없음. arm64/x86_64 ELF12개 LOAD alignment≥16KB. 실제 Play split APK 검증과 구분한다.
