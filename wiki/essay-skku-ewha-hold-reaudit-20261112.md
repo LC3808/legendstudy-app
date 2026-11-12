@@ -104,3 +104,11 @@
 [S7]: </Users/woojinchang/development/legendstudy-materials/essay-2026-10/이화여대/2027학년도 이화여대 모의논술_자연계열1 해설,답안.pdf>
 [P8]: </Users/woojinchang/development/legendstudy-materials/essay-2026-10/이화여대/2027학년도 이화여대 모의논술_자연계열2 문제.pdf>
 [S8]: </Users/woojinchang/development/legendstudy-materials/essay-2026-10/이화여대/2027학년도 이화여대 모의논술_자연계열2 해설,답안.pdf>
+
+## Owner 연결 재개 지시 및 구현 중 상태
+
+후속 Owner 지시는 공식 평가 설명을 근거로 서비스용 평가 요소를 구조화하도록 승인했다. 앞선 의미 분류 미확정을 추가 Owner 승인 요건으로 반복하지 않는다. 공식 원문과 서비스 파생 요소를 분리하고, 원문에 없는 배점은 공식값으로 넣지 않는다.
+
+24문항의 출제의도 구간을 예시답안 앞에서 종료하는 기존 geometry 추출기로 분리했다. 원본 SHA와 Registry ID를 유지하며 `.local/ewha-mock-service-20261112/`에 비공개 원문을 저장했다. [재개 매핑](../supabase/candidates/ewha_essay_20261112/reaudit_20261112/service-resume.json)은 Math12/Essay12 대상, official_weight NULL, 파생 요소와 공식 규칙 구분을 기록한다. 이는 연결 완료가 아니다. 문항별 서비스 요소 작성, 기존 package 조립, Worker/WEB/APP 계약 검증, 운영 사전검사·원복·공개는 아직 미완료다. 24 ID 유일성·원본 SHA·추출 완료 검사 PASS, 실제 제출·결과·재첨삭 NOT TESTED. 이번 운영 변경0, 추가공개0.
+
+성균관은 모의6와2026수리9 각각 기존 HOLD 유지. 이전 본문의 Owner 결정 자료를 재사용한다.

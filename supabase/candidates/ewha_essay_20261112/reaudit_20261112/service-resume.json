@@ -1,0 +1,365 @@
+{
+  "owner_direction": "2026-11-12: service-derived evaluation elements allowed with official provenance kept separate; publish sufficiently supported questions",
+  "questions": [
+    {
+      "question_id": "94c31452-c9b0-556a-8913-195a75d2e8e4",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:1",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+      "intent_pages": [
+        2,
+        3
+      ],
+      "extraction_sha256": "737b3ccad3b7a2192cb79aa18a44c817ba8504e9bdcf51b1db2b927042c91dc3",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "2c872e03-d340-55fc-b9bc-af9eed8036f9",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:2",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+      "intent_pages": [
+        4,
+        5
+      ],
+      "extraction_sha256": "2ab0f83b0d82089555bca51ea57a13c46e88678938f50cb01e99d16b2a51024c",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "00f573ab-8f33-5d8f-adff-e52a1ec7b109",
+      "registry_id": "source:7f6db8eab2da997f47f1b49b8a665486d3273b719f9a31f415837fe800bc5d2b:3",
+      "exam_id": "759dc80b-540b-535c-8ca5-e8f8c1bceb91",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0fc74bf801f1382d3e8c2ee73187e7d4c8d24a8aa0ba5643a6d4f68c73a381af",
+      "intent_pages": [
+        6,
+        7,
+        8
+      ],
+      "extraction_sha256": "e6fba8991e6a3c064d1915471f3ab1867799f4595999e605a8255961df528a72",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "62b7a0db-99fe-5689-9276-a67d3c8ab3bc",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:1",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+      "intent_pages": [
+        2,
+        3
+      ],
+      "extraction_sha256": "4a161ef7d93604a6630e5b7e13aec2c816bc1a3e7984ea46a0d1608b2ae72b80",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "af222aca-ad72-5c76-b499-2378b11d0b9c",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:2",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+      "intent_pages": [
+        4,
+        5
+      ],
+      "extraction_sha256": "3701ab9708d8824e0a670bbd20ab203a14d30f94938029008a62721c6e5582a5",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "f277d7fe-a76b-531b-aab4-49b025d98dcb",
+      "registry_id": "source:c4aa2c136a7e829a035ea5067f34f4b1d0dccf3f1f72339f6326994b3117819b:3",
+      "exam_id": "be108151-16e2-556e-b645-ace485c48624",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "32b36c6543be3bbf3228de4498084ca392d6129080d58614acaff562da1531a9",
+      "intent_pages": [
+        6,
+        7
+      ],
+      "extraction_sha256": "20db63d6e71b7e3c01566f64c8c86d44c0da5adc214c13f978e2156259e41b0e",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "worker_target": "Math v1",
+      "official_source_sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+      "intent_pages": [
+        1,
+        2,
+        3
+      ],
+      "extraction_sha256": "b49669ecb29129912a3270c86f4555d6569a1398988328f7cebe4f97a68a61a1",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "4a432fdf-d601-5230-b045-d2123c614773",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "worker_target": "Math v1",
+      "official_source_sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+      "intent_pages": [
+        4,
+        5,
+        6
+      ],
+      "extraction_sha256": "00b6fc0a0f92ddec8da6d03b0152279a933e36d6311358de87b60ddfab792f20",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "e7362b80-3f05-5d84-8768-826ab7136233",
+      "registry_id": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+      "exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+      "worker_target": "Math v1",
+      "official_source_sha256": "d7851f74db8a18c1bfaea8fc7b0585a5ad43a3dca84a348f490bf804c7f9d020",
+      "intent_pages": [
+        7,
+        8,
+        9
+      ],
+      "extraction_sha256": "7c43c16cca36431b535c1f815a8b77c84ffd79cc4b24519798ea7a2c1daa23d8",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "7a712a56-2c56-593d-8c6c-740f8b265cb3",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:1",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "worker_target": "Math v1",
+      "official_source_sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+      "intent_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "extraction_sha256": "7635aa6cbf8859b71a7006b654b974a7ca5926411d516055ae7ca39aada7ca54",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "086eab54-62a6-5b20-969b-d45410e37a39",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:2",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "worker_target": "Math v1",
+      "official_source_sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+      "intent_pages": [
+        5,
+        6,
+        7
+      ],
+      "extraction_sha256": "2f54aa413c7d2e4fd6415544eb5c2c1e9ef65f660b9636a4c57f9fd0c560548e",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "a03c2ee5-d6a9-5aff-90ba-c53562dd0b29",
+      "registry_id": "source:0f48381e822a6946a65493422f8c893dde77d9142534f76aff681bb21375a62f:3",
+      "exam_id": "b459d8b0-db7f-5198-a8ce-dc25fd799729",
+      "worker_target": "Math v1",
+      "official_source_sha256": "837dc85d0dad41b2906ef7907729d807e25b61180633cba371b3445ff3aef0d5",
+      "intent_pages": [
+        8,
+        9,
+        10
+      ],
+      "extraction_sha256": "17d9dc78f1f7c644ef527b0bbfe16ee284ed04fe34f052fe019f601da6260d17",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "d1dd1f8b-d467-5423-b837-9ffa9bc2db44",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:1",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+      "intent_pages": [
+        1
+      ],
+      "extraction_sha256": "e8edf41bcdcda475e1b10abeceed97a7d3d90381be453b973c0902f3cb00af7b",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "013c4f5b-6f34-507d-867b-ab83bd5eb15a",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:2",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+      "intent_pages": [
+        4
+      ],
+      "extraction_sha256": "f7fca50cc162577df05fc99deb9e4808815f6b1ff08e771b5561c1b484e006d9",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "7b7a4c73-b85c-5e66-a25a-7110a6a5ee21",
+      "registry_id": "source:63d180d22b43439f39c5362a95382b9edd82914c7c194da0b9324cfea9d40dec:3",
+      "exam_id": "24e1ae27-fb31-591a-b3fc-6f73e92a2564",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "0deae16c0da93b5e087b7c89051330eca4644bf8c48199c84d23108120c2ca54",
+      "intent_pages": [
+        6
+      ],
+      "extraction_sha256": "b3d7e16d9fdf9ba15fed7b87bd55b033c64994d03a3b7f4fc461889ef2e4b8af",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "c618b344-7e18-52c8-bc57-ee41c722d58e",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:1",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+      "intent_pages": [
+        1
+      ],
+      "extraction_sha256": "68dc68a3fe0d975d2b802ae5fc662d8bb2b35086fcaa4732aca102e303cfa659",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "c008580f-85ee-5149-96d7-ed316b107324",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:2",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+      "intent_pages": [
+        3
+      ],
+      "extraction_sha256": "b1cd62eaa19945d0fcf13e5221db0f3448aef0d47875bff9c9e61f252d2d25bf",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "11a0783b-c5b8-5bb8-b45c-b2268e4517cc",
+      "registry_id": "source:20c64e5ad34c68eb07f3fd6e33a9a98da9af2f1225a2f790270e5269fbdf0c65:3",
+      "exam_id": "7b20c77f-3e34-5b8d-9da9-26e976b14230",
+      "worker_target": "Essay 1.3",
+      "official_source_sha256": "caeb8b1d15404e63c033fb3f5e3bc14784efe767c65f299b3e8de4418d09a80d",
+      "intent_pages": [
+        5
+      ],
+      "extraction_sha256": "6595a265ed33fdcf4d5df6bc17a8b5db0c9dd709783bf4ccabb94380012c44ae",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "8b4f615f-98ab-592f-9762-4c9920036bc7",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:1",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "worker_target": "Math v1",
+      "official_source_sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+      "intent_pages": [
+        1
+      ],
+      "extraction_sha256": "15b112973319d4a97ab190c62665a44848e94e7935a1f5b6082aca7bd7998bda",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "09223a1e-ebab-5f67-b0cf-6730053c53da",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:2",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "worker_target": "Math v1",
+      "official_source_sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+      "intent_pages": [
+        4
+      ],
+      "extraction_sha256": "a047f0c8896b6288d12ebc542f7ea02288b7683747a333a3773a920b1ee84116",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "8290cd10-8235-5597-a9b0-e2d4ba7d886e",
+      "registry_id": "source:33c6978f3244396f0845b61482ade9d8805ebb21918efde9daa3d47c3c36e300:3",
+      "exam_id": "466a360a-5814-55cf-91cb-69c99ba2e081",
+      "worker_target": "Math v1",
+      "official_source_sha256": "bdde6323962f173228ee4a6dfb8a633e31d14d48356a20999b0e34499751ecb8",
+      "intent_pages": [
+        7
+      ],
+      "extraction_sha256": "0f203d574db3eb53ed6976287837064a8c15acfcbf4a10c00f641ab902116844",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "afe3a716-f643-5571-9b12-0227d3bb0297",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:1",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "worker_target": "Math v1",
+      "official_source_sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+      "intent_pages": [
+        1
+      ],
+      "extraction_sha256": "83a3c2021596f7ce1220924bca1292b5deda17215d878d693099eda3ff795d63",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "0496fa8f-cc1a-57a1-8daf-748e68c98f80",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:2",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "worker_target": "Math v1",
+      "official_source_sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+      "intent_pages": [
+        5
+      ],
+      "extraction_sha256": "126e6c7e9e54dbae0829fdc0ea5b27667f8d0f0c3fc867d3aa4568e5ad57dada",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    },
+    {
+      "question_id": "5536426a-fee4-5a28-b905-c7c169b7f7a0",
+      "registry_id": "source:eabd4209a8f8a8b1850ca629a7f6a5e6f9fa1baab4c9768c64004f7cfb47ccf5:3",
+      "exam_id": "7d0b2102-0239-5529-95ec-7d0e93d05ef8",
+      "worker_target": "Math v1",
+      "official_source_sha256": "294c5fdf3b7cb3b8ab20e0971e5f72d1c3e72ad31db93e519d15b9e8ebdb3df1",
+      "intent_pages": [
+        8
+      ],
+      "extraction_sha256": "3f6a32ad52bc8a4f1683030556e709a7b1fa406cb3cbbed60c2d5d8a017b08f4",
+      "official_weight": null,
+      "official_scoring_rule": false,
+      "service_elements_ready": false
+    }
+  ],
+  "extracted": 24,
+  "connected": 0,
+  "newly_published": 0,
+  "production_changes": 0
+}
