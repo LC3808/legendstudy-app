@@ -1,0 +1,9 @@
+{
+  "migration_version": "20261112053237",
+  "name": "kwangwoon_42_math_public_release",
+  "sql_sha256": "305329ae5c8f6e05fa286ddf0a5a9b986d7b77b057e9d37eba1ce4dfaedad871",
+  "sql_bytes": 1445541,
+  "transport": "Direct TLS PostgreSQL; exact verified file and migration history inserted in same transaction",
+  "prior_mcp_attempts": [],
+  "provider_calls": 0
+}

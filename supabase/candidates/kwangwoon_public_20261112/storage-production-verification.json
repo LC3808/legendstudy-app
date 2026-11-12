@@ -1,0 +1,32 @@
+{
+  "existing_policies_unchanged": 271,
+  "new_exact_file_policy": 1,
+  "role_checks": [
+    {
+      "account_class": "normal",
+      "files_visible": 21
+    },
+    {
+      "account_class": "anon",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    },
+    {
+      "account_class": "DELETION_PENDING",
+      "files_visible": 0
+    }
+  ],
+  "migration": [
+    {
+      "version": "20261112053152",
+      "name": "kwangwoon_21_official_problem_pdfs_read"
+    }
+  ]
+}

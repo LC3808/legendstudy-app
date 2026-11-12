@@ -1,0 +1,77 @@
+{
+  "status": "PUBLISHED",
+  "exams": 21,
+  "questions": 42,
+  "new_rows": 636,
+  "active_state_rows": 168,
+  "unpublished_target_questions": 0,
+  "new_holds": 0,
+  "prior_340_math_rows_exact": true,
+  "other_41_university_catalogs_exact": true,
+  "existing_17_kwangwoon_catalog_exams_preserved": true,
+  "final_kwangwoon_browse_exams": 37,
+  "official_problem_pdf_files": 21,
+  "pdf_pages": 78,
+  "existing_rls_policies_preserved": 271,
+  "new_exact_file_policy": 1,
+  "new_rpc": 0,
+  "existing_function_allowlists_changed": 3,
+  "credit_policy_unchanged": true,
+  "provider_calls": 0,
+  "production_test_submissions": 0,
+  "tests": {
+    "web_pass": 410,
+    "web_skip": 1,
+    "app_pass": 39,
+    "preflight": 158,
+    "postdraft": 199,
+    "activation": 126,
+    "isolated_worker_questions": 42,
+    "isolated_browse_universities": 42,
+    "storage_states": 6,
+    "rollback": "PASS",
+    "typecheck": "PASS",
+    "next_build": "PASS",
+    "functions_build": "PASS",
+    "eslint": "PASS",
+    "provider_calls": 0,
+    "logs_sha256": {
+      "web-tests": "653b24ad44a77898f5a58403e0ea635792e7de1af98fdfc18700af598cb8881d",
+      "flutter": "7993f39185d8a831f852f23ce01054dfc1c66fa8232f8351be0bd8e92d27a4d2",
+      "db-test": "effd362fec6ea5770bf052e023fa30f2e2bd82c10eb97e36578f62eabc1be54b",
+      "storage-test": "f57f1d56eade6eb13051656a254fe33381f8c40e5bb50da4a3bda2c63c264651",
+      "browse-test": "2f145f9d815c5bcde513b59262d9c23fb025f67c0debe2e7d516d8500d92a1dc",
+      "lint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "browser_ui": {
+    "status": "PARTIAL",
+    "detail": "실제 운영 도메인의 비로그인 브라우저에서 광운대 자연계열 21회차, 2027 모의 Q1·Q2의 정확한 Registry ID, 사진·수식 답안 입력, PDF 파일명·쪽수와 로그인 후 첨삭 안내를 확인했다. 문제 보기 클릭 후 이 브라우저에서 PDF 또는 새 탭은 확인되지 않았으므로 실제 PDF 렌더링은 NOT TESTED로 남긴다. 로그인·답안 저장·제출은 수행하지 않았다.",
+    "observed_url": "https://lab.legendstudy.com/essay-lab/universities/kwangwoon/",
+    "browser": "IAB",
+    "authenticated_pdf": "NOT TESTED",
+    "submission_results_rewrite": "NOT TESTED",
+    "provider_calls": 0
+  },
+  "iphone": "NOT TESTED",
+  "android": "NOT TESTED",
+  "ai_quality": "Owner integrated review pending",
+  "migration_storage": {
+    "version": "20261112053152",
+    "name": "kwangwoon_21_official_problem_pdfs_read"
+  },
+  "migration_math": {
+    "version": "20261112053237",
+    "name": "kwangwoon_42_math_public_release"
+  },
+  "migration_browse": {
+    "version": "20261112053243",
+    "name": "kwangwoon_42_browse_public_release"
+  },
+  "deployment": "df045831-8152-4d90-bd92-30f7847da1f9",
+  "deployed_web_sha": "f931f958359cd1d62eaa147450ba564ead2d713e",
+  "app_preflight_sha": "9a4e511",
+  "next_university": "Seoul Women",
+  "all_universities_complete": false,
+  "checked_at_kst": "2026-11-12T14:35:45.758954+09:00"
+}

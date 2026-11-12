@@ -1,7 +1,7 @@
 # 자연·수리 논술 대학별 순차 작업 — 최신 Owner 결정
 
 
-최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
+최신 Owner 기준은 **검증된 문항의 운영 연결·사용자 공개**다. AI 품질은 전체대학후Owner통합검수하며 다음대학진행조건이 아니다. [건국24](essay-konkuk-public-20261112.md),[경희7](essay-kyunghee-public-20261112.md),[서강11](essay-sogang-public-20261112.md),[숭실19](essay-soongsil-public-20261112.md),[숙명44](essay-sookmyung-public-20261112.md),[동국20](essay-dongguk-public-20261112.md), [광운42](essay-kwangwoon-public-20261112.md) 공개결과를 확인한다. 아래 TECH기준은 후속개발자료의 준비상태이며 공개완료를 뜻하지 않는다. 한대학씩진행,Provider반복호출·AI품질대행·엔진변경금지.
 
 ## 확정 순서와 현재 상태
 
@@ -16,8 +16,8 @@
 |5|서강대학교|9시험11 PUBLISHED|DONE|
 |6|숭실대학교|5시험19 PUBLISHED / 2024Q2 HOLD1|공개대상DONE,HOLD유지|
 |7|숙명여자대학교|16시험44 PUBLISHED / 기존6 보존|Owner확인DONE|
-|8|동국대학교|7시험20 PUBLISHED / 2026모의Q1 HOLD1|PARTIAL;공식수정근거보완,다음광운|
-|9|광운대학교|42 TECH READY|다음순서:공식PDF·권한·운영범위재검증후공개연결|
+|8|동국대학교|7시험20 PUBLISHED / 2026모의Q1 HOLD1|공개 작업 종료; Q1 공식 수정 근거 보완 대기|
+|9|광운대학교|[21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md)|DONE,다음서울여대|
 |10|서울여자대학교|수리3 TECH READY / 과학6 NOT READY|36행 운영 승인 별도·과학 기존 경로 결합 미완료|
 
 후순위 대학의 기존 산출물은 폐기하거나 다시 만들지 않는다. 실제 차례에 기존 운영/Registry/공식 근거를 대조해 미완료만 처리한다. 현재 뒤 대학 개발·운영 적용은 진행하지 않는다.

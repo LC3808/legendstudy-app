@@ -36,7 +36,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 현재 한국항공7문항·106행 운영 비공개 DRAFT 적재 DONE([영수증·검증](essay-kau-draft-production-20261112.md)). 사전116/사후122 PASS,기존 데이터·함수·권한20개 snapshot 동일,HOLD5 유지. SERVICE READY 아님;다음은 한국항공 Owner 전용 검수 접근 제어 준비. 후순위 착수0,기완료4개교 재작업 제외.
+[자연·수리 대학별 순차 작업](essay-natural-sequential-order-20261112.md): 건국24·경희7·서강11·숭실19·숙명44·동국20·[광운42 PUBLISHED](essay-kwangwoon-public-20261112.md). 다음서울여대. 항공7 DRAFT 및문항별HOLD유지. 최신Owner공개지시와대학별영수증을기준으로인수,과거TECH상태를운영공개와구분한다.
 
 [이전 확장 감사와 범위 이력](essay-connection-owner-verification-20261111.md) · [공식 불일치·원문 보존·중앙 과학11 HOLD](essay-natural-expansion-20261111.md).
 
@@ -414,4 +414,4 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 - [동국7시험20문항 공개연결·2026모의Q1 공식수정 HOLD](essay-dongguk-public-20261112.md). 다음광운.
 
-- [광운21시험42문항 운영공개·검증](essay-kwangwoon-public-20261112.md). 다음서울여대.
+- [광운21시험42문항 PUBLISHED·검증](essay-kwangwoon-public-20261112.md). 다음서울여대.

@@ -103,3 +103,7 @@ Math265+Worker21=286행 DRAFT 후보는 미승인·미적용. DB429/WEB30(비대
 ## 동국 후속 운영 공개 결과
 
 2026-11-12 [동국20문항 PUBLISHED/1 HOLD](essay-dongguk-public-20261112.md). 위21 TECH READY는이전자료기준의기술계약기록이다. 공식수정HWP 확인후2026모의Q1을제외한273행만연결·공개했다.2025시행/2026학년도정합성PASS,기존승인PDF·Registry·기존320Math보존. 다음광운.
+
+## 광운 후속 운영 공개 결과
+
+[21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md).636행/기존후보PDF21파일78쪽/기존목록20시험숨김해제적용.위TECH/미적용은이전시점기록이다.운영158/199/126·WEB410/APP39 PASS,기존340문항보존. 다음서울여대.

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "migration_version": "20261112053243",
+  "migration_name": "kwangwoon_42_browse_public_release",
+  "checked_at_kst": "2026-11-12T14:32:41.542305+09:00",
+  "sql_sha256": "cb86f41e83b0c83255cb26d982064277fd2e4246016cf6a0d9171e369b753bf5",
+  "before_function_md5": "8f827314118d114578e23f8712fe1931",
+  "after_function_md5": "00331d6e407080fe8023460212526e0b",
+  "exclusions_removed": 20,
+  "remaining_exclusions": 16,
+  "roles": [
+    "anon",
+    "authenticated existing review account"
+  ],
+  "universities_checked": 42,
+  "other_41_universities_exact": true,
+  "old_kwangwoon_17_catalog_exams_exact": true,
+  "kwangwoon_catalog_exams": 37,
+  "new_exam_scope": 21,
+  "new_questions": 42,
+  "acl_owner_preserved": true,
+  "other_functions_owners_acls_exact": true,
+  "other_data_rls_fingerprint_groups": 19,
+  "provider_calls": 0,
+  "production_submissions": 0,
+  "rollback": "prepared and isolated rehearsal PASS; not executed in production"
+}

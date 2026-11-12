@@ -1,0 +1,9 @@
+{
+  "status": "PARTIAL",
+  "detail": "실제 운영 도메인의 비로그인 브라우저에서 광운대 자연계열 21회차, 2027 모의 Q1·Q2의 정확한 Registry ID, 사진·수식 답안 입력, PDF 파일명·쪽수와 로그인 후 첨삭 안내를 확인했다. 문제 보기 클릭 후 이 브라우저에서 PDF 또는 새 탭은 확인되지 않았으므로 실제 PDF 렌더링은 NOT TESTED로 남긴다. 로그인·답안 저장·제출은 수행하지 않았다.",
+  "observed_url": "https://lab.legendstudy.com/essay-lab/universities/kwangwoon/",
+  "browser": "IAB",
+  "authenticated_pdf": "NOT TESTED",
+  "submission_results_rewrite": "NOT TESTED",
+  "provider_calls": 0
+}

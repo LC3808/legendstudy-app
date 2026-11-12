@@ -1,0 +1,25 @@
+{
+  "web_pass": 410,
+  "web_skip": 1,
+  "app_pass": 39,
+  "preflight": 158,
+  "postdraft": 199,
+  "activation": 126,
+  "isolated_worker_questions": 42,
+  "isolated_browse_universities": 42,
+  "storage_states": 6,
+  "rollback": "PASS",
+  "typecheck": "PASS",
+  "next_build": "PASS",
+  "functions_build": "PASS",
+  "eslint": "PASS",
+  "provider_calls": 0,
+  "logs_sha256": {
+    "web-tests": "653b24ad44a77898f5a58403e0ea635792e7de1af98fdfc18700af598cb8881d",
+    "flutter": "7993f39185d8a831f852f23ce01054dfc1c66fa8232f8351be0bd8e92d27a4d2",
+    "db-test": "effd362fec6ea5770bf052e023fa30f2e2bd82c10eb97e36578f62eabc1be54b",
+    "storage-test": "f57f1d56eade6eb13051656a254fe33381f8c40e5bb50da4a3bda2c63c264651",
+    "browse-test": "2f145f9d815c5bcde513b59262d9c23fb025f67c0debe2e7d516d8500d92a1dc",
+    "lint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

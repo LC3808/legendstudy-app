@@ -1,0 +1,30 @@
+{
+  "checked_at_kst": "2026-11-12T14:32:37.724202+09:00",
+  "preflight_checks": 158,
+  "draft_postchecks": 199,
+  "activation_checks": 126,
+  "draft_preservation_groups": 20,
+  "post_activation_unchanged_groups": 19,
+  "changed_only_two_function_allowlists": true,
+  "existing_function_acl_preserved": "atomic activation checks",
+  "new_rows": 636,
+  "questions": 42,
+  "active_state_rows": 168,
+  "normal_user_math_catalog_count": 382,
+  "normal_user_new_questions": 42,
+  "normal_user_history_read": true,
+  "all_340_prior_math_catalog_rows_exact": true,
+  "hold_worker_math_rows": 0,
+  "browse_function_owner_acl_exact": true,
+  "browse_all_17_kwangwoon_exams_exact": true,
+  "new_production_submissions": 0,
+  "provider_calls": 0,
+  "migrations": [
+    {
+      "version": "20261112053237",
+      "name": "kwangwoon_42_math_public_release"
+    }
+  ],
+  "ui": "NOT TESTED",
+  "checkpoint": "Before separate approved browse visibility change; see browse-production-verification.json for final third-function result"
+}
