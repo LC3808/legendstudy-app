@@ -1,0 +1,650 @@
+{
+  "errors": [
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:23:28.878000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:25:28.835000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:27:28.850000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:29:28.825000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:30:28.837000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:31:29.046000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:33:28.996000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:34:28.980000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:36:28.888000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:38:28.915000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:40:29.058000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:41:28.943000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:43:28.978000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:44:29.175000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:46:28.825000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:47:28.816000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:49:28.846000",
+      "username": "supabase_admin"
+    },
+    {
+      "application": "postgres_exporter",
+      "connection": "::1:18927",
+      "pid": "2973075",
+      "query_id": "-8285757822602875730",
+      "session": "6af60420.2d5d93",
+      "sqlstate": "53400",
+      "timestamp": "2026-11-12T18:50:28.952000",
+      "username": "supabase_admin"
+    }
+  ],
+  "settings": [
+    {
+      "name": "block_size",
+      "setting": "8192",
+      "unit": null,
+      "source": "default"
+    },
+    {
+      "name": "pg_stat_statements.max",
+      "setting": "5000",
+      "unit": null,
+      "source": "default"
+    },
+    {
+      "name": "pg_stat_statements.track",
+      "setting": "top",
+      "unit": null,
+      "source": "default"
+    },
+    {
+      "name": "pg_stat_statements.track_utility",
+      "setting": "on",
+      "unit": null,
+      "source": "default"
+    },
+    {
+      "name": "temp_file_limit",
+      "setting": "-1",
+      "unit": "kB",
+      "source": "default"
+    },
+    {
+      "name": "work_mem",
+      "setting": "3500",
+      "unit": "kB",
+      "source": "configuration file"
+    }
+  ],
+  "stats_reset": [
+    {
+      "pg_postmaster_start_time": "2026-11-12 19:48:50.73311+00",
+      "stats_reset": "2026-11-12 19:48:50.664096+00"
+    }
+  ],
+  "edge_buckets": [
+    {
+      "bucket": "2026-11-12T18:00:00",
+      "max_ms": 2330,
+      "n": 9,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:00:00",
+      "max_ms": 1320,
+      "n": 10,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:00:00",
+      "max_ms": 4702,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:10:00",
+      "max_ms": 2914,
+      "n": 10,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:10:00",
+      "max_ms": 1397,
+      "n": 9,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:10:00",
+      "max_ms": 3674,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:20:00",
+      "max_ms": 4061,
+      "n": 10,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:20:00",
+      "max_ms": 2057,
+      "n": 10,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:20:00",
+      "max_ms": 2867,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:30:00",
+      "max_ms": 2838,
+      "n": 10,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:30:00",
+      "max_ms": 1693,
+      "n": 10,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:30:00",
+      "max_ms": 152,
+      "n": 1,
+      "path": "/functions/v1/delete-account",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:30:00",
+      "max_ms": 5815,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:40:00",
+      "max_ms": 4577,
+      "n": 9,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:40:00",
+      "max_ms": 2006,
+      "n": 10,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:40:00",
+      "max_ms": 3338,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:50:00",
+      "max_ms": 1048,
+      "n": 1,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:50:00",
+      "max_ms": 414,
+      "n": 1,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T18:50:00",
+      "max_ms": 1792,
+      "n": 1,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:40:00",
+      "max_ms": 1768,
+      "n": 1,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:40:00",
+      "max_ms": 229,
+      "n": 1,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:40:00",
+      "max_ms": 1539,
+      "n": 1,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:50:00",
+      "max_ms": 4094,
+      "n": 10,
+      "path": "/functions/v1/account-deletion-worker/dispatch",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:50:00",
+      "max_ms": 1053,
+      "n": 10,
+      "path": "/functions/v1/account-ops-sink/checkpoint",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:50:00",
+      "max_ms": 172,
+      "n": 2,
+      "path": "/functions/v1/delete-account",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:50:00",
+      "max_ms": 172,
+      "n": 17,
+      "path": "/functions/v1/neis",
+      "status": "200"
+    },
+    {
+      "bucket": "2026-11-12T19:50:00",
+      "max_ms": 4937,
+      "n": 10,
+      "path": "/functions/v1/process-feedback-notifications",
+      "status": "200"
+    }
+  ],
+  "cron": [
+    {
+      "jobid": 1,
+      "bucket": "2026-11-12 18:00:00+00",
+      "n": 51,
+      "min": "2026-11-12 18:00:00.026552+00",
+      "max": "2026-11-12 18:50:00.028993+00"
+    },
+    {
+      "jobid": 1,
+      "bucket": "2026-11-12 19:00:00+00",
+      "n": 11,
+      "min": "2026-11-12 19:49:00.184518+00",
+      "max": "2026-11-12 19:59:00.018834+00"
+    },
+    {
+      "jobid": 2,
+      "bucket": "2026-11-12 18:00:00+00",
+      "n": 51,
+      "min": "2026-11-12 18:00:00.022232+00",
+      "max": "2026-11-12 18:50:00.019048+00"
+    },
+    {
+      "jobid": 2,
+      "bucket": "2026-11-12 19:00:00+00",
+      "n": 11,
+      "min": "2026-11-12 19:49:00.182+00",
+      "max": "2026-11-12 19:59:00.017829+00"
+    }
+  ],
+  "cron_error_window": [
+    {
+      "jobid": 1,
+      "status": "succeeded",
+      "n": 28,
+      "min_pid": 2972346,
+      "max_pid": 2974973,
+      "max_seconds": "0.056743"
+    },
+    {
+      "jobid": 2,
+      "status": "succeeded",
+      "n": 28,
+      "min_pid": 2972345,
+      "max_pid": 2974972,
+      "max_seconds": "0.054471"
+    }
+  ],
+  "costs_after_restart": [
+    {
+      "queryid": "-5708723254081763768",
+      "role": "postgres",
+      "calls": 5,
+      "total_ms": "60558.75",
+      "mean_ms": "12111.75",
+      "shared_blks_read": 0,
+      "temp_blks_read": 122167,
+      "temp_blks_written": 122193,
+      "category": "other"
+    },
+    {
+      "queryid": "8270099943726956572",
+      "role": "essay_worker",
+      "calls": 4019,
+      "total_ms": "118182.45",
+      "mean_ms": "29.41",
+      "shared_blks_read": 47691,
+      "temp_blks_read": 33915,
+      "temp_blks_written": 33915,
+      "category": "essay_exam_preflight"
+    },
+    {
+      "queryid": "-3076875962393720596",
+      "role": "postgres",
+      "calls": 9,
+      "total_ms": "13360.51",
+      "mean_ms": "1484.50",
+      "shared_blks_read": 3,
+      "temp_blks_read": 576,
+      "temp_blks_written": 5058,
+      "category": "other"
+    },
+    {
+      "queryid": "-3244997985098964727",
+      "role": "postgres",
+      "calls": 1,
+      "total_ms": "245.09",
+      "mean_ms": "245.09",
+      "shared_blks_read": 5,
+      "temp_blks_read": 2678,
+      "temp_blks_written": 2678,
+      "category": "other"
+    },
+    {
+      "queryid": "-8520002144512618773",
+      "role": "postgres",
+      "calls": 5,
+      "total_ms": "224.79",
+      "mean_ms": "44.96",
+      "shared_blks_read": 0,
+      "temp_blks_read": 1785,
+      "temp_blks_written": 1785,
+      "category": "other"
+    },
+    {
+      "queryid": "-7094796414869135262",
+      "role": "postgres",
+      "calls": 5,
+      "total_ms": "363.17",
+      "mean_ms": "72.63",
+      "shared_blks_read": 13,
+      "temp_blks_read": 1785,
+      "temp_blks_written": 1785,
+      "category": "essay_exam_preflight"
+    },
+    {
+      "queryid": "4240226550064500957",
+      "role": "authenticated",
+      "calls": 114,
+      "total_ms": "137.80",
+      "mean_ms": "1.21",
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "category": "other"
+    },
+    {
+      "queryid": "-2912739556735260622",
+      "role": "postgres",
+      "calls": 1,
+      "total_ms": "0.38",
+      "mean_ms": "0.38",
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "category": "other"
+    },
+    {
+      "queryid": "2342043866499538452",
+      "role": "legendstudy_material_sync",
+      "calls": 2,
+      "total_ms": "0.01",
+      "mean_ms": "0.01",
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "category": "other"
+    },
+    {
+      "queryid": "3061095886615197911",
+      "role": "authenticated",
+      "calls": 1,
+      "total_ms": "0.67",
+      "mean_ms": "0.67",
+      "shared_blks_read": 0,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0,
+      "category": "other"
+    }
+  ],
+  "query_shape_after_restart": [
+    {
+      "entries": 968,
+      "query_text_bytes": 12063123,
+      "longest_query_bytes": 10113919
+    }
+  ],
+  "explain": [
+    {
+      "QUERY PLAN": [
+        {
+          "Plan": {
+            "Node Type": "Aggregate",
+            "Strategy": "Plain",
+            "Partial Mode": "Simple",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 55.65,
+            "Total Cost": 55.66,
+            "Plan Rows": 1,
+            "Plan Width": 32,
+            "Plans": [
+              {
+                "Node Type": "Function Scan",
+                "Parent Relationship": "InitPlan",
+                "Subplan Name": "CTE normalized_pg_stat_statements",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Function Name": "pg_stat_statements",
+                "Alias": "pg_stat_statements",
+                "Startup Cost": 1.61,
+                "Total Cost": 19.94,
+                "Plan Rows": 333,
+                "Plan Width": 40,
+                "Filter": "((NOT (ANY (userid = (hashed SubPlan 1).col1))) AND (NOT pg_is_in_recovery()))",
+                "Plans": [
+                  {
+                    "Node Type": "Seq Scan",
+                    "Parent Relationship": "SubPlan",
+                    "Subplan Name": "SubPlan 1",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Relation Name": "pg_authid",
+                    "Alias": "pg_authid",
+                    "Startup Cost": 0,
+                    "Total Cost": 1.6,
+                    "Plan Rows": 4,
+                    "Plan Width": 4,
+                    "Filter": "(rolname = ANY ('{authenticator,pgbouncer,supabase_admin,supabase_storage_admin}'::name[]))"
+                  }
+                ]
+              },
+              {
+                "Node Type": "CTE Scan",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "CTE Name": "normalized_pg_stat_statements",
+                "Alias": "normalized_pg_stat_statements",
+                "Startup Cost": 0.11,
+                "Total Cost": 35.08,
+                "Plan Rows": 252,
+                "Plan Width": 8,
+                "Filter": "((query !~~ '%-- source: auth_system_query%'::text) AND (query !~~ '%auth_migration:%'::text) AND (query !~~ 'select am.amname from pg_class%'::text) AND (query !~~ 'select c.relname as index_name%'::text) AND (query !~~ '%left join pg_description%d on d.objoid = %'::text) AND (query !~~ '%select c.oid::int8 as \"id\",%'::text) AND (query !~~ '%select con.oid as id, con.conname as %'::text) AND (query !~~ '%select sum(pg_database_size(pg_database.datname))::bigint as db_size from pg_database'::text) AND (query !~~ '%select tbl.schemaname, tbl.tablename,%'::text) AND (query !~~ '%select word from pg_get_keywords()'::text) AND (query !~~ '-- source: dashboard%show default_transaction_read_only'::text) AND (query !~~ 'select pg_temp.pg_get_tabledef ( $1, $2, $3, $4, $5 ) as definition -- source: dashboard%'::text) AND (query !~~ 'select $1 -- source: dashboard%'::text) AND (query !~~ 'select 1 -- source: dashboard%'::text) AND (query !~~ '%join pg_namespace sch on sch.oid = tbl.relnamespace%'::text) AND (query !~~ '-- adapted from information_schema.%'::text) AND (query !~~ 'select p.oid :: int8 as id, p.pubname as name,%'::text) AND (query !~~ 'select t.oid::int8 as id, t.typname as name,%'::text) AND (query !~~ 'set idle_session_timeout%'::text) AND (query !~~ 'set statement_timeout%'::text) AND (query !~~ 'with f as ( -- cte with sane arg_modes,%'::text) AND (query !~ '^(?:.*select .*\\.oid ?:: ?int8 as \"?id\"?, .*\\.nspname as \"?schema\"?, c\\.relname as .*)$'::text) AND (query !~~ 'update cron.job_run_details set %'::text) AND (query !~~ '%net.http_request_queue%'::text) AND (query !~~ 'select set_config(%'::text) AND (query !~~ 'select name, setting from pg_settings %'::text) AND (query !~~ '%left join (pg_collation co join pg_namespace nco on co.collnamespace = nco.oid)%'::text) AND (query !~~ 'select%pg_wal_lsn_diff(%restart_lsn)%from pg_replication_slots%'::text) AND (query !~~ 'set client_encoding%''unicode'''::text) AND (query !~~ 'set client_encoding%''utf8'''::text) AND (query !~~ 'set client_min_messages%notice'::text) AND (query !~~ 'set client_min_messages%warning'::text) AND (query <> ALL ('{\"insert into schema_migrations (version) values ($1)\",\"insert into schema_migrations (version) values (''00'')\",\"select * from schema_migrations\",\"select exists (select schema_migrations.* from schema_migrations as schema_migrations where version = $1)\",\"show max_connections\",\"select pid, query, query_start from pg_stat_activity where state = $1 and datname = $2\",\"select \\\"id\\\" from \\\"buckets\\\" where \\\"id\\\" = $1 and \\\"public\\\" = $2 limit $3\",\"select \\\"id\\\", \\\"file_size_limit\\\", \\\"allowed_mime_types\\\" from \\\"buckets\\\" where \\\"id\\\" = $1 limit $2\",\"select \\\"id\\\", \\\"name\\\", \\\"public\\\", \\\"owner\\\", \\\"created_at\\\", \\\"updated_at\\\", \\\"file_size_limit\\\", \\\"allowed_mime_types\\\" from \\\"buckets\\\"\",\"select \\\"id\\\", \\\"public\\\" from \\\"buckets\\\" where \\\"id\\\" = $1 and \\\"public\\\" = $2 limit $3\",\"select \\\"id\\\", \\\"version\\\" from \\\"objects\\\" where \\\"name\\\" = $1 and \\\"bucket_id\\\" = $2 limit $3\",\"select id from storage.buckets limit $1\",\"select id from storage.buckets limit 1\",\"delete from cron.job_run_details where end_time < now() - interval $1\",\"insert into cron.job_run_details (jobid, runid, database, username, command, status) values ($1,$2,$3,$4,$5,$6)\",\"select e.name, n.nspname as schema, e.default_version, x.extversion as installed_version, e.comment from pg_available_extensions() e(name, default_version, comment) left join pg_extension x on e.name = x.extname left join pg_namespace n on x.extnamespace = n.oid\",\"with rows as ( select ctid from net._http_response where created < now() - $1 order by created limit $2 ) delete from net._http_response r using rows where r.ctid = rows.ctid\",\"with rows as ( select ctid from net._http_response where created < $1 - $2 order by created limit $3 ) delete from net._http_response r using rows where r.ctid = rows.ctid\",\"with rows as ( select id from net.http_request_queue order by id limit $1 ) delete from net.http_request_queue q using rows where q.id = rows.id returning q.id, q.method, q.url, timeout_milliseconds, array(select key || $2 || value from jsonb_each_text(q.headers)), q.body\",\"select current_schema()\",\"select pg_catalog.version()\",\"select t.oid, typarray from pg_type t join pg_namespace ns on typnamespace = ns.oid where typname = $1\",\"select version()\",\"select concat(conrelid::regclass, $1, conname) as fk from pg_constraint where contype = $2 order by 1 desc\",\"select concat(schemaname, $1, tablename, $2, policyname) as policy from pg_policies order by 1 desc\",\"select concat(table_schema, $1, table_name) as table from information_schema.tables where table_schema not like $2 and table_schema <> $3 order by 1 desc\",\"select count(*) > $1 as keys_created from pgsodium.key\",\"select count(*) > $1 as pgsodium_enabled from pg_extension where extname = $2\",\"select datname from pg_database where datallowconn = $1 order by oid asc\",\"begin isolation level read committed read only\",begin,commit,\"select $1\",\"select * from migrations order by id\",\"select * from migrations\",\"select b.oid, b.typarray from pg_catalog.pg_type a left join pg_catalog.pg_type b on b.oid = a.typelem where a.typcategory = $1 group by b.oid, b.typarray order by b.oid\",\"select current_setting($1)::integer, current_setting($2)\",\"select pg_advisory_lock($1)\",\"select pg_advisory_unlock($1)\",\"select pg_advisory_unlock(hashtext($1)::bigint)\",\"select pg_advisory_unlock_all()\",\"select pg_advisory_xact_lock($1)\",\"select pg_try_advisory_lock($1)\",\"select pg_try_advisory_lock(hashtext($1)::bigint)\",\"select typname::text, oid::int4, typarray::int4 from pg_type where typname in ($1,$2) order by typname\"}'::text[])))"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

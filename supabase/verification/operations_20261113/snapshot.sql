@@ -14,14 +14,15 @@ select stats_reset,blks_read,blks_hit,temp_files,temp_bytes,deadlocks
 from pg_stat_database where datname=current_database();
 select stats_reset,dealloc from extensions.pg_stat_statements_info;
 -- IDs only: query text may contain credentials, answers or personal data.
+-- showtext=false avoids loading query texts in the underlying statistics function.
 select queryid,calls,total_exec_time,mean_exec_time,shared_blks_read,
        shared_blks_hit,temp_blks_read,temp_blks_written
-from extensions.pg_stat_statements order by total_exec_time desc limit 20;
+from extensions.pg_stat_statements(false) order by total_exec_time desc limit 20;
 select queryid,calls,mean_exec_time,shared_blks_read,temp_blks_written
-from extensions.pg_stat_statements where calls>0
+from extensions.pg_stat_statements(false) where calls>0
 order by mean_exec_time desc limit 20;
 select queryid,calls,total_exec_time,shared_blks_read,temp_blks_written
-from extensions.pg_stat_statements order by calls desc limit 20;
+from extensions.pg_stat_statements(false) order by calls desc limit 20;
 select schemaname,relname,seq_scan,seq_tup_read,idx_scan,n_live_tup,n_dead_tup,
        last_autovacuum,last_autoanalyze
 from pg_stat_user_tables order by seq_tup_read desc limit 20;

@@ -40,7 +40,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-운영 장애 / HTTP522 / 상용화 순차 실행: [11/13 증거·진단SQL·단계별 상태](operations-commercial-20261113.md).
+운영 장애 / temp_file_limit / HTTP522: [P0 exporter 추적](supabase-temp-incident-20261113.md). 상용화 순차 실행: [11/13 증거·진단SQL·단계별 상태](operations-commercial-20261113.md).
 
 APP83 / 최종 빌드 / 1.0.3(83) / 스토어 업데이트: [소스·검증·서명·Android 제출 상태·iOS 신청 완료 Owner 확인·RPC 미활성](app83-store-handoff-20261112.md).
 

@@ -20,6 +20,7 @@ hotfix 포함)에서 독립 codex/operations-commercial-20261113 생성.
 ## PHASE 1 — PARTIAL / 인프라 원인 확인 BLOCKED
 
 목표: 11/13 새벽 로그인 장애의 실제 증거와 재발 대응 확보.
+[P0 후속 조사](supabase-temp-incident-20261113.md): exporter 동일 PID/SQL18건·cron/Edge 공백·EXPLAIN 확인. 진단 SQL은 showtext=false로 개선, 522 인과관계 미확정.
 읽기 전용 Supabase MCP로 프로젝트 ref/region/Postgres를 확인:
 LegendStudy / ap-northeast-2 / PostgreSQL17.6.1.166 / ACTIVE_HEALTHY.
 운영 변경·재시작·통계 reset·RLS 변경0. 아래 시간은 KST이다.

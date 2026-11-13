@@ -1,3 +1,7 @@
+## 2026-11-13 — temp_file_limit P0 추적
+
+[조사 근거](supabase-temp-incident-20261113.md): 18건 모두 postgres_exporter/supabase_admin/PID2973075/query_id-8285757822602875730. cron·Edge 이력 및 EXPLAIN 대조, 통계 reset으로 사고 전 비용 복원 불가. 진단 SQL 숫자 조회 showtext=false 적용·전체 READ ONLY 실행 PASS, EXPLAIN ANALYZE 2.106ms/temp0. 522·재시작 인과관계 및 호스트 원인 미확정, 지원 요청 초안 미전송. 운영 설정/데이터/cron/Compute 변경0.
+
 ## 2026-11-13 — APP84 Owner 확인·main 통합 승인
 
 Owner 로그인 화면 확인 후 main 병합/Push 승인. [통합 근거](auth-verification-ux-hotfix-20261113.md#owner-확인-후-main-통합--2026-11-13): 최신main9f533d2가 hotfix 조상, 충돌0·제품 트리/배포 소스 동일·IPA/AAB 해시 PASS. fast-forward/일반 Push로 통합하며 스토어 업로드는 Owner 담당. 운영/바이너리 변경0, 실제 계정 로그인·Android 기기 NOT TESTED 유지.
