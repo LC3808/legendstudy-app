@@ -108,6 +108,9 @@ class _NewsBodyState extends ConsumerState<_NewsBody>
               if (data.emptyUniversities) {
                 return const _UniversityLinks(empty: true);
               }
+              if (data.catalog != null) {
+                return _CatalogNewsBody(feed: data, home: widget.home);
+              }
               final all = matchUniversityNews(
                 data.items,
                 data.applications,
@@ -288,5 +291,91 @@ class _NewsTile extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _CatalogNewsBody extends StatelessWidget {
+  const _CatalogNewsBody({required this.feed, required this.home});
+  final UniversityNewsFeed feed;
+  final bool home;
+  @override
+  Widget build(BuildContext context) {
+    final appIds = feed.applications
+        .map((a) => a.data['university_id'] as String)
+        .toSet();
+    final interestIds = feed.interests.map((a) => a.universityId).toSet();
+    final rows = feed.catalog!.select(appIds, interestIds);
+    final missing = {
+      ...appIds,
+      ...interestIds,
+    }.difference(rows.map((u) => u['universityId'] as String).toSet());
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (missing.isNotEmpty) const Text('일부 등록 대학의 공식 일정 미확인'),
+        for (final u in home ? rows.take(3) : rows) ...[
+          const SizedBox(height: 12),
+          Text(
+            u['name'] as String,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(u['isApplication'] == true ? '실제 지원 대학' : '관심 대학'),
+          ..._offerings(u),
+        ],
+        if (home)
+          TextButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const UniversityNewsPage(),
+              ),
+            ),
+            child: const Text('자세히 보기'),
+          ),
+        if (!home) const _UniversityLinks(empty: false),
+      ],
+    );
+  }
+
+  List<Widget> _offerings(Map<String, dynamic> u) {
+    final years = {
+      ...feed.applications
+          .where((a) => a.data['university_id'] == u['universityId'])
+          .map((a) => a.year),
+      ...feed.interests
+          .where((a) => a.universityId == u['universityId'])
+          .map((a) => a.admissionYear),
+    }..remove(null);
+    final offerings = (u['offerings'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((o) => years.isEmpty || years.contains(o['academicYear']))
+        .toList();
+    final shown = home ? offerings.take(1) : offerings;
+    final children = <Widget>[
+      if (offerings.isEmpty) const Text('공식 일정 미확인'),
+      for (final o in shown) ...[
+        Text(
+          '${o['academicYear']}학년도 · ${o['admissionName']} · ${(o['divisions'] as List).join(' / ')}',
+        ),
+        Text(o['examDateText'] as String? ?? '공식 일정 미확인'),
+        if (o['examTimeText'] != null) Text(o['examTimeText'] as String),
+        Text('공식 자료 확인 상태: ${o['sourceStatus']} · 확인 ${o['verifiedAt']}'),
+        const Text('대학 전형 안내입니다. 본인 모집단위 일정은 공식 입학처에서 확인해 주세요.'),
+      ],
+    ];
+    final links = {
+      for (final o in shown)
+        if (o['sourceUrl'] is String) o['sourceUrl'] as String,
+      if (u['officialSourceUrl'] is String) u['officialSourceUrl'] as String,
+    };
+    for (final link in links.take(home ? 1 : 4)) {
+      final uri = Uri.tryParse(link);
+      if (uri != null &&
+          ['https', 'http'].contains(uri.scheme) &&
+          uri.host.isNotEmpty &&
+          uri.userInfo.isEmpty) {
+        children.add(ExternalLinkButton(uri: uri, label: '공식 입학처 확인'));
+      }
+    }
+    return children;
   }
 }
