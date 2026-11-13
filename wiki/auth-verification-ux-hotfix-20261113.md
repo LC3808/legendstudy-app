@@ -77,6 +77,15 @@ Owner는 iOS 1.0.3(83)의 일반 로그인에서 인증 안내가 상시 노출�
 
 ## 빌드·Git·남은 승인
 
-예상 iOS 1.0.4(84). App Store Connect 로그인 만료로 실제 중복 확인 대기; 확인 전 번호 확정/스토어 제출하지 않는다. 기존 APP82/83 산출물과 설치본을 보존한다.
+상태: **코드/자동 검증/독립 브랜치 Push DONE, 최종 배포 빌드 PARTIAL**.
+
+- 구현 소스 커밋 `5059c884f86df6a96f822f72697fd59c8d1b6533`, 해당 hotfix 브랜치 원격 Push 및 `git ls-remote` 일치 확인. 문서 후속 SHA는 Git HEAD로 확인한다.
+- iOS `tool/store-release ios --check` PASS, `tool/store-release ios --no-codesign --no-pub` PASS. Xcode archive75.7초, arm64 Release 컴파일/설정 검사 성공.
+- 컴파일 검증 산출물: `build/releases/auth-hotfix-validation-only/Runner.xcarchive` (**unsigned / 업로드·설치 금지**). 기존 metadata1.0.3(83)를 유지한 컴파일 검증이며 새 출시본이 아니다. IPA export0.
+- Bundle ID `com.legendstudy.app`, Minimum iOS15.0 보존. signing 설정/Entitlements/URL schemes/SDK lock 파일 변경0. 새 배포용 서명 검사는 최종 번호 확정 후 수행한다.
+- 예상 **1.0.4(84)는 미확정**. App Store Connect가 로그인 만료 화면이라 실제 기존 버전/TestFlight 빌드 중복 여부를 확인할 수 없다. Owner에게 직접 로그인을 요청했고, 지시서13항에 따라 조회 전 번호를 확정하지 않았다.
+- 기존 APP82/83 archive 및 APP83 IPA/AAB SHA256 보존 PASS. [검증 영수증](assets/auth-verification-ux-hotfix-20261113/validation.json). 설치/삭제/스토어/운영 변경0.
+
+남은 순서: Owner ASC 로그인 → 1.0.4/84 중복 확인 → pubspec 버전 확정·별도 커밋 → 서명 IPA 생성/검사·원격 hotfix Push → Owner 최종 검증/승인 → main/스토어 단계. 이 브랜치에는 SDK/서명/기능 추가 없이 해당 UI 수정만 포함한다.
 
 Owner는 hotfix 구현·테스트·커밋·해당 브랜치 Push·긴급 iOS 빌드 준비를 승인했다. **main 병합·Push 및 업로드/스토어 제출은 별도 최종 승인 전 금지**다. 수정 소스만으로 이미 제출한 APP83 바이너리가 바뀌지는 않는다.

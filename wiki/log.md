@@ -1,6 +1,6 @@
 ## 2026-11-13 — 로그인 인증 안내 P0 hotfix
 
-[원인·조건부 재발송·오류 분류·검증·빌드 게이트](auth-verification-ux-hotfix-20261113.md). APP83 제품 소스/최신 main 대조 후 독립 hotfix 브랜치에서 수정. 가입 직후/실제 미인증 응답만 안내, 오류별 카피와 20초 제한. 운영/회원/세션 저장/온보딩 계약 변경0. 최종 자동 검증·iOS 빌드/Push 기록 후속; main/스토어는 승인 전 보류.
+[원인·조건부 재발송·오류 분류·검증·빌드 게이트](auth-verification-ux-hotfix-20261113.md). APP83 제품 소스/최신 main 대조 후 독립 hotfix 브랜치에서 수정. 가입 직후/실제 미인증 응답만 안내, 오류별 카피와 20초 제한. 운영/회원/세션 저장/온보딩 계약 변경0. 전체2601 PASS/8 SKIP/0 FAIL·Analyze/Wiki PASS. 소스5059c88 hotfix 원격 Push 확인, iOS unsigned compile PASS/APP83 산출물 보존. ASC 로그인 만료로1.0.4(84) 중복 조회·번호 확정/서명IPA 대기(PARTIAL), main/스토어 승인 전 보류.
 
 ## 2026-11-12 — APP83 iOS 심사 신청 완료 Owner 확인
 

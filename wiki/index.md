@@ -1,6 +1,6 @@
 # LegendStudy Wiki Index
 
-[APP84 로그인 인증 안내 P0 hotfix·조건부 재발송·오류/대기 제한·검증/빌드](auth-verification-ux-hotfix-20261113.md).
+[APP84 후보 로그인 인증 안내 P0 hotfix·조건부 재발송·검증/빌드 대기](auth-verification-ux-hotfix-20261113.md).
 
 [APP83 최종 릴리스·main Push·IPA/AAB·Android 심사 전송 / iOS 신청 완료 Owner 확인](app83-store-handoff-20261112.md).
 

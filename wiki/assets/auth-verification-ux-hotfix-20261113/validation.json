@@ -24,5 +24,22 @@
   "app83_sha256": {
     "ipa": "f598f46e5df50f0654b54070a12acfe38fe4ee1f376ae0032311b0a41905c97e",
     "aab": "7396b2c0ca55247c593b97c9bd894f954690a52fc8a85fc9b43419a5374b67fe"
-  }
+  },
+  "implementation_source": "5059c884f86df6a96f822f72697fd59c8d1b6533",
+  "ios_compile": {
+    "result": "PASS",
+    "command": "tool/store-release ios --no-codesign --no-pub",
+    "archive": "build/releases/auth-hotfix-validation-only/Runner.xcarchive",
+    "xcode_seconds": 75.7,
+    "version_metadata": "1.0.3(83) retained for compile only",
+    "bundle_id": "com.legendstudy.app",
+    "minimum_ios": "15.0",
+    "signed": false,
+    "ipa_exported": false,
+    "installed": false,
+    "next_release_candidate": "1.0.4(84) NOT CONFIRMED"
+  },
+  "app83_artifacts_preserved": "PASS",
+  "hotfix_branch_push_source": "5059c884f86df6a96f822f72697fd59c8d1b6533",
+  "wiki_handoff": "PASS"
 }
