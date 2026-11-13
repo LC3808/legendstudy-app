@@ -17,7 +17,27 @@
   },
   "runtime_changes": [],
   "live_auth_test": "NOT TESTED",
-  "ios_device": "NOT TESTED",
+  "ios_device": {
+    "result": "PASS: update install, launch, ordinary login UI",
+    "device": "iPhone 17 Pro Max",
+    "before": "1.0.3(83) App Store",
+    "after": "1.0.4(84)",
+    "bundle": "com.legendstudy.app",
+    "install_method": "devicectl install app, no uninstall",
+    "installed_artifact": "archive Release app, development-signed for device; not distribution IPA",
+    "source_sha": "8195bb07e1f545f0876378b94ebf218b9a00cd77",
+    "verification_resend_hidden": true,
+    "verification_help_hidden": true,
+    "social_buttons_visible": [
+      "Google",
+      "Kakao",
+      "Apple"
+    ],
+    "account_login_or_logout_performed": false,
+    "data_reset_performed": false,
+    "full_user_data_comparison": "NOT TESTED: original Store container inaccessible",
+    "store_submitted": false
+  },
   "store_collision_check": {
     "result": "PASS",
     "latest_version": "1.0.3",
@@ -85,5 +105,41 @@
     "source_sha": "8195bb07e1f545f0876378b94ebf218b9a00cd77",
     "path": "build/releases/app84/legendstudy-1.0.4-84.ipa",
     "archive": "build/releases/app84/Runner.xcarchive"
+  },
+  "android": {
+    "file": "legendstudy-1.0.4-84.aab",
+    "bytes": 101876067,
+    "sha256": "ae91211c8cb62a60d6b68e85899d7836f94ab9baca0544b2f25489c75f5b2727",
+    "version": "1.0.4",
+    "build": 84,
+    "package": "com.legendstudy.app",
+    "sdk_manifest": "uses-sdk | minSdkVersion=24 | targetSdkVersion=36",
+    "release_not_debuggable": true,
+    "jarsigner": "PASS",
+    "upload_certificate_sha256": "C0:0F:42:60:D5:B9:5A:08:43:35:57:6C:03:BF:36:B8:91:4A:2F:33:CB:3D:A7:01:40:3E:0A:DB:AC:FB:8E:F1",
+    "matches_existing_upload_certificate": true,
+    "billing_permission": true,
+    "ad_id_permission": false,
+    "permissions_added_vs_app67": [],
+    "permissions_removed_vs_app67": [],
+    "public_runtime_config_embedded": true,
+    "elf_64bit_load_alignment": {
+      "base/lib/arm64-v8a/libapp.so": 65536,
+      "base/lib/arm64-v8a/libdartjni.so": 16384,
+      "base/lib/arm64-v8a/libdatastore_shared_counter.so": 16384,
+      "base/lib/arm64-v8a/libflutter.so": 65536,
+      "base/lib/arm64-v8a/libmlkit_google_ocr_pipeline.so": 16384,
+      "base/lib/arm64-v8a/libpdfium.so": 16384,
+      "base/lib/x86_64/libapp.so": 65536,
+      "base/lib/x86_64/libdartjni.so": 16384,
+      "base/lib/x86_64/libdatastore_shared_counter.so": 16384,
+      "base/lib/x86_64/libflutter.so": 65536,
+      "base/lib/x86_64/libmlkit_google_ocr_pipeline.so": 16384,
+      "base/lib/x86_64/libpdfium.so": 16384
+    },
+    "all_64bit_elf_at_least_16kb": true,
+    "installed": false,
+    "uploaded": false,
+    "source_sha": "8195bb07e1f545f0876378b94ebf218b9a00cd77"
   }
 }

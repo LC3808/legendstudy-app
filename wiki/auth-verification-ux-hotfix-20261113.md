@@ -103,3 +103,15 @@ Owner는 hotfix 구현·테스트·커밋·해당 브랜치 Push·긴급 iOS 빌
 - Apple Distribution / Copacabana / VUKFS69GB4, App Store profile, codesign deep/strict PASS. get-task-allow false, 서명 entitlement 전체가 APP83과 동일. Google redirect/이메일 복귀 scheme·공개 런타임 설정·main target·IPA/archive UUID·privacy manifest26개 PASS.
 - APP83 IPA/AAB 해시 재확인 PASS, 기존 앱·APP82/83 archive 보존. 실기기 설치·실제 Auth E2E·스토어 업로드/처리/심사 **NOT TESTED**.
 - ASC 로그인/번호 차단 해소. 남은 사항은 Owner 실기기 최종 검증 및 main 병합/스토어 제출 승인이다. 원격 Push는 hotfix 브랜치에만 수행한다.
+
+## iPhone17 업데이트·로그인 UI 및 Android 빌드 후속
+
+Owner가 기존 앱 데이터를 유지한 iPhone17 Pro Max 설치/로그인 화면 확인과 Android 빌드를 승인했다. 스토어 제출 금지는 유지한다.
+
+- 설치 전 실제 기기는 App Store1.0.3(83). 같은 Bundle ID/팀의 archive Release app(기기용 development 서명)을 `devicectl install app`으로 업데이트했다. 제거/초기화/로그아웃0. 설치 후1.0.4(84)·실행 성공 확인. 배포 IPA 직접 설치 검증과 구분한다.
+- Owner 마이크 사용 종료/잠금 후 iPhone Mirroring에서 홈→로그인 진입 확인. 일반 로그인 화면에서 재발송 버튼과 인증 안내 미노출 **PASS**. 이메일/비밀번호·로그인·회원가입/복구 링크·Google/Kakao/Apple·비회원/약관 표시 확인. 로그인 화면을 그대로 남겼다.
+- 실제 로그인/가입/재발송 요청은 하지 않았다. 기존 Store 앱 컨테이너가 접근 불가라 사용자 데이터 전체의 전후 해시 비교는 **NOT TESTED**. 삭제 없는 OS 업데이트 경로를 사용했고 운영 데이터/기존 세션 저장소를 임의 수정하지 않았다.
+- Android1.0.4(84) `tool/store-release android` **PASS**. 첫 `--no-pub` 시도는 이전 integration_test 자동 생성 registrant 잔여 참조로 실패; Git 미추적 생성 파일만 재생성하고 동일 소스로 정상 빌드. 제품 코드/SDK/의존성 변경0.
+- AAB `build/releases/app84/legendstudy-1.0.4-84.aab` (101,876,067 bytes), SHA256 `ae91211c8cb62a60d6b68e85899d7836f94ab9baca0544b2f25489c75f5b2727`.
+- 기존 업로드 인증서·jarsigner·package/version·release non-debuggable·운영 공개 설정·모든64bit ELF16KB 정렬 **PASS**. min24/target36, 기존 권한 유지/AD_ID 없음. Android 실기기·Play 업로드/설치 **NOT TESTED**.
+- APP83 IPA/AAB 해시 보존 재확인. main 병합·운영 변경·양쪽 스토어 업로드/제출0. 이 후속은 hotfix 브랜치의 Wiki/영수증만 갱신한다.

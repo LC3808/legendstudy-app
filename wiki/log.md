@@ -1,3 +1,7 @@
+## 2026-11-13 — APP84 iPhone 로그인 UI·Android AAB
+
+[실기기·Android 후속](auth-verification-ux-hotfix-20261113.md#iphone17-업데이트로그인-ui-및-android-빌드-후속): Owner 승인으로 iPhone17 Pro Max83→84 삭제 없는 업데이트·실행/로그인 안내 숨김 PASS, 계정 로그인·로그아웃·초기화0. Android 생성 registrant 잔여 참조 재생성 후 동일 소스 AAB/서명·16KB 검증 PASS. 기존 APP83 해시 보존. 실제 인증/Android 기기·스토어 NOT TESTED; main/운영/스토어 변경0.
+
 ## 2026-11-13 — APP84 서명 IPA 완료
 
 [로그인 UX hotfix 빌드](auth-verification-ux-hotfix-20261113.md#최종-서명-ipa-완료): Owner ASC 로그인 후 최신1.0.3(83)/처리 중84 없음 확인, 1.0.4(84) 확정. 제품 소스8195bb0, 배포 서명·동일 entitlement·버전/설정/UUID 검사 PASS. APP83 해시 보존, hotfix 브랜치만 Push. main/운영/설치/업로드/제출0. 실기기·실제 Auth·스토어 E2E NOT TESTED, Owner 최종 승인 대기.

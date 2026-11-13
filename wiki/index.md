@@ -1,6 +1,6 @@
 # LegendStudy Wiki Index
 
-[APP84 로그인 인증 안내 P0 hotfix·검증·1.0.4(84) 서명 IPA](auth-verification-ux-hotfix-20261113.md).
+[APP84 로그인 인증 안내 P0·iPhone UI 검증·1.0.4(84) IPA/AAB](auth-verification-ux-hotfix-20261113.md).
 
 [APP83 최종 릴리스·main Push·IPA/AAB·Android 심사 전송 / iOS 신청 완료 Owner 확인](app83-store-handoff-20261112.md).
 
