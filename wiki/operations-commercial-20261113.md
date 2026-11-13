@@ -77,3 +77,30 @@ Compute 증설 필요성과 비용 비교는 실제 병목 확인 전 미완료,
 
 아직 실행 중이며 완료 판정 없음. 단계별 기존 구현·수정·테스트·운영 적용·
 잔여·Owner 결정·Git/Wiki 증거를 아래에 추가한다.
+
+## 보존: 작업 시작 시 APP82 이력
+
+[APP82 릴리스 승인·main Push·빌드 완료](app82-store-handoff-20261113.md): 최신main 보존 fast-forward/원격 Push 완료. 1.0.3(82) 배포 IPA·서명 AAB 생성·버전/서명/운영 연결 설정 확인. 통합 후2557 PASS/8 SKIP/0 FAIL·Analyze·Python29·Android JVM2 PASS. 기존 [RC 실기기 근거](app-release-rc-20261113.md) 유지. 추가 소셜 로그인/논술 실사용 검증 WAIVED, marker 없는46개 회원 재노출 ACCEPTED(보호/backfill 없음). 운영 DB/RPC/Auth·회원 데이터·평가 엔진 변경0. 스토어 업로드/제출0, 새 배포 바이너리 설치·Play 업데이트 NOT TESTED. Owner 제출 전 인계.
+
+## PHASE 2 — PARTIAL / 실제 상점 검증 BLOCKED
+
+현재 DB configuration LIVE, Toss TEST20(완료10/준비10), TEST지급0,
+LIVE1 FAILED/지급0. 기존11/4 실패 이후 성공 LIVE 근거 없음.
+최신 WEB 결제 기록은 원래 작업 브랜치의
+[payment-live-activation](https://github.com/LC3808/legendstudy-app/blob/codex/material-service-app-20261022/wiki/payment-live-activation-20261104.md)에 있으며 APP main에 없는 문서를 과거 TEST-only 상태로 오인하지 않았다.
+11/4 INVALID_UNREGISTERED_SUBMALL 후 PAUSED 기록. 이번 공개 runtime GET은
+환경에서403으로 현재 WEB 설정 미확인. 마지막 Finance 만료기록11/11은
+갱신 여부 확인 필요이며 새키/권한/Secret 변경0.
+
+기존 Apple4상품 ID와 가격은 요청과 동일. Google도 같은 catalog 사용하지만
+현재 Console 등록·상품상태를 코드만으로 확정하지 않는다.
+운영 verify-iap-purchase v23 ACTIVE. iap-refund-notifications는 실제 함수
+목록에 없음: 저장소 구현 존재와 운영 환불 수신을 구분한다.
+기존 공통 credit_summary 및 서버 영수증 검증/지급을 재사용한다.
+
+검증: Flutter 구매/생명주기/계정격리/잔액/내역6파일35 PASS.
+Deno 영수증검증19 + 환불수신10 =29 PASS. 합성 검증이며 실제 상품조회·
+구매·복원·환불·WEB↔APP 실계정 잔액 E2E의 대체 근거가 아니다.
+운영 주문·지급·환불·Store 제출0; 가격·유효기간·상품ID 변경0.
+Owner 잔여: 카드사 등록 완료 확인, 대상/금액을 지정한 실결제·환불 승인,
+기존 Console 및 토큰 갱신 상태 확인. 외부 확인 대기 중 PHASE3 진행.
