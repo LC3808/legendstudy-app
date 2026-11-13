@@ -1,5 +1,15 @@
 # Durable Decisions
 
+
+## 2026-11-13 — 기존 다운로드 활성화와 MY 완료 목록
+
+Owner는 기존 PDF 다운로드를 재사용하여 활성화하고 자료 이용 검토를 반복하지
+않도록 결정했다. 기존 private 권한 revision과 서버 검증은 유지하고 이번 정확한
+Owner 결정으로 활성화 후보를 준비한다. MY 다운로드는 실제 저장 성공 후
+기기·계정별 완료 목록이며 기존 bookmarks/recent_views를 대체하지 않는다.
+[기존 PDF 통합](app-update-final-audit-20261105.md),
+[실행·운영 SQL·검증](operations-commercial-20261113.md#phase-3)에 연결한다.
+
 ## 2026-11-13 — 로그인 인증 안내 조건과 hotfix 승인 경계
 
 후속 Owner 승인: iPhone 로그인 화면 확인 후 hotfix의 main 병합·Push를 승인했다. 스토어 업로드·제출은 Owner가 직접 수행하며 Codex는 수행하지 않는다. 아래 초기 병합 보류는 이 승인으로 해소한다.

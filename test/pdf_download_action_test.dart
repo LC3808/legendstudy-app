@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/resources/data/pdf_download.dart';
 import 'package:legendstudy_app/features/resources/presentation/pdf_download_action.dart';
+import 'package:legendstudy_app/features/resources/presentation/pdf_viewer_page.dart';
+import 'package:legendstudy_app/features/resources/domain/content_resource.dart';
 import 'package:legendstudy_app/features/analytics/analytics_providers.dart';
 import 'package:legendstudy_app/features/analytics/domain/analytics_service.dart';
 
@@ -40,6 +42,38 @@ class Recording implements AnalyticsService {
 
 void main() {
   const id = '11111111-1111-4111-8111-111111111111';
+  testWidgets('viewer keeps download available when rendering fails', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          pdfDownloadPolicyProvider(id)
+              .overrideWith((ref) async => const PdfDownloadPolicy('ALLOWED')),
+        ],
+        child: const MaterialApp(
+          home: PdfViewerPage(
+            args: PdfViewerRouteArgs(
+              title: '수학 문제',
+              resourceId: id,
+              resourceType: 'question',
+              delivery: ResourceDelivery(
+                kind: ResourceDeliveryKind.sourcePage,
+                uri: null,
+                sourceFallback: null,
+                label: '원문',
+                description: '원문',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('자료를 바로 열 수 없어요.'), findsOneWidget);
+    expect(find.text('PDF 다운로드'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
   for (final state in ['PENDING', 'VIEW_ONLY']) {
     testWidgets('$state does not offer download', (tester) async {
       await tester.pumpWidget(

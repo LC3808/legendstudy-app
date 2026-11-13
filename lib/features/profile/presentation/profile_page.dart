@@ -163,6 +163,11 @@ class ProfilePage extends ConsumerWidget {
                   title: '최근 본 자료',
                   onTap: () => context.push('/my/recent'),
                 ),
+                const Divider(),
+                LsListRow(
+                  title: '다운로드한 자료',
+                  onTap: () => context.push('/my/downloads'),
+                ),
               ],
             ),
           ),

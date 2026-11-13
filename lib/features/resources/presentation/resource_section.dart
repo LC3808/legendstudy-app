@@ -136,6 +136,7 @@ class ResourceSection extends ConsumerWidget {
                                 ))
                                   PdfDownloadAction(
                                     resourceId: item.id,
+                                    contentSlug: contentSlug,
                                     postId: Uri.parse(contentSourceUrl).path
                                         .replaceAll('/', ''),
                                     resourceType: item.resourceType,
@@ -223,6 +224,9 @@ class _ResourceDeliveryActions extends StatelessWidget {
                       '/materials/${Uri.encodeComponent(contentSlug)}/resource/${Uri.encodeComponent(resource.id)}',
                       extra: PdfViewerRouteArgs(
                         title: resource.displayTitle,
+                        resourceId: resource.id,
+                        contentSlug: contentSlug,
+                        resourceType: resource.resourceType,
                         delivery: delivery,
                       ),
                     );
@@ -278,6 +282,9 @@ class _ResolvedPdfActionState extends ConsumerState<_ResolvedPdfAction> {
       '/materials/${Uri.encodeComponent(widget.contentSlug)}/resource/${Uri.encodeComponent(widget.resource.id)}',
       extra: PdfViewerRouteArgs(
         title: widget.resource.displayTitle,
+        resourceId: widget.resource.id,
+        contentSlug: widget.contentSlug,
+        resourceType: widget.resource.resourceType,
         ephemeral: true,
         resolverResourceId: widget.resource.id,
         delivery: ResourceDelivery(

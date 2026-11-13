@@ -5,6 +5,7 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../study/data/study_local.dart';
 import '../../essay/source_draft.dart';
+import '../../resources/data/download_history.dart';
 import '../../study/study_providers.dart';
 import '../account_deletion.dart';
 import '../auth_email.dart';
@@ -35,6 +36,8 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
     try {
       await purgeStudyOwner(ref.read(studyLocalStoreProvider), owner);
       await SourceDraftGateway.purge(owner);
+      await ref.read(downloadHistoryProvider).clear(owner);
+      ref.invalidate(downloadedMaterialsProvider);
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
         setState(() => _cleanupPending = false);
       }

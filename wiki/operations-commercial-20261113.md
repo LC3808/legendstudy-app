@@ -104,3 +104,55 @@ Deno 영수증검증19 + 환불수신10 =29 PASS. 합성 검증이며 실제 상
 운영 주문·지급·환불·Store 제출0; 가격·유효기간·상품ID 변경0.
 Owner 잔여: 카드사 등록 완료 확인, 대상/금액을 지정한 실결제·환불 승인,
 기존 Console 및 토큰 갱신 상태 확인. 외부 확인 대기 중 PHASE3 진행.
+
+## PHASE 3
+
+PARTIAL: 기존 다운로드 코드8f83f3f/통합9fb4ea3, 검증6df9a68/파일명53b2a3a
+재사용. 운영 resource-download v1 ACTIVE/권한0/18게시글 확인.
+정상 PDF명을 거절하는 DB 이중 backslash 정규식 결함 확인(읽기 SELECT false),
+[수정·846개 활성화 SQL](../supabase/candidates/pdf_activation_20261113/apply.sql) 준비.
+Owner가 자료이용을 별도 처리한다는 이번 결정을 그대로 기록하며 허위 권리자
+명칭을 채우지 않는다. 기존 private 원장의 정확한 Owner 결정에만 대체 경로를
+허용하고 기존 권한·RLS·RPC·원본·사용자 기록은 보존한다.
+[원복](../supabase/candidates/pdf_activation_20261113/rollback.sql)은 VIEW_ONLY
+revision 추가이며 이전 허용 근거를 삭제하지 않는다.
+[사후조회](../supabase/candidates/pdf_activation_20261113/postcheck.sql).
+
+기존 PdfDownloadAction을 PDF Viewer 하단에 연결, 원본 resource ID 전달.
+서버 ALLOWED일 때만 표시하고 매 다운로드 서버재승인·SHA256·PDF검사 유지.
+기존 iOS UIDocumentPicker/Android ACTION_CREATE_DOCUMENT·파일명 유지·
+중복진입 방지/취소·저장완료 후 안내를 재사용. 저장 실패 안내에 네트워크/
+기기 공간 확인 추가. MY 저장 및 열람/캐시는 변경하지 않았다.
+
+격리 PostgreSQL17: 정확846 활성화/Guest조회/재실행거절/846원복/
+원본846 revision보존 PASS. 기존 Flutter 다운로드/열람/Resolver67 PASS.
+운영 적용0. 양OS 실파일 저장·저장공간부족 실기기·오프라인 캐시 NOT TESTED.
+기존 파일명 후보는 원본 메타데이터 기반이며 학년도/시행기관 미상값을 추정하지 않음.
+다음: Owner가 apply.sql 적용→postcheck ALLOWED846 확인→양OS 저장·재열람.
+기존 설치앱도 서버 활성화 후 상세페이지 다운로드 가능; Viewer 연결은 다음
+승인 스토어 업데이트 대상. 로그인APP84·브랜드·일정 작업 보존.
+
+### 보존 검토7 — PDF/MY/Study 공통
+
+1. 다운로드 완료 시점과 학습 세션 실제 시각 분리; 기존 시각 수정0.
+2. 기존 resource ID/source key/검증 SHA와 세션 interval 원본으로 재현.
+3. 권한은 append-only revision; 과거 자료·학생기록 UPDATE/삭제0.
+4. 기존 auth.users identity 유지, 사용자 전환 시 로컬 상태 분리.
+5. 공부시간은 Learning, 목표는 계획이며 다운로드는 서비스 이용 사실.
+6. 기존 본인조회/RLS와 보존 정책 유지, 새 외부 공유/개인정보 수집 없음.
+7. 기간/과목 합계는 원본 interval에서 계산; 과거 미분류는 미분류로 유지.
+
+## PHASE 4 — PARTIAL / APP 구현·회귀 완료
+
+기존 학년/학년도/월/기관/과목/자료유형 검색과 시험 상세의 과목별 실자료 묶음,
+bookmarks/recent_views를 재사용. 서버 검색/Registry/WEB 계약 변경0.
+MY에 다운로드한 자료 추가: 실제 네이티브 저장 성공 후 resource ID/slug/파일명/
+완료시각만 계정별 기기 로컬 최근100개 보관. 중복 파일은 최근 위치로 이동.
+다운로드는 실제 파일, MY 저장은 기존 bookmark로 명확히 구분.
+목록에서 자료로 복귀, 목록 삭제는 OS 파일을 삭제하지 않으며 계정탈퇴 시
+로컬 목록 정리. WEB 또는 다른 기기로 동기화되는 목록이라고 표시하지 않는다.
+
+PHASE3/4 Flutter 다운로드·MY·검색·탈퇴11파일 **109 PASS/1 SKIP**.
+SKIP은 기존 자격증명 기반 public 검색 통합검증이며 실제 WEB E2E가 아니다.
+운영 자료/회원 기록 변경0. 실기기 다운로드 및 WEB 실제 이용 흐름은 NOT TESTED.
+Owner: PHASE3 SQL 적용과 다음 바이너리 범위 승인 필요.

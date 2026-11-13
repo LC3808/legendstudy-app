@@ -89,7 +89,11 @@ class PdfDownloadService {
   final Future<Uint8List> Function(Uri) load;
   final SavePdf save;
   bool _busy = false;
-  Future<bool> download(String id, {bool Function()? cancelled}) async {
+  Future<bool> download(
+    String id, {
+    bool Function()? cancelled,
+    void Function(String)? onSaved,
+  }) async {
     if (_busy) throw StateError('busy');
     _busy = true;
     try {
@@ -113,7 +117,9 @@ class PdfDownloadService {
           sha256.convert(bytes).toString() != policy.digest) {
         throw StateError('invalid_pdf');
       }
-      return await save(bytes, policy.filename!);
+      final saved = await save(bytes, policy.filename!);
+      if (saved) onSaved?.call(policy.filename!);
+      return saved;
     } finally {
       _busy = false;
     }

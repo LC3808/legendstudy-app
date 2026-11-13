@@ -5,15 +5,20 @@ import '../../../core/links/external_link.dart';
 import '../../analytics/analytics_providers.dart';
 import '../../analytics/domain/analytics_events.dart';
 import '../data/pdf_download.dart';
+import '../data/download_history.dart';
+import '../../../core/supabase/supabase_providers.dart';
 
 class PdfDownloadAction extends ConsumerStatefulWidget {
   const PdfDownloadAction({
     required this.resourceId,
     required this.postId,
     required this.resourceType,
+    this.screen = 'material_detail',
+    this.contentSlug,
     super.key,
   });
-  final String resourceId, postId, resourceType;
+  final String resourceId, postId, resourceType, screen;
+  final String? contentSlug;
   @override
   ConsumerState<PdfDownloadAction> createState() => _PdfDownloadActionState();
 }
@@ -27,7 +32,7 @@ class _PdfDownloadActionState extends ConsumerState<PdfDownloadAction> {
         'post_id': widget.postId,
         'resource_id': widget.resourceId,
         'resource_type': widget.resourceType,
-        'screen': 'material_detail',
+        'screen': widget.screen,
         'source': 'popular_pdf_pilot',
         'status': status,
       });
@@ -38,11 +43,17 @@ class _PdfDownloadActionState extends ConsumerState<PdfDownloadAction> {
       cancelled = false;
       message = null;
     });
+    final owner = ref.read(authStateProvider).value?.userId;
+    String? savedName;
     event(AnalyticsEvents.pdfDownloadClick, 'started');
     try {
       final saved = await ref
           .read(pdfDownloadServiceProvider)
-          .download(widget.resourceId, cancelled: () => cancelled || !mounted);
+          .download(
+            widget.resourceId,
+            cancelled: () => cancelled || !mounted,
+            onSaved: (name) => savedName = name,
+          );
       if (!mounted) return;
       event(
         saved
@@ -51,10 +62,32 @@ class _PdfDownloadActionState extends ConsumerState<PdfDownloadAction> {
         saved ? 'saved' : 'cancelled',
       );
       setState(() => message = saved ? 'PDF를 저장했어요.' : '저장을 취소했어요.');
+      if (saved &&
+          owner != null &&
+          savedName != null &&
+          widget.contentSlug != null &&
+          ref.read(authStateProvider).value?.userId == owner) {
+        try {
+          await ref
+              .read(downloadHistoryProvider)
+              .record(
+                owner,
+                DownloadReceipt(
+                  widget.resourceId,
+                  widget.contentSlug!,
+                  savedName!,
+                  DateTime.now(),
+                ),
+              );
+          if (mounted) ref.invalidate(downloadedMaterialsProvider);
+        } catch (_) {
+          if (mounted) setState(() => message = 'PDF는 저장했지만 MY 목록에 기록하지 못했어요.');
+        }
+      }
     } catch (_) {
       if (!mounted) return;
       event(AnalyticsEvents.pdfDownloadFailure, 'failed');
-      setState(() => message = '저장하지 못했어요. 다시 시도해 주세요.');
+      setState(() => message = '저장하지 못했어요. 네트워크와 기기 저장 공간을 확인한 뒤 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => busy = false);
     }

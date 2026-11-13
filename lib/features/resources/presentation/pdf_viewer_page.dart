@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/ephemeral_pdf_loader.dart';
+import 'pdf_download_action.dart';
 import '../data/trusted_resolver_client.dart';
 
 import 'package:pdfrx/pdfrx.dart';
@@ -17,12 +18,18 @@ class PdfViewerRouteArgs {
     required this.delivery,
     this.ephemeral = false,
     this.resolverResourceId,
+    this.resourceId,
+    this.resourceType = 'other',
+    this.contentSlug,
   });
 
   final String title;
   final ResourceDelivery delivery;
   final bool ephemeral;
   final String? resolverResourceId;
+  final String? resourceId;
+  final String resourceType;
+  final String? contentSlug;
 }
 
 class PdfViewerPage extends ConsumerStatefulWidget {
@@ -77,6 +84,20 @@ class _PdfViewerPageState extends ConsumerState<PdfViewerPage> {
         delivery?.kind == ResourceDeliveryKind.externalFile && uri != null;
     return Scaffold(
       appBar: AppBar(title: Text(args?.title ?? '자료 보기')),
+      bottomNavigationBar: args?.resourceId == null
+          ? null
+          : SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: PdfDownloadAction(
+                  resourceId: args!.resourceId!,
+                  postId: sourceFallback?.path.replaceAll('/', '') ?? '',
+                  resourceType: args.resourceType,
+                  screen: 'pdf_viewer',
+                  contentSlug: args.contentSlug,
+                ),
+              ),
+            ),
       body: usable
           ? KeyedSubtree(
               key: ValueKey(_attempt),
