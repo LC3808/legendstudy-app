@@ -440,3 +440,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [대학 소식 운영 API·Flutter 연결](university-news-phase1-connected-20261113.md) — 29연결/13미완료, 실기기NT.
 
 [개인화 UUID35·관리자 네 순위 페이지네이션 운영](personalization-phase2-release-20261113.md): 7대학 미연결, WEB17/APP17 PASS·실기기NT.
+
+[대학 UUID42·기기 검증](university42-device-verification-20261114.md) — 식별자/운영 DONE, 실계정 기기 PARTIAL.

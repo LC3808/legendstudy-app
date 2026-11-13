@@ -1,5 +1,7 @@
 # Current Status
 
+[UUID42·기기](university42-device-verification-20261114.md): 신규7/기존35·운영42 DONE. iPhone QA실행·Android모의17PASS, 실계정NT.
+
 [잔여6 처리](essay-remaining6-resolution-20261113.md): **304공개/4잔여/308**. 항공2 공개·항공3/숭실1 공식 충돌. 기존302/기록/권한/Credit 보존, Provider0. WEB63PASS/build·APP15PASS4SKIP; 실제로그인제출/기기/AI품질NT. 성균15·이화87 CLOSED, 전체 PARTIAL. 아래는 과거 이력.
 
 

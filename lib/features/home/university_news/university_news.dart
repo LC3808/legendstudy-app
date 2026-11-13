@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'catalog_news.dart';
 
 import 'dart:async';
@@ -323,6 +324,10 @@ final universityNewsRepositoryProvider = Provider<UniversityNewsRepository?>((
 });
 // Refetch every 5 minutes while visible. No persistent news cache. Home settings
 // cache and admissions freshness are deliberately independent.
+final catalogNewsLoaderProvider = Provider<Future<CatalogNews> Function()>(
+  (ref) => CatalogNews.load,
+);
+
 final universityNewsProvider = FutureProvider.autoDispose<UniversityNewsFeed>((
   ref,
 ) async {
@@ -337,7 +342,7 @@ final universityNewsProvider = FutureProvider.autoDispose<UniversityNewsFeed>((
     ...apps.map((a) => a.data['university_id'] as String),
   };
   if (ids.isEmpty) return UniversityNewsFeed([], apps, interests);
-  final catalog = await CatalogNews.load();
+  final catalog = await ref.watch(catalogNewsLoaderProvider)();
   if (!ref.mounted ||
       ref.read(authStateProvider).asData?.value.userId != owner) {
     throw StateError('Account changed');
