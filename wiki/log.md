@@ -6011,3 +6011,5 @@ Resend/SES/Brevo 공식 최신 요금·quota·인증·로그 비교, Resend 우�
 - 2026-11-13 PHASE4/5: 학년도 구조검색54 PASS, 과목 선택·복원/겹침합계·일주목표 append revision 구현, 학습84 PASS/Analyze PASS. 운영 subject/학교함수 읽기검증, DB쓰기0. [상세](operations-commercial-20261113.md).
 
 - 2026-11-13 PHASE6: 전체2609 PASS/8 SKIP/0 FAIL·Analyze·iOS simulator/Android debug 빌드 PASS,Python5/Deno29·격리PDF845 PASS. main/Store/LIVE 변경0,운영PDF0 재확인·수정SQL Owner대기. [전체 단계 인계](operations-commercial-20261113.md).
+
+- 2026-11-13 PDF 수정SQL 재실패 신고: 정확한 운영 preflight845/845·권한0,현재 재현안됨. PDF845-R2 버전/실패수치/성공영수증 추가·격리844거절/845허용/원복 PASS. Owner 적용대기. [상세](operations-commercial-20261113.md).

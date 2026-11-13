@@ -1,3 +1,4 @@
+-- PACKAGE: PDF845-R2 (845 rows; diagnostic preflight)
 -- Owner application only: LegendStudy stlhijzpjfgwwdgunlsd.
 -- Excludes currently inactive 78960745-ee6a-5045-842f-08738ac1fe44; never reactivate it.
 -- Existing 18-post / 845 verified-file scope only. No student/content UPDATE.
@@ -852,18 +853,30 @@ insert into pdf_activation_input values
 ('e15ac431-96fb-54f2-a8b5-2b57813d0b33','992A5F475F7C183209','2021학년도 9월 모의평가 사회탐구 - 정치와법 정답 해설.pdf','6a8e207e53442669d9d3e4a37d7181b3ad778b9b1398a6793e39d1fb1fb8d513','https://legendstudy.com/1435'),
 ('1b973751-b866-5fba-ade8-7691da581626','9984C3465F7C18320A','2021학년도 9월 모의평가 사회탐구 - 한국지리 문제.pdf','2d841430673693837d62ed57a223a3fcb2eded1baf367035f500ad9ac7668eb1','https://legendstudy.com/1435'),
 ('e7016416-fdcc-5ec6-a672-6294b37ad8a3','99A08A355F7C183206','2021학년도 9월 모의평가 사회탐구 - 한국지리 정답 해설.pdf','a4a162b564a4130d0a8e3847bc22c731598afb3412268c8a5fdffba02410c022','https://legendstudy.com/1435');
-do $$ begin
+do $$
+declare
+ v_input integer;
+ v_matched integer;
+begin
+ select count(*) into v_input from pdf_activation_input;
+ if v_input <> 845 or exists(select 1 from pdf_activation_input where resource_id='78960745-ee6a-5045-842f-08738ac1fe44') then
+  raise exception 'PDF845-R2 manifest mismatch: expected=845 input=%; no changes applied', v_input;
+ end if;
  if exists(select 1 from material_download_private.permissions) then
   raise exception 'Permission history changed: do not replay activation';
  end if;
- if (select count(*) from pdf_activation_input i
+ select count(*) into v_matched from pdf_activation_input i
   join public.resources r on r.id=i.resource_id and r.source_resource_key=i.source_resource_key and r.is_active
   join public.content_items c on c.id=r.content_item_id and c.source_url=i.source_url and c.is_active and c.content_type='exam'
   join material_download_private.pilot_posts pp on pp.content_item_id=c.id and pp.source_url=c.source_url
   join public.exams e on e.content_item_id=c.id and e.exam_type in ('csat','evaluation_mock','national_mock')
   join public.source_posts sp on sp.id=r.source_post_id and sp.id=c.source_post_id and sp.source='legendstudy' and sp.source_status='available'
   where r.exam_subject_id is null or exists(select 1 from public.exam_subjects es where es.id=r.exam_subject_id and es.is_active)
- ) <> 845 then raise exception 'Registry mismatch: no changes applied'; end if;
+ ;
+ if v_matched <> 845 then
+  raise exception 'PDF845-R2 Registry mismatch: expected=845 input=% matched=% role=% database=%; no changes applied',
+   v_input,v_matched,current_user,current_database();
+ end if;
 end $$;
 -- SQL standard_conforming_strings preserves backslashes: use [.] for literal dot.
 alter table material_download_private.permissions drop constraint permissions_check1;
@@ -885,3 +898,9 @@ do $$ begin
  raise exception 'Policy postcheck failed'; end if;
 end $$;
 commit;
+-- Visible receipt distinguishes this package from a stale SQL Editor tab.
+select 'PDF845-R2' as package, current_user as executor,
+ count(*) as activation_rows,
+ count(*) filter(where public.resource_download_policy(resource_id)->>'state'='ALLOWED') as policy_allowed
+from material_download_private.permissions
+where owner_decision='owner_download_activation_20261113';

@@ -1,5 +1,4 @@
 """Disposable local PostgreSQL only. Never accepts a remote connection URL."""
-import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -19,8 +18,17 @@ with tempfile.TemporaryDirectory(prefix='legend-pdf-') as temp:
     def sql(query):
         return run(command, input=query).stdout.strip()
     try:
-        for filename in ['baseline-fixture.sql','baseline-apply.sql','fixture-resources.sql','apply.sql']:
+        for filename in ['baseline-fixture.sql','baseline-apply.sql','fixture-resources.sql']:
             run(command+['-f', str(root/filename)])
+        # A current registry change must fail with counts, without granting anything.
+        target = '05dc696a-7ff0-5406-9162-ddfe2f85c754'
+        sql(f"update public.resources set is_active=false where id='{target}'")
+        rejected = subprocess.run(command+['-f', str(root/'apply.sql')],capture_output=True,text=True)
+        assert rejected.returncode != 0 and 'PDF845-R2 Registry mismatch: expected=845 input=845 matched=844' in rejected.stderr, rejected.stderr
+        assert sql("select count(*) from material_download_private.permissions") == '0'
+        sql(f"update public.resources set is_active=true where id='{target}'")
+        applied = run(command+['-f', str(root/'apply.sql')])
+        assert 'PDF845-R2|' in applied.stdout and '|845|845' in applied.stdout
         assert sql("select count(*) from material_download_private.permissions") == '845'
         assert sql("set role anon; select count(*) from public.resources where public.resource_download_policy(id)->>'state'='ALLOWED'").splitlines()[-1] == '845'
         assert sql("select public.resource_download_policy('78960745-ee6a-5045-842f-08738ac1fe44')->>'state'") != 'ALLOWED'

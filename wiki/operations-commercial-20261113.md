@@ -245,3 +245,18 @@ LIVE 결제·환불/운영 사용자 기록 쓰기0. PDF는 첫 Owner 실행 rol
 다음 순서: 수정PDF SQL 확인 → 양OS 실제 저장/파일명/재열람 → 과목 타이머
 백그라운드·재실행/목표/MY 검수 → 기능별 출시범위 확정. 결제는 별도 외부
 상점/가맹점 gate를 통과한 뒤 실결제·환불 승인과 LIVE전환을 진행한다.
+
+### PDF 후속 재실패 신고 — PDF845-R2 진단 보완
+
+Owner가 수정본에도 같은 Registry mismatch/policy0을 보고했다. 현재 파일의
+845개 전체를 운영에서 읽기 전용 대조: input845/valid845/mismatches[]/권한0.
+apply.sql의 정확한 JOIN/EXISTS 조건을 별도로 실행해 matched845,executor postgres
+확인. 현재 오류는 재현되지 않음. 이전 본문/중간버전/다른 실행 역할/시점차 중
+어느 것인지 확인할 증거가 없어 사용자 실수나 새 Registry 오류로 단정하지 않는다.
+
+같은845개·동일 활성/출처 조건을 유지하고 첫 줄 **PDF845-R2**, 실패 시
+expected/input/matched/role/database, 성공 시 package/activation_rows/policy_allowed
+영수증 추가. 격리PG에서 일부러 후보1개 비활성→matched844 오류·권한0,
+복원→845허용/Guest/재실행차단/append-only원복 PASS. 운영쓰기0.
+Owner는 SQL Editor 기존본문 대신 최신 apply.sql 전체를 붙여 첫 줄 PDF845-R2
+확인 후 실행. 결과/새 오류 대기. [정확한 절차](../supabase/candidates/pdf_activation_20261113/README.md).
