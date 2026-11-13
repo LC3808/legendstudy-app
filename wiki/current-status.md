@@ -1,6 +1,6 @@
 # Current Status
 
-[11/13 운영·상용화 순차 작업](operations-commercial-20261113.md): PHASE1/2 PARTIAL(원인·LIVE 미확정). PHASE3/4 Viewer 다운로드·MY 완료목록 구현,109 PASS/1 SKIP. 첫SQL Registry 검증 중단·변경0. 비활성1개 제외한845개 수정SQL·실기기 대기. 독립 브랜치 진행.
+[11/13 운영·상용화 순차 작업](operations-commercial-20261113.md): PHASE1/2 PARTIAL(원인·LIVE 미확정). PHASE3/4 Viewer 다운로드·MY 완료목록 구현,109 PASS/1 SKIP. 첫SQL Registry 검증 중단·변경0. 비활성1개 제외한845개 수정SQL·실기기 대기. 학년도 검색·과목/목표 구현(54/84 PASS). 학교3/1 유지. 독립 브랜치 진행.
 
 [로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당.
 

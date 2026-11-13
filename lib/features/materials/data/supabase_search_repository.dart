@@ -83,6 +83,9 @@ class SupabaseSearchRepository implements SearchRepository {
     for (final year in [if (f.year != null) f.year!, ...terms.years]) {
       request = request.eq('exam.year', year);
     }
+    for (final year in terms.academicYears) {
+      request = request.eq('exam.academic_year', year);
+    }
     for (final month in [if (f.month != null) f.month!, ...terms.months]) {
       request = request.eq('exam.exam_month', month);
     }

@@ -630,3 +630,13 @@ between total and maximum. Total stays primary/bold; maximum secondary. Responsi
 360/428px at1×/2× remains required. This supersedes the preceding two-dot copy
 only; mean label/dashed line placement, chart geometry and all calculations stay
 unchanged. No Mock or study storage/analytics change.
+
+## 2026-11-13 — 과목·개인 목표·추이 보완
+
+Owner 새 지시로 일반 공부 시작 전 선택 과목을 허용한다(미선택=미분류).
+기존 [시작 마찰 관련 리뷰](day-8-study-ui-review.md)의 후속 결정이며
+시작 필수 입력/과거 과목 추정은 추가하지 않는다. 세션의 기존 subject로 저장.
+현재 기간 과목별 합계는 전체 interval union과 같고, 서로 다른 과목의 겹친
+구간은 별도 ‘과목 겹침’으로 표시. 목표는 원본 시간과 분리된 기기·계정별
+계획 revision이며 현재 목표를 이번 기간에 적용한다. cloud sync 없음.
+[구현·보존7문항·검증·운영 상태](operations-commercial-20261113.md#phase-5--partial--app-구현회귀-완료).

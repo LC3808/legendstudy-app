@@ -34,6 +34,56 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       historyLimit = false,
       authReady = false;
   String? message;
+  String? selectedStudySubject;
+  void selectStudySubject(String? value) {
+    if (!ready || busy || draft != null) return;
+    if (value != null && !studySubjects.contains(value)) return;
+    selectedStudySubject = value;
+    _notify();
+  }
+
+  Map<String, dynamic>? get studyGoal {
+    if (!ready) return null;
+    final revisions = _space(_owner)['goal_revisions'] as List?;
+    return revisions == null || revisions.isEmpty
+        ? null
+        : Map<String, dynamic>.from(revisions.last as Map);
+  }
+
+  Future<void> setStudyGoals(int dailyMinutes, int weeklyMinutes) async {
+    if (!ready || !authReady) throw const StudyStorageError();
+    if (dailyMinutes < 0 ||
+        dailyMinutes > 1440 ||
+        weeklyMinutes < 0 ||
+        weeklyMinutes > 10080) {
+      throw const FormatException('Invalid study goal');
+    }
+    final epoch = _epoch, owner = _owner;
+    await _serial(() async {
+      if (epoch != _epoch) throw const StudyStorageError();
+      final now = await clock.read();
+      if (epoch != _epoch) throw const StudyStorageError();
+      final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
+      (copy['owners'] as Map)[owner] = {
+        ..._space(owner),
+        'goal_revisions': [
+          ...?_space(owner)['goal_revisions'] as List?,
+          {
+            'daily_minutes': dailyMinutes,
+            'weekly_minutes': weeklyMinutes,
+            'recorded_at': DateTime.fromMillisecondsSinceEpoch(
+              now.utcMs,
+              isUtc: true,
+            ).toIso8601String(),
+          },
+        ],
+      };
+      await store.write(copy);
+      _doc = copy;
+      if (epoch == _epoch) _notify();
+    });
+  }
+
   bool historyStale = false;
   SavePhase savePhase = SavePhase.idle;
   TimerPhase get phase => recovery
@@ -254,6 +304,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       _identity = user;
       _owner = user ?? 'guest';
       ready = false;
+      selectedStudySubject = null;
       includeMockDefault = true;
       preferenceBusy = false;
       preferenceError = null;
@@ -463,6 +514,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     final d = StudyDraft.start(
       now,
       mock: mock,
+      studySubject: mock == null ? selectedStudySubject : null,
       answers: mock == null ? null : scoringSetup,
     );
     final e = _epoch;

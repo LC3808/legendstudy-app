@@ -172,6 +172,8 @@ class StudyRecord {
       StudyRecord.fromJson({...toJson(), 'synced': true});
 }
 
+const studySubjects = ['국어', '수학', '영어', '탐구', '기타'];
+
 class StudyDraft {
   StudyDraft({
     required this.id,
@@ -183,6 +185,7 @@ class StudyDraft {
     required this.segments,
     this.openStart,
     this.mock,
+    this.studySubject,
     this.frozenReason,
     this.answers,
   });
@@ -193,6 +196,7 @@ class StudyDraft {
   final List<ActiveSegment> segments;
   final int? openStart;
   final MockSetup? mock;
+  final String? studySubject;
   final String? frozenReason;
   bool get frozen => frozenReason != null;
   int boundedOffset(int value) {
@@ -220,6 +224,7 @@ class StudyDraft {
       checkpoint: end,
       segments: activeAt(end),
       mock: mock,
+      studySubject: studySubject,
       answers: answers,
       frozenReason: reason,
     );
@@ -228,9 +233,11 @@ class StudyDraft {
   factory StudyDraft.start(
     ClockReading now, {
     MockSetup? mock,
+    String? studySubject,
     AnswerDraft? answers,
   }) => StudyDraft(
     mock: mock,
+    studySubject: studySubject,
     answers: answers,
     id: newStudyId(),
     startedMs: now.utcMs,
@@ -261,6 +268,7 @@ class StudyDraft {
     final closing = phase == TimerPhase.running && target != TimerPhase.running;
     return StudyDraft(
       mock: mock,
+      studySubject: studySubject,
       answers: answers,
       id: id,
       startedMs: startedMs,
@@ -284,7 +292,7 @@ class StudyDraft {
           endedMs: startedMs + boundedOffset(offset),
           mode: mock == null ? 'study' : 'mock_exam',
           title: mock?.title,
-          subject: mock?.subject,
+          subject: mock?.subject ?? studySubject,
           plannedSeconds: mock?.plannedSeconds,
           includeInStudyTotal: mock?.includeInStudyTotal ?? true,
           segments: activeAt(offset),
@@ -293,6 +301,7 @@ class StudyDraft {
     'id': id,
     'answers': answers?.toJson(),
     'mock': mock?.toJson(),
+    'study_subject': studySubject,
     'frozen': frozenReason,
     'started': startedMs,
     'anchor': anchorElapsed,
@@ -312,6 +321,7 @@ class StudyDraft {
       mock: j['mock'] == null
           ? null
           : MockSetup.fromJson(Map<String, dynamic>.from(j['mock'] as Map)),
+      studySubject: j['study_subject'] as String?,
       frozenReason: j['frozen'] as String?,
       id: j['id'] as String,
       startedMs: j['started'] as int,

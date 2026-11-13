@@ -227,7 +227,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
                   }
                 },
                 decoration: InputDecoration(
-                  hintText: '모의고사, 과목, 연도 검색',
+                  hintText: '과목, 문제·해설, 2027학년도 검색',
                   hintMaxLines: 2,
                   errorText: validation,
                   errorMaxLines: 4,

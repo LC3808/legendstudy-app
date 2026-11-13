@@ -6,6 +6,7 @@ import '../study_providers.dart';
 import '../domain/study_models.dart';
 import 'study_trends.dart';
 import 'study_bar_chart.dart';
+import 'study_goals.dart';
 
 class StudyTrendPage extends ConsumerStatefulWidget {
   const StudyTrendPage({super.key});
@@ -75,6 +76,28 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
               draft: study.recovery ? null : study.draft,
               offset: study.offset,
             );
+            final tomorrow = dayStartMs(day.add(const Duration(days: 1)));
+            final summary = studyBuckets(
+              records,
+              [
+                (dayStartMs(day), tomorrow),
+                (dayStartMs(monday(day)), tomorrow),
+                (dayStartMs(DateTime.utc(day.year, day.month)), tomorrow),
+                (
+                  dayStartMs(monday(day).subtract(const Duration(days: 7))),
+                  dayStartMs(monday(day)),
+                ),
+              ],
+              draft: study.recovery ? null : study.draft,
+              offset: study.offset,
+            );
+            final subjects = studySubjectTotals(
+              records,
+              dayStartMs(dates.last),
+              dayStartMs(trendEnd(period, dates.last)),
+              draft: study.recovery ? null : study.draft,
+              offset: study.offset,
+            );
             final max = totals.fold<int>(0, (a, b) => a > b ? a : b);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,6 +111,25 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const Text('현재 기간은 진행 중이에요.'),
+                Text(
+                  '오늘 ${studyDuration(summary[0])} · 이번 주 ${studyDuration(summary[1])} · 이번 달 ${studyDuration(summary[2])}',
+                ),
+                Text(
+                  '이번 주 하루 평균 ${studyDuration(summary[1] ~/ day.weekday)} (월요일~오늘)',
+                ),
+                Text(
+                  '지난주 전체 ${studyDuration(summary[3])} · 현재까지 ${summary[1] >= summary[3] ? '+' : '-'}${studyDuration((summary[1] - summary[3]).abs())}',
+                ),
+                const Text('진행 중인 이번 주와 완료된 지난주를 비교해요.'),
+                const SizedBox(height: 12),
+                StudyGoals(study: study, today: summary[0], week: summary[1]),
+                const Divider(),
+                const Text('선택한 현재 기간의 과목별 공부시간'),
+                for (final entry in subjects.entries)
+                  Text('${entry.key} · ${studyDuration(entry.value)}'),
+                if (subjects.containsKey('과목 겹침'))
+                  const Text('다른 기기의 서로 다른 과목이 겹친 시간은 한 번만 별도로 계산해요.'),
+                if (subjects.isEmpty) const Text('아직 과목별 공부 기록이 없어요.'),
                 const SizedBox(height: 16),
                 Text(
                   '${dates.first.month}.${dates.first.day} ~ ${day.month}.${day.day}',

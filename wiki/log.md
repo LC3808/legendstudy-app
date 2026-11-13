@@ -6007,3 +6007,5 @@ Resend/SES/Brevo 공식 최신 요금·quota·인증·로그 비교, Resend 우�
 - 2026-11-13 운영 순차 PHASE3/4: 기존 Viewer 다운로드 연결·MY 계정별 기기 완료목록/탈퇴정리,846개 활성화/원복 SQL 격리PG 검증. Flutter109 PASS/1 SKIP; 운영SQL·실기기 대기. [상세](operations-commercial-20261113.md).
 
 - 2026-11-13 PDF 활성화: Owner 첫SQL Registry mismatch/0건 보고. 운영846개 대조→비활성1개 제외845개 수정·격리PG PASS. 운영 재적용 대기. 학교 현행3/1 유지 재확정. [상세](operations-commercial-20261113.md).
+
+- 2026-11-13 PHASE4/5: 학년도 구조검색54 PASS, 과목 선택·복원/겹침합계·일주목표 append revision 구현, 학습84 PASS/Analyze PASS. 운영 subject/학교함수 읽기검증, DB쓰기0. [상세](operations-commercial-20261113.md).

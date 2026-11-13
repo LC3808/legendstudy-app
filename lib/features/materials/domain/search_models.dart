@@ -93,11 +93,13 @@ class SearchQuery {
   bool get isBrowse => text.isEmpty && filters.isEmpty;
 }
 
-/// Typed tokens use calendar year (not source-labelled academic year).
+/// Bare year/년 is calendar year; explicit 학년도 uses existing academic metadata.
 class SearchTerms {
   SearchTerms(SearchQuery query) {
     for (final token in query.tokens) {
-      if (RegExp(r'^(19|20|21|22)\d{2}년?$').hasMatch(token)) {
+      if (RegExp(r'^(19|20|21|22)\d{2}학년도$').hasMatch(token)) {
+        academicYears.add(int.parse(token.replaceAll('학년도', '')));
+      } else if (RegExp(r'^(19|20|21|22)\d{2}년?$').hasMatch(token)) {
         years.add(int.parse(token.replaceAll('년', '')));
       } else if (RegExp(r'^(1[0-2]|[1-9])월$').hasMatch(token)) {
         months.add(int.parse(token.replaceAll('월', '')));
@@ -125,12 +127,14 @@ class SearchTerms {
       }
     }
   }
+  final academicYears = <int>[];
   final years = <int>[], months = <int>[], grades = <int>[];
   final types = <String>[], words = <String>[], resourceKinds = <String>[];
   bool examOnly = false;
   bool get needsExam =>
       examOnly ||
       years.isNotEmpty ||
+      academicYears.isNotEmpty ||
       months.isNotEmpty ||
       grades.isNotEmpty ||
       types.isNotEmpty;

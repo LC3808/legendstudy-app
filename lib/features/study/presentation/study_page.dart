@@ -102,6 +102,27 @@ class StudyPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   StudyTimerDisplay(study: study),
+                  if (study.draft == null)
+                    DropdownButton<String>(
+                      isExpanded: true,
+                      value: study.selectedStudySubject ?? '미분류',
+                      items: [
+                        for (final subject in ['미분류', ...studySubjects])
+                          DropdownMenuItem(
+                            value: subject,
+                            child: Text('과목: $subject'),
+                          ),
+                      ],
+                      onChanged: study.ready && !study.busy && !focus.busy
+                          ? (value) => study.selectStudySubject(
+                              value == '미분류' ? null : value,
+                            )
+                          : null,
+                    )
+                  else
+                    Text(
+                      '과목: ${study.draft!.mock?.subject ?? study.draft!.studySubject ?? '미분류'}',
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Text(

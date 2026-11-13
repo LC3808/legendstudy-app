@@ -127,3 +127,55 @@ List<String> trendLabels(TrendPeriod period, List<DateTime> dates) => [
       TrendPeriod.monthly => '${dates[i].month}월',
     },
 ];
+
+/// Attribute the same interval union as studyBuckets, never double-count overlaps.
+/// Different simultaneous subjects remain explicitly ambiguous, not guessed.
+Map<String, int> studySubjectTotals(
+  List<StudyRecord> records,
+  int start,
+  int end, {
+  StudyDraft? draft,
+  int? offset,
+}) {
+  final events = <int, List<(String, int)>>{};
+  void add(int anchor, List<ActiveSegment> segments, String? subject) {
+    final label = subject == null || subject.trim().isEmpty ? '미분류' : subject;
+    for (final segment in segments) {
+      final a = (anchor + segment.start).clamp(start, end);
+      final b = (anchor + segment.end).clamp(start, end);
+      if (b <= a) continue;
+      (events[a] ??= []).add((label, 1));
+      (events[b] ??= []).add((label, -1));
+    }
+  }
+
+  for (final record in {for (final r in records) r.id: r}.values) {
+    if (record.mode == 'mock_exam' && !record.includeInStudyTotal) continue;
+    add(record.startedMs, record.segments, record.subject);
+  }
+  if (draft != null &&
+      offset != null &&
+      (draft.mock?.includeInStudyTotal ?? true) &&
+      !records.any((r) => r.id == draft.id)) {
+    add(
+      draft.startedMs,
+      draft.activeAt(offset),
+      draft.mock?.subject ?? draft.studySubject,
+    );
+  }
+  final times = events.keys.toList()..sort();
+  final counts = <String, int>{}, totals = <String, int>{};
+  int? previous;
+  for (final time in times) {
+    final active = counts.keys.where((s) => counts[s]! > 0).toList();
+    if (previous != null && active.isNotEmpty) {
+      final label = active.length == 1 ? active.single : '과목 겹침';
+      totals[label] = (totals[label] ?? 0) + time - previous;
+    }
+    for (final (subject, delta) in events[time]!) {
+      counts[subject] = (counts[subject] ?? 0) + delta;
+    }
+    previous = time;
+  }
+  return totals;
+}

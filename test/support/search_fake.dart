@@ -52,6 +52,7 @@ class FakeSearchRepository implements SearchRepository {
                   (f.subjectId == null ||
                       i.groups.any((g) => g.subjectId == f.subjectId)) &&
                   t.years.every((v) => i.exam?.year == v) &&
+                  t.academicYears.every((v) => i.exam?.academicYear == v) &&
                   t.months.every((v) => i.exam?.examMonth == v) &&
                   t.grades.every((v) => i.exam?.gradeLevel == v) &&
                   t.types.every((v) => i.exam?.examType == v) &&

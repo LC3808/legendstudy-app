@@ -36,7 +36,8 @@ void main() {
       expect(t.months, [9]);
       expect(t.grades, [3]);
       expect(t.words, ['english']);
-      expect(SearchTerms(SearchQuery('2027학년도')).words, ['2027학년도']);
+      expect(SearchTerms(SearchQuery('2027학년도')).academicYears, [2027]);
+      expect(SearchTerms(SearchQuery('2027학년도')).years, isEmpty);
       expect(() => SearchQuery('*'), throwsFormatException);
       expect(() => SearchQuery('x ' * 13), throwsFormatException);
       expect(() => SearchQuery('x' * 201), throwsFormatException);
@@ -136,6 +137,11 @@ void main() {
     repository = SupabaseSearchRepository(client);
   });
   tearDown(() => client.dispose());
+  test('academic year uses metadata without rewriting calendar year', () async {
+    await repository.search(SearchQuery('2027학년도 2026년'));
+    expect(calls.single.queryParameters['exam.academic_year'], 'eq.2027');
+    expect(calls.single.queryParameters['exam.year'], 'eq.2026');
+  });
   for (final entry in <String, SearchFilters>{
     'grade': const SearchFilters(grade: 3),
     'year': const SearchFilters(year: 2026),
