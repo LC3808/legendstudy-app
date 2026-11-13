@@ -1,5 +1,7 @@
 # Auth Recovery Foundation
 
+2026-11-13 후속: [일반 로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md). 재발송은 신규 가입 직후 또는 실제 미인증 응답 이후에만 노출한다. 아래 11/11 상시 재발송 UI 기록은 당시 구현이며 이 후속 조건으로 대체한다. SMTP/세션/온보딩 계약은 유지한다.
+
 2026-11-11: [독립 이메일 안정화·실제 SMTP 설정·코드 검증·남은 운영 게이트](email-verification-audit-20261111.md#독립-안정화-조사--2026-11-11). 기본 SMTP2/h 확인, 재발송·대기·오류 안내 보완. 아래 과거 설정 미확인 기록은 해당 시점의 증거다.
 
 ## App native/shared-account follow-up — 2026-09-21

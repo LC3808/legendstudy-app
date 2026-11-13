@@ -224,14 +224,14 @@ void main() {
   group('error localization', () {
     test('invalid login credentials maps to Korean', () {
       expect(authErrorMessage(authError('Invalid login credentials')),
-          '이메일 또는 비밀번호가 올바르지 않습니다.');
+          '이메일 또는 비밀번호를 확인해 주세요.');
       expect(
           authErrorMessage(authError('anything', code: 'invalid_credentials')),
-          '이메일 또는 비밀번호가 올바르지 않습니다.');
+          '이메일 또는 비밀번호를 확인해 주세요.');
     });
 
     test('email confirmation, rate limit and expired link map', () {
-      expect(authErrorMessage(authError('Email not confirmed')),
+      expect(authErrorMessage(authError('private detail', code: 'email_not_confirmed')),
           contains('이메일 인증'));
       expect(authErrorMessage(authError('over_email_send_rate_limit',
               code: 'over_email_send_rate_limit')),

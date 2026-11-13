@@ -20,6 +20,10 @@ import '../auth_recovery.dart';
 import 'auth_support_links.dart';
 import 'provider_button.dart';
 
+/// Bounds UI waiting only. The SDK remains responsible for session events;
+/// a late successful sign-in is still handled by the existing return policy.
+const emailAuthRequestTimeout = Duration(seconds: 20);
+
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key, this.returnToPrevious = false});
   final bool returnToPrevious;
@@ -34,6 +38,11 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   final _form = GlobalKey<FormState>();
   bool _signUp = false, _busy = false, _visible = false;
   String? _error, _notice;
+  String? _verificationEmail;
+  bool get _awaitingVerification =>
+      !_signUp &&
+      _verificationEmail != null &&
+      _verificationEmail == _email.text.trim().toLowerCase();
   Timer? _cooldownTimer;
   int _lastCooldown = 0;
   int get _cooldown => ref.read(emailRequestCooldownProvider).remainingSeconds;
@@ -41,6 +50,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   @override
   void initState() {
     super.initState();
+    _email.addListener(_onEmailChanged);
     _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted && _lastCooldown != _cooldown) {
         setState(() => _lastCooldown = _cooldown);
@@ -48,8 +58,20 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     });
   }
 
+  void _onEmailChanged() {
+    if (_verificationEmail == null ||
+        _verificationEmail == _email.text.trim().toLowerCase()) {
+      return;
+    }
+    setState(() {
+      _verificationEmail = null;
+      _error = null;
+      _notice = null;
+    });
+  }
+
   Future<void> _resendVerification() async {
-    if (_busy || _cooldown > 0) return;
+    if (!_awaitingVerification || _busy || _cooldown > 0) return;
     if (!isPlausibleEmail(_email.text.trim())) {
       setState(() => _error = '이메일 형식을 확인해 주세요.');
       return;
@@ -66,7 +88,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       _notice = null;
     });
     try {
-      await send(_email.text.trim());
+      await send(_email.text.trim()).timeout(emailAuthRequestTimeout);
       if (mounted) {
         setState(
           () => _notice = '인증 메일 발송을 요청했어요. 인증이 필요한 계정이라면 받은 편지함과 스팸함을 확인해 주세요. 인증 후 이 화면에서 로그인할 수 있어요.',
@@ -82,6 +104,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   @override
   void dispose() {
     _cooldownTimer?.cancel();
+    _email.removeListener(_onEmailChanged);
     _confirm.dispose();
     _email.dispose();
     _password.dispose();
@@ -109,16 +132,21 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       _busy = true;
       _error = null;
       _notice = null;
+      _verificationEmail = null;
     });
     try {
-      final authenticated = signingUp
-          ? await service.signUp(requestedEmail, _password.text)
-          : await service
-                .login(_email.text.trim(), _password.text)
-                .then((_) => true);
+      final authenticated =
+          await (signingUp
+                  ? service.signUp(requestedEmail, _password.text)
+                  : service
+                        .login(requestedEmail, _password.text)
+                        .then((_) => true))
+              .timeout(emailAuthRequestTimeout);
       if (authenticated) {
         try {
-          await profile.upsertCurrentProfile();
+          await profile.upsertCurrentProfile().timeout(
+            const Duration(seconds: 8),
+          );
         } catch (_) {
           /* Settings can retry. */
         }
@@ -130,10 +158,18 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           _confirm.clear();
           _form.currentState?.reset();
           _email.text = requestedEmail;
+          _verificationEmail = requestedEmail.toLowerCase();
         });
       }
     } catch (error) {
-      if (mounted) setState(() => _error = authErrorMessage(error));
+      if (mounted) {
+        setState(() {
+          _error = authErrorMessage(error);
+          if (!signingUp && isEmailVerificationRequired(error)) {
+            _verificationEmail = requestedEmail.toLowerCase();
+          }
+        });
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -154,7 +190,12 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       'source': provider.name,
       'status': 'started',
     });
-    setState(() => _busy = true);
+    setState(() {
+      _busy = true;
+      _verificationEmail = null;
+      _error = null;
+      _notice = null;
+    });
     try {
       // Android browser success means opened; iOS/native success includes exchange.
       // Both navigate only through the Supabase event handled by _onAuthStatus.
@@ -201,6 +242,11 @@ class _AuthPageState extends ConsumerState<AuthPage> {
         status.isPasswordRecovery) {
       return;
     }
+    setState(() {
+      _verificationEmail = null;
+      _error = null;
+      _notice = null;
+    });
     final router = GoRouter.maybeOf(context);
     if (router == null) return;
     // Imperative push keeps the branch URI; the visible route owns the return.
@@ -223,6 +269,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     _signUp = !_signUp;
     _error = null;
     _notice = null;
+    _verificationEmail = null;
     _password.clear();
     _confirm.clear();
     _visible = false;
@@ -352,7 +399,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                     : '로그인',
               ),
             ),
-            if (!_signUp) ...[
+            if (_awaitingVerification) ...[
               TextButton(
                 onPressed: _busy || _cooldown > 0 ? null : _resendVerification,
                 child: Text(
@@ -363,7 +410,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                 '메일에서 인증을 마쳤다면 로그인해 주세요. 앱으로 돌아오지 않거나 다른 기기에서 인증했어도 로그인으로 확인할 수 있어요.',
                 style: TextStyle(color: AppTokens.textSecondary),
               ),
-            ] else if (_cooldown > 0)
+            ] else if (_signUp && _cooldown > 0)
               Text('메일 요청 대기 중 · $_cooldown초 후 다시 시도할 수 있어요.'),
             // Account links on one centred line (회원가입 | 비밀번호 찾기 | 이메일
             // 찾기); wraps naturally on a small screen or at large text scale.

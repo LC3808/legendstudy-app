@@ -15,6 +15,7 @@ import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'auth_lifecycle_sdk_test.dart' show MemoryPkce;
 
 class SignupFixture implements EmailAuthService {
+  Object? loginError;
   int signups = 0;
   int logins = 0;
   @override
@@ -26,6 +27,7 @@ class SignupFixture implements EmailAuthService {
   @override
   Future<void> login(String email, String password) async {
     logins++;
+    if (loginError != null) throw loginError!;
   }
 }
 
@@ -85,6 +87,7 @@ void main() {
       await tester.tap(login);
       await tester.pumpAndSettle();
       expect(service.logins, 1);
+      expect(find.textContaining('메일에서 인증을 마쳤다면'), findsNothing);
       await tester.pumpWidget(const SizedBox());
     },
   );
@@ -151,6 +154,14 @@ void main() {
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus(null)),
             ),
+            emailAuthServiceProvider.overrideWithValue(
+              SignupFixture()
+                ..loginError = const AuthException(
+                  'fixture',
+                  code: 'email_not_confirmed',
+                  statusCode: '400',
+                ),
+            ),
             emailRequestCooldownProvider.overrideWithValue(cooldown),
             resendSignupEmailProvider.overrideWithValue((email) async {
               calls++;
@@ -172,6 +183,14 @@ void main() {
         find.byType(TextFormField).first,
         'student@example.test',
       );
+      await tester.enterText(
+        find.byType(TextFormField).at(1),
+        'fixture-password',
+      );
+      final login = find.widgetWithText(FilledButton, '로그인');
+      await tester.ensureVisible(login);
+      await tester.tap(login);
+      await tester.pumpAndSettle();
       final resend = find.text('인증 메일 다시 요청');
       await tester.ensureVisible(resend);
       await tester.tap(resend);

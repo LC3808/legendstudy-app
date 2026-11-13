@@ -9,6 +9,17 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Matching prefers the stable `code` and falls back to lowercase substrings of
 /// the message; anything unrecognised becomes the safe generic fallback.
 const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.';
+const authNetworkFailure = '인터넷 연결을 확인한 뒤 다시 시도해 주세요.';
+const authTimeoutFailure = '서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.';
+const authServiceFailure = '현재 서비스 연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.';
+const emailVerificationRequiredMessage = '이메일 인증이 필요합니다. 메일함을 확인해 주세요.';
+
+/// Only a password-auth response with this stable code establishes that the
+/// submitted address needs verification. Never infer account state from prose.
+bool isEmailVerificationRequired(Object? error) =>
+    error is AuthException &&
+    error.code == 'email_not_confirmed' &&
+    const {null, '400', '403', '422'}.contains(error.statusCode);
 
 /// Shown when a recovery link cannot be exchanged for a session. Deliberately
 /// broader than "expired": the same failure covers a link that was already
@@ -25,8 +36,8 @@ const _byCode = <String, String>{
   'unexpected_failure': '로그인을 완료하지 못했어요. 잠시 후 다시 시도해 주세요.',
   'bad_oauth_callback': '로그인을 완료하지 못했어요. 로그인 화면에서 다시 시도해 주세요.',
   'bad_oauth_state': '로그인 요청이 만료됐어요. 다시 시도해 주세요.',
-  'invalid_credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
-  'email_not_confirmed': '이메일 인증이 아직 완료되지 않았어요. 받은 편지함을 확인해 주세요.',
+  'invalid_credentials': '이메일 또는 비밀번호를 확인해 주세요.',
+  'email_not_confirmed': emailVerificationRequiredMessage,
   'over_email_send_rate_limit': '현재 이메일 발송 한도에 도달해 메일을 요청하지 못했어요. 반복 요청을 멈추고 나중에 다시 시도해 주세요. 계속되면 문의해 주세요.',
   'over_request_rate_limit': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
   'otp_expired': '인증 링크가 만료되었거나 이미 사용됐어요. 인증을 마쳤다면 로그인하고, 아니라면 메일을 다시 요청해 주세요.',
@@ -45,8 +56,7 @@ const _byCode = <String, String>{
 };
 
 const _bySubstring = <String, String>{
-  'invalid login credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
-  'email not confirmed': '이메일 인증이 아직 완료되지 않았어요. 받은 편지함을 확인해 주세요.',
+  'invalid login credentials': '이메일 또는 비밀번호를 확인해 주세요.',
   'rate limit': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
   'too many requests': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
   'expired': '재설정 링크가 만료되었어요. 다시 요청해 주세요.',
@@ -97,12 +107,17 @@ bool isRecoveryLinkFailure(Object? error) {
 
 /// Never returns raw SDK text, a token, a URL or a status code.
 String authErrorMessage(Object? error) {
-  if (error is SocketException ||
-      error is TimeoutException ||
-      error is AuthRetryableFetchException) {
-    return '인터넷 연결을 확인한 뒤 다시 시도해 주세요.';
-  }
+  if (error is TimeoutException) return authTimeoutFailure;
+  if (error is SocketException) return authNetworkFailure;
   if (error is! AuthException) return genericAuthFailure;
+  final httpStatus = int.tryParse(error.statusCode ?? '');
+  if (httpStatus == 408 || httpStatus == 504) return authTimeoutFailure;
+  if (httpStatus != null && httpStatus >= 500) return authServiceFailure;
+  // GoTrue also uses this exception for HTTP 502/503/504; those must be
+  // classified above before considering a transport failure without a response.
+  if (error is AuthRetryableFetchException && httpStatus == null) {
+    return authNetworkFailure;
+  }
   // On a link or OAuth callback the specific value arrives as error_code, which
   // the SDK stores in statusCode, while code holds the coarse `error`. The
   // specific one therefore wins; an HTTP status such as '400' simply misses.
@@ -110,6 +125,7 @@ String authErrorMessage(Object? error) {
   if (status != null && _byCode.containsKey(status)) return _byCode[status]!;
   final code = error.code?.toLowerCase();
   if (code != null && _byCode.containsKey(code)) return _byCode[code]!;
+  if (httpStatus == 429) return _byCode['over_request_rate_limit']!;
   final message = error.message.toLowerCase();
   for (final key in _substringKeysLongestFirst) {
     if (message.contains(key)) return _bySubstring[key]!;

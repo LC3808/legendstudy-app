@@ -1,5 +1,7 @@
 # Current Status
 
+[로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 상시 안내 제거, 가입 직후/실제 미인증 코드만 재발송 제공. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. iOS 빌드 검증 진행/스토어 번호 조회 로그인 대기; main/스토어는 최종 승인 필요.
+
 [APP83 최종 빌드·스토어 제출](app83-store-handoff-20261112.md): 스플래시6962c0f 포함, main fast-forward/Push 완료. 1.0.3(83) IPA/AAB·서명/설정 PASS. 전체2580 PASS/8 SKIP/0 FAIL·Analyze·Python33·격리SQL71/42·Android JVM2 PASS. Owner IPA/AAB 업로드 보고. Android83 서버 수락 확인·심사 전송 요청 완료: Google 자동 검사 중, 승인 후 기존100% 자동 출시 설정. iOS 심사 신청 완료 Owner 확인. 최종산출물 실기기·심사 승인·실제 공개 NOT TESTED. 신규RPC2 미적용: 기존TOP10 유지, 추가순위/백분위 미활성. 운영DB/Auth/회원/Provider 변경0. 기존 설치 앱·APP82 보존. [후속UX·이전 iPhone 검증](app82-post-rc-ux-20261112.md).
 
 [APP82 릴리스 승인·main Push·빌드 완료](app82-store-handoff-20261113.md): 최신main 보존 fast-forward/원격 Push 완료. 1.0.3(82) 배포 IPA·서명 AAB 생성·버전/서명/운영 연결 설정 확인. 통합 후2557 PASS/8 SKIP/0 FAIL·Analyze·Python29·Android JVM2 PASS. 기존 [RC 실기기 근거](app-release-rc-20261113.md) 유지. 추가 소셜 로그인/논술 실사용 검증 WAIVED, marker 없는46개 회원 재노출 ACCEPTED(보호/backfill 없음). 운영 DB/RPC/Auth·회원 데이터·평가 엔진 변경0. 스토어 업로드/제출0, 새 배포 바이너리 설치·Play 업데이트 NOT TESTED. Owner 제출 전 인계.
