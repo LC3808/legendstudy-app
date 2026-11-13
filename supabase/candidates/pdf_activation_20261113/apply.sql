@@ -1,5 +1,6 @@
 -- Owner application only: LegendStudy stlhijzpjfgwwdgunlsd.
--- Existing 18-post / 846 verified-file scope only. No student/content UPDATE.
+-- Excludes currently inactive 78960745-ee6a-5045-842f-08738ac1fe44; never reactivate it.
+-- Existing 18-post / 845 verified-file scope only. No student/content UPDATE.
 begin;
 set local lock_timeout='3s';
 set local statement_timeout='30s';
@@ -27,7 +28,7 @@ insert into pdf_activation_input values
 ('ec785a3a-73d1-5f4f-907b-22b091342d61','bp2VAa/dJMcad1D61G','2026학년도 수능_k_생명과학1 문제.pdf','49fc58ac4ba83da8dc860745615c2f2ce5f3db3c2264f90f97a44de6c7c66602','https://legendstudy.com/1700'),
 ('6889499d-b62c-5f14-89b9-bd1f2d16148a','7SZKq/dJMcaaqm7Y7','2026학년도 수능_k_생명과학1 정답 해설.pdf','3640cff43433d78e63667154608bbe4ba1532f0436907da1b6f046be8aed2f96','https://legendstudy.com/1700'),
 ('c9570ecf-1d2f-527d-83cc-165dc3da9b4d','ca3sRg/dJMcaaqm7Y8','2026학년도 수능_k_생명과학2 문제.pdf','29ad303b94d4205622c22f70af66b94e27315029429efa6b7fced643166a0a1d','https://legendstudy.com/1700'),
-('a4ae8469-1ef5-54f9-ab3b-c622289544cc','JtKAc/dJMcafSKSa9','2026학년도 수능_k_생명과학2 정답 해설.pdf','8b5cb1cbddef8206895d2c5e39a293204ad02ce632d95ba6bf887fd362aaf6d0','https://legendstudy.com/1700'),
+('a4ae8459-1ef5-54f9-ab3b-c622289544cc','JtKAc/dJMcafSKSa9','2026학년도 수능_k_생명과학2 정답 해설.pdf','8b5cb1cbddef8206895d2c5e39a293204ad02ce632d95ba6bf887fd362aaf6d0','https://legendstudy.com/1700'),
 ('f1a04a7f-1af5-5494-a1e5-4363ed410263','bcYwqi/dJMcad1D61O','2026학년도 수능_k_지구과학1 문제.pdf','0fba020f8d8751439dead58409464cf5b6c13ab1f8b915a338aa5236b4c4debf','https://legendstudy.com/1700'),
 ('f4f9a48f-f8f7-50e0-8cff-96ae23bc46ad','vDfHN/dJMcad1D61N','2026학년도 수능_k_지구과학1 정답 해설.pdf','40865bb68439ede4d7c6027a32b8dce379df05d206fef1f3360ed31b9fa31e05','https://legendstudy.com/1700'),
 ('32902db2-b922-5e40-885e-bf8fe608cc60','dndbuw/dJMcai9JfMo','2026학년도 수능_k_지구과학2 문제.pdf','2bbdac684049f14fd32023746ac22fb516da3258ff283c5912c0f9ebd9683134','https://legendstudy.com/1700'),
@@ -96,7 +97,7 @@ insert into pdf_activation_input values
 ('b3fa41b5-13d2-5724-ba72-3f213d6e7630','c2Wmjt/btsAyKVrPSF','2024학년도 수능 사탐_세계사 문제.pdf','3eeaad4bc72f2623aa6b5551f16af971ca730172754a581b764f01e2fc4b9dc2','https://legendstudy.com/1574'),
 ('4ad9578a-f50b-559e-9c88-7f2da16d0029','O3m7a/btsAvtAr04f','2024학년도 수능 사탐_세계사 정답 해설.pdf','40e62c8dd5c7fd6e51a91682130db726add42bf03cc261f53d6053ae9880bb00','https://legendstudy.com/1574'),
 ('7d3fa5df-cb0d-5abd-a382-091cde9591cf','HR2rp/btsAzccXLO1','2024학년도 수능 사탐_세계지리 문제.pdf','9e653e5f741ec3ea4fe55d0c2d46295c324c72c315b0579631fd8dd83bbf0f15','https://legendstudy.com/1574'),
-('7a9be9a0-c5cd-5fe1-9327-9deecd8627f6','LVjq2/btsAyMTg7yF','2024학년도 수능 사탐_세계지리 정답 해설.pdf','0b51aea1e8e68baad137ebd53b89b1c059dd2a1caaa906a5c846335a7e76f30c','https://legendstudy.com/1574'),
+('7a9be9a0-c5cd-5fe1-9327-9deecd8627f6','LVjq2/btsAyMTg7yF','2024학년도 수능 사탐_세계지리 정답 해설.pdf','0b51aea1e8e68baad137ebd53b89b1c059dd2a1caaa906a5c845335a7e76f30c','https://legendstudy.com/1574'),
 ('5ef4d64d-6a0f-5e83-8947-924c2a02ec24','8rIJH/btsAyKVrQEN','2024학년도 수능 사탐_윤리와사상 문제.pdf','8f15e7c5631706f90a76361129285ae8e7ac6e00b471cadfdbabe45b8df8378e','https://legendstudy.com/1574'),
 ('c6ef9a2f-5540-57c4-bef8-517b61239918','yd3nz/btsAxTSwiZk','2024학년도 수능 사탐_윤리와사상 정답 해설.pdf','b8e5a096ee0e3c5253fa9251e5016e8b3efe5ddd27f289ada09ebdca4f18b6c2','https://legendstudy.com/1574'),
 ('586f4a4e-b24e-51f2-910a-2e70084fce31','bKCInt/btsAw7wJO8H','2024학년도 수능 사탐_정치와법 문제.pdf','c2cd8ab31f321615d9ee5906e0e450aaefc0d001d8a349a9bbd9934b89a214e7','https://legendstudy.com/1574'),
@@ -106,7 +107,7 @@ insert into pdf_activation_input values
 ('e52a0403-92f9-5d92-a0d2-5d7cf6677431','bh29HU/btsKMOlWUeA','2025학년도 수능_국어(언매) 문제.pdf','4e3d0a98967df4ebb6509767a8c963e29e991a870a92d9e962f4ef5f91e56ac4','https://legendstudy.com/1649'),
 ('811187f9-0c85-5fc4-88b2-ad3fe2cad1b7','bzjtLB/btsKMNAzruz','2025학년도 수능_국어(언매) 정답 해설.pdf','39d82b105b6f3fe9ecfb7cdcb6f1833313adde4f5230c130ad029bbeb8e6dd9a','https://legendstudy.com/1649'),
 ('ff2d964b-d730-58cf-b413-69a615647bd3','9DPjM/btsKLezqrq4','2025학년도 수능_국어(화작) 문제.pdf','ed83e4eb4e558acc5e2fd18916ae4a37a416a9918b116474258857cd28bf6342','https://legendstudy.com/1649'),
-('a576b0d5-61cb-5a3b-8465-fcc7005ff53a','bk6pNu/btsKMbWv9pc','2025학년도 수능_국어(화작) 정답 해설.pdf','04c65e24098f93c1780d354c3d266b127473f03fac5537a4806bcc38a54f1c93','https://legendstudy.com/1649'),
+('a576b0d5-61cb-5a3b-8455-fcc7005ff53a','bk6pNu/btsKMbWv9pc','2025학년도 수능_국어(화작) 정답 해설.pdf','04c65e24098f93c1780d354c3d266b127473f03fac5537a4806bcc38a54f1c93','https://legendstudy.com/1649'),
 ('7df077cc-6111-51fb-8091-3755aa397177','SQBK4/btsKL8ZLKZo','2025학년도 수능_수학(기하) 문제.pdf','f7240549f1a733de55bd6513db440a9f3c69cf9352c8e403bbe4651569222220','https://legendstudy.com/1649'),
 ('eaccfd53-2ca3-5e94-9259-102b662b47e6','HTFE1/btsKLwNnzSr','2025학년도 수능_수학(기하) 정답 해설.pdf','75b956ed03dfbf59b1946f025314f5feca2f4334089084011f30c4ad509b1b74','https://legendstudy.com/1649'),
 ('7eb459b5-fe4c-5190-8a75-00ddcc654d28','I8IGi/btsKMogN720','2025학년도 수능_수학(미적) 문제.pdf','ae132b5a1b22dbcbf6fba67073c7d04aa058ce23a61e0983546e2e542108cfc2','https://legendstudy.com/1649'),
@@ -115,7 +116,7 @@ insert into pdf_activation_input values
 ('edf8c699-cc37-5880-9ced-93ca4f912077','qjyx0/btsKKFYApem','2025학년도 수능_수학(확통) 정답 해설.pdf','9ba43cfe1375acdfe7f9f460db4666f75e4c1e6bec3ae0f4cd23bc87c7385f11','https://legendstudy.com/1649'),
 ('4b743544-203a-5463-8e3a-1cdf0d22c822','c6bbYO/btsKMi8TtcV','2025학년도 수능_영어 문제.pdf','fc0164edaa52481a97c5dfd6fdf39674753c8d81c6ba6cf3a8f0700b843c6d69','https://legendstudy.com/1649'),
 ('f92c9dd9-d1fd-57fc-92f4-30ad71a993d3','bz8ltN/btsKLp1TVcH','2025학년도 수능_영어 듣기대본.pdf','a5a83c9f27217bbdef50fb0e060b57973a31517043094cff8831d30a4b1cdddc','https://legendstudy.com/1649'),
-('87c87daf-7748-57c0-aeda-50f782cf18fa','AXcKJ/btsKKNPLDwx','2025학년도 수능_영어 정답 해설.pdf','13b831f4b06225f445fb031817477df545de9446d9bbb69e338e6284661362ed','https://legendstudy.com/1649'),
+('87c87daf-7748-57c0-aeda-50f782cf18fa','AXcKJ/btsKKNPLDwx','2025학년도 수능_영어 정답 해설.pdf','13b831f4b06225f445fb031817477df545de9446d9bbb69e338e6284561362ed','https://legendstudy.com/1649'),
 ('36ae8b72-cfa0-5872-8502-ad60222b86ad','cuD7pi/btsKKx0LYDw','2025학년도 수능_한국사 문제.pdf','6a3a23dccde93bfb3f8dbdc64645d75e1414e01ef47cf743d2495edf6a081d25','https://legendstudy.com/1649'),
 ('462d9ee9-5d4c-5629-92b4-1be13534fb8a','bhxH0R/btsKMG2BOEn','2025학년도 수능_한국사 정답 해설.pdf','1400a09fdb21d7abd215e57c770da72735bbbfcea2a8389e469546289e64488e','https://legendstudy.com/1649'),
 ('849e2a43-e880-5a37-83d5-593cf61aa825','BZ3ov/btsKMM2LcR4','2025학년도 수능_t 물리학1 문제.pdf','58074e5e1d2a328dc7f48ce14942f823419fccc5a860a89a6eaf55ae3b565c47','https://legendstudy.com/1649'),
@@ -145,7 +146,7 @@ insert into pdf_activation_input values
 ('02d9f924-ceae-5fe2-b12c-f08f7a4837a2','cqiSxD/btsKLpgu8lF','2025학년도 수능_s 세계사 문제.pdf','92261573b9f80efce08e5dfa80b4b56efbd0fd5ef14d6527bd44a7c11a3d697f','https://legendstudy.com/1649'),
 ('3ccdcfc9-6f04-5950-a8fe-51a3d77cbcd3','DPuiP/btsKKNbcBPZ','2025학년도 수능_s 세계사 정답 해설.pdf','b329e4438635e9f49bdc3d56e8325e5b80d3bb839b6518e5ae36d9f7e4b5bc18','https://legendstudy.com/1649'),
 ('640a0cff-88c0-52e8-a687-93cb8b9553c8','bTEWnL/btsKKwnaUyn','2025학년도 수능_s 세계지리 문제.pdf','c895622f0ba5e2d965d6120e7c97b1ba022512bcd05507915289f512698f0794','https://legendstudy.com/1649'),
-('ef28846e-d2b9-55bc-9300-c4ebf92e5dbd','XHjRK/btsKKFdbRVd','2025학년도 수능_s 세계지리 정답 해설.pdf','301b499cf0f6221fdbdd74b356d3a97fc2d6028b4bd3d1ed2034f18d09351cb5','https://legendstudy.com/1649'),
+('ef28845e-d2b9-55bc-9300-c4ebf92e5dbd','XHjRK/btsKKFdbRVd','2025학년도 수능_s 세계지리 정답 해설.pdf','301b499cf0f6221fdbdd74b356d3a97fc2d6028b4bd3d1ed2034f18d09351cb5','https://legendstudy.com/1649'),
 ('9c167c8e-8ad2-540a-a8fd-146ee9c61872','ehIe1V/btsKL4wlm9d','2025학년도 수능_s 윤리와사상 문제.pdf','ae1019c9541065ddc2e3bca1e9803dbd33bc7954fa4df7c5a4fd65368f451eed','https://legendstudy.com/1649'),
 ('f74feaf6-f75f-5378-bb0c-868e978cf739','c1jr2m/btsKKqACLxL','2025학년도 수능_s 윤리와사상 정답 해설.pdf','fc7f5ef260d19c7fb6cdda87c8a9ccdb01fb5f364c668d4eed0656b4f417497f','https://legendstudy.com/1649'),
 ('1785b641-db23-5a82-bb34-4d406e63fc83','dMZfEK/btsKMc10oCy','2025학년도 수능_s 정치와법 문제.pdf','cbddb7ca0529b73d73556325ba34fc000176e5ddddea2fb40388f93fc2e5411f','https://legendstudy.com/1649'),
@@ -181,10 +182,10 @@ insert into pdf_activation_input values
 ('f078b5ef-78b6-57a6-b53c-07f46ec1bcf0','WVK6w/dJMcahFdbO5','2027학년도 6월 모의평가 k_화학1 정답 해설.pdf','d9794c16fe6ab9745207babd8f4b68d3c99ba7facc1938cac7149865eead8433','https://legendstudy.com/1706'),
 ('372b0cf0-2826-5c48-abc2-f6f6ca1c40a0','MkoH9/dJMcaa0pSTi','2027학년도 6월 모의평가 k_화학2 문제.pdf','0ae514498f22cc1fa3c3715e76506140ba68e9c697f1fc547ce5db91ab8ca829','https://legendstudy.com/1706'),
 ('9e841f2f-4fe3-5d5c-99c0-9a13c09feb53','bdrF9M/dJMcahFdbO4','2027학년도 6월 모의평가 k_화학2 정답 해설.pdf','38e38cd95baed4d64c269ec1e6fd81b8d8743046693c9acfb0e998a5af822875','https://legendstudy.com/1706'),
-('c03040a2-4b88-5a6c-a086-e44d65be4d5d','3mqUk/dJMcabLT1lx','2027학년도 6월 모의평가 s_경제 문제.pdf','77c47dad353e89fc91eba97cd747558c2b1cf846156c3c9cfa2110f5d359fc5a','https://legendstudy.com/1706'),
+('c03040a2-4b88-5a6c-a086-e44d65be4d5d','3mqUk/dJMcabLT1lx','2027학년도 6월 모의평가 s_경제 문제.pdf','77c47dad353e89fc91eba97cd747558c2b1cf845156c3c9cfa2110f5d359fc5a','https://legendstudy.com/1706'),
 ('65421def-9a3e-5ae7-906a-13da9bc0b2ce','bQby89/dJMcabLT1lv','2027학년도 6월 모의평가 s_경제 정답 해설.pdf','015391ef3cd9dc6c272fcbed54e8da3d107a669f126d3cb0d7be5612bda5e0c5','https://legendstudy.com/1706'),
 ('9ea09540-0043-5e2e-a25b-06f609063130','b8aFsX/dJMcabLT1ly','2027학년도 6월 모의평가 s_동아시아사 문제.pdf','0423583d877043e1974b28589e75d1a8538e57033656c2319a5b96043ab74f9b','https://legendstudy.com/1706'),
-('9a2e9441-a67c-502c-ba74-79bff5ad757d','2Y3Vx/dJMcabLT1lt','2027학년도 6월 모의평가 s_동아시아사 정답 해설.pdf','2f352cf7813ecd6bd73cbb96e90f9875784681e122abfebf727de96a02cf264f','https://legendstudy.com/1706'),
+('9a2e9441-a67c-502c-ba74-79bff5ad757d','2Y3Vx/dJMcabLT1lt','2027학년도 6월 모의평가 s_동아시아사 정답 해설.pdf','2f352cf7813ecd6bd73cbb96e90f9875784581e122abfebf727de96a02cf264f','https://legendstudy.com/1706'),
 ('47643d0f-6237-57e8-9183-a211ba575586','scuOZ/dJMcagNb69r','2027학년도 6월 모의평가 s_사회문화 문제.pdf','cd8cf8103484cfa89afec1d6db2ab2645019f68845b17dd09904923ae24e934d','https://legendstudy.com/1706'),
 ('e526b58d-fb5a-55bf-9034-57f4203db7b6','c4DuNl/dJMcagNb69m','2027학년도 6월 모의평가 s_사회문화 정답 해설.pdf','170139e7d7378bffdefa50aca8f276068ab89f99a6ad8e71ce5c9b19f6e3152a','https://legendstudy.com/1706'),
 ('2e7364af-e3ce-52aa-898a-9ba139254995','bFOD6i/dJMcagNb69o','2027학년도 6월 모의평가 s_생활과윤리 문제.pdf','bde53da0a0a8400265acbd9edc18f38bfb454203367a29cdc24b48c66902e1f7','https://legendstudy.com/1706'),
@@ -226,7 +227,7 @@ insert into pdf_activation_input values
 ('813a6473-699e-5fa7-9e58-e6e24d0a260b','kNw4F/dJMcaatnbhT','2027학년도 9월 모의평가_k 화학2 문제.pdf','9a2c50d6c65618dfa79a281b7da7a5a464835098db90d372657f4b81d0bbceba','https://legendstudy.com/1710'),
 ('25fad07d-4059-5dc7-b559-c528419dd63b','P4Jnv/dJMcadcm2Kh','2027학년도 9월 모의평가_k 화학2 정답 해설.pdf','3de5a21d4217f9ba88c23205c7beb364a2c4f09c7a21f1caea037a8f600403c0','https://legendstudy.com/1710'),
 ('356dc809-b0c2-5b5d-bd46-b41d2d67af15','bJqlew/dJMcag724qI','2027학년도 9월 모의평가_k 지구과학1 문제.pdf','6bf30b30594d29370a309415f68886aac96c42072655770aa28278b907267404','https://legendstudy.com/1710'),
-('eb4111cd-fe73-5fd8-9c10-2446a2ebf3b6','mxXSl/dJMcag724qH','2027학년도 9월 모의평가_k 지구과학1 정답 해설.pdf','84615499ac53cfdf833c48f39a0193da16d4ca335cfa3412cf114e4df43f58b7','https://legendstudy.com/1710'),
+('eb4111cd-fe73-5fd8-9c10-2446a2ebf3b6','mxXSl/dJMcag724qH','2027학년도 9월 모의평가_k 지구과학1 정답 해설.pdf','84515499ac53cfdf833c48f39a0193da16d4ca335cfa3412cf114e4df43f58b7','https://legendstudy.com/1710'),
 ('5a6403ed-81e0-5e94-8bfa-1761a71ae00f','CpcXQ/dJMcacENK6y','2027학년도 9월 모의평가_k 지구과학2 문제.pdf','96a240426403a191a9b58c374f781f69d061b5b5db4a3903e302426e3033e30e','https://legendstudy.com/1710'),
 ('983d7bd8-b13b-5609-a38f-d6250e0d9c31','bLmTaC/dJMcag724qG','2027학년도 9월 모의평가_k 지구과학2 정답 해설.pdf','de798105de3051bd8399310e3992c4b7c7bec0ce9d2ee0d3b54d76f8f3271b0a','https://legendstudy.com/1710'),
 ('cab27608-7a48-58b7-a973-6c387925cd5e','cwy1Hs/dJMcac5Idvg','2027학년도 9월 모의평가_s 경제 문제.pdf','fbc57ea7a6c88d225d0099aae134943429d264ac2baedd17080662e756421d1e','https://legendstudy.com/1710'),
@@ -307,7 +308,7 @@ insert into pdf_activation_input values
 ('26bdfa87-9286-5bfb-8b5d-86c2886b0876','zxKwI/btrUKYmjp3R','2023학년도 수능 과탐_생명과학2 문제.pdf','97a6550e4528f053987ad322824496ba63e9141b6a9d7e182d1e1c1ac394e880','https://legendstudy.com/1509'),
 ('49c82a11-4df6-5484-82a9-c48ffb2b03bd','CIFZ9/btrUBaaZKTU','2023학년도 수능 과탐_생명과학2 정답 해설.pdf','e2dbf73b3da2f09903addf57f7fd95a701f6e28ddadb083a4f96b8b5ee4d16d7','https://legendstudy.com/1509'),
 ('34120926-3520-5112-bf7d-c88e7cf146df','bQLJYr/btrUDhOwgRt','2023학년도 수능 과탐_지구과학1 문제.pdf','efe4bdfaf355fff76837141cca92f474d7cb5658fe5873d55bb19fca82e098ad','https://legendstudy.com/1509'),
-('b43abe20-ee1f-59b2-93cf-243d81840580','teoPo/btrUIlPOxn2','2023학년도 수능 과탐_지구과학1 정답 해설.pdf','d95ded8e9b65f08a57d2309c79660551eaa714a1279d3ba846f006605ce26da7','https://legendstudy.com/1509'),
+('b43abe20-ee1f-59b2-93cf-243d81840580','teoPo/btrUIlPOxn2','2023학년도 수능 과탐_지구과학1 정답 해설.pdf','d95ded8e9b65f08a57d2309c79660551eaa714a1279d3ba845f006605ce26da7','https://legendstudy.com/1509'),
 ('d16f87ed-01e9-54f3-a771-ee81262eceb2','lhYYk/btrUIYNE35b','2023학년도 수능 과탐_지구과학2 문제.pdf','0d351a04cbce0cc60bda783cbb0fb75b9593ac06cb550d472403d745a125236c','https://legendstudy.com/1509'),
 ('1031ba1d-9cec-5787-b6ac-073f45d2ea23','c1Eg1g/btrUGH0bx1X','2023학년도 수능 과탐_지구과학2 정답 해설.pdf','721d75f1497ee5420797ae11a8bbc49ecfabf6b41f423463b4f9919e575148bc','https://legendstudy.com/1509'),
 ('77071cae-eb87-595b-9e57-b6909b8aa0c5','brKMGw/btrUEw5EXKk','2023학년도 수능 과탐_화학1 문제.pdf','1b5e96bc7ed82fbb62d5a2cd0631d0b99f639deac38b5d03d34fa742efa28258','https://legendstudy.com/1509'),
@@ -330,7 +331,6 @@ insert into pdf_activation_input values
 ('9f9cab7a-8d5e-52c2-a5ee-91d6a40a1b50','blwDJ9/btsHZtGWSf5','2025학년도 6월 s_사회문화 문제.pdf','6e8341252e45cd5284f2d4c139aa52129d659d003e43b5f7d84ce5f32718b5f3','https://legendstudy.com/1618'),
 ('d4dfbb44-7bf3-5c15-960f-72ea8533c397','xKFaQ/btsH0uY1ANJ','2025학년도 6월 s_사회문화 정답 해설.pdf','e7e6b1ef77b1de97a5da9d84c7509dd7310a43dbe12d4db660589fd970f96119','https://legendstudy.com/1618'),
 ('9a50b598-df2f-5573-aaad-4d81921d0a31','7hOKZ/btsH1DtW933','2025학년도 6월 s_생활과윤리 문제_9a50b598.pdf','700a3eff614afbc5281ac202faa60fd482799ad8e36803f3a8b3d7d07c3bee61','https://legendstudy.com/1618'),
-('78960745-ee6a-5045-842f-08738ac1fe44','upcYM/dJMcafBoTJm','2025학년도 6월 s_생활과윤리 문제_78960745.pdf','700a3eff614afbc5281ac202faa60fd482799ad8e36803f3a8b3d7d07c3bee61','https://legendstudy.com/1618'),
 ('ec56ac78-c3ec-5998-bb19-0c3cc3046cf4','ljLVf/btsH1nLyOWU','2025학년도 6월 s_세계사 문제.pdf','4842678b874126666fca6979ffa9ed7144f68690411ff716c584d537d95c56bc','https://legendstudy.com/1618'),
 ('a709fc3c-ae60-5d8f-b2a2-ace301d74e97','cq4FxY/btsH1NDdIWS','2025학년도 6월 s_세계사 정답 해설.pdf','684ae742410b01e44f98bbfa88fb04ddc91e1505c9f450ca33ecf7fb1fd4b979','https://legendstudy.com/1618'),
 ('e2467142-8f89-5714-b1c7-925741f23cbc','bgoqRh/btsH0oLqbDp','2025학년도 6월 s_세계지리 문제.pdf','fe54eba89fc230f2641ca1479eeb5fcabefa3a6f0d78a1547be0cee0f547ba46','https://legendstudy.com/1618'),
@@ -369,7 +369,7 @@ insert into pdf_activation_input values
 ('dc801723-efa4-504c-a0c2-5b3f565e0f7f','Fhalf/btrujJbI71x','2022학년도 수능- 영어 듣기대본.pdf','508fdd2960d9eb2b6eeae344a0a598e407caa5a8a3fc0fb591f4a5690cbcf378','https://legendstudy.com/1487'),
 ('725cbaa8-92ca-59a1-8923-856175750994','b39YEl/btrugQP6Z4p','2022학년도 수능- 한국사 문제.pdf','b3be6627e702721f9bdb6f2ab7b6a8205e1e296fc86f0a30f4d795df6a9ee399','https://legendstudy.com/1487'),
 ('180357ad-01da-5f01-8cd3-146d0fd6520d','bd0jkf/btrurTXXJs1','2022학년도 수능- 한국사 정답 해설.pdf','261adadd1465dad8ed048ca471b2c7bba55533e830127978e9061cdb35d2fd09','https://legendstudy.com/1487'),
-('02bc3bfc-e3bf-5be3-b6fa-415a041c0142','cigHlc/btrupIo6MF1','2022학년도 수능 사- 경제 문제.pdf','ec2db4c7d4996c3d75bc4441ff0ec335250fb64690846eb3ea014b8c73e06c37','https://legendstudy.com/1487'),
+('02bc3bfc-e3bf-5be3-b6fa-415a041c0142','cigHlc/btrupIo6MF1','2022학년도 수능 사- 경제 문제.pdf','ec2db4c7d4996c3d75bc4441ff0ec335250fb64690845eb3ea014b8c73e06c37','https://legendstudy.com/1487'),
 ('3784d80e-1001-54ab-9606-53aa756bd369','uyuFu/btruk3Vj4b0','2022학년도 수능 사- 경제 정답 해설.pdf','cfad1b43256c8aba6ca8c1e1eae3fb1f585aa6fb580a5c2a89b1c30316c29145','https://legendstudy.com/1487'),
 ('9195dc54-ac6a-5a5e-b735-5dd289c86b87','JF8Fq/btruh7KV8F4','2022학년도 수능 사- 동아시아사 문제.pdf','cfd024b714910d888224a104d4f6aeba804aad74b6165c46c9b09e2786448930','https://legendstudy.com/1487'),
 ('9819e967-59db-576a-bd7e-1d3a1d5adb5e','nRr9Q/btruh6SJYw1','2022학년도 수능 사- 동아시아사 정답 해설.pdf','f9a520b3572f75044523b9452159faaa6dd21a1a09f5b5c31a6e0e2e39742011','https://legendstudy.com/1487'),
@@ -448,7 +448,7 @@ insert into pdf_activation_input values
 ('1f1bc244-7ae4-56f3-9518-ac03d2161e4a','X0lDr/dJMb9PsH2Vj','2026학년도 9월 모평_s_윤리와사상 문제.pdf','03f78faef00084d02983905313dd7eb5bb2841f94168253572e59860579b323b','https://legendstudy.com/1686'),
 ('8056b73d-6687-5ec3-ad32-7f84bdf2b08c','HEl8p/dJMb8WZFiLn','2026학년도 9월 모평_s_윤리와사상 정답 해설.pdf','623bf6940f4ffe0cb0049148b573e3512bfe6bc0e66dbc253eaa066b19f38824','https://legendstudy.com/1686'),
 ('72aac935-d905-56a5-8138-455cb9c9bc35','bi5qXY/dJMb8WZFiLo','2026학년도 9월 모평_s_정치와법 문제.pdf','8d1f8894e467652e2dcd56d27e60ddaed41d2887a98c6507734ebb2f747b4665','https://legendstudy.com/1686'),
-('b8102979-39e6-5b58-9452-475e74846fb1','cu0p3V/dJMb9LDQi5z','2026학년도 9월 모평_s_정치와법 정답 해설.pdf','1b55d5f71db08309fbe24386cb096b382b05df3b3f1aaa814078898636e4f1cc','https://legendstudy.com/1686'),
+('b8102979-39e6-5b58-9452-475e74845fb1','cu0p3V/dJMb9LDQi5z','2026학년도 9월 모평_s_정치와법 정답 해설.pdf','1b55d5f71db08309fbe24386cb096b382b05df3b3f1aaa814078898636e4f1cc','https://legendstudy.com/1686'),
 ('a025946a-1660-56d1-83e3-39d83b071c6c','MpAJI/dJMb9LDQi5A','2026학년도 9월 모평_s_한국지리 문제.pdf','3c36d1234a7ddceb8d731068d68446afc63f2a487c1fd5d45dc80770c4086472','https://legendstudy.com/1686'),
 ('2936429c-5098-5c02-9f20-9f36269d516b','ppnCF/dJMb8598R8F','2026학년도 9월 모평_s_한국지리 정답 해설.pdf','5eadca1cd4b69026660173443289a63c13006873551728e35ccb9120283576b9','https://legendstudy.com/1686'),
 ('9b7eb935-151b-58d7-afeb-3e230c557767','sKqtR/btsiOivLDSf','2024학년도 6월 모의평가_국어 문제.pdf','bdeb77efffbe2ff948956d243acc99a0592539f68ebcb838c7b0f27cfd04f323','https://legendstudy.com/1516'),
@@ -456,7 +456,7 @@ insert into pdf_activation_input values
 ('92f0f546-3ab2-5f42-931e-0a1fc2a09d53','8GXXh/btsAnBcPzeS','2024학년도 6월 모의평가_국어(화작) 정답 해설.pdf','c73968393545e5dafe1f46c8b99dd87c954462db14d82555e7f42f100df58040','https://legendstudy.com/1516'),
 ('1dd2cb12-311d-5867-b8a1-89df8f81d6ae','nz6g2/btsiPihKvaU','2024학년도 6월 모의평가_수학 문제.pdf','026d29c312ac5c4d1e533aabe29a6948bcbef634471dfd5a297d405c186333c5','https://legendstudy.com/1516'),
 ('c97dc3a5-df84-5c09-92aa-cad739892eb6','ppcya/btsAjgA1qVi','2024학년도 6월 모의평가_수학(기하) 정답 해설.pdf','12bd31cc2200f8063031265aa8a03bd1a1c1ae2e4358da140e16da60ce3a825b','https://legendstudy.com/1516'),
-('afbb1eaf-f8c5-5719-ad43-e979ffa92b98','cJnOyU/btsAjsVvhhC','2024학년도 6월 모의평가_수학(미적) 정답 해설.pdf','4788468e3ba5ca5e7d1ee81f05be9b7f2d341b90116254670897811bc5862042','https://legendstudy.com/1516'),
+('afbb1eaf-f8c5-5719-ad43-e979ffa92b98','cJnOyU/btsAjsVvhhC','2024학년도 6월 모의평가_수학(미적) 정답 해설.pdf','4788458e3ba5ca5e7d1ee81f05be9b7f2d341b90116254670897811bc5862042','https://legendstudy.com/1516'),
 ('7c1adddb-a3ee-52f7-a240-3b06d6cee469','cPiVRw/btsAjv5KGMi','2024학년도 6월 모의평가_수학(확통) 정답 해설.pdf','ab8c78541be9fe891c1ffb8efa89d81ecf5584249eab571c6515d18c5fe43bbe','https://legendstudy.com/1516'),
 ('81641900-9606-5ce0-a94b-4f052c832750','4WroV/btsiOfTu8Pv','2024학년도 6월 모의평가_영어 문제.pdf','ff63eaadf4854e75049a09700ffd4244fafe37db2cdbf9e669bbb6045aed5767','https://legendstudy.com/1516'),
 ('df928a2b-f074-549d-9f14-47377128af9c','NqLzo/btsiPjgIecE','2024학년도 6월 모의평가_영어 듣기대본.pdf','593ca3ff0e724bc3c41c6ee229736caca884995050d60ac50a94b33c3209455b','https://legendstudy.com/1516'),
@@ -474,7 +474,7 @@ insert into pdf_activation_input values
 ('778f8b78-5065-5cb3-9f4c-55529147e94b','A6BOc/btsiO6oePT2','2024학년도 6월 모의평가_과탐_지구과학1 문제.pdf','504db5b21117cc7fa38e5c8bdf323ae4daf21ff410a67f77f131e5ee646cee31','https://legendstudy.com/1516'),
 ('9130d5d7-6931-5048-b85b-d73f0bba71dc','l3sDK/btsiNaybJsE','2024학년도 6월 모의평가_과탐_지구과학1 정답 해설.pdf','ea88d922b63adef969f47f5ef7c8be659d075e3622b8479dd868575569d4f7c7','https://legendstudy.com/1516'),
 ('d2fb7bc0-ebf4-5174-b524-a832a73fd051','cvgXnY/btsiJzycztw','2024학년도 6월 모의평가_과탐_지구과학2 문제.pdf','1cd89e5bdc93c44195003d82ac6f8784a3d046bddabfef57f37406f22f09cbe1','https://legendstudy.com/1516'),
-('64ded1f2-f360-5c55-aeea-3d080aa0896e','csgSk7/btsiPQemZ06','2024학년도 6월 모의평가_과탐_지구과학2 정답 해설.pdf','33f05e7e3846c018ec86a51b0a08c49320898d87b9317b08904f10dcc9e2d8ae','https://legendstudy.com/1516'),
+('64ded1f2-f360-5c55-aeea-3d080aa0896e','csgSk7/btsiPQemZ06','2024학년도 6월 모의평가_과탐_지구과학2 정답 해설.pdf','33f05e7e3845c018ec86a51b0a08c49320898d87b9317b08904f10dcc9e2d8ae','https://legendstudy.com/1516'),
 ('44c0c1d7-fefa-5d0e-a93e-f820b9dd13e9','pVclX/btsiQjm8VRW','2024학년도 6월 모의평가_과탐_화학1 문제.pdf','941ada7a994ef6a0fcb7d63cfdcde803afeea23e786caa13c995b575c0efc168','https://legendstudy.com/1516'),
 ('b862acf5-6578-52e2-8d98-3e80c8697f53','y0aRb/btsiX3cD9uf','2024학년도 6월 모의평가_과탐_화학1 정답 해설.pdf','d99c33d43aca71cce3a901cd3efc12164520537e33e0ff14f44a5b8541542e37','https://legendstudy.com/1516'),
 ('d9806f83-5498-5bc6-8a07-fcda0fd63523','ovwss/btsiO6PgJdI','2024학년도 6월 모의평가_과탐_화학2 문제.pdf','a3fdf72d90cd8b2d16d39471e928fe5905dcd2414f1a306a5f43ca057ce888ea','https://legendstudy.com/1516'),
@@ -503,7 +503,7 @@ insert into pdf_activation_input values
 ('28bc37ae-831d-5796-89f6-68955dcbe39c','bZ7DdO/btsJvobllII','25학년도 9월 모평_수학(기하) 문제.pdf','7318b1f73df1dd657c2371cd24636e9aea89a04ed9925e4d24ec10ca5cd51b40','https://legendstudy.com/1634'),
 ('4a124060-de01-5be7-9a0d-84427cec8e40','bBwcjj/btsJvnpWHqr','25학년도 9월 모평_수학(미적) 문제.pdf','a88e9df8910a4d4d108585d10df936ee61d8448b6ce95da216fc5e757274f055','https://legendstudy.com/1634'),
 ('462594b3-bda5-536c-9fba-391e390eff09','VToXH/btsJwdG85OB','25학년도 9월 모평_수학(확통) 문제.pdf','a764252591b0b5467a74e7d1fb88c624f51e1642fc83efdc9657281495d9df06','https://legendstudy.com/1634'),
-('ac489430-a656-59a7-be0a-8de7322e5c4a','bSDFHw/btsJt5RUwKi','25학년도 9월 모평_수학 정답 해설.pdf','ff290de3a4c7bc618a8f151336ae9b484673118622eb0ecbc905f24f9f44089c','https://legendstudy.com/1634'),
+('ac489430-a656-59a7-be0a-8de7322e5c4a','bSDFHw/btsJt5RUwKi','25학년도 9월 모평_수학 정답 해설.pdf','ff290de3a4c7bc618a8f151336ae9b484573118622eb0ecbc905f24f9f44089c','https://legendstudy.com/1634'),
 ('67024cf6-bb95-5d32-b333-d4b1e27253e4','JJsXj/btsJue8TFqZ','25학년도 9월 모평_영어 문제.pdf','73a48f9bba4265fee9875d86f8277aa7946fcb630c69c11ad03986568bead7e5','https://legendstudy.com/1634'),
 ('40e06b60-ac5d-5312-9d10-a093336f658e','cE88ij/btsJvuo5zo9','25학년도 9월 모평_영어 정답 해설.pdf','8c1ab86dbb7a1f48f16f4b91212232801a601e4dd62513e5b8a1f71363fb436e','https://legendstudy.com/1634'),
 ('1ceadfbd-c608-56b5-ac55-d46eb462ee12','HJTaF/btsJusFROqS','25학년도 9월 모평_영어 듣기대본.pdf','b12aa6587e81523d72e0ada38825269c0971270e57835b9b4fa5e60758f2d17d','https://legendstudy.com/1634'),
@@ -521,7 +521,7 @@ insert into pdf_activation_input values
 ('7033f57e-1b4c-5c2f-bad3-830dda69b43e','bEt6wS/btsJtENLvHV','25학년도 9월 모평_과_지구과학1 정답 해설.pdf','ce62f6e9145b888c768bafabaa0a3966e8185504444fee02e15ae72cae0cf05e','https://legendstudy.com/1634'),
 ('f9da5964-97c1-553e-9487-d72cde59d5f5','bJlbBC/btsJuRLPaMS','25학년도 9월 모평_과_지구과학2 문제.pdf','5bb46bd115e09cd50da11567d5669eb301cc04db6ac9dcb984c140588878cb71','https://legendstudy.com/1634'),
 ('e51397a3-cae7-55c9-a2ac-bfecca0204b8','AyX34/btsJvtp90uE','25학년도 9월 모평_과_지구과학2 정답 해설.pdf','a30fd62889e64c07bfc63d018029fc063399683c7d9d63b3748d59f8d6908d58','https://legendstudy.com/1634'),
-('022b846a-00a7-5a4c-b7ce-4991f762e3a2','bqI2C4/btsJutEKXjm','25학년도 9월 모평_과_화학1 문제.pdf','5901fcbd78a97b7330614e22d40ef83c4e80c34f966482f020481cd4bf72142e','https://legendstudy.com/1634'),
+('022b845a-00a7-5a4c-b7ce-4991f762e3a2','bqI2C4/btsJutEKXjm','25학년도 9월 모평_과_화학1 문제.pdf','5901fcbd78a97b7330614e22d40ef83c4e80c34f966482f020481cd4bf72142e','https://legendstudy.com/1634'),
 ('6a003bec-dd5d-573e-8901-333be0c3cb7c','Nmtrz/btsJvq1hvNe','25학년도 9월 모평_과_화학1 정답 해설.pdf','169277862ee5db221083cc6613ce954ffc6a4bc857839da72feb75eac151ac30','https://legendstudy.com/1634'),
 ('37dec3b3-a257-52bb-8a07-12cef70a0652','BvG1g/btsJvaK9DHf','25학년도 9월 모평_과_화학2 문제.pdf','864dc4eda907ea8b92b7ed8215c6babe4f8d25c67aa1ffddb7bb0fa14d8c3eb5','https://legendstudy.com/1634'),
 ('3fa7ddef-f1b1-523c-b4f9-f4cf46e9b00e','ztWFd/btsJt3sYUuV','25학년도 9월 모평_과_화학2 정답 해설.pdf','8d2ca26ea072dc49460ba0aadcea55e5cb2c827e9dfde73149071a79f8f28ee5','https://legendstudy.com/1634'),
@@ -606,7 +606,7 @@ insert into pdf_activation_input values
 ('2688a4ad-2a87-5491-b65a-1a0977f45b47','dsIf35/btrIXvP0khH','2023학년도 6월 모평 과탐- 물리학2 정답 해설.pdf','893e65b860f6b2bbf56d02135899667a37c46872d02ca7942875784f02519717','https://legendstudy.com/1501'),
 ('78a30a67-47bb-5752-bb48-d549e11b491c','lweeg/btrISOwzfeS','2023학년도 6월 모평 과탐- 생명과학1 문제.pdf','21c13d94cfee37304d06307e5f88a3cc117a320a3282034b748fae5d5421a0d4','https://legendstudy.com/1501'),
 ('7df2bffc-64e7-55a4-9271-3e230794cbb7','tP1vj/btrIVgToope','2023학년도 6월 모평 과탐- 생명과학1 정답 해설.pdf','99c8b6a621ac64315ca9688056bbb6005c0ea3c6c0b7e8c10c50903a5a3aeb51','https://legendstudy.com/1501'),
-('8bc3d553-a5b1-5c8c-9712-8469f493cc89','lYVix/btrIUalyk7d','2023학년도 6월 모평 과탐- 생명과학2 문제.pdf','4125b1d9f9fc4a75cfe99dec1b327e64d736253c642f188eee2b70bee6cd46a9','https://legendstudy.com/1501'),
+('8bc3d553-a5b1-5c8c-9712-8459f493cc89','lYVix/btrIUalyk7d','2023학년도 6월 모평 과탐- 생명과학2 문제.pdf','4125b1d9f9fc4a75cfe99dec1b327e64d736253c642f188eee2b70bee6cd46a9','https://legendstudy.com/1501'),
 ('7782e202-200e-5a98-a00a-0c2b35c55ccc','ecbIFS/btrIVhkp6T0','2023학년도 6월 모평 과탐- 생명과학2 정답 해설.pdf','43c56d62ac8b8e6ec767b86918a4360dbfd24334ae8f0c838cdeb64dde0bd9b6','https://legendstudy.com/1501'),
 ('51bd67b7-ebb0-537f-9980-078f163a5c47','pXFfL/btrIPXneK3b','2023학년도 6월 모평 과탐- 지구과학1 문제.pdf','f5d95cb9baea8dac7319106396795e821fc787fcedacf76646dfe5caa00d0b1d','https://legendstudy.com/1501'),
 ('36c42d1d-b690-5c33-9f3a-b1e311599e5c','kJrOc/btrIPW9H0Po','2023학년도 6월 모평 과탐- 지구과학1 정답 해설.pdf','6459d51ad2dbebedf286f8bab00fd6fe8c039dd3495806faa5df8e5a5b1e8063','https://legendstudy.com/1501'),
@@ -615,7 +615,7 @@ insert into pdf_activation_input values
 ('901fcc5e-1415-55e0-b782-d9774c71b165','b2L0V6/btrIXwnR9CC','2023학년도 6월 모평 과탐- 화학1 문제.pdf','53f8f86c04697ad4bff9c377eb0da820bdc512c1a2b0312158e25984264e2583','https://legendstudy.com/1501'),
 ('2eb91be7-c568-597f-818b-1f78add00bd5','TyS8U/btrISNxzhvQ','2023학년도 6월 모평 과탐- 화학1 정답 해설.pdf','9ed3444d8be250146e216c1533ee75e5f5e7aada75ea1790913b915738525c4d','https://legendstudy.com/1501'),
 ('906896bc-8b4c-5d25-b026-dff891f4e35b','b9WcRu/btrIT8ONVSG','2023학년도 6월 모평 과탐- 화학2 문제.pdf','4ab8e5130e62710437620ed1d3b1764a0e73ef933bef8eea34771c7935590f6e','https://legendstudy.com/1501'),
-('07295125-7328-551c-a846-780a592132f6','D7QVF/btrIToYGoS1','2023학년도 6월 모평 과탐- 화학2 정답 해설.pdf','3b364a5cebe6e672f6add0d0725d80a4e7154c996be7d8446281be20e4fe93cf','https://legendstudy.com/1501'),
+('07295125-7328-551c-a845-780a592132f6','D7QVF/btrIToYGoS1','2023학년도 6월 모평 과탐- 화학2 정답 해설.pdf','3b364a5cebe6e672f6add0d0725d80a4e7154c996be7d8446281be20e4fe93cf','https://legendstudy.com/1501'),
 ('0b6233c5-2ec9-5fc4-b2cf-2f2c2dda1268','ImlXI/btrIVgZ9F6l','2023학년도 6월 모평 사탐- 경제 문제.pdf','bee2501e1027b5af612215b7ed4882da4fcda13b906c79afb1c8f769ff4bccae','https://legendstudy.com/1501'),
 ('46eabcb3-9cf3-597e-b8a3-6b453cf1c48a','LI6Yt/btrIVglxbSx','2023학년도 6월 모평 사탐- 경제 정답 해설.pdf','3e2ae88e27d7dd99c85d0b7727b2f102b9bad90cd21d17369cf3925d72cd2f5e','https://legendstudy.com/1501'),
 ('98307439-6af2-56fb-8994-c1fef01f6dc2','l242M/btrIVhLwzav','2023학년도 6월 모평 사탐- 동아시아사 문제.pdf','2692af7a66247536bed37192c6717fd9d415af95eb1827fdcdaff287cf6cb133','https://legendstudy.com/1501'),
@@ -666,13 +666,13 @@ insert into pdf_activation_input values
 ('bfcdb575-1248-5542-8ebd-f70e5a9f225a','bYdNwx/btstwkpZcbb','2024학년도 9월 모의평가_사탐_사회문화 문제.pdf','d90f16e718c331e7781573aa098cdf9559182a70b2081dff85705647b094a159','https://legendstudy.com/1525'),
 ('c61dfe93-a276-5905-a5bc-4636736ce52e','dSMUcH/btstykic31V','2024학년도 9월 모의평가_사탐_사회문화 정답 해설.pdf','e31175d1a7532a8787d346f48407ebaee13f66d11c001ddbedb8263edd8ae028','https://legendstudy.com/1525'),
 ('30caf22c-292f-5f5a-a379-56cf492ec864','7PJsv/btstCHKMCur','2024학년도 9월 모의평가_사탐_생활과윤리 문제.pdf','a2b68415e37d1f2f307ee7981ea195f9b9924ca6b8108182cea6bbe5071b5e24','https://legendstudy.com/1525'),
-('56b4db82-2b7b-5982-b846-c5bc5df90fd8','dDHJsi/btstsOrCtZp','2024학년도 9월 모의평가_사탐_생활과윤리 정답 해설.pdf','fa23b1432fec34fd168ec314397fa67806e0fc1060df95694aaf54ae91605479','https://legendstudy.com/1525'),
+('56b4db82-2b7b-5982-b845-c5bc5df90fd8','dDHJsi/btstsOrCtZp','2024학년도 9월 모의평가_사탐_생활과윤리 정답 해설.pdf','fa23b1432fec34fd168ec314397fa67806e0fc1060df95694aaf54ae91605479','https://legendstudy.com/1525'),
 ('981b000f-48bd-5cfe-bd80-8a63b4a582aa','bktqA1/btsts1RMLZB','2024학년도 9월 모의평가_사탐_세계사 문제.pdf','10c14567246e35d1025d5e0636ea0449e14ff94384296659886df63a9c139e48','https://legendstudy.com/1525'),
 ('13950048-fd3e-595f-aa66-6d1653413f61','bN0jif/btstwWh5YRt','2024학년도 9월 모의평가_사탐_세계사 정답 해설.pdf','c05f303091b683d30b3fe33f79dd57f6b04e44f8c52223d868538a8ca38514af','https://legendstudy.com/1525'),
 ('704a2d31-7ff5-5d5f-ad73-e2931d338157','dGulwH/btstHcX1AA1','2024학년도 9월 모의평가_사탐_세계지리 문제.pdf','bbbfd39fb26cc1932d5c0d6be4802efb4ad690bfe32d69e7125b322e8c1c535d','https://legendstudy.com/1525'),
 ('b4844497-6d30-5ae6-a631-90295724fa90','H0ozQ/btstG4Z0p2u','2024학년도 9월 모의평가_사탐_세계지리 정답 해설.pdf','befb123d2c5c85a10349bb2658f4ac85ce6fc68512f2162c795335665babd526','https://legendstudy.com/1525'),
 ('73950f6c-963b-5955-a6aa-8cd08c8536ae','AefDr/btstsQCZds2','2024학년도 9월 모의평가_사탐_윤리와사상 문제.pdf','54dac185c95e1696edd5c3455a27eb9af2c91c06dc6488ea46b460aa92f94e46','https://legendstudy.com/1525'),
-('f57e7591-76c9-5219-a3e1-71d3ecdbfe1a','EeRvP/btstzkWASbo','2024학년도 9월 모의평가_사탐_윤리와사상 정답 해설.pdf','42b0cfabfea04b41b24a77937f5d26bd200da2ce25b4c026ccdd7cfc86f98461','https://legendstudy.com/1525'),
+('f57e7591-76c9-5219-a3e1-71d3ecdbfe1a','EeRvP/btstzkWASbo','2024학년도 9월 모의평가_사탐_윤리와사상 정답 해설.pdf','42b0cfabfea04b41b24a77937f5d26bd200da2ce25b4c026ccdd7cfc86f98451','https://legendstudy.com/1525'),
 ('17e7a02a-0fd1-5633-8553-d23464f3f67a','st7Jv/btstxmASP2n','2024학년도 9월 모의평가_사탐_정치와법 문제.pdf','b4d83502a7e86508d4638d3daf3372a6edc68a8de01143f0b7dbbefc0999a410','https://legendstudy.com/1525'),
 ('ce9d0e5c-2903-5a7d-a78f-7296d48b22ff','mR1w0/btstw1wYIF3','2024학년도 9월 모의평가_사탐_정치와법 정답 해설.pdf','fb2f7ac397236109149f1af5edf04cd48a5557989be9fde56bf0e17a3485e560','https://legendstudy.com/1525'),
 ('1af9fc67-d2d8-59cd-aece-2b0aa20e8a94','bxIe8z/btstG6pXSJg','2024학년도 9월 모의평가_사탐_한국지리 문제.pdf','09d4ed756f2d4d20745292cf09f2a9ef80e93d8af9c89130352bfb9e07004315','https://legendstudy.com/1525'),
@@ -688,7 +688,7 @@ insert into pdf_activation_input values
 ('c90ef851-93fb-59bd-90d6-517111dfc3c8','GJGDX/btrao7wQeaB','2022학년도 6월-영어 문제.pdf','20356214cc91ec70c83b3f2799e8452f4c01e6f00f5fd03c4b0f342f1d40db34','https://legendstudy.com/1483'),
 ('09264ee6-94db-56dc-8ac5-b69f9fe2775e','cTpvKJ/btraoaNvc8B','2022학년도 6월-영어 정답 해설.pdf','1de030fe732e0b9d41e17796b6acc6ae0a1d3a9b1a6da17293770452785d0858','https://legendstudy.com/1483'),
 ('3af080c0-84de-5000-b10c-4d8d52fda27a','by8Yvi/btrasuku8Vx','2022학년도 6월-한국사 문제.pdf','99a448d1562ec2376a7970ae639a04fd6f94ccf306d80aade6037de57c5f2531','https://legendstudy.com/1483'),
-('8f8db4fe-f3c7-5cc5-bae8-a4234d78a774','bzh1KJ/btrax8udLPr','2022학년도 6월-한국사 정답 해설.pdf','682a51e8ffa6f48465dd8e78fd40be4e767e5116a5633e2a2da57bea7a0c3f34','https://legendstudy.com/1483'),
+('8f8db4fe-f3c7-5cc5-bae8-a4234d78a774','bzh1KJ/btrax8udLPr','2022학년도 6월-한국사 정답 해설.pdf','682a51e8ffa6f48455dd8e78fd40be4e767e5116a5633e2a2da57bea7a0c3f34','https://legendstudy.com/1483'),
 ('9aa640a0-255e-528c-9050-d40cc78aa9b0','cQdSj4/btrat2ONo3I','2022학년도 6월-과-물리학1 문제.pdf','1a1807f8b4a4c57ea8b73e5a1f33013e4a01c8a00701e385bccb920653300086','https://legendstudy.com/1483'),
 ('ac825ba3-e597-52ee-9571-cb06f96c6dcd','nrtx2/btraBSD8xC6','2022학년도 6월-과-물리학1 정답 해설.pdf','3c9025d6b9b18f63c070fa9893b084d1f0219f919929cd7fc1e716b77aa0db18','https://legendstudy.com/1483'),
 ('940d65f6-8610-5d36-ba15-05956759da82','tjUMo/btrapEVtKDI','2022학년도 6월-과-물리학2 문제.pdf','b2288763f742e89cd975c786d819cda73a3315e0c959963f281c8566f001749e','https://legendstudy.com/1483'),
@@ -713,8 +713,8 @@ insert into pdf_activation_input values
 ('b9728a33-ab36-5884-9fe0-34df8575719c','tFelN/btrao6Lrg8p','2022학년도 6월-사-사회문화 정답 해설.pdf','2a0a30bfc31a5d436401bcaa2c71ec5550254a64d32046960b98c88c20866991','https://legendstudy.com/1483'),
 ('0575b2e0-52f8-50d9-bac9-4d6e6e6af88a','bkccST/btrat1Jayb3','2022학년도 6월-사-생활과윤리 문제.pdf','d13817a5743cbe15dbe7389e9ee022318275ff0f58093fb24b48cb9d6f019c0f','https://legendstudy.com/1483'),
 ('9ec14b70-a441-5631-b72c-86e52a3ab83b','bpnzv1/btraqRNMZi9','2022학년도 6월-사-생활과윤리 정답 해설.pdf','1fdcbf2eda08f93ad1f7c497cc4b39036f94500dc2ba5bf7a03ca76609470c4d','https://legendstudy.com/1483'),
-('422e99bf-c10f-59a9-9e09-c47994404487','bxTONB/btrapE8ZMGn','2022학년도 6월-사-세계사 문제.pdf','01168d14afe6a8461e3be6f8a1f5378e0813fe9fe2426ee7ef1b6e343a1cddb4','https://legendstudy.com/1483'),
-('b3f009db-ddd4-50ee-8acd-2111eaa495b5','2qo2i/btrapGyW5Ce','2022학년도 6월-사-세계사 정답 해설.pdf','01168d14afe6a8461e3be6f8a1f5378e0813fe9fe2426ee7ef1b6e343a1cddb4','https://legendstudy.com/1483'),
+('422e99bf-c10f-59a9-9e09-c47994404487','bxTONB/btrapE8ZMGn','2022학년도 6월-사-세계사 문제.pdf','01168d14afe6a8451e3be6f8a1f5378e0813fe9fe2426ee7ef1b6e343a1cddb4','https://legendstudy.com/1483'),
+('b3f009db-ddd4-50ee-8acd-2111eaa495b5','2qo2i/btrapGyW5Ce','2022학년도 6월-사-세계사 정답 해설.pdf','01168d14afe6a8451e3be6f8a1f5378e0813fe9fe2426ee7ef1b6e343a1cddb4','https://legendstudy.com/1483'),
 ('b03096eb-c482-501c-b23d-9e1b56ce5bf2','9ilg0/btrapE8ZPa0','2022학년도 6월-사-세계지리 문제.pdf','e70ddbe5d519b5e88c6e704ae304e2fa8a057af704953ed1a84d062ec421e256','https://legendstudy.com/1483'),
 ('1422f4f9-795e-5151-bd39-0c3e155df877','yXKV0/btraBem8S3q','2022학년도 6월-사-세계지리 정답 해설.pdf','9b674bc4e2371718265b2ef2f02bf4e9eacb44b8bbc9672c339c2940c7fd0e18','https://legendstudy.com/1483'),
 ('48f7a2eb-25d5-5b4d-bc7f-c17ca1f1f22d','kF2R3/btraBTQzWN7','2022학년도 6월-사-윤리와사상 문제.pdf','31e70902693b9e351f507cc91511c06033a7080ce0e1b19a69f7c09f1f4ef82e','https://legendstudy.com/1483'),
@@ -863,7 +863,7 @@ do $$ begin
   join public.exams e on e.content_item_id=c.id and e.exam_type in ('csat','evaluation_mock','national_mock')
   join public.source_posts sp on sp.id=r.source_post_id and sp.id=c.source_post_id and sp.source='legendstudy' and sp.source_status='available'
   where r.exam_subject_id is null or exists(select 1 from public.exam_subjects es where es.id=r.exam_subject_id and es.is_active)
- ) <> 846 then raise exception 'Registry mismatch: no changes applied'; end if;
+ ) <> 845 then raise exception 'Registry mismatch: no changes applied'; end if;
 end $$;
 -- SQL standard_conforming_strings preserves backslashes: use [.] for literal dot.
 alter table material_download_private.permissions drop constraint permissions_check1;
@@ -881,7 +881,7 @@ insert into material_download_private.permissions(resource_id,source_resource_ke
  'wiki/operations-commercial-20261113.md#phase-3', 'owner_download_activation_20261113'
  from pdf_activation_input;
 do $$ begin
- if (select count(*) from pdf_activation_input i where public.resource_download_policy(i.resource_id)->>'state'='ALLOWED')<>846 then
+ if (select count(*) from pdf_activation_input i where public.resource_download_policy(i.resource_id)->>'state'='ALLOWED')<>845 then
  raise exception 'Policy postcheck failed'; end if;
 end $$;
 commit;

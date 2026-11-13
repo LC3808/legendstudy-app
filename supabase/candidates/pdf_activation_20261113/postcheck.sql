@@ -1,4 +1,4 @@
--- Read-only; expected 846 ALLOWED after apply, 846 VIEW_ONLY after rollback.
+-- Read-only; expected 845 ALLOWED after apply, 845 VIEW_ONLY after rollback.
 select p.state,count(*) from material_download_private.permissions p
 where p.revision=(select max(x.revision) from material_download_private.permissions x where x.resource_id=p.resource_id)
 group by p.state;

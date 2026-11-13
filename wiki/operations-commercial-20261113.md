@@ -156,3 +156,20 @@ PHASE3/4 Flutter 다운로드·MY·검색·탈퇴11파일 **109 PASS/1 SKIP**.
 SKIP은 기존 자격증명 기반 public 검색 통합검증이며 실제 WEB E2E가 아니다.
 운영 자료/회원 기록 변경0. 실기기 다운로드 및 WEB 실제 이용 흐름은 NOT TESTED.
 Owner: PHASE3 SQL 적용과 다음 바이너리 범위 승인 필요.
+
+### PHASE3 운영 사전검증 중단 후 수정
+
+Owner가 첫 apply.sql 실행 시 `Registry mismatch` 보고, 사후 policy_allowed=0.
+운영 전체846 후보를 읽기 전용 재대조하여 **1개만 비활성** 확인:
+78960745-ee6a-5045-842f-08738ac1fe44 (1618 게시글 생활과윤리 문제).
+다른845개는 ID/key/source/pilot/활성 계약 일치. 이전846개 이력은 보존하되
+현재 apply/postcheck는 이1개를 제외한 **845개** 기준. 원본 재활성화/삭제0.
+`test_isolated.py`는 운영 비활성 상태를 반영한 PostgreSQL17에서845개 허용,
+비활성자료 제외,Guest 조회,재실행 거절,append-only 원복/기존845 revision보존 PASS.
+첫 패키지가 오래된 활성 상태를 현재 상태로 대조하지 못한 점을 수정했다.
+Owner 수정본 적용 결과 대기이며 운영 활성화 완료 아님.
+
+### Owner 후속 회신
+
+장애 시점 CPU/RAM/IO 그래프·지원 답변은 없음. 원인 미확정 유지.
+학교 순위는 **현행 총·평균3명/참여1명 유지** 재확정. 공개5명 변경하지 않는다.

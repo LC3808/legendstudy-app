@@ -845,3 +845,6 @@ insert into public.resources select 'aa226b74-9642-5355-8051-766cdb44ab0b'::uuid
 insert into public.resources select 'e15ac431-96fb-54f2-a8b5-2b57813d0b33'::uuid,c.id,c.source_post_id,null,true,'992A5F475F7C183209' from public.content_items c where source_url='https://legendstudy.com/1435';
 insert into public.resources select '1b973751-b866-5fba-ade8-7691da581626'::uuid,c.id,c.source_post_id,null,true,'9984C3465F7C18320A' from public.content_items c where source_url='https://legendstudy.com/1435';
 insert into public.resources select 'e7016416-fdcc-5ec6-a672-6294b37ad8a3'::uuid,c.id,c.source_post_id,null,true,'99A08A355F7C183206' from public.content_items c where source_url='https://legendstudy.com/1435';
+
+-- Match verified production retirement; old evidence must not reactivate it.
+update public.resources set is_active=false where id='78960745-ee6a-5045-842f-08738ac1fe44';
