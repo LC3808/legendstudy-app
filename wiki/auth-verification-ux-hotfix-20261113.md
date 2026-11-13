@@ -115,3 +115,13 @@ Owner가 기존 앱 데이터를 유지한 iPhone17 Pro Max 설치/로그인 화
 - AAB `build/releases/app84/legendstudy-1.0.4-84.aab` (101,876,067 bytes), SHA256 `ae91211c8cb62a60d6b68e85899d7836f94ab9baca0544b2f25489c75f5b2727`.
 - 기존 업로드 인증서·jarsigner·package/version·release non-debuggable·운영 공개 설정·모든64bit ELF16KB 정렬 **PASS**. min24/target36, 기존 권한 유지/AD_ID 없음. Android 실기기·Play 업로드/설치 **NOT TESTED**.
 - APP83 IPA/AAB 해시 보존 재확인. main 병합·운영 변경·양쪽 스토어 업로드/제출0. 이 후속은 hotfix 브랜치의 Wiki/영수증만 갱신한다.
+
+## Owner 확인 후 main 통합 — 2026-11-13
+
+Owner가 로그인 화면 확인 완료와 main 병합·Push를 승인했다. 스토어 업로드는 Owner가 직접 수행한다.
+
+- fetch 후 원격/로컬 main `9f533d29773a8f5c28b45904c079fc4fe37417a8`는 hotfix의 조상. 다른 main 전용 변경/충돌0, fast-forward 통합 가능 확인.
+- hotfix5개 커밋은 로그인 오류/안내 UI2파일·테스트3파일·버전·Wiki만 포함한다. 운영DB/SDK/Native/LAB 변경 없음.
+- 최종 제품 트리는 배포 소스 `8195bb0`와 lib/android/ios/pubspec/lock 모두 동일. 기존2601 PASS/8 SKIP/0 FAIL·Analyze 및 빌드 검증을 재사용하며 문서/fast-forward만을 이유로 테스트를 재실행했다고 기록하지 않는다.
+- IPA/AAB 파일 존재·SHA256 재확인 PASS. 신규 바이너리 생성/스토어 업로드·제출0. 실기기 실제 계정 로그인·Android 실기기 NOT TESTED 유지.
+- main을 fast-forward하고 일반 Push(강제 Push 없음) 후 원격 SHA와 로컬 HEAD 일치를 확인한다. 최종 통합 SHA는 Git main을 조회한다.

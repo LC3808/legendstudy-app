@@ -1,3 +1,7 @@
+## 2026-11-13 — APP84 Owner 확인·main 통합 승인
+
+Owner 로그인 화면 확인 후 main 병합/Push 승인. [통합 근거](auth-verification-ux-hotfix-20261113.md#owner-확인-후-main-통합--2026-11-13): 최신main9f533d2가 hotfix 조상, 충돌0·제품 트리/배포 소스 동일·IPA/AAB 해시 PASS. fast-forward/일반 Push로 통합하며 스토어 업로드는 Owner 담당. 운영/바이너리 변경0, 실제 계정 로그인·Android 기기 NOT TESTED 유지.
+
 ## 2026-11-13 — APP84 iPhone 로그인 UI·Android AAB
 
 [실기기·Android 후속](auth-verification-ux-hotfix-20261113.md#iphone17-업데이트로그인-ui-및-android-빌드-후속): Owner 승인으로 iPhone17 Pro Max83→84 삭제 없는 업데이트·실행/로그인 안내 숨김 PASS, 계정 로그인·로그아웃·초기화0. Android 생성 registrant 잔여 참조 재생성 후 동일 소스 AAB/서명·16KB 검증 PASS. 기존 APP83 해시 보존. 실제 인증/Android 기기·스토어 NOT TESTED; main/운영/스토어 변경0.
