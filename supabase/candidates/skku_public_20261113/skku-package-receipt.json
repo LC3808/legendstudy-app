@@ -1,0 +1,79 @@
+{
+  "questions": [
+    {
+      "question_id": "1ce6e75d-2e6e-543c-b6a4-e1c41b95b0bb",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "source_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:1"
+    },
+    {
+      "question_id": "40cb9125-a195-5540-a650-60f0cc6f7518",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "source_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:2"
+    },
+    {
+      "question_id": "d0e47369-676a-5347-94f3-bb7a2dcd6814",
+      "exam_id": "ed5bcc6c-ee78-527c-94bc-c913414c846c",
+      "source_key": "source:dc5b3e812a60ed1766af528ef74ab3d70c6202097785d0199a714629306bbc9f:3"
+    },
+    {
+      "question_id": "dcd032b7-e2e8-52d7-b3fe-ccb55e572a96",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "source_key": "source:skku-2026-admission-sk01:q1"
+    },
+    {
+      "question_id": "8215d793-884f-5392-ba34-39b2c934c7db",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "source_key": "source:skku-2026-admission-sk01:q2"
+    },
+    {
+      "question_id": "1bb7bbff-fdf4-5205-b779-ccb29e756479",
+      "exam_id": "fa908d5a-f3f9-5565-b11a-8fcaf8d0bc78",
+      "source_key": "source:skku-2026-admission-sk01:q3"
+    },
+    {
+      "question_id": "0ee85c19-7d9f-5186-8ff7-6f9353f21097",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "source_key": "source:skku-2026-admission-sk03:q1"
+    },
+    {
+      "question_id": "8633896c-7611-5eeb-ae69-ab2672f1d867",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "source_key": "source:skku-2026-admission-sk03:q2"
+    },
+    {
+      "question_id": "337b7c8a-1c15-5f67-b542-f82877aad6df",
+      "exam_id": "cfced8fe-2111-5ee2-9b81-b19dd1933d54",
+      "source_key": "source:skku-2026-admission-sk03:q3"
+    },
+    {
+      "question_id": "8121b47e-4a8c-5767-b90c-90bde3327d74",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "source_key": "source:skku-2026-admission-sk05:q1"
+    },
+    {
+      "question_id": "e8deaca8-512a-56d8-82fa-fa11993883bc",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "source_key": "source:skku-2026-admission-sk05:q2"
+    },
+    {
+      "question_id": "b36ee18b-15cd-53bf-ba79-62bccf56510e",
+      "exam_id": "17a2b4c9-6070-51b4-8f96-5d347335b5d2",
+      "source_key": "source:skku-2026-admission-sk05:q3"
+    },
+    {
+      "question_id": "9ea7243c-f209-5341-a334-347cda833409",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "source_key": "source:skku-2027-mock-sk12:q1"
+    },
+    {
+      "question_id": "c5fc0bc9-02a5-5298-904d-33c9b3c405eb",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "source_key": "source:skku-2027-mock-sk12:q2"
+    },
+    {
+      "question_id": "fda4849f-0f49-5553-99bb-1c78985ab5cb",
+      "exam_id": "f4674c42-defb-57df-9356-611138d2be85",
+      "source_key": "source:skku-2027-mock-sk12:q3"
+    }
+  ]
+}

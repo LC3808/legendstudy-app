@@ -1,0 +1,443 @@
+{
+  "version": "owner-review-skku15-v1",
+  "prepared_at_kst": "2026-11-13T11:23:11.307671+09:00",
+  "scope": "Original natural expansion 221 plus separate Ewha 87; precompleted Hanyang/Chungang/Korea/Inha and prior extra connections remain outside this denominator.",
+  "overall": "PARTIAL_OTHER_UNIVERSITIES",
+  "status_counts": {
+    "PUBLISHED": 302,
+    "HOLD": 6
+  },
+  "cohorts": {
+    "natural_expansion": {
+      "universities": 10,
+      "exams": 83,
+      "questions": 221,
+      "published": 215,
+      "remaining": 6
+    },
+    "ewha_official": {
+      "exams": 21,
+      "questions": 63,
+      "Math": 27,
+      "Essay": 36,
+      "state": "PUBLISHED",
+      "connection_work": "DONE"
+    },
+    "ewha_mock": {
+      "exams": 8,
+      "questions": 24,
+      "state": "PUBLISHED",
+      "existing_1_exam_3_question_registry_preserved": true,
+      "connection_work": "DONE"
+    }
+  },
+  "published_total": 302,
+  "published_exams": 110,
+  "published_universities": 11,
+  "publication_pending": 0,
+  "remaining_material_or_rights": 6,
+  "owner_quality": "NOT TESTED",
+  "provider_calls_during_this_task": 0,
+  "actual_production_test_submissions": 0,
+  "evidence": {
+    "natural": "../remaining_51_20261112/integrated-expansion-status.json",
+    "ewha_db": "production-application-receipt.json",
+    "ewha_db_postflight": "db-postflight.json",
+    "worker": "worker-production-verification.json",
+    "web": "web-production-receipt.json",
+    "science18": "science-public-postflight.json",
+    "skku15": "public-postflight.json"
+  },
+  "questions": [
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "registry_key": "source:kau-2024-admission-engineering:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "두 로그 합을 정리하는 중간 줄과 이후 곱 형태 사이 부호 표기 차이. Codex 정정 없이 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "registry_key": "source:kau-2024-admission-engineering:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "문제의 거리·정의역과 공식 예시풀이의 부호 있는 차이/최댓값 결론이 충돌할 가능성. 공식 답을 수정하지 않음.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "registry_key": "source:kau-2024-admission-science:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+          "questionId": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+          "assetId": "ca34fb284fcde2f9f18cfac1820bb6fb234305451ded6ed57b0602da6b31dc25",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "1-3(1): 기준 2+2+2 / 풀이 1.5+1.5+3. 1-3(3): 기준 2+1+2 / 풀이 1+1+3. 1-3 제목17점과 세부합16점. 1-4(3) 기준5점/풀이 과정2+답3. 양쪽 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "registry_key": "source:kau-2026-admission-science:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "8c11754b-d3af-56bf-9b66-d72092468f70",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "1-2 풀이 계산 마지막 음수와 최종 답 줄 양수의 부호 불일치. 1-1(1) 모든 빈칸 미기재: 기준표3점/예시풀이0점. 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "registry_key": "source:kau-2026-admission-science:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "주 풀이의 이차식 일차항 -17m, 이후 근/다른 풀이의 +17m 표기 차이. 원문 보존.",
+      "resolution": "현재 공식 첨부 PDF SHA가 기존 자료와 동일. 대학 공식 정정 또는 Owner의 정확한 처리 범위 결정 필요. 원문 수정·소문항 임의 분리 없음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    },
+    {
+      "university": "soongsil",
+      "name": "숭실대학교",
+      "exam_id": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+      "question_id": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+      "registry_key": "source:soongsil-2024-admission-natural:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "TECH READY",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "숭실대학교 2024학년도 수시 논술 자연계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:soongsil-2024-admission-natural:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+      "pdf_mapping": [
+        {
+          "examId": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+          "questionId": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+          "assetId": "ec70db336d7bae25d2e413302d1a1c4b0eeba60208ae47e87612425f1a52cc05",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "2024 자연 Q2 문제25점과 공식 평가기준 합계40점(25+15) 불일치. 현재 공식 PDF도 동일.",
+      "resolution": "대학의 공식 배점 정정 필요. 임의 점수 선택·조정하지 않음.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+        "exam": "숭실대학교 2024학년도 수시 논술 자연계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false
+    }
+  ],
+  "newly_published_this_task": 15,
+  "production_writes_this_task": 243,
+  "blocker_counts": {
+    "OFFICIAL_CONFLICT": 6
+  },
+  "reaudited_at_kst": "2026-11-12T19:39:55.967866+09:00",
+  "ewha_closure": {
+    "status": "DONE",
+    "new_source_connection": "CLOSED",
+    "checked_at_kst": "2026-11-12T20:28:46.168923+09:00",
+    "exams": 29,
+    "questions": 87,
+    "official": 63,
+    "mock": 24,
+    "overlap": 0,
+    "math_public": 39,
+    "essay_runtime": 48,
+    "registry_exact": 87,
+    "public_catalog_exact": 87,
+    "existing_three": [
+      {
+        "id": "f32f7b67-6fcf-52ab-b6b7-06074712c702",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:1",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      },
+      {
+        "id": "4a432fdf-d601-5230-b045-d2123c614773",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:2",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      },
+      {
+        "id": "e7362b80-3f05-5d84-8768-826ab7136233",
+        "essay_exam_id": "c15360f1-571e-5fa4-8314-dde3022f9594",
+        "question_key": "source:fb119b1708e9b646bdf7134283d8e03572367eca2afc893a9869495984f0bd81:3",
+        "is_published": false,
+        "is_active": false,
+        "math_public": true,
+        "public_catalog": true
+      }
+    ],
+    "production_writes": 0,
+    "provider_calls": 0,
+    "ai_quality": "NOT TESTED_OWNER",
+    "browser_ui": "NOT TESTED",
+    "actual_submission": "NOT TESTED"
+  }
+}
