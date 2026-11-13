@@ -124,4 +124,4 @@ Owner가 로그인 화면 확인 완료와 main 병합·Push를 승인했다. �
 - hotfix5개 커밋은 로그인 오류/안내 UI2파일·테스트3파일·버전·Wiki만 포함한다. 운영DB/SDK/Native/LAB 변경 없음.
 - 최종 제품 트리는 배포 소스 `8195bb0`와 lib/android/ios/pubspec/lock 모두 동일. 기존2601 PASS/8 SKIP/0 FAIL·Analyze 및 빌드 검증을 재사용하며 문서/fast-forward만을 이유로 테스트를 재실행했다고 기록하지 않는다.
 - IPA/AAB 파일 존재·SHA256 재확인 PASS. 신규 바이너리 생성/스토어 업로드·제출0. 실기기 실제 계정 로그인·Android 실기기 NOT TESTED 유지.
-- main을 fast-forward하고 일반 Push(강제 Push 없음) 후 원격 SHA와 로컬 HEAD 일치를 확인한다. 최종 통합 SHA는 Git main을 조회한다.
+- main fast-forward·일반 Push 완료(강제 Push 없음), 원격 SHA와 로컬 HEAD 일치 확인. 최종 통합 SHA는 Git main을 조회한다.
