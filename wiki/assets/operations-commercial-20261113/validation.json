@@ -1,0 +1,49 @@
+{
+  "source_commit": "c0aed176c18ed15d814f95b580fbd4f5fba26fbd",
+  "flutter": {
+    "pass": 2609,
+    "skip": 8,
+    "fail": 0
+  },
+  "analyze": "PASS",
+  "python_pure_contracts": {
+    "pass": 5
+  },
+  "deno_billing_refund": {
+    "pass": 29
+  },
+  "pdf_isolated_postgres": "845 active, inactive excluded, guest, replay rejection, append-only rollback PASS",
+  "builds": {
+    "ios": "debug simulator --no-codesign, no production defines",
+    "android": "debug APK, no production defines"
+  },
+  "logs": {
+    "full-tests": {
+      "sha256": "8b4742484a5fed9d6e27711c26985de0a470b53d3540253287b0af5bd58b2684",
+      "local_log": "/tmp/legend-operations-full-tests.log"
+    },
+    "ios-build": {
+      "sha256": "48355cc23e9faaf239931c36135948ebc668013aeabdfdb43367a8320bd62945",
+      "local_log": "/tmp/legend-operations-ios-build.log"
+    },
+    "android-build": {
+      "sha256": "f2c69c73227e55dfeac3121f6be00815659ec194851196140ed64e15df5e4e06",
+      "local_log": "/tmp/legend-operations-android-build.log"
+    },
+    "python-tests": {
+      "sha256": "76241af68a02f286937aa82da88cc1808ec785fff3183fcf71d2b692511dd12b",
+      "local_log": "/tmp/legend-operations-python-tests.log"
+    },
+    "final-analyze": {
+      "sha256": "e1c64382efd4c1faf526625e8c979c621fe7baf4a5616abaa8d693e9215526c6",
+      "local_log": "/tmp/legend-operations-final-analyze.log"
+    }
+  },
+  "not_tested": [
+    "physical device file save and reopening",
+    "store receipt purchase/refund E2E",
+    "WEB real-account contract E2E",
+    "new binary production configuration/signing/store submission"
+  ],
+  "production_pdf_allowed_last_observed": 0
+}

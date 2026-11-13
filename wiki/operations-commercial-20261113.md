@@ -73,10 +73,9 @@ CPU/RAM/IO 시계열 수집 및 알림 전달은 아직 검증되지 않았다.
 [공식 인덱스 advisory](https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys).
 Compute 증설 필요성과 비용 비교는 실제 병목 확인 전 미완료, 유료 변경0.
 
-## PHASE 2–6
+## 후속 단계
 
-아직 실행 중이며 완료 판정 없음. 단계별 기존 구현·수정·테스트·운영 적용·
-잔여·Owner 결정·Git/Wiki 증거를 아래에 추가한다.
+단계별 실제 구현·검증과 외부 대기를 아래에 구분한다. 모든 단계의 운영 완료를 의미하지 않는다.
 
 ## 보존: 작업 시작 시 APP82 이력
 
@@ -207,3 +206,42 @@ range_agg 중복제거 유지. Owner가 현행3/1을 재확정하여 변경0.
 학교 month는 기존 최근30일, 개인 ‘이번달’은 KST 달력월: 동일 기간으로
 오인하지 않는다. 기존 네이티브 초대/공유 재사용. 실계정 학교집계 E2E는 미실행.
 실기기 재시작/백그라운드·신규 과목 WEB 실계정 조회는 NOT TESTED.
+
+## PHASE 6 — PARTIAL / 통합 회귀·컴파일 PASS
+
+목표: 로그인APP84·온보딩·자료·MY·Study·학교·LAB·원장 보존 및 출시 분리.
+원격 main 재fetch: 시작 기준02996be와 동일. 기존 작업 폴더의 미커밋 변경0,
+main 병합/Push0; 독립 브랜치만 Push. 웹 브랜드·대학일정 변경0.
+
+- 전체 Flutter **2609 PASS / 8 SKIP / 0 FAIL**, Analyze PASS.
+- Deno 결제/환불29 PASS(앞선 PHASE2), Python 공개 Resolver/출시설정5 PASS.
+- 격리 PostgreSQL17 수정845개 활성화·Guest·비활성제외·재실행거절·원복 PASS.
+- iOS simulator debug `--no-codesign` 빌드 PASS; Android debug APK 빌드 PASS.
+  두 산출물은 production dart-define 없는 컴파일 확인용. 실기기/Store 배포 금지.
+  release IPA/AAB·새 빌드번호·운영 설정·서명 검증은 이번 범위에서 미실행.
+- 기존 AGP/Kotlin/SDK XML 및 flutter_tts SPM 전환 경고 관측; 현재 빌드는 통과.
+  별도 의존성 업그레이드를 이 변경에 섞지 않았다.
+- 최초 Python 묶음 명령은 격리DB 전용 helper/모듈경로를 잘못 선택해 import
+  오류가 났다. 순수 계약5개를 올바른 PYTHONPATH로 재실행해 PASS. 계정삭제
+  전체DB harness를 실행했다고 주장하지 않는다(Flutter 탈퇴 회귀는 통과).
+- 재발 진단 snapshot.sql 전체를 운영 READ ONLY/ROLLBACK으로 실행 PASS.
+
+[검증 영수증](assets/operations-commercial-20261113/validation.json).
+시험 대상 소스 c0aed17; 이후 인계 문서만 추가. 스토어 제출/유료Compute/
+LIVE 결제·환불/운영 사용자 기록 쓰기0. PDF는 첫 Owner 실행 rollback 및
+권한0을 재확인했고, 수정845개 Owner 적용 결과 대기.
+
+### 단계별 9항목 인계
+
+|단계·상태|목표/기존 구현|실제 변경|검증|운영 적용|잔여/Owner 항목|Git(기능 검증 기준)|Wiki|
+|---|---|---|---|---|---|---|---|
+|1 PARTIAL|522·DB 장애/기존 로그·통계|제한시간 READ ONLY 진단SQL|로그·Health·SQL PASS|변경0,복구 확인|원인·IO/CPU/RAM 미확정; 지표 없음. 지원확인 필요|6e9ce31|본 문서 PHASE1|
+|2 PARTIAL|기존 Toss/IAP/Play/원장 재사용|검증·LIVE/환불배포 차이 기록|Flutter35/Deno29 PASS|결제·지급·환불0|가맹점·상점·Finance 상태 확인 및 실결제/환불·LIVE 승인|91cc9d8|본 문서 PHASE2|
+|3 PARTIAL|기존 네이티브 PDF 다운로드|Viewer 연결·정규식수정·845활성화 후보|Flutter 다운로드·격리PG PASS|첫SQL 중단,권한0|Owner 수정SQL 적용,양OS 실파일 검수,바이너리 승인|4e433f4 / 6fc39b8|본 문서 PHASE3·SQL README|
+|4 PARTIAL|기존 검색·시험묶음·최근·저장|학년도 검색·MY 다운로드 완료목록|자료/MY109(+기존SKIP1),검색54 PASS|APP미배포|기관 facet 없음; WEB/실기기 이용흐름 미검증|4e433f4 / c0aed17|본 문서 PHASE4|
+|5 PARTIAL|기존 timer/outbox/union/학교|과목·일주목표·기간/과목합계|학습84 PASS·운영제약/함수읽기|DB쓰기0,APP미배포|실기기 복원·WEB 조회·학교 실계정 E2E 미검증. 학교3/1 유지 확정|c0aed17|본 문서 PHASE5·study-v1|
+|6 PARTIAL|APP84 보존·기능별 출시 분리|전체 회귀·양OS컴파일·인계|2609 PASS/8 SKIP,Analyze/빌드 PASS|Store/main/LIVE변경0|양OS 실사용→출시범위·main통합·서명빌드·Store 최종승인|c0aed17(시험 소스)|본 문서 PHASE6·검증영수증|
+
+다음 순서: 수정PDF SQL 확인 → 양OS 실제 저장/파일명/재열람 → 과목 타이머
+백그라운드·재실행/목표/MY 검수 → 기능별 출시범위 확정. 결제는 별도 외부
+상점/가맹점 gate를 통과한 뒤 실결제·환불 승인과 LIVE전환을 진행한다.
