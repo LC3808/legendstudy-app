@@ -1,5 +1,7 @@
 # Current Status
 
+[11/13 운영·상용화 순차 작업](operations-commercial-20261113.md): PHASE1 PARTIAL, DB복구·522 확인/원인 미확정. 독립 브랜치 진행.
+
 [로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당.
 
 [APP83 최종 빌드·스토어 제출](app83-store-handoff-20261112.md): 스플래시6962c0f 포함, main fast-forward/Push 완료. 1.0.3(83) IPA/AAB·서명/설정 PASS. 전체2580 PASS/8 SKIP/0 FAIL·Analyze·Python33·격리SQL71/42·Android JVM2 PASS. Owner IPA/AAB 업로드 보고. Android83 서버 수락 확인·심사 전송 요청 완료: Google 자동 검사 중, 승인 후 기존100% 자동 출시 설정. iOS 심사 신청 완료 Owner 확인. 최종산출물 실기기·심사 승인·실제 공개 NOT TESTED. 신규RPC2 미적용: 기존TOP10 유지, 추가순위/백분위 미활성. 운영DB/Auth/회원/Provider 변경0. 기존 설치 앱·APP82 보존. [후속UX·이전 iPhone 검증](app82-post-rc-ux-20261112.md).

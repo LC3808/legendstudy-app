@@ -5999,3 +5999,7 @@ APP75 이후4489603 기반 별도worktree/브랜치. Dashboard 기본 SMTP2/h·O
 
 ## 2026-11-11 — SMTP 도입 준비 승인·공급자 비교
 Resend/SES/Brevo 공식 최신 요금·quota·인증·로그 비교, Resend 우선/Free 검증 추천. 기존 feedback Resend 검수·Gabia DNS(Google MX/SPF,DMARC,Resend DKIM,send CNAME) 확인. 고객지원 주소 소스 확인/공개페이지403 미검증. [설정표·비용·10단계 전환·원복·Owner 승인](email-smtp-provider-plan-20261111.md). 계정/키/DNS/Auth/실제 발송0, c5cd349 코드 보존.
+
+## 2026-11-13 — 운영 안정화 PHASE1
+
+운영 ACTIVE_HEALTHY/52225건/04:48 재기동/exporter temp오류18건 확인. 장애원인·IO/CPU/RAM 미확정, 재시작 후 통계는 장애 전 증거 아님. 원본보존 진단SQL 추가, 운영쓰기0. [증거·미완료](operations-commercial-20261113.md).

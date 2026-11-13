@@ -40,6 +40,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+운영 장애 / HTTP522 / 상용화 순차 실행: [11/13 증거·진단SQL·단계별 상태](operations-commercial-20261113.md).
+
 APP83 / 최종 빌드 / 1.0.3(83) / 스토어 업데이트: [소스·검증·서명·Android 제출 상태·iOS 신청 완료 Owner 확인·RPC 미활성](app83-store-handoff-20261112.md).
 
 APP82 Post-RC / 학교 순위·개인 백분위·중앙 스플래시·첫 홈 가이드: [구현·iPhone 격리 검증·운영 승인 후보](app82-post-rc-ux-20261112.md).
