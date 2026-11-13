@@ -1,3 +1,7 @@
+## 2026-11-13 — APP84 서명 IPA 완료
+
+[로그인 UX hotfix 빌드](auth-verification-ux-hotfix-20261113.md#최종-서명-ipa-완료): Owner ASC 로그인 후 최신1.0.3(83)/처리 중84 없음 확인, 1.0.4(84) 확정. 제품 소스8195bb0, 배포 서명·동일 entitlement·버전/설정/UUID 검사 PASS. APP83 해시 보존, hotfix 브랜치만 Push. main/운영/설치/업로드/제출0. 실기기·실제 Auth·스토어 E2E NOT TESTED, Owner 최종 승인 대기.
+
 ## 2026-11-13 — 로그인 인증 안내 P0 hotfix
 
 [원인·조건부 재발송·오류 분류·검증·빌드 게이트](auth-verification-ux-hotfix-20261113.md). APP83 제품 소스/최신 main 대조 후 독립 hotfix 브랜치에서 수정. 가입 직후/실제 미인증 응답만 안내, 오류별 카피와 20초 제한. 운영/회원/세션 저장/온보딩 계약 변경0. 전체2601 PASS/8 SKIP/0 FAIL·Analyze/Wiki PASS. 소스5059c88 hotfix 원격 Push 확인, iOS unsigned compile PASS/APP83 산출물 보존. ASC 로그인 만료로1.0.4(84) 중복 조회·번호 확정/서명IPA 대기(PARTIAL), main/스토어 승인 전 보류.

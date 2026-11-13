@@ -18,7 +18,15 @@
   "runtime_changes": [],
   "live_auth_test": "NOT TESTED",
   "ios_device": "NOT TESTED",
-  "store_collision_check": "BLOCKED: App Store Connect signed out",
+  "store_collision_check": {
+    "result": "PASS",
+    "latest_version": "1.0.3",
+    "latest_build": 83,
+    "checked": "2026-11-13",
+    "source": "ASC distribution + TestFlight versions + newest-first all-status uploads",
+    "new_version": "1.0.4",
+    "new_build": 84
+  },
   "store_submission": false,
   "main_merge": false,
   "app83_sha256": {
@@ -41,5 +49,41 @@
   },
   "app83_artifacts_preserved": "PASS",
   "hotfix_branch_push_source": "5059c884f86df6a96f822f72697fd59c8d1b6533",
-  "wiki_handoff": "PASS"
+  "wiki_handoff": "PASS",
+  "ios": {
+    "file": "legendstudy-1.0.4-84.ipa",
+    "bytes": 34459920,
+    "sha256": "98cd976b32ccfc658f69d11f80d5bff1391832d06347c02d6644c7453ac3ab12",
+    "version": "1.0.4",
+    "build": 84,
+    "bundle_id": "com.legendstudy.app",
+    "display_name": "레전드스터디+",
+    "minimum_os": "15.0",
+    "sdk": "iphoneos27.2",
+    "codesign_deep_strict": "PASS",
+    "authority": [
+      "Apple Distribution: Copacabana Co. (VUKFS69GB4)",
+      "Apple Worldwide Developer Relations Certification Authority",
+      "Apple Root CA"
+    ],
+    "distribution_profile": true,
+    "profile_expiry": "2027-10-19T03:57:20",
+    "get_task_allow": false,
+    "apple_signin": "Default",
+    "google_redirect_matches": true,
+    "recovery_scheme_matches": true,
+    "public_runtime_config_embedded": true,
+    "compiler_config_matches_approved": true,
+    "target_main_not_test": true,
+    "archive_ipa_app_uuid_match": true,
+    "app_uuid": "F1CDE10F-AD2B-16EF-5A7F-3156C89971B6",
+    "privacy_plists_valid": true,
+    "privacy_plist_count": 26,
+    "installed": false,
+    "uploaded": false,
+    "entitlements_identical_to_app83": true,
+    "source_sha": "8195bb07e1f545f0876378b94ebf218b9a00cd77",
+    "path": "build/releases/app84/legendstudy-1.0.4-84.ipa",
+    "archive": "build/releases/app84/Runner.xcarchive"
+  }
 }

@@ -77,7 +77,7 @@ Owner는 iOS 1.0.3(83)의 일반 로그인에서 인증 안내가 상시 노출�
 
 ## 빌드·Git·남은 승인
 
-상태: **코드/자동 검증/독립 브랜치 Push DONE, 최종 배포 빌드 PARTIAL**.
+이전 로그인 차단 시점: 코드/자동 검증/독립 브랜치 Push DONE, 최종 배포 빌드 PARTIAL. 최신 재개 결과는 아래 참조.
 
 - 구현 소스 커밋 `5059c884f86df6a96f822f72697fd59c8d1b6533`, 해당 hotfix 브랜치 원격 Push 및 `git ls-remote` 일치 확인. 문서 후속 SHA는 Git HEAD로 확인한다.
 - iOS `tool/store-release ios --check` PASS, `tool/store-release ios --no-codesign --no-pub` PASS. Xcode archive75.7초, arm64 Release 컴파일/설정 검사 성공.
@@ -86,10 +86,20 @@ Owner는 iOS 1.0.3(83)의 일반 로그인에서 인증 안내가 상시 노출�
 - 예상 **1.0.4(84)는 미확정**. App Store Connect가 로그인 만료 화면이라 실제 기존 버전/TestFlight 빌드 중복 여부를 확인할 수 없다. Owner에게 직접 로그인을 요청했고, 지시서13항에 따라 조회 전 번호를 확정하지 않았다.
 - 기존 APP82/83 archive 및 APP83 IPA/AAB SHA256 보존 PASS. [검증 영수증](assets/auth-verification-ux-hotfix-20261113/validation.json). 설치/삭제/스토어/운영 변경0.
 
-남은 순서: Owner ASC 로그인 → 1.0.4/84 중복 확인 → pubspec 버전 확정·별도 커밋 → 서명 IPA 생성/검사·원격 hotfix Push → Owner 최종 검증/승인 → main/스토어 단계. 이 브랜치에는 SDK/서명/기능 추가 없이 해당 UI 수정만 포함한다.
+당시 남은 순서: ASC 로그인/번호 확인 → 버전 확정 → 서명 IPA → Owner 최종 검증/승인 → main/스토어 단계. 이 브랜치에는 SDK/서명/기능 추가 없이 해당 UI 수정만 포함한다.
 
 Owner는 hotfix 구현·테스트·커밋·해당 브랜치 Push·긴급 iOS 빌드 준비를 승인했다. **main 병합·Push 및 업로드/스토어 제출은 별도 최종 승인 전 금지**다. 수정 소스만으로 이미 제출한 APP83 바이너리가 바뀌지는 않는다.
 
 ## ASC 확인 후 서명 빌드 재개
 
 2026-11-13 Owner 로그인 후 LegendStudy ASC 배포 화면에서1.0.3(83) 배포 준비됨, TestFlight 버전 목록과 생성일 내림차순 전체 상태 업로드 목록에서 최신83(11/12 18:03) 확인. 1.0.4/84 업로드·처리 중 항목 없음. 번호1.0.4(84)를 확정하고 기존 서명 설정으로 IPA 생성한다. ASC 변경/버전 생성/업로드/제출0. 앞의 로그인 차단은 해소됐으며 빌드 완료 결과는 아래에 기록한다.
+
+## 최종 서명 IPA 완료
+
+- **빌드 준비 DONE**: iOS **1.0.4(84)**, 제품 소스 `8195bb07e1f545f0876378b94ebf218b9a00cd77`. 검증된 제품 코드에 버전 metadata만 변경했다. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS는 앞선 코드 검증 결과이며 버전만 변경한 뒤 반복 실행한 것은 아니다.
+- `tool/store-release ios --no-pub --export-options-plist=build/releases/app84/ExportOptions.plist` PASS.
+- IPA: `build/releases/app84/legendstudy-1.0.4-84.ipa` (34,459,920 bytes). Archive: `build/releases/app84/Runner.xcarchive`.
+- SHA256: `98cd976b32ccfc658f69d11f80d5bff1391832d06347c02d6644c7453ac3ab12`.
+- Apple Distribution / Copacabana / VUKFS69GB4, App Store profile, codesign deep/strict PASS. get-task-allow false, 서명 entitlement 전체가 APP83과 동일. Google redirect/이메일 복귀 scheme·공개 런타임 설정·main target·IPA/archive UUID·privacy manifest26개 PASS.
+- APP83 IPA/AAB 해시 재확인 PASS, 기존 앱·APP82/83 archive 보존. 실기기 설치·실제 Auth E2E·스토어 업로드/처리/심사 **NOT TESTED**.
+- ASC 로그인/번호 차단 해소. 남은 사항은 Owner 실기기 최종 검증 및 main 병합/스토어 제출 승인이다. 원격 Push는 hotfix 브랜치에만 수행한다.
