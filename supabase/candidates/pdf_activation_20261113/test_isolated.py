@@ -9,7 +9,10 @@ pg = Path('/opt/homebrew/opt/postgresql@17/bin')
 with tempfile.TemporaryDirectory(prefix='legend-pdf-') as temp:
     data = Path(temp) / 'data'
     def run(args, **kwargs):
-        return subprocess.run(args, check=True, capture_output=True, text=True, **kwargs)
+        result = subprocess.run(args, capture_output=True, text=True, **kwargs)
+        if result.returncode:
+            raise RuntimeError(result.stderr)
+        return result
     run([str(pg/'initdb'), '-D', str(data), '-A', 'trust', '--no-locale', '-E', 'UTF8'])
     run([str(pg/'pg_ctl'), '-D', str(data), '-l', str(Path(temp)/'server.log'), '-o', f"-k {temp} -p 55439 -c listen_addresses=''", '-w', 'start'])
     command = [str(pg/'psql'), '-h', temp, '-p', '55439', '-d', 'postgres', '-v', 'ON_ERROR_STOP=1', '-At']
