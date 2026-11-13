@@ -1,0 +1,23 @@
+{
+  "web_related_tests": {
+    "passed": 63,
+    "failed": 0,
+    "files": 5
+  },
+  "web_production_build": "PASS",
+  "app_related_tests": {
+    "passed": 15,
+    "skipped": 4,
+    "failed": 0
+  },
+  "wiki_handoff": "PASS",
+  "source_original_hashes": "PASS",
+  "live_public_postflight": "public-postflight.json",
+  "isolated_rpc_and_rollback": "math-isolated-results.json",
+  "production_submissions": "NOT TESTED",
+  "browser_pdf_render": "NOT TESTED",
+  "iphone": "NOT TESTED",
+  "android": "NOT TESTED",
+  "provider_calls": 0,
+  "ai_quality": "NOT TESTED"
+}

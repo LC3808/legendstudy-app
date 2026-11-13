@@ -1,0 +1,424 @@
+{
+  "source_files": [
+    {
+      "filename": "2026학년도 한국항공대 수시 논술_이학계열 문제,해설,답안.pdf",
+      "sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+      "original_unchanged": true
+    },
+    {
+      "filename": "2024학년도 한국항공대 수시 논술_이학계열 문제,해설,답안.pdf",
+      "sha256": "f07121c91e7d2a7c937f0c32e08d635f45446f950f7e6b48912976d5213f6b6d",
+      "original_unchanged": true
+    },
+    {
+      "filename": "2024학년도 한국항공대 수시 논술_공학계열 문제,해설,답안.pdf",
+      "sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+      "original_unchanged": true
+    },
+    {
+      "filename": "2024학년도 숭실대 선행학습영향평가 자체평가보고서.pdf",
+      "sha256": "2a50b3c44b5b845e99472a1ebead3e524865faf486831d58c4e5e4b92e3b7ce8",
+      "official_url": "https://admission.ssu.ac.kr/incs/incFiledo.asp?cot=1&mode=4&number=124",
+      "physical_pages": 50
+    }
+  ],
+  "questions": [
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "registry_key": "source:kau-2024-admission-engineering:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "READY",
+      "status": "PUBLISHED",
+      "live_math_catalog": true,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "p5 로그 합·곱 전개는 일치하며 기존 부호 HOLD 판정은 잘못되었다. p6 최종값 2025/4048 확인. 근의 합 중간 부호 오기는 제곱식·최종 범위와 구분한다.",
+      "resolution": "기존 공식 풀이·평가표 유지. 서비스 원문 읽기 지침만 추가하고 원문·정답·배점을 변경하지 않았다.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": null,
+      "release_eligible_now": true,
+      "source_audit": {
+        "sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+        "physical_pages": [
+          4,
+          5,
+          6
+        ],
+        "original_visual_checked": true
+      },
+      "publication_evidence": "public-postflight.json"
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "question_id": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+      "registry_key": "source:kau-2024-admission-engineering:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "공학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 공학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-engineering:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "00355b1e-744d-553c-bba3-2483d4d57d42",
+          "questionId": "f0ae1ea0-6c50-5b7e-b42b-35f436849c6f",
+          "assetId": "1eeab0aa4f6ed128e66631510c1a0e20491aedf04abb6a74369b593fa28721c0",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "p9는 거리 LM의 최댓값을 묻지만 p16–17은 부호 있는 차 h=4/t+1-ln(t²/(t²-2))를 사용한다. t→√2+에서 h→-∞, 실제 거리 |LM|는 발산하여 공식 최대 3-ln2와 충돌한다.",
+      "resolution": "공식 정의역 제한 또는 거리/부호 있는 차의 문제 목표 정정 근거 필요. 임의 정의역·정답 생성 금지.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 공학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false,
+      "source_audit": {
+        "sha256": "01fc6ddc2224731af0ca68bb86a4ffe90eb7997c306a9d429513f7ad77fa3632",
+        "physical_pages": [
+          9,
+          16,
+          17
+        ],
+        "original_visual_checked": true
+      }
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+      "question_id": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+      "registry_key": "source:kau-2024-admission-science:q1",
+      "year": 2024,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2024학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2024-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "51d7f36d-a011-5279-8c5d-f731b2900af3",
+          "questionId": "2476c8dc-a8e4-599a-8cf2-1ffdddbb6f06",
+          "assetId": "ca34fb284fcde2f9f18cfac1820bb6fb234305451ded6ed57b0602da6b31dc25",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "p5–6과 p8의 1-3(1) 부분점수는 2+2+2 대 1.5+1.5+3, 1-3(3)은 2+1+2 대 1+1+3이다. p8 1-3 제목 17점과 실제 6+5+5=16점도 다르다.",
+      "resolution": "총점만 맞추어 해결할 수 없는 부분점수 우선 기준의 공식 정정 필요. 1-4(3)의 5 대 2+3은 별도 총점 충돌로 보지 않는다.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2024학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false,
+      "source_audit": {
+        "sha256": "f07121c91e7d2a7c937f0c32e08d635f45446f950f7e6b48912976d5213f6b6d",
+        "physical_pages": [
+          5,
+          6,
+          8
+        ],
+        "original_visual_checked": true
+      }
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "8c11754b-d3af-56bf-9b66-d72092468f70",
+      "registry_key": "source:kau-2026-admission-science:q1",
+      "year": 2026,
+      "label": "문제 1",
+      "source_state": "HOLD",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q1",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "8c11754b-d3af-56bf-9b66-d72092468f70",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 1,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "기존 해설 부호 불일치 주장은 정정: p7 계산과 최종 -1/2^100은 일치한다. 실제 잔여 충돌은 1-1(1) 전부 미기재 p5 평가표 3점 대 p6 예시 채점 0점이다.",
+      "resolution": "전부 미기재의 공식 점수 또는 두 표의 우선 적용 근거 필요. 0점으로 임의 정정하지 않는다.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 1",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false,
+      "source_audit": {
+        "sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+        "physical_pages": [
+          5,
+          6,
+          7
+        ],
+        "original_visual_checked": true
+      }
+    },
+    {
+      "university": "kau",
+      "name": "한국항공대학교",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "registry_key": "source:kau-2026-admission-science:q2",
+      "year": 2026,
+      "label": "문제 2",
+      "source_state": "READY",
+      "status": "PUBLISHED",
+      "live_math_catalog": true,
+      "previous_status": "HOLD",
+      "track": "이학계열",
+      "exam_kind": "admission",
+      "exam_name": "한국항공대학교 2026학년도 수시 논술 이학계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:kau-2026-admission-science:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+      "pdf_mapping": [
+        {
+          "examId": "3e312310-9393-5d7d-90d3-731aee13c360",
+          "questionId": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+          "assetId": "31e10b2b3a3f9e8b1285a0bedfc640d36a5f978c809d5b31bd77d80be01fd3a9",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "p18 주 풀이의 4m²+17m+15=0, 근 -3/-5/4, 최종 -5/4가 일치한다. 기존 -17m HOLD 판정은 원문 렌더와 다르다.",
+      "resolution": "공식 주 풀이와 p14 평가표 연결. 별해의 치환 변수·분모 오기를 공식 정답으로 채택하지 않도록 서비스 읽기 지침을 분리했다.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/kau/",
+        "exam": "한국항공대학교 2026학년도 수시 논술 이학계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": null,
+      "release_eligible_now": true,
+      "source_audit": {
+        "sha256": "f72636d51947d4c25cd76de0f00c1c2eef7caaa512a355634010af6605f6512e",
+        "physical_pages": [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "original_visual_checked": true
+      },
+      "publication_evidence": "public-postflight.json"
+    },
+    {
+      "university": "soongsil",
+      "name": "숭실대학교",
+      "exam_id": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+      "question_id": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+      "registry_key": "source:soongsil-2024-admission-natural:q2",
+      "year": 2024,
+      "label": "문제 2",
+      "source_state": "TECH READY",
+      "status": "HOLD",
+      "live_math_catalog": false,
+      "previous_status": "HOLD",
+      "track": "자연계열",
+      "exam_kind": "admission",
+      "exam_name": "숭실대학교 2024학년도 수시 논술 자연계열",
+      "cohort": "natural_expansion_221",
+      "registry_id": "source:soongsil-2024-admission-natural:q2",
+      "owner_review": {
+        "normal_answer": "NOT TESTED",
+        "incorrect_answer": "NOT TESTED",
+        "partial_answer": "NOT TESTED",
+        "feedback_quality": "NOT TESTED",
+        "rewrite_quality": "NOT TESTED",
+        "browser_ui": "NOT TESTED",
+        "iphone": "NOT TESTED",
+        "android": "NOT TESTED",
+        "actual_login_submission_result_rewrite": "NOT TESTED"
+      },
+      "provider_calls_during_this_task": 0,
+      "entry_url": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+      "pdf_mapping": [
+        {
+          "examId": "fb89bcfe-ed40-5bc2-8a91-db9e935a5d43",
+          "questionId": "815bc344-cdbb-5b7f-82c1-dc528de46f51",
+          "assetId": "ec70db336d7bae25d2e413302d1a1c4b0eeba60208ae47e87612425f1a52cc05",
+          "pageCount": 4,
+          "startPage": 3,
+          "verification": "VERIFIED",
+          "studentDisplay": "APPROVED",
+          "storageRead": "APPROVED"
+        }
+      ],
+      "cause": "현재 공식 첨부 50쪽의 물리39쪽(인쇄35쪽)은 Q2 총25점, 물리44쪽(인쇄40쪽) 평가표는 소문항25+15=40점이다. 기존 SHA와 동일하다.",
+      "resolution": "Q2 총점 또는 소문항 배점의 공식 정정 필요. 10+15로 추정하거나 40→25 비례 환산하지 않는다.",
+      "review_path": {
+        "entry": "https://lab.legendstudy.com/essay-lab/universities/soongsil/",
+        "exam": "숭실대학교 2024학년도 수시 논술 자연계열",
+        "question": "문제 2",
+        "answer": "같은 시험 화면의 문항 펼치기 → 답안 작성/저장",
+        "result": "https://lab.legendstudy.com/my/essays/",
+        "rewrite": "기존 첨삭 기록 → 결과 → 재작성·재첨삭 (서버 자격·Credit 정책 적용)",
+        "actual_submission_result_rewrite": "NOT TESTED"
+      },
+      "blocker_category": "OFFICIAL_CONFLICT",
+      "release_eligible_now": false,
+      "source_audit": {
+        "sha256": "2a50b3c44b5b845e99472a1ebead3e524865faf486831d58c4e5e4b92e3b7ce8",
+        "physical_pages": [
+          39,
+          44
+        ],
+        "original_visual_checked": true
+      }
+    }
+  ],
+  "published": 2,
+  "held": 4,
+  "original_edits": 0,
+  "provider_calls": 0
+}

@@ -1,0 +1,14 @@
+{
+  "questions": [
+    {
+      "question_id": "74e16370-a1be-57f9-b6c7-b2e035bfbb06",
+      "exam_id": "00355b1e-744d-553c-bba3-2483d4d57d42",
+      "source_key": "source:kau-2024-admission-engineering:q1"
+    },
+    {
+      "question_id": "48512d94-959c-5a94-b985-7e1bd005c6b7",
+      "exam_id": "3e312310-9393-5d7d-90d3-731aee13c360",
+      "source_key": "source:kau-2026-admission-science:q2"
+    }
+  ]
+}

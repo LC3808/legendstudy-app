@@ -1,0 +1,26 @@
+{
+  "sha": "c7cfcc2ec06a86fc3f695bef5fc197c71a94ae53",
+  "counts": {
+    "ESSAY_PUBLIC_EXAMS": [
+      372,
+      374
+    ],
+    "ESSAY_BETA_EXPANSION_EXAMS": [
+      202,
+      204
+    ],
+    "MATH_PUBLIC_LEAVES": [
+      451,
+      453
+    ]
+  },
+  "preservedStaticAssets": 2221,
+  "previous": "c3c00aca-9018-437c-bddc-0e125d38b429",
+  "scope": "KAU2 2 partial exams / 2 questions / 2 Math leaves; existing static assets, APIs and private bindings preserved",
+  "api_source": "c7cfcc2ec06a86fc3f695bef5fc197c71a94ae53",
+  "worker_sha256": "f33d805f421d5142d6cbf99ab74491417f3ab5b5880e632b3eafffc3c765960d",
+  "only_three_plaintext_scopes_changed": true,
+  "changed_asset_count": 453,
+  "deployment": "3ebc2fc1-7444-4ff4-9bc6-41c3c195a3f2",
+  "status": "PUBLISHED"
+}

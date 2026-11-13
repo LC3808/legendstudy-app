@@ -1,0 +1,50 @@
+{
+  "exams": [
+    "00355b1e-744d-553c-bba3-2483d4d57d42",
+    "3e312310-9393-5d7d-90d3-731aee13c360"
+  ],
+  "questions": [
+    "48512d94-959c-5a94-b985-7e1bd005c6b7",
+    "74e16370-a1be-57f9-b6c7-b2e035bfbb06"
+  ],
+  "leaves": [
+    "b5c82f4d-fb81-5d04-b0b1-3af5369379f1",
+    "6df6f2da-0744-54f5-83ae-f40ff03d210c"
+  ],
+  "new_rows": {
+    "math_problem_sets": 2,
+    "math_problems": 2,
+    "math_subproblems": 2,
+    "math_source_artifacts": 8,
+    "math_evaluation_profiles": 2,
+    "math_scoring_criteria": 2,
+    "math_canonical_solutions": 2,
+    "math_canonical_solution_steps": 7
+  },
+  "worker_rows": 2,
+  "total_new_math_rows": 29,
+  "registry_new_rows": 0,
+  "state_updates": 8,
+  "registry_public_updates": 0,
+  "existing_public_preserved": 451,
+  "new_public_count": 453,
+  "preflight_checks": 16,
+  "postflight_checks": 16,
+  "preservation_groups": 21,
+  "functions": [
+    {
+      "signature": "math_private.evaluation_admission()",
+      "before_md5": "3f65ac3c76100db17290f85fd29504a3",
+      "after_md5": "d6822cf5e09de67487be4fa667e3e331"
+    },
+    {
+      "signature": "math_private.release_catalog(uuid)",
+      "before_md5": "76b2e82747dc5bdbf505dbb8b11fdec2",
+      "after_md5": "bb5ffacfaf16c0f0316ee296b92bc1d3"
+    }
+  ],
+  "apply_sql_sha256": "5467598b3fb7d462d4005d86c31620e62519f60dfc2168d455bd5d6a6d336f7f",
+  "rollback_sql_sha256": "ff26bc7c8e20541256453fdbb69a7c630feb1b54f6931fd5b0358038bca93477",
+  "provider_calls": 0,
+  "production_writes": 0
+}

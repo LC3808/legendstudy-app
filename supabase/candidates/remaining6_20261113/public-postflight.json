@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "questions": 2,
+  "exams": 2,
+  "pages": "3ebc2fc1-7444-4ff4-9bc6-41c3c195a3f2",
+  "source": "c7cfcc2ec06a86fc3f695bef5fc197c71a94ae53",
+  "public_http_ids_exact": true,
+  "math_catalog": 453,
+  "old_451_preserved": true,
+  "old_worker_unchanged": true,
+  "static_manifest_exact": true,
+  "environment_exact": true,
+  "provider_calls": 0,
+  "browser_login_submission": "NOT TESTED",
+  "device": "NOT TESTED"
+}

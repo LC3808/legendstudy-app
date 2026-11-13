@@ -5995,3 +5995,8 @@ Owner 명시 승인 후 LegendStudy에 검증된 단독SQL(c4fdfeb0…)106행 IN
 - 2026-11-12T14:35:45.758954+09:00: [광운21시험42 PUBLISHED](essay-kwangwoon-public-20261112.md).636행/168ACTIVE/PDF21/목록20시험해제.운영158/199/126·WEB410/APP39 PASS.기존340문항/다른41대학/RLS271보존.신규HOLD0,Provider0,로그인제출·실기기NOT TESTED.다음서울여대.
 
 - 2026-11-12T15:39:30.340185+09:00: [서울여 수리3 PUBLISHED / 과학6 NOT READY](essay-swu-public-20261112.md). 운영119/121/9·WEB447/APP29 PASS,기존382/RLS272/42대학목록보존. [통합](essay-natural-publication-summary-20261112.md):221중170공개·51잔여,Owner품질검수목록인계. Provider0,실제제출/실기기NOT TESTED.
+
+
+## 2026-11-13 — 최종6 중 항공2 공개 / 공식 충돌4
+
+[최종 기록](essay-remaining6-resolution-20261113.md). 기존 HOLD의 원문 오독2건 해소, 운영29행/Math2 공개. 304공개·4잔여, 기존302 보존. WEB63PASS/build, APP15PASS4SKIP, 격리원복 PASS, Provider0. 전체 CLOSED 아님.

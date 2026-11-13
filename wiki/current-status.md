@@ -1,6 +1,7 @@
 # Current Status
 
-[성균관15 운영 공개](essay-skku-public-20261113.md): **302공개/6잔여/308**.5시험15문항243행·PDF5개·운영HTTP15ID PASS. 기존 데이터/권한/Credit 보존. WEB63PASS/build·APP15PASS4SKIP, Provider0·실기기/로그인제출/AI품질NT. 항공5·숭실1 HOLD 유지. [이전 경희4·과학18](essay-khu-mock-science-20261112.md). 아래 집계는 당시 이력.
+[잔여6 처리](essay-remaining6-resolution-20261113.md): **304공개/4잔여/308**. 항공2 공개·항공3/숭실1 공식 충돌. 기존302/기록/권한/Credit 보존, Provider0. WEB63PASS/build·APP15PASS4SKIP; 실제로그인제출/기기/AI품질NT. 성균15·이화87 CLOSED, 전체 PARTIAL. 아래는 과거 이력.
+
 
 [이화 종료·잔여43](essay-ewha-closure-20261112.md): 이화29시험87(63+24,중복0) DONE/CLOSED. 기존3 ID·실제Math공개 확인. 전체265공개43잔여; Owner AI통합검수 별도. 종료 운영쓰기/Provider0.
 
