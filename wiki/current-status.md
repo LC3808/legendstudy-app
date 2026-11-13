@@ -1,5 +1,7 @@
 # Current Status
 
+[11/13 WEB UI·일정/배포·보존·잔여검증](essay-university-ui-schedule-20261113.md).
+
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
 
 [TASK16-C](task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.

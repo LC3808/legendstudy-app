@@ -1,3 +1,7 @@
+## 2026-11-13 — 논술 WEB 대학 UI·공식 일정
+
+종료 베타 상시 배너 제거·히어로/공통 대학 카드 개선, 15원본로고·25대학62일정 보완. 기존304공개문항/API/설정 보존. 공식색20개·일정17개 추가검증 필요. [검증·배포·복구](essay-university-ui-schedule-20261113.md).
+
 ## 2026-10-27 — MY 최종 UI 보정 Production 완료
 
 - 2026-11-02 TASK16-E: Q1 기호 오류 확인 분류·UNCERTAIN Worker 차단·WEB/Native 상세 공개 gate. API 재호출0/DB변경0. [검증·잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
