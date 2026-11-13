@@ -22,6 +22,7 @@ Newest explicit Owner decisions supersede historical scope; record exact scope,
 not an inferred promotion of a whole roadmap. Current is not historical evidence.
 
 ## Task Routing Map
+대학 로고·브랜드 전체 재검증: [35개 공식 자료 대조·운영](essay-university-brand-audit-20261113.md).
 
 대학 카드 제외 / 지난 일정 제거 / 로고 정정: [11/13 Owner 후속](essay-university-ui-followup-20261113.md).
 
