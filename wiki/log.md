@@ -6015,3 +6015,5 @@ Resend/SES/Brevo 공식 최신 요금·quota·인증·로그 비교, Resend 우�
 - 2026-11-13 PDF 수정SQL 재실패 신고: 정확한 운영 preflight845/845·권한0,현재 재현안됨. PDF845-R2 버전/실패수치/성공영수증 추가·격리844거절/845허용/원복 PASS. Owner 적용대기. [상세](operations-commercial-20261113.md).
 
 - 2026-11-13 14:34KST PDF Success 회신 사후조회: 운영권한/허용0,비활성자료보존. 활성화 미완료·실행 프로젝트/본문 확인요청. [근거](operations-commercial-20261113.md).
+
+- 2026-11-13 PDF Success 원인: 실제 SQL Editor에 주석1줄만 존재,정확한 운영프로젝트 확인. Git밖 전체SQL 텍스트 재전달·바이트일치. 운영실행0. [근거](operations-commercial-20261113.md).

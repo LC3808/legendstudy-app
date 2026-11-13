@@ -268,3 +268,14 @@ Owner `Success. No rows returned` 회신 후 2026-11-13 14:34:48 KST 운영
 is_active=false/PENDING/권한0 유지. 활성화 완료 아님. PDF845-R2 전체 실행은
 마지막 SELECT에 package/activation_rows/policy_allowed 행을 반환하므로,
 실행 프로젝트와 전체본문/선택영역 여부를 Owner에게 확인 요청. 원인은 미확정.
+
+### SQL Editor 실제 화면으로 원인 확인
+
+Owner가 전체 실행했다고 회신하여 열린 브라우저를 읽기전용 확인했다. 프로젝트는
+stlhijzpjfgwwdgunlsd/main PRODUCTION으로 정확했으나, 선택된 실행 탭 본문은
+`-- Excludes currently inactive ...; never reactivate it.` 주석1줄과 빈2행뿐이었다.
+동일 화면의 결과가 Success/0rows임을 확인. 이번 Success는 활성화 SQL 실행
+근거가 아닌 주석만 실행한 결과로 설명된다. UI 편집/Run/운영쓰기0. 파일 링크가
+변경부분을 보여준 전달경로 혼동 가능성(추정)을 줄이기 위해 Git 밖 전체 텍스트
+파일을 생성·원본 바이트 일치 확인 후 전달. 앞선 Registry mismatch 원인과는
+구분하며 이번 Success의 화면만 확인한 것이다.
