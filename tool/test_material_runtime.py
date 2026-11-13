@@ -55,17 +55,17 @@ class MaterialRuntimeTests(unittest.TestCase):
   self.package['questions'][0]['official_images']=[self.image()]
   q,_=self.bind();images=q.frozen_cache['official_images']
   self.assertEqual(len(images),1)
-  self.assertEqual(set(images[0]['evidence_ids']),{e['binding']['id'] for e in q.frozen_cache['evidence'] if e['binding']['role'] in ('question','passage')})
+  self.assertEqual(set(images[0]['evidence_ids']),{e['binding']['id'] for e in q.frozen_cache['evidence'] if e['binding']['role'] in ('question','passage','exam_intent','scoring_criteria')})
   self.assertFalse(q.approved_processing)
  def test_foreign_page_source_or_changed_image_fails_closed(self):
   for change in [dict(sourceHash='b'*64),dict(startPage=2,endPage=2),dict(sha256='0'*64)]:
    self.package['questions'][0]['official_images']=[dict(self.image(),**change)]
    with self.assertRaises(Invalid):self.bind()
- def test_official_images_cannot_point_only_to_rubric(self):
+ def test_reviewed_rubric_images_bind_only_the_exact_rubric_page(self):
   for m in self.package['questions'][0]['source_page_references']:
    if m['role']=='criteria':m.update(startPage=2,endPage=2)
   self.package['questions'][0]['official_images']=[dict(self.image(),startPage=2,endPage=2)]
-  with self.assertRaisesRegex(Invalid,'FOREIGN_OFFICIAL_IMAGE'):self.bind()
+  q,_=self.bind();self.assertEqual(set(q.frozen_cache['official_images'][0]['evidence_ids']),{e['binding']['id'] for e in q.frozen_cache['evidence'] if e['binding']['locator']=='PDF 2-2'})
  def test_model_answer_is_not_misrepresented_as_criteria(self):
   self.package['questions'][0]['source_page_references'].append(dict(questionId='q',sourceHash='a'*64,role='model_answer',startPage=2,endPage=2,evidenceText='answer',verification='VERIFIED'))
   q,r=self.bind();self.assertEqual(r['not_forwarded_roles'],['model_answer']);self.assertEqual(len(q.frozen_cache['criteria']),1)

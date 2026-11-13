@@ -1,0 +1,15 @@
+{
+  "worker_unit_pass": 45,
+  "web_contract_pass": 62,
+  "flutter_pass": 19,
+  "flutter_skip": 5,
+  "staged_science_contract_pass": 3,
+  "isolated_sql": "PASS",
+  "isolated_ledger_history_credit": "PASS",
+  "web_production_build": "PASS",
+  "provider_calls": 0,
+  "actual_browser": "NOT TESTED",
+  "actual_device": "NOT TESTED",
+  "actual_login_submission_result_rewrite": "NOT TESTED",
+  "ai_quality": "NOT TESTED"
+}

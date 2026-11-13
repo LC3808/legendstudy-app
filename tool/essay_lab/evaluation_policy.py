@@ -19,6 +19,9 @@ def policy_family(evaluation_type, exam_identity):
 
 
 def question_engine(evaluation_type, approved_engine='essay'):
+    if evaluation_type == 'science':
+        require(approved_engine in ('science','math'),'SCIENCE_ENGINE_REQUIRED')
+        return approved_engine
     if evaluation_type == 'business':
         return business_question_engine(approved_engine)
     # Preserve the existing humanities path, including already pinned children.

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "pages_deployment": "68e2172b-802d-4d07-ad6a-0aa205824cd7",
+  "pages_source": "f99135ce02abe67c8d0af3152872026ac2297760",
+  "worker_version": "27c67e48-5526-46a6-a7e8-1aab3218016e",
+  "public_catalog_exams": 5,
+  "public_catalog_entries": 22,
+  "science_questions": 18,
+  "existing_math_entries_preserved": 4,
+  "db_preflight_exams": 5,
+  "old_math_leaves_preserved": 436,
+  "all_deployment_config_exact": true,
+  "all_static_assets_exact": true,
+  "provider_calls": 0,
+  "browser_ui": "NOT TESTED",
+  "device": "NOT TESTED",
+  "actual_login_submission": "NOT TESTED"
+}

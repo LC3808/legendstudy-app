@@ -35,7 +35,7 @@ def material_readiness(package, registry):
 
 def reviewed_material_question(package,registry,question_id,*,pinned_digest,binding,regime,evaluation_type,
                               approved_processing=False,length_requirement=None):
-    require(evaluation_type in ('humanities','business'),'USE_EXISTING_MATH_OR_SCIENCE_RUNTIME')
+    require(evaluation_type in ('humanities','business','science'),'USE_EXISTING_MATH_OR_SCIENCE_RUNTIME')
     require(type(package) is dict and package.get('schema')=='essay-material-package-v1', 'MATERIAL_PACKAGE_REQUIRED')
     require(package.get('verification_status')=='VERIFIED_MANIFEST' and
             package.get('package_digest')==pinned_digest and
@@ -106,6 +106,12 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
             image_parts([dict(sha256=image['sha256'],bytes=raw)])
             attached.append(dict(sha256=image['sha256'],data=image['data'],evidence_ids=matches))
         cache['official_images']=attached
+    if evaluation_type=='science':
+        require(entry.get('evaluation_engine') in ('science','math'),'SCIENCE_ENGINE_REQUIRED')
+        if entry['evaluation_engine']=='science':
+            from .science_runtime import science_context
+            cache['science_context']=science_context(entry)
+            cache['evaluation_engine']='science'
     sources={e['binding']['hash'] for e in evidence if e['binding']['role']=='question'}
     require(len(sources)==1,'QUESTION_DOCUMENT_MISMATCH')
     assignment={k:exam[k] for k in ('examId','universityId','year','kind','track','session','campus')}
@@ -213,7 +219,7 @@ def execute_reviewed_material_exam(*, package, registry, pinned_digest, binding,
     # Validate ALL selected questions before any journal intent or Provider call.
     # Exact list equality prevents quietly dropping a required official criterion.
     for q in questions:
-        require(type(q) is dict and set(q) == {
+        require(type(q) is dict and (set(q)-{'engine'}) == {
             'questionId', 'rubricVersion', 'evidenceVersion', 'evaluationId', 'claim'
         }, 'INVALID_EXAM_QUESTION_SET')
         content = hosted.get(q['questionId'])
@@ -222,6 +228,7 @@ def execute_reviewed_material_exam(*, package, registry, pinned_digest, binding,
         require(q['rubricVersion'] == version and q['evidenceVersion'] == version,
                 'REVIEWED_PACKAGE_PIN_REQUIRED')
         cache = deepcopy(content.frozen_cache)
+        require(q.get('engine','essay')==cache.get('evaluation_engine','essay') and q.get('engine','essay') in ('essay','science'),'QUESTION_ENGINE_MISMATCH')
         claim = q['claim']
         require(claim['input']['evidence'] == [e['binding'] for e in cache['evidence']]
                 and claim['input']['criteria'] == [c['binding'] for c in cache['criteria']],
@@ -250,6 +257,7 @@ def execute_reviewed_material_exam(*, package, registry, pinned_digest, binding,
             return results[0]['evaluation']['summary']
         return summarize(results)
 
+    run=dict(run,questions=[{k:v for k,v in q.items() if k!='engine'} for q in questions])
     return DurableExamRunner(journal).execute(**run, authorize=authorize,
         build_worker=build, summarize=synthesis, finalize=finalize)
 
@@ -370,5 +378,5 @@ def prepare_claimed_material(claimed,pkg,registry):
             input=frozen,provider_binding=policy['binding'])
         provider_package(claim,cache)
         questions.append(dict(questionId=qid,rubricVersion=answer['rubricVersion'],
-            evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim))
+            evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim,**({'engine':'science'} if cache.get('evaluation_engine')=='science' else {})))
     return questions,caches

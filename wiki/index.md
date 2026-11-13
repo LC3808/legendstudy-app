@@ -430,3 +430,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 - [이화 모의24 공개·265 통합검수](essay-ewha-mock-public-20261112.md)
 
 - [이화 전체 종료·자연계열 잔여43](essay-ewha-closure-20261112.md)
+
+- [경희 모의4·과학18 운영 공개 및 Owner287/잔여21](essay-khu-mock-science-20261112.md).

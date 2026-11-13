@@ -1,0 +1,102 @@
+{
+  "transaction": "COMMITTED",
+  "migration": "20261112114857_khu_mock_4_service_connections_public.sql",
+  "sql_sha256": "a9338101c0e5646295ed58185d1f933ef103e9ac05d0c56c288cf7778478012e",
+  "preflight": 18,
+  "postflight": 24,
+  "preservation": {
+    "tables": {
+      "public.math_problem_sets": {
+        "old_rows_preserved": 411,
+        "new_rows": 4
+      },
+      "public.math_problems": {
+        "old_rows_preserved": 460,
+        "new_rows": 4
+      },
+      "public.math_subproblems": {
+        "old_rows_preserved": 460,
+        "new_rows": 4
+      },
+      "public.math_source_artifacts": {
+        "old_rows_preserved": 1525,
+        "new_rows": 16
+      },
+      "public.math_evaluation_profiles": {
+        "old_rows_preserved": 412,
+        "new_rows": 4
+      },
+      "public.math_scoring_criteria": {
+        "old_rows_preserved": 945,
+        "new_rows": 4
+      },
+      "public.math_canonical_solutions": {
+        "old_rows_preserved": 361,
+        "new_rows": 4
+      },
+      "public.math_canonical_solution_steps": {
+        "old_rows_preserved": 972,
+        "new_rows": 6
+      },
+      "math_private.task20_hanyang_source_pages": {
+        "old_rows_preserved": 320,
+        "new_rows": 4
+      },
+      "public.universities": {
+        "old_rows_preserved": 131,
+        "new_rows": 0
+      },
+      "public.essay_exams": {
+        "old_rows_preserved": 478,
+        "new_rows": 0
+      },
+      "public.essay_questions": {
+        "old_rows_preserved": 1316,
+        "new_rows": 0
+      },
+      "public.essay_attempts": {
+        "old_rows_preserved": 0,
+        "new_rows": 0
+      },
+      "public.essay_evaluations": {
+        "old_rows_preserved": 0,
+        "new_rows": 0
+      },
+      "public.credit_transactions": {
+        "old_rows_preserved": 683,
+        "new_rows": 0
+      },
+      "public.math_attempts": {
+        "old_rows_preserved": 69,
+        "new_rows": 0
+      },
+      "public.math_evaluations": {
+        "old_rows_preserved": 13,
+        "new_rows": 0
+      },
+      "essay_material_private.documents": {
+        "old_rows_preserved": 481,
+        "new_rows": 0
+      },
+      "essay_material_private.reviews": {
+        "old_rows_preserved": 300,
+        "new_rows": 0
+      },
+      "essay_material_private.revisions": {
+        "old_rows_preserved": 371,
+        "new_rows": 0
+      }
+    },
+    "functions_preserved": 360,
+    "policies_preserved": 274,
+    "relations_preserved": 127,
+    "private_history_tables_preserved": 13
+  },
+  "connected_questions": 4,
+  "new_rows": 50,
+  "new_rpc": 0,
+  "new_storage_policy": 0,
+  "provider_calls": 0,
+  "applied_at_kst": "2026-11-12T20:49:47.647916+09:00",
+  "web_publication": "VERIFIED"
+}

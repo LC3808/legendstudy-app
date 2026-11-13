@@ -1,0 +1,142 @@
+{
+  "status": "COMMITTED",
+  "migration": "20261113013507_science18_reviewed_runtime_public",
+  "sql_sha256": "67721e367ea77540a0d0a2fa9fbb9b437c1ed8f4d0336ee6d80809ca0961ecb6",
+  "preflight": {
+    "exact_policy_baseline": true,
+    "reader_unchanged": true,
+    "registry_exact": true,
+    "review_baseline": true,
+    "revision_baseline": true,
+    "runtime_absent": true,
+    "no_student_runs": true,
+    "private_bucket": true,
+    "documents_compatible": true
+  },
+  "postflight": {
+    "reader_unchanged": true,
+    "registry_exact": true,
+    "private_bucket": true,
+    "exact_reviews": true,
+    "exact_revisions": true,
+    "packages_readable": true,
+    "same_regime": true
+  },
+  "tables": {
+    "public.math_problem_sets": {
+      "old_rows": 415,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_problems": {
+      "old_rows": 464,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_subproblems": {
+      "old_rows": 464,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_source_artifacts": {
+      "old_rows": 1541,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_evaluation_profiles": {
+      "old_rows": 416,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_scoring_criteria": {
+      "old_rows": 949,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_canonical_solutions": {
+      "old_rows": 365,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_canonical_solution_steps": {
+      "old_rows": 978,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "math_private.task20_hanyang_source_pages": {
+      "old_rows": 324,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.universities": {
+      "old_rows": 131,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.essay_exams": {
+      "old_rows": 478,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.essay_questions": {
+      "old_rows": 1316,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.essay_attempts": {
+      "old_rows": 0,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.essay_evaluations": {
+      "old_rows": 0,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.credit_transactions": {
+      "old_rows": 694,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_attempts": {
+      "old_rows": 69,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "public.math_evaluations": {
+      "old_rows": 13,
+      "new_rows": 0,
+      "advanced_review_rows": 0
+    },
+    "essay_material_private.documents": {
+      "old_rows": 481,
+      "new_rows": 4,
+      "advanced_review_rows": 0
+    },
+    "essay_material_private.reviews": {
+      "old_rows": 300,
+      "new_rows": 3,
+      "advanced_review_rows": 2
+    },
+    "essay_material_private.revisions": {
+      "old_rows": 371,
+      "new_rows": 5,
+      "advanced_review_rows": 0
+    }
+  },
+  "old_functions_preserved": 358,
+  "changed_functions": 4,
+  "function_identity_acl_preserved": true,
+  "policies_preserved": 274,
+  "relations_preserved": 127,
+  "private_history_tables_preserved": 13,
+  "old_runtime_entries_preserved": 229,
+  "old_math_leaves_preserved": 436,
+  "science_packages": 18,
+  "existing_math_entries": 4,
+  "provider_calls": 0,
+  "public_status": "PUBLISHED",
+  "completed_at_kst": "2026-11-13T10:40:29.471821+09:00",
+  "pages_deployment": "68e2172b-802d-4d07-ad6a-0aa205824cd7",
+  "worker_version": "27c67e48-5526-46a6-a7e8-1aab3218016e"
+}

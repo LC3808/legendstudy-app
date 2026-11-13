@@ -1,0 +1,186 @@
+{
+  "questions": [
+    {
+      "question_id": "f7733560-15d9-530e-aaae-6d04da444d51",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "leaf_id": "dd2e938b-4ea0-57cf-88b3-9b6cc867a3c2",
+      "source_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:1",
+      "evidence": {
+        "problem": {
+          "file": "2022학년도 경희대 모의논술_자연계 문제.pdf",
+          "sha256": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pages": [
+            1,
+            2
+          ]
+        },
+        "intent": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "rubric": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "solution": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            1,
+            2
+          ]
+        }
+      },
+      "official_description": "[논제I](1)에서는인수분해공식을이용하여절대부등식을만들고, 4차방정식을풀어조건에맞는최\n댓값을찾는능력을평가하고자하였다.\n[논제I](2)에서는주어진성질을가지는함수의극대와극소를판정하고설명할수있는능력을평\n가하고자하였다.",
+      "service_concepts": "인수분해·절대부등식·4차방정식과 조건에 맞는 최댓값; 함수의 극대·극소 판정",
+      "official_points": null,
+      "package_sha256": "260936bae2bf1c5350ff3a57fefe0579ea789038bab8214087e315fbee25bbbc",
+      "worker_sha256": "083ad3aa433f399859ee0d592a584223fae46d974fb684473bf2a8d5122f05b7",
+      "rows": 12,
+      "status": "LOCAL_PACKAGE_ONLY"
+    },
+    {
+      "question_id": "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "leaf_id": "1f5ccb52-641a-5d7c-869a-21007978e885",
+      "source_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:2",
+      "evidence": {
+        "problem": {
+          "file": "2022학년도 경희대 모의논술_자연계 문제.pdf",
+          "sha256": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pages": [
+            1,
+            2
+          ]
+        },
+        "intent": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "rubric": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "solution": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            3
+          ]
+        }
+      },
+      "official_description": "[논제2](1)에서는다항식의인수분해를이용하고, 경우를적절하게분류하여경우의수를구하는논\n리적인사고력을평가하려하였다.\n[논제2](2)에서는(1)에서의문제해결방법을응용하여수학적확률을구하는합리적인판단력을\n평가하려하였다.",
+      "service_concepts": "다항식 인수분해·경우 분류·중복/누락 없는 경우의 수; 수학적 확률",
+      "official_points": null,
+      "package_sha256": "0a6ab629294d447d05c13988519aa0e1709138921ea60858f2e99eb8f3b42a92",
+      "worker_sha256": "58fa89a911b0981ab5dd6b83b3a7ce93229c1c5b1c893926e84ade6c2f6c5240",
+      "rows": 11,
+      "status": "LOCAL_PACKAGE_ONLY"
+    },
+    {
+      "question_id": "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "leaf_id": "86afdfc6-3179-525b-9db2-cc0bf5b7c068",
+      "source_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:3",
+      "evidence": {
+        "problem": {
+          "file": "2022학년도 경희대 모의논술_자연계 문제.pdf",
+          "sha256": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pages": [
+            1,
+            3
+          ]
+        },
+        "intent": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "rubric": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "solution": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            4,
+            5
+          ]
+        }
+      },
+      "official_description": "[논제3](1)에서는이등변삼각형의성질과삼각함수의덧셈정리를이용하여삼각형의넓이를구하고\n수열의극한을계산하는능력을평가하고자하였다.\n[논제3](2)에서는도형의닮음, 삼각함수를이용한삼각형의넓이와미적분의급수를사용하여극한\n을계산하는능력을평가하고자하였다.",
+      "service_concepts": "이등변삼각형·삼각함수 덧셈정리·닮음·넓이; 수열/급수의 극한",
+      "official_points": null,
+      "package_sha256": "c7aa6b7cd9ccedb7762c4be90997c2c58defa854432563f3c03b8a768c404b9b",
+      "worker_sha256": "1df36cf8c7e2412ac97206764fcceb66ef10bbf1c9f33d8178c8d32802c2e972",
+      "rows": 12,
+      "status": "LOCAL_PACKAGE_ONLY"
+    },
+    {
+      "question_id": "c6b54603-e483-5a5d-b4c3-d4044b40a0d2",
+      "exam_id": "c47c6ed4-a3fc-5758-b773-9d7ce4762725",
+      "leaf_id": "761143c8-67d3-56a4-8da2-6063d560e144",
+      "source_key": "source:a31bdaa7716d4150af88cd0cbd85f34745dd283f5c0b072b26f0f5c0b007f5b7:4",
+      "evidence": {
+        "problem": {
+          "file": "2022학년도 경희대 모의논술_자연계 문제.pdf",
+          "sha256": "dd083814f7aa1d7290c22ab8a38f4b0eea19513b27a8470ebc4ad01700e3756e",
+          "pages": [
+            1,
+            3
+          ]
+        },
+        "intent": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "rubric": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            7
+          ]
+        },
+        "solution": {
+          "file": "2022학년도 경희대 모의논술_자연계 예시답안,해설.pdf",
+          "sha256": "ab8ab45af576121d66187f81b85244175813f5acf12f9560c874bc35710da005",
+          "pages": [
+            6
+          ]
+        }
+      },
+      "official_description": "[논제4](1)에서는원주각의성질, 원주각과중심각, 이등변삼각형의성질, 피타고라스정리를이용하\n여삼각형의넓이의합을계산하는능력을평가하고자하였다.\n[논제4](2)에서는미분계수, 함수의증가와감소및함수의최댓값, 최솟값을사용하여삼각형의둘\n레의합을계산하는능력을평가하고자하였다.",
+      "service_concepts": "원주각·중심각·이등변삼각형·피타고라스; 미분계수·증감·최댓값/최솟값",
+      "official_points": null,
+      "package_sha256": "f17425e8c1e98746209d2dc948b8b49e028a1e28ac66d90227c9a372a3085450",
+      "worker_sha256": "701c1c66d7add25ef2012aaf39131aa83280d32299f077b14604b25a089f94f1",
+      "rows": 11,
+      "status": "LOCAL_PACKAGE_ONLY"
+    }
+  ],
+  "source_files_unchanged": 2,
+  "provider_calls": 0,
+  "production_writes": 0,
+  "published": 0
+}

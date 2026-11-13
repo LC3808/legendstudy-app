@@ -1,0 +1,146 @@
+{
+  "scope": "isolated PG17; existing 432 synthetic catalog fixtures + exact KHU mock4 official packages; actual existing submit/result/rewrite RPCs with synthetic outputs",
+  "math_preflight": [
+    "math_problem_sets IDs absent",
+    "math_problems IDs absent",
+    "math_subproblems IDs absent",
+    "math_source_artifacts IDs absent",
+    "math_evaluation_profiles IDs absent",
+    "math_scoring_criteria IDs absent",
+    "math_canonical_solutions IDs absent",
+    "math_canonical_solution_steps IDs absent",
+    "Worker rows absent",
+    "question binding absent",
+    "Worker implementation unchanged",
+    "old public catalog exact count",
+    "math_private.evaluation_admission() unchanged",
+    "math_private.release_catalog(uuid) unchanged",
+    "f7733560-15d9-530e-aaae-6d04da444d51 existing Registry exact",
+    "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d existing Registry exact",
+    "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 existing Registry exact",
+    "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 existing Registry exact"
+  ],
+  "checks": [
+    "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 public mapping",
+    "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 unique profile",
+    "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 Worker exact evidence",
+    "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5 Registry identity",
+    "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 public mapping",
+    "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 unique profile",
+    "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 Worker exact evidence",
+    "c6b54603-e483-5a5d-b4c3-d4044b40a0d2 Registry identity",
+    "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d public mapping",
+    "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d unique profile",
+    "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d Worker exact evidence",
+    "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d Registry identity",
+    "f7733560-15d9-530e-aaae-6d04da444d51 public mapping",
+    "f7733560-15d9-530e-aaae-6d04da444d51 unique profile",
+    "f7733560-15d9-530e-aaae-6d04da444d51 Worker exact evidence",
+    "f7733560-15d9-530e-aaae-6d04da444d51 Registry identity",
+    "math_problem_sets exact new row count",
+    "math_problems exact new row count",
+    "math_subproblems exact new row count",
+    "math_source_artifacts exact new row count",
+    "math_evaluation_profiles exact new row count",
+    "math_scoring_criteria exact new row count",
+    "math_canonical_solutions exact new row count",
+    "math_canonical_solution_steps exact new row count"
+  ],
+  "questions": [
+    {
+      "question_id": "8d2b2a5b-38e1-5c2a-a7c4-92396a2eeeb5",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "coaching_required_before_synthetic_disclosure",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_coaching_required_before_synthetic_disclosure",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "c6b54603-e483-5a5d-b4c3-d4044b40a0d2",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "coaching_required_before_synthetic_disclosure",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_coaching_required_before_synthetic_disclosure",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "f1ae8fd9-d4cb-5fb5-944b-9283e77cd59d",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "coaching_required_before_synthetic_disclosure",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_coaching_required_before_synthetic_disclosure",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    },
+    {
+      "question_id": "f7733560-15d9-530e-aaae-6d04da444d51",
+      "checks": [
+        "submission_idempotent",
+        "evaluation_idempotent",
+        "criteria_finalize",
+        "coaching_required_before_synthetic_disclosure",
+        "result_read",
+        "foreign_result_denied",
+        "rewrite_idempotent",
+        "lineage_preserved",
+        "reevaluation_idempotent",
+        "rewritten_coaching_required_before_synthetic_disclosure",
+        "rewritten_result_read"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "rollback": {
+    "old_catalog_exact": true,
+    "histories_exact": true,
+    "new_evaluation_denied": true,
+    "existing_result_read": true,
+    "function_hashes_exact": true,
+    "new_registry_closed": true
+  },
+  "existing_registry_exact": true,
+  "combined_registry_math_transaction": true,
+  "table_acls_unchanged": true,
+  "live_runtime_function_hashes": {
+    "math_evaluation_detail_task16f_legacy": "7280e1493dfa49b41e8d3b13b538cb15",
+    "math_submit_attempt": "e3c2bf35ae1c6260b4c18a0a04b5a71a",
+    "math_finalize_evaluation": "787e25bbab815451c210ed67836c55bb",
+    "math_evaluation_detail": "c942a6a8c209a9dcb2565f65ded5ee3c",
+    "math_learning": "e6bb1be2cab45ef6491007cf027cf6ee",
+    "math_request_evaluation": "8de2ff7828e8525a479398950530d313",
+    "math_claim_evaluation": "5995b8a703765ba47fa5c53df5166e67",
+    "math_learning_task16f_legacy": "adf7a0702631b95ccdafe73ebbdb7dd3"
+  },
+  "coaching_disclosure": "existing guard verified before synthetic fixture disclosure; actual paid reveal NOT TESTED",
+  "provider_calls": 0,
+  "production_writes": 0,
+  "browser_ui": "NOT TESTED",
+  "device_ui": "NOT TESTED",
+  "ai_quality": "NOT TESTED"
+}

@@ -1,0 +1,9 @@
+{
+  "official_source_objects": 13,
+  "authenticated_problem_pdfs": 7,
+  "anonymous_problem_pdfs": 0,
+  "new_internal_sources_visible": 0,
+  "preexisting_source_access_unchanged": 1,
+  "method": "read-only role simulation; no login or UI",
+  "writes": 0
+}

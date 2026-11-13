@@ -8,7 +8,7 @@ from .runtime_host import HostedQuestion
 
 def bind_registered_package(registry, assignment, cache, *, binding, regime,
                             approved_processing=False, reviewed_cache=False):
-    require(assignment.get('evaluationType') in ('humanities','business'),'USE_EXISTING_MATH_OR_SCIENCE_RUNTIME')
+    require(assignment.get('evaluationType') in ('humanities','business','science'),'USE_EXISTING_MATH_OR_SCIENCE_RUNTIME')
     exams=[e for e in registry['exams'] if e['examId']==assignment['examId']]
     require(len(exams)==1,'EXAM_NOT_REGISTERED')
     exam=exams[0]

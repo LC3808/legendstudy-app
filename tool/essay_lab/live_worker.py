@@ -151,6 +151,12 @@ def package(claim, cache):
         for key in ('session','campus'):
             if identity[key] is not None:text(identity[key],1000)
         result['exam_identity']=deepcopy(identity)
+    if cache.get('evaluation_engine')=='science':
+        context=cache.get('science_context')
+        require(type(context) is dict and context.get('capability')=='SCIENCE_REASONING'
+                and context.get('question_id')==cache.get('exam_identity',{}).get('question_id'),
+                'SCIENCE_BINDING_REQUIRED')
+        result['science_context']=deepcopy(context)
     if cache.get('official_images'):
         import base64
         from .bakeoff import image_parts

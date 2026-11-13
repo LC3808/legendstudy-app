@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "checked_at_kst": "2026-11-12T20:50:48.045020",
+  "exams": 1,
+  "published": 4,
+  "existing_math_leaves_preserved": 432,
+  "public_math_leaves": 436,
+  "registry_ids_exact": true,
+  "public_catalog_http": true,
+  "production_scope_exact": true,
+  "static_assets_preserved": 2209,
+  "preview_and_other_env_preserved": true,
+  "deployment": "b791314f-359a-4f89-938e-e4e2be2d2341",
+  "web_sha": "f2aa5e66f9997424dd6dd4eed068598b2d2ec170",
+  "provider_calls": 0,
+  "real_browser": "NOT TESTED",
+  "real_device": "NOT TESTED",
+  "actual_ai_quality": "NOT TESTED"
+}

@@ -1,5 +1,7 @@
 # Current Status
 
+[경희모의4·과학18 운영 공개](essay-khu-mock-science-20261112.md): **287공개/21잔여/308전체**. 경희모의4+경희과학12+서울여과학6 추가. DB·Worker·WEB 운영 연결과 ID/digest/공개목록 PASS, 기존 데이터·권한·Credit 보존. WEB62PASS/APP19PASS5SKIP, Provider0·실기기/로그인제출/AI품질NT. 남은성균15·항공5·숭실1 HOLD 유지. [Owner287목록](../supabase/candidates/khu_mock_science_20261112/owner-integrated-review-287.json). 아래 이전 집계는 당시 이력.
+
 [이화 종료·잔여43](essay-ewha-closure-20261112.md): 이화29시험87(63+24,중복0) DONE/CLOSED. 기존3 ID·실제Math공개 확인. 전체265공개43잔여; Owner AI통합검수 별도. 종료 운영쓰기/Provider0.
 
 [이화 모의24 운영 공개](essay-ewha-mock-public-20261112.md):8시험24(Math12/Essay12) PUBLISHED. 전체265공개43잔여.218행·기존241/데이터/ACL/Credit보존. Provider0,UI·실기기·실제AI NT.
