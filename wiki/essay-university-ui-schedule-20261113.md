@@ -96,3 +96,7 @@ Supabase read-only 조회에서 essay_exams.exam_date는 모두 NULL이고 별�
 - 로그인 운영 화면에서 종료배너 없음/히어로/대학별 컬러 CTA 확인. 다음 페이지의 외대·한양·인하·항공 활성 CTA와 국민 등 회색 비활성 상태 보존. 외대2027 일정4행·공식 출처와2026사회T2 문항3개/답안 작성/기존1이용권 안내까지 확인. 답안 입력·저장·평가 요청은 하지 않았다.
 - 복구는 Cloudflare Pages에서 직전 `3ebc2fc1-7444-4ff4-9bc6-41c3c195a3f2` 배포로 rollback한다. 설정/DB/API migration은 없으므로 역SQL이나 env 복구는 필요 없다. 다른 작업이 후속 배포한 뒤에는 그 변경까지 되돌리지 않도록 최신 상태를 먼저 확인한다.
 - APP canonical current-status/log/index/decisions 및 영향 문서 연결, Wiki handoff PASS(11,956bytes). 기존 다른 작업 수정은 보존하고 이번 추가분만 stage한다.
+
+## Owner 후속 변경
+
+오전42개/지난일정 UI는 [12:14 이후35개·4로고·진한테두리·지난일정제거](essay-university-ui-followup-20261113.md)로 대체된다. 위 기록은 당시 증거로 보존한다.

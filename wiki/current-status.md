@@ -1,6 +1,6 @@
 # Current Status
 
-[11/13 WEB UI·일정/배포·보존·잔여검증](essay-university-ui-schedule-20261113.md).
+[11/13 후속:35대학·로고·진한테두리·지난일정제거](essay-university-ui-followup-20261113.md).
 
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
 

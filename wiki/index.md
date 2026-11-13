@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+대학 카드 제외 / 지난 일정 제거 / 로고 정정: [11/13 Owner 후속](essay-university-ui-followup-20261113.md).
+
 논술 WEB UI / 대학 로고·색상 / 2027 일정 / university schedule: [11/13 검증·배포·42개 감사](essay-university-ui-schedule-20261113.md).
 
 TASK16-E: [손글씨·정답 공개 P0 수정/검증/잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
