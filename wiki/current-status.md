@@ -98,3 +98,5 @@ APP75(1.0.2/75, source c9b4830) 서명·iPhone 설치/실행 PASS, 과목명 후
 관련55/렌더4·analyze PASS. APP74/73/72/71/67 보존, Android 검수 미실행.
 
 [대학 소식 연결](university-news-phase1-connected-20261113.md): API운영/Flutter구현, 29연결13미완료. 테스트17PASS·실기기NT.
+
+[개인화 UUID35·관리자 네 순위 페이지네이션 운영](personalization-phase2-release-20261113.md): 7대학 미연결, WEB17/APP17 PASS·실기기NT.

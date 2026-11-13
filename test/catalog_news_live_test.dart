@@ -8,5 +8,5 @@ void main(){test('operating API captured response parses on APP',(){
  final raw=jsonDecode(File(path).readAsStringSync());
  final n=CatalogNews.parse(raw['universityNews']);
  expect(n.universities.length,42);
- expect(n.universities.where((u)=>u['universityId']!=null).length,29);
+ expect(n.universities.where((u)=>u['universityId']!=null).length,35);
 }, skip: Platform.environment['NEWS_LIVE_FIXTURE']==null ? 'Supply captured operating API response' : false);}
