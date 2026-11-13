@@ -237,7 +237,7 @@ LIVE 결제·환불/운영 사용자 기록 쓰기0. PDF는 첫 Owner 실행 rol
 |---|---|---|---|---|---|---|---|
 |1 PARTIAL|522·DB 장애/기존 로그·통계|제한시간 READ ONLY 진단SQL|로그·Health·SQL PASS|변경0,복구 확인|원인·IO/CPU/RAM 미확정; 지표 없음. 지원확인 필요|6e9ce31|본 문서 PHASE1|
 |2 PARTIAL|기존 Toss/IAP/Play/원장 재사용|검증·LIVE/환불배포 차이 기록|Flutter35/Deno29 PASS|결제·지급·환불0|가맹점·상점·Finance 상태 확인 및 실결제/환불·LIVE 승인|91cc9d8|본 문서 PHASE2|
-|3 PARTIAL|기존 네이티브 PDF 다운로드|Viewer 연결·정규식수정·845활성화 후보|Flutter 다운로드·격리PG PASS|첫SQL 중단,권한0|Owner 수정SQL 적용,양OS 실파일 검수,바이너리 승인|4e433f4 / 6fc39b8|본 문서 PHASE3·SQL README|
+|3 PARTIAL|기존 네이티브 PDF 다운로드|Viewer 연결·정규식수정·845활성화 후보|Flutter 다운로드·격리PG PASS|Owner 적용845·운영전수대조 PASS|양OS 실파일 검수,바이너리 승인|4e433f4 / 6fc39b8|본 문서 PHASE3·SQL README|
 |4 PARTIAL|기존 검색·시험묶음·최근·저장|학년도 검색·MY 다운로드 완료목록|자료/MY109(+기존SKIP1),검색54 PASS|APP미배포|기관 facet 없음; WEB/실기기 이용흐름 미검증|4e433f4 / c0aed17|본 문서 PHASE4|
 |5 PARTIAL|기존 timer/outbox/union/학교|과목·일주목표·기간/과목합계|학습84 PASS·운영제약/함수읽기|DB쓰기0,APP미배포|실기기 복원·WEB 조회·학교 실계정 E2E 미검증. 학교3/1 유지 확정|c0aed17|본 문서 PHASE5·study-v1|
 |6 PARTIAL|APP84 보존·기능별 출시 분리|전체 회귀·양OS컴파일·인계|2609 PASS/8 SKIP,Analyze/빌드 PASS|Store/main/LIVE변경0|양OS 실사용→출시범위·main통합·서명빌드·Store 최종승인|c0aed17(시험 소스)|본 문서 PHASE6·검증영수증|
@@ -279,3 +279,20 @@ stlhijzpjfgwwdgunlsd/main PRODUCTION으로 정확했으나, 선택된 실행 탭
 변경부분을 보여준 전달경로 혼동 가능성(추정)을 줄이기 위해 Git 밖 전체 텍스트
 파일을 생성·원본 바이트 일치 확인 후 전달. 앞선 Registry mismatch 원인과는
 구분하며 이번 Success의 화면만 확인한 것이다.
+
+### PDF 운영 활성화 확인 — 2026-11-13 15:36 KST
+
+Owner가 `42P01 pdf_activation_input does not exist`를 보고했으나 운영 사후조회에서
+permissions845/policy_allowed845가 확인됐다. 이 오류가 어느 실행·범위에서
+발생했는지는 미확정이며 현재 적용 상태와 구분한다. 추가 적용/원복 금지.
+
+현재 R2 파일의845개 전체를 직접 대조하여 **expected845 / exact_permission_matches845 /
+active_policy_matches845** PASS. resource ID/source key/파일명/SHA256/정확한 Owner
+결정/state 모두 일치. 제외한78960745-ee6a-5045-842f-08738ac1fe44는 비활성,
+PENDING/권한0 유지. anon 역할로1700/1435 대표2게시글92개 정책조회 PASS.
+운영 변경은 Owner 실행, Codex는 읽기전용 검증. 초기 검토한 단일DO R3 실험은
+운영 반영이 확인되어 폐기했으며 기존 R2·원복 패키지를 유지한다.
+
+**서버 권한 활성화 DONE, PHASE3 전체 PARTIAL**: 양OS 실제 PDF 저장·재열람은
+아직 NOT TESTED. 기존 앱 상세페이지는 활성 정책을 받을 수 있고 Viewer 하단/
+MY 완료목록은 미배포 새 앱 변경이다. 다음 단계는 대표 PDF 실제 파일 저장 검수.

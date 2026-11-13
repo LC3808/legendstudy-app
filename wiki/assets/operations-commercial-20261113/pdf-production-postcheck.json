@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-11-13T15:36:56+09:00",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "package": "PDF845-R2",
+  "permission_rows": 845,
+  "policy_allowed": 845,
+  "expected_count": 845,
+  "exact_permission_matches": 845,
+  "active_policy_matches": 845,
+  "excluded_resource": {
+    "id": "78960745-ee6a-5045-842f-08738ac1fe44",
+    "is_active": false,
+    "state": "PENDING",
+    "permission_rows": 0
+  },
+  "guest_sample_posts": [
+    "1700",
+    "1435"
+  ],
+  "guest_sample_allowed": 92,
+  "physical_device_save": "NOT TESTED",
+  "agent_production_writes": 0
+}
