@@ -260,3 +260,11 @@ expected/input/matched/role/database, 성공 시 package/activation_rows/policy_
 복원→845허용/Guest/재실행차단/append-only원복 PASS. 운영쓰기0.
 Owner는 SQL Editor 기존본문 대신 최신 apply.sql 전체를 붙여 첫 줄 PDF845-R2
 확인 후 실행. 결과/새 오류 대기. [정확한 절차](../supabase/candidates/pdf_activation_20261113/README.md).
+
+### Owner Success 회신 후 운영 사후조회
+
+Owner `Success. No rows returned` 회신 후 2026-11-13 14:34:48 KST 운영
+읽기전용 확인: permissions0/ALLOWED0/policy_allowed0. 제외자료는
+is_active=false/PENDING/권한0 유지. 활성화 완료 아님. PDF845-R2 전체 실행은
+마지막 SELECT에 package/activation_rows/policy_allowed 행을 반환하므로,
+실행 프로젝트와 전체본문/선택영역 여부를 Owner에게 확인 요청. 원인은 미확정.
