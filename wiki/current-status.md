@@ -1,4 +1,4 @@
-[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter92/analyze PASS; 원본 보존.
+[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter93/analyze PASS; 원본 보존.
 
 # Current Status
 

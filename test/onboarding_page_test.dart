@@ -586,6 +586,18 @@ void main() {
     expect(repo.nicknameWrites, 1);
   });
 
+  testWidgets('untouched long nickname including whitespace is preserved', (
+    t,
+  ) async {
+    final old = ' ${'가' * 40} ';
+    final repo = _Repo()..initial = UserProfile(id: 'u1', displayName: old);
+    await toNickname(t, repo);
+    await t.tap(find.text('다음'));
+    await t.pumpAndSettle();
+    expect(repo.nicknameWrites, 0);
+    expect(find.textContaining('1~20자로'), findsNothing);
+  });
+
   testWidgets('invalid nickname cannot save or complete', (t) async {
     final repo = _Repo();
     await toNickname(t, repo);

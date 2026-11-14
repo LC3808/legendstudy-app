@@ -5,10 +5,10 @@ characters 1.4.1 (Unicode16)을 직접 의존성으로 선언. 프로필/온보�
 입력 counter20, 강제 절단 없음. repository에서 기존 이름 조회 후 동일하면
 payload에 display_name을 보내지 않는다. 학교·학년/온보딩 완료와 기존 이름 보존.
 
-검증: nickname/day7_profile/personalization_onboarding/onboarding_page/my_profile_state/task14b_profile_navigation 92 PASS.
+검증: nickname/day7_profile/personalization_onboarding/onboarding_page/my_profile_state/task14b_profile_navigation 93 PASS.
 Flutter3.47.5/Dart3.13.4 analyze PASS. 기존 테스트의 단일 요청 기대는 추가 GET을
 고려해 POST payload를 검증하도록 변경; 이전1~80 안내 기대는1~20으로 변경.
-기존 긴 이름으로 학년 저장,21자 거부,한글/영문/ZWJ가족/국기/피부색/결합문자 검증.
+기존 앞뒤 공백 포함 긴 이름의 미변경 온보딩 진행, 기존 긴 이름으로 학년 저장,21자 거부,한글/영문/ZWJ가족/국기/피부색/결합문자 검증.
 
 운영 DB는 WEB 작업의 `nickname_grapheme_20` migration으로 동일 Unicode16
 검증을 적용했다. 기존80코드포인트 CHECK를 신규/변경만 검사하는 트리거로 교체.

@@ -173,7 +173,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     try {
       await _persistDraft(owner);
       if (!skip && delta > 0 && _step == 5) {
-        final nickname = _nickname.text.trim();
+        final nickname = _nickname.text == _savedNickname
+            ? _nickname.text
+            : _nickname.text.trim();
         final validation = nickname.isEmpty
             ? null
             : nicknameValidationError(nickname, previous: _savedNickname);
@@ -292,7 +294,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Future<void> _finish() async {
     if (_busy || _advancing || !_hydrated) return;
-    final nickname = _nickname.text.trim();
+    final nickname = _nickname.text == _savedNickname
+        ? _nickname.text
+        : _nickname.text.trim();
     final validationError = nickname.isEmpty
         ? null
         : nicknameValidationError(nickname, previous: _savedNickname);
