@@ -1,6 +1,6 @@
 # Current Status
 
-[11/14 LAB 관리자 조회](admin-lab-operations-20261114.md): 요청순·회원이력·답안/결과·처리추적·검수 연결. 요청58/완료47/실패10/진행1,베타1 확인. SQL 격리검증 PASS. Owner 위임 SQL 운영 PASS·WEB 배포/E2E 진행(PARTIAL).
+[11/14 LAB 관리자 조회](admin-lab-operations-20261114.md): 요청순·회원이력·답안/결과·처리추적·검수 연결. 요청58/완료47/실패10/진행1,베타1 확인. SQL 격리검증 PASS. SQL·WEB 운영/관리자 E2E PASS(DONE).
 
 [11/13 운영 작업](operations-commercial-20261113.md): PDF845 운영허용 확인,실기기 대기. 학교3/1 유지. [exporter 장애 추적](supabase-temp-incident-20261113.md):522 인과 미확정. 전체2609 PASS/8 SKIP,양OS debug PASS; LIVE/Store 완료 아님.
 

@@ -1,6 +1,6 @@
 # 논술 LAB 운영 관리 1차 — 2026-11-14
 
-상태 **PARTIAL**: WEB 구현·격리 SQL 검증 완료. Owner가 이번 SQL 직접 실행을 위임하여 운영 R1 적용 완료. 신규 화면 운영 E2E/배포 진행 중.
+상태 **DONE**: 확정 범위 구현·SQL/WEB 운영 반영·관리자 실제 조회 검증 완료. 미수집 결과 열람 이벤트/기존 테스트 실패/후속 UX는 아래에 명시한다.
 기존 정책: [Credit](admin-credit-operations-20261027.md), [베타](admin-beta-operations.md),
 [피드백](essay-feedback-reports.md), [장기 보존](longitudinal-learning-admissions-data-strategy.md).
 신규 품질 점수/평가 엔진/코멘트 원장은 만들지 않는다. Claude 전체 UI 설계와 분리된 데이터 연결이다.
@@ -90,11 +90,11 @@ promotion grant의 예약/소비-1이며 **daily_grants가 연결된 실제 베�
 SQL: [후보와 적용/원복 절차](../supabase/candidates/admin_lab_operations_20261114/README.md).
 격리 PostgreSQL17에서 exact apply/rollback,검색/전체정렬/동률/NULLlast/25페이지/회원·대학·시험필터,
 역할/비관리자/비활성대상 차단,버전보존·민감필드제거,재실행차단,원복의 run 불변 검증.
-실제 잔액 비교·실제 학생 결과의 신규 관리자 화면 E2E는 SQL 운영 적용 후 확인해야 한다.
+실제 잔액 비교와 실제 학생 답안·결과의 신규 관리자 화면 E2E 완료.
 WEB 변경 자체는 기존 렌더러/읽기 hook 재사용. fixture테스트와 실제운영 확인은 구분한다.
 
 운영 기준 배포798de461-c684-428e-90dc-3d3489191cc2/source c995178.
-WEB 기준62a3296에서 작업. 운영 SQL은 Owner 직접 위임 후 R1 적용 성공; 신규 UI 운영 배포 진행 중.
+WEB 기준62a3296에서 작업. 운영 SQL은 Owner 직접 위임 후 R1 적용 성공; 신규 UI도 아래 최종 배포로 반영 완료.
 이전 웹 배포로 복귀 후 rollback.sql 적용 가능. 배포 도구는 /admin/와 /ql/만 교체하고
 기존 공개 학생 자산·API·설정을 보존하며 동시 배포 drift 발생 시 중단한다.
 
@@ -111,5 +111,23 @@ Supabase apply_migration(admin_lab_operations_20261114) success,3함수 권한/c
 runs/credit_transactions/credit_grants 전체행 해시 적용 전후 각각 동일(사용자 데이터 변경0).
 WEB TypeScript·변경 ESLint·production 설정 정적 build PASS.
 전체1987 PASS/5 SKIP/11 FAIL 및 기존 dashboard mock 오류1. 실패11개·오류1은 깨끗한62a3296에서도 동일 재현.
-신규5·회원격리8·기존Credit7·Quality36 관련 검증 PASS(각 실행 범위의 수치를 중복 합산하지 않음).
+신규5·회원격리2·기존Credit7·Quality36 관련 검증 PASS(각 실행 범위의 수치를 중복 합산하지 않음).
 격리 exact SQL 재실행 차단·베타 연결·동률·원복 검사도 PASS.
+
+### 최종 운영 배포·검수
+
+WEB source `3d19c03a79b4a86245cc4a43529323c1dffb96c4`, Pages
+`698baa47-dc13-4621-b964-dd0ceaa3aaa2` success. 바로 이전bc89be7e,작업 전798de461 보존.
+최종 변경 범위 /admin/·/ql/와 새 해시 자산,기존 비대상2653자산·API 번들·환경설정 동일.
+운영 migration version `20261114125224`를 repository migrations에도 동일 SQL로 기록.
+기존 함수/원장 불변·requested_desc 독립 원천 정렬 일치·잔액 불일치0·UUID 검색1·마지막 페이지8 PASS.
+일반 회원 인증 문맥의 상세 조회 ADMIN_REQUIRED(42501) 확인.
+실제 Chrome 관리자 세션: 기본 최근 요청순·활동 컬럼,679회원 중 성균관대 회원 검색1,
+회원 상세1회/완료1/베타1,전체58회,베타필터1회,실제답안3·결과3·원장 예약/소비·재처리1 표시 PASS.
+기존 품질 검수 해당 문제3 원본 상세 조회 PASS; 검수 저장/재평가/금전 변경 수행0.
+공식 라벨이 registry에 없는 과거 문항은 UUID로 구분한다. 배열 순서를 공식 문항 번호로 추정하지 않는다.
+검수 링크 전체 탐색으로 이전 탭 상태 재사용을 방지. 보완 후 신규5/TS/build PASS.
+
+남은 범위: 결과 열람 시각은 기록 미연결(확인 불가),beta 관리자 설정 RPC 미설치,
+학생 코멘트/전체 UI 재설계는 후속. 품질검수 판정 작성·실제 재평가·유료 결제 실행 NOT TESTED(이번 읽기 기능 범위 밖).
+전체 테스트 기존11실패/오류1은 별도 정리 대상이며 이번 배포의 신규 회귀로 오인하지 않는다.
