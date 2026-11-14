@@ -1,4 +1,4 @@
-[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter92/analyze PASS, 기존 긴 이름·학교/학년 저장 보존. 스토어 제출 없음.
+[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter92/analyze PASS; 원본 보존.
 
 # Current Status
 
