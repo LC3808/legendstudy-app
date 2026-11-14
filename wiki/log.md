@@ -1,3 +1,7 @@
+## 2026-11-14 — 논술 LAB 관리자 조회 1차
+
+[구현·계약·운영 조사](admin-lab-operations-20261114.md). 요청순 서버정렬/회원이력/원본답안·결과/처리추적/기존검수 연결. SQL 격리 검증,운영58회 중47완료·10실패·1진행·베타1. 원장·엔진 변경0. Owner 직접 실행 위임으로 R1 운영 적용·원장/회차 해시 보존 PASS. WEB E2E/배포 진행(PARTIAL).
+
 ## 2026-11-13 — temp_file_limit P0 추적
 
 [조사 근거](supabase-temp-incident-20261113.md): 18건 모두 postgres_exporter/supabase_admin/PID2973075/query_id-8285757822602875730. cron·Edge 이력 및 EXPLAIN 대조, 통계 reset으로 사고 전 비용 복원 불가. 진단 SQL 숫자 조회 showtext=false 적용·전체 READ ONLY 실행 PASS, EXPLAIN ANALYZE 2.106ms/temp0. 522·재시작 인과관계 및 호스트 원인 미확정, 지원 요청 초안 미전송. 운영 설정/데이터/cron/Compute 변경0.

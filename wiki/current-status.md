@@ -1,6 +1,8 @@
 # Current Status
 
-[11/13 운영·상용화 순차 작업](operations-commercial-20261113.md): [P0 exporter 추적](supabase-temp-incident-20261113.md)·522 원인 미확정. PHASE3/4 Viewer 다운로드·MY 완료목록 구현,109 PASS/1 SKIP. PDF 운영845허용·ID/파일명/SHA 전수일치 확인(15:36KST). 재실행 불필요·실기기 대기. 학년도 검색·과목/목표 구현(54/84 PASS). 학교3/1 유지. 2609 PASS/8 SKIP·Analyze·양OS debug PASS. LIVE/실기기/Store 완료 아님.
+[11/14 LAB 관리자 조회](admin-lab-operations-20261114.md): 요청순·회원이력·답안/결과·처리추적·검수 연결. 요청58/완료47/실패10/진행1,베타1 확인. SQL 격리검증 PASS. Owner 위임 SQL 운영 PASS·WEB 배포/E2E 진행(PARTIAL).
+
+[11/13 운영 작업](operations-commercial-20261113.md): PDF845 운영허용 확인,실기기 대기. 학교3/1 유지. [exporter 장애 추적](supabase-temp-incident-20261113.md):522 인과 미확정. 전체2609 PASS/8 SKIP,양OS debug PASS; LIVE/Store 완료 아님.
 
 [로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당.
 
