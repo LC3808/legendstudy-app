@@ -7,6 +7,7 @@ import '../../analytics/analytics_providers.dart';
 import '../../analytics/domain/analytics_events.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -175,7 +176,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         final nickname = _nickname.text.trim();
         final validation = nickname.isEmpty
             ? null
-            : nicknameValidationError(nickname);
+            : nicknameValidationError(nickname, previous: _savedNickname);
         if (validation != null) {
           if (_sameOwner(owner)) setState(() => _error = validation);
           return;
@@ -294,7 +295,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     final nickname = _nickname.text.trim();
     final validationError = nickname.isEmpty
         ? null
-        : nicknameValidationError(nickname);
+        : nicknameValidationError(nickname, previous: _savedNickname);
     if (validationError != null) {
       setState(() => _error = validationError);
       return;
@@ -626,7 +627,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     TextField(
       controller: _nickname,
       enabled: !_busy && _hydrated,
-      maxLength: 80,
+      maxLength: 20,
+      maxLengthEnforcement: MaxLengthEnforcement.none,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
         labelText: '닉네임',

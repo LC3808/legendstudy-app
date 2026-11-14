@@ -1,3 +1,5 @@
+import '../../profile/nickname_validation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
@@ -64,12 +66,20 @@ class SupabaseProfileRepository extends _PersonalRepository
     bool clearAcademicStatus = false,
   }) async {
     final owner = requireUser();
-    if (displayName != null &&
-        (displayName.trim() != displayName ||
-            displayName.isEmpty ||
-            displayName.runes.length > 80 ||
-            displayName.contains(RegExp(r'[\x00-\x1f\x7f]')))) {
-      throw const FormatException('Invalid nickname.');
+    var nicknameChanged = false;
+    if (displayName != null) {
+      final existing = await client!
+          .from('profiles')
+          .select('display_name')
+          .eq('id', owner)
+          .maybeSingle();
+      nicknameChanged = displayName != existing?['display_name'];
+      if (nicknameChanged &&
+          (displayName.trim() != displayName ||
+              nicknameValidationError(displayName) != null)) {
+        throw const FormatException('Invalid nickname.');
+      }
+      if (requireUser() != owner) throw StateError('Owner changed.');
     }
     if (gradeLevel != null && ![1, 2, 3].contains(gradeLevel)) {
       throw const FormatException('Unsupported grade.');
@@ -80,7 +90,7 @@ class SupabaseProfileRepository extends _PersonalRepository
     }
     await client!.from('profiles').upsert({
       'id': owner,
-      if (displayName != null) 'display_name': displayName,
+      if (nicknameChanged) 'display_name': displayName,
       if (gradeLevel != null || clearGrade)
         'grade_level': clearGrade ? null : gradeLevel,
       if (academicStatus != null || clearAcademicStatus)

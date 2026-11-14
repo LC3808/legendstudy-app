@@ -61,13 +61,42 @@ void main() {
   test('legacy upsert retains the exact existing payload', () async {
     await session('owner-a');
     await repository.upsertCurrentProfile(displayName: '학생', gradeLevel: 2);
-    expect(jsonDecode(requests.single.body), {
+    expect(jsonDecode(requests.where((r) => r.method == 'POST').single.body), {
       'id': 'owner-a',
       'display_name': '학생',
       'grade_level': 2,
     });
-    expect(requests.single.url.queryParameters['on_conflict'], 'id');
+    expect(
+      requests
+          .where((r) => r.method == 'POST')
+          .single
+          .url
+          .queryParameters['on_conflict'],
+      'id',
+    );
   });
+  test(
+    'unchanged long legacy nickname is omitted from other profile updates',
+    () async {
+      await session('owner-a');
+      final old = '가' * 80;
+      rows['owner-a'] = {
+        'id': 'owner-a',
+        'display_name': old,
+        'grade_level': 1,
+      };
+      await repository.upsertCurrentProfile(displayName: old, gradeLevel: 2);
+      expect(jsonDecode(requests.last.body), {
+        'id': 'owner-a',
+        'grade_level': 2,
+      });
+      expect(rows['owner-a']!['display_name'], old);
+      await expectLater(
+        repository.upsertCurrentProfile(displayName: '가' * 21),
+        throwsFormatException,
+      );
+    },
+  );
   test('optional grade clear and nickname-only edits preserve other profile fields', () async {
     await session('owner-a');
     await repository.upsertCurrentProfile(displayName: '내닉네임', gradeLevel: 3);
@@ -128,7 +157,7 @@ void main() {
   test('clear sends two explicit nulls, not profile deletion', () async {
     await session('owner-a');
     await repository.updateSchoolSelection();
-    expect(jsonDecode(requests.single.body), {
+    expect(jsonDecode(requests.where((r) => r.method == 'POST').single.body), {
       'id': 'owner-a',
       'neis_office_code': null,
       'neis_school_code': null,

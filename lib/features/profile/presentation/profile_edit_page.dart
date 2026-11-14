@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../avatar.dart';
 import '../nickname_validation.dart';
@@ -21,6 +22,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
   bool busy = false, photoBusy = false, photoFailed = false, completed = false;
   String? error;
   String? hydratedOwner;
+  String? savedNickname;
   @override
   void dispose() {
     name.dispose();
@@ -37,8 +39,11 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
         owner != hydratedOwner) {
       return;
     }
-    final value = name.text.trim();
-    final validationError = nicknameValidationError(value);
+    final value = name.text == savedNickname ? name.text : name.text.trim();
+    final validationError = nicknameValidationError(
+      value,
+      previous: savedNickname,
+    );
     if (validationError != null) {
       setState(() => error = validationError);
       return;
@@ -105,7 +110,8 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
       photoBusy = false;
       photoFailed = false;
       completed = false;
-      name.text = profile.value?.displayName ?? '';
+      savedNickname = profile.value?.displayName;
+      name.text = savedNickname ?? '';
       error = null;
     }
     return ShellPage(
@@ -120,7 +126,8 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
         const SizedBox(height: 16),
         TextField(
           controller: name,
-          maxLength: 80,
+          maxLength: 20,
+          maxLengthEnforcement: MaxLengthEnforcement.none,
           enabled: !busy,
           decoration: const InputDecoration(
             labelText: '닉네임',

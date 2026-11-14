@@ -595,7 +595,7 @@ void main() {
     await t.pumpAndSettle();
     expect(repo.nicknameWrites, 0);
     expect(repo.completionAttempts, 0);
-    expect(find.textContaining('1~80자로'), findsOneWidget);
+    expect(find.textContaining('1~20자로'), findsOneWidget);
   });
 
   testWidgets('nickname duplicate taps save and finish only once', (t) async {

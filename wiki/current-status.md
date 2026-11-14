@@ -1,3 +1,5 @@
+[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter92/analyze PASS, 기존 긴 이름·학교/학년 저장 보존. 스토어 제출 없음.
+
 # Current Status
 
 [11/14 LAB 관리자 조회](admin-lab-operations-20261114.md): 요청순·회원이력·답안/결과·처리추적·검수 연결. 요청58/완료47/실패10/진행1,베타1 확인. SQL 격리검증 PASS. SQL·WEB 운영/관리자 E2E PASS(DONE).
