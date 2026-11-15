@@ -2,6 +2,8 @@ import '../../core/network/review_read_only_client.dart';
 
 import 'dart:async';
 
+import '../analytics/usage_actions.dart';
+
 import 'scoring/scoring_repository.dart';
 import 'notifications/mock_notification.dart';
 import 'focus/focus_service.dart';
@@ -62,6 +64,7 @@ final studyControllerProvider =
         ref.watch(studyLocalStoreProvider),
         ref.watch(studyRepositoryFactoryProvider),
         scoringRepository: ref.watch(scoringRepositoryProvider),
+        usageActions: ref.watch(usageActionsProvider),
       );
       final focus = ref.watch(studyFocusProvider);
       void observeFocus() => focus.observe(

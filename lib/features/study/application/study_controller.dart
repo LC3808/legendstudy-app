@@ -1,4 +1,8 @@
 import 'dart:async';
+
+import '../../analytics/usage_actions.dart';
+import '../../analytics/domain/analytics_events.dart';
+
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -16,9 +20,11 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     this.repository, {
     this.ticking = true,
     this.scoringRepository,
+    this.usageActions,
   }) {
     WidgetsBinding.instance.addObserver(this);
   }
+  final UsageActions? usageActions;
   final StudyClock clock;
   final StudyLocalStore store;
   final StudyRepository Function() repository;
@@ -528,6 +534,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     nowMs = now.utcMs;
     lastCompletedMs = 0;
     savePhase = SavePhase.idle;
+    if (mock == null) usageActions?.feature(AnalyticsEvents.studyTimerStart);
     // Future focus integration runs after durable start; no permission dependency here.
   });
   Future<void> pause() => _command((now) async {
@@ -640,6 +647,12 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     scoringSetup = null;
     recovery = false;
     lastCompletedMs = row?.activeMs ?? 0;
+    if (row != null && d.mock == null) {
+      usageActions?.feature(
+        AnalyticsEvents.studyTimerComplete,
+        durationMs: row.activeMs,
+      );
+    }
     lastMock = row?.mode == 'mock_exam' ? row : null;
     records = _merge(rows, records);
     savePhase = row == null

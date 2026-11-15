@@ -1,3 +1,5 @@
+2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
+
 2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.
 
 [PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter93/analyze PASS; 원본 보존.

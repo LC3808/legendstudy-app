@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import '../../analytics/usage_actions.dart';
+import '../../analytics/domain/analytics_events.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,6 +46,13 @@ class PdfViewerPage extends ConsumerStatefulWidget {
 
 class _PdfViewerPageState extends ConsumerState<PdfViewerPage> {
   int _attempt = 0;
+  bool _viewRecorded = false;
+  void _recordView(PdfDocument document, PdfViewerController controller) {
+    if (!mounted || _viewRecorded) return;
+    _viewRecorded = true;
+    ref.read(usageActionsProvider).feature(AnalyticsEvents.pdfView);
+  }
+
   Future<Uint8List>? _bytes;
   @override
   void initState() {
@@ -118,6 +128,7 @@ class _PdfViewerPageState extends ConsumerState<PdfViewerPage> {
                           snapshot.data!,
                           sourceName: '자료',
                           params: PdfViewerParams(
+                            onViewerReady: _recordView,
                             errorBannerBuilder:
                                 (context, error, stackTrace, documentRef) =>
                                     _PdfErrorPanel(
@@ -132,6 +143,7 @@ class _PdfViewerPageState extends ConsumerState<PdfViewerPage> {
                       uri,
                       timeout: const Duration(seconds: 30),
                       params: PdfViewerParams(
+                        onViewerReady: _recordView,
                         loadingBannerBuilder:
                             (context, bytesDownloaded, totalBytes) {
                               final progress =

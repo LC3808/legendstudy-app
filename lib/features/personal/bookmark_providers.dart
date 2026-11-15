@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import '../analytics/usage_actions.dart';
+import '../analytics/domain/analytics_events.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
@@ -189,6 +192,13 @@ class BookmarkStore extends Notifier<Map<String, BookmarkState>> {
         ),
       );
       ref.invalidate(personalMaterialListProvider(PersonalListKind.bookmarks));
+      ref
+          .read(usageActionsProvider)
+          .feature(
+            before.isSaved
+                ? AnalyticsEvents.bookmarkRemove
+                : AnalyticsEvents.bookmarkAdd,
+          );
     } catch (_) {
       if (!_current(generation, owner)) return;
       _put(

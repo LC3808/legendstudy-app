@@ -19,6 +19,13 @@ String analyticsPlatform() {
 /// credit and revenue counts come from PostgreSQL, not from these.
 abstract final class AnalyticsEvents {
   static const menuView = 'menu_view';
+  static const menuClick = 'menu_click';
+  static const materialSearch = 'material_search';
+  static const pdfView = 'pdf_view';
+  static const bookmarkAdd = 'bookmark_add';
+  static const bookmarkRemove = 'bookmark_remove';
+  static const studyTimerStart = 'study_timer_start';
+  static const studyTimerComplete = 'study_timer_complete';
   static const materialOpen = 'material_open';
   static const gradeCutoffView = 'grade_cutoff_view';
   static const pdfDownloadClick = 'pdf_download_click';

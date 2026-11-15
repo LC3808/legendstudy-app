@@ -1,4 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../analytics/usage_actions.dart';
+import '../../analytics/domain/analytics_events.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../data/supabase_search_repository.dart';
 import '../domain/search_models.dart';
@@ -28,13 +31,16 @@ class SearchController extends Notifier<SearchResultState> {
   @override
   SearchResultState build() => const SearchResultState();
 
-  Future<void> search(SearchQuery next) async {
+  Future<void> search(SearchQuery next, {bool track = true}) async {
     query = next;
     final generation = ++_generation;
     state = const SearchResultState();
     try {
       final page = await ref.read(searchRepositoryProvider).search(next);
       if (!ref.mounted || generation != _generation) return;
+      if (track && !next.isBrowse) {
+        ref.read(usageActionsProvider).feature(AnalyticsEvents.materialSearch);
+      }
       state = SearchResultState(
         phase: page.items.isEmpty
             ? (next.isBrowse ? SearchPhase.empty : SearchPhase.noResults)
@@ -49,7 +55,7 @@ class SearchController extends Notifier<SearchResultState> {
     }
   }
 
-  Future<void> retry() => search(query);
+  Future<void> retry() => search(query, track: false);
   Future<void> loadMore() async {
     if (state.loadingMore || state.nextOffset == null) return;
     final before = state;

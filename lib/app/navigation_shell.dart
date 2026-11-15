@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../features/analytics/usage_actions.dart';
 import '../core/supabase/supabase_providers.dart';
 import '../features/home/guide/home_menu_guide.dart';
 
@@ -93,11 +94,14 @@ class _NavigationShellState extends ConsumerState<NavigationShell> {
               body: SafeArea(child: widget.shell),
               bottomNavigationBar: NavigationBar(
                 selectedIndex: widget.shell.currentIndex,
-                onDestinationSelected: (index) => widget.shell.goBranch(
-                  index,
-                  initialLocation:
-                      index == 4 || index == widget.shell.currentIndex,
-                ),
+                onDestinationSelected: (index) {
+                  ref.read(usageActionsProvider).menuClick(index);
+                  widget.shell.goBranch(
+                    index,
+                    initialLocation:
+                        index == 4 || index == widget.shell.currentIndex,
+                  );
+                },
                 destinations: [
                   NavigationDestination(
                     key: targets[0],
