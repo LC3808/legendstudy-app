@@ -825,3 +825,7 @@ Owner가 WEB 일반인증사용자 LIVE를승인하여앞선HOLD를대체한다.
 ## 2026-11-13 — 대학 로고 공식 UI 우선 및 크기 균형
 
 [대학 브랜드](university-brand-hero-20261026.md)와 [대학카드 후속](essay-university-ui-followup-20261113.md)의 연장: Owner가 남은35개 전체 재점검 요청. 입학처/검색 헤더보다 대학 공식 UI 원본을 우선하며, 파일 재착색·왜곡 없이 여백 표시만 정규화한다. 공식 디지털 숫자가 없는 색은 임시값으로 구분한다. [35개 검토](essay-university-brand-audit-20261113.md).
+
+## 2026-11-15 — Toss Owner QA 제한 재시험
+
+11/4 일반LIVE승인을이번재시험에서는제한한다. Owner승인전PAUSED유지,승인후기존Owner QA만LIVE·review TEST·일반사용자차단. 실결제Owner직접,환불별도승인. 기존결제/원장재사용. [Toss Owner QA 재시험 사전점검](toss-live-owner-qa-preflight-20261115.md).
