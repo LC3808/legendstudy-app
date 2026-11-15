@@ -22,6 +22,79 @@ class FakeUniversities implements UniversityRepository {
 }
 
 void main() {
+  testWidgets(
+    'existing application survives eligibility change and editor delete refreshes the list',
+    (t) async {
+      t.view.physicalSize = const Size(500, 1400);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      var deleted = false;
+      var deletes = 0;
+      final row = {
+        'id': 'existing',
+        'university_id': 'u1',
+        'university_name_snapshot': '테스트대학교',
+        'intended_division': '학과',
+        'admission_type': '수시',
+        'admission_name': '전형',
+        'admission_year': 2027,
+        'revision': 1,
+        'latest_event': null,
+      };
+      final repo = ApplicationRepository(
+        (name, args) async {
+          if (name == 'my_application_delete') {
+            expect(args, {'p_id': 'existing'});
+            deletes++;
+            deleted = true;
+            return null;
+          }
+          expect(name, 'my_applications');
+          return {
+            'version': 'applications-v1',
+            'has_more': false,
+            'items': deleted ? <Map<String, dynamic>>[] : [row],
+          };
+        },
+        () => 'u',
+        'u',
+      );
+      await t.pumpWidget(
+        ProviderScope(
+          overrides: [
+            applicationRepositoryProvider.overrideWithValue(repo),
+            currentProfileProvider.overrideWith(
+              (_) async =>
+                  const UserProfile(id: 'u', academicStatus: 'student'),
+            ),
+          ],
+          child: const MaterialApp(home: Scaffold(body: ApplicationsEntry())),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.tap(find.text('실제 지원 대학 관리'));
+      await t.pumpAndSettle();
+      expect(find.text('지원 대학 등록하기'), findsNothing);
+      expect(find.text('테스트대학교'), findsOneWidget);
+      await t.tap(find.text('수정'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('지원 내역 삭제'));
+      await t.tap(find.text('지원 내역 삭제'));
+      await t.pumpAndSettle();
+      expect(find.textContaining('관심 대학·학과는 유지됩니다'), findsOneWidget);
+      await t.tap(find.text('취소'));
+      await t.pumpAndSettle();
+      expect(deletes, 0);
+      await t.tap(find.text('지원 내역 삭제'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('삭제'));
+      await t.pumpAndSettle();
+      expect(deletes, 1);
+      expect(find.text('등록된 지원 내역이 없습니다.'), findsOneWidget);
+      expect(t.takeException(), isNull);
+    },
+  );
   test('eligibility is saved high3 or retaker only', () {
     expect(
       canManageApplications(

@@ -111,6 +111,48 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
     }
   }
 
+  Future<void> deleteRecord() async {
+    if (widget.record == null || busy || confirming) return;
+    confirming = true;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: const Text('지원 내역을 삭제할까요?'),
+        content: const Text('이 지원 내역과 지원·합격 이력이 함께 삭제됩니다. 관심 대학·학과는 유지됩니다.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(c, true),
+            child: const Text('삭제'),
+          ),
+        ],
+      ),
+    );
+    confirming = false;
+    if (confirmed != true || !mounted) return;
+    await run((r) async {
+      await r.delete(widget.record!.id);
+      ref.invalidate(applicationsProvider);
+      if (!mounted) return;
+      setState(() {
+        dirty = false;
+        savedId = null;
+        busy = false;
+      });
+      // PopScope must observe the completed state before leaving the route.
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
+      if (widget.onSaved != null) {
+        widget.onSaved!();
+      } else {
+        Navigator.pop(context);
+      }
+    });
+  }
+
   Future<void> search() => run((r) async {
     final q = query.text.trim();
     if (q.isEmpty) return;
@@ -404,6 +446,11 @@ class ApplicationEditorState extends ConsumerState<ApplicationEditor> {
             child: Text(busy ? '저장 중…' : '저장'),
           ),
         ),
+        if (widget.record != null)
+          TextButton(
+            onPressed: busy ? null : deleteRecord,
+            child: const Text('지원 내역 삭제'),
+          ),
       ],
     );
     return PopScope(

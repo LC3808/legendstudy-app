@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/supabase/supabase_providers.dart';
+import '../../applications/application_repository.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../universities/application/university_providers.dart';
@@ -13,36 +13,15 @@ import '../data/intended_major_repository.dart';
 final applicationLabelsProvider = FutureProvider.autoDispose<List<String>>((
   ref,
 ) async {
-  final owner = ref.watch(authStateProvider).value?.userId;
-  final client = ref.watch(supabaseClientProvider);
-  if (owner == null || client == null) return [];
-  final labels = <String>[];
-  for (var offset = 0; ; offset += 25) {
-    final value = await client.rpc<Map<String, dynamic>>(
-      'my_applications',
-      params: {'p_offset': offset},
-    );
-    if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
-      return [];
-    }
-    if (value['version'] != 'applications-v1' ||
-        value['items'] is! List ||
-        value['has_more'] is! bool) {
-      throw const FormatException('Invalid applications response');
-    }
-    final items = value['items'] as List;
-    for (final item in items) {
-      final row = item as Map<String, dynamic>;
-      final name = row['university_name_snapshot'] as String;
-      final division = row['intended_division'] as String;
-      // These are actual stored application records, never inferred from targets.
-      labels.add([name, if (division.isNotEmpty) division].join(' · '));
-    }
-    if (value['has_more'] == false) return labels;
-    if (items.isEmpty) {
-      throw const FormatException('Invalid application cursor');
-    }
-  }
+  final records = await ref.watch(applicationsProvider.future);
+  return records
+      .map(
+        (record) => [
+          record.university,
+          if (record.division.isNotEmpty) record.division,
+        ].join(' · '),
+      )
+      .toList();
 });
 
 class AspirationsCard extends ConsumerWidget {

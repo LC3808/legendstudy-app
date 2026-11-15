@@ -15,8 +15,14 @@ class ApplicationsEntry extends ConsumerWidget {
     if (repo == null ||
         profile.isLoading ||
         profile.hasError ||
-        profile.asData?.value?.id != repo.owner ||
-        !canManageApplications(profile.asData?.value)) {
+        profile.asData?.value?.id != repo.owner) {
+      return const SizedBox.shrink();
+    }
+    final eligible = canManageApplications(profile.asData?.value);
+    final records = ref.watch(applicationsProvider);
+    if (!eligible &&
+        !records.hasError &&
+        (records.asData?.value.isEmpty ?? true)) {
       return const SizedBox.shrink();
     }
     return LsCard(
@@ -43,11 +49,8 @@ class ApplicationsPage extends ConsumerWidget {
           repo == null ||
               profile.isLoading ||
               profile.hasError ||
-              profile.asData?.value?.id != repo.owner ||
-              !canManageApplications(profile.asData?.value)
-          ? const Center(
-              child: Text('고3·N수생 프로필에서 이용할 수 있어요. 기존 지원 기록은 보존됩니다.'),
-            )
+              profile.asData?.value?.id != repo.owner
+          ? const Center(child: Text('계정과 프로필을 확인해 주세요. 기존 지원 기록은 보존됩니다.'))
           : _ApplicationList(key: ValueKey(repo.owner)),
     );
   }
@@ -58,6 +61,9 @@ class _ApplicationList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rows = ref.watch(applicationsProvider);
+    final canCreate = canManageApplications(
+      ref.watch(currentProfileProvider).asData?.value,
+    );
     return ShellPage(
       children: [
         const Text('관심 대학과 별도로 실제 지원 내역을 관리해요.'),
@@ -66,12 +72,15 @@ class _ApplicationList extends ConsumerWidget {
           onPressed: () => ref.invalidate(applicationsProvider),
           child: const Text('목록 새로고침'),
         ),
-        FilledButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(builder: (_) => const ApplicationEditor()),
+        if (canCreate)
+          FilledButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const ApplicationEditor(),
+              ),
+            ),
+            child: const Text('지원 대학 등록하기'),
           ),
-          child: const Text('지원 대학 등록하기'),
-        ),
         rows.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, _) => TextButton(
@@ -271,7 +280,9 @@ class _HistoryState extends ConsumerState<_History> {
                         context: context,
                         builder: (c) => AlertDialog(
                           title: const Text('지원 내역을 삭제할까요?'),
-                          content: const Text('이 지원 내역과 기록한 이력이 함께 삭제됩니다.'),
+                          content: const Text(
+                            '이 지원 내역과 지원·합격 이력이 함께 삭제됩니다. 관심 대학·학과는 유지됩니다.',
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(c, false),

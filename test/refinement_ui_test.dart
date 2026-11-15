@@ -1,3 +1,4 @@
+import 'package:legendstudy_app/features/applications/application_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,57 @@ class Interests extends InterestedUniversitiesController {
 }
 
 void main() {
+  test(
+    'application summary refreshes with the shared list after deletion',
+    () async {
+      var deleted = false;
+      final repository = ApplicationRepository(
+        (name, params) async {
+          if (name == 'my_application_delete') {
+            deleted = true;
+            return null;
+          }
+          return {
+            'version': 'applications-v1',
+            'has_more': false,
+            'items': deleted
+                ? <Map<String, dynamic>>[]
+                : [
+                    {
+                      'id': 'application',
+                      'university_id': 'university',
+                      'university_name_snapshot': '한국교원대학교',
+                      'intended_division': '학과',
+                      'admission_type': '수시',
+                      'admission_name': '전형',
+                      'admission_year': 2027,
+                      'revision': 1,
+                    },
+                  ],
+          };
+        },
+        () => 'owner',
+        'owner',
+      );
+      final container = ProviderContainer(
+        overrides: [
+          applicationRepositoryProvider.overrideWithValue(repository),
+        ],
+      );
+      addTearDown(container.dispose);
+      final subscription = container.listen(
+        applicationLabelsProvider,
+        (_, _) {},
+      );
+      addTearDown(subscription.close);
+      expect(await container.read(applicationLabelsProvider.future), [
+        '한국교원대학교 · 학과',
+      ]);
+      await repository.delete('application');
+      container.invalidate(applicationsProvider);
+      expect(await container.read(applicationLabelsProvider.future), isEmpty);
+    },
+  );
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'compact Credit visual and touch geometry at 360 scale $scale',

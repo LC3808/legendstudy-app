@@ -33,7 +33,7 @@ class OnboardingApplicationsState
       context: context,
       builder: (c) => AlertDialog(
         title: const Text('지원 내역을 삭제할까요?'),
-        content: const Text('이 지원 내역과 기록한 이력이 함께 삭제됩니다.'),
+        content: const Text('이 지원 내역과 지원·합격 이력이 함께 삭제됩니다. 관심 대학·학과는 유지됩니다.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(c, false),
