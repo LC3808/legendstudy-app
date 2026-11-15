@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:legendstudy_app/features/home/university_news/catalog_news.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -65,24 +67,15 @@ void main() {
                     id,
                   );
           }),
-          universityNewsRepositoryProvider.overrideWithValue(
-            UniversityNewsRepository(
-              (n, p) async => {
-                'version': 'university-news-v1',
-                'snapshot_at': '2026-11-11T00:00:00Z',
-                'has_more': false,
-                'items': [
-                  {
-                    ...fixtures.news(scope: 'university'),
-                    'title': '$owner official news',
-                    'kind': 'news',
-                    'precision': 'unknown',
-                    'starts_on': null,
-                    'expires_at': '2200-01-01T00:00:00Z',
-                  },
-                ],
+          catalogNewsLoaderProvider.overrideWithValue(
+            () async => CatalogNews([
+              {
+                'universityId': 'u',
+                'sourceUniversityId': 'fixture',
+                'name': '$owner official news',
+                'offerings': <dynamic>[],
               },
-            ),
+            ]),
           ),
         ],
       );

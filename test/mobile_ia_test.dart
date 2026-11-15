@@ -175,7 +175,7 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 200));
       expect(repo.writes, 0);
-      expect(find.textContaining('1~80자'), findsOneWidget);
+      expect(find.textContaining('1~20자'), findsOneWidget);
     },
   );
 }

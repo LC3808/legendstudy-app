@@ -1,5 +1,4 @@
 import 'result_disclosure.dart';
-import '../../shared/widgets/shell_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,16 +31,7 @@ class EssayGrowthPage extends ConsumerWidget {
         .read(analyticsServiceProvider)
         .logEventOnce('growth_view', AnalyticsEvents.essayGrowthView);
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text('나의 논술랩'),
-            SizedBox(width: AppTokens.space8),
-            LabBetaBadge(),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: const Text('나의 논술랩')),
       body: owner == null
           ? const Center(child: Text('로그인 상태를 확인해 주세요.'))
           : _GrowthBody(key: ValueKey(owner), owner: owner),

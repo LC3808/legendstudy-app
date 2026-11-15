@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +21,33 @@ class _RecoveringStatusGateway extends Fake implements MathGateway {
 }
 
 void main() {
+  test('status errors distinguish auth, transport, timeout and server without raw details', () {
+    expect(
+      publicServiceFailureMessage(const PublicServiceHttpFailure(401)),
+      contains('로그인'),
+    );
+    expect(
+      publicServiceFailureMessage(const PublicServiceHttpFailure(403)),
+      contains('권한'),
+    );
+    expect(
+      publicServiceFailureMessage(const PublicServiceHttpFailure(503)),
+      contains('서버'),
+    );
+    expect(
+      publicServiceFailureMessage(TimeoutException('private')),
+      contains('지연'),
+    );
+    expect(
+      publicServiceFailureMessage(http.ClientException('private')),
+      contains('연결'),
+    );
+    expect(
+      publicServiceFailureMessage(const FormatException('private')),
+      isNot(contains('private')),
+    );
+  });
+
   final catalog = SourceCatalog([
     {'sourceUniversityId': 'held', 'universityId': 'held-id', 'name': '준비 대학'},
     {

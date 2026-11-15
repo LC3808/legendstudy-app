@@ -538,7 +538,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                         publicServiceUniversitiesProvider(widget.owner),
                       );
                     },
-                    child: const Text('일시적으로 확인할 수 없습니다 · 다시 시도'),
+                    child: Text(publicServiceFailureMessage(service.error)),
                   ),
                 for (final u in orderedServiceUniversities(c, ready))
                   Card(

@@ -1,3 +1,5 @@
+[APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.
+
 [2026-11-15 APP 행동 분석 보완](app-usage-analytics-implementation-20261115.md) — 기존 GA4 재사용, 코드54테스트·analyze·iOS simulator build PASS, 신규 이벤트 실기기 수신 NOT TESTED.
 
 2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.

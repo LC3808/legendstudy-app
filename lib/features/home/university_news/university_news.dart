@@ -1,7 +1,10 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'catalog_news.dart';
+
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../applications/application_repository.dart';
@@ -253,7 +256,13 @@ List<MatchedUniversityNews> matchUniversityNews(
 }
 
 class UniversityNewsFeed {
-  const UniversityNewsFeed(this.items, this.applications, this.interests);
+  const UniversityNewsFeed(
+    this.items,
+    this.applications,
+    this.interests, {
+    this.catalog,
+  });
+  final CatalogNews? catalog;
   final List<UniversityNewsItem> items;
   final List<ApplicationRecord> applications;
   final List<InterestedUniversity> interests;
@@ -315,6 +324,10 @@ final universityNewsRepositoryProvider = Provider<UniversityNewsRepository?>((
 });
 // Refetch every 5 minutes while visible. No persistent news cache. Home settings
 // cache and admissions freshness are deliberately independent.
+final catalogNewsLoaderProvider = Provider<Future<CatalogNews> Function()>(
+  (ref) => CatalogNews.load,
+);
+
 final universityNewsProvider = FutureProvider.autoDispose<UniversityNewsFeed>((
   ref,
 ) async {
@@ -329,16 +342,14 @@ final universityNewsProvider = FutureProvider.autoDispose<UniversityNewsFeed>((
     ...apps.map((a) => a.data['university_id'] as String),
   };
   if (ids.isEmpty) return UniversityNewsFeed([], apps, interests);
-  final repository = ref.watch(universityNewsRepositoryProvider);
-  if (repository == null) throw StateError('News unavailable');
-  final items = await repository.load(ids);
+  final catalog = await ref.watch(catalogNewsLoaderProvider)();
   if (!ref.mounted ||
       ref.read(authStateProvider).asData?.value.userId != owner) {
     throw StateError('Account changed');
   }
   final timer = Timer(const Duration(minutes: 5), ref.invalidateSelf);
   ref.onDispose(timer.cancel);
-  return UniversityNewsFeed(items, apps, interests);
+  return UniversityNewsFeed([], apps, interests, catalog: catalog);
 }, retry: (_, _) => null);
 String universityNewsError(Object error) {
   if (error is PostgrestException) {

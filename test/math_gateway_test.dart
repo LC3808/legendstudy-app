@@ -120,7 +120,13 @@ void main() {
       );
       await expectLater(
         failed.publicServiceUniversities(),
-        throwsFormatException,
+        throwsA(
+          isA<PublicServiceHttpFailure>().having(
+            (e) => e.status,
+            'status',
+            503,
+          ),
+        ),
       );
       failed.close();
     },

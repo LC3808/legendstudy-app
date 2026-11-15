@@ -1,6 +1,7 @@
 import '../../core/network/review_read_only_client.dart';
 import '../../core/config/app_config.dart';
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
@@ -48,6 +49,32 @@ String? mathExtractionNotice(Object error) {
     'CHECK_EXTRACTION_STATUS' => '인식 상태를 확인하지 못했어요. 저장된 사진은 유지됩니다.',
     _ => null,
   };
+}
+
+/// Status only; never includes response bodies, tokens or student identifiers.
+class PublicServiceHttpFailure implements Exception {
+  const PublicServiceHttpFailure(this.status);
+  final int status;
+}
+
+String publicServiceFailureMessage(Object? error) {
+  if (error is TimeoutException) {
+    return '응답이 지연되고 있어요 · 다시 시도';
+  }
+  if (error is http.ClientException) {
+    return '서비스에 연결하지 못했어요. 네트워크를 확인해 주세요 · 다시 시도';
+  }
+  if (error is PublicServiceHttpFailure) {
+    if (error.status == 401) return '로그인 상태를 다시 확인해 주세요 · 다시 시도';
+    if (error.status == 403) return '이 계정의 접근 권한을 확인해 주세요 · 다시 시도';
+    if (error.status == 429) return '요청이 많아요. 잠시 후 다시 시도해 주세요';
+    if (error.status >= 500) return '서버에서 상태를 확인하지 못했어요 · 다시 시도';
+  }
+  if (error is StateError &&
+      const {'LOGIN_REQUIRED', 'ACCOUNT_CHANGED'}.contains(error.message)) {
+    return '로그인 상태를 다시 확인해 주세요 · 다시 시도';
+  }
+  return '일시적으로 확인할 수 없습니다 · 다시 시도';
 }
 
 /// Existing WEB RPCs and allowlisted worker gateway. No worker key or client billing.
@@ -158,6 +185,9 @@ class MathGateway {
         .then(http.Response.fromStream)
         .timeout(const Duration(seconds: 20));
     checkOwner();
+    if (response.statusCode != 200) {
+      throw PublicServiceHttpFailure(response.statusCode);
+    }
     final data = jsonDecode(response.body);
     if (response.statusCode != 200 ||
         data is! Map ||
