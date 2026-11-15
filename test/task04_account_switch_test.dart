@@ -29,7 +29,7 @@ class _Interests implements UniversityRepository {
 
 void main() {
   testWidgets(
-    'selected university card survives hidden Home account switch without stale owner results',
+    'held university card stays hidden across account switches; stored choice survives',
     (t) async {
       final events = StreamController<AuthStatus>.broadcast();
       String? owner = 'a';
@@ -88,7 +88,8 @@ void main() {
       );
       events.add(AuthStatus(owner));
       await t.pumpAndSettle();
-      expect(find.text('a official news'), findsOneWidget);
+      expect(find.text('a official news'), findsNothing);
+      expect(config.cards.singleWhere((c) => c.id == 'university_news').visible, isTrue);
       router.go('/my');
       await t.pumpAndSettle();
       owner = null;
@@ -101,7 +102,8 @@ void main() {
       await t.pumpAndSettle();
       router.go('/home');
       await t.pumpAndSettle();
-      expect(find.text('b official news'), findsOneWidget);
+      expect(find.text('b official news'), findsNothing);
+      expect(find.text('나의 대학 소식'), findsNothing);
       expect(find.text('a official news'), findsNothing);
       expect(t.takeException(), isNull);
       await t.pumpWidget(const SizedBox());

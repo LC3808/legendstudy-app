@@ -33,6 +33,8 @@ class HomeCardDefinition {
   final String? route;
   int get displayOrderDefault =>
       defaultHomeVisibility.keys.toList().indexOf(id);
+  // Owner release hold: retain persisted choices without rendering unfinished UX.
+  bool get released => availability != 'release-hold';
   bool get defaultVisible => defaultHomeVisibility[id] ?? false;
 }
 
@@ -146,6 +148,6 @@ final homeCards = <HomeCardDefinition>[
     Icons.school_outlined,
     (_) => const UniversityNewsCard(),
     ['interestedUniversities', 'applications', 'verifiedUniversityNews'],
-    availability: 'official-data-required',
+    availability: 'release-hold',
   ),
 ];

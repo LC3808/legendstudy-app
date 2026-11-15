@@ -107,9 +107,11 @@ void main() {
           final bell = t.getRect(find.byTooltip('알림'));
           expect(edit.center.dy, closeTo(bell.center.dy, 0.01));
           expect(edit.right, lessThanOrEqualTo(bell.left));
-          for (var i = 1; i < order.length; i++) {
-            final before = t.getRect(find.byKey(ValueKey(order[i - 1])));
-            final after = t.getRect(find.byKey(ValueKey(order[i])));
+          expect(find.byKey(const ValueKey('university_news')), findsNothing);
+          final shown = order.where((id) => id != 'university_news').toList();
+          for (var i = 1; i < shown.length; i++) {
+            final before = t.getRect(find.byKey(ValueKey(shown[i - 1])));
+            final after = t.getRect(find.byKey(ValueKey(shown[i])));
             expect(
               after.top - before.bottom,
               closeTo(16, 0.01),

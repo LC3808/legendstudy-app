@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
     final state = configurationState.asData?.value;
     final config = state?.configuration ?? HomeConfiguration.defaults();
     final visible = config.cards
-        .where((c) => c.visible && homeCards.any((d) => d.id == c.id))
+        .where((c) => c.visible && homeCards.any((d) => d.id == c.id && d.released))
         .toList();
     return ShellPage(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),

@@ -362,11 +362,12 @@ void main() {
         ),
       );
       expect(find.byType(ReorderableListView), findsNothing);
-      await t.ensureVisible(find.text('나의 대학 소식'));
-      await t.tap(find.text('나의 대학 소식'));
+      expect(find.text('나의 대학 소식'), findsNothing);
+      await t.ensureVisible(find.text('논술 LAB'));
+      await t.tap(find.text('논술 LAB'));
       await t.pump();
       expect(
-        config.cards.singleWhere((c) => c.id == 'university_news').visible,
+        config.cards.singleWhere((c) => c.id == 'essay_lab').visible,
         true,
       );
     },

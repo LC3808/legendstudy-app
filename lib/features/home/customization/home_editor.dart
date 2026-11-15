@@ -20,7 +20,7 @@ class HomeCardSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     children: [
-      for (final card in homeCards)
+      for (final card in homeCards.where((card) => card.released))
         CheckboxListTile(
           secondary: Icon(card.icon),
           title: Text(card.title),
@@ -176,6 +176,9 @@ class _HomeEditorState extends ConsumerState<HomeEditor> {
                           (d) => d.id == choice.id,
                         );
                         final card = matching.isEmpty ? null : matching.first;
+                        if (card != null && !card.released) {
+                          return SizedBox.shrink(key: ValueKey(choice.id));
+                        }
                         return ListTile(
                           key: ValueKey(choice.id),
                           leading: Checkbox(

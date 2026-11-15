@@ -6045,3 +6045,5 @@ APP73 Owner 화면 확인 후 APP74 후속 구현: 오늘→이번 주→누적,
 Owner APP74 화면 확인 완료. APP75 후속으로 결과 목록·상세 제목에 과목명 통합 표시.
 APP75(1.0.2/75, source c9b4830) 서명·iPhone 설치/실행 PASS, 과목명 후속 Owner 확인 대기.
 관련55/렌더4·analyze PASS. APP74/73/72/71/67 보존, Android 검수 미실행.
+
+2026-11-15: Owner iPhone12 85 사용자 데이터 보존/LAB 정상 확인. 대학 소식 UX 보류 요청으로 홈/편집/온보딩 비노출·저장 설정 보존, 86 재빌드. [QA](app-release-105-readiness-20261115.md).

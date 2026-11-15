@@ -98,3 +98,32 @@ Version 1.0.5 updates Essay LAB labels, catalog failure messages, personalized u
 - 빌드 경고: flutter_tts SPM 미지원, AGP/Kotlin 향후 지원 종료 예고, Android SDK XML 버전 차이, CupertinoIcons font 참조 경고. 빌드는 성공했으며 도구체인/디자인 변경으로 범위를 확장하지 않았다. 실제 아이콘 포함 시 단말 시각 검수가 필요하다.
 
 Git 인계는 이 문서를 포함하는 커밋으로 식별한다. main 병합 및 실제 출시 승인은 별도다.
+
+## Owner 실기기 확인 및 대학 소식 보류 — 2026-11-15 후속
+
+Owner는 iPhone12의 84→85 업데이트 후 기존 로그인·잔액·저장 자료·학습 기록 및 LAB 대학/시험 수가 정상이라고 확인했다. **Owner 실기기 확인 PASS**이며 Codex의 직접 화면 검증과 구분한다. 상단 베타 무료 제공 종료 안내는 기존 정책 배너로 남아 있다. 제거한 BETA 배지와 별개다.
+
+추가 스크린샷에서 대학 소식의 긴 문장·내부 상태값 노출에 대해 Owner가 비노출을 요청했다. 이번 릴리스에서는 홈 카드·홈 편집·온보딩 선택에서 대학 소식을 보류한다. persisted university_news 선택과 정렬은 지우지 않으며 관심·지원·합격/학습 원본, RPC, 계정별 설정을 수정하지 않는다. 새 UX 개발은 별도다. 기존 85 산출물은 이 변경을 포함하지 않으므로 출시 후보를 **1.0.5(86)**으로 올려 재빌드한다. 85를 최종 제출하지 않는다.
+
+7개 보존 질문: UI 노출만 변경; 과거 사실 UPDATE 없음; 답안/결과/학습/이용권 원본 유지; 동일 회원·대학 식별자 유지; 관심/지원/결과 의미 유지; 신규 수집·권한 확장 없음; 기존 개인화 설정을 임의 삭제하거나 사실로 재해석하지 않음.
+
+86 자동화·서명 빌드 및 설치 결과는 후속 기록. Android 실기기, 신규 이벤트 실제 수신, 스토어 신고 저장은 아직 NOT TESTED/미완료. PAUSED/HOLD·실제 결제/환불0 유지.
+
+### 86 검증 중간 영수증
+
+Flutter 전체 2629 PASS/9 SKIP/0 FAIL, analyze PASS. 대학 소식 활성 표시를 전제로 한 레이아웃·온보딩 테스트는 최신 보류 정책으로 수정했으며 다른 카드의 선택/저장 재시도·계정 전환·카드 간격 검증을 유지했다. Wiki handoff PASS.
+
+22:11 KST 운영 관리자 앱 이용 분석을 실제 브라우저로 재확인했다. 최근7일 기존 이벤트29267/화면16063/기능143은 수신되지만 신규 메뉴 클릭은 여전히 수신 미확인이다. 이 수치를 85/86 QA 이벤트 전송·저장 PASS로 대체하지 않는다. Android ADB 실기기0.
+
+개인정보 보완 근거: [Firebase Apple 신고 가이드](https://firebase.google.com/docs/ios/app-store-data-collection), [Analytics Apple 신고](https://support.google.com/analytics/answer/10285841), [Analytics Play 신고](https://support.google.com/analytics/answer/11582702). 앱 인스턴스 식별자는 사용자 ID를 직접 설정하지 않아도 존재한다. 우선 확정 가능한 차이는 제품/앱 상호작용에 Analytics 목적 추가, SDK 식별자 신고 검토, Play 사용자 선택 수집 표기와 실제 옵트아웃 부재 정합화이다. 콘솔에 저장/게시한 것으로 보고하지 않는다. 위치/IP 파생 정보·공유/연결 여부까지 설정과 대조하여 신고 완료 전 HOLD 유지.
+
+### 86 최종 빌드·설치 영수증
+
+1.0.5(86) IPA/AAB 서명 빌드 PASS. IPA CFBundleVersion86·bundle com.legendstudy.app 및 codesign deep/strict PASS, AAB jarsigner verified(기존 자체서명 인증서 체인/타임스탬프 경고). 기존85 산출물은 별도 보존.
+
+- `build/releases/app105-86/legendstudy-1.0.5-86.ipa`: SHA256 `a9c97cfb4322fe7645687fa5b5c32da582b8a9012d5ead9cc96679c7802ce7c1`
+- `build/releases/app105-86/legendstudy-1.0.5-86.aab`: SHA256 `78da9d9aa6f8cc819c7149417029c3bcc81f03e104efa4b58a6f68f381203b23`
+
+iPhone12에 삭제 없이86 release archive 업데이트/실행 PASS, 설치목록1.0.5/86 확인(`/tmp/app106-device-after.json`). 이는 development provisioning된 archive 설치이며 Store Distribution IPA 설치 검증과 구분한다. 86 홈 비노출 직접 실기기 시각 확인은 NOT TESTED; 자동화 PASS. 85의 보존 정상은 Owner 보고 근거다. Android 실기기0, 업로드/심사 제출0.
+
+결제 서버 후보는 WEB 별도 브랜치1814111에 기록: 단일Owner 제한/PAUSED 유지/SQL 격리PASS, 운영 미적용·실결제/환불0. 사용자에게 정확한 SQL 적용 범위를 보고하고 승인 대기 중.

@@ -424,9 +424,9 @@ void main() {
       );
       await t.tap(find.text('다음'));
       await t.pumpAndSettle();
-      await t.ensureVisible(find.text('나의 대학 소식'));
+      await t.ensureVisible(find.text('논술 LAB'));
       await t.pumpAndSettle();
-      await t.tap(find.text('나의 대학 소식'));
+      await t.tap(find.text('논술 LAB'));
       await t.pump();
       await t.tap(find.text('이대로 시작하기'));
       await t.pumpAndSettle();
@@ -439,7 +439,7 @@ void main() {
       expect(writes, 2);
       expect(
         (stored!['cards'] as List).singleWhere(
-          (c) => c['card_id'] == 'university_news',
+          (c) => c['card_id'] == 'essay_lab',
         )['visible'],
         true,
       );
