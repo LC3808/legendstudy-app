@@ -30,7 +30,7 @@ App Store Connect 배포 1.0.4 / TestFlight 최신 84, Play Console 프로덕션
 
 ## 기능별 출시 체크리스트
 
-자동화 PASS는 widget/unit 계약에 대한 판정이며 물리 기기 E2E를 대신하지 않는다. 모든 행의 iOS/Android 실기기는 이번 85 최종 바이너리 기준 NOT TESTED다.
+자동화 PASS는 widget/unit 계약에 대한 판정이며 물리 기기 E2E를 대신하지 않는다. 아래 기능별 iOS/Android 화면 E2E는 NOT TESTED다. 후속 iPhone12 설치·실행 검증은 별도 기록한다.
 
 | 기능 | 84/이전 상태 | 85 코드·자동화 | 운영 Backend 확인 | 포함 | 최종 |
 |---|---|---|---|---|---|
@@ -47,7 +47,13 @@ App Store Connect 배포 1.0.4 / TestFlight 최신 84, Play Console 프로덕션
 
 ## 실기기와 보존
 
-iPhone17 Pro Max는 devicectl unavailable. 연결된 iPhone12 Pro Max 앱 목록에는 별도 `com.legendstudy.app.task04c.qa` 1.0.2(67)만 확인되며 정식 bundle 설치는 확인되지 않았다. ADB 연결 기기 없음. Owner에게 기존84 설치 iPhone 연결/잠금 해제 및 Android 연결을 요청했다. 기존 앱 삭제·로그아웃·계정 초기화 없이 유지했다. 따라서 84→85 업데이트/계정·저장·학습 기록 유지, 기기별 소셜 로그인, Native PDF, 실제 분석 전송 모두 NOT TESTED. Owner의 84 정상 복구 보고는 85 실기기 QA가 아니다.
+최초 iPhone12 조회에서 별도 QA 앱만 보였던 것은 `devicectl device info apps`의 기본값이 개발 앱만 포함하기 때문이었다. 정식 앱 미설치 근거로 사용할 수 없으며 이전 안내를 정정한다. `--include-all-apps --bundle-id com.legendstudy.app`로 App Store **1.0.4(84)** 설치를 확인했다.
+
+Owner 연결 통보 후 iPhone12 Pro Max(iOS26.6.1)에 동일 bundle/team의 최종 release archive를 `device install app`으로 **삭제 없이 1.0.5(85) 업데이트 성공**, 설치 후 버전85 및 `device process launch` 성공 확인. 기존 별도 QA 앱은 변경하지 않았다. 연결 기기가 포함된 development provisioning 서명으로 설치한 release archive이며, Store Distribution IPA의 실제 설치/다운로드 검증과 구분한다. Store IPA/AAB는 그대로 보존, 업로드0.
+
+Mac iPhone 미러링은 iPhone17을 대상으로 연결 중이어서 iPhone12 화면을 직접 검수하지 못했다. Owner에게 기존 로그인, LAB 시험 수/BETA 제거, MY·저장 자료·학습 기록 유지 확인을 요청했다. 앱 설치 성공을 세션·사용자 기록 보존 PASS로 대체하지 않는다. 최초 LAB 실패 계정의 재로그인 복구는84에 대한 Owner 보고다. Android ADB 기기 없음. iOS 화면 E2E·분석 신규 수신·Android 실기기는 NOT TESTED 유지.
+
+로컬 근거: `/tmp/app105-store-app-before.json`, `/tmp/app105-device-install.json`, `/tmp/app105-device-after.json`, `/tmp/app105-device-launch.json`. 사용자 데이터/로그인 토큰을 추출하거나 기록하지 않았다.
 
 [보존 전략](longitudinal-learning-admissions-data-strategy.md)의 7개 질문 적용: (1) 변경 대상은 UI/read projection 및 기존 계측 경계, (2) 과거 사실 원본 UPDATE 없음, (3) 기존 답안/평가/지원/합격/학습 원본 유지, (4) 데이터 삭제/일괄변환/새 저장구조 없음, (5) 동일 회원 UUID·대학 UUID 계약 유지, (6) 관심/실제 지원/결과 의미 및 기존 RLS·권한 분리 유지, (7) 기존 기록만 표시하고 미수집을0으로 복원하지 않으며 신규 이벤트에 이메일/검색어/답안 원문을 넣지 않음. 운영 DML/원장/결제/평가 엔진 변경0.
 
@@ -75,7 +81,7 @@ Version 1.0.5 updates Essay LAB labels, catalog failure messages, personalized u
 
 ## 출시 전 남은 검증
 
-1. 연결된 기존84 기기에서 삭제 없는 업데이트와 학생 핵심 흐름 검증; Android도 동일.
+1. iPhone12 삭제 없는84→85 업데이트·실행 PASS 이후 학생 핵심 화면/기록 보존 확인 대기; Android 업데이트·E2E는 NOT TESTED.
 2. 실제 신규 행동 이벤트→Firebase/GA4 저장→관리자 집계 수신 검증. 과거 데이터 수신을85 검증으로 대체하지 않음.
 3. 위 개인정보 신고 차이를 실제 설정과 일치시키고 검토 완료.
 4. 최종 IPA/AAB를 Owner가 검수한 후 스토어 업로드/제출 승인. 현재는 **출시 HOLD**.
