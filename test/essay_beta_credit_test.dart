@@ -129,7 +129,7 @@ void main() {
     expect(find.text('오늘의 무료 첨삭을 모두 사용했습니다.'), findsOneWidget);
     expect(find.textContaining('내일 00:00'), findsNothing);
   });
-  testWidgets('ended banner has no policy modal', (tester) async {
+  testWidgets('ended campaign hides banner and keeps workspace', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -143,7 +143,8 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('베타 무료 첨삭 제공이 종료되었습니다.'), findsOneWidget);
+    expect(find.text('베타 무료 첨삭 제공이 종료되었습니다.'), findsNothing);
+    expect(find.text('workspace'), findsOneWidget);
     expect(find.byType(AlertDialog), findsNothing);
   });
   test('uses server balance and absolute KST midnight timestamp', () {

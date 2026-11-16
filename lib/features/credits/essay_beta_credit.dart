@@ -281,7 +281,8 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
             ),
           )
         else if (value != null &&
-            (value.ended || value.expiresAt.isAfter(DateTime.now())))
+            !value.ended &&
+            value.expiresAt.isAfter(DateTime.now()))
           Material(
             child: SafeArea(
               bottom: false,

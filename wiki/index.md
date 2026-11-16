@@ -1,4 +1,4 @@
-[APP105 스토어 준비·신고 변경표·86 문안](app105-store-preparation-20261116.md) — 2026-11-16, 코드 변경 없음·제출 HOLD.
+[APP105 빌드87·개인정보 보완·최종 QA](app105-build87-release-20261116.md) — 2026-11-16, 배너 제거·iPhone Owner PASS·제출 HOLD.
 
 [APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.
 

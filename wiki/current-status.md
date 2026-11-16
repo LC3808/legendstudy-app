@@ -1,4 +1,4 @@
-[APP105 최종 준비](app105-store-preparation-20261116.md):86 원격Git·해시 일치/전체2629 PASS·analyze PASS. 메뉴클릭10건 수신. Play 신고초안 저장·Apple 미게시·Android 미검증·제출 HOLD.
+[APP105 빌드87](app105-build87-release-20261116.md): 종료 배너 제거·IPA/AAB 재빌드·iPhone 업데이트/Owner PASS. 전체2629 PASS·analyze PASS. Apple 신고 게시/Play 초안 저장. PDF 수신 확인·Android 미검증·제출 HOLD.
 
 2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
 
