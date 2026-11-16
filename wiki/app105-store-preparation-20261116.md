@@ -70,3 +70,7 @@ Version 1.0.5 (86) improves Essay LAB catalog recovery, profile/application summ
 3. Android 실기기 미검증을 Owner에게 명시.
 4. 기존86 IPA/AAB 사용. 제품 코드 변경이 필요하면 새 번호로 재빌드.
 5. Owner의 별도 스토어 제출 승인 이후에만 업로드·심사 제출 절차 진행. 현재 제출 가능 판정은 HOLD.
+
+## Owner 후속 화면 확인
+
+2026-11-16 Owner는 iPhone12에서 “논술랩 상단의 베타 무료 첨삭 제공이 종료되었습니다 배너는 아직 떠 있음”을 확인했다. 이는 유지한 종료 정책 배너이며 BETA 배지와 별개다. 배너 제거 요청으로 확대하지 않았고 코드/빌드를 변경하지 않았다. 이 회신만으로 대학 소식 비노출·BETA 배지 제거·검색/PDF 기능 실기기 검증을 PASS로 전환하지 않는다.
