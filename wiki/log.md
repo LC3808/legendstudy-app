@@ -1,3 +1,5 @@
+2026-11-16: [1.0.5(86) 최종 출시 준비](app105-store-preparation-20261116.md). 산출물 해시·원격Git·고정SDK2629 PASS/analyze 확인, 신규 menu_click10건 수신, Play 신고 초안 보완, Apple 게시/스토어 제출0. 실기기·신고 잔여 명시.
+
 [APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, iPhone12 84→85 설치·실행 PASS, 화면·신고 확인 대기, 제출 없음.
 
 2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.

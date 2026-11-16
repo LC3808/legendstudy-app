@@ -1,3 +1,5 @@
+[APP105 스토어 준비·신고 변경표·86 문안](app105-store-preparation-20261116.md) — 2026-11-16, 코드 변경 없음·제출 HOLD.
+
 [APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.
 
 [2026-11-15 APP 행동 분석 보완](app-usage-analytics-implementation-20261115.md) — 기존 GA4 재사용, 코드54테스트·analyze·iOS simulator build PASS, 신규 이벤트 실기기 수신 NOT TESTED.

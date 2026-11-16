@@ -1,4 +1,4 @@
-[APP105 QA·출시 준비](app-release-105-readiness-20261115.md): Owner iPhone12 84→85 보존/LAB 정상 확인. 대학 소식 비노출86:2629 PASS/9 SKIP, 서명빌드·iPhone 설치 PASS. PAUSED/HOLD.
+[APP105 최종 준비](app105-store-preparation-20261116.md):86 원격Git·해시 일치/전체2629 PASS·analyze PASS. 메뉴클릭10건 수신. Play 신고초안 저장·Apple 미게시·Android 미검증·제출 HOLD.
 
 2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
 
