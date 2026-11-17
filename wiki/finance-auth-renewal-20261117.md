@@ -146,3 +146,5 @@ Owner가 Worker/암호화DO/기존키 Secret/Production private binding을 승�
 [비밀 없는 최종 설정·배포 영수증](evidence/finance-auth-production-20261117.json). 로컬 복구 키 경로는 `~/review-signing-key.jwk` 및 새 `~/review-finance-storage-key.b64`(0600)이며 Git에 넣지 않는다. 기존 수동토큰은 안전한 기존 보관본을 재사용한다. 원복/키복원 시 Worker와 저장키를 임의로 바꾸거나 권한을 확대하지 않는다.
 
 남은 위험: Cloudflare 공통 장애·프로젝트 서명키 침해 영향·외부 push/독립heartbeat 부재는 기존 보안 검토대로 남는다. 이번 승인 범위의 추가 승인 대기사항은 없다. 외부알림·새 알림탭·실제 거래 재시험은 이번 적용 범위 밖이다.
+
+Automatic 전환 뒤 **20:15:35 KST 실제 cron**도 outcome=ok로 실행됐고 해당 호출의 Finance 경고0을 확인했다. 이것은 스케줄러 기동 증거이며 아직 도래하지 않은20% 만료 경계의 운영 갱신 증거로 확대하지 않는다.

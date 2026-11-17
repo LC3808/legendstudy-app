@@ -34,5 +34,8 @@
   "shadow_read_authentication": "PASS",
   "actual_retry_recovery": "PASS",
   "db_unchanged": true,
-  "payment_refund_executions": 0
+  "payment_refund_executions": 0,
+  "automatic_cron_observed_at": "2026-11-17T20:15:35+09:00",
+  "automatic_cron_outcome": "ok",
+  "automatic_cron_auth_warnings": 0
 }
