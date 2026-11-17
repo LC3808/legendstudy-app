@@ -104,6 +104,7 @@ class _PdfDownloadActionState extends ConsumerState<PdfDownloadAction> {
     }
     if (policy?.state != 'ALLOWED' && !busy) return const SizedBox.shrink();
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextButton.icon(

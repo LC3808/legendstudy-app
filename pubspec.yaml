@@ -1,7 +1,7 @@
 name: legendstudy_app
 description: Native LegendStudy mobile application scaffold.
 publish_to: 'none'
-version: 1.0.5+87
+version: 1.0.6+88
 
 environment:
   sdk: ^3.13.3

@@ -1,3 +1,5 @@
+2026-11-17: [PDF P0](pdf-white-screen-hotfix-20261117.md) 다운로드 가능 자료 본문 높이0을 위젯/Android에서 재현. 운영 파일 A/B 정상 바이트 확인, Column 최소 높이 수정. Owner 화면 확인 중단·직접 스토어 업데이트 지시.1.0.6(88) IPA/AAB서명·2632 PASS/9 SKIP/0 FAIL·analyze·Android네이티브2 PASS.실기기 NOT TESTED,제출0.
+
 2026-11-16: [APP105(87)](app105-build87-release-20261116.md) 종료 배너 제거·signed IPA/AAB·2629 PASS/analyze PASS·iPhone 업데이트 및 Owner PASS. Apple 개인정보9종 게시·Play 초안 저장. GA4 PDF 수신. PAUSED/제출 HOLD 유지.
 
 2026-11-16: [1.0.5(86) 최종 출시 준비](app105-store-preparation-20261116.md). 산출물 해시·원격Git·고정SDK2629 PASS/analyze 확인, 신규 menu_click10건 수신, Play 신고 초안 보완, Apple 게시/스토어 제출0. 실기기·신고 잔여 명시.

@@ -1,3 +1,5 @@
+[PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.
+
 [APP105 빌드87·개인정보 보완·최종 QA](app105-build87-release-20261116.md) — 2026-11-16, 배너 제거·iPhone Owner PASS·제출 HOLD.
 
 [APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.

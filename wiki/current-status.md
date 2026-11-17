@@ -1,4 +1,4 @@
-[APP105 빌드87](app105-build87-release-20261116.md): 종료 배너 제거·IPA/AAB 재빌드·iPhone 업데이트/Owner PASS. 전체2629 PASS·analyze PASS. Apple 신고 게시/Play 초안 저장. PDF 수신 확인·Android 미검증·제출 HOLD.
+[PDF P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): ALLOWED 하단 Column이 본문 높이0 유발, 한 줄 수정·Android 재현/수정 검증. 전체2632 PASS·analyze PASS·IPA/AAB서명 PASS, 스토어 Owner 담당·실기기 NOT TESTED. 이전87 QA는 조건별 PDF 검증 누락.
 
 2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
 
