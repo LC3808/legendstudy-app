@@ -5115,3 +5115,8 @@ Owner 직접4900원 환불: CANCELLED/REVOKED·CANCEL SUCCEEDED, 회수원장-1 
 ## 2026-11-17 — 이용안내 영역 구분
 
 10개 안내항목 전체테두리·FAQ 윤곽선 운영반영, build·실제접근 PASS. [배포·검증](toss-live-owner-qa-preflight-20261115.md).
+
+
+## 2026-11-17 — Finance 자동 갱신 준비
+
+비공개 Worker·암호화DO·재시도·Owner상태 구현, 후보 Finance 읽기 PASS, 원장불변. 운영 미적용·승인대기. [계약·검증·정확변경·원복](finance-auth-renewal-20261117.md).

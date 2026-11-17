@@ -34,7 +34,7 @@ TASK16-C / 수학 인식·스캐폴딩·수식: [재사용·Preview·품질 검�
 
 TASK16-B / 상경·사회 실제 첨삭 통합: [격리 Preview·대표 시험·검증·차단 요소](task16b-commerce-social-integration-20261102.md).
 
-[Toss Owner QA 재시험 사전점검](toss-live-owner-qa-preflight-20261115.md) — PAUSED유지·미검증조건·정확변경안.
+[Toss 운영·검증](toss-live-owner-qa-preflight-20261115.md) — 일반LIVE/환불 검증. [Finance 자동 갱신](finance-auth-renewal-20261117.md) — 구현·운영 승인 대기.
 
 TASK17 [작업 명세서·카드사 승인 후 재개](task17-payment-work-spec-20261104.md).
 
