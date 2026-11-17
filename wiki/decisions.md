@@ -829,3 +829,8 @@ Owner가 WEB 일반인증사용자 LIVE를승인하여앞선HOLD를대체한다.
 ## 2026-11-15 — Toss Owner QA 제한 재시험
 
 11/4 일반LIVE승인을이번재시험에서는제한한다. Owner승인전PAUSED유지,승인후기존Owner QA만LIVE·review TEST·일반사용자차단. 실결제Owner직접,환불별도승인. 기존결제/원장재사용. [Toss Owner QA 재시험 사전점검](toss-live-owner-qa-preflight-20261115.md).
+
+
+## 2026-11-17 — 일반 로그인 사용자 LIVE 공개
+
+Owner의 “전체 결제 가능하게 수정해봐”가 11/15 단일Owner QA·PAUSED 유지 정책을 대체한다. 일반 인증 사용자 네 상품 LIVE, review 고정UID TEST전용, 기존가격·원장·권한검증 유지. 실제결제Owner직접·환불별도. [변경·운영영수증](toss-live-owner-qa-preflight-20261115.md#2026-11-17--owner-정책-변경-및-일반-live-활성화).

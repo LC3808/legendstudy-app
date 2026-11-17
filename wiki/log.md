@@ -5098,3 +5098,8 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 - 2026-11-04 TASK17 작업명세서: WEB/DB반영완료·신규결제PAUSED·LIVE검증미완료 구분. Owner 앱카드/ISP·카드사승인최대약2주안내 확인,Finance11/11만료·재개/환불검증절차명시. 이번문서작업은운영변경0. [명세서](task17-payment-work-spec-20261104.md).
 
 - 2026-11-15 Toss후속: 감사16be931확인,운영9105e9e8/902057c PAUSED/LIVE·DB LIVE·QA/review UID일치. 현행QA제한없고직접RPC생성허용확인. 현재Secret유효성/세트/egress미검증구분,미적용SQL·변경안작성. 운영쓰기/결제0. [Toss Owner QA 재시험 사전점검](toss-live-owner-qa-preflight-20261115.md).
+
+
+## 2026-11-17 — Toss 일반 LIVE 공개
+
+Owner 최신승인, WEB01d2624·배포3f7a57bb. Finance복구·2108 PASS, SQL0·기존원장보존. 4900원LIVE창/새주문1 확인, Owner결제대기. [증거·만료·한계](toss-live-owner-qa-preflight-20261115.md).
