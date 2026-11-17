@@ -159,3 +159,8 @@ Owner가 관리자 환불 실행·확인을 직접 완료했다. 운영 DB 읽�
 ### 이용안내 전체 항목 테두리 — 2026-11-17
 
 Owner의 후속 요청으로 판매상품부터 사업자정보까지10개 안내 section에 2px 남색 전체 테두리·흰 배경·동일 여백 적용. FAQ 질문별 윤곽선/이용단계 대비도 강화. 기존11/13 논술LAB 경계 정책과 앞선pricing 수정의 연장이다. WEB e9335ed, 배포 fb94f1da-0603-4a45-9d65-d387edb730b7. webpack production build·diff-check PASS. 실제운영10개 section 전체테두리/흰배경·가로넘침0 확인(브라우저zoom computed1.66667px). /pricing/5정적경로와 추가7자산만 반영, 나머지3073경로/API/env 보존. 모바일viewport 별도 미검증. 결제/환불/SQL 실행0.
+
+
+### 2번 시안 운영 반영 — 2026-11-17
+
+Owner가 제목밑줄+안쪽패널 2번 선택. WEB422b518, 배포00d02c96-c227-42d6-b28d-edbe4456dcde. Next build/diff PASS, 실제제목선·회색패널·데스크톱/축소폭 가로넘침0(390설정,브라우저zoom CSS폭433) 확인. /pricing/5경로+8자산, 기타3076경로·설정·기존APIbundle보존. Finance923f87a 서버코드는 미배포·승인대기 유지.
