@@ -1,7 +1,7 @@
 # Finance 인증 자동 갱신 — 2026-11-17
 
-상태 **PARTIAL — 구현·로컬/실제 읽기 검증 완료, 운영 설치·전환 Owner 승인 대기**.
-기존 [LIVE 승인·환불 기록](toss-live-owner-qa-preflight-20261115.md)과 [인증 수명 검토](essay-jwt-lifecycle-review-20261023.md)를 계승한다. Owner의 이번 요청은 Finance 자동화를 구현하되 운영 적용 순서의 **“5. Owner 승인”**을 유지한다. 실제 결제·환불 시험은 금지되어 수행하지 않았다.
+상태 **DONE — 단계적 운영 적용 완료. Shadow 통과 후 Automatic 활성화·운영 읽기·재시작 복원 확인**. 자연 만료20% 도달에 따른 미래 주기 갱신은 아직 NOT TESTED이며 합성 경계 테스트와 구분한다.
+기존 [LIVE 승인·환불 기록](toss-live-owner-qa-preflight-20261115.md)과 [인증 수명 검토](essay-jwt-lifecycle-review-20261023.md)를 계승한다. Owner가 WEB `923f87a` 기준 Worker/DO/Secret/private binding/Shadow 및 Shadow 통과 후 Automatic 전환을 명시 승인했다. 아래 승인 전 준비 기록은 역사적 근거이며 최신 실제 상태는 후속 영수증을 따른다. 실제 결제·환불 시험은 금지되어 수행하지 않았다.
 
 ## 기존 계약 및 실제 확인
 
@@ -12,7 +12,7 @@
 - `essay_finance`: login/super/bypassrls 모두 false, 직접 테이블 grant 0. service_role 대체0, SQL/GRANT/함수 변경0.
 - 현재 `PAYMENT_FINANCE_TOKEN` Secret 만료 **2026-11-24 18:03:34 KST**. Production LIVE/enabled=true 유지. review TEST 전용 유지.
 - 기존/신규 후보 모두 `payment_process(get, 00000000-0000-0000-0000-000000000000)` → HTTP404/PT404. 실제 함수 정의에서 미존재 주문은 잠금·쓰기 전에 예외 종료하는 것을 확인했다. 익명 동일 호출 HTTP401.
-- 서명키는 과거부터 Owner 로컬 보안 파일에 존재한다. 이번에는 메모리에서만 사용하고 외부 업로드/로그/Git 저장하지 않았다. Node crypto에서는 허용하던 JWK 사용 메타데이터가 WebCrypto import와 호환되지 않아 EC 숫자·kid를 보존하고 import 속성만 정규화했다. 새 키 생성/회전 없음.
+- 서명키는 과거부터 Owner 로컬 보안 파일에 존재한다. 승인 전 준비 단계에서는 메모리에서만 사용했다. Owner 승인 후 전용 Worker Secret에 등록했으며 로그/Git에는 저장하지 않았다. Node crypto에서는 허용하던 JWK 사용 메타데이터가 WebCrypto import와 호환되지 않아 EC 숫자·kid를 보존하고 import 속성만 정규화했다. 새 키 생성/회전 없음.
 - [비밀 없는 사전검증 영수증](evidence/finance-auth-preflight-20261117.json).
 
 ## 방식 비교와 선택
@@ -47,7 +47,7 @@ Owner는 기존 외부 알림 채널이 없고 관리자 화면으로 확인한�
 
 관리자가 열지 않아도 받는 push 경고, Cloudflare 전체 장애를 탐지하는 외부 heartbeat 감시는 **미구현**이다. cron+alarm은 모두 Cloudflare 의존이며 외부 독립 감시라고 표현하지 않는다. 키 폐기/네트워크 장애가 갱신 여유기간 전체에 지속되면 중단 위험이 남는다.
 
-## 검증
+## 승인 전 검증 기록
 
 - 전체 WEB 회귀: **2161 PASS / 5 SKIP**(최종 목적지 제한·shadow 추가 전). 이후 변경 관련 최종 결과는 아래 마감 기록에 기재한다.
 - 정상/20% 경계/만료/실패 보존/지수 backoff/거절 토큰/동시40요청/재시작/저장 실패/읽기 네트워크 오류/401/PGRST303/비허용 대상/Owner 권한/Secret 비노출을 합성 테스트.
@@ -55,16 +55,16 @@ Owner는 기존 외부 알림 채널이 없고 관리자 화면으로 확인한�
 - 검증 전후 주문22·작업13·원장889행 동일, payment_process 정의 MD5 `0dcccf66129e06eb3535da797b56f8f6` 동일, RPC ACL 동일. 실제 결제·환불·SQL 변경0.
 - TS/ESLint/Next production build/Pages Functions compile/전용 Worker dry-run 검증. 실제 CF 다중 지역 실행·alarm/cron·관리자 화면 운영 E2E는 **NOT TESTED — 승인 후**. 시간 이동/동시 요청 테스트와 운영 증거를 구분한다.
 
-## 정확한 운영 변경안 — 승인 전 실행 금지
+## 승인된 운영 변경안 — 아래 단계 실행 완료
 
-1. 현재 Pages deployment/config/API/static manifest를 다시 읽고 보존 영수증을 만든다. 이번 기준은 `fb94f1da-0603-4a45-9d65-d387edb730b7`; 다른 배포가 생기면 새 기준으로 재검토한다.
+1. 현재 Pages deployment/config/API/static manifest를 다시 읽고 보존 영수증을 만든다. 최종 실행 시작 기준은 `00d02c96-c227-42d6-b28d-edbe4456dcde`; 다른 배포가 생기면 새 기준으로 재검토한다.
 2. 동일 LegendStudy Cloudflare 계정에 **legendstudy-finance-auth** Worker + **FinanceVault SQLite Durable Object namespace**를 bootstrap 설정으로 설치한다. 공개 routes/workers.dev/preview URL은 없다. 기존 서비스/DB는 변경하지 않는다.
 3. 전용 Worker Secrets **FINANCE_SIGNING_JWK**, **FINANCE_SUBJECT**, **FINANCE_PUBLISHABLE_KEY**, **FINANCE_STORAGE_KEY** 등록. 기존 서명키/subject/publishable을 안전한 메모리 경로로 재사용하고 저장 암호화키만 암호학적 난수32바이트로 신규 생성한다. 로그/채팅/CLI 인자/Git으로 전달하지 않는다. 기존 키를 Rotate/Revoke하지 않는다.
 4. Worker 정상 설정을 배포하여15분 cron 설치. Pages Production service binding **FINANCE_AUTH → legendstudy-finance-auth** 추가. Preview에는 연결하지 않는다.
 5. Pages에 **PAYMENT_FINANCE_AUTO=shadow** 추가하고 검증한 결제 Worker 코드·관리자 상태 화면만 배포. 기존 PAYMENT_FINANCE_TOKEN은 그대로 보존. 그 외 모든 설정·정적 페이지·API 입력을 비교한다. `PAYMENT_MODE=LIVE`, `PAYMENT_ENABLED=true`, `PAYMENT_PUBLIC_ENABLED=true`, Toss 키, review 설정은 변경하지 않는다.
 6. Owner 상태 API/관리자 패널에서 후보 읽기·만료·마지막 성공 확인. 비Owner API403. 실제 알람/cron heartbeat와 encrypted storage 재시작을 확인한다. 실패 시 여기서 중지하며 기존 결제 토큰은 계속 사용한다.
 7. 성공 시 **PAYMENT_FINANCE_AUTO=true**로 바꾸고 Pages 재배포. 이후 갱신은 환경변수 쓰기·재배포 없이 DO 내부에서 처리된다. 상태/읽기 probe, 비Owner 차단, 원장 비교, 기존 LIVE/review runtime 확인. 실제 결제·환불 실행 없음.
-8. 신규 Worker/DO/binding/Secrets/Pages 두 단계 전환에 대한 **Owner 승인 필요**. Supabase SQL/DB 권한 변경은 필요하지 않다.
+8. 신규 Worker/DO/binding/Secrets/Pages 두 단계 전환에 대한 **Owner 승인 수령·실행 완료**. Supabase SQL/DB 권한 변경은 필요하지 않다.
 
 ## 원복·수동 복구
 
@@ -77,10 +77,10 @@ Owner는 기존 외부 알림 채널이 없고 관리자 화면으로 확인한�
 ## 근거 및 후속
 
 - [Supabase Signing Keys](https://supabase.com/docs/guides/auth/signing-keys), [Cloudflare Durable Objects alarms](https://developers.cloudflare.com/durable-objects/api/alarms/). Supabase11/17 changelog 확인; 이번 작업과 관련된 라이브러리 업그레이드는 하지 않았다.
-- 다음 만료일은 기존 수동 토큰11/24이며 자동화는 아직 운영 중이 아니다. 전환 후에는 각 토큰7일/잔여20% 갱신 정책을 적용한다.
-- 배포 승인 이후 실제 주기 갱신·다중 인스턴스·cold start·fallback 관측 영수증을 이 문서에 추가하기 전까지 전체 DONE으로 보고하지 않는다.
+- 자동 토큰 만료는11/24 20:02:52 KST이며 각 토큰7일/잔여20% 갱신 정책이 운영 중이다. 기존 수동 토큰11/24 18:03:34 KST는 원복 경로로 보존한다.
+- 운영 전환·재시작·재시도 영수증은 아래에 기록했다. 미래 자연주기와 다중리전 실부하는 미검증으로 남기며 합성검증을 실제관측으로 표현하지 않는다.
 
-## 최종 준비 보고
+## 승인 전 준비 보고 (역사 기록)
 
 | 항목 | 상태·결과 |
 |---|---|
@@ -102,3 +102,47 @@ Owner는 기존 외부 알림 채널이 없고 관리자 화면으로 확인한�
 | 16 승인 | 위 운영변경1–8: 새 Worker/DO/Secrets/private binding/shadow→true. DB SQL 없음 |
 
 실패한 빌드는 기존 Cloudflare OAuth 세션 만료의 읽기 설정 조회 오류였으며 정상 세션 갱신 후 최종 Next build PASS. 운영자 OAuth는 개발 실행에만 사용했고 자동 갱신 시스템에 저장하지 않았다. 인증 메타데이터를 포함한 동작만 기록하며 Secret 원문은 노출하지 않았다.
+
+
+## 2026-11-17 — Owner 승인 및 Shadow 적용 기록 (완료)
+
+Owner가 Worker/암호화DO/기존키 Secret/Production private binding을 승인했고, Shadow 통과 시 Automatic까지 진행하도록 승인했다. 실제 결제·환불 및 DB 권한·원장·기존주문 변경은 제외한다.
+
+- 운영 시작 기준 Pages `00d02c96-c227-42d6-b28d-edbe4456dcde`(이용안내2안). API의 실제 기존 번들은 일반 LIVE `01d2624` 계열이며 정적 메타데이터 SHA만으로 Finance 설치를 추정하지 않았다.
+- Worker `legendstudy-finance-auth`, SQLite namespace `f7736b5bb58440f088c9a2105c39cea3`, singleton `production-v1`. Worker Secret4개 이름 확인; 기존 서명키 재사용, AES32바이트 신규키 로컬0600 보관. 원문 출력0.
+- Pages Production만 `services.FINANCE_AUTH={service:legendstudy-finance-auth,environment:production}` 및 `PAYMENT_FINANCE_AUTO=shadow`. Preview·기존서비스·그 외 환경변수 동일. 공개 Worker URL·preview disabled, cron `*/15 * * * *` 설치.
+- 최초 Shadow `ed2d55a9-3540-4101-b319-ccb0799a3346`, 호환성 보완 Shadow `96eb8a1a-5f9c-410d-8bf4-0d9aed53ace3`. 기존 정적3081경로 보존, 관리자 결제5파일과 신규자산만 반영.
+- Shadow 발급 실패의 원인은 Workers에서 지원하지 않는 `redirect: error`. JWKS 호출 전 실패했으므로 신규인증 활성화0, 결제는 기존수동경로. [공식 Request 문서](https://developers.cloudflare.com/workers/runtime-apis/request/)에 따라 `manual`로 고치고3xx거절을 유지. 키·권한검증 우회0.
+- 재시도60→300→900초가 실제 DO alarm으로 실행됨. 상태조회가 retryAt을 계속 뒤로 미루는 별도 경계조건도 수정·회귀검증. 오류로그는 고정stage, 암호화복원로그는 존재여부/만료/성공시각만 기록.
+- 기준 DB: orders22/operations13/ledger889, orders MD5 `0078ed26b2c37c96a952d6ccc09908ed`, ledger MD5 `2837249bfaa1e3862c24b0beec4a2b4d`, 함수MD5/ACL은 기존과 동일.
+- 전체2166 PASS/5 SKIP 후 리다이렉트거절 포함 관련50 PASS. 로컬 별도 workerd 실행은 도구 호환성 오류로 NOT TESTED이며 Vitest 검증·운영 Cloudflare 검증과 구분한다.
+- 실제운영 `runtime` 익명200/LIVE/consumer_purchase=false, Finance 상태 익명401. Owner 관리자에서 Shadow 경고·실패·다음재시도 표시 확인. 일반 LIVE와 review TEST 분기 코드·설정 유지.
+- 다음 성공/Automatic/불변성 결과는 아래 최종 영수증으로 별도 확정한다.
+
+
+## 최종 운영 영수증 — 2026-11-17 20:10 KST
+
+| 요청 항목 | 실제 결과 |
+|---|---|
+| Worker 배포 | DONE — `legendstudy-finance-auth`, 최종 version `d14a757e-5b46-448c-8b66-325d181c2a9f` |
+| Durable Object | DONE — SQLite `FinanceVault`/singleton `production-v1`, AES-256-GCM 저장, 재배포 후 복호화·동일토큰 메타데이터 복원 |
+| Secret | DONE — 4개 등록, 기존 서명키 재사용. 기존 수동 Finance Secret·Toss LIVE/TEST 키 보존, 값 출력0 |
+| Shadow | DONE — 실패단계 보완 후 실제 alarm 재시도로 발급·읽기 성공. 기존 결제는 수동 경로 유지 |
+| Automatic | DONE — `PAYMENT_FINANCE_AUTO=true`, Pages **`9201e47a-f06c-4c35-92a0-3fd6e08ad0da`**, 원복용 Shadow **`96eb8a1a-5f9c-410d-8bf4-0d9aed53ace3`** |
+| Finance 읽기 | DONE — 신규 JWT가 고정 없는주문 get의 HTTP404/PT404를 통과해야만 저장·활성화. 기존 역할/claims 검증도 필수 실행 |
+| 자동 갱신 | 실제 신규발급·alarm 재시도복구·cron기동 DONE. 20% 경계/만료/실패유효토큰보존/40동시/서버재시작 합성 PASS. 자연주기·다중리전 실부하 NOT TESTED |
+| LIVE 영향 | 일반LIVE 설정 유지, review TEST 분기·설정 보존, 현재 관리자 잔액92. 실제결제/환불 실행0, 거래 E2E 재시험 없음 |
+| 관리자 | DONE — [결제 관리](https://lab.legendstudy.com/admin/payment/) → ‘인증 상태 확인’: ‘자동 갱신 · 인증 유효’. 익명 상태요청401, 비Owner거절은 자동화 테스트 |
+| 원복 | DONE — 기존 수동 Secret 보존. false+Pages 재배포 또는 위 Shadow 배포 복귀 후 읽기확인. 수동 Secret은11/24 18:03:34 KST까지 유효; 이후 먼저 같은계약 수동발급·읽기검증 필요 |
+| 다음 만료 | **2026-11-24 20:02:52 KST**. 갱신 임계시각 **11/23 10:26:52 KST** 이후 다음 요청/alarm/15분 cron에서 갱신 |
+| Git/Wiki | 운영코드 WEB **`d2d607a151ae4fdefde0e9d9b10ca537ce4f9a4b`**, 이 문서가 정본. 후속 문서 커밋은 Git 이력 참조 |
+
+검증 전/Shadow 후/Automatic 후 모두 orders22·operations13·ledger889, 주문/원장 MD5 및 payment_process MD5/ACL 동일. essay_finance login/super/bypassrls=false, 직접 테이블grant0. DB SQL변경·Credit/주문/원장쓰기0. 초기3081정적경로·Preview·그 외 Production설정 불변; 관리자5정적파일만 변경.
+
+최종 전체 **2168 PASS / 5 SKIP**, 관련50 PASS, TypeScript/ESLint/Pages compile PASS. 화면은 마지막 실패19:47:52와 회복20:02:52를 이력으로 보존하여 ‘인증 오류 기록 있음’을 표시한다. 현재 ‘인증 유효’이고 다음재시도가 없으므로 지속 중인 장애를 뜻하지 않는다. 오류 이력을 지워 정상처럼 꾸미지 않았다.
+
+새 Worker 재배포 후 `finance_vault_restore`가 credentialPresent=true, expiresAt=1795518172, lastSuccess=1794913372를 기록했고 관리자 재조회도 같은 만료/성공시각이었다. Secret·토큰 원문을 읽어 출력하지 않고 복호화/복원 성공을 확인했다. 최초 장애 중 유효했던 **수동 경로의 보존**은 실제 확인, 자동 active 갱신 실패 시 보존은 합성 테스트다.
+
+[비밀 없는 최종 설정·배포 영수증](evidence/finance-auth-production-20261117.json). 로컬 복구 키 경로는 `~/review-signing-key.jwk` 및 새 `~/review-finance-storage-key.b64`(0600)이며 Git에 넣지 않는다. 기존 수동토큰은 안전한 기존 보관본을 재사용한다. 원복/키복원 시 Worker와 저장키를 임의로 바꾸거나 권한을 확대하지 않는다.
+
+남은 위험: Cloudflare 공통 장애·프로젝트 서명키 침해 영향·외부 push/독립heartbeat 부재는 기존 보안 검토대로 남는다. 이번 승인 범위의 추가 승인 대기사항은 없다. 외부알림·새 알림탭·실제 거래 재시험은 이번 적용 범위 밖이다.

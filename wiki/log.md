@@ -5125,3 +5125,8 @@ Owner 직접4900원 환불: CANCELLED/REVOKED·CANCEL SUCCEEDED, 회수원장-1 
 ## 2026-11-17 — 이용안내 2번 시안
 
 제목 구분선·안쪽패널 운영 반영. API/설정 보존, Finance 미배포. [배포·검증](toss-live-owner-qa-preflight-20261115.md).
+
+
+## 2026-11-17 — Finance 자동 갱신 운영 전환
+
+Owner 승인으로 Worker/암호화DO/Secret/private binding 설치. Shadow redirect 호환성 보완 후 실제재시도·읽기·복원 PASS, Automatic9201e47a. 원장/주문 불변·거래0, 전체2168 PASS/5 SKIP. [영수증·원복·미검증](finance-auth-renewal-20261117.md).

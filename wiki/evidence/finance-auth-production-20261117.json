@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-11-17T11:10:55.358Z",
+  "deployment": "9201e47a-f06c-4c35-92a0-3fd6e08ad0da",
+  "baseline": "00d02c96-c227-42d6-b28d-edbe4456dcde",
+  "automatic": true,
+  "other_configs_unchanged": true,
+  "preview_unchanged": true,
+  "manual_secret_preserved": true,
+  "live_mode": "LIVE",
+  "public_enabled": "true",
+  "changed_existing_static": [
+    "/admin/payment/__next._full.txt",
+    "/admin/payment/__next._tree.txt",
+    "/admin/payment/__next.admin.payment.__PAGE__.txt",
+    "/admin/payment/index.html",
+    "/admin/payment/index.txt"
+  ],
+  "preserved_existing_static": 3081,
+  "worker": "legendstudy-finance-auth",
+  "worker_public": false,
+  "secret_names": [
+    "FINANCE_PUBLISHABLE_KEY",
+    "FINANCE_SIGNING_JWK",
+    "FINANCE_STORAGE_KEY",
+    "FINANCE_SUBJECT"
+  ],
+  "namespace": "f7736b5bb58440f088c9a2105c39cea3",
+  "crons": [
+    "*/15 * * * *"
+  ],
+  "expires_at": "2026-11-24T20:02:52+09:00",
+  "renewal_due": "2026-11-23T10:26:52+09:00",
+  "production_restart_restored": true,
+  "shadow_read_authentication": "PASS",
+  "actual_retry_recovery": "PASS",
+  "db_unchanged": true,
+  "payment_refund_executions": 0
+}
