@@ -32,7 +32,7 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 
 ## Product state
 
-[결제](toss-live-owner-qa-preflight-20261115.md): 일반LIVE 활성·review TEST, Owner 실결제 대기.
+[결제](toss-live-owner-qa-preflight-20261115.md): LIVE승인·1회지급·잔액93, review TEST.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 
