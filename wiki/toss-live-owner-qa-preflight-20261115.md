@@ -154,3 +154,8 @@ WEB afc60eb8d37ef697de73102589280ad4fdfef58b Commit·Push, 배포2e1a82a9-8d0d-4
 Owner가 관리자 환불 실행·확인을 직접 완료했다. 운영 DB 읽기 검증: 주문86f4d220-6527-4689-8723-52800802b2b6 CANCELLED/REVOKED, CANCEL SUCCEEDED(4900원, error null), 완료18:25:26 KST. 연결grant의 원장은 purchase_v1 +1과 purchase_cancel_v1 -1 각각1행, 예약0. 중복취소·중복회수0, 잔액93→92. 실제 WEB 관리자 환불완료 메시지와 /account/credits/ 전체92·구매0을 확인했다.
 
 기존 서버의 Toss 취소응답 검증을 거친 성공이며 이번 확인에서 Toss 대시보드/GET을 별도 재조회하지 않았다. 카드사 명세 반영 및 APP 실기기는 NOT TESTED. 일반LIVE 공개·review TEST 유지, 추가결제/환불/SQL/배포 없음. UI 배포2e1a82a9-8d0d-4906-85e5-7b5350d45e84 유지. Finance 만료11/24 18:03:34 KST 이전 갱신 필요.
+
+
+### 이용안내 전체 항목 테두리 — 2026-11-17
+
+Owner의 후속 요청으로 판매상품부터 사업자정보까지10개 안내 section에 2px 남색 전체 테두리·흰 배경·동일 여백 적용. FAQ 질문별 윤곽선/이용단계 대비도 강화. 기존11/13 논술LAB 경계 정책과 앞선pricing 수정의 연장이다. WEB e9335ed, 배포 fb94f1da-0603-4a45-9d65-d387edb730b7. webpack production build·diff-check PASS. 실제운영10개 section 전체테두리/흰배경·가로넘침0 확인(브라우저zoom computed1.66667px). /pricing/5정적경로와 추가7자산만 반영, 나머지3073경로/API/env 보존. 모바일viewport 별도 미검증. 결제/환불/SQL 실행0.

@@ -5110,3 +5110,8 @@ Owner 최신승인, WEB01d2624·배포3f7a57bb. Finance복구·2108 PASS, SQL0·
 ## 2026-11-17 — LIVE 환불 검증 완료
 
 Owner 직접4900원 환불: CANCELLED/REVOKED·CANCEL SUCCEEDED, 회수원장-1 한 행·중복0, WEB잔액93→92. 일반LIVE 유지. [검증 기록](toss-live-owner-qa-preflight-20261115.md).
+
+
+## 2026-11-17 — 이용안내 영역 구분
+
+10개 안내항목 전체테두리·FAQ 윤곽선 운영반영, build·실제접근 PASS. [배포·검증](toss-live-owner-qa-preflight-20261115.md).
