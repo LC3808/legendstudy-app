@@ -147,3 +147,10 @@ Owner 요청으로 상단배너 테두리·pricing 범위 구분선 대비·상�
 WEB afc60eb8d37ef697de73102589280ad4fdfef58b Commit·Push, 배포2e1a82a9-8d0d-4906-85e5-7b5350d45e84. 관련200 PASS, 타입/ESLint/webpack빌드 PASS. pricing/admin-payment 두 경로 및 추가hashed자산만 반영, 기타3059경로·결제API·일반LIVE설정 모두보존. 실제pricing에서 배너·선·문구/줄바꿈 확인.
 
 운영관리자 support-inspect 성공, 환불금액4900원/회수1회/실행가능 표시. Owner에게 환불 실행 및 확인창 직접승인을 인계했다. 아직CANCEL/환불완료로 보고하지 않는다. 최종확인 뒤 Toss응답에 따른 주문CANCELLED/REVOKED, 회수원장1개·잔액93→92를 검증한다. APP실기기/모바일viewport시각검수 미실행.
+
+
+## 2026-11-17 18:25:26 KST — LIVE 전액 환불 검증 완료
+
+Owner가 관리자 환불 실행·확인을 직접 완료했다. 운영 DB 읽기 검증: 주문86f4d220-6527-4689-8723-52800802b2b6 CANCELLED/REVOKED, CANCEL SUCCEEDED(4900원, error null), 완료18:25:26 KST. 연결grant의 원장은 purchase_v1 +1과 purchase_cancel_v1 -1 각각1행, 예약0. 중복취소·중복회수0, 잔액93→92. 실제 WEB 관리자 환불완료 메시지와 /account/credits/ 전체92·구매0을 확인했다.
+
+기존 서버의 Toss 취소응답 검증을 거친 성공이며 이번 확인에서 Toss 대시보드/GET을 별도 재조회하지 않았다. 카드사 명세 반영 및 APP 실기기는 NOT TESTED. 일반LIVE 공개·review TEST 유지, 추가결제/환불/SQL/배포 없음. UI 배포2e1a82a9-8d0d-4906-85e5-7b5350d45e84 유지. Finance 만료11/24 18:03:34 KST 이전 갱신 필요.
