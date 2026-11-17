@@ -138,3 +138,12 @@ PAUSED 복구배포 `526ed879-1b91-443a-9371-80b07fe39ccc` 이후 공개배포 `
 Owner 결제완료 통보 후 운영 DB와 실제 WEB 내역을 독립 확인했다. 주문86f4d220-6527-4689-8723-52800802b2b6: LIVE/1c/4900원/PAID/POSTED, CONFIRM SUCCEEDED(error null), 승인시각18:11:53. 지급grant d3f28406-2959-4cb5-946d-0672c48f39cf, external_reference payment/주문ID에 해당하는 grant 정확히1개. 연결원장 purchase/purchase_v1 +1·reserved0 정확히1행. 잔액92→93. 실제 /account/credits/에 구매+1·구매분1·전체93 표시 확인. 유효기간2027-02-17 18:11:53 KST. 중복지급0, 환불실행0.
 
 서버의 Toss 응답 일치 검증을 거친 승인·지급 성공을 확인했다. 이번 turn에서 Toss GET을 별도로 재호출하지 않았으며 APP 실기기 잔액은 NOT TESTED(공유 DB 잔액93 확인과 구분). 실제 callback 재전송 시험은 수행하지 않았고 중복지급 방지 회귀는 앞선 합성 테스트 결과를 사용한다. 일반LIVE 공개 유지, review TEST정책 유지. Finance 11/24 갱신 필요는 남아 있다.
+
+
+## 2026-11-17 — 요금 UI 개선·환불 실행 인계
+
+Owner 요청으로 상단배너 테두리·pricing 범위 구분선 대비·상품 의미단위 줄바꿈 수정, 쿠폰 ‘적용 준비 중’ 문구 제거(적용버튼 비활성 유지). 기존 서버 support-inspect/support-cancel을 호출하는 고정Owner 전용 관리자 환불 제어 추가. 서버권한/금액계산/원장정산 유지, 최종실행 금액·회수량 확인창과 중복클릭 방지. 대상4900원 구매는 미사용/예약0 확인.
+
+WEB afc60eb8d37ef697de73102589280ad4fdfef58b Commit·Push, 배포2e1a82a9-8d0d-4906-85e5-7b5350d45e84. 관련200 PASS, 타입/ESLint/webpack빌드 PASS. pricing/admin-payment 두 경로 및 추가hashed자산만 반영, 기타3059경로·결제API·일반LIVE설정 모두보존. 실제pricing에서 배너·선·문구/줄바꿈 확인.
+
+운영관리자 support-inspect 성공, 환불금액4900원/회수1회/실행가능 표시. Owner에게 환불 실행 및 확인창 직접승인을 인계했다. 아직CANCEL/환불완료로 보고하지 않는다. 최종확인 뒤 Toss응답에 따른 주문CANCELLED/REVOKED, 회수원장1개·잔액93→92를 검증한다. APP실기기/모바일viewport시각검수 미실행.
