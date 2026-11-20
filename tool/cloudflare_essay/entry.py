@@ -15,6 +15,7 @@ from essay_lab.live_worker import digest
 from essay_lab.evaluation_policy import question_engine, policy_family
 from registry_asset import REGISTRY
 import time
+from essay_lab.admin_run_actions import retry_admin_run
 
 class Default(WorkerEntrypoint):
     async def math_child(self,payload):
@@ -107,7 +108,25 @@ class Default(WorkerEntrypoint):
             raw=await request.text();require(len(raw.encode())<=4096,'INVALID_REQUEST')
             payload=json.loads(raw);path=urlparse(request.url).path
             token=request.headers.get('Authorization','').removeprefix('Bearer ')
-            t=self.transport();subject=await t.subject(token)
+            t=self.transport()
+            if path=='/admin-exam-retry':
+                require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
+                async def admin_rpc(name,args,caller):
+                    # Fixed functions, original JWT: SQL require_admin is authoritative.
+                    require(name in ('admin_lab_run_capabilities','admin_lab_manage_run'),'ACCESS_DENIED')
+                    try:
+                        raw=await fetch_bytes(t.origin+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+caller,'Content-Type':'application/json'},json.dumps(args))
+                        return json.loads(raw)
+                    except HTTPError as error:
+                        allowed={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED'}
+                        try: code=json.loads(error.read(4096)).get('message')
+                        except Exception: code=None
+                        raise Unknown(code if code in allowed else 'ADMIN_REQUEST_REJECTED') from None
+                async def enqueue(value):
+                    await self.env.ESSAY_QUEUE.send(json.dumps(value))
+                result=await retry_admin_run(payload,token,admin_rpc,lambda subject,exam:self.admission(t,subject,exam),enqueue)
+                return Response.json(result,status=202,headers=headers)
+            subject=await t.subject(token)
             if path=='/connection-check':
                 require(self.env.ESSAY_EXECUTION_ENABLED=='false' and set(payload)=={'probe_id'},'INVALID_REQUEST')
                 probe=str(UUID(payload['probe_id']))
@@ -146,6 +165,8 @@ class Default(WorkerEntrypoint):
             code=str(error)
             safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else type(error).__name__
             print('ESSAY_REQUEST_FAILURE '+safe)
+            admin_codes={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED'}
+            if locals().get('path')=='/admin-exam-retry' and safe in admin_codes:return Response.json({'code':safe},status=403 if safe in ('ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED') else 409,headers=headers)
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
 
     async def queue(self,batch,*_context):
