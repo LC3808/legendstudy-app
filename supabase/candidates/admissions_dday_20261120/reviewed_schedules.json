@@ -1,0 +1,357 @@
+{
+  "version": "admissions-dday-20261120-v1",
+  "schedules": [
+    {
+      "id": "f1c953d5-6b65-558b-b3b6-d79f00dab729",
+      "university_id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "academic_year": 2027,
+      "campus": "수원",
+      "title": "아주대학교 논술고사",
+      "event_type": "ESSAY",
+      "event_date": "2026-12-05",
+      "event_time": null,
+      "admission_names": [
+        "수리논술",
+        "논술우수자전형",
+        "논술(논술우수자전형)"
+      ],
+      "division_names": [
+        "기계공학과"
+      ],
+      "source_url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601",
+      "source_sha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+      "source_page": 8,
+      "source_note": "2027 공식 모집요강 PDF7의 기계공학과 자연·공과 분류와 PDF8 논술우수자 공과대학 배정 확인. 기존 수리논술 표현은 이 대학/모집단위에 한해 명시적 별칭으로 검수.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "85d7e831-098a-5be6-83df-0961ff503a44",
+      "university_id": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
+      "academic_year": 2027,
+      "campus": "인천",
+      "title": "인하대학교 논술고사",
+      "event_type": "ESSAY",
+      "event_date": "2026-12-06",
+      "event_time": null,
+      "admission_names": [
+        "수리논술",
+        "논술우수자전형",
+        "논술(논술우수자전형)"
+      ],
+      "division_names": [
+        "기계공학과"
+      ],
+      "source_url": "https://admission.inha.ac.kr/ajaxfile/CMN_SVC/FileView.do?GBN=X04_1&TEMP_CODE=IPSI_A&CONFIG_CD=C1405&CONFIG_SEQ=6&SITE_NO=2&SUB_SEQ=8",
+      "source_sha256": "8fe632a3efbba13c0ac32f79ff1bc71792d01820d4517fcffe7b493f79c20b4e",
+      "source_page": 25,
+      "source_note": "2027 공식 모집요강 PDF21 자연계 기계공학과와 PDF25 자연 논술고사 일자 대조. 기존 수리논술 표현은 이 대학/모집단위에 한해 명시적 별칭으로 검수.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "ed850e6d-3413-58a1-a647-8504a5a2414b",
+      "university_id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "고려대학교 논술고사",
+      "event_type": "ESSAY",
+      "event_date": "2026-11-22",
+      "event_time": null,
+      "admission_names": [
+        "논술",
+        "논술전형"
+      ],
+      "division_names": [
+        "국제학부"
+      ],
+      "source_url": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf",
+      "source_sha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+      "source_page": 23,
+      "source_note": "2027 공식 모집요강 PDF23 국제학부 인문 오전 표. 08:30은 입실 마감이므로 시험 시작 시각으로 저장하지 않음.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "14847e53-13a2-5998-ba8c-8313cfcac3a7",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "서강대학교 논술고사",
+      "event_type": "ESSAY",
+      "event_date": "2026-11-22",
+      "event_time": "19:00:00",
+      "admission_names": [
+        "논술",
+        "논술(일반)"
+      ],
+      "division_names": [
+        "경제학과"
+      ],
+      "source_url": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf",
+      "source_sha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+      "source_page": 36,
+      "source_note": "2027 공식 모집요강 PDF36 경제학과 일요일 고사. 입실18:30과 시험19:00–20:40 구분.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "8c2fc4a2-1e2d-5f65-b403-858515c5adfc",
+      "university_id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "academic_year": 2027,
+      "campus": "수원",
+      "title": "아주대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": null,
+      "admission_names": [
+        "수리논술",
+        "논술우수자전형",
+        "논술(논술우수자전형)"
+      ],
+      "division_names": [
+        "기계공학과"
+      ],
+      "source_url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601",
+      "source_sha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+      "source_page": 8,
+      "source_note": "2027 공식 모집요강 PDF8 체육우수자를 제외한 전형의 최초 합격 발표. 기계공학과 논술우수자 범위만 게시.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "85de036e-0050-5c7e-99dc-c54076425bc2",
+      "university_id": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
+      "academic_year": 2027,
+      "campus": "인천",
+      "title": "인하대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": null,
+      "admission_names": [
+        "수리논술",
+        "논술우수자전형",
+        "논술(논술우수자전형)"
+      ],
+      "division_names": [
+        "기계공학과"
+      ],
+      "source_url": "https://admission.inha.ac.kr/ajaxfile/CMN_SVC/FileView.do?GBN=X04_1&TEMP_CODE=IPSI_A&CONFIG_CD=C1405&CONFIG_SEQ=6&SITE_NO=2&SUB_SEQ=8",
+      "source_sha256": "8fe632a3efbba13c0ac32f79ff1bc71792d01820d4517fcffe7b493f79c20b4e",
+      "source_page": 25,
+      "source_note": "2027 공식 모집요강 PDF25 논술우수자 최초 합격 발표. 자연 기계공학과 범위만 게시.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "0f850995-48ab-549f-bfc1-97d727cab166",
+      "university_id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "고려대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": "17:00:00",
+      "admission_names": [
+        "논술",
+        "논술전형",
+        "고른기회전형",
+        "고른기회"
+      ],
+      "division_names": [
+        "국제학부",
+        "미디어학부"
+      ],
+      "source_url": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf",
+      "source_sha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+      "source_page": 9,
+      "source_note": "2027 공식 모집요강 PDF9 모든 수시 전형 최초 합격 발표. PDF4–5/16/23에서 검토한 두 모집단위·논술/고른기회 범위로 한정. 공통 사건 하나로 여러 지원 연결.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "ba56d200-d06a-5623-9e71-6a21a57a187b",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "서강대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": "17:00:00",
+      "admission_names": [
+        "논술",
+        "논술(일반)",
+        "기회균형전형",
+        "기회균형"
+      ],
+      "division_names": [
+        "경제학과",
+        "지식융합미디어학부"
+      ],
+      "source_url": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf",
+      "source_sha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+      "source_page": 17,
+      "source_note": "2027 공식 모집요강 PDF16 전형·모집단위 표와 PDF17 공통 최초 합격 발표(17:00 예정). 학교장추천 별칭은 미확정이므로 제외.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "1796dcba-b165-5fe6-ad4f-d67f5e63d1b7",
+      "university_id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "한양대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": null,
+      "admission_names": [
+        "고른기회전형",
+        "고른기회",
+        "학생부종합(고른기회)"
+      ],
+      "division_names": [
+        "미디어커뮤니케이션학과"
+      ],
+      "source_url": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf",
+      "source_sha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+      "source_page": 8,
+      "source_note": "2027 서울 모집요강 PDF8–9 학생부종합 고른기회 최종 합격 발표 예정일. 면접형과 구분, 서울 모집단위로 제한.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "8915c362-ee92-52a7-9bfa-92176e3e5be9",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "연세대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-11-20",
+      "event_time": null,
+      "admission_names": [
+        "기회균형전형",
+        "기회균형",
+        "학생부종합전형[기회균형]"
+      ],
+      "division_names": [
+        "언론홍보영상학부"
+      ],
+      "source_url": "https://www2.yonsei.ac.kr/entrance/2027/susi/pass_susi_fin_AACCBDBHCJ_J/pass.asp",
+      "source_sha256": null,
+      "source_page": null,
+      "source_note": "2026-11-20 서울 입학처 최종 합격자 발표 공지 및 조회 안내 확인. https://admission.yonsei.ac.kr/seoul/admission/html/main/mainnotice.asp 의 게시일 기준. 미래캠퍼스 제외, 개인 합격은 조회하지 않음.",
+      "verification_status": "VERIFIED",
+      "is_published": true
+    },
+    {
+      "id": "eb39bf9f-2de6-5bb1-8975-c63b278454dc",
+      "university_id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "이화여자대학교 논술고사",
+      "event_type": "ESSAY",
+      "event_date": "2026-11-29",
+      "event_time": null,
+      "admission_names": [
+        "수리논술"
+      ],
+      "division_names": [
+        "스크랜튼학부"
+      ],
+      "source_url": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf",
+      "source_sha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+      "source_page": 9,
+      "source_note": "PENDING: PDF9 자연Ⅰ 고사일 근거는 있으나 스크랜튼은 원서의 인문Ⅰ/Ⅱ/자연Ⅰ 선택 확인 필요. Owner 지시로 확인 전 어떤 자동 일정도 게시하지 않음.",
+      "verification_status": "PENDING",
+      "is_published": false
+    },
+    {
+      "id": "8f4716e1-9eb0-50b7-86b4-7eaa99d5279e",
+      "university_id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "이화여자대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-17",
+      "event_time": null,
+      "admission_names": [
+        "수리논술"
+      ],
+      "division_names": [
+        "스크랜튼학부"
+      ],
+      "source_url": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf",
+      "source_sha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+      "source_page": 8,
+      "source_note": "PENDING: PDF8 논술전형 발표일은 공통이나 스크랜튼 논술유형 확인 전 자동 등록 보류라는 Owner 결정을 적용.",
+      "verification_status": "PENDING",
+      "is_published": false
+    },
+    {
+      "id": "cf3e26be-c707-5b0a-bd0d-6ff544cca4f7",
+      "university_id": "ffad67a6-107f-47b7-a1cb-ab61687ffb9f",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "중앙대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": "14:00:00",
+      "admission_names": [
+        "기회균형전형"
+      ],
+      "division_names": [
+        "미디어커뮤니케이션학과"
+      ],
+      "source_url": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf",
+      "source_sha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+      "source_page": 13,
+      "source_note": "PENDING: PDF13 기회균형 공통 발표일은 있으나 저장 전형의 세부 기회균형 유형이 불명확하여 정규화 확인 전 게시하지 않음.",
+      "verification_status": "PENDING",
+      "is_published": false
+    },
+    {
+      "id": "78b5df33-c0f9-565d-8857-b24e856d2f4f",
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "서강대학교 최초발표",
+      "event_type": "INITIAL_RESULT",
+      "event_date": "2026-12-18",
+      "event_time": "17:00:00",
+      "admission_names": [
+        "학교장추천"
+      ],
+      "division_names": [
+        "지식융합미디어학부"
+      ],
+      "source_url": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf",
+      "source_sha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+      "source_page": 17,
+      "source_note": "PENDING: PDF16 정식 명칭은 학생부교과 지역균형. 학교장추천 원문 입력의 실제 전형 확인 전 별칭을 승인하지 않음.",
+      "verification_status": "PENDING",
+      "is_published": false
+    },
+    {
+      "id": "d4530b00-d259-5ea3-8a0f-4a9ed490fac9",
+      "university_id": "52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2",
+      "academic_year": 2027,
+      "campus": "서울",
+      "title": "서울과기대 논술고사",
+      "event_type": "ESSAY",
+      "event_date": null,
+      "event_time": null,
+      "admission_names": [
+        "수리논술"
+      ],
+      "division_names": [
+        "st자유전공"
+      ],
+      "source_url": null,
+      "source_sha256": null,
+      "source_page": null,
+      "source_note": "PENDING: 최신 공식 일정과 ST자유전공학부 선발 계열 확인 전 날짜를 생성하거나 게시하지 않음.",
+      "verification_status": "PENDING",
+      "is_published": false
+    }
+  ]
+}

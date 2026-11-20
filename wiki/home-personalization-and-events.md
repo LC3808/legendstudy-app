@@ -67,6 +67,10 @@ meal/material/analytics providers do not issue unnecessary work.
 
 ## Multi D-Day architecture
 
+2026-11-20 Owner 후속: [수시 지원 일정 자동 연동 사전 조사](admissions-dday-linkage-research-20261120.md). 실제 지원·공식 일정 기반, 학생 삭제 후 미재생성/명시적 복원, 공식 정정 반영을 설계한다. 기존 수동 D-Day/Home 구조는 보존한다. 아래의 과거 admissions 연동 보류는 이번 **조사·설계** 범위에 한해 진전되며 구현/운영 적용은 아직 아니다.
+
+같은 날 후속 구현 승인: [기존 Home/관리 sheet 확장·59검사·운영 승인 대기](admissions-dday-implementation-20261120.md). 위 조사 상태를 진전시킨 로컬 구현이며, 스토어 앱과 운영 DB는 아직 변경하지 않았다.
+
 ### Canonical event model
 
 The long-term source record should be one owner-scoped event collection, not

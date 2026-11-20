@@ -1,3 +1,11 @@
+## 2026-11-20 — 수시 지원 D-Day 구현·운영 승인 패키지
+
+DB5테이블/RPC·기존 저장 함수 잠금 보완, WEB 관리자·MY, Flutter 기존 Home/관리 sheet 구현. 실제14건 read-only 예측은 지원8건→논술4+발표8; 불확실5연결 비노출. PostgreSQL46/Flutter59/WEB2210 PASS(5 SKIP), 삭제 우회·동시 신규등록 누락 보완. 운영 설치/seed/개인 연동·WEB배포 승인 대기, 운영쓰기0. [구조·검증·SQL·APP릴리스 경계](admissions-dday-implementation-20261120.md).
+
+## 2026-11-20 — 수시 지원 D-Day 연동 사전 조사
+
+운영 read-only 14건(수시13/정시1) 대조. 기존 논술 날짜 후보4/조건부1, 원문 발표일 확장 근거11은 자동 매칭 확정과 구분. 7개 공식 PDF·연세 최신 공지 확인, 삭제 기억/복원/정정 및 WEB·APP 재사용 설계. 4개 테이블 전후 count/digest 동일, DB/코드/배포 변경0. [조사·근거·개발순서](admissions-dday-linkage-research-20261120.md).
+
 ## 2026-11-13 — 35개 대학 브랜드 재점검
 
 공식 원본14개 교체·카드 로고 여백 정규화·3대학 색상 정정. 공식 숫자19/미확정16 구분. 28테스트·build·운영35이미지·API/설정 보존 PASS. [대조표·배포](essay-university-brand-audit-20261113.md).

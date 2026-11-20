@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/supabase/supabase_providers.dart';
@@ -7,6 +8,7 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../day_event_providers.dart';
 import '../day_target_providers.dart' show dayTargetClockProvider;
 import '../domain/day_event.dart';
+import '../domain/admission_day_event.dart';
 import '../domain/day_target.dart' show koreanCalendarDay;
 
 /// Home representative D-Day card plus a compact list of upcoming events.
@@ -20,9 +22,15 @@ class DayTargetCard extends ConsumerWidget {
     final state = ref.watch(dayEventsProvider);
     final auth = ref.watch(authStateProvider);
     final now = ref.watch(dayTargetClockProvider).value ?? DateTime.now();
-    final events = state.isLoading || state.hasError ? const <DayEvent>[] : state.value!;
+    final events = state.isLoading || state.hasError
+        ? const <DayEvent>[]
+        : state.value!;
     final rep = representativeEvent(events, now);
-    final ready = !state.isLoading && !state.hasError && !auth.isLoading && !auth.hasError;
+    final ready =
+        !state.isLoading &&
+        !state.hasError &&
+        !auth.isLoading &&
+        !auth.hasError;
 
     return DailyUtilityCard(
       title: rep?.label ?? 'D-DAY',
@@ -46,15 +54,16 @@ class DayTargetCard extends ConsumerWidget {
             )
           : rep == null
           ? const Text('목표 날짜를 설정해 주세요.')
-          : _CompactEvents(
-              events: compactUpcoming(events, now, rep),
-              now: now,
-            ),
+          : _CompactEvents(events: compactUpcoming(events, now, rep), now: now),
     );
   }
 }
 
-Future<void> _openManageSheet(BuildContext context, WidgetRef ref, DateTime now) {
+Future<void> _openManageSheet(
+  BuildContext context,
+  WidgetRef ref,
+  DateTime now,
+) {
   final owner = ref.read(authStateProvider).value?.userId;
   return showModalBottomSheet<void>(
     context: context,
@@ -79,6 +88,7 @@ class _RepInfo extends StatelessWidget {
       runSpacing: 2,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
+        if (target.admission != null) const _AdmissionBadge(),
         Text(
           '${target.label} · ${target.displayDate}',
           style: AppTokens.cardTitle.copyWith(color: AppTokens.textPrimary),
@@ -115,8 +125,9 @@ class _CompactEventsState extends State<_CompactEvents> {
   Widget build(BuildContext context) {
     if (widget.events.isEmpty) return const SizedBox.shrink();
     final hidden = widget.events.length - _collapsedCount;
-    final visible =
-        _expanded ? widget.events : widget.events.take(_collapsedCount).toList();
+    final visible = _expanded
+        ? widget.events
+        : widget.events.take(_collapsedCount).toList();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Column(
@@ -135,7 +146,10 @@ class _CompactEventsState extends State<_CompactEvents> {
                 children: [
                   Flexible(child: Text(_expanded ? '접기' : '일정 $hidden개 더보기')),
                   const SizedBox(width: 6),
-                  Icon(_expanded ? Icons.expand_less : Icons.expand_more, size: 24),
+                  Icon(
+                    _expanded ? Icons.expand_less : Icons.expand_more,
+                    size: 24,
+                  ),
                 ],
               ),
             ),
@@ -158,11 +172,17 @@ class _CompactRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Text(
-              '${event.label} · ${event.displayDate}',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTokens.body.copyWith(color: AppTokens.textPrimary),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (event.admission != null) const _AdmissionBadge(),
+                Text(
+                  '${event.label} · ${event.displayDate}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTokens.body.copyWith(color: AppTokens.textPrimary),
+                ),
+              ],
             ),
           ),
           const SizedBox(width: 8),
@@ -193,6 +213,16 @@ class _ManageEventsSheet extends ConsumerStatefulWidget {
 class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
   bool _busy = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && widget.authenticated) {
+        _guard(() => ref.read(dayEventsProvider.notifier).refresh());
+      }
+    });
+  }
+
   Future<void> _guard(Future<bool> Function() op) async {
     if (_busy) return;
     setState(() => _busy = true);
@@ -201,7 +231,7 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
       if (!mounted) return;
       if (!ok) _notify('로그인 상태가 변경됐어요. 다시 시도해 주세요.');
     } catch (_) {
-      if (mounted) _notify('저장하지 못했어요. 다시 시도해 주세요.');
+      if (mounted) _notify('처리하지 못했어요. 새로고침 후 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -218,6 +248,9 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
     final controller = ref.read(dayEventsProvider.notifier);
     final events = state.value ?? const <DayEvent>[];
     final sorted = [...events]..sort(compareEvents);
+    final hiddenAdmissions = controller.admissionEvents
+        .where((e) => !e.isActive)
+        .toList();
     final primaryId = () {
       for (final e in sorted) {
         if (e.isPrimary) return e.id;
@@ -238,9 +271,23 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 4, right: 8),
-              child: Text('D-Day 관리', style: AppTokens.body.copyWith(
-                fontWeight: FontWeight.w700,
-              )),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'D-Day 관리',
+                      style: AppTokens.body.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: '일정 새로고침',
+                    onPressed: _busy ? null : () => _guard(controller.refresh),
+                    icon: const Icon(Icons.refresh),
+                  ),
+                ],
+              ),
             ),
             Flexible(
               child: SingleChildScrollView(
@@ -252,33 +299,62 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
                     }
                   },
                   child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (sorted.isEmpty)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        child: Text('아직 저장된 일정이 없어요.'),
-                      ),
-                    for (final e in sorted)
-                      _EventManageRow(
-                        event: e,
-                        now: widget.now,
-                        enabled: !_busy,
-                        onEdit: () async {
-                          final result = await _showForm(context, e);
-                          if (result != null) {
-                            await _guard(() => controller.editEvent(
-                                e.id!, result.$1, result.$2));
-                          }
-                        },
-                        onDelete: () async {
-                          if (await _confirmDelete(context, e)) {
-                            await _guard(() => controller.deleteEvent(e.id!));
-                          }
-                        },
-                      ),
-                  ],
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (controller.admissionSyncUnavailable)
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 12),
+                          child: Text(
+                            '입시 일정 연동을 아직 사용할 수 없어요. 저장된 일정은 계속 관리할 수 있어요.',
+                          ),
+                        ),
+                      if (_busy) const LinearProgressIndicator(),
+                      if (sorted.isEmpty)
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Text('아직 저장된 일정이 없어요.'),
+                        ),
+                      if (hiddenAdmissions.isNotEmpty)
+                        ExpansionTile(
+                          tilePadding: EdgeInsets.zero,
+                          title: const Text('삭제·중단된 입시 일정'),
+                          subtitle: const Text('삭제한 일정은 직접 복원해야 다시 표시돼요.'),
+                          children: [
+                            for (final event in hiddenAdmissions)
+                              _HiddenAdmissionRow(
+                                event: event,
+                                enabled: !_busy,
+                                onRestore: () => _guard(
+                                  () => controller.restoreAdmissionEvent(event),
+                                ),
+                              ),
+                          ],
+                        ),
+                      for (final e in sorted)
+                        _EventManageRow(
+                          event: e,
+                          now: widget.now,
+                          enabled: !_busy,
+                          onEdit: () async {
+                            final result = await _showForm(context, e);
+                            if (result != null) {
+                              await _guard(
+                                () => controller.editEvent(
+                                  e.id!,
+                                  result.$1,
+                                  result.$2,
+                                ),
+                              );
+                            }
+                          },
+                          onDelete: () async {
+                            if (await _confirmDelete(context, e)) {
+                              await _guard(() => controller.deleteEvent(e.id!));
+                            }
+                          },
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -301,11 +377,13 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
                         : () async {
                             final result = await _showForm(context, null);
                             if (result != null) {
-                              await _guard(() => controller.addEvent(
-                                    result.$1,
-                                    result.$2,
-                                    primary: sorted.isEmpty,
-                                  ));
+                              await _guard(
+                                () => controller.addEvent(
+                                  result.$1,
+                                  result.$2,
+                                  primary: sorted.isEmpty,
+                                ),
+                              );
                             }
                           },
                     icon: const Icon(Icons.add),
@@ -320,7 +398,10 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
     );
   }
 
-  Future<(DateTime, String)?> _showForm(BuildContext context, DayEvent? initial) {
+  Future<(DateTime, String)?> _showForm(
+    BuildContext context,
+    DayEvent? initial,
+  ) {
     return showDialog<(DateTime, String)>(
       context: context,
       barrierDismissible: false,
@@ -335,7 +416,11 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
       // (which can be stale after a rebuild and leave the buttons unresponsive).
       builder: (dialogContext) => AlertDialog(
         title: const Text('일정 삭제'),
-        content: Text("'${e.label}' 일정을 삭제할까요?"),
+        content: Text(
+          e.admission == null
+              ? "'${e.label}' 일정을 삭제할까요?"
+              : "'${e.admission!.displayTitle}' 일정을 삭제할까요?\n자동으로 다시 추가되지 않아요. 삭제·중단된 입시 일정에서 복원할 수 있어요.",
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
@@ -377,15 +462,20 @@ class _EventManageRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (event.admission != null) const _AdmissionBadge(),
               Text(
-                event.label,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                event.admission?.displayTitle ?? event.label,
+                maxLines: event.admission == null ? 2 : null,
+                overflow: event.admission == null
+                    ? TextOverflow.ellipsis
+                    : null,
                 style: AppTokens.body.copyWith(
                   color: AppTokens.textPrimary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              if (event.admission case final admission?)
+                _AdmissionSource(event: admission),
               Text(
                 '${event.displayDate} · ${event.dLabel(now)}',
                 style: AppTokens.body.copyWith(color: AppTokens.textPrimary),
@@ -393,11 +483,12 @@ class _EventManageRow extends StatelessWidget {
             ],
           ),
         ),
-        IconButton(
-          onPressed: enabled ? onEdit : null,
-          icon: const Icon(Icons.edit_outlined),
-          tooltip: '수정',
-        ),
+        if (event.admission == null)
+          IconButton(
+            onPressed: enabled ? onEdit : null,
+            icon: const Icon(Icons.edit_outlined),
+            tooltip: '수정',
+          ),
         IconButton(
           onPressed: enabled ? onDelete : null,
           icon: const Icon(Icons.delete_outline),
@@ -406,6 +497,117 @@ class _EventManageRow extends StatelessWidget {
       ],
     );
   }
+}
+
+class _AdmissionBadge extends StatelessWidget {
+  const _AdmissionBadge();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+    decoration: BoxDecoration(
+      color: AppTokens.info.withValues(alpha: 0.08),
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Text(
+      '입시 일정',
+      style: AppTokens.caption.copyWith(
+        color: AppTokens.info,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  );
+}
+
+class _AdmissionSource extends StatelessWidget {
+  const _AdmissionSource({required this.event});
+  final AdmissionDayEvent event;
+
+  @override
+  Widget build(BuildContext context) {
+    final uri = Uri.tryParse(event.sourceUrl ?? '');
+    final usable =
+        uri != null &&
+        uri.host.isNotEmpty &&
+        (uri.scheme == 'https' || uri.scheme == 'http');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (usable)
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+            ),
+            onPressed: () async {
+              try {
+                final opened = await launchUrl(
+                  uri,
+                  mode: LaunchMode.externalApplication,
+                );
+                if (!opened && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('공식 출처를 열지 못했어요.')),
+                  );
+                }
+              } catch (_) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('공식 출처를 열지 못했어요.')),
+                  );
+                }
+              }
+            },
+            icon: const Icon(Icons.open_in_new, size: 14),
+            label: const Text('공식 출처'),
+          ),
+      ],
+    );
+  }
+}
+
+class _HiddenAdmissionRow extends StatelessWidget {
+  const _HiddenAdmissionRow({
+    required this.event,
+    required this.enabled,
+    required this.onRestore,
+  });
+  final AdmissionDayEvent event;
+  final bool enabled;
+  final VoidCallback onRestore;
+
+  String get _unavailableMessage => switch (event.unavailableReason) {
+    'SOURCE_PENDING' => '공식 일정 확인 중이에요.',
+    'APPLICATION_NOT_MATCHED' => '지원 정보와 연결되지 않은 일정이에요.',
+    'SOURCE_CANCELLED' || 'NOT_PUBLISHED' => '공개가 중단된 일정이에요.',
+    'PAST_EVENT' => '이미 지난 일정이에요.',
+    _ => '일정 정보를 확인할 수 없어요. 새로고침 후 다시 확인해 주세요.',
+  };
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _AdmissionBadge(),
+        Text(event.displayTitle, style: AppTokens.body),
+        if (event.date != null)
+          Text(formatEventDate(event.date!), style: AppTokens.caption),
+        Text(
+          event.isDismissed ? '내가 삭제한 일정' : '현재 표시가 중단된 일정',
+          style: AppTokens.caption,
+        ),
+        if (event.unavailableReason?.isNotEmpty == true)
+          Text(_unavailableMessage, style: AppTokens.caption),
+        _AdmissionSource(event: event),
+        TextButton.icon(
+          onPressed: enabled && event.canRestore ? onRestore : null,
+          icon: const Icon(Icons.restore),
+          label: const Text('복원'),
+        ),
+      ],
+    ),
+  );
 }
 
 /// Reused add/edit form: name + date picker. Returns (date, label) or null.
@@ -420,10 +622,10 @@ class _EventFormDialog extends StatefulWidget {
 
 class _EventFormDialogState extends State<_EventFormDialog> {
   final _form = GlobalKey<FormState>();
-  late final TextEditingController _label =
-      TextEditingController(text: widget.initial?.label);
-  late DateTime _date =
-      widget.initial?.date ?? koreanCalendarDay(widget.now);
+  late final TextEditingController _label = TextEditingController(
+    text: widget.initial?.label,
+  );
+  late DateTime _date = widget.initial?.date ?? koreanCalendarDay(widget.now);
 
   @override
   void dispose() {

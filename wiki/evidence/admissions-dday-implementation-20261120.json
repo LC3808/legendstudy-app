@@ -1,0 +1,92 @@
+{
+  "scope": "IMPLEMENTED_CANDIDATE_NOT_PRODUCTION_APPLIED",
+  "project_ref": "stlhijzpjfgwwdgunlsd",
+  "production_mutations": 0,
+  "production_deployments": 0,
+  "production_preflight_read_only": {
+    "new_rpcs_absent": true,
+    "application_count": 14,
+    "day_targets_count": 142,
+    "essay_exams_count": 478,
+    "new_tables_absent": true,
+    "day_targets_digest": "0d558e31f66f43bf40fa4110f0d22572",
+    "essay_exams_digest": "836033e5457fe85b1620cc583b658aed",
+    "applications_digest": "3144025af5cecf23dd1827f224489052",
+    "private_schema_absent": true,
+    "save_preimage_matches": true,
+    "application_events_count": 30,
+    "application_events_digest": "a6059a73fb64b8daef3277e5ee7e1471",
+    "comparison": "Matches prior research before/after hashes for all four inspected tables; no claims about unqueried tables."
+  },
+  "coverage_read_only": {
+    "as_of_kst": "2026-11-20T21:23:00.483186",
+    "applications": 14,
+    "by_event_type": {
+      "ESSAY": 4,
+      "INITIAL_RESULT": 8
+    },
+    "pending_links": 5,
+    "upcoming_unique_owner_events": 12,
+    "verified_unique_owner_events": 12,
+    "verified_matching_applications": 8,
+    "verified_application_event_links": 12
+  },
+  "coverage_note": "Forecast from candidate seed matched by SQL CTE against existing headers. No tables installed or personal rows created; eligible counts change after KST dates pass.",
+  "source_inventory": {
+    "published_events": 10,
+    "verified_essay_events": 4,
+    "verified_result_events": 6,
+    "pending_events": 5,
+    "result_candidate_headers_reviewed": 11,
+    "result_headers_accepted": 8,
+    "result_headers_pending": 3
+  },
+  "database_test_receipt": "../../supabase/validation/admissions_dday/result.json",
+  "app_test_summary": {
+    "sdk": "3.47.7",
+    "focused_and_existing_dday_tests": 59,
+    "status": "PASS",
+    "scoped_analyze": "PASS: all 7 changed/new Flutter files",
+    "physical_device": "NOT_TESTED",
+    "store_release": "NOT_PERFORMED",
+    "test_command": "flutter test --no-pub test/admission_day_event_test.dart test/day_event_test.dart test/day_target_test.dart test/day_target_persistence_test.dart"
+  },
+  "web_test_summary": {
+    "focused_tests_passed": 69,
+    "full_tests_passed": 2210,
+    "full_tests_skipped": 5,
+    "test_files_passed": 284,
+    "test_files_skipped": 4,
+    "typescript": "PASS",
+    "changed_file_eslint": "PASS",
+    "static_build": "PASS:171 routes",
+    "mobile_ui": "PASS:390px mocked RPC, student dismiss/restore and admin create/edit",
+    "production_ui": "NOT_TESTED",
+    "baseline_boundary_check": "FAIL:2 unchanged violations in payment-checkout.tsx and admin-members-view.tsx; source and verifier bytes match HEAD",
+    "temporary_fixture": "Removed before final build"
+  },
+  "git": {
+    "web_commit": "76e24b44266f5d4156952b11ad28845a5f4bb5bc",
+    "web_branch": "codex/lab-admin-operations-20261114",
+    "app_branch": "codex/material-service-app-20261022",
+    "app_preimplementation_head": "56a476f91b601902564a44cb203dc28b8497f165",
+    "web_pushed": true
+  },
+  "cloudflare_pre_push_read_only": {
+    "project": "legendstudy-lab",
+    "production_branch": "main",
+    "production_deployments_enabled": true,
+    "preview_deployment_setting": "all",
+    "production_deployment": "e84b1232-4991-49ef-81e0-32cdefc137ec",
+    "config_mutations": 0,
+    "note": "Requested codex branch push may trigger Preview build; no Production deployment requested."
+  },
+  "cloudflare_post_push_read_only": {
+    "production_unchanged": true,
+    "production_deployment": "e84b1232-4991-49ef-81e0-32cdefc137ec",
+    "preview_deployment": "faeb2403-82d2-4f68-b2fb-c554731faa3d",
+    "preview_commit": "76e24b44266f5d4156952b11ad28845a5f4bb5bc",
+    "preview_status_at_check": "build running, clone completed, deploy not started",
+    "preview_browser_or_db_calls": 0
+  }
+}

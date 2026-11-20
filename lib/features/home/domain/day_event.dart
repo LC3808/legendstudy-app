@@ -1,4 +1,5 @@
 import 'day_target.dart' show koreanCalendarDay;
+import 'admission_day_event.dart';
 
 /// App-side title limit for a D-Day event (code points). The Production column
 /// still permits up to 80; new/edited titles are limited to this in the app.
@@ -25,6 +26,7 @@ class DayEvent {
     required DateTime date,
     required String label,
     this.isPrimary = false,
+    this.admission,
   }) : date = DateTime.utc(date.year, date.month, date.day),
        label = label.trim() {
     if (this.label.isEmpty || this.label.runes.length > dayEventMaxTitle) {
@@ -36,6 +38,7 @@ class DayEvent {
   final DateTime date;
   final String label;
   final bool isPrimary;
+  final AdmissionDayEvent? admission;
 
   String get displayDate => formatEventDate(date);
 
@@ -54,13 +57,19 @@ class DayEvent {
 
   bool isUpcoming(DateTime instant) => daysFrom(instant) >= 0;
 
-  DayEvent copyWith({String? id, DateTime? date, String? label, bool? isPrimary}) =>
-      DayEvent(
-        id: id ?? this.id,
-        date: date ?? this.date,
-        label: label ?? this.label,
-        isPrimary: isPrimary ?? this.isPrimary,
-      );
+  DayEvent copyWith({
+    String? id,
+    DateTime? date,
+    String? label,
+    bool? isPrimary,
+    AdmissionDayEvent? admission,
+  }) => DayEvent(
+    id: id ?? this.id,
+    date: date ?? this.date,
+    label: label ?? this.label,
+    isPrimary: isPrimary ?? this.isPrimary,
+    admission: admission ?? this.admission,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -68,10 +77,11 @@ class DayEvent {
       other.id == id &&
       other.date == date &&
       other.label == label &&
-      other.isPrimary == isPrimary;
+      other.isPrimary == isPrimary &&
+      other.admission == admission;
 
   @override
-  int get hashCode => Object.hash(id, date, label, isPrimary);
+  int get hashCode => Object.hash(id, date, label, isPrimary, admission);
 }
 
 /// Deterministic ordering for the collection: soonest date first, then a stable
@@ -91,8 +101,10 @@ DayEvent? representativeEvent(List<DayEvent> events, DateTime instant) {
   for (final e in events) {
     if (e.isPrimary) return e;
   }
-  final upcoming = [for (final e in events) if (e.isUpcoming(instant)) e]
-    ..sort(compareEvents);
+  final upcoming = [
+    for (final e in events)
+      if (e.isUpcoming(instant)) e,
+  ]..sort(compareEvents);
   return upcoming.isEmpty ? null : upcoming.first;
 }
 

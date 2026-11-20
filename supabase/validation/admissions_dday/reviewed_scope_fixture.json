@@ -1,0 +1,135 @@
+{
+  "scope": "Public university IDs and anonymized input labels only. All owners/application IDs generated locally; no Production student identifier or status history copied.",
+  "universities": [
+    {
+      "id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "name": "아주대학교"
+    },
+    {
+      "id": "ffad67a6-107f-47b7-a1cb-ab61687ffb9f",
+      "name": "중앙대학교"
+    },
+    {
+      "id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "name": "이화여자대학교"
+    },
+    {
+      "id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "name": "한양대학교"
+    },
+    {
+      "id": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
+      "name": "인하대학교"
+    },
+    {
+      "id": "88aa2231-6a1c-47ee-a063-b168cdaf85ad",
+      "name": "국민대학교"
+    },
+    {
+      "id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "name": "고려대학교"
+    },
+    {
+      "id": "b5ac5045-b2eb-4c20-a1f0-c36f04e4fab6",
+      "name": "서울대학교"
+    },
+    {
+      "id": "52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2",
+      "name": "서울과학기술대학교"
+    },
+    {
+      "id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "name": "서강대학교"
+    },
+    {
+      "id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "name": "연세대학교"
+    }
+  ],
+  "applications": [
+    {
+      "university_id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "division": "기계공학과",
+      "admission": "수리논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "ffad67a6-107f-47b7-a1cb-ab61687ffb9f",
+      "division": "미디어커뮤니케이션학과",
+      "admission": "기회균형전형",
+      "kind": "수시"
+    },
+    {
+      "university_id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "division": "스크랜튼학부",
+      "admission": "수리논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "division": "미디어커뮤니케이션학과",
+      "admission": "고른기회전형",
+      "kind": "수시"
+    },
+    {
+      "university_id": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
+      "division": "기계공학과",
+      "admission": "수리논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "88aa2231-6a1c-47ee-a063-b168cdaf85ad",
+      "division": "자유전공",
+      "admission": "산업디자인",
+      "kind": "수시"
+    },
+    {
+      "university_id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "division": "국제학부",
+      "admission": "논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "division": "미디어학부",
+      "admission": "고른기회전형",
+      "kind": "수시"
+    },
+    {
+      "university_id": "b5ac5045-b2eb-4c20-a1f0-c36f04e4fab6",
+      "division": "전기정보공학부",
+      "admission": "정시",
+      "kind": "정시"
+    },
+    {
+      "university_id": "52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2",
+      "division": "st자유전공",
+      "admission": "수리논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "division": "경제학과",
+      "admission": "논술",
+      "kind": "수시"
+    },
+    {
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "division": "지식융합미디어학부",
+      "admission": "학교장추천",
+      "kind": "수시"
+    },
+    {
+      "university_id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "division": "지식융합미디어학부",
+      "admission": "기회균형전형",
+      "kind": "수시"
+    },
+    {
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "division": "언론홍보영상학부",
+      "admission": "기회균형전형",
+      "kind": "수시"
+    }
+  ]
+}

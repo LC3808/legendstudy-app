@@ -851,3 +851,11 @@ Owner의 “전체 결제 가능하게 수정해봐”가 11/15 단일Owner QA·
 [기존 보존 전략](longitudinal-learning-admissions-data-strategy.md)과 [기존 Worker 복구 계약](essay-worker-incident-20261028.md)을 계승한다. Owner는 WEB 기간통계/현재상태 분리와 관리자 재진행·삭제·보관 기능 구현·배포를 승인했다. 실제 기존 요청 재진행·삭제는 별도 Owner 승인. 검증된 테스트이면서 결제/원장과 무관한 요청만 영구 삭제 가능하며, 학생/미검증/원장 연결 요청은 보관으로 관리한다. 기존 원장·답안·완료 결과를 변경하는 재시도나 중복 차감은 금지한다. [구현·일곱 보존 검토·운영 적용](admin-lab-run-management-20261120.md).
 
 11/20 후속 Owner 명시 승인: 준비된 c5a9aa1f SQL의 LegendStudy 운영 설치와 1f345807 WEB·Worker 배포·검증·Commit/Push를 Codex가 수행한다. 기존 요청 재진행/삭제/보관, 예약 변경, 실제 결제/환불, 답안/결과 변경은 제외한다. e7af7e52는 테스트 미확정·예약1개로 보호한다. 예상하지 못한 데이터/권한 변경 시 중단한다.
+
+## 2026-11-20 — 수시 지원 기록 기반 D-Day 자동 연동 정책
+
+[기존 Home 일정 컬렉션](home-personalization-and-events.md)과 [지원 Decision/Outcome 분리](my-shared-foundation.md)를 계승한다. Owner 확정: 실제 수시 지원의 대학·전형·모집단위·학년도로 매칭하고 공식 확인 일정만 등록한다. 학생 삭제 후 자동 재생성 금지·명시적 복원 허용, 대학 공식 변경은 자동 반영, 수동 D-Day와 기존 Home 구조 유지. 날짜 추정/지원 원문·결과 변경 금지. 이번 승인은 **조사와 설계 및 Wiki 기록만**이며 DB 변경/운영 배포 승인이 아니다. [14건 대조·일곱 보존 검토·세부 권장안](admissions-dday-linkage-research-20261120.md).
+
+### 2026-11-20 후속 — D-Day 구현 착수와 운영 승인 분리
+
+Owner는 당일 P0 기능 구현·격리 검증·Wiki·Commit/Push를 승인했다. 수시 지원 저장 즉시 연동하고 논술/면접/실기/1단계·최초 발표/등록 마감/기타 공식 일정 유형을 지원한다. 불확실한 조건은 PENDING·학생 화면 미노출, 이화 유형·서울과기 공식 날짜 확인 전 자동 등록 금지. 기존 삭제 기억/복원·수동/Home 보존 결정은 유지한다. **DB 패키지 준비 후 별도 Owner 승인**, DB검증·회귀 통과 뒤 WEB배포, Flutter 변경은 APP 릴리스와 구분한다. 논술 자료 추가 등록은 11/21부터이며 이번 구현과 섞지 않는다. [구현·승인 대상·검증](admissions-dday-implementation-20261120.md).

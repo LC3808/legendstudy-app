@@ -22,6 +22,10 @@ Application tables: absent at preflight, now applied by Owner as006. Application
 
 ## Status
 
+2026-11-20 [수시 지원 → D-Day 조사](admissions-dday-linkage-research-20261120.md): 기존 지원14건과 대학UUID·공식 일정 대조, 표시용 파생값 설계만 완료. 지원 원문/이벤트·계정/lifecycle 계약 불변. 자동 일정은 합격/응시/지원 사건을 생성하지 않는다.
+
+같은 날 후속 [D-Day 구현·승인 패키지](admissions-dday-implementation-20261120.md): 현 운영 save의 중복 방어를 보존하고 catalog 잠금만 추가하는 후보. 지원 원문/이력 불변, 운영 적용은 별도 승인 대기.
+
 Signup predecessor is closed separately: Owner observed one signup grant, balance 3, linked delivery, no expiry and both UI balances. No Credit worker/ledger changes belong to this task.
 School LAB 3c432cd: Production deployed; Owner verified school auto-student, optional grade, grade save and reload persistence. APP school flow unchanged. No profile schema change.
 Target candidate: SQL preservation/duplicate/RLS/cascade tests PASS; LAB focused 20 PASS. APP Flutter runtime NOT_RUN: pinned SDK unavailable and official download host denied by environment proxy. Candidate remains held.

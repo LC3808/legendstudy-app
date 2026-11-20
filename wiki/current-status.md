@@ -1,5 +1,7 @@
 # Current Status
 
+[11/20 수시 D-Day](admissions-dday-implementation-20261120.md): DB·WEB·Flutter 구현·격리검증 PASS. 운영 DB 승인 대기·미배포. APP 업데이트 별도.
+
 [11/20 관리자 기간·요청 관리](admin-lab-run-management-20261120.md): Owner승인 DB설치·WEB/Worker 운영배포·UI/권한 PASS. 기존13테이블·원장 불변. 실제 재진행·삭제·보관0; 운영 mutation 별도승인.
 
 [11/13 35대학 브랜드 재점검·운영](essay-university-brand-audit-20261113.md).

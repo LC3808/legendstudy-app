@@ -1,0 +1,68 @@
+{
+  "scope": "LOCAL_SYNTHETIC_ONLY",
+  "production_writes": 0,
+  "verified_at_kst": "2026-11-20T21:35:46.853643+09:00",
+  "postgres": "PostgreSQL 17.11 (Homebrew) on aarch64-apple-darwin25.6.0, compiled by Apple clang version 21.0.0 (clang-2100.1.1.101), 64-bit",
+  "installer_role": "postgres NOSUPERUSER",
+  "tests_run": 46,
+  "successful": true,
+  "failures": [],
+  "errors": [],
+  "source_files_unchanged_during_run": true,
+  "source_sha256": {
+    "supabase/candidates/admissions_dday_20261120/install.sql": "f56ac57b9644d9487a25d49ed71c3ffa80b90df5b9ccde50fcf91a1f5d482e11",
+    "supabase/candidates/admissions_dday_20261120/preimage_my_application_save.sql": "715083246cc00ae5299c452910ff385ac44918b6834fcb55fc6e837a2a2d00b0",
+    "supabase/candidates/admissions_dday_20261120/seed_reviewed.sql": "e65c54c49662c3b75a07764aceaede25ecf20ac6c3e8fadb8abb83a42832d6b8",
+    "supabase/candidates/admissions_dday_20261120/reviewed_schedules.json": "afa835781a487ce9cb70f13a3730dac3bdfe0a4aa1b98241752d1c137846af9e",
+    "supabase/candidates/admissions_dday_20261120/activate_existing.sql": "2be8cc7a1788f55482ad70023df1c0d9a03345cd5d59f391808f6b137f170018",
+    "supabase/candidates/admissions_dday_20261120/rollback.sql": "886856512143654210be4546b03e6be2ee764bcc66723e40b583478ab8efd547",
+    "supabase/validation/admissions_dday/test_postgres.py": "175a39a2fe194bd70a5ce47ab367fe2656724d5f7c9c952cf5e3d1c444841c86",
+    "supabase/validation/admissions_dday/fixture.sql": "348a178e35380aa7946c500242c7da4c22a2ffd90a7e3d8632ff5bc7df241f3a",
+    "supabase/validation/admissions_dday/lifecycle_fixture.sql": "2af2bce7d2d116139cd32658f420347cb8843f4ecd00648da7332c37ca716d85",
+    "supabase/validation/admissions_dday/reviewed_scope_fixture.json": "f68dda2a1a449d327946db7e1f263891eb948bc14756d59ba55f17163c41292c"
+  },
+  "baseline_rows": {
+    "before": {
+      "student_applications": "14164fa166f884829bceb7c14117f0e5",
+      "student_application_events": "832f2c15781faa8290e1d4139d7c821e",
+      "day_targets": "7f9393e5a9600a4a89b8697c5c1aa782"
+    },
+    "after": {
+      "student_applications": "14164fa166f884829bceb7c14117f0e5",
+      "student_application_events": "832f2c15781faa8290e1d4139d7c821e",
+      "day_targets": "7f9393e5a9600a4a89b8697c5c1aa782"
+    },
+    "unchanged": true
+  },
+  "package_evidence": {
+    "reviewed_seed": {
+      "synthetic_applications": 14,
+      "susi": 13,
+      "regular_excluded": 1,
+      "schedules": 15,
+      "verified_published": 10,
+      "pending": 5,
+      "matched_application_links": 12,
+      "matched_applications": 8,
+      "pending_links": 5,
+      "distinct_active_targets_at_run": 10,
+      "seed_no_backfill": true,
+      "repeated_seed_preserved_rows": true,
+      "edited_seed_drift_refused": true
+    },
+    "rollback": {
+      "original_rpc_md5": "65edac758433cde4a123b95be3da42ee",
+      "application_headers_history_unchanged": true,
+      "manual_target_unchanged": true,
+      "generated_targets_removed": true,
+      "dismissal_retained": true,
+      "client_read_supported": true,
+      "publication_disabled": true
+    }
+  },
+  "limits": [
+    "Synthetic minimal Auth/profile/admin fixture; hosted JWT verifier not exercised",
+    "Full account erasure worker, Production PostgREST, WEB and Flutter E2E are separate",
+    "Date-only/session timezone invariance tested; no mocked system clock"
+  ]
+}
