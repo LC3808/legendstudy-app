@@ -1,0 +1,56 @@
+{
+  "functions": [
+    {
+      "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)",
+      "before_md5": "6b60463d6f68140d53d20a0f83465d75",
+      "source_sha256": "1a4711c92ac2ac4b126d875b4f86953499516ba7e82ceb674d98e0fd4df2a9fa"
+    },
+    {
+      "signature": "admin_lab_manage_run(uuid,text,uuid)",
+      "before_md5": "7490f7adc5d490121540aa53d7fd1f05",
+      "source_sha256": "840658408974a3408338eddca4349e0c6ec037b7a07d7e0d5a7fb48dce04debe"
+    },
+    {
+      "signature": "admin_lab_run_capabilities(uuid)",
+      "before_md5": "a552036fa62ee763aabb100e81a7235c",
+      "source_sha256": "462d122d5317f39cc35be67b73248b883eb159d07707cd9aca38a121d4c1601f"
+    },
+    {
+      "signature": "admin_lab_set_run_hidden(uuid,boolean)",
+      "before_md5": "e64687bcbd0988d0e0f4b8db0d471458",
+      "source_sha256": "bafbe9d182bef5daede2669ef4dbd0808a27890b42d6bf81dcf1b32ac2ed7c83"
+    },
+    {
+      "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "before_md5": "f99bc33ca07235aabbf06a8e71818bf4",
+      "source_sha256": "4ba4e0cef70a4fd853ecc094494a69eb350cb23624b352e458b073115fdc03d8"
+    },
+    {
+      "signature": "essay_exam_claim(uuid,uuid,uuid)",
+      "before_md5": "831184243ee955cd591dbb9f32a50905",
+      "source_sha256": "0b443b1661b44f8c8702e1ca9aab958eb16b3a1a80d0474fa99476d9765993df"
+    },
+    {
+      "signature": "essay_exam_observation(uuid)",
+      "before_md5": "e360af489bbadb077970de7745b9f0e3",
+      "source_sha256": "9ab359d54455a67e273bc63960d8c004c4052a7e700931144298b7fbd01f1983"
+    },
+    {
+      "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)",
+      "before_md5": "5636d454391c76aa60411f2a64a44286",
+      "source_sha256": "90e693b997d9809cb21492d2cc095d18cbc89aadeb719752c321de0d407a6b84"
+    },
+    {
+      "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "before_md5": "19323172ce32422aee6f36b786ecf507",
+      "source_sha256": "344b8300245eb273a7c353c04dfdf73134d4b4a05b47102dcadfebb0055607b0"
+    },
+    {
+      "signature": "essay_exam_session_status(uuid)",
+      "before_md5": "3e7f7c53c76b7623cfabbede642f4e25",
+      "source_sha256": "0b85e41a7d8938e8261c97286b41658e0f894aaaa616b894fd6bb5bf99c00763"
+    }
+  ],
+  "new_rpc": "essay_exam_dispatch_guard(uuid,uuid)",
+  "install_sha256": "6a8370d24aba9d8b6f65940836603528f9d7f35c9755aed1d86a934ef81fcc4e"
+}

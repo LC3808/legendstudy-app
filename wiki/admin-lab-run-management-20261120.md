@@ -6,6 +6,8 @@ Owner는 11/20 후속 지시로 c5a9aa1f SQL/서버와 1f345807 WEB의 운영 �
 
 기존 정책: [데이터 보존 전략](longitudinal-learning-admissions-data-strategy.md), [Worker 중단/기존 finish 복구](essay-worker-incident-20261028.md), [Credit 운영](admin-credit-operations-20261027.md), [Finance 자동 갱신](finance-auth-renewal-20261117.md). WEB 기존 운영 근거는 WEB checkout의 `wiki/operations-integrity-20261115.md`, 기존 숨김 구현 b6d47c5. 기존 숨김 RPC는 운영에 있으나 현재 source에는 UI 연결이 누락되어 재연결했다.
 
+2026-11-20 후속: [보관 요청의 활성 운영 제외](admin-archived-run-operations-20261120.md) 적용으로 아래 과거 목록 숨김/KPI 포함 정책을 보완했다. 현재 보관은 실행·재시도·활성 KPI 제외이며 예약 해제는 아니다. 아래 배포 시점 증거는 역사로 보존한다.
+
 ## 구현
 
 - `/admin/`: 기존 AdminPeriodFilter 재사용, 오늘/7일/30일/직접 입력. KST 자정 시작 포함·마지막 날 다음 자정 미포함, 직접 입력 최대93일, 존재하지 않는 날짜 거부.

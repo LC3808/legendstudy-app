@@ -1,0 +1,829 @@
+{
+  "scope": "PRODUCTION_OWNER_APPROVED_RPC_ONLY_ARCHIVE_GUARD",
+  "project": {
+    "id": "stlhijzpjfgwwdgunlsd",
+    "name": "LegendStudy",
+    "status": "ACTIVE_HEALTHY"
+  },
+  "recorded_at_utc": "2026-11-20T13:10:18.400Z",
+  "approval": "Owner authorized minimum RPC/Worker/WEB archive-execution correction and deployment after validation; real request archive/restore/retry/delete, credit reservation changes, payment/refund and original student data mutations excluded.",
+  "migration": {
+    "name": "admin_archived_run_guard_20261120",
+    "sql_md5": "f38354154fa168f53435092d218b6e7f",
+    "version": "20261120130743"
+  },
+  "install_sha256": "6a8370d24aba9d8b6f65940836603528f9d7f35c9755aed1d86a934ef81fcc4e",
+  "local_validation": {
+    "scope": "LOCAL_SYNTHETIC_ONLY",
+    "production_mutations": 0,
+    "installer_role": "postgres NOSUPERUSER BYPASSRLS, matching inspected Production; authenticated/essay_worker NOBYPASSRLS",
+    "verified_at_utc": "2026-11-20T13:01:44.684881+00:00",
+    "tests": 20,
+    "successful": true,
+    "failures": [],
+    "errors": [],
+    "source_sha256": {
+      "supabase/candidates/admin_archived_run_guard_20261120/install.sql": "6a8370d24aba9d8b6f65940836603528f9d7f35c9755aed1d86a934ef81fcc4e",
+      "supabase/candidates/admin_archived_run_guard_20261120/preimage.json": "74c08cdc1c3faa1dce9b7631159c0c5e2e47b8914cb41058de5059ed8f4a7415",
+      "supabase/candidates/admin_archived_run_guard_20261120/preimage.sql": "dd448e189e5afe6877f5ca4f7ba9d3355b32419dc44ae4cc1bfdc068bb8c1a53",
+      "supabase/candidates/admin_archived_run_guard_20261120/fixture_extra.sql": "559873427786074326dd2a1cacf62e5b3d13b88129499d033e1e32eac75671ee",
+      "supabase/candidates/admin_archived_run_guard_20261120/session_claim_preimage.sql": "109a1227297e504a506320b9b1ef8a3a93a71cfb366413e8aa75068a71ab2bef",
+      "supabase/candidates/admin_archived_run_guard_20261120/test_postgres.py": "10d32556c0f724115509e878e9ca90fb4956f7e80759b191144b132e968acc77",
+      "supabase/candidates/admin_archived_run_guard_20261120/rollback.sql": "b17d399c336644070dfe44b268221c7b176a673eb5f84c29335ca9c4697a626b"
+    },
+    "installed_function_md5": [
+      {
+        "md5": "3c5616e0e2bb9a734538c960a57f12d0",
+        "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)"
+      },
+      {
+        "md5": "d8292b35fd49688f562a9bf5c90dd77e",
+        "signature": "admin_lab_manage_run(uuid,text,uuid)"
+      },
+      {
+        "md5": "0b405804182b44684361fad93a189199",
+        "signature": "admin_lab_run_capabilities(uuid)"
+      },
+      {
+        "md5": "cd00866070df6466121023d8e922cd8b",
+        "signature": "admin_lab_set_run_hidden(uuid,boolean)"
+      },
+      {
+        "md5": "c3bfd5bac836e575beedec18579177f8",
+        "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "md5": "c464c30ec66964791641febe4e89eea6",
+        "signature": "essay_exam_claim(uuid,uuid,uuid)"
+      },
+      {
+        "md5": "930f4cb10efcaffc63d8d74754ec7122",
+        "signature": "essay_exam_dispatch_guard(uuid,uuid)"
+      },
+      {
+        "md5": "27e9f3568ec4a2ee85f8d6686d0acd50",
+        "signature": "essay_exam_observation(uuid)"
+      },
+      {
+        "md5": "b505a07b40ff3bbb9490705adf426164",
+        "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)"
+      },
+      {
+        "md5": "f91ff6befbf0e476fbf0b2e374630a52",
+        "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "md5": "9682ead7a6c3ca1faf000f09ea0f1333",
+        "signature": "essay_exam_session_status(uuid)"
+      }
+    ],
+    "limits": [
+      "Minimal existing schema/admin/lifecycle fixture; exact captured RPCs and real roles/locks used.",
+      "No actual student archive/retry/refund operation; hosted JWT and Worker transport tested separately."
+    ]
+  },
+  "preflight": {
+    "functions": [
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "6b60463d6f68140d53d20a0f83465d75",
+        "owner": "postgres",
+        "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "7490f7adc5d490121540aa53d7fd1f05",
+        "owner": "postgres",
+        "signature": "admin_lab_manage_run(uuid,text,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "a552036fa62ee763aabb100e81a7235c",
+        "owner": "postgres",
+        "signature": "admin_lab_run_capabilities(uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "e64687bcbd0988d0e0f4b8db0d471458",
+        "owner": "postgres",
+        "signature": "admin_lab_set_run_hidden(uuid,boolean)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "f99bc33ca07235aabbf06a8e71818bf4",
+        "owner": "postgres",
+        "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "831184243ee955cd591dbb9f32a50905",
+        "owner": "postgres",
+        "signature": "essay_exam_claim(uuid,uuid,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "e360af489bbadb077970de7745b9f0e3",
+        "owner": "postgres",
+        "signature": "essay_exam_observation(uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "5636d454391c76aa60411f2a64a44286",
+        "owner": "postgres",
+        "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "19323172ce32422aee6f36b786ecf507",
+        "owner": "postgres",
+        "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "3e7f7c53c76b7623cfabbede642f4e25",
+        "owner": "postgres",
+        "signature": "essay_exam_session_status(uuid)"
+      }
+    ],
+    "guard_absent": true
+  },
+  "postflight": {
+    "functions": [
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "3c5616e0e2bb9a734538c960a57f12d0",
+        "owner": "postgres",
+        "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "d8292b35fd49688f562a9bf5c90dd77e",
+        "owner": "postgres",
+        "signature": "admin_lab_manage_run(uuid,text,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "0b405804182b44684361fad93a189199",
+        "owner": "postgres",
+        "signature": "admin_lab_run_capabilities(uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "cd00866070df6466121023d8e922cd8b",
+        "owner": "postgres",
+        "signature": "admin_lab_set_run_hidden(uuid,boolean)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "c3bfd5bac836e575beedec18579177f8",
+        "owner": "postgres",
+        "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "c464c30ec66964791641febe4e89eea6",
+        "owner": "postgres",
+        "signature": "essay_exam_claim(uuid,uuid,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "930f4cb10efcaffc63d8d74754ec7122",
+        "owner": "postgres",
+        "signature": "essay_exam_dispatch_guard(uuid,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "27e9f3568ec4a2ee85f8d6686d0acd50",
+        "owner": "postgres",
+        "signature": "essay_exam_observation(uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "b505a07b40ff3bbb9490705adf426164",
+        "owner": "postgres",
+        "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "essay_worker=X/postgres"
+        ],
+        "md5": "f91ff6befbf0e476fbf0b2e374630a52",
+        "owner": "postgres",
+        "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "md5": "9682ead7a6c3ca1faf000f09ea0f1333",
+        "owner": "postgres",
+        "signature": "essay_exam_session_status(uuid)"
+      }
+    ],
+    "migration": {
+      "name": "admin_archived_run_guard_20261120",
+      "sql_md5": "f38354154fa168f53435092d218b6e7f",
+      "version": "20261120130743"
+    }
+  },
+  "target_before": {
+    "state": "reserved",
+    "hidden": false,
+    "run_id": "e7af7e52-eba9-46c3-aba4-0961ea516b48",
+    "run_md5": "d5542082fe996202c503d5d2e9687101",
+    "hidden_md5": "90ae63afc6fcaeaa93f46a30a2b71ea2",
+    "billing_md5": "4070b13b7383f2eb270f45ef7c8a3032",
+    "ledger_rows": 1,
+    "balance_delta": 0,
+    "billing_status": "reserved",
+    "reserved_delta": 1,
+    "checkpoints_md5": "bb5084ed19bb682d603c873020270056",
+    "credits_required": 1,
+    "hidden_changed_at": "2026-11-20T11:52:31.977097+00:00",
+    "retry_generations": 1
+  },
+  "target_after": {
+    "state": "reserved",
+    "hidden": false,
+    "run_id": "e7af7e52-eba9-46c3-aba4-0961ea516b48",
+    "run_md5": "d5542082fe996202c503d5d2e9687101",
+    "hidden_md5": "90ae63afc6fcaeaa93f46a30a2b71ea2",
+    "billing_md5": "4070b13b7383f2eb270f45ef7c8a3032",
+    "ledger_rows": 1,
+    "balance_delta": 0,
+    "billing_status": "reserved",
+    "reserved_delta": 1,
+    "checkpoints_md5": "bb5084ed19bb682d603c873020270056",
+    "credits_required": 1,
+    "hidden_changed_at": "2026-11-20T11:52:31.977097+00:00",
+    "retry_generations": 1
+  },
+  "target_unchanged": true,
+  "preservation": {
+    "algorithm": "MD5 of sorted per-full-row MD5 strings and row counts.",
+    "tables": [
+      {
+        "rows": 851,
+        "digest": "3b4b3a8403362cf497b5a42cf9f00bee",
+        "table_name": "essay_exam_private.checkpoints"
+      },
+      {
+        "rows": 39,
+        "digest": "e1ea4b5fe046ba2de93bd9a369c00f48",
+        "table_name": "essay_exam_private.retry_requests"
+      },
+      {
+        "rows": 59,
+        "digest": "a5b9a3a751e95af68abe23241b7c1cb3",
+        "table_name": "essay_exam_private.runs"
+      },
+      {
+        "rows": 2,
+        "digest": "ab7b1d4f01c7c2ec06ed80b12718229e",
+        "table_name": "essay_ops_private.hidden_runs"
+      },
+      {
+        "rows": 1,
+        "digest": "76beed73e9564a5a098dbd84667f523f",
+        "table_name": "essay_ops_private.run_actions"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "essay_ops_private.verified_test_runs"
+      },
+      {
+        "rows": 1,
+        "digest": "a0db18965fa3fbce6cabeb6196ccfc60",
+        "table_name": "payment_private.configuration"
+      },
+      {
+        "rows": 3,
+        "digest": "2ac3ae58aa8e461b2dc6bb48ef7d5d8c",
+        "table_name": "payment_private.support_audit"
+      },
+      {
+        "rows": 854,
+        "digest": "c171133e38432329a9a2e5b7c82d5517",
+        "table_name": "public.credit_accounts"
+      },
+      {
+        "rows": 867,
+        "digest": "1386c372769a064a22d145d56c8dccc8",
+        "table_name": "public.credit_grants"
+      },
+      {
+        "rows": 970,
+        "digest": "23400834450e2bd2c3122a49bc7abc93",
+        "table_name": "public.credit_transactions"
+      },
+      {
+        "rows": 154,
+        "digest": "0e727a41cdcb5fa39da1b2f789754fdd",
+        "table_name": "public.day_targets"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_ai_processing_runs"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_attempts"
+      },
+      {
+        "rows": 80,
+        "digest": "1031d9357102ebbc3e74e8c3684366cb",
+        "table_name": "public.essay_billing_decisions"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_drafts"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_evaluation_criteria"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_evaluation_dimensions"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_evaluation_evidence"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_evaluations"
+      },
+      {
+        "rows": 134,
+        "digest": "07873ffad64b142beb3ff69a423c1fd6",
+        "table_name": "public.essay_exam_resources"
+      },
+      {
+        "rows": 478,
+        "digest": "28c1acf83afb27c5c89a93cfc63057d1",
+        "table_name": "public.essay_exams"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_generated_rewrites"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_improvement_items"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_improvement_progress"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_learning_events"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_practice_sessions"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.essay_question_evidence"
+      },
+      {
+        "rows": 1316,
+        "digest": "5bf29f92217d34e389e0049644f7a39e",
+        "table_name": "public.essay_questions"
+      },
+      {
+        "rows": 24,
+        "digest": "6471acf44b3dc72a566efadf4d331cb6",
+        "table_name": "public.math_attempt_artifacts"
+      },
+      {
+        "rows": 71,
+        "digest": "71294704586462da7c3e1f4e838787c3",
+        "table_name": "public.math_attempts"
+      },
+      {
+        "rows": 11,
+        "digest": "c22afef9e258ee319075fa705247699b",
+        "table_name": "public.math_billing_bindings"
+      },
+      {
+        "rows": 1041,
+        "digest": "9bbc5b1a13f6b3d126eb0fb0a1bfd1a6",
+        "table_name": "public.math_canonical_solution_steps"
+      },
+      {
+        "rows": 382,
+        "digest": "c42724c9d57db1797e94bfeab7e6c04a",
+        "table_name": "public.math_canonical_solutions"
+      },
+      {
+        "rows": 10,
+        "digest": "9362d822fac2ecd4f313771cb14b260c",
+        "table_name": "public.math_considered_references"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_core"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_error_propagations"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_errors"
+      },
+      {
+        "rows": 12,
+        "digest": "f40d9717cbac8f09d9daf101f151b92c",
+        "table_name": "public.math_evaluated_paths"
+      },
+      {
+        "rows": 5,
+        "digest": "fab8a331010d3aa4fb32209a0ff36131",
+        "table_name": "public.math_evaluation_criteria"
+      },
+      {
+        "rows": 433,
+        "digest": "356d309734c3adbd3fe0afc6e625af1e",
+        "table_name": "public.math_evaluation_profiles"
+      },
+      {
+        "rows": 23,
+        "digest": "7221ec7b98c057e6807a933082423124",
+        "table_name": "public.math_evaluation_sources"
+      },
+      {
+        "rows": 14,
+        "digest": "8d9a04a40877fe979b65ee448a362812",
+        "table_name": "public.math_evaluations"
+      },
+      {
+        "rows": 269,
+        "digest": "65d53fb3fdf9ae5a977859f021a61276",
+        "table_name": "public.math_extraction_regions"
+      },
+      {
+        "rows": 27,
+        "digest": "a51768e4fe47e9f783fe860ae23aa593",
+        "table_name": "public.math_extraction_runs"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_hint_exposures"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_hints"
+      },
+      {
+        "rows": 432,
+        "digest": "5c9124f4fe5145bf2ced2b32b68bb7d5",
+        "table_name": "public.math_problem_sets"
+      },
+      {
+        "rows": 481,
+        "digest": "dbe6d62fad4e7a21c7dd41bb7c879309",
+        "table_name": "public.math_problems"
+      },
+      {
+        "rows": 988,
+        "digest": "2ee19b9b8549ff1d218232ec2a633a73",
+        "table_name": "public.math_scoring_criteria"
+      },
+      {
+        "rows": 0,
+        "digest": "d41d8cd98f00b204e9800998ecf8427e",
+        "table_name": "public.math_solution_exposures"
+      },
+      {
+        "rows": 56,
+        "digest": "01f8737fb4143305a659c0f9f5bede08",
+        "table_name": "public.math_solution_steps"
+      },
+      {
+        "rows": 1609,
+        "digest": "e5ed9c69e631f653dd6316e9727af9d5",
+        "table_name": "public.math_source_artifacts"
+      },
+      {
+        "rows": 45,
+        "digest": "e61fe2c06445282f5eaeba07ae5e1ed7",
+        "table_name": "public.math_step_dependencies"
+      },
+      {
+        "rows": 19,
+        "digest": "68bf2daef4b91f8a6b9aaa6b762482df",
+        "table_name": "public.math_step_regions"
+      },
+      {
+        "rows": 481,
+        "digest": "f4b887e9aa66ad024ec0e0254beff44f",
+        "table_name": "public.math_subproblems"
+      },
+      {
+        "rows": 49,
+        "digest": "c6c8606ff12b6686134177c01b4721ae",
+        "table_name": "public.payment_events"
+      },
+      {
+        "rows": 13,
+        "digest": "683c5db6f9c3366495e337253c3a6603",
+        "table_name": "public.payment_operations"
+      },
+      {
+        "rows": 22,
+        "digest": "7e1762c6095775ab977f002e8e113898",
+        "table_name": "public.payment_orders"
+      },
+      {
+        "rows": 846,
+        "digest": "19b535a6609163d06068dab222228d53",
+        "table_name": "public.profiles"
+      },
+      {
+        "rows": 30,
+        "digest": "06ad1f994c9c6bc5ac6ff556f9b48523",
+        "table_name": "public.student_application_events"
+      },
+      {
+        "rows": 14,
+        "digest": "47f0b2cd03b05753219ecbb7a3b196b3",
+        "table_name": "public.student_applications"
+      },
+      {
+        "rows": 138,
+        "digest": "4787fbed728c0e134875acf587778b02",
+        "table_name": "public.universities"
+      }
+    ],
+    "table_count": 63,
+    "all_counts_and_hashes_unchanged": true
+  },
+  "finance": {
+    "contract": {
+      "role": {
+        "rolname": "essay_finance",
+        "rolsuper": false,
+        "rolconfig": null,
+        "rolinherit": true,
+        "rolcanlogin": false,
+        "rolcreatedb": false,
+        "rolbypassrls": false,
+        "rolcreaterole": false,
+        "rolreplication": false
+      },
+      "memberships": [
+        {
+          "role": "essay_finance",
+          "member": "postgres",
+          "admin_option": true
+        },
+        {
+          "role": "essay_finance",
+          "member": "authenticator",
+          "admin_option": false
+        }
+      ],
+      "table_grants": [
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "essay_executor=r/postgres"
+          ],
+          "table": "configuration",
+          "schema": "payment_private"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres"
+          ],
+          "table": "support_audit",
+          "schema": "payment_private"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "service_role=arwdDxtm/postgres",
+            "authenticated=r/postgres",
+            "essay_executor=arw/postgres",
+            "account_erasure_executor=r/postgres"
+          ],
+          "table": "credit_accounts",
+          "schema": "public"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "service_role=arwdDxtm/postgres",
+            "authenticated=r/postgres",
+            "essay_executor=arw/postgres",
+            "account_erasure_executor=rw/postgres"
+          ],
+          "table": "credit_grants",
+          "schema": "public"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "service_role=arwdDxtm/postgres",
+            "authenticated=r/postgres",
+            "essay_executor=ar/postgres",
+            "account_erasure_executor=rw/postgres"
+          ],
+          "table": "credit_transactions",
+          "schema": "public"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "essay_executor=ar/postgres"
+          ],
+          "table": "payment_events",
+          "schema": "public"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "essay_executor=arw/postgres"
+          ],
+          "table": "payment_operations",
+          "schema": "public"
+        },
+        {
+          "acl": [
+            "postgres=arwdDxtm/postgres",
+            "essay_executor=arw/postgres"
+          ],
+          "table": "payment_orders",
+          "schema": "public"
+        }
+      ],
+      "function_contracts": [
+        {
+          "acl": [
+            "postgres=X/postgres",
+            "authenticated=X/postgres"
+          ],
+          "signature": "admin_payment_orders(jsonb)",
+          "definition_md5": "ec5fc997a57eac200b33b0c82299f000"
+        },
+        {
+          "acl": [
+            "postgres=X/postgres",
+            "essay_finance=X/postgres"
+          ],
+          "signature": "payment_compensate(jsonb)",
+          "definition_md5": "3f8de1ae4f077b6eb1e61a703bf7d159"
+        },
+        {
+          "acl": [
+            "essay_executor=X/essay_executor",
+            "authenticated=X/essay_executor"
+          ],
+          "signature": "payment_order(jsonb)",
+          "definition_md5": "1afb9a07c8688d74517df6b999dc7320"
+        },
+        {
+          "acl": [
+            "essay_executor=X/essay_executor",
+            "essay_finance=X/essay_executor"
+          ],
+          "signature": "payment_process(jsonb)",
+          "definition_md5": "0dcccf66129e06eb3535da797b56f8f6"
+        },
+        {
+          "acl": [
+            "postgres=X/postgres",
+            "essay_finance=X/postgres"
+          ],
+          "signature": "payment_support(jsonb)",
+          "definition_md5": "8d114a9e9fda1c15818cb4edc5f27722"
+        }
+      ]
+    },
+    "roles_acls_rpc_unchanged": true
+  },
+  "production_read_only_checks": {
+    "admin": {
+      "live": {
+        "archived": 0,
+        "processing": 1,
+        "retry_pending": 1
+      },
+      "target": {
+        "hidden": false,
+        "ledger_count": 1,
+        "retry_allowed": true,
+        "archive_reason": null,
+        "billing_status": "reserved",
+        "archive_allowed": true,
+        "restore_allowed": false,
+        "credits_required": 1
+      }
+    },
+    "worker": {
+      "state": "reserved"
+    },
+    "permissions": {
+      "anon_guard_execute": false,
+      "service_role_guard_execute": false,
+      "ordinary_member_manage_denied": true,
+      "ordinary_member_worker_guard_denied": true
+    }
+  },
+  "new_guard_security_advisories": [],
+  "unchanged_entry_and_finalization": {
+    "essay_exam_session_claim_md5": "a24b1173fbe782846526d228c7b00a64",
+    "essay_exam_finish_md5": "b2ff3dce059d8a5d6b3652094c6a757a",
+    "matches_preflight": true
+  },
+  "gate": "PASS",
+  "limits": [
+    "Current target is hidden=false, processing/retry KPI 1/1 remains correct. No attempt was made to force zero by changing the target.",
+    "Archived 0/0 exclusion, retry replay/claim/checkpoint fencing and restore correctness were tested only with synthetic PostgreSQL data; all eleven deployed function hashes match that tested implementation.",
+    "Production verification used READ ONLY role/context probes and original-data digests. No real request archive, restore, retry, delete, finish or payment/ledger operation was executed.",
+    "Worker HTTP/queue behavior and WEB deployment are separate receipts.",
+    "BYPASSRLS is an existing postgres role attribute, not newly granted in Production. Authenticated/Worker role permissions were preserved."
+  ]
+}

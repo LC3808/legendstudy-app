@@ -1,3 +1,7 @@
+## 2026-11-20 — 관리자 보관 활성 집계·실행 제외
+
+DB20/WEB2215+관련21/Worker15+실운영patch8 PASS. migration130743·Worker5095226c·Pages842dccfe 반영, 기존63테이블·답안·원장 보존. 대상은restore이력/hiddenfalse라KPI1/1/0 정상, 재보관0·예약1유지. [처리방법·검증경계](admin-archived-run-operations-20261120.md).
+
 ## 2026-11-20 — D-Day 운영 설치·WEB 배포
 
 Owner 승인 migration20261120124053/공식15(공개10·PENDING5), 지원8건→자동12개·중복0. 기존63테이블·수동142 보존/운영권한 PASS. WEB624664a1 배포·관리자15건/MY빈상태 확인, 타학생카드 브라우저 미검증. APP출시 제외. [증거·검증경계](admissions-dday-implementation-20261120.md).

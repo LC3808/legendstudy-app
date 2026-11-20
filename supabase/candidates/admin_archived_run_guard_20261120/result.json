@@ -1,0 +1,69 @@
+{
+  "scope": "LOCAL_SYNTHETIC_ONLY",
+  "production_mutations": 0,
+  "installer_role": "postgres NOSUPERUSER BYPASSRLS, matching inspected Production; authenticated/essay_worker NOBYPASSRLS",
+  "verified_at_utc": "2026-11-20T13:01:44.684881+00:00",
+  "tests": 20,
+  "successful": true,
+  "failures": [],
+  "errors": [],
+  "source_sha256": {
+    "supabase/candidates/admin_archived_run_guard_20261120/install.sql": "6a8370d24aba9d8b6f65940836603528f9d7f35c9755aed1d86a934ef81fcc4e",
+    "supabase/candidates/admin_archived_run_guard_20261120/preimage.json": "74c08cdc1c3faa1dce9b7631159c0c5e2e47b8914cb41058de5059ed8f4a7415",
+    "supabase/candidates/admin_archived_run_guard_20261120/preimage.sql": "dd448e189e5afe6877f5ca4f7ba9d3355b32419dc44ae4cc1bfdc068bb8c1a53",
+    "supabase/candidates/admin_archived_run_guard_20261120/fixture_extra.sql": "559873427786074326dd2a1cacf62e5b3d13b88129499d033e1e32eac75671ee",
+    "supabase/candidates/admin_archived_run_guard_20261120/session_claim_preimage.sql": "109a1227297e504a506320b9b1ef8a3a93a71cfb366413e8aa75068a71ab2bef",
+    "supabase/candidates/admin_archived_run_guard_20261120/test_postgres.py": "10d32556c0f724115509e878e9ca90fb4956f7e80759b191144b132e968acc77",
+    "supabase/candidates/admin_archived_run_guard_20261120/rollback.sql": "b17d399c336644070dfe44b268221c7b176a673eb5f84c29335ca9c4697a626b"
+  },
+  "installed_function_md5": [
+    {
+      "md5": "3c5616e0e2bb9a734538c960a57f12d0",
+      "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)"
+    },
+    {
+      "md5": "d8292b35fd49688f562a9bf5c90dd77e",
+      "signature": "admin_lab_manage_run(uuid,text,uuid)"
+    },
+    {
+      "md5": "0b405804182b44684361fad93a189199",
+      "signature": "admin_lab_run_capabilities(uuid)"
+    },
+    {
+      "md5": "cd00866070df6466121023d8e922cd8b",
+      "signature": "admin_lab_set_run_hidden(uuid,boolean)"
+    },
+    {
+      "md5": "c3bfd5bac836e575beedec18579177f8",
+      "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+    },
+    {
+      "md5": "c464c30ec66964791641febe4e89eea6",
+      "signature": "essay_exam_claim(uuid,uuid,uuid)"
+    },
+    {
+      "md5": "930f4cb10efcaffc63d8d74754ec7122",
+      "signature": "essay_exam_dispatch_guard(uuid,uuid)"
+    },
+    {
+      "md5": "27e9f3568ec4a2ee85f8d6686d0acd50",
+      "signature": "essay_exam_observation(uuid)"
+    },
+    {
+      "md5": "b505a07b40ff3bbb9490705adf426164",
+      "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)"
+    },
+    {
+      "md5": "f91ff6befbf0e476fbf0b2e374630a52",
+      "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)"
+    },
+    {
+      "md5": "9682ead7a6c3ca1faf000f09ea0f1333",
+      "signature": "essay_exam_session_status(uuid)"
+    }
+  ],
+  "limits": [
+    "Minimal existing schema/admin/lifecycle fixture; exact captured RPCs and real roles/locks used.",
+    "No actual student archive/retry/refund operation; hosted JWT and Worker transport tested separately."
+  ]
+}

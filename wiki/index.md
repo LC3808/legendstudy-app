@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+관리자 보관 / archived / 활성 KPI·Worker 실행 제외: [11/20 수정·배포·대상 정리](admin-archived-run-operations-20261120.md).
+
 수시 지원 일정 → D-Day / 자동 등록·삭제·복원 / admissions schedule sync: [11/20 구현·DB 승인 패키지·검증](admissions-dday-implementation-20261120.md) → [기존14건 조사·보존 검토](admissions-dday-linkage-research-20261120.md). Owner 승인 운영 DB 적용·WEB 단계 배포. [Home 일정](home-personalization-and-events.md)과 [지원 기반](my-shared-foundation.md)을 함께 읽는다.
 
 관리자 논술 운영 / 기간 선택 / 첨삭 재진행·삭제·보관: [11/20 운영 설치·배포·검증·승인 경계](admin-lab-run-management-20261120.md).
