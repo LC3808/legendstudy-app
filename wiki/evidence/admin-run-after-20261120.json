@@ -1,0 +1,71 @@
+{
+  "tables": [
+    {
+      "count": 848,
+      "table": "public.credit_accounts",
+      "digest": "5b9ce3efbca4a0202545925eafeb882b"
+    },
+    {
+      "count": 861,
+      "table": "public.credit_grants",
+      "digest": "8a234c71083ce65713b2b63cc0c4249c"
+    },
+    {
+      "count": 964,
+      "table": "public.credit_transactions",
+      "digest": "537814e5d9b13c87c72fa2b4a4a14ea4"
+    },
+    {
+      "count": 80,
+      "table": "public.essay_billing_decisions",
+      "digest": "1031d9357102ebbc3e74e8c3684366cb"
+    },
+    {
+      "count": 22,
+      "table": "public.payment_orders",
+      "digest": "7e1762c6095775ab977f002e8e113898"
+    },
+    {
+      "count": 13,
+      "table": "public.payment_operations",
+      "digest": "683c5db6f9c3366495e337253c3a6603"
+    },
+    {
+      "count": 49,
+      "table": "public.payment_events",
+      "digest": "c6c8606ff12b6686134177c01b4721ae"
+    },
+    {
+      "count": 59,
+      "table": "essay_exam_private.runs",
+      "digest": "a5b9a3a751e95af68abe23241b7c1cb3"
+    },
+    {
+      "count": 851,
+      "table": "essay_exam_private.checkpoints",
+      "digest": "3b4b3a8403362cf497b5a42cf9f00bee"
+    },
+    {
+      "count": 39,
+      "table": "essay_exam_private.retry_requests",
+      "digest": "e1ea4b5fe046ba2de93bd9a369c00f48"
+    },
+    {
+      "count": 2,
+      "table": "essay_ops_private.hidden_runs",
+      "digest": "f6f084279f4380bce18fb50c85cd8062"
+    },
+    {
+      "count": 3,
+      "table": "payment_private.support_audit",
+      "digest": "2ac3ae58aa8e461b2dc6bb48ef7d5d8c"
+    },
+    {
+      "count": 1,
+      "table": "payment_private.configuration",
+      "digest": "a0db18965fa3fbce6cabeb6196ccfc60"
+    }
+  ],
+  "functions": "7450d23a296852e421a20ed032683498",
+  "captured_at": "2026-11-20T11:37:08.973981+00:00"
+}

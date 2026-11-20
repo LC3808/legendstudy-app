@@ -1,6 +1,6 @@
 # 관리자 운영 관리 — Owner 적용 패키지
 
-Production NOT_APPLIED. Project: `stlhijzpjfgwwdgunlsd` only.
+Production APPLIED — Owner 명시 승인, 2026-11-20 20:28 KST, migration `20261120112811`. Project: `stlhijzpjfgwwdgunlsd` only. 아래 절차는 완료 기록이며 운영에서 재실행하지 않습니다. WEB/Worker 배포·읽기 검증 완료; 실제 기존 요청 작업0. 상세: `wiki/admin-lab-run-management-20261120.md`.
 
 1. Supabase SQL Editor에서 `install.sql` 전체를 한 번 실행합니다. 새 테이블·RPC·인덱스만 설치하며 기존 요청·답안·이용권·원장은 변경하지 않습니다.
 2. `postcheck.sql`을 실행합니다. 보안 검사 3행 true, 최초 action/test count 0, 기존 요청 reserved / ledger 1 / retry 1을 확인합니다.

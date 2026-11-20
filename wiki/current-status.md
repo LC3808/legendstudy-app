@@ -1,5 +1,7 @@
 # Current Status
 
+[11/20 관리자 기간·요청 관리](admin-lab-run-management-20261120.md): Owner승인 DB설치·WEB/Worker 운영배포·UI/권한 PASS. 기존13테이블·원장 불변. 실제 재진행·삭제·보관0; 운영 mutation 별도승인.
+
 [11/13 35대학 브랜드 재점검·운영](essay-university-brand-audit-20261113.md).
 
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
@@ -142,9 +144,7 @@ wave rollout gate. Owner device QA then Essay LAB; maintenance only for real def
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
 
-## Historical: 2026-10-21 — Backend recovery gate follow-up
-
-Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
+[Oct21 복구 이력](history/status-checkpoints.md#historical-2026-10-21--backend-recovery-gate-follow-up).
 
 [Oct22 자료 탐색 검증 이력](history/status-checkpoints.md#2026-10-22--student-material-browsing).
 

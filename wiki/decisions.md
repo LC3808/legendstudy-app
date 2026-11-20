@@ -844,3 +844,10 @@ Owner의 “전체 결제 가능하게 수정해봐”가 11/15 단일Owner QA·
 ### 2026-11-17 — Finance 단계적 운영 적용 승인
 
 위 자동갱신 결정을 실행하기 위해 Owner가 기존 서명키의 전용 Worker Secret 등록·암호화DO·Production private binding·Shadow 및 통과 후 Automatic 전환을 승인했다. 기존 수동경로를 보존하고 인증 장애 시 전환중단/원복한다. 실제결제/환불·DB권한/원장/주문 변경은 제외한다. [운영 증거](finance-auth-renewal-20261117.md).
+
+
+## 2026-11-20 — 관리자 논술 요청 관리와 보존
+
+[기존 보존 전략](longitudinal-learning-admissions-data-strategy.md)과 [기존 Worker 복구 계약](essay-worker-incident-20261028.md)을 계승한다. Owner는 WEB 기간통계/현재상태 분리와 관리자 재진행·삭제·보관 기능 구현·배포를 승인했다. 실제 기존 요청 재진행·삭제는 별도 Owner 승인. 검증된 테스트이면서 결제/원장과 무관한 요청만 영구 삭제 가능하며, 학생/미검증/원장 연결 요청은 보관으로 관리한다. 기존 원장·답안·완료 결과를 변경하는 재시도나 중복 차감은 금지한다. [구현·일곱 보존 검토·운영 적용](admin-lab-run-management-20261120.md).
+
+11/20 후속 Owner 명시 승인: 준비된 c5a9aa1f SQL의 LegendStudy 운영 설치와 1f345807 WEB·Worker 배포·검증·Commit/Push를 Codex가 수행한다. 기존 요청 재진행/삭제/보관, 예약 변경, 실제 결제/환불, 답안/결과 변경은 제외한다. e7af7e52는 테스트 미확정·예약1개로 보호한다. 예상하지 못한 데이터/권한 변경 시 중단한다.

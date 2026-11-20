@@ -5130,3 +5130,11 @@ Owner 직접4900원 환불: CANCELLED/REVOKED·CANCEL SUCCEEDED, 회수원장-1 
 ## 2026-11-17 — Finance 자동 갱신 운영 전환
 
 Owner 승인으로 Worker/암호화DO/Secret/private binding 설치. Shadow redirect 호환성 보완 후 실제재시도·읽기·복원 PASS, Automatic9201e47a. 원장/주문 불변·거래0, 전체2168 PASS/5 SKIP. [영수증·원복·미검증](finance-auth-renewal-20261117.md).
+
+
+## 2026-11-20 — 관리자 논술 기간·요청 관리
+
+기간4종/KST·현재상태 분리, 서버 capability/관리자 JWT 어댑터·재진행/삭제/보관·append audit 구현. 격리SQL/동시실행·권한·원장보존 PASS, WEB 최종전체2184 PASS/5 SKIP·Python21 PASS. processing1/retry1은 동일 한양요청 e7af7e52, reserve1 연결·테스트 미검증. 새DB설치 Owner 방식 확인 대기, WEB/Worker 새배포0·기존요청변경0. [정의·SQL·재개](admin-lab-run-management-20261120.md).
+
+
+11/20 관리자 운영 적용: Owner 명시 승인 후 DB20261120112811 설치, WEB e84b1232 및 Worker9ac3b91c100% 배포. 실제 기간4종/실시간·요청 capability/버튼·재진행 확인창 PASS; 실행0. nonadmin RPC42501/무인증401/위조403. 기존13테이블·함수ACL·원장·비대상3088자산·평가73모듈·LIVE/Finance설정 불변. [영수증·남은 승인](admin-lab-run-management-20261120.md#운영-설치배포-검증--2026-11-20-2038-kst).

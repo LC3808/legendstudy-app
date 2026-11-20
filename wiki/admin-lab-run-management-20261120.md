@@ -1,8 +1,8 @@
 # WEB 관리자 논술 운영 기간·요청 관리 — 2026-11-20
 
-**PARTIAL — 구현·격리 검증 완료, 운영 DB 설치 승인 대기. WEB/Worker 운영 미배포. 기존 요청 재진행·삭제 0.**
+**DONE — Owner 승인된 운영 DB 설치·WEB/Worker 배포·관리자 UI 읽기 검증 완료. 기존 요청 재진행·삭제·보관 0. 실제 mutation E2E는 승인 제외로 NOT TESTED.**
 
-Owner의 이번 지시는 실제 관리자 기능 구현과 WEB 운영 배포를 승인한다. 기존 요청을 실제 재진행·삭제하는 작업은 별도 승인 단계다. AGENTS §4의 Owner DB 적용 원칙 때문에 준비된 새 DB 기능 설치 방식만 확인 중이다. 파일 존재를 운영 설치로 간주하지 않는다.
+Owner는 11/20 후속 지시로 c5a9aa1f SQL/서버와 1f345807 WEB의 운영 설치·배포·검증·Commit/Push를 명시 승인했다. AGENTS §4의 기본 Owner 직접 적용 원칙에 대한 이번 작업의 명시적 실행 승인이다. 기존 요청 재진행/삭제/보관, 예약 상태, 결제/환불, 학생 답안/결과 변경은 제외했다.
 
 기존 정책: [데이터 보존 전략](longitudinal-learning-admissions-data-strategy.md), [Worker 중단/기존 finish 복구](essay-worker-incident-20261028.md), [Credit 운영](admin-credit-operations-20261027.md), [Finance 자동 갱신](finance-auth-renewal-20261117.md). WEB 기존 운영 근거는 WEB checkout의 `wiki/operations-integrity-20261115.md`, 기존 숨김 구현 b6d47c5. 기존 숨김 RPC는 운영에 있으나 현재 source에는 UI 연결이 누락되어 재연결했다.
 
@@ -63,15 +63,29 @@ Owner의 이번 지시는 실제 관리자 기능 구현과 WEB 운영 배포를
 - DONE: WEB 최종전체 2,184 PASS /5 SKIP, 신규 API/route/UI11 PASS. typecheck·변경파일 ESLint·운영값 Next build·Pages Functions compile PASS.
 - DONE: Python adapter+기존 async retry/queue/stage/math checkpoint21 PASS. Worker stage PASS.
 - NOT TESTED: 실제 Production 관리자 mutation/Provider 재실행, 실제 학생 데이터 변경, 실제 결제/환불. 실행하지 않음.
-- PARTIAL: 운영 DB 새 패키지 NOT_APPLIED. 기존 DB read와 대상 식별만 완료. Owner 설치 방식 확인 대기.
-- PARTIAL: WEB/Worker 새 버전 NOT_DEPLOYED. 기능 의존 DB 미설치 상태의 불완전 UI를 운영에 덮어쓰지 않는다.
+- DONE: 승인 SQL 원문 해시 대조 후 운영 migration `20261120112811` 설치. 신규 RPC3개 및 private 테이블2개만 설치; 기존 함수·권한 정의 동일.
+- DONE: WEB Pages `e84b1232-4991-49ef-81e0-32cdefc137ec` canonical success, Worker version `9ac3b91c-dad4-4f2e-bc92-3428a2c8720e` 100%.
 - 준비 기준 Pages: `969afe59-8bf4-4940-b0a9-d32b2ac9a9ba`, source `d559b9b58ef6b419b500e3f7a5333b65d9849230`. 현재 Finance Automatic/Toss LIVE 설정 보존 대상. 새 공개 경로는 `/api/admin/essay-run` 하나.
 - 운영 Worker는 로컬보다 최신 prompt/모듈을 포함한다. 전체 재빌드 교체 금지. 현재74모듈 중 entry의 관리자 어댑터만 패치하고 helper1개 추가하는 방식으로 나머지 모듈을 바이트 보존한다. [패치 준비 도구](../tool/cloudflare_essay/admin_run_patch.py)는 기존 fetch 메서드 drift 시 중단한다.
 
-## 재개 순서
+## 운영 설치·배포 검증 — 2026-11-20 20:38 KST
 
-1. Owner가 새 DB 기능만 설치하도록 Codex 승인 또는 직접 install/postcheck 결과 전달.
-2. 읽기로 설치/ACL/기존 요청·원장 불변 검증.
-3. 현재 운영 모듈 보존 Worker adapter + WEB 관리자 경로 한정 배포, 기존 학생 자산·Finance/Toss 설정 전후 대조.
-4. 실제 관리자 UI에서 기간4종/상태확인/disabled 사유/확인창을 검증. 기존 요청 mutation은 Owner 별도 승인 전 금지.
-5. 별도 승인된 합성 데이터가 없다면 운영 삭제/재진행 E2E는 NOT TESTED로 남기고 격리 검증과 구분.
+- 프로젝트: LegendStudy `stlhijzpjfgwwdgunlsd` (ACTIVE_HEALTHY), 타 프로젝트 접근/설치 없음.
+- install SHA-256 `7f6223a781cd464b15d6a98b3d32beabe8ab984b7edfc884cfc8241f4998eeba`; 승인 c5a9aa1f 원문과 동일. MCP apply_migration 성공, 원격 version `20261120112811`. [로컬 추적 migration](../supabase/migrations/20261120112811_admin_run_management_20261120.sql)은 CLI 생성 후 실제 원격 version에 맞춰 이름 동기화, 설치문과 바이트 동일. 재실행하지 않는다.
+- RPC3개 authenticated EXECUTE만 허용; 기존 require_admin/account 검사 유지. anon/service_role/essay_worker 거부. private 테이블2개 FORCE RLS, 일반 역할 직접권한 없음. 기존 public/essay 관련 함수 정의+ACL digest 동일.
+- 읽기 전용 트랜잭션에서 실제 admin_users identity로 capability/stats 성공. 기존 nonadmin identity의 authenticated 요청 문맥으로 capability/manage 각각 `42501 ADMIN_REQUIRED`. 일반 회원의 실제 로그인 브라우저 E2E는 NOT TESTED; 서버 role 검증과 구분한다.
+- 운영 HTTP `/api/admin/essay-run`: 인증 없음401 LOGIN_REQUIRED, 위조 토큰403 ACCESS_DENIED. 존재하지 않는 run ID 사용; 관리자 mutation API 호출0.
+- 보안 advisor 신규5건: private2테이블의 no-policy INFO는 직접 접근 차단을 위한 의도적 deny-all, public3 SECURITY DEFINER RPC는 require_admin으로 제한하는 의도된 진입점이다. 별도 권한 확장 없음. [RLS 설명](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy), [SECURITY DEFINER 점검](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable). 기존 advisor 경고는 이번 범위에서 변경하지 않았다.
+- WEB source `1f34580706c5ff254170ba9d4a1822ba21424052`, 관리자3경로 15파일+새 hash assets만 반영. 기존 비대상3,088파일 바이트 해시 동일. 기존 API route 보존 + 관리자 POST1개. Finance Automatic=true / PAYMENT_MODE=LIVE 및 전체 Pages deployment_configs 동일.
+- Worker deployment `7e9d20c0-12cd-4a65-a612-fac071fcfc16`, version `9ac3b91c-dad4-4f2e-bc92-3428a2c8720e` 100%. entry fetch 어댑터+helper만 반영, 기존73모듈 바이트 동일, 총75모듈. bindings14·secret 이름·compatibility·limits·실행 설정 동일. version upload로 추가된 commit/message annotation만 메타데이터 차이.
+- 실제 관리자 Chrome `/admin/`, `/admin/lab-dashboard/`, `/admin/essay-runs/` 읽기 PASS. 오늘 1/1/0/1, 최근7일 2/2/0/4, 최근30일 56/45/10/39 (순서 요청/현재완료/현재실패/재시도사건). 직접11/20~11/20도 오늘과 일치. 기간 미완성에도 live1/1/0 유지. KST 경계는 기존 단위검사+UI 표시 검증.
+- 지정 e7af7e52 요청: 실사용 보호/원장1건/중단 상태/재진행 버튼 표시, 삭제 disabled 및 미검증 이유 표시. 재진행 확인창의 대학·시험·UUID·reserved1/ledger1 확인; 승인/실행하지 않음. completed 요청 재진행·삭제 disabled, 보관 enabled 확인. 삭제 확인창/성공 mutation/보관 실행은 운영 미검증.
+- 지정 요청은 **작업 시작 전부터 hidden=true**였다. 이번 작업에서 보관/복원하지 않았다. run_actions0, verified_test_runs0, retry1, reserved1 및 snapshot/checkpoint 유지.
+- [설치 전](evidence/admin-run-before-20261120.json) / [배포 후](evidence/admin-run-after-20261120.json): 13개 테이블 건수·전체 행 해시 모두 동일. 주문/결제이벤트/이용권계정·grant·ledger/판단/run·snapshot/checkpoint·평가/retry/hidden/Finance 설정·감사 포함. 신규 작업 감사0. 비교 시각20:25:37→20:37:08 KST.
+- [WEB 배포 영수증](evidence/admin-web-deployment-20261120.json), [Worker 영수증](evidence/admin-worker-deployment-20261120.json). 실제 결제/환불·Provider 호출·학생 데이터 변경0.
+
+## 남은 승인 및 복구
+
+승인된 설치/배포는 완료했다. 실제 기존 요청 재진행/삭제/보관과 검증 테스트 등록·운영 mutation E2E는 별도 Owner 승인 필요. 특히 e7af7e52는 원장 연결로 영구 삭제 불허; 테스트로 추정하지 않는다. 확정 종료 failed 요청의 새 유료 실행 정책은 이번 기능에 포함하지 않는다.
+
+문제 발생 시 신규 RPC는 [rollback.sql](../supabase/candidates/admin_run_management_20261120/rollback.sql)로 닫고 WEB `969afe59-8bf4-4940-b0a9-d32b2ac9a9ba`, Worker `27c67e48-5526-46a6-a7e8-1aab3218016e`로 복원 가능. 복원은 실행하지 않았다. 감사/원장 삭제 금지.
