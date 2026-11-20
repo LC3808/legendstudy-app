@@ -8,6 +8,7 @@ async def retry_admin_run(payload, token, rpc_as_caller, admission, enqueue):
     # Both RPCs use the original admin JWT, never the Worker credential.
     caps = await rpc_as_caller('admin_lab_run_capabilities', {'p_run': run}, token)
     require(caps.get('version') == 'admin-run-management-v1', 'ADMIN_CONTRACT_REQUIRED')
+    require(caps.get('hidden') is not True, 'RUN_ARCHIVED')
     ready = await admission(caps['subject_id'], caps['exam_id'])
     require(ready.get('ready') is True and ready.get('session_version') == 'exam-session-v1', 'ADMIN_CONTRACT_REQUIRED')
     result = await rpc_as_caller('admin_lab_manage_run', {'p_run': run, 'p_action': 'retry', 'p_key': key}, token)

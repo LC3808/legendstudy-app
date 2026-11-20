@@ -40,7 +40,9 @@ class CloudflareExamRuntime:
         subject=str(UUID(message['subject_id']));run=str(UUID(message['run_id']))
         require(subject in self.allowed or bool(self.public_exams),'ACCESS_DENIED')
         claim=await self.rpc('essay_exam_session_claim',dict(p_subject=subject,p_run=run,p_dispatch=str(uuid5(NS,'dispatch/'+subject+'/'+run))))
-        if claim['state'] in ('completed','failed'):return claim['state']
+        # The owner-checked claim is authoritative. Archived queue messages are
+        # terminal deliveries: no Provider, checkpoint, continuation or retry.
+        if claim['state'] in ('completed','failed','archived'):return claim['state']
         require(subject in self.allowed or claim.get('exam_id') in self.public_exams,'EXAM_ACCESS_DENIED')
         require(claim['subject_id']==subject and claim['snapshot']['ownerId']==subject,'EXAM_ACCESS_DENIED')
         require(claim.get('session_version')=='exam-session-v1','EXAM_SESSION_CONTRACT_REQUIRED')

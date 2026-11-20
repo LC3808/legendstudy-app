@@ -118,7 +118,7 @@ class Default(WorkerEntrypoint):
                         raw=await fetch_bytes(t.origin+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+caller,'Content-Type':'application/json'},json.dumps(args))
                         return json.loads(raw)
                     except HTTPError as error:
-                        allowed={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED'}
+                        allowed={'RUN_ARCHIVED','ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED'}
                         try: code=json.loads(error.read(4096)).get('message')
                         except Exception: code=None
                         raise Unknown(code if code in allowed else 'ADMIN_REQUEST_REJECTED') from None
@@ -156,6 +156,10 @@ class Default(WorkerEntrypoint):
                 return Response.json(await self.admission(t,subject,payload['exam_id']),headers=headers)
             require(path=='/exam-evaluate' and set(payload)=={'run_id'},'INVALID_REQUEST')
             require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
+            # Read-only owner/lifecycle guard blocks old clients before enqueue.
+            # The atomic consumer claim closes any later archive race.
+            guard=await t.rpc('essay_exam_dispatch_guard',dict(p_subject=subject,p_run=str(UUID(payload['run_id']))))
+            require(guard.get('state')!='archived','RUN_ARCHIVED')
             # Identity-only message. Consumer independently verifies owner/lifecycle/lease.
             # Native binding is a JS proxy: use its positional API. The default
             # structured-clone encoding preserves this JSON string on delivery.
@@ -165,6 +169,7 @@ class Default(WorkerEntrypoint):
             code=str(error)
             safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else type(error).__name__
             print('ESSAY_REQUEST_FAILURE '+safe)
+            if safe=='RUN_ARCHIVED':return Response.json({'code':safe},status=409,headers=headers)
             admin_codes={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED'}
             if locals().get('path')=='/admin-exam-retry' and safe in admin_codes:return Response.json({'code':safe},status=403 if safe in ('ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED') else 409,headers=headers)
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
@@ -191,4 +196,16 @@ class Default(WorkerEntrypoint):
             except Exception as error:
                 # Symbolic class only: messages/tracebacks may contain credentials.
                 print('ESSAY_QUEUE_ERROR '+type(error).__name__)
+                # An archive racing a checkpoint fence must not become an
+                # automatic retry. ACK only an owner-checked archived response;
+                # unavailable/denied/other states retain the existing retry.
+                try:
+                    identity=json.loads(message.body)
+                    require(type(identity) is dict and set(identity)=={'subject_id','run_id'},'INVALID_JOB')
+                    guard=await self.transport().rpc('essay_exam_dispatch_guard',dict(p_subject=str(UUID(identity['subject_id'])),p_run=str(UUID(identity['run_id']))))
+                    if guard.get('state')=='archived':
+                        message.ack()
+                        continue
+                except Exception:
+                    pass
                 message.retry() # DB intent prevents repeated Provider call.
