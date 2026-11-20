@@ -1,9 +1,24 @@
 # Admissions D-Day — Owner approval package
 
-**NOT APPLIED.** Target: LegendStudy Supabase `stlhijzpjfgwwdgunlsd` only.
+**APPLIED — 2026-11-20, Owner-approved.** Target: LegendStudy Supabase `stlhijzpjfgwwdgunlsd` only.
 Canonical policy, source review and implementation: [Wiki](../../../wiki/admissions-dday-implementation-20261120.md).
 
-Prepared order (do not run on Production before Owner approval):
+Production migration `20261120124053_admissions_dday_20261120` installed the exact
+tested `install.sql` (SHA256 `f56ac57b9644d9487a25d49ed71c3ffa80b90df5b9ccde50fcf91a1f5d482e11`).
+Seed15 (10 verified/published, 5 pending) and separately approved initial activation
+completed: 8 applications matched, 12 generated targets, zero duplicates.
+Original 63-table counts/full-row hashes, manual142, application14/history30 and
+Finance role/ACL/RPC contracts remained unchanged. Read-only real-role checks
+allowed the existing admin and denied ordinary-member/anonymous admin access.
+[Secret-free Production receipt](../../../wiki/evidence/admissions-dday-production-20261120.json).
+
+The local migration file uses the exact remote-applied version. CLI initially
+created a `20261120124459` empty placeholder; it was renamed to `20261120124053`
+and filled with the byte-identical installed SQL, so no duplicate pending
+migration remains. Seed/activation are separately recorded operational data
+steps, not silently replayed by the schema migration.
+
+Reviewed execution order (completed under this Owner approval; do not blindly rerun the installer):
 
 1. `preflight.sql` — read only; save receipt. Stop if names collide or exact existing `my_application_save` MD5 differs.
 2. `install.sql` — transaction, additive tables/RPC/triggers plus one shared catalog lock before the existing save owner lock. Captured current duplicate prevention remains intact. No existing personal row writes on installation.

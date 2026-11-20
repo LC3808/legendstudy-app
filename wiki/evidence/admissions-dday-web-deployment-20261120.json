@@ -1,0 +1,71 @@
+{
+  "sha": "76e24b44266f5d4156952b11ad28845a5f4bb5bc",
+  "baseline": "e84b1232-4991-49ef-81e0-32cdefc137ec",
+  "scope": [
+    "/admin/ root",
+    "/admin/admission-schedules/",
+    "/account/ root"
+  ],
+  "changedPages": [
+    "/account/__next._full.txt",
+    "/account/__next._tree.txt",
+    "/account/__next.account.__PAGE__.txt",
+    "/account/index.html",
+    "/account/index.txt",
+    "/admin/__next._full.txt",
+    "/admin/__next._tree.txt",
+    "/admin/__next.admin.__PAGE__.txt",
+    "/admin/admission-schedules/__next._full.txt",
+    "/admin/admission-schedules/__next._tree.txt",
+    "/admin/admission-schedules/__next.admin.admission-schedules.__PAGE__.txt",
+    "/admin/admission-schedules/index.html",
+    "/admin/admission-schedules/index.txt",
+    "/admin/index.html",
+    "/admin/index.txt"
+  ],
+  "addedAssets": 25,
+  "preservedPaths": 3107,
+  "workerSha256": "a753222551b0ce9a46e98733d002077bdfbff3311c462fc5e5508ec26cb55413",
+  "runtimeChanges": 0,
+  "settingsChanges": 0,
+  "deployment": "624664a1-c22b-49a3-9c47-9d656dd95449",
+  "verifiedAt": "2026-11-20T12:45:05.033Z",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-20T12:44:46.898385Z",
+    "status": "success"
+  },
+  "canonical": true,
+  "settingsUnchanged": true,
+  "sourceConfigurationUnchanged": true,
+  "functionRoutingUnchanged": true,
+  "functionBindingsUnchanged": true,
+  "existingUnrelatedFilesUnchanged": true,
+  "preservedExistingFiles": 3107,
+  "liveMode": "LIVE",
+  "financeAutomatic": "true",
+  "browserVerification": {
+    "adminAuthorizedSession": "PASS",
+    "adminSchedules": 15,
+    "verifiedPublished": 10,
+    "pendingPrivate": 5,
+    "adminRootNavigation": "PASS",
+    "existingScheduleReadOnlyEditor": "PASS",
+    "identityFieldsDisabled": true,
+    "myOwnerEmptyState": "PASS",
+    "myOwnerApplicationCount": 0,
+    "myOwnerScheduleCount": 0,
+    "narrowViewportCssWidth": 433,
+    "narrowViewportScrollWidth": 433,
+    "temporaryViewportReset": true,
+    "normalMemberBrowser": "NOT_TESTED_NO_AUTHORIZED_SESSION",
+    "normalMemberServerAuthorization": "Verified separately by DB postflight",
+    "productionMutationActions": 0,
+    "screenshots": [
+      "admin-live.jpg",
+      "admin-list-live.jpg",
+      "my-live-mobile.jpg"
+    ]
+  }
+}

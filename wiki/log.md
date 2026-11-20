@@ -1,3 +1,7 @@
+## 2026-11-20 — D-Day 운영 설치·WEB 배포
+
+Owner 승인 migration20261120124053/공식15(공개10·PENDING5), 지원8건→자동12개·중복0. 기존63테이블·수동142 보존/운영권한 PASS. WEB624664a1 배포·관리자15건/MY빈상태 확인, 타학생카드 브라우저 미검증. APP출시 제외. [증거·검증경계](admissions-dday-implementation-20261120.md).
+
 ## 2026-11-20 — 수시 지원 D-Day 구현·운영 승인 패키지
 
 DB5테이블/RPC·기존 저장 함수 잠금 보완, WEB 관리자·MY, Flutter 기존 Home/관리 sheet 구현. 실제14건 read-only 예측은 지원8건→논술4+발표8; 불확실5연결 비노출. PostgreSQL46/Flutter59/WEB2210 PASS(5 SKIP), 삭제 우회·동시 신규등록 누락 보완. 운영 설치/seed/개인 연동·WEB배포 승인 대기, 운영쓰기0. [구조·검증·SQL·APP릴리스 경계](admissions-dday-implementation-20261120.md).
