@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+논술 LAB 안정성 / Provider timeout·재시도·중복 비용·중단 요청: [11/22 운영 분석·최소 패치·검증](essay-lab-stability-20261122.md).
+
 관리자 보관 / archived / 활성 KPI·Worker 실행 제외: [11/20 수정·배포·대상 정리](admin-archived-run-operations-20261120.md).
 
 수시 지원 일정 → D-Day / 자동 등록·삭제·복원 / admissions schedule sync: [11/20 구현·DB 승인 패키지·검증](admissions-dday-implementation-20261120.md) → [기존14건 조사·보존 검토](admissions-dday-linkage-research-20261120.md). Owner 승인 운영 DB 적용·WEB 단계 배포. [Home 일정](home-personalization-and-events.md)과 [지원 기반](my-shared-foundation.md)을 함께 읽는다.

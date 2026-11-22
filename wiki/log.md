@@ -1,3 +1,7 @@
+## 2026-11-22 — 논술 LAB 운영 안정성 P0
+
+최근9요청/재시도12 read-only 분석: 품질검증 거절8+정확인용4, 6요청 모두완료. 무료재첨삭1건 응답불확정·복구차단. Worker111/WEB15/Finance226/로컬DB18 PASS, Worker bdee88d0·Pages c5348617 운영반영·실제3화면 확인. 기존9요청/checkpoint242/원장14/RPC15 해시보존, LIVE/Automatic 유지, 실학생action0. [상세·비용한계·검증·남은승인](essay-lab-stability-20261122.md).
+
 ## 2026-11-20 — 관리자 보관 활성 집계·실행 제외
 
 DB20/WEB2215+관련21/Worker15+실운영patch8 PASS. migration130743·Worker5095226c·Pages842dccfe 반영, 기존63테이블·답안·원장 보존. 대상은restore이력/hiddenfalse라KPI1/1/0 정상, 재보관0·예약1유지. [처리방법·검증경계](admin-archived-run-operations-20261120.md).

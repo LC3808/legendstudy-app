@@ -8,6 +8,8 @@ from tool.essay_lab.cloudflare_http import provider_transport
 from tool.essay_lab.cloudflare_runtime import receipt_checkpoint_key
 from tool.essay_lab.live_worker import OpenAIResponses, Unknown, ProviderFailure, execution_failure
 from tool.essay_lab.transport_diagnostics import attach_transport_diagnostic, validate_transport_diagnostic
+from tool import test_essay_reviewed_runtime as runtime_fixture
+from tool import test_essay_session_retry as session_fixture
 
 
 class TransportDiagnosticTests(unittest.IsolatedAsyncioTestCase):
@@ -68,6 +70,35 @@ class TransportDiagnosticTests(unittest.IsolatedAsyncioTestCase):
                 self.assertEqual(value['transport']['kind'],'http_status')
                 self.assertEqual(receipt_checkpoint_key(value),'execution-failure')
                 self.assertEqual(events.count('fetch'),1)
+
+    async def test_failure_receipt_save_error_restart_never_redispatches_or_settles(self):
+        journal=session_fixture.Journal();settled=[];receipts=[]
+        original=runtime_fixture.RuntimeTests.fixture
+
+        def fixture(test,mode='ok'):
+            result=original(test,mode)
+            def fail_receipt(value):
+                receipts.append(value)
+                raise Unknown('SYNTHETIC_DB_SAVE_FAILED')
+            result[0].receipt_sink=fail_receipt
+            return result
+
+        with patch.object(runtime_fixture.RuntimeTests,'fixture',fixture):
+            run,requests=session_fixture.SessionRetryTests().prepare(['timeout'],journal,{},settled)
+            with self.assertRaisesRegex(Unknown,'SYNTHETIC_DB_SAVE_FAILED'):
+                await run()
+        self.assertEqual(len(requests[0]),1)
+        self.assertEqual(receipts[0]['component'],'execution_failure')
+        self.assertEqual(journal.rows['q0']['state'],'pending')
+        self.assertEqual(settled,[])
+
+        # A new worker cannot infer whether the prior Provider call completed.
+        # It must keep that intent and reservation rather than regenerate/refund.
+        run,replayed=session_fixture.SessionRetryTests().prepare(['ok'],journal,{},settled)
+        self.assertEqual(await run(),'reconciling')
+        self.assertEqual(len(replayed[0]),0)
+        self.assertEqual(journal.rows['q0']['state'],'pending')
+        self.assertEqual(settled,[])
 
     def test_canonical_receipt_rejects_unbounded_data_and_preserves_existing_usage(self):
         diagnostic=dict(kind='network',phase='request',elapsed_ms=10,deadline_ms=75000,http_status=None)

@@ -1,0 +1,550 @@
+{
+  "scope": "READ_ONLY_SUPABASE_HTTP_AND_POSTGRES_LOG_AGGREGATES",
+  "period": "KST 2026-11-16 00:00 through screenshot 2026-11-22 15:04:40",
+  "limits": "HTTP requests are not unique Provider calls. PostgreSQL errors include other services and administrative probes; no request bodies, student answers, credentials, or emails collected.",
+  "edge": [
+    {
+      "start": "2026-11-15T15:00:00Z",
+      "end": "2026-11-16T15:00:00Z",
+      "result": [
+        {
+          "calls": 6,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 136,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 43,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        },
+        {
+          "calls": 1318,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 7,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_registered_questions",
+          "status": "200"
+        },
+        {
+          "calls": 7,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-16T15:00:00Z",
+      "end": "2026-11-17T15:00:00Z",
+      "result": [
+        {
+          "calls": 21,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 160,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 36,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        },
+        {
+          "calls": 1502,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 11,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_material_runtime_package",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_registered_questions",
+          "status": "200"
+        },
+        {
+          "calls": 11,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-17T15:00:00Z",
+      "end": "2026-11-18T15:00:00Z",
+      "result": [
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 21,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 1,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-18T15:00:00Z",
+      "end": "2026-11-19T15:00:00Z",
+      "result": [
+        {
+          "calls": 16,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 81,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 834,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 6,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_material_runtime_package",
+          "status": "200"
+        },
+        {
+          "calls": 6,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-19T15:00:00Z",
+      "end": "2026-11-20T15:00:00Z",
+      "result": [
+        {
+          "calls": 5,
+          "path": "/rest/v1/rpc/essay_beta_daily_claim_v2",
+          "status": "200"
+        },
+        {
+          "calls": 71,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 481,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_dispatch_guard",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_finish",
+          "status": "200"
+        },
+        {
+          "calls": 235,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        },
+        {
+          "calls": 3603,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_quote_source",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_retry",
+          "status": "200"
+        },
+        {
+          "calls": 144,
+          "path": "/rest/v1/rpc/essay_exam_session_checkpoint",
+          "status": "200"
+        },
+        {
+          "calls": 5,
+          "path": "/rest/v1/rpc/essay_exam_session_claim",
+          "status": "200"
+        },
+        {
+          "calls": 38,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 26,
+          "path": "/rest/v1/rpc/essay_exam_session_status",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_submit_source",
+          "status": "200"
+        },
+        {
+          "calls": 24,
+          "path": "/rest/v1/rpc/essay_material_runtime_package",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_open_session",
+          "status": "422"
+        },
+        {
+          "calls": 27,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-20T15:00:00Z",
+      "end": "2026-11-21T15:00:00Z",
+      "result": [
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_beta_daily_claim_v2",
+          "status": "200"
+        },
+        {
+          "calls": 52,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 257,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_exam_dispatch_guard",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_finish",
+          "status": "200"
+        },
+        {
+          "calls": 356,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 15,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        },
+        {
+          "calls": 43,
+          "path": "/rest/v1/rpc/essay_exam_observation",
+          "status": "200"
+        },
+        {
+          "calls": 1884,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_question_result",
+          "status": "200"
+        },
+        {
+          "calls": 3,
+          "path": "/rest/v1/rpc/essay_exam_quote_source",
+          "status": "200"
+        },
+        {
+          "calls": 1,
+          "path": "/rest/v1/rpc/essay_exam_retry",
+          "status": "200"
+        },
+        {
+          "calls": 147,
+          "path": "/rest/v1/rpc/essay_exam_session_checkpoint",
+          "status": "200"
+        },
+        {
+          "calls": 6,
+          "path": "/rest/v1/rpc/essay_exam_session_claim",
+          "status": "200"
+        },
+        {
+          "calls": 38,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_exam_session_status",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_submit_source",
+          "status": "200"
+        },
+        {
+          "calls": 31,
+          "path": "/rest/v1/rpc/essay_material_runtime_package",
+          "status": "200"
+        },
+        {
+          "calls": 14,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-21T15:00:00Z",
+      "end": "2026-11-22T06:04:40Z",
+      "result": [
+        {
+          "calls": 7,
+          "path": "/rest/v1/rpc/essay_beta_daily_claim_v2",
+          "status": "200"
+        },
+        {
+          "calls": 35,
+          "path": "/rest/v1/rpc/essay_beta_daily_status_v2",
+          "status": "200"
+        },
+        {
+          "calls": 98,
+          "path": "/rest/v1/rpc/essay_browse_catalog",
+          "status": "200"
+        },
+        {
+          "calls": 14,
+          "path": "/rest/v1/rpc/essay_exam_dispatch_guard",
+          "status": "200"
+        },
+        {
+          "calls": 4,
+          "path": "/rest/v1/rpc/essay_exam_finish",
+          "status": "200"
+        },
+        {
+          "calls": 561,
+          "path": "/rest/v1/rpc/essay_exam_history",
+          "status": "200"
+        },
+        {
+          "calls": 8,
+          "path": "/rest/v1/rpc/essay_exam_history_page",
+          "status": "404"
+        },
+        {
+          "calls": 121,
+          "path": "/rest/v1/rpc/essay_exam_observation",
+          "status": "200"
+        },
+        {
+          "calls": 570,
+          "path": "/rest/v1/rpc/essay_exam_preflight",
+          "status": "200"
+        },
+        {
+          "calls": 2,
+          "path": "/rest/v1/rpc/essay_exam_question_result",
+          "status": "200"
+        },
+        {
+          "calls": 5,
+          "path": "/rest/v1/rpc/essay_exam_quote_source",
+          "status": "200"
+        },
+        {
+          "calls": 9,
+          "path": "/rest/v1/rpc/essay_exam_retry",
+          "status": "200"
+        },
+        {
+          "calls": 462,
+          "path": "/rest/v1/rpc/essay_exam_session_checkpoint",
+          "status": "200"
+        },
+        {
+          "calls": 23,
+          "path": "/rest/v1/rpc/essay_exam_session_claim",
+          "status": "200"
+        },
+        {
+          "calls": 35,
+          "path": "/rest/v1/rpc/essay_exam_session_ready",
+          "status": "200"
+        },
+        {
+          "calls": 260,
+          "path": "/rest/v1/rpc/essay_exam_session_status",
+          "status": "200"
+        },
+        {
+          "calls": 5,
+          "path": "/rest/v1/rpc/essay_exam_submit_source",
+          "status": "200"
+        },
+        {
+          "calls": 54,
+          "path": "/rest/v1/rpc/essay_material_runtime_package",
+          "status": "200"
+        },
+        {
+          "calls": 9,
+          "path": "/rest/v1/rpc/essay_web_runtime_status",
+          "status": "200"
+        }
+      ]
+    }
+  ],
+  "pg": [
+    {
+      "start": "2026-11-19T15:00:00Z",
+      "end": "2026-11-20T15:00:00Z",
+      "result": [
+        {
+          "essay_function": "",
+          "occurrences": 221,
+          "severity": "ERROR",
+          "sqlstate": "23514"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 78,
+          "severity": "ERROR",
+          "sqlstate": "PT404"
+        },
+        {
+          "essay_function": "essay_open_session",
+          "occurrences": 4,
+          "severity": "ERROR",
+          "sqlstate": "PT422"
+        },
+        {
+          "essay_function": "essay_ops_private",
+          "occurrences": 3,
+          "severity": "ERROR",
+          "sqlstate": "42501"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 2,
+          "severity": "ERROR",
+          "sqlstate": "42501"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 1,
+          "severity": "ERROR",
+          "sqlstate": "42883"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-20T15:00:00Z",
+      "end": "2026-11-21T15:00:00Z",
+      "result": [
+        {
+          "essay_function": "",
+          "occurrences": 1440,
+          "severity": "ERROR",
+          "sqlstate": "23514"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 85,
+          "severity": "ERROR",
+          "sqlstate": "PT404"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 2,
+          "severity": "ERROR",
+          "sqlstate": "42501"
+        }
+      ]
+    },
+    {
+      "start": "2026-11-21T15:00:00Z",
+      "end": "2026-11-22T06:04:40Z",
+      "result": [
+        {
+          "essay_function": "",
+          "occurrences": 995,
+          "severity": "ERROR",
+          "sqlstate": "23514"
+        },
+        {
+          "essay_function": "",
+          "occurrences": 57,
+          "severity": "ERROR",
+          "sqlstate": "PT404"
+        }
+      ]
+    }
+  ]
+}

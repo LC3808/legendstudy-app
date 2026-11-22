@@ -1,0 +1,2009 @@
+{
+  "schema_version": "essay-stability-read-only-audit-v1",
+  "project_id": "stlhijzpjfgwwdgunlsd",
+  "observed_at": "2026-11-22T06:12:11.1444+00:00",
+  "window": {
+    "from_inclusive": "2026-11-16T00:00:00+09:00",
+    "to_exclusive": "2026-11-23T00:00:00+09:00",
+    "timezone": "Asia/Seoul"
+  },
+  "methodology": {
+    "production_mode": "BEGIN READ ONLY; SELECT; ROLLBACK",
+    "mutations_executed": 0,
+    "excluded": [
+      "email",
+      "student uid",
+      "answer text",
+      "evaluation text",
+      "lease token",
+      "dispatch key",
+      "reviewer identifier",
+      "raw reason narratives"
+    ],
+    "logs_owned_by": "root agent; see essay-stability-20261122-logs.json",
+    "models": "generation receipts identify openai/gpt-5.6-sol; independent review receipts do not persist provider/model",
+    "receipt_time": "checkpoint table has no created_at/updated_at and calls view exposes called_at NULL",
+    "cost": "All 60 receipts have UNKNOWN monetary cost; no USD estimate produced",
+    "latency": "Summed response receipt latency is not wall-clock completion time or an invoice total",
+    "query_review": "One metadata query requesting reviewer identifier was blocked before execution. Safer schema/enum-only query succeeded; reviewer values not retrieved."
+  },
+  "dashboard": {
+    "operations": {
+      "live": {
+        "archived": 1,
+        "processing": 1,
+        "retry_pending": 0
+      },
+      "summary": {
+        "failed": 0,
+        "retries": 12,
+        "consumed": 7,
+        "refunded": 0,
+        "released": 0,
+        "requests": 9,
+        "reserved": 7,
+        "completed": 8,
+        "processing": 1,
+        "avg_seconds": 535.195205125,
+        "max_seconds": 2666.249979,
+        "p50_seconds": 192.493915,
+        "p90_seconds": 1110.8748479,
+        "p95_seconds": 1888.56241345,
+        "success_rate": 100,
+        "retry_pending": 0,
+        "recovery_pending": 0,
+        "reserved_current": 0,
+        "duplicate_suspected": 0
+      },
+      "cost_coverage": {
+        "unknown": 60,
+        "receipts": 60,
+        "input_tokens": 1114395,
+        "time_unknown": 60,
+        "output_tokens": 153581,
+        "known_subtotal_per_receipted_run_usd": null
+      }
+    },
+    "observed_at": "2026-11-22T06:12:11.1444+00:00",
+    "period_stats": {
+      "to": "2026-11-22T15:00:00+00:00",
+      "from": "2026-11-15T15:00:00+00:00",
+      "as_of": "2026-11-22T06:12:11.27605+00:00",
+      "summary": {
+        "failed": 0,
+        "retries": 12,
+        "requests": 9,
+        "completed": 8
+      },
+      "version": "admin-lab-operation-stats-v1"
+    },
+    "active_capabilities": {
+      "hidden": false,
+      "state": "reserved",
+      "active_lease": false,
+      "capability_confirmed_at": "2026-11-22T06:16:22.584174+00:00",
+      "retry_reason": "RECONCILIATION_REQUIRED",
+      "retry_allowed": false,
+      "archive_reason": "RECONCILIATION_REQUIRED",
+      "archive_allowed": false
+    }
+  },
+  "advisors": {
+    "security": {
+      "rls_enabled_no_policy:INFO": 1,
+      "extension_in_public:WARN": 1,
+      "anon_security_definer_function_executable:WARN": 1,
+      "authenticated_security_definer_function_executable:WARN": 1,
+      "auth_leaked_password_protection:WARN": 1
+    },
+    "performance": {
+      "unindexed_foreign_keys:INFO": 1,
+      "auth_rls_initplan:WARN": 1,
+      "no_primary_key:INFO": 1,
+      "unused_index:INFO": 1,
+      "multiple_permissive_policies:WARN": 1,
+      "auth_db_connections_absolute:INFO": 1
+    },
+    "health": {}
+  },
+  "retry_summary": {
+    "manual_retry_hard_limit": null,
+    "manual_retry_limit_status": "GAP: live RPC increments failed-question attempt and generation without an upper bound; queue delivery retry limit is a separate mechanism.",
+    "live_retry_function_md5": "b505a07b40ff3bbb9490705adf426164",
+    "retry_generation_constraint": "generation > 0; no upper bound",
+    "all_time_max_observed_generation": 15,
+    "events": 12,
+    "events_for_preperiod_runs": 0,
+    "affected_runs": 6,
+    "prior_failure_counts": {
+      "INDEPENDENT_REVIEW_NOT_ACCEPTED": 8,
+      "EXACT_QUOTE": 4
+    },
+    "all_nine_runs_generations_distinct_from_provider_stage_receipts": true
+  },
+  "receipt_usage": {
+    "by_stage_and_attempt": {
+      "initial:generation": {
+        "receipts": 20,
+        "input_tokens": 396383,
+        "output_tokens": 58318,
+        "summed_latency_seconds": 539.998
+      },
+      "initial:independent_review": {
+        "receipts": 19,
+        "input_tokens": 329911,
+        "output_tokens": 29552,
+        "summed_latency_seconds": 301.706
+      },
+      "retry:generation": {
+        "receipts": 12,
+        "input_tokens": 234505,
+        "output_tokens": 48508,
+        "summed_latency_seconds": 407.645
+      },
+      "retry:independent_review": {
+        "receipts": 9,
+        "input_tokens": 153596,
+        "output_tokens": 17203,
+        "summed_latency_seconds": 166.94799999999998
+      }
+    },
+    "initial": {
+      "receipts": 39,
+      "input_tokens": 726294,
+      "output_tokens": 87870,
+      "summed_latency_seconds": 841.704
+    },
+    "retry": {
+      "receipts": 21,
+      "input_tokens": 388101,
+      "output_tokens": 65711,
+      "summed_latency_seconds": 574.593
+    },
+    "total": {
+      "receipts": 60,
+      "input_tokens": 1114395,
+      "output_tokens": 153581,
+      "summed_latency_seconds": 1416.297
+    },
+    "unknown_provider_invocation": {
+      "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "question_index": 1,
+      "provider_call": "possible",
+      "receipt_present": false,
+      "excluded_from_receipt_totals": true
+    }
+  },
+  "active_request": {
+    "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+    "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+    "exam": "경희대학교 2027학년도 모의논술 사회계",
+    "created_at": "2026-11-21T16:31:23.877719+00:00",
+    "lease_until": "2026-11-21T16:46:26.375685+00:00",
+    "lease_active": false,
+    "state": "reserved",
+    "hidden": false,
+    "retry_count": 0,
+    "credits_required": 0,
+    "billing_status": "reserved",
+    "ledger_entries": 0,
+    "question_states": [
+      {
+        "key": "q0",
+        "state": "completed",
+        "output_json_type": "object"
+      },
+      {
+        "key": "q1",
+        "state": "reconciling",
+        "output_json_type": "null"
+      }
+    ],
+    "failure": {
+      "code": "PROVIDER_NETWORK_UNKNOWN",
+      "stage": "provider",
+      "http_status": null,
+      "provider_call": "possible",
+      "elapsed_recorded": false,
+      "response_id_recorded": false,
+      "failure_timestamp_recorded": false
+    },
+    "capabilities": {
+      "hidden": false,
+      "state": "reserved",
+      "active_lease": false,
+      "capability_confirmed_at": "2026-11-22T06:16:22.584174+00:00",
+      "retry_reason": "RECONCILIATION_REQUIRED",
+      "retry_allowed": false,
+      "archive_reason": "RECONCILIATION_REQUIRED",
+      "archive_allowed": false
+    },
+    "timeout_diagnosis": "NOT PROVEN: persisted code conflates network/timeout/body failures; checkpoint timestamps absent."
+  },
+  "archived_request": [
+    {
+      "state": "reserved",
+      "run_id": "e7af7e52-eba9-46c3-aba4-0961ea516b48",
+      "changed_at": "2026-11-20T13:17:16.600517+00:00"
+    }
+  ],
+  "runs": [
+    {
+      "exam": "2026학년도 성균관대학교 모의논술 언어형 ",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "exam_id": "37c78d49-42bd-5c3d-8f17-4e39da312a02",
+      "receipts": 8,
+      "parent_id": null,
+      "created_at": "2026-11-20T05:23:46.144219+00:00",
+      "university": "성균관대학교",
+      "retry_count": 1,
+      "answer_count": 3,
+      "completed_at": "2026-11-20T05:27:07.581536+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 201.437317,
+      "submission_index": 1,
+      "period_retry_count": 1,
+      "result_question_count": 3,
+      "integrity": {
+        "state": "completed",
+        "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 3
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q2-a0",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 6,
+          "input_tokens": 131802,
+          "output_tokens": 12481,
+          "summed_latency_seconds": 115.026
+        },
+        "retry": {
+          "receipts": 2,
+          "input_tokens": 48439,
+          "output_tokens": 4725,
+          "summed_latency_seconds": 39.916
+        }
+      }
+    },
+    {
+      "exam": "서강대학교 2026학년도 수시 논술 인문계열(경제경영)",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "exam_id": "aa9c471c-974a-5894-b46f-560a449844b3",
+      "receipts": 6,
+      "parent_id": null,
+      "created_at": "2026-11-20T13:19:09.276607+00:00",
+      "university": "서강대학교",
+      "retry_count": 1,
+      "answer_count": 2,
+      "completed_at": "2026-11-20T13:22:02.920727+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 173.64412,
+      "submission_index": 1,
+      "period_retry_count": 1,
+      "result_question_count": 2,
+      "integrity": {
+        "state": "completed",
+        "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 2
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q1-a0",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 4,
+          "input_tokens": 60344,
+          "output_tokens": 8520,
+          "summed_latency_seconds": 84.131
+        },
+        "retry": {
+          "receipts": 2,
+          "input_tokens": 32724,
+          "output_tokens": 4402,
+          "summed_latency_seconds": 43.49
+        }
+      }
+    },
+    {
+      "exam": "서강대학교 2026학년도 수시 논술 인문계열(경제경영)",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [],
+      "run_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "exam_id": "aa9c471c-974a-5894-b46f-560a449844b3",
+      "receipts": 4,
+      "parent_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "created_at": "2026-11-20T18:10:27.743235+00:00",
+      "university": "서강대학교",
+      "retry_count": 0,
+      "answer_count": 2,
+      "completed_at": "2026-11-20T18:12:07.913081+00:00",
+      "billing_reason": "included_revision",
+      "billing_status": "settled",
+      "credit_origins": [],
+      "credits_required": 0,
+      "duration_seconds": 100.169846,
+      "submission_index": 2,
+      "period_retry_count": 0,
+      "result_question_count": 2,
+      "integrity": {
+        "state": "completed",
+        "run_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 2
+      },
+      "diagnostics": [],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 4,
+          "input_tokens": 64998,
+          "output_tokens": 8415,
+          "summed_latency_seconds": 77.56
+        },
+        "retry": {
+          "receipts": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "summed_latency_seconds": 0
+        }
+      }
+    },
+    {
+      "exam": "2026학년도 한국외국어대학교 수시논술 인문계 T1",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "exam_id": "317249a5-ef36-5b30-b474-41b1d40efc57",
+      "receipts": 8,
+      "parent_id": null,
+      "created_at": "2026-11-21T07:44:50.301723+00:00",
+      "university": "한국외국어대학교",
+      "retry_count": 1,
+      "answer_count": 3,
+      "completed_at": "2026-11-21T07:51:47.519708+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 417.217985,
+      "submission_index": 1,
+      "period_retry_count": 1,
+      "result_question_count": 3,
+      "integrity": {
+        "state": "completed",
+        "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 3
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q0-a0",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 6,
+          "input_tokens": 132987,
+          "output_tokens": 13176,
+          "summed_latency_seconds": 126.946
+        },
+        "retry": {
+          "receipts": 2,
+          "input_tokens": 44664,
+          "output_tokens": 6257,
+          "summed_latency_seconds": 55.518
+        }
+      }
+    },
+    {
+      "exam": "경희대학교 2027학년도 모의논술 사회계",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+      "receipts": 10,
+      "parent_id": null,
+      "created_at": "2026-11-21T15:14:15.888862+00:00",
+      "university": "경희대학교",
+      "retry_count": 3,
+      "answer_count": 2,
+      "completed_at": "2026-11-21T15:21:40.174368+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 444.285506,
+      "submission_index": 1,
+      "period_retry_count": 3,
+      "result_question_count": 2,
+      "integrity": {
+        "state": "completed",
+        "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 2
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q0-a0",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q0-a1",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q0-a2",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 4,
+          "input_tokens": 59409,
+          "output_tokens": 11690,
+          "summed_latency_seconds": 136.432
+        },
+        "retry": {
+          "receipts": 6,
+          "input_tokens": 92793,
+          "output_tokens": 17866,
+          "summed_latency_seconds": 162.222
+        }
+      }
+    },
+    {
+      "exam": "경희대학교 2027학년도 모의논술 사회계",
+      "state": "reserved",
+      "hidden": false,
+      "ledger": [],
+      "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+      "receipts": 2,
+      "parent_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "created_at": "2026-11-21T16:31:23.877719+00:00",
+      "university": "경희대학교",
+      "retry_count": 0,
+      "answer_count": 2,
+      "completed_at": null,
+      "billing_reason": "included_revision",
+      "billing_status": "reserved",
+      "credit_origins": [],
+      "credits_required": 0,
+      "duration_seconds": null,
+      "submission_index": 2,
+      "period_retry_count": 0,
+      "result_question_count": null,
+      "integrity": {
+        "state": "reserved",
+        "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+        "final_checkpoint_count": 0,
+        "answer_result_ids_match": null,
+        "unique_result_questions": 0
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q1-a0",
+          "component": "execution_failure",
+          "code": "PROVIDER_NETWORK_UNKNOWN",
+          "stage": "provider",
+          "http_status": null,
+          "provider_call": "possible"
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 2,
+          "input_tokens": 31955,
+          "output_tokens": 5394,
+          "summed_latency_seconds": 47.062
+        },
+        "retry": {
+          "receipts": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "summed_latency_seconds": 0
+        }
+      }
+    },
+    {
+      "exam": "2025학년도 서강대학교 수시논술 인문계열(경제경영) ",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "exam_id": "66f70c38-7d06-5720-b5ce-e3e9fd46a458",
+      "receipts": 4,
+      "parent_id": null,
+      "created_at": "2026-11-21T17:38:05.982341+00:00",
+      "university": "서강대학교",
+      "retry_count": 0,
+      "answer_count": 2,
+      "completed_at": "2026-11-21T17:39:40.988716+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 95.006375,
+      "submission_index": 1,
+      "period_retry_count": 0,
+      "result_question_count": 2,
+      "integrity": {
+        "state": "completed",
+        "run_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 2
+      },
+      "diagnostics": [],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 4,
+          "input_tokens": 93777,
+          "output_tokens": 7558,
+          "summed_latency_seconds": 73.431
+        },
+        "retry": {
+          "receipts": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "summed_latency_seconds": 0
+        }
+      }
+    },
+    {
+      "exam": "서강대학교 2026학년도 수시 논술 인문계열(경제경영)",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "exam_id": "aa9c471c-974a-5894-b46f-560a449844b3",
+      "receipts": 6,
+      "parent_id": null,
+      "created_at": "2026-11-22T00:51:22.718756+00:00",
+      "university": "서강대학교",
+      "retry_count": 1,
+      "answer_count": 2,
+      "completed_at": "2026-11-22T00:54:26.269269+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 183.550513,
+      "submission_index": 1,
+      "period_retry_count": 1,
+      "result_question_count": 2,
+      "integrity": {
+        "state": "completed",
+        "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 2
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q1-a0",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 4,
+          "input_tokens": 59878,
+          "output_tokens": 8154,
+          "summed_latency_seconds": 76.635
+        },
+        "retry": {
+          "receipts": 2,
+          "input_tokens": 32540,
+          "output_tokens": 3577,
+          "summed_latency_seconds": 31.427
+        }
+      }
+    },
+    {
+      "exam": "2025학년도 한국외국어대학교 수시논술 인문계 T3",
+      "state": "completed",
+      "hidden": false,
+      "ledger": [
+        {
+          "entries": 1,
+          "balance_delta": -1,
+          "reserved_delta": -1,
+          "transaction_type": "consume"
+        },
+        {
+          "entries": 1,
+          "balance_delta": 0,
+          "reserved_delta": 1,
+          "transaction_type": "reserve"
+        }
+      ],
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "exam_id": "efd414a4-0848-595f-9c86-c07af151a46a",
+      "receipts": 12,
+      "parent_id": null,
+      "created_at": "2026-11-22T02:29:29.000669+00:00",
+      "university": "한국외국어대학교",
+      "retry_count": 5,
+      "answer_count": 3,
+      "completed_at": "2026-11-22T03:13:55.250648+00:00",
+      "billing_reason": "paid_cycle",
+      "billing_status": "settled",
+      "credit_origins": [
+        "signup_bonus"
+      ],
+      "credits_required": 1,
+      "duration_seconds": 2666.249979,
+      "submission_index": 1,
+      "period_retry_count": 5,
+      "result_question_count": 3,
+      "integrity": {
+        "state": "completed",
+        "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+        "final_checkpoint_count": 1,
+        "answer_result_ids_match": true,
+        "unique_result_questions": 3
+      },
+      "diagnostics": [
+        {
+          "question_attempt": "q1-a0",
+          "component": "validation_failure",
+          "code": "EXACT_QUOTE",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q1-a1",
+          "component": "validation_failure",
+          "code": "EXACT_QUOTE",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q1-a2",
+          "component": "validation_failure",
+          "code": "EXACT_QUOTE",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q1-a3",
+          "component": "validation_failure",
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        },
+        {
+          "question_attempt": "q1-a4",
+          "component": "validation_failure",
+          "code": "EXACT_QUOTE",
+          "stage": null,
+          "http_status": null,
+          "provider_call": null
+        }
+      ],
+      "receipt_usage": {
+        "initial": {
+          "receipts": 5,
+          "input_tokens": 91144,
+          "output_tokens": 12482,
+          "summed_latency_seconds": 104.481
+        },
+        "retry": {
+          "receipts": 7,
+          "input_tokens": 136941,
+          "output_tokens": 28884,
+          "summed_latency_seconds": 242.02
+        }
+      }
+    }
+  ],
+  "retry_events": [
+    {
+      "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "attempts": {
+        "2": 1
+      },
+      "created_at": "2026-11-20T05:26:15.362094+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-20T05:41:15.362094+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-20T05:23:46.144219+00:00",
+      "prior_failures": [
+        {
+          "question_index": 2,
+          "prior_attempt": 0,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "attempts": {
+        "1": 1
+      },
+      "created_at": "2026-11-20T13:21:07.846284+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-20T13:36:07.846284+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-20T13:19:09.276607+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 0,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "attempts": {
+        "0": 1
+      },
+      "created_at": "2026-11-21T07:50:38.569684+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-21T08:05:38.569685+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-21T07:44:50.301723+00:00",
+      "prior_failures": [
+        {
+          "question_index": 0,
+          "prior_attempt": 0,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "root_binding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "attempts": {
+        "0": 1
+      },
+      "created_at": "2026-11-21T15:17:24.030684+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-21T15:32:24.030684+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-21T15:14:15.888862+00:00",
+      "prior_failures": [
+        {
+          "question_index": 0,
+          "prior_attempt": 0,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "attempts": {
+        "0": 2
+      },
+      "created_at": "2026-11-21T15:18:48.567222+00:00",
+      "generation": 2,
+      "lease_until": "2026-11-21T15:33:48.567222+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-21T15:14:15.888862+00:00",
+      "prior_failures": [
+        {
+          "question_index": 0,
+          "prior_attempt": 1,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "attempts": {
+        "0": 3
+      },
+      "created_at": "2026-11-21T15:20:38.827832+00:00",
+      "generation": 3,
+      "lease_until": "2026-11-21T15:35:38.827832+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-21T15:14:15.888862+00:00",
+      "prior_failures": [
+        {
+          "question_index": 0,
+          "prior_attempt": 2,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding",
+            "root_binding",
+            "stance_preservation",
+            "no_content_clarity_confusion"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "attempts": {
+        "1": 1
+      },
+      "created_at": "2026-11-22T00:53:47.282981+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-22T01:08:47.282981+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T00:51:22.718756+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 0,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "attempts": {
+        "1": 1
+      },
+      "created_at": "2026-11-22T03:02:40.955603+00:00",
+      "generation": 1,
+      "lease_until": "2026-11-22T03:17:40.955603+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T02:29:29.000669+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 0,
+          "code": "EXACT_QUOTE",
+          "stage": "validation_failure",
+          "review_failed_checks": []
+        }
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "attempts": {
+        "1": 2
+      },
+      "created_at": "2026-11-22T03:03:52.50396+00:00",
+      "generation": 2,
+      "lease_until": "2026-11-22T03:18:52.50396+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T02:29:29.000669+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 1,
+          "code": "EXACT_QUOTE",
+          "stage": "validation_failure",
+          "review_failed_checks": []
+        }
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "attempts": {
+        "1": 3
+      },
+      "created_at": "2026-11-22T03:07:16.868634+00:00",
+      "generation": 3,
+      "lease_until": "2026-11-22T03:22:16.868634+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T02:29:29.000669+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 2,
+          "code": "EXACT_QUOTE",
+          "stage": "validation_failure",
+          "review_failed_checks": []
+        }
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "attempts": {
+        "1": 4
+      },
+      "created_at": "2026-11-22T03:09:14.718616+00:00",
+      "generation": 4,
+      "lease_until": "2026-11-22T03:24:14.718616+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T02:29:29.000669+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 3,
+          "code": "INDEPENDENT_REVIEW_NOT_ACCEPTED",
+          "stage": "validation_failure",
+          "review_failed_checks": [
+            "grounding",
+            "length_requirement"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "attempts": {
+        "1": 5
+      },
+      "created_at": "2026-11-22T03:12:42.496362+00:00",
+      "generation": 5,
+      "lease_until": "2026-11-22T03:27:42.496362+00:00",
+      "run_in_window": true,
+      "run_created_at": "2026-11-22T02:29:29.000669+00:00",
+      "prior_failures": [
+        {
+          "question_index": 1,
+          "prior_attempt": 4,
+          "code": "EXACT_QUOTE",
+          "stage": "validation_failure",
+          "review_failed_checks": []
+        }
+      ]
+    }
+  ],
+  "receipt_groups": [
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 16806,
+      "evaluation_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "output_tokens": 3429,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 27.371,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 27.371
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 15149,
+      "evaluation_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "output_tokens": 1965,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 19.691,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 19.691
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 32594,
+      "evaluation_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "output_tokens": 5172,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 24.747,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 47.547
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 17446,
+      "evaluation_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "output_tokens": 2278,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 18.817,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 18.817
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 27284,
+      "evaluation_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "output_tokens": 2982,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 14.752,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 29.088
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 15094,
+      "evaluation_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "output_tokens": 1299,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 12.61,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 12.61
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 3,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 70849,
+      "evaluation_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "output_tokens": 8740,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 36.716,
+      "unknown_cost_receipts": 3,
+      "missing_call_timestamp": 3,
+      "summed_receipt_seconds": 80.897
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 23719,
+      "evaluation_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "output_tokens": 4100,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 34.887,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 34.887
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 3,
+      "providers": [
+        null
+      ],
+      "input_tokens": 62138,
+      "evaluation_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "output_tokens": 4436,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 17.968,
+      "unknown_cost_receipts": 3,
+      "missing_call_timestamp": 3,
+      "summed_receipt_seconds": 46.049
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 20945,
+      "evaluation_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "output_tokens": 2157,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 20.631,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 20.631
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 3,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 58525,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 10166,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 36.639,
+      "unknown_cost_receipts": 3,
+      "missing_call_timestamp": 3,
+      "summed_receipt_seconds": 81.492
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 20161,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 5122,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 42.84,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 42.84
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 2,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 20161,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 4827,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 40.95,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 40.95
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 3,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 20161,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 5204,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 41.542,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 41.542
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 4,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 20418,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 4341,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 34.429,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 34.429
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 5,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 20161,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 4916,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 42.234,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 42.234
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 32619,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 2316,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 13.215,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 22.989
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 3,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 17887,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 2100,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 19.087,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 19.087
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 5,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 17992,
+      "evaluation_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "output_tokens": 2374,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 20.938,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 20.938
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 31672,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 7418,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 57.441,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 92.49
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 16306,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 4162,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 36.894,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 36.894
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 2,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 16301,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 4199,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 34.501,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 34.501
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 3,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 16717,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 3617,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 30.858,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 30.858
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 27737,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 4272,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 24.066,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 43.942
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 14481,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 1927,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 18.681,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 18.681
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 2,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 14643,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 2006,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 20.487,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 20.487
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 3,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 14345,
+      "evaluation_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "output_tokens": 1955,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 20.801,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 20.801
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 3,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 69831,
+      "evaluation_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "output_tokens": 7849,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 28.023,
+      "unknown_cost_receipts": 3,
+      "missing_call_timestamp": 3,
+      "summed_receipt_seconds": 70.317
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 25434,
+      "evaluation_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "output_tokens": 2920,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 22.63,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 22.63
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 3,
+      "providers": [
+        null
+      ],
+      "input_tokens": 61971,
+      "evaluation_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "output_tokens": 4632,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 16.494,
+      "unknown_cost_receipts": 3,
+      "missing_call_timestamp": 3,
+      "summed_receipt_seconds": 44.709
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 23005,
+      "evaluation_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "output_tokens": 1805,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 17.286,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 17.286
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 34619,
+      "evaluation_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "output_tokens": 4922,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 21.346,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 41.897
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 30379,
+      "evaluation_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "output_tokens": 3493,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 19.757,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 35.663
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 49052,
+      "evaluation_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "output_tokens": 5031,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 22.914,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 45.003
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 44725,
+      "evaluation_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "output_tokens": 2527,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 14.698,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 28.428
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 32435,
+      "evaluation_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "output_tokens": 5591,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 27.662,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 52.984
+    },
+    {
+      "stage": "generation",
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        "openai"
+      ],
+      "input_tokens": 17520,
+      "evaluation_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "output_tokens": 2822,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 27.063,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 27.063
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 0,
+      "receipts": 2,
+      "providers": [
+        null
+      ],
+      "input_tokens": 27909,
+      "evaluation_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "output_tokens": 2929,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 18.985,
+      "unknown_cost_receipts": 2,
+      "missing_call_timestamp": 2,
+      "summed_receipt_seconds": 31.147
+    },
+    {
+      "stage": "independent_review",
+      "models": [
+        null
+      ],
+      "attempt": 1,
+      "receipts": 1,
+      "providers": [
+        null
+      ],
+      "input_tokens": 15204,
+      "evaluation_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "output_tokens": 1580,
+      "documented_cost_usd": null,
+      "max_receipt_seconds": 16.427,
+      "unknown_cost_receipts": 1,
+      "missing_call_timestamp": 1,
+      "summed_receipt_seconds": 16.427
+    }
+  ],
+  "review_failure_checks": [
+    {
+      "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "question_attempt": "q1-a0",
+      "failed_checks": [
+        "grounding"
+      ]
+    },
+    {
+      "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "question_attempt": "q2-a0",
+      "failed_checks": [
+        "grounding"
+      ]
+    },
+    {
+      "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "question_attempt": "q1-a0",
+      "failed_checks": [
+        "grounding"
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "question_attempt": "q0-a0",
+      "failed_checks": [
+        "grounding"
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "question_attempt": "q0-a2",
+      "failed_checks": [
+        "grounding",
+        "root_binding",
+        "stance_preservation",
+        "no_content_clarity_confusion"
+      ]
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "question_attempt": "q0-a1",
+      "failed_checks": [
+        "grounding"
+      ]
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "question_attempt": "q1-a3",
+      "failed_checks": [
+        "grounding",
+        "length_requirement"
+      ]
+    },
+    {
+      "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "question_attempt": "q0-a0",
+      "failed_checks": [
+        "root_binding"
+      ]
+    }
+  ],
+  "result_integrity": [
+    {
+      "state": "completed",
+      "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 2
+    },
+    {
+      "state": "completed",
+      "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 3
+    },
+    {
+      "state": "completed",
+      "run_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 2
+    },
+    {
+      "state": "completed",
+      "run_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 2
+    },
+    {
+      "state": "completed",
+      "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 2
+    },
+    {
+      "state": "reserved",
+      "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "final_checkpoint_count": 0,
+      "answer_result_ids_match": null,
+      "unique_result_questions": 0
+    },
+    {
+      "state": "completed",
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 2
+    },
+    {
+      "state": "completed",
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 3
+    },
+    {
+      "state": "completed",
+      "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "final_checkpoint_count": 1,
+      "answer_result_ids_match": true,
+      "unique_result_questions": 3
+    }
+  ],
+  "invariant_snapshot": {
+    "completed_results": 8,
+    "completed_question_id_arrays_exact_match": 8,
+    "completed_single_final_checkpoints": 8,
+    "paid_cycle_runs": 7,
+    "paid_credit_origin": "signup_bonus",
+    "reserve_entries": 7,
+    "consume_entries": 7,
+    "duplicate_suspected": 0,
+    "release_entries": 0,
+    "refund_entries": 0,
+    "included_revision_runs": 2,
+    "included_revision_ledger_entries": 0,
+    "public_essay_exam_finish_md5": "b2ff3dce059d8a5d6b3652094c6a757a"
+  },
+  "limitations": [
+    "No Provider invoice/API response recovery was performed.",
+    "No real retry, finalization, archive, restore, refund, result, answer, grant or ledger write was executed.",
+    "Reconciling request may have a Provider invocation without a durable receipt; 60 is not an exact billable invocation count.",
+    "Retries after validation rejection are not automatically waste; weakening validation is not justified by counts alone.",
+    "Longest completed duration includes a 1991.955-second gap from run creation to first retry; DB cannot assign that gap to Provider work.",
+    "The operations success_rate is 100% only among completed+failed requests and excludes the one unresolved request."
+  ],
+  "deployment_preservation_evidence": "essay-stability-20261122-preservation.json"
+}

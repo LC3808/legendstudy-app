@@ -1,0 +1,388 @@
+{
+  "verified_at_utc": "2026-11-22T06:13:05.563876+00:00",
+  "scope": "Read-only stability audit; synthetic Provider transports and disposable local PostgreSQL only",
+  "production_mutations": 0,
+  "external_provider_calls": 0,
+  "real_payment_or_refund_calls": 0,
+  "runtime_baseline": {
+    "worker_version": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+    "source": "Cloudflare download supplied by runtime audit agent; non-vendor module bytes checked against module-inventory.json",
+    "deployed_runtime_test_result": {
+      "tests": 93,
+      "passed": 93,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "http_fault_probes": [
+      {
+        "input": 429,
+        "state": "failed",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_finalize_failure",
+        "saved_results": 0
+      },
+      {
+        "input": 500,
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      },
+      {
+        "input": 503,
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      },
+      {
+        "input": "timeout",
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      }
+    ],
+    "loaded_modules": [
+      {
+        "module": "tool.essay_lab.scaffolding_adapter",
+        "sha256": "1fa2281e924c0b4f5607bdf81115200a5bb0501606a0d3e963bf2bf7edfc523a"
+      },
+      {
+        "module": "tool.essay_lab.live_worker",
+        "sha256": "3124f460c19875c9254238eb91ffdb7bd33c7c6af602621dd44d765af63adf2a"
+      },
+      {
+        "module": "tool.essay_lab.positive_learning",
+        "sha256": "0ada013928c5f087979942e25ebb2f2ba2443a78bcf6bc3842886de0a21240c8"
+      },
+      {
+        "module": "tool.essay_lab.reviewed_runtime",
+        "sha256": "75854af107f1541aa949abfa4fe03c7aa914bdf1dd74ae2f16fdbcf070d64e68"
+      },
+      {
+        "module": "tool.essay_lab.exam_runtime",
+        "sha256": "beadba7873b379c118a66094e0d0fe8064546d0c28ea060f3b677b29fab30ba0"
+      },
+      {
+        "module": "tool.essay_lab.mixed_math_runtime",
+        "sha256": "04f924c7dfab7dad4bf2d58834a7b9b52f26fb8212aa578b8d3c81ece595d92c"
+      },
+      {
+        "module": "tool.essay_lab.async_exam",
+        "sha256": "3937504fe485c8dde016410249f369c535cc243d47e2496c9d9fdee6726f167e"
+      },
+      {
+        "module": "tool.essay_lab.durable_exam",
+        "sha256": "6e3ee4a51ff86dee05e66b01e169f19098f1c1b6b333da9b35e6e8b1235f9f46"
+      },
+      {
+        "module": "tool.essay_lab.durable_journal",
+        "sha256": "bd59cbc71fb39b3fb7df337af7c13bb279c91fe897d587f0e57c5e91de3b7ddb"
+      },
+      {
+        "module": "tool.essay_lab.evidence_preview",
+        "sha256": "32952f8dd7b4d39e035d37d8c37131ee4d346c6d3dbff9b2ed0bc1c1b2463e13"
+      },
+      {
+        "module": "tool.essay_lab.evidence_package",
+        "sha256": "af5fa5ca445d6cf0cf2f7314a56ad21cb704375df550b75738473fa9f563c57e"
+      },
+      {
+        "module": "tool.essay_lab.service_content",
+        "sha256": "ec38b416da383201d32adcdfb897999429c17a11e90fdee67d621e82bca5722f"
+      },
+      {
+        "module": "tool.essay_lab.runtime_host",
+        "sha256": "4b43c84ef0f151082a7d9756ed39a35543e49a2c001b20e51cc9258817e11de3"
+      },
+      {
+        "module": "tool.essay_lab.package_registry",
+        "sha256": "f9110c239f5d1356e484fe5e6f6f26a57a71ac361fe77b875d531ab3a18fd9b5"
+      },
+      {
+        "module": "tool.essay_lab.material_runtime",
+        "sha256": "a509f82294c3784844030245e015af4748849d66f3409df8ee6599dc8acf1055"
+      },
+      {
+        "module": "tool.essay_lab.runtime_effects",
+        "sha256": "820802144be7861e04f30738331766f7079f9d4483f888ae3fa86f60b53389a5"
+      }
+    ],
+    "test_clock_adjustment": "Only sync/async parity test monotonic clock fixed at1000; first run latency2ms vs0ms assertion flaked. Runtime files unchanged."
+  },
+  "repository_baseline_tests": {
+    "executed": 131,
+    "passed": 129,
+    "skipped": 2,
+    "skipped_reason": "Private C1 assets unavailable: test_only_attempt_identity_changes_request, test_production_timeout_not_changed",
+    "not_equivalent_to_deployed_bytes": true
+  },
+  "postgres_fault_tests": {
+    "checks": [
+      "empty_rollback_restores_legacy_functions",
+      "all_api_roles_denied",
+      "new_question_new_paid_round_preserves_original_and_rejects_free_expansion",
+      "owner_1_question_round_one_credit_duplicate_zero_free_rewrite_zero",
+      "owner_2_question_round_one_credit_duplicate_zero_free_rewrite_zero",
+      "owner_4_question_round_one_credit_duplicate_zero_free_rewrite_zero",
+      "eight_concurrent_retries_one_reservation",
+      "idempotency_conflict_and_cross_exam_no_posting",
+      "partial_result_no_charge_complete_exactly_one_credit",
+      "completed_history_immutable",
+      "free_reevaluation_once_failed_attempt_retry",
+      "independent_submissions_and_frozen_set_versions",
+      "insufficient_credit_and_idempotent_release",
+      "distinct_request_race_and_late_failure_transaction_rollback",
+      "expired_and_cross_account_reevaluation_denied",
+      "durable_runtime_lost_settlement_replay_no_new_provider_or_charge",
+      "durable_runtime_included_reevaluation_zero_additional_credit",
+      "nonempty_rollback_denied_legacy_functions_unchanged"
+    ],
+    "count": 18,
+    "productionWrites": 0,
+    "providerCalls": 0,
+    "localDatabase": "PostgreSQL 17, canonical legacy ledger migrations",
+    "deploymentReady": false
+  },
+  "scenarios": [
+    {
+      "id": "normal",
+      "local_status": "DONE",
+      "evidence": "SessionRetryTests.test_bounded_delivery_preserves_success_and_advances_without_rebilling; RuntimeTests.test_real_request_shape_existing_atomic_finalize",
+      "behavior_and_limits": "Synthetic complete results; one finalization record and exact replay; actual Provider acceptance NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "temporary_provider_failure",
+      "local_status": "DONE",
+      "evidence": "Deployed OpenAIResponses HTTP500/503 injected probes; SessionRetryTests.test_unknown_does_not_dispatch_again_or_finalize",
+      "behavior_and_limits": "Unknown becomes reconciling; repeated orchestration does not regenerate or settle. Automatic recovery/backoff is not implemented and is not claimed.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "timeout",
+      "local_status": "DONE",
+      "evidence": "SessionRetryTests.test_unknown_does_not_dispatch_again_or_finalize; deployed TimeoutError probe; MaterialExecutionTests.test_provider_timeout_stays_reconciling_without_settlement_or_retry",
+      "behavior_and_limits": "Mock timeout preserves ambiguous state/reservation and prevents a second Provider call. Real network timeout and in-flight Provider outcome NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "http_429",
+      "local_status": "DONE",
+      "evidence": "Deployed OpenAIResponses HTTP429 injected probe; SessionRetryTests.test_failure_preserves_success_and_only_failed_question_reexecutes",
+      "behavior_and_limits": "429 is a definitive failed question; explicit retry generation can rerun only that failed question. Real429 and Retry-After scheduling NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "worker_restart",
+      "local_status": "DONE",
+      "evidence": "DurableExamTests.test_completed_restart_reuses_children_summary_and_final_record; test_claim_marker_survives_process_loss_without_dispatch; SessionRetryTests.test_four_question_completion_and_lost_finish_replay",
+      "behavior_and_limits": "Local restart and pending/complete checkpoint replay covered. Actual Cloudflare process restart with live DB NOT TESTED; disk-journal tests are supporting legacy-host evidence.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "db_save_failure",
+      "local_status": "DONE",
+      "evidence": "ExamRuntimeTests.test_storage_failure_prevents_provider_and_no_implicit_refund; DurableExamTests.test_crash_after_review_checkpoint_recovers_child; PG distinct_request_race_and_late_failure_transaction_rollback",
+      "behavior_and_limits": "Before-dispatch write failure blocks call; reviewed checkpoint can replay; injected late DB error atomically rolls back ledger and decision. Full deployed RPC network interruption E2E NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "duplicate_retry",
+      "local_status": "DONE",
+      "evidence": "SessionRetryTests.test_failure_preserves_success_and_only_failed_question_reexecutes; DurableJournalTests.test_cross_process_claim_once_and_restart_pending_not_retried; PG eight_concurrent_retries_one_reservation",
+      "behavior_and_limits": "Concurrent logical reserve creates one reservation; duplicate orchestration reuses checkpoint. Native Cloudflare multi-consumer + production DB contention NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "duplicate_credit",
+      "local_status": "DONE",
+      "evidence": "PG partial_result_no_charge_complete_exactly_one_credit; durable_runtime_lost_settlement_replay_no_new_provider_or_charge; insufficient_credit_and_idempotent_release",
+      "behavior_and_limits": "Actual disposable PostgreSQL canonical ledger enforces one consume/release and no extra debit on replay; no real ledger changed.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "duplicate_result",
+      "local_status": "DONE",
+      "evidence": "PG completed_history_immutable; SessionRetryTests.test_four_question_completion_and_lost_finish_replay; DurableExamTests.test_lost_finalize_response_only_replays_exact_record",
+      "behavior_and_limits": "Identical final result replay succeeds; changed final payload rejected and no new Provider call. Production HTTP replay NOT TESTED.",
+      "production_e2e": "NOT TESTED"
+    },
+    {
+      "id": "long_running",
+      "local_status": "PARTIAL",
+      "evidence": "LongCriteriaAsyncTests.test_two_long_questions_checkpoint_continue_complete_and_duplicate; LongCriteriaTests.test_official_input_preserved_at_incident_length_and_existing_evidence_limit",
+      "behavior_and_limits": "Long text and bounded multi-question continuation PASS. Actual long wall time/75s Provider deadline/15min DB lease expiry during processing or queue delay NOT TESTED; no lease renewal or automatic redispatch added.",
+      "production_e2e": "NOT TESTED"
+    }
+  ],
+  "commands": [
+    "python3 -m unittest -v tool.test_essay_session_retry tool.test_essay_async_runtime tool.test_essay_exam_runtime tool.test_essay_durable_exam tool.test_essay_durable_journal tool.test_essay_provider_binding tool.test_essay_reviewed_runtime tool.test_essay_live_worker tool.test_essay_material_execution tool.test_essay_long_criteria tool.test_essay_queue_continuation tool.test_essay_archived_dispatch tool.essay_lab.test_admin_run_actions tool.test_cloudflare_stage tool.test_hanyang_recovery",
+    "python3 /tmp/legendstudy-live-fault-suite-20261122.py",
+    "python3 -m tool.test_essay_exam_credit --pg-bin /opt/homebrew/opt/postgresql@17/bin"
+  ],
+  "test_execution_notes": [
+    "First local PG invocation was blocked by sandbox shared-memory permission; authorized escalation ran only temporary Unix-socket PostgreSQL with listen_addresses empty.",
+    "Direct script entry later hit Python import path issue; module invocation completed18checks. No source change needed.",
+    "Executed unittest counts include imported reusable test classes discovered in multiple modules; not a claim of that many unique independent scenarios.",
+    "No production student run was submitted, retried, archived, deleted, finalized, or refunded."
+  ],
+  "noncausal_hardening_observation": "Existing DB finish validates owner/token, result membership/version pins and atomic ledger, but does not independently bind payload to persisted final checkpoint. Orchestrator provides that ordering. Existing unchanged contract; not identified as cause of current ProviderNetworkUnknown and not changed in this audit.",
+  "artifacts": {
+    "legendstudy-stability-tests-20261122.log": {
+      "path": "/tmp/legendstudy-stability-tests-20261122.log",
+      "sha256": "93d6d7c459b2d75bda7e9aafebf8b98687aed7bfd6056ddd2792e4727ed8d410"
+    },
+    "legendstudy-live-fault-suite-20261122.py": {
+      "path": "/tmp/legendstudy-live-fault-suite-20261122.py",
+      "sha256": "7b14329e94b08dcf2d73693402eb0bbd699a9455b82f0d867a10101f41e05ac7"
+    },
+    "legendstudy-live-fault-suite-20261122.log": {
+      "path": "/tmp/legendstudy-live-fault-suite-20261122.log",
+      "sha256": "35c7e2cdc1636615f7b07e2952a3acf45637d543c9b34d3e20b5020c25d42160"
+    },
+    "legendstudy-live-fault-suite-20261122.json": {
+      "path": "/tmp/legendstudy-live-fault-suite-20261122.json",
+      "sha256": "dc8813137b619cb7416844915f08522eaa79c87de5de4271591322c408588e6b"
+    },
+    "legendstudy-credit-fault-tests-20261122.json": {
+      "path": "/tmp/legendstudy-credit-fault-tests-20261122.json",
+      "sha256": "4ac7b069d6c8482c0cee126da43938c3dca4b3a3ab1dc5d1105ec3afd73c3ae1"
+    }
+  },
+  "candidate_transport_patch_status": "DONE: independent exact-candidate synthetic validation; production deployment/E2E not performed by this reviewer",
+  "candidate_transport_patch_verification": {
+    "verified_at_utc": "2026-11-22T06:22:14.565057+00:00",
+    "baseline_worker_version": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+    "scope": "Exact deployed-source reconstruction;3existingmodules modified+1newdiagnosticsmodule; parent deployment agent verifies76module upload",
+    "candidate_modules": [
+      {
+        "module": "essay_lab/live_worker.py",
+        "sha256_before": "3124f460c19875c9254238eb91ffdb7bd33c7c6af602621dd44d765af63adf2a",
+        "sha256_after": "d4f3f1f969f255cf170e38522da9e5e8215a09f1cc6a6427ae55a598c78b9682"
+      },
+      {
+        "module": "essay_lab/transport_diagnostics.py",
+        "sha256_before": null,
+        "sha256_after": "c20ac1f7b0106ab94b091d1b0b4880e3790b512f200e43e4eedbb5dc40eb2ca0"
+      },
+      {
+        "module": "essay_lab/cloudflare_http.py",
+        "sha256_before": "77dbfccea085fa86190a6d557eb742fcab9bcbdaea045b0f4dcd9d220bd37d53",
+        "sha256_after": "5c43f018c353ab7ead53fe2ad64c293b736ba9b1f4bd0693dfdd55257001e878"
+      },
+      {
+        "module": "essay_lab/cloudflare_runtime.py",
+        "sha256_before": "d640aa8b438f6465a0a4e163f22e494b8855e065410fc8c5b1f26abc31c0c764",
+        "sha256_after": "a34b560e07ceab531fed7e9a36694bbcdc871ef315eaaff9cb5b38e118949b9b"
+      }
+    ],
+    "test_result": {
+      "tests": 111,
+      "passed": 111,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "http_fault_probes": [
+      {
+        "input": 429,
+        "state": "failed",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_finalize_failure",
+        "saved_results": 0
+      },
+      {
+        "input": 500,
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      },
+      {
+        "input": 503,
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      },
+      {
+        "input": "timeout",
+        "state": "reconciling",
+        "mock_transport_calls": 1,
+        "last_rpc": "essay_timeout",
+        "saved_results": 0
+      }
+    ],
+    "failure_receipt_persistence_probe": {
+      "name": "failure_receipt_DB_failure_then_restart",
+      "first_mock_calls": 1,
+      "restart_mock_calls": 0,
+      "settlements": 0,
+      "state": "reconciling"
+    },
+    "review_findings": [],
+    "reviewed_invariants": [
+      "75second Provider deadline unchanged; no automatic Provider retry or new lease policy.",
+      "HTTP429 remains definitive failed question;HTTP500/503 and ambiguous transport remain reconciling.",
+      "Request deadline abort, request network failure, response-body deadline, body read failure, size cap are separately bounded observations.",
+      "No request URL, request headers, credentials, answer, response fragment, or raw exception text in transport diagnostic.",
+      "Execution-failure receipt keeps canonical key and validates exact transport fields; invalid field types/additional fields rejected.",
+      "Failure-receipt DB write failure preserves pending ambiguity; restart makes no additional Provider call or settlement.",
+      "Existing deployed prepare_input, science binding, retry feedback, ORIGIN routing, all prompts and acceptance checks preserved.",
+      "Archived queue message handling and admin caller/owner boundaries pass with candidate entry/consumer source."
+    ],
+    "test_harness_notes": [
+      "Runtime imports exclusively from exact candidate tree; candidate module hashes checked against original inventory plus candidate-patch manifest.",
+      "AST-based entry/consumer tests redirected to exact candidate files, not repository HEAD.",
+      "Existing sync/async parity test gets deterministic monotonic clock in external harness only; timing measurement is not a quality/timeout policy change.",
+      "Initial external harness path remapping failed2testloads; corrected mapping/package registration then final111testsPASS. No product fix was needed.",
+      "Executed unittest count may include imported reusable test classes; not111distinct scenarios."
+    ],
+    "sdk_inspection": {
+      "source": "Deployed python_modules/workers/response.py, SDK1.9.5",
+      "sha256": "a87282adff519607d2ba3a68a6e7af4ad66a2b95507d9ddfa79ea723931adb80",
+      "finding": "FetchResponse inherits pyodide.http.FetchResponse; real Cloudflare JS/FFI execution not exercised by this synthetic Python test."
+    },
+    "limits": [
+      "Actual Provider calls0;production DB mutations0;existing student run retry0.",
+      "Actual deployed network interruption, FFI response conversion and longwalltime lease expiry remain NOT TESTED.",
+      "Postdeploy active-version/source-byte verification belongs to deployment agent and is separate from this predeployment receipt."
+    ],
+    "commands": [
+      "python3 -m unittest -v tool.test_essay_transport_diagnostics tool.test_essay_queue_continuation tool.test_essay_archived_dispatch tool.essay_lab.test_admin_run_actions",
+      "python3 /tmp/legendstudy-candidate-fault-suite-20261122.py"
+    ],
+    "artifacts": {
+      "legendstudy-candidate-fault-suite-20261122.py": {
+        "path": "/tmp/legendstudy-candidate-fault-suite-20261122.py",
+        "sha256": "096483d8a5d2ef2c9fc5e12ce65c97ecf4fb59e45199f6fcd666c81f5508d75e"
+      },
+      "legendstudy-candidate-fault-suite-20261122.log": {
+        "path": "/tmp/legendstudy-candidate-fault-suite-20261122.log",
+        "sha256": "71c9e2309071344046ed73e7657c92526990c36ec9d06060dee7ef6a68899b0b"
+      },
+      "legendstudy-candidate-fault-suite-20261122.json": {
+        "path": "/tmp/legendstudy-candidate-fault-suite-20261122.json",
+        "sha256": "2a287df52c299a6fed816415eb35c3de6c284c8317716d7aa344561fc84104db"
+      },
+      "legendstudy-transport-independent-20261122.log": {
+        "path": "/tmp/legendstudy-transport-independent-20261122.log",
+        "sha256": "44f468d966782a560bc6fc9903b6ad386802a0cd64f3ad78329d58862b2cd089"
+      }
+    },
+    "focused_repository_tests": {
+      "tests": 18,
+      "passed": 18,
+      "failures": 0
+    },
+    "persistent_regression_test": {
+      "path": "tool/test_essay_transport_diagnostics.py",
+      "test": "TransportDiagnosticTests.test_failure_receipt_save_error_restart_never_redispatches_or_settles",
+      "sha256": "a6e9224f931f48aebe26e780f09f30ed91dfc5f4d18bd7f740c142bdf735571b",
+      "note": "Added after9bffbc0 at root request; runtime candidate bytes unchanged."
+    }
+  }
+}
