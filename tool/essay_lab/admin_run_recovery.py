@@ -125,6 +125,17 @@ async def validate_saved_recovery(context, material, registry):
         claim, evaluation = question['claim'], question['evaluationId']
         saved = rows.get(key)
         require(type(saved) is dict, 'RECOVERY_ARTIFACT_REQUIRED')
+        if question['questionId'] in context.get('uncertain_question_ids', []):
+            require(operation == 'verify_then_retry' and saved.get('state') == 'checkpoint'
+                    and saved.get('payload', {}).get('state') == 'reconciling'
+                    and saved['payload'].get('output') is None
+                    and key + '-reviewed' not in rows and key + '-usage' not in rows,
+                    'RECONCILIATION_REQUIRED')
+            channel = ExamQuestionChannel(evaluation, claim, None)
+            channel.restore(saved['payload'])
+            require(channel.terminal == 'reconciling', 'RECONCILIATION_REQUIRED')
+            failed += 1
+            continue
         if saved.get('state') == 'checkpoint' and saved.get('payload', {}).get('state') == 'failed':
             channel = ExamQuestionChannel(evaluation, claim, None)
             channel.restore(saved['payload'])

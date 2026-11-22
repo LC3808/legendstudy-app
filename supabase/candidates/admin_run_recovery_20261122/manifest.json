@@ -2,7 +2,7 @@
   "status": "NOT_APPLIED",
   "project_id": "stlhijzpjfgwwdgunlsd",
   "migration_cli_generated_name": "20261122064411_admin_run_recovery_20261122.sql",
-  "install_sha256": "9187578017e5f4982bd5834800e6fba54f0e089867f3becf70ef3c23d047fb2c",
+  "install_sha256": "c52fb2c42b8a88264f671b78629a1fc89c4307b0d66e0015c1f62cd32676db50",
   "new_functions": [
     "essay_ops_private.recovery_key(uuid)",
     "essay_ops_private.recovery_retry_key(uuid)",
@@ -11,11 +11,17 @@
     "essay_ops_private.recovery_diagnosis(uuid)",
     "public.admin_lab_run_recovery(uuid)",
     "essay_ops_private.recovery_receipt(uuid,uuid,jsonb,text,text,text)",
-    "public.admin_lab_recover_run(uuid,uuid,text)",
+    "public.admin_lab_recover_run(uuid,uuid,text,boolean)",
     "public.essay_exam_recovery_finish(uuid,text,jsonb,jsonb)",
     "public.admin_lab_recovery_operations(timestamptz,timestamptz)",
     "essay_ops_private.recovery_intent(uuid)",
-    "public.essay_exam_recovery_context(uuid)"
+    "public.essay_exam_recovery_context(uuid)",
+    "essay_ops_private.recovery_select(jsonb,boolean)",
+    "essay_ops_private.recovery_retry_uncertain(uuid,uuid,jsonb)",
+    "essay_ops_private.recovery_current_result(uuid,jsonb)",
+    "essay_ops_private.recovery_fence()",
+    "essay_ops_private.quality_retry_guard()",
+    "public.essay_exam_recovery_quality_ready()"
   ],
   "existing_function_preimages": [
     {
@@ -144,7 +150,7 @@
       "acl": [
         "postgres=X/postgres"
       ],
-      "md5": "450075910e8aa9bd2980998370f29f64",
+      "md5": "6a7b7304c8b02531967416281907f089",
       "owner": "postgres",
       "signature": "essay_ops_private.recovery_diagnosis(uuid)"
     },
@@ -170,16 +176,16 @@
         "postgres=X/postgres",
         "authenticated=X/postgres"
       ],
-      "md5": "6ac0528270851374c7e27fd633651725",
+      "md5": "d50e209bbb9e6fddbe1cf0c4e8650521",
       "owner": "postgres",
-      "signature": "admin_lab_recover_run(uuid,uuid,text)"
+      "signature": "admin_lab_recover_run(uuid,uuid,text,boolean)"
     },
     {
       "acl": [
         "postgres=X/postgres",
         "essay_worker=X/postgres"
       ],
-      "md5": "0ea34b98abb183e7fcf2324055f3958c",
+      "md5": "568ae269482e4689892614bee73afa11",
       "owner": "postgres",
       "signature": "essay_exam_recovery_finish(uuid,text,jsonb,jsonb)"
     },
@@ -205,9 +211,58 @@
         "postgres=X/postgres",
         "essay_worker=X/postgres"
       ],
-      "md5": "c3a2cfac216c3aa5daf1b7c7766c7891",
+      "md5": "e4f9235128e394e397bcff8c998a20af",
       "owner": "postgres",
       "signature": "essay_exam_recovery_context(uuid)"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "c06f070bb60ea45cfe38a5032742e141",
+      "owner": "postgres",
+      "signature": "essay_ops_private.recovery_select(jsonb,boolean)"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "382ac8e4bb342b913eddaea47a814d1f",
+      "owner": "postgres",
+      "signature": "essay_ops_private.recovery_retry_uncertain(uuid,uuid,jsonb)"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "05d1da79cf26b1c121b3f2f4fd275cfc",
+      "owner": "postgres",
+      "signature": "essay_ops_private.recovery_current_result(uuid,jsonb)"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "17c09456b7e68eb07a78fa69c57d9bca",
+      "owner": "postgres",
+      "signature": "essay_ops_private.recovery_fence()"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "fafcb7be2b5cd14d11da90da31be53bd",
+      "owner": "postgres",
+      "signature": "essay_ops_private.quality_retry_guard()"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "5c4700d3e9147693e4401e279b140a41",
+      "owner": "postgres",
+      "signature": "essay_exam_recovery_quality_ready()"
     }
   ]
 }

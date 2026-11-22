@@ -70,7 +70,10 @@ class SemanticReview:
   for check in checks.values():
    shape(check,'decision reason');text(check['reason'],6000)
    require(bool(check['reason'].strip()),'REVIEW_REASON_REQUIRED')
-   if check['decision']!='pass':raise ProviderFailure('INDEPENDENT_REVIEW_NOT_ACCEPTED')
+   require(check['decision'] in ('pass','fail','uncertain'),'REVIEW_CHECKS_REQUIRED')
+  if any(c['decision']!='pass' for c in checks.values()):
+   from .quality_repair import ReviewRejected
+   raise ReviewRejected(assessment)
   keys=assessment['local_issue_keys']
   require(type(keys) is list and all(type(k) is str for k in keys) and len(keys)==len(local) and set(keys)==set(local),'LOCAL_REVIEW_COVERAGE')
   receipt=dict(reviewer=self.reviewer_id,expires_at=int(self.clock())+600,evaluation_id=evaluation,

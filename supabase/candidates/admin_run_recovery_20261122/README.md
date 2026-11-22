@@ -2,6 +2,10 @@
 
 NOT APPLIED. Production DB writes and actual student recovery actions require separate Owner approval under AGENTS.md §4. This package reuses the existing exam runtime, retry and billing contracts. It makes no Provider calls itself.
 
+## Follow-up candidate — supersedes the earlier installer hash
+
+E explicitly approved uncertain-question recovery, late-result fences and quality retry guard are now included. See [current implementation and approval scope](../../../wiki/essay-quality-followup-20261122.md). `followup-result.json` is the current55-test receipt; `result.json` preserves the earlier45-test run. New installer hash is in `manifest.json`. No production installation or real student action occurred. The4-argument admin recovery RPC has `p_allow_uncertain=false` by default. New quality policy stays disabled. Guarded rollback refuses removal after uncertain fences or quality markers have been used.
+
 ## Preservation review
 
 1. Request creation, retry admission, recovery preparation, recovery terminal event and actual run completion retain separate meanings and timestamps. Checkpoint execution timestamps do not exist; `last_execution_at` is null and `last_retry_at` is retry admission time.
@@ -33,7 +37,7 @@ Latest immutable reviewed evidence is trusted as proof of the original validatio
 
 When all N/N results are proven, pending summary/final rows with null payload stay unchanged and deterministic summary aggregation feeds the existing finish. Existing checkpoint payloads must match exactly. The existing checkpoint constraint enforces pending→null payload and is checked by installer preflight. Any summary/final row blocks B/C/D mixed retries.
 
-Unknown or reconciling Provider outcomes without complete durable evidence, missing dispatch/claim, missing question rows, active leases, archived/finalized requests and incompatible reservation states stay blocked. Age or an expired lease is never sufficient proof of interruption.
+Unknown or reconciling Provider outcomes without complete durable evidence stay blocked by default; the new E path requires explicit administrator approval and immutable fencing. Missing dispatch/claim/question rows, active leases, archived/finalized requests and incompatible reservations stay blocked even for E. Age or an expired lease is never sufficient proof of interruption.
 
 ## Concurrency, permissions and audit
 

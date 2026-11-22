@@ -26,8 +26,10 @@ async def recover_admin_run(payload, token, rpc_as_caller, admission, enqueue, f
     action key can be resubmitted after a lost queue/finish response; the database
     checks its immutable intent and current lifecycle before accepting that replay.
     """
-    require(type(payload) is dict and set(payload) == {'run_id', 'key', 'diagnosis_token'}, 'INVALID_REQUEST')
+    require(type(payload) is dict and set(payload) in ({'run_id', 'key', 'diagnosis_token'}, {'run_id', 'key', 'diagnosis_token', 'allow_uncertain'}), 'INVALID_REQUEST')
     run, key = str(UUID(payload['run_id'])), str(UUID(payload['key']))
+    allow_uncertain = payload.get('allow_uncertain', False)
+    require(type(allow_uncertain) is bool, 'INVALID_REQUEST')
     diagnosis_token = payload['diagnosis_token']
     require(isinstance(diagnosis_token, str) and re.fullmatch('[0-9a-f]{64}', diagnosis_token), 'INVALID_REQUEST')
     diagnosis = await rpc_as_caller('admin_lab_run_recovery', {'p_run': run}, token)
@@ -43,7 +45,7 @@ async def recover_admin_run(payload, token, rpc_as_caller, admission, enqueue, f
         await ready()
         preflight = True
     result = await rpc_as_caller('admin_lab_recover_run',
-        dict(p_run=run, p_key=key, p_diagnosis_token=diagnosis_token), token)
+        dict(p_run=run, p_key=key, p_diagnosis_token=diagnosis_token, **({'p_allow_uncertain': True} if allow_uncertain else {})), token)
 
     def checked(value):
         require(type(value) is dict and value.get('version') == 'admin-run-recovery-v1' and
@@ -52,7 +54,7 @@ async def recover_admin_run(payload, token, rpc_as_caller, admission, enqueue, f
                 value.get('exam_id') == diagnosis['exam_id'] and
                 type(value.get('dispatch_required')) is bool and type(value.get('success')) is bool,
                 'ADMIN_CONTRACT_REQUIRED')
-        require(value.get('recovery_type') in (None, 'A', 'B', 'C', 'D') and
+        require(value.get('recovery_type') in (None, 'A', 'B', 'C', 'D', 'E') and
                 (value.get('reason') is None or isinstance(value['reason'], str) and
                  re.fullmatch('[A-Z][A-Z_0-9]{0,79}', value['reason'])) and
                 ('generation' not in value or type(value['generation']) is int and value['generation'] > 0),

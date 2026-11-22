@@ -40,13 +40,14 @@ def receipt_checkpoint_key(value):
     return 'receipt-'+value['output_sha256']
 
 class CloudflareExamRuntime:
-    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=(),math_child=None):
+    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=(),math_child=None,quality_provider_factory=None):
         self.rpc=rpc;self.registry=registry;self.provider=provider;self.reviewer=reviewer
         self.review_source=review_source;self.receipt_sink=receipt_sink
         self.allowed=set(allowed_subjects);self.enabled=enabled
         self.public_exams={str(UUID(exam)) for exam in public_exams}
         self.provider_factory=provider_factory
         self.math_child=math_child
+        self.quality_provider_factory=quality_provider_factory
 
     async def consume(self,message):
         # Queue carries identity only, never JWT/answers/Package/provider choice.
@@ -61,6 +62,8 @@ class CloudflareExamRuntime:
         require(subject in self.allowed or claim.get('exam_id') in self.public_exams,'EXAM_ACCESS_DENIED')
         require(claim['subject_id']==subject and claim['snapshot']['ownerId']==subject,'EXAM_ACCESS_DENIED')
         require(claim.get('session_version')=='exam-session-v1','EXAM_SESSION_CONTRACT_REQUIRED')
+        if self.quality_provider_factory is not None:
+            require(await self.rpc('essay_exam_recovery_quality_ready',{})=='quality-repair-2-1-v1','QUALITY_POLICY_NOT_INSTALLED')
         journal=DatabaseCheckpoint(self.rpc,subject,run,claim['lease_token'],session=True)
         policy=claim['snapshot']['runtime']
         provider=self.provider_factory(policy['binding']) if self.provider_factory else self.provider
@@ -102,7 +105,14 @@ class CloudflareExamRuntime:
                 await journal.begin(prefix+'review')
                 await journal.write(prefix+'review',receipt)
                 return receipt
-            return ReviewedRuntimeWorker(channel,provider,cache,self.reviewer,review,persist_receipt,checkpoint,
+            repair=None
+            if self.quality_provider_factory is not None:
+                from .quality_repair import QualityRepair
+                require(hasattr(self.review_source,'bind_audit'),'INDEPENDENT_REVIEW_REQUIRED')
+                repair=QualityRepair(journal=journal,prefix=prefix,provider=provider,
+                    repair_provider=self.quality_provider_factory(policy['binding']),source=self.review_source,
+                    binding=policy['binding'],persist_receipt=persist_receipt)
+            return ReviewedRuntimeWorker(channel,provider,cache,self.reviewer,review,persist_receipt,checkpoint,quality_repair=repair,
                 permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True))
         for q in questions:
             require(q['rubricVersion']==version and q['evidenceVersion']==version,'REVIEWED_PACKAGE_PIN_REQUIRED')

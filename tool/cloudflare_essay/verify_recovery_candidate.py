@@ -25,6 +25,7 @@ MODULES = [
     'tool.test_essay_transport_diagnostics', 'tool.test_essay_queue_continuation',
     'tool.test_essay_archived_dispatch', 'tool.test_mixed_math_checkpoint',
     'tool.test_essay_admin_recovery', 'tool.test_essay_admin_recovery_patch',
+    'tool.test_essay_quote_alignment', 'tool.test_essay_quality_repair',
 ]
 
 

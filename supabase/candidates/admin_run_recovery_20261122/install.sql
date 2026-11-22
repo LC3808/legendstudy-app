@@ -76,6 +76,7 @@ when 'authorized' then lc=0 when 'rejected' then lc=0 else false end;
    readiness='completed';done=done+1;
   elsif c.state='checkpoint' and c.payload->>'state'='failed' and c.payload->'output'='null'::jsonb then
    readiness='retryable';failed=failed+1;targets=targets||jsonb_build_array(a->>'questionId');
+   select case when x.payload->>'code' ~ '^[A-Z_0-9]{1,80}$' then x.payload->>'code' end into qreason from essay_exam_private.checkpoints x where x.run_id=p_run and x.key like 'q'||i||'-a'||n||'-validation-failure-%' limit 1;
   elsif c.state='pending' and rv.state='checkpoint' and us.state='checkpoint'
     and rv.payload->>'p_run'=p_run::text and rv.payload->>'p_token'=r.lease_token::text
     and us.payload->>'p_run'=p_run::text and us.payload->>'p_token'=r.lease_token::text
@@ -83,8 +84,14 @@ when 'authorized' then lc=0 when 'rejected' then lc=0 else false end;
     and jsonb_typeof(rv.payload->'p_output')='object' and rv.payload->'p_output'<>'{}'::jsonb
     and (rv.payload#>>'{p_output,contract_version}'='math-eval-v1' or exists(select 1 from essay_exam_private.checkpoints x where x.run_id=p_run and x.key='q'||i||'-a'||n||'-review' and x.state='checkpoint')) then
    readiness='recoverable';recoverable=recoverable+1;targets=targets||jsonb_build_array(a->>'questionId');
+  elsif c.state='checkpoint' and c.payload->>'state'='reconciling' and c.payload->'output'='null'::jsonb
+    and rv.run_id is null and us.run_id is null
+    and not exists(select 1 from essay_exam_private.checkpoints x where x.run_id=p_run and x.key like 'q'||i||'-a'||n||'-%' and x.key<>'q'||i||'-a'||n||'-execution-failure')
+    and exists(select 1 from essay_exam_private.checkpoints x where x.run_id=p_run and x.key='q'||i||'-a'||n||'-execution-failure' and x.payload->>'stage'='provider' and x.payload->>'provider_call'='possible') then
+   readiness='uncertain';unresolved=unresolved+1;qreason='OWNER_EXECUTION_APPROVAL_REQUIRED';
   else readiness='unresolved';unresolved=unresolved+1;qreason='RECONCILIATION_REQUIRED';end if;
-  qs=qs||jsonb_build_array(jsonb_build_object('index',i,'question_id',a->>'questionId','attempt',n,'key',k,'state',coalesce(c.payload->>'state',c.state,'missing'),'readiness',readiness,'reason',qreason));
+  qs=qs||jsonb_build_array(jsonb_build_object('index',i,'question_id',a->>'questionId','attempt',n,'key',k,'state',coalesce(c.payload->>'state',c.state,'missing'),'readiness',readiness,'reason',qreason,
+   'review_failures',(select coalesce(jsonb_agg(jsonb_build_object('check',z.key,'decision',z.value->>'decision','reason',left(z.value->>'reason',600))),'[]') from jsonb_each(coalesce((select x.payload#>'{assessment,checks}' from essay_exam_private.checkpoints x where x.run_id=p_run and x.state='checkpoint' and x.key ~ ('^q'||i||'-a'||n||'-quality-review-[0-3]$') and x.payload->>'accepted'='false' order by x.key desc limit 1),'{}'))z where z.value->>'decision' in('fail','uncertain'))));
  end loop;
  if hidden then reason='RUN_ARCHIVED';elsif r.state<>'reserved' then reason='FINALIZED_RUN';elsif live then reason='ACTIVE_LEASE';
  elsif r.dispatch_key is null or r.lease_token is null then reason='DISPATCH_NOT_CONFIRMED';
@@ -93,6 +100,7 @@ when 'authorized' then lc=0 when 'rejected' then lc=0 else false end;
  elsif exists(select 1 from essay_exam_private.checkpoints x where x.run_id=p_run and x.state='pending' and x.key not in('final','summary') and not exists(select 1 from jsonb_array_elements(qs) z where z->>'key'=x.key and z->>'readiness'='recoverable')) then reason='RECONCILIATION_REQUIRED';
  elsif exists(select 1 from jsonb_array_elements(qs) z join essay_exam_private.checkpoints x on x.run_id=p_run and x.key='q'||(z->>'index')||'-a'||(z->>'attempt')||'-execution-failure' where x.payload->>'provider_call'='possible' and z->>'readiness' not in('completed','retryable')) then reason='RECONCILIATION_REQUIRED';
  end if;
+ if failed>0 and exists(select 1 from essay_exam_private.checkpoints where run_id=p_run and key ~ '^q[0-9]+-a[0-9]+-quality-policy$') then reason=coalesce(reason,'ADMIN_QUALITY_REVIEW_REQUIRED');end if;
  if failed>0 then typ=case when recoverable>0 then 'D' when done>0 then 'B' else 'C' end;method=case when recoverable>0 then 'verify_then_retry' else 'retry_failed' end;
   if final_cp.run_id is not null or exists(select 1 from essay_exam_private.checkpoints where run_id=p_run and key='summary') then reason=coalesce(reason,'FINAL_CHECKPOINT_CONFLICT');end if;
  else typ=case when final_cp.state='checkpoint' and final_cp.payload->'failed'='false'::jsonb then 'A' else 'D' end;method=case when typ='A' then 'finish_saved' else 'restore_reviewed' end;
@@ -107,6 +115,17 @@ when 'authorized' then lc=0 when 'rejected' then lc=0 else false end;
  'counts',jsonb_build_object('total',total,'completed',done,'failed',failed,'recoverable',recoverable,'unresolved',unresolved,'stored_result',case when jsonb_typeof(r.result->'questions')='array' then jsonb_array_length(r.result->'questions') else 0 end),
  'questions',qs,'billing',jsonb_build_object('status',b.status,'credits_required',b.credits_required,'reserved',reserved_current,'reserved_total',reserved,'recovery_eligible',recovery_eligible,'consumed',consumed,'released',released,'refunded',refunded,'ledger_count',lc,'consistent',consistent),
  'recovery',jsonb_build_object('allowed',reason is null,'type',typ,'method',method,'reason',reason,'target_question_ids',targets,'rerun_question_count',failed,'additional_credit',0,'preserve_existing',true),
+ 'quality_review',jsonb_build_object('waiting',coalesce(reason='ADMIN_QUALITY_REVIEW_REQUIRED',false),
+ 'partial_calls',(select count(*) from essay_exam_private.checkpoints where run_id=p_run and key ~ '-quality-partial-[12]$'),
+ 'full_calls',(select count(*) from essay_exam_private.checkpoints where run_id=p_run and key ~ '-quality-full-1$'),
+ 'last_execution_at',(select max(payload->>'started_at') from essay_exam_private.checkpoints where run_id=p_run and key ~ '-quality-(policy|.*-started)$'),
+ 'recommendation','Review failed checks and preserved candidates; no automatic completion or extra retry.'),
+ 'uncertain_recovery',jsonb_build_object('allowed',reason='RECONCILIATION_REQUIRED' and not live and not hidden and recovery_eligible and r.state='reserved'
+  and r.dispatch_key is not null and r.lease_token is not null and final_cp.run_id is null
+  and not exists(select 1 from essay_exam_private.checkpoints x where x.run_id=p_run and (x.state='pending' or x.key='summary'))
+  and exists(select 1 from jsonb_array_elements(qs) z where z->>'readiness'='uncertain')
+  and not exists(select 1 from jsonb_array_elements(qs) z where z->>'readiness' not in('completed','retryable','uncertain')),
+  'reason','OWNER_EXECUTION_APPROVAL_REQUIRED'),
  'history',(select coalesce(jsonb_agg(jsonb_build_object('action_id',x.outcome->>'action_id','actor',x.actor,'recorded_at',x.recorded_at,'state',x.outcome->>'state','operation',x.outcome->>'operation','recovery_type',x.outcome->>'recovery_type','reason',x.outcome->>'reason','before_state',x.outcome->>'before_state','after_state',x.outcome->>'after_state') order by x.recorded_at desc),'[]') from(select * from essay_ops_private.run_actions where run_id=p_run and action='recover' order by recorded_at desc limit 20)x));
 end $$;
 
@@ -118,7 +137,7 @@ create function essay_ops_private.recovery_receipt(p_run uuid,p_key uuid,p_diag 
  'recovery_type',p_diag#>>'{recovery,type}','dispatch_required',false,'reason',p_reason,'success',p_state='completed','before_state',p_diag->>'state','after_state',case when p_state='completed' then 'completed' else p_diag->>'state' end)
 $$;
 
-create function public.admin_lab_recover_run(p_run uuid,p_key uuid,p_diagnosis_token text) returns jsonb language plpgsql security definer set search_path='' set statement_timeout='12s' as $$
+create function public.admin_lab_recover_run(p_run uuid,p_key uuid,p_diagnosis_token text,p_allow_uncertain boolean default false) returns jsonb language plpgsql security definer set search_path='' set statement_timeout='12s' as $$
 declare r essay_exam_private.runs;actor uuid;subject uuid;d jsonb;outcome jsonb;old essay_ops_private.run_actions;terminal essay_ops_private.run_actions;retry jsonb;retry_key uuid;
 begin
  perform essay_ops_private.require_admin();actor=auth.uid();
@@ -131,18 +150,18 @@ begin
  perform 1 from public.essay_billing_decisions where id=r.decision_id for update;
  select * into old from essay_ops_private.run_actions where id=p_key;
  if found then
-  if old.actor<>actor or old.run_id<>p_run or old.action<>'recover' or old.outcome->>'diagnosis_token' is distinct from p_diagnosis_token then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;
+  if old.actor<>actor or old.run_id<>p_run or old.action<>'recover' or old.outcome->>'diagnosis_token' is distinct from p_diagnosis_token or coalesce((old.outcome->>'uncertain_approved')::boolean,false) is distinct from p_allow_uncertain then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;
   select * into terminal from essay_ops_private.run_actions where id=essay_ops_private.recovery_key(p_key);
   if terminal.id is not null then if terminal.actor<>old.actor or terminal.run_id<>old.run_id or terminal.action<>'recover' or terminal.outcome->>'action_id'<>p_key::text then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;outcome=terminal.outcome;else outcome=old.outcome;end if;
   return essay_ops_private.recovery_replay(outcome);
  end if;
  if exists(select 1 from essay_ops_private.run_actions where id=essay_ops_private.recovery_key(p_key)) then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;
- d=essay_ops_private.recovery_diagnosis(p_run);
+ d=essay_ops_private.recovery_select(essay_ops_private.recovery_diagnosis(p_run),p_allow_uncertain);
  if d->>'diagnosis_token'<>p_diagnosis_token then outcome=essay_ops_private.recovery_receipt(p_run,p_key,d,'blocked','blocked','DIAGNOSIS_CHANGED');
  elsif (d#>>'{recovery,allowed}')::boolean is not true then outcome=essay_ops_private.recovery_receipt(p_run,p_key,d,'blocked','blocked',d#>>'{recovery,reason}');
  else outcome=essay_ops_private.recovery_receipt(p_run,p_key,d,'verification_required',case when d#>>'{recovery,method}' in('verify_then_retry','retry_failed') then 'verify_then_retry' else 'verify_saved' end);
  end if;
- outcome=outcome||jsonb_build_object('diagnosis_token',p_diagnosis_token);
+ outcome=outcome||jsonb_build_object('diagnosis_token',p_diagnosis_token,'uncertain_approved',p_allow_uncertain);
  insert into essay_ops_private.run_actions(id,run_id,actor,action,outcome) values(p_key,p_run,actor,'recover',outcome);
  return outcome-'diagnosis_token';
 end$$;
@@ -163,7 +182,7 @@ begin
   outcome=terminal.outcome;
   return essay_ops_private.recovery_replay(outcome);
  end if;
- d=essay_ops_private.recovery_diagnosis(r.id);mixed=a.outcome->>'operation'='verify_then_retry';
+ d=essay_ops_private.recovery_select(essay_ops_private.recovery_diagnosis(r.id),coalesce((a.outcome->>'uncertain_approved')::boolean,false));mixed=a.outcome->>'operation'='verify_then_retry';
  if p_diagnosis_token is distinct from a.outcome->>'diagnosis_token' or d->>'diagnosis_token' is distinct from p_diagnosis_token then outcome=essay_ops_private.recovery_receipt(r.id,p_key,d,'blocked','blocked','DIAGNOSIS_CHANGED');
  elsif (d#>>'{recovery,allowed}')::boolean is not true then outcome=essay_ops_private.recovery_receipt(r.id,p_key,d,'blocked','blocked',d#>>'{recovery,reason}');
  elsif p_result is null and jsonb_typeof(p_proof)='object' and (select count(*) from jsonb_object_keys(p_proof))=1 and p_proof->>'failure_code' in('ARTIFACT_VERIFICATION_FAILED','RECOVERY_RUNTIME_UNAVAILABLE','UNSUPPORTED_RECOVERY_ENGINE') then outcome=essay_ops_private.recovery_receipt(r.id,p_key,d,'blocked','blocked',p_proof->>'failure_code');
@@ -172,7 +191,7 @@ begin
    if jsonb_typeof(p_result) is distinct from 'object' or jsonb_typeof(p_result->'questions') is distinct from 'array' or jsonb_typeof(p_proof->'questions') is distinct from 'array' or coalesce(p_proof->>'result_sha256','') !~ '^[0-9a-f]{64}$' then raise exception 'RECOVERY_PROOF_INVALID';end if;
    if mixed is distinct from (d#>>'{recovery,method}' in('verify_then_retry','retry_failed')) then raise exception 'RECOVERY_OPERATION_CHANGED';end if;
    for q in select value from jsonb_array_elements(d->'questions') order by (value->>'index')::int loop
-    if q->>'readiness'='retryable' and mixed then continue;end if;
+    if q->>'readiness' in('retryable','uncertain') and mixed then continue;end if;
     if q->>'readiness' not in('completed','recoverable') then raise exception 'RECOVERY_PROOF_INVALID';end if;
     recovery_stage='validation';count_ready=count_ready+1;k=q->>'key';prefix='q'||(q->>'index')||'-a'||(q->>'attempt');
     select * into c from essay_exam_private.checkpoints where run_id=r.id and key=k;
@@ -210,8 +229,10 @@ begin
    if mixed then
     if fc.run_id is not null or exists(select 1 from essay_exam_private.checkpoints where run_id=r.id and key='summary') then raise exception 'FINAL_CHECKPOINT_CONFLICT';end if;
     retry_key=essay_ops_private.recovery_retry_key(p_key);
-    recovery_stage='retry';retry=public.essay_exam_retry(subject,r.id,retry_key,r.exam_id);
-    outcome=essay_ops_private.recovery_receipt(r.id,p_key,d,'queued','retry')||jsonb_build_object('dispatch_required',true,'generation',retry->'generation','retry_key',retry_key,'restored_questions',restored);
+    recovery_stage='retry';
+    if coalesce((a.outcome->>'uncertain_approved')::boolean,false) then retry=essay_ops_private.recovery_retry_uncertain(r.id,retry_key,d);
+    else retry=public.essay_exam_retry(subject,r.id,retry_key,r.exam_id);end if;
+    outcome=essay_ops_private.recovery_receipt(r.id,p_key,d,'queued','retry')||jsonb_build_object('dispatch_required',true,'generation',retry->'generation','retry_key',retry_key,'restored_questions',restored,'uncertain_approved',coalesce((a.outcome->>'uncertain_approved')::boolean,false),'fenced_attempts',case when coalesce((a.outcome->>'uncertain_approved')::boolean,false) then (select jsonb_object_agg(z->>'index',z->'attempt') from jsonb_array_elements(d->'questions') z where z->>'readiness'='uncertain') else '{}'::jsonb end);
    else
     if count_ready<>(d#>>'{counts,total}')::int or (fc.state='checkpoint' and (fc.payload->'result' is distinct from p_result or fc.payload->'failed' is distinct from 'false'::jsonb)) then raise exception 'RECOVERY_FINAL_MISMATCH';end if;
     if exists(select 1 from essay_exam_private.checkpoints x where x.run_id=r.id and x.key='summary' and x.state='checkpoint' and x.payload->>'summary' is distinct from summary) then raise exception 'RECOVERY_SUMMARY_MISMATCH';end if;
@@ -264,12 +285,93 @@ begin
  select * into terminal from essay_ops_private.run_actions where id=essay_ops_private.recovery_key(p_key);
  if terminal.id is not null then if terminal.actor<>a.actor or terminal.run_id<>a.run_id or terminal.action<>'recover' or terminal.outcome->>'action_id'<>p_key::text then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;return jsonb_build_object('version','admin-run-recovery-v1','terminal',essay_ops_private.recovery_replay(terminal.outcome));end if;
  select * into r from essay_exam_private.runs where id=a.run_id;
- d=essay_ops_private.recovery_diagnosis(r.id);
+ d=essay_ops_private.recovery_select(essay_ops_private.recovery_diagnosis(r.id),coalesce((a.outcome->>'uncertain_approved')::boolean,false));
  if d->>'diagnosis_token'<>a.outcome->>'diagnosis_token' or (d#>>'{recovery,allowed}')::boolean is not true then return jsonb_build_object('version','admin-run-recovery-v1','terminal',public.essay_exam_recovery_finish(p_key,a.outcome->>'diagnosis_token',null,jsonb_build_object('failure_code','ARTIFACT_VERIFICATION_FAILED')));end if;
  return jsonb_build_object('version','admin-run-recovery-v1','action_id',p_key,'run_id',r.id,'diagnosis_token',d->>'diagnosis_token','operation',a.outcome->>'operation',
  'claimed',jsonb_build_object('state',r.state,'run_id',r.id,'subject_id',d->'subject_id','exam_id',r.exam_id,'snapshot',r.snapshot,'parent_id',r.parent_id,'parent_result',(select p.result from essay_exam_private.runs p where p.id=r.parent_id and p.account_id=r.account_id),'lease_token',r.lease_token,'lease_until',r.lease_until,'session_version','exam-session-v1','attempts',coalesce((select attempts from essay_exam_private.retry_requests where run_id=r.id order by generation desc limit 1),'{}'::jsonb)),
+ 'uncertain_question_ids',case when coalesce((a.outcome->>'uncertain_approved')::boolean,false) then (select coalesce(jsonb_agg(z->>'question_id'),'[]') from jsonb_array_elements(d->'questions')z where z->>'readiness'='uncertain') else '[]'::jsonb end,
  'checkpoints',(select coalesce(jsonb_object_agg(key,jsonb_build_object('state',state,'payload',payload)),'{}') from essay_exam_private.checkpoints where run_id=r.id));
 end$$;
+
+
+create function essay_ops_private.recovery_select(d jsonb,approved boolean) returns jsonb language plpgsql immutable set search_path='' as $$
+begin
+ if approved is null then raise invalid_parameter_value;end if;
+ if not approved then return d;end if;
+ if (d#>>'{uncertain_recovery,allowed}')::boolean is not true then
+  return jsonb_set(d,'{recovery}',(d->'recovery')||jsonb_build_object('allowed',false,'reason','UNCERTAIN_RECOVERY_NOT_AVAILABLE'));
+ end if;
+ return jsonb_set(d,'{recovery}',(d->'recovery')||jsonb_build_object('allowed',true,'reason',null,'type','E','method','verify_then_retry',
+ 'rerun_question_count',(select count(*) from jsonb_array_elements(d->'questions') q where q->>'readiness' in('retryable','uncertain')),
+ 'target_question_ids',(select jsonb_agg(q->>'question_id') from jsonb_array_elements(d->'questions') q where q->>'readiness' in('retryable','uncertain'))));
+end$$;
+
+create function essay_ops_private.recovery_retry_uncertain(p_run uuid,p_key uuid,d jsonb) returns jsonb language plpgsql set search_path='' as $$
+declare previous essay_exam_private.retry_requests;a jsonb;q jsonb;
+begin
+ -- Caller holds account/run/billing locks and has verified the current diagnosis and retained results.
+ select * into previous from essay_exam_private.retry_requests where run_id=p_run order by generation desc limit 1;
+ a=coalesce(previous.attempts,'{}');
+ for q in select value from jsonb_array_elements(d->'questions') loop
+  if q->>'readiness' in('retryable','uncertain') then a=jsonb_set(a,array[q->>'index'],to_jsonb((q->>'attempt')::int+1));end if;
+ end loop;
+ insert into essay_exam_private.retry_requests(run_id,request_key,generation,attempts)
+ values(p_run,p_key,coalesce(previous.generation,0)+1,a) returning * into previous;
+ return jsonb_build_object('run_id',p_run,'generation',previous.generation);
+end$$;
+
+create function essay_ops_private.recovery_current_result(p_run uuid,p_result jsonb default null) returns boolean language plpgsql stable set search_path='' as $$
+declare r essay_exam_private.runs;a jsonb;c essay_exam_private.checkpoints;i int;n int;matched jsonb;
+begin
+ select * into r from essay_exam_private.runs where id=p_run;
+ select attempts into a from essay_exam_private.retry_requests where run_id=p_run order by generation desc limit 1;
+ if p_result is not null and (jsonb_typeof(p_result->'questions') is distinct from 'array' or jsonb_array_length(p_result->'questions')<>jsonb_array_length(r.snapshot->'answers')) then return false;end if;
+ for i in 0..jsonb_array_length(r.snapshot->'answers')-1 loop
+  n=coalesce((a->>i::text)::int,0);
+  select * into c from essay_exam_private.checkpoints where run_id=p_run and key='q'||i||case when n=0 then '' else '-retry-'||n end;
+  if c.state is distinct from 'checkpoint' or c.payload->>'state' is distinct from 'completed' then return false;end if;
+  if p_result is not null then
+   select x into matched from jsonb_array_elements(p_result->'questions') x where x->>'questionId'=r.snapshot#>>array['answers',i::text,'questionId'];
+   if matched is null or matched->'evaluation' is distinct from c.payload->'output' then return false;end if;
+  end if;
+ end loop;
+ return true;
+end$$;
+
+create function essay_ops_private.recovery_fence() returns trigger language plpgsql security definer set search_path='' as $$
+declare rid uuid;entry record;idx text;attempt int;fenced boolean;
+begin
+ if TG_TABLE_NAME='runs' then rid=new.id;else rid=new.run_id;end if;
+ perform 1 from essay_exam_private.runs where id=rid for update;
+ select exists(select 1 from essay_ops_private.run_actions where run_id=rid and action='recover' and outcome->>'state'='queued' and outcome->>'uncertain_approved'='true') into fenced;
+ if not fenced then return new;end if;
+ if TG_TABLE_NAME='runs' then
+  if new.state is distinct from old.state and (new.state<>'completed' or not essay_ops_private.recovery_current_result(rid,new.result)) then raise sqlstate 'PT409' using message='STALE_RECOVERY_RESULT';end if;
+ else
+  for entry in select e.key,e.value from essay_ops_private.run_actions a cross join lateral jsonb_each(a.outcome->'fenced_attempts') e where a.run_id=rid and a.action='recover' and a.outcome->>'state'='queued' and a.outcome->>'uncertain_approved'='true' loop
+   idx=entry.key;
+   if new.key ~ ('^q'||idx||'($|-)') then
+    attempt=case when new.key ~ ('^q'||idx||'-a[0-9]+-') then substring(new.key from '-a([0-9]+)-')::int
+     when new.key ~ ('^q'||idx||'-retry-[0-9]+') then substring(new.key from '-retry-([0-9]+)')::int else 0 end;
+    if attempt<=entry.value::text::int then raise sqlstate 'PT409' using message='STALE_QUESTION_ATTEMPT';end if;
+   end if;
+  end loop;
+  if new.key in('summary','final') and (not essay_ops_private.recovery_current_result(rid) or (new.key='final' and new.state='checkpoint' and (new.payload->'failed' is distinct from 'false'::jsonb or not essay_ops_private.recovery_current_result(rid,new.payload->'result')))) then raise sqlstate 'PT409' using message='STALE_RECOVERY_RESULT';end if;
+ end if;
+ return new;
+end$$;
+create trigger recovery_attempt_fence before insert or update on essay_exam_private.checkpoints for each row execute function essay_ops_private.recovery_fence();
+create trigger recovery_result_fence before update on essay_exam_private.runs for each row execute function essay_ops_private.recovery_fence();
+
+create function essay_ops_private.quality_retry_guard() returns trigger language plpgsql security definer set search_path='' as $$
+begin
+ if exists(select 1 from essay_exam_private.checkpoints where run_id=new.run_id and key ~ '^q[0-9]+-a[0-9]+-quality-policy$') then
+  raise sqlstate 'PT409' using message='ADMIN_QUALITY_REVIEW_REQUIRED';
+ end if;
+ return new;
+end$$;
+create trigger quality_retry_budget before insert on essay_exam_private.retry_requests for each row execute function essay_ops_private.quality_retry_guard();
+create function public.essay_exam_recovery_quality_ready() returns text language sql stable security definer set search_path='' as $$select 'quality-repair-2-1-v1'::text$$;
 
 alter function essay_ops_private.recovery_key(uuid) owner to postgres;
 revoke all on function essay_ops_private.recovery_key(uuid) from public,anon,authenticated,essay_worker,service_role;
@@ -286,9 +388,9 @@ revoke all on function public.admin_lab_run_recovery(uuid) from public,anon,auth
 grant execute on function public.admin_lab_run_recovery(uuid) to authenticated;
 alter function essay_ops_private.recovery_receipt(uuid,uuid,jsonb,text,text,text) owner to postgres;
 revoke all on function essay_ops_private.recovery_receipt(uuid,uuid,jsonb,text,text,text) from public,anon,authenticated,essay_worker,service_role;
-alter function public.admin_lab_recover_run(uuid,uuid,text) owner to postgres;
-revoke all on function public.admin_lab_recover_run(uuid,uuid,text) from public,anon,authenticated,essay_worker,service_role;
-grant execute on function public.admin_lab_recover_run(uuid,uuid,text) to authenticated;
+alter function public.admin_lab_recover_run(uuid,uuid,text,boolean) owner to postgres;
+revoke all on function public.admin_lab_recover_run(uuid,uuid,text,boolean) from public,anon,authenticated,essay_worker,service_role;
+grant execute on function public.admin_lab_recover_run(uuid,uuid,text,boolean) to authenticated;
 alter function public.essay_exam_recovery_finish(uuid,text,jsonb,jsonb) owner to postgres;
 revoke all on function public.essay_exam_recovery_finish(uuid,text,jsonb,jsonb) from public,anon,authenticated,essay_worker,service_role;
 grant execute on function public.essay_exam_recovery_finish(uuid,text,jsonb,jsonb) to essay_worker;
@@ -300,5 +402,18 @@ revoke all on function essay_ops_private.recovery_intent(uuid) from public,anon,
 alter function public.essay_exam_recovery_context(uuid) owner to postgres;
 revoke all on function public.essay_exam_recovery_context(uuid) from public,anon,authenticated,essay_worker,service_role;
 grant execute on function public.essay_exam_recovery_context(uuid) to essay_worker;
+alter function essay_ops_private.recovery_select(jsonb,boolean) owner to postgres;
+revoke all on function essay_ops_private.recovery_select(jsonb,boolean) from public,anon,authenticated,essay_worker,service_role;
+alter function essay_ops_private.recovery_retry_uncertain(uuid,uuid,jsonb) owner to postgres;
+revoke all on function essay_ops_private.recovery_retry_uncertain(uuid,uuid,jsonb) from public,anon,authenticated,essay_worker,service_role;
+alter function essay_ops_private.recovery_current_result(uuid,jsonb) owner to postgres;
+revoke all on function essay_ops_private.recovery_current_result(uuid,jsonb) from public,anon,authenticated,essay_worker,service_role;
+alter function essay_ops_private.recovery_fence() owner to postgres;
+revoke all on function essay_ops_private.recovery_fence() from public,anon,authenticated,essay_worker,service_role;
+alter function essay_ops_private.quality_retry_guard() owner to postgres;
+revoke all on function essay_ops_private.quality_retry_guard() from public,anon,authenticated,essay_worker,service_role;
+alter function public.essay_exam_recovery_quality_ready() owner to postgres;
+revoke all on function public.essay_exam_recovery_quality_ready() from public,anon,authenticated,essay_worker,service_role;
+grant execute on function public.essay_exam_recovery_quality_ready() to essay_worker;
 notify pgrst,'reload schema';
 commit;

@@ -2,6 +2,8 @@
 
 상태: 구현·격리 검증 DONE / 운영 DB 설치·WEB/Worker 배포 BLOCKED(별도 승인 대기), 실제 학생 복구 NOT TESTED. 기존 [안정성 점검](essay-lab-stability-20261122.md)의 분석·최소 패치 운영 배포를 완료한 뒤 이어서 수행한다. [관리자 요청 관리](admin-lab-run-management-20261120.md), [보관의 운영 제외](admin-archived-run-operations-20261120.md), [장기 보존 전략](longitudinal-learning-admissions-data-strategy.md)을 계승한다.
 
+후속: [E 불확정 복구·부분 재생성·상한 구현과 새 설치 hash](essay-quality-followup-20261122.md). 기존45검사는 최초 후보 이력이며 최신 확장 SQL은55검사·별도 승인 대상이다.
+
 ## Owner 지시 및 경계
 
 실제 결과·문항 상태를 검증하여 정상 완료를 지원한다. 상태만 completed로 바꾸는 강제 완료는 금지한다. 기존 Worker·Provider·평가 기준과 프롬프트, 학생 답안/결과/이용권/Credit Ledger를 재사용·보존한다. 이미 완료된 문항 재평가, 이용권 추가 차감, 정상 실행 강제 중단, 응답 불확정 실행의 나이 기반 탈취는 하지 않는다.

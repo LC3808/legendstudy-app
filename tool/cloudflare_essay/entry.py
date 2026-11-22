@@ -70,8 +70,17 @@ class Default(WorkerEntrypoint):
         async def receipt(_):
             # Actual receipt persistence is supplied per-run below, never discard.
             raise Unknown('RECEIPT_PERSISTENCE_REQUIRED')
+        quality_factory=None
+        if getattr(self.env,'ESSAY_QUALITY_REPAIR_ENABLED','false')=='true':
+            require(mode=='independent_model','INDEPENDENT_REVIEW_REQUIRED')
+            from essay_lab.quality_repair import patch_schema,PATCH_INSTRUCTIONS
+            from essay_lab.live_worker import OpenAIResponses
+            def quality_factory(policy):
+                selected=configured_binding(policy,legacy,approved)
+                return OpenAIResponses(self.env.ESSAY_PROVIDER_KEY,selected['model'],patch_schema(),
+                    instructions=PATCH_INSTRUCTIONS,prompt_version='quality-repair-2-1-v1',transport=provider_transport)
         return CloudflareExamRuntime(rpc=transport.rpc,registry=REGISTRY,provider=provider,
-            reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,
+            reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,quality_provider_factory=quality_factory,
             allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for,public_exams=transport.public_exams,
             math_child=self.math_child if getattr(self.env,'ESSAY_MIXED_SESSION_ENABLED','false')=='true' else None)
 

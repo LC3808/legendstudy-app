@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+관리자 불확정 복구 / 부분 재생성2+full1·상한: [11/22 후속 구현·검증·승인 패키지](essay-quality-followup-20261122.md).
+
 논술 재시도 최적화 / Evidence ID·정확인용·부분수정: [11/22 구현·설계·승인 경계](essay-retry-quality-20261122.md).
 
 논술 대시보드 개편 / 완료율·처리시간·재시도 분석: [Claude 채택·PHASE 1 운영·PHASE 2 근거](lab-dashboard-implementation-20261122.md).

@@ -390,14 +390,15 @@ class OpenAIResponses:
 
 
 class Worker:
-    """One explicit job, at most one provider call; caller owns durable private review/receipts.
+    """One explicit job; default one generation, opt-in durable bounded quality repair.
     rpc has the narrow essay_worker credential. No user/billing/finance/SQL table access.
     All writes go through existing fenced RPCs. Transport ambiguity never triggers re-generation.
     """
-    def __init__(self, rpc, provider, cache, reviewer, review_source, receipt_sink, checkpoint, *, isolated_fixture=False):
+    def __init__(self, rpc, provider, cache, reviewer, review_source, receipt_sink, checkpoint, *, isolated_fixture=False, quality_repair=None):
         self.rpc=rpc;self.provider=provider;self.cache=cache;self.reviewer=reviewer
         self.review_source=review_source;self.receipt_sink=receipt_sink;self.checkpoint=checkpoint
         self.isolated_fixture=isolated_fixture
+        self.quality_repair=quality_repair
 
     def authorize(self, evaluation):
         # Existing default remains synthetic-only. Reviewed runtime subclass is job-scoped.
@@ -420,6 +421,9 @@ class Worker:
         from .runtime_effects import drive_async
         return await drive_async(self.execution_steps(evaluation),self)
 
+    def start_quality(self):
+        return self.quality_repair.start()
+
     def execution_steps(self,evaluation):
         """Same evaluator rules; yield only external I/O for sync or async hosting."""
         self.authorize(evaluation)
@@ -430,6 +434,8 @@ class Worker:
             binding=self.bind_claim(claim)
             stage='input'
             value=package(claim,self.cache)
+            if self.quality_repair is not None:
+                (yield ('start_quality', ()))
             stage='provider'
             result=(yield ('provider.evaluate', (value,)))
             stage='identity'
@@ -451,7 +457,7 @@ class Worker:
         except Invalid as error:
             (yield ('receipt_sink', (execution_failure(error,'telemetry'),)))
             (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
-        if telemetry is not None:
+        if telemetry is not None and self.quality_repair is None:
             (yield ('rpc', ('essay_record_provider_telemetry',telemetry,)))
         # Receipt identity is claim-owned. Provider output must match, never overwrite it.
         (yield ('receipt_sink', ({'run_id':claim['run_id'],'provider':binding['provider'] if binding else result.provider,
@@ -464,8 +470,17 @@ class Worker:
             alignment=quote_alignment_receipt(result.raw,out)
             if alignment is not None:
                 (yield ('receipt_sink', (alignment,)))
-            try:receipt=(yield ('review_source', (evaluation,value,out,)))
+            try:
+                if self.quality_repair is None:
+                    receipt=(yield ('review_source', (evaluation,value,out,)))
+                else:
+                    out,receipt=(yield ('quality_repair', (evaluation,value,out,claim,)))
+                    validate_output(out,claim)
             except (TimeoutError, URLError):raise Unknown('REVIEW_UNAVAILABLE') from None
+            if binding and self.quality_repair is not None:
+                from .quality_repair import combined_generation_usage
+                total=combined_generation_usage(result,self.quality_repair)
+                (yield ('rpc', ('essay_record_provider_telemetry',telemetry_payload(args,total,binding),)))
             local=self.reviewer.verify(receipt,evaluation,value,out)
             payload=finalize_payload(out,contract_version='1.3',local_reviews=local)
         except Unknown:

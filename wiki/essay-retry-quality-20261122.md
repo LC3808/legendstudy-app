@@ -2,6 +2,8 @@
 
 상태: 최소 인용 위치 보정 구현·격리 검증·운영 배포 DONE. 의미적 부분 수정·원인별 상한·응답불확정 복구는 설계 PARTIAL. 기존 [운영 분석](essay-lab-stability-20261122.md), [대시보드](lab-dashboard-implementation-20261122.md), [관리자 복구](admin-run-recovery-20261122.md)를 계승한다. 신규 DB·기존 학생 action 승인으로 해석하지 않는다.
 
+후속: [부분 재생성2+full1 구현·관리자 복구 E·상한 후보](essay-quality-followup-20261122.md). 아래는 최초 보정 배포 시점 기록이다.
+
 ## 실제 코드 경로와 12회 원인
 
 운영 Worker bdee88d0의 76개 모듈을 직접 내려받아 Git과 대조했다. HEAD에는 미배포 관리자 복구 코드가 있어 전체 Worker 빌드 교체는 금지하고 해당 운영본의 두 모듈만 수정한다.
