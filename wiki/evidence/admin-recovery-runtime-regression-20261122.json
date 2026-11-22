@@ -1,0 +1,72 @@
+{
+  "tests": 166,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "modules": [
+    "tool.test_essay_session_retry",
+    "tool.test_essay_async_runtime",
+    "tool.test_essay_exam_runtime",
+    "tool.test_essay_durable_exam",
+    "tool.test_essay_durable_journal",
+    "tool.test_essay_provider_binding",
+    "tool.test_essay_reviewed_runtime",
+    "tool.test_essay_live_worker",
+    "tool.test_essay_material_execution",
+    "tool.test_essay_long_criteria",
+    "tool.test_essay_transport_diagnostics",
+    "tool.test_essay_queue_continuation",
+    "tool.test_essay_archived_dispatch",
+    "tool.test_mixed_math_checkpoint",
+    "tool.test_essay_admin_recovery",
+    "tool.test_essay_admin_recovery_patch",
+    "tool.test_essay_quote_alignment",
+    "tool.test_essay_quality_repair",
+    "tool.essay_lab.test_admin_run_actions"
+  ],
+  "runtime_imports": {
+    "tool.essay_lab.scaffolding_adapter": "essay_lab/scaffolding_adapter.py",
+    "tool.essay_lab.live_worker": "essay_lab/live_worker.py",
+    "tool.essay_lab.admin_run_actions": "essay_lab/admin_run_actions.py",
+    "tool.essay_lab.positive_learning": "essay_lab/positive_learning.py",
+    "tool.essay_lab.reviewed_runtime": "essay_lab/reviewed_runtime.py",
+    "tool.essay_lab.exam_runtime": "essay_lab/exam_runtime.py",
+    "tool.essay_lab.mixed_math_runtime": "essay_lab/mixed_math_runtime.py",
+    "tool.essay_lab.async_exam": "essay_lab/async_exam.py",
+    "tool.essay_lab.durable_exam": "essay_lab/durable_exam.py",
+    "tool.essay_lab.durable_journal": "essay_lab/durable_journal.py",
+    "tool.essay_lab.evidence_preview": "essay_lab/evidence_preview.py",
+    "tool.essay_lab.evidence_package": "essay_lab/evidence_package.py",
+    "tool.essay_lab.service_content": "essay_lab/service_content.py",
+    "tool.essay_lab.runtime_host": "essay_lab/runtime_host.py",
+    "tool.essay_lab.package_registry": "essay_lab/package_registry.py",
+    "tool.essay_lab.material_runtime": "essay_lab/material_runtime.py",
+    "tool.essay_lab.operating_host": "essay_lab/operating_host.py",
+    "tool.essay_lab.transport_diagnostics": "essay_lab/transport_diagnostics.py",
+    "tool.essay_lab.cloudflare_http": "essay_lab/cloudflare_http.py",
+    "tool.essay_lab.db_checkpoint": "essay_lab/db_checkpoint.py",
+    "tool.essay_lab.retry_feedback": "essay_lab/retry_feedback.py",
+    "tool.essay_lab.evaluation_policy": "essay_lab/evaluation_policy.py",
+    "tool.essay_lab.cloudflare_runtime": "essay_lab/cloudflare_runtime.py",
+    "tool.essay_lab.admin_run_recovery": "essay_lab/admin_run_recovery.py",
+    "tool.essay_lab.quality_repair": "essay_lab/quality_repair.py",
+    "tool.essay_lab.runtime_effects": "essay_lab/runtime_effects.py"
+  },
+  "candidate_changes": [
+    {
+      "module": "entry.py",
+      "sha256_before": "80f40b2cd9dfa899c286ce458ae72cd8361023067ea89675750be908a7e887ab",
+      "sha256_after": "cf9a99263251f9f87f2327aeb98b9549d29fb47e5be5ca7f17594a18c77d1537"
+    },
+    {
+      "module": "essay_lab/cloudflare_http.py",
+      "sha256_before": "7426a393f493bce4784f9d36ba1baa493ce5d4f242db49fc0c712227c9fcb741",
+      "sha256_after": "5b8fb2ae6961e59b89c995e1f42b7f585b8254992842a86fe0e0defb6e066b4d"
+    }
+  ],
+  "preserved_source_files": 76,
+  "external_provider_calls": 0,
+  "production_db_mutations": 0,
+  "deployment_performed": false,
+  "test_adjustment": "Only existing sync/async parity test uses a fixed monotonic clock to prevent 1ms assertion flake."
+}

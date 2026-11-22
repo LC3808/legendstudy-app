@@ -2,6 +2,8 @@
 
 **DONE — 원인 재현·최소 WEB 코드 수정·테스트·운영 배포. 실제 학생 복구 재실행 NOT TESTED/미실행.** [이전1회 실패](admin-run-recovery-execution-20261122.md)와 [운영 설치](admin-run-recovery-deployment-20261122.md)를 계승한다.
 
+후속: WEB 경로를 통과한 뒤 드러난 별도 운영 transport 결함은 [런타임 수정·운영 진단](admin-recovery-runtime-fix-20261122.md)에서 해결했다. 아래는 앞선 WEB 경로 누락의 원인 기록이다.
+
 ## WEB API → Worker → DB 조사
 
 1. UI는 진단 후 `POST /api/admin/essay-run`에 `action=recover`·원 요청/작업 key·진단 token·allow_uncertain을 보낸다.

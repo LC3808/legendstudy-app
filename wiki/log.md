@@ -1,3 +1,7 @@
+## 2026-11-22 — 관리자 복구 운영 transport origin 결함 해결
+
+운영 부모 origin 미보관→첫RPC 전 AttributeError 재현. Worker2모듈·WEB최소 배포,166+9/DB55/WEB274 PASS. 운영 비파괴 연결 PASS·9요청/15RPC 불변·실행0. [원인·배포·추가승인](admin-recovery-runtime-fix-20261122.md).
+
 ## 2026-11-22 — WEB 수정 후 q1 승인 실행 1회
 
 21:36 제출1회 RUNTIME_UNAVAILABLE, 새attempt/감사/receipt0·q0해시/원장 불변, 처리중1 유지. 추가제출0·내부원인 미확정. [실행·보존·후속](admin-recovery-q1-execution-20261122.md).
