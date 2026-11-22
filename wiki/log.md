@@ -1,3 +1,7 @@
+## 2026-11-22 — WEB 수정 후 q1 승인 실행 1회
+
+21:36 제출1회 RUNTIME_UNAVAILABLE, 새attempt/감사/receipt0·q0해시/원장 불변, 처리중1 유지. 추가제출0·내부원인 미확정. [실행·보존·후속](admin-recovery-q1-execution-20261122.md).
+
 ## 2026-11-22 — 관리자 복구 Worker 어댑터 경로 누락 수정
 
 기존 배포 번들503/Worker0 재현. WEB 두 허용목록에 recover 경로 추가, 실제adapter 통합18/서버101·타입·린트·번들 PASS. Pages2faad0e4·정적3173/설정 보존, Worker/DB 변경0·실학생실행0. [원인·검증·재승인](admin-recovery-binding-fix-20261122.md).

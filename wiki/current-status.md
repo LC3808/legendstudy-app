@@ -1,6 +1,6 @@
 # Current Status
 
-[11/22 복구 수정](admin-recovery-binding-fix-20261122.md): WEB 경로누락 수정·배포 PASS. 재실행0·결과/원장 보존. 실행 재승인 필요.
+[11/22 q1 복구](admin-recovery-q1-execution-20261122.md): 승인 제출1회·Worker 응답실패. 새attempt0·q0/원장 불변. 추가실행 중단.
 
 [11/20 수시 D-Day](admissions-dday-implementation-20261120.md): 운영 DB 설치·초기12개 연동·보존/권한 PASS. WEB 운영 배포·관리자/MY 확인. APP 출시 별도.
 
