@@ -1,6 +1,6 @@
 # 논술 재시도 최적화·Evidence ID·중단 복구 — 2026-11-22
 
-상태: 최소 인용 위치 보정 구현·격리 검증 DONE, 운영 배포 사후 기록 예정. 의미적 부분 수정·원인별 상한·응답불확정 복구는 설계 PARTIAL. 기존 [운영 분석](essay-lab-stability-20261122.md), [대시보드](lab-dashboard-implementation-20261122.md), [관리자 복구](admin-run-recovery-20261122.md)를 계승한다. 신규 DB·기존 학생 action 승인으로 해석하지 않는다.
+상태: 최소 인용 위치 보정 구현·격리 검증·운영 배포 DONE. 의미적 부분 수정·원인별 상한·응답불확정 복구는 설계 PARTIAL. 기존 [운영 분석](essay-lab-stability-20261122.md), [대시보드](lab-dashboard-implementation-20261122.md), [관리자 복구](admin-run-recovery-20261122.md)를 계승한다. 신규 DB·기존 학생 action 승인으로 해석하지 않는다.
 
 ## 실제 코드 경로와 12회 원인
 
@@ -82,3 +82,11 @@ billing reserved지만 credits_required0, 연결 원장0. 보관된 심사용 e7
 ## 운영·승인 경계
 
 운영 결과는 아래 사후 기록으로 확정한다. WEB은 기존 대시보드 Pages e55b4622 유지. 관리자 recovery DB 패키지와 불확정 resolution은 미설치이며 실제 요청 재진행·복원·삭제·보관·환불·원장 변경0. 롤백은 Worker 이전 bdee88d0 100% 재배포로 코드만 되돌리고 새 감사/학생 결과를 지우지 않는다. 실행 중 요청을 강제로 중단·재제출하지 않는다.
+
+### 운영 사후 확인 — 2026-11-22 16:32 KST
+
+Worker `204cfb37-0b73-4f33-9f6c-86efc178539c` 100% 배포 DONE, 코드 commit `685e772928bc164a5be09c639a365e98aa9d09fe`. [배포 증거](evidence/essay-retry-quality-20261122-deployment.json): 76개 중2개 변경/74개 보존, 전체 다운로드 hash 일치, binding/compatibility/limits 설정 동일. WEB Pages e55b4622 및 LIVE/Finance Automatic 유지. 신규 DB 설치0, Provider 검증 호출0, 실학생 action0.
+
+[전후 보존](evidence/essay-retry-quality-20261122-after.json): 고정9요청의 row/snapshot/answer/result/checkpoint/retry/billing/ledger/hidden hash 및15개 RPC 정의/ACL/owner 동일. q0 결과 보존·q1 응답불확정과 무료재첨삭 원장0 유지. DB 계정 권한 확대0. 과거 해시가 동일하다는 것은 배포 이후 미래 요청의 품질 향상을 입증하지 않는다.
+
+최종 경계: 실제 인용 위치 보정은 DONE. 의미적 부분 수정/Evidence span 계약/원인별 상한/불확정 q1 전용 실행은 PARTIAL(설계, 운영 미활성). 실운영 시간·비용 개선 및 실제 학생 복구는 NOT TESTED. 신규 DB 정책과 q1 재실행은 별도 승인 대상이며 이번 기록으로 승인된 것으로 취급하지 않는다.
