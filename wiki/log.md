@@ -1,3 +1,7 @@
+## 2026-11-22 — 관리자 복구 Worker 어댑터 경로 누락 수정
+
+기존 배포 번들503/Worker0 재현. WEB 두 허용목록에 recover 경로 추가, 실제adapter 통합18/서버101·타입·린트·번들 PASS. Pages2faad0e4·정적3173/설정 보존, Worker/DB 변경0·실학생실행0. [원인·검증·재승인](admin-recovery-binding-fix-20261122.md).
+
 ## 2026-11-22 — 승인 복구 1회 제출 후 응답 실패
 
 대상03629605 q1만 승인·조건 확인 후 관리자 제출1회. UI응답확인실패, 새attempt/retry/감사0, q0/원장 불변·처리중1 유지. 추가실행0, 원인 미확정·재실행 재승인 필요. [실행 증거](admin-run-recovery-execution-20261122.md).

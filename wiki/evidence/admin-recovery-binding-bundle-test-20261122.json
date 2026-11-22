@@ -1,0 +1,24 @@
+{
+  "networkCalls": 0,
+  "syntheticOnly": true,
+  "results": [
+    {
+      "label": "before",
+      "status": 503,
+      "body": {
+        "code": "REQUEST_UNCERTAIN"
+      },
+      "dbCalls": 1,
+      "workerCalls": 0
+    },
+    {
+      "label": "after",
+      "status": 409,
+      "body": {
+        "code": "ACTIVE_LEASE"
+      },
+      "dbCalls": 1,
+      "workerCalls": 1
+    }
+  ]
+}
