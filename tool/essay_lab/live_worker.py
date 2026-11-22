@@ -461,6 +461,9 @@ class Worker:
             'cost_amount':result.cost_amount},)))
         try:
             out=parse_provider(result.raw,claim)
+            alignment=quote_alignment_receipt(result.raw,out)
+            if alignment is not None:
+                (yield ('receipt_sink', (alignment,)))
             try:receipt=(yield ('review_source', (evaluation,value,out,)))
             except (TimeoutError, URLError):raise Unknown('REVIEW_UNAVAILABLE') from None
             local=self.reviewer.verify(receipt,evaluation,value,out)
@@ -500,12 +503,48 @@ def output_schema():
 def parse_provider(raw,claim):
     out=strict_json(raw)
     require(type(out) is dict,'OUTPUT_OBJECT')
-    # Sole explicit wire adaptation; unknown keys, including Pilot uncertainty_note,
+    # Explicit wire adaptations only; unknown keys, including Pilot uncertainty_note,
     # are rejected, not silently stripped. SQL derives not_assessable uncertainty.
     if type(out.get('sentence_feedback')) is list:
         for s in out['sentence_feedback']:
             if type(s) is dict and s.get('example','absent') is None:s.pop('example')
     try:
-        return validate_output(out,claim)
+        return validate_output(align_exact_quote_offsets(out,claim),claim)
     except (KeyError, TypeError, AttributeError, OverflowError):
         raise Invalid("INVALID_FIELD_TYPE") from None
+
+
+def align_exact_quote_offsets(out, claim):
+    """Wire coordinate normalization, not quote correction or evaluation repair.
+
+    Only a verbatim UNIQUE substring in the hash-bound original answer can supply
+    coordinates. No Unicode/space normalization, fuzzy match, quote substitution,
+    fallback occurrence or type coercion. validate_output remains authoritative.
+    """
+    result=deepcopy(out)
+    answer=claim.get('answer')
+    if type(answer) is not str or out.get('answer_hash')!=sha256(answer.encode()).hexdigest():
+        return result
+    sentences=result.get('sentence_feedback')
+    if type(sentences) is not list or len(sentences)>5:return result
+    for sentence in sentences:
+        if type(sentence) is not dict:continue
+        quote=sentence.get('quote');a=sentence.get('start');b=sentence.get('end')
+        if type(quote) is not str or not quote or type(a) is not int or type(b) is not int:continue
+        if 0<=a<b<=len(answer) and answer[a:b]==quote:continue
+        start=answer.find(quote)
+        if start<0 or answer.find(quote,start+1)!=-1:continue
+        sentence['start']=start;sentence['end']=start+len(quote)
+    return result
+
+
+def quote_alignment_receipt(raw, output):
+    """Hash/coordinate-only audit; never persist a second answer or candidate body."""
+    original=strict_json(raw)
+    changes=[]
+    for index,(before,after) in enumerate(zip(original.get('sentence_feedback',[]),output['sentence_feedback'])):
+        if (before['start'],before['end'])!=(after['start'],after['end']):
+            changes.append(dict(index=index,before=[before['start'],before['end']],after=[after['start'],after['end']]))
+    if not changes:return None
+    return dict(component='quote_offset_alignment',version='exact-unique-offset-v1',
+        output_sha256=digest(output),raw_output_sha256=sha256(raw.encode()).hexdigest(),adjustments=changes)

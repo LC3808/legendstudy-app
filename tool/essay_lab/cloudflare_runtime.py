@@ -13,6 +13,12 @@ from .mixed_math_runtime import MixedMathWorker
 from .evaluation_policy import question_engine, policy_family
 
 def receipt_checkpoint_key(value):
+    if value.get('component')=='quote_offset_alignment':
+        # Separate namespace: never collide with Provider/review receipts or
+        # become a billable call in the operations receipt view.
+        require(set(value)=={'component','version','output_sha256','raw_output_sha256','adjustments'}
+                and value['version']=='exact-unique-offset-v1','INVALID_ALIGNMENT_RECEIPT')
+        return 'quote-alignment-'+digest(value)
     # A rejected output has no successful Provider output receipt. Keep the
     # symbolic failure durable so the existing failure/Credit path can finish.
     if value.get('component')=='validation_failure':

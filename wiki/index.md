@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+논술 재시도 최적화 / Evidence ID·정확인용·부분수정: [11/22 구현·설계·승인 경계](essay-retry-quality-20261122.md).
+
 논술 대시보드 개편 / 완료율·처리시간·재시도 분석: [Claude 채택·PHASE 1 운영·PHASE 2 근거](lab-dashboard-implementation-20261122.md).
 
 관리자 첨삭 복구·완료 / 저장 결과 복원·부분 재시도: [11/22 구현·격리 검증·DB 승인 패키지](admin-run-recovery-20261122.md).
