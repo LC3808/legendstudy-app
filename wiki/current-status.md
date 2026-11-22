@@ -1,6 +1,6 @@
 # Current Status
 
-[11/22 복구 운영](admin-run-recovery-deployment-20261122.md): DB·WEB·Worker·진단 PASS. 실제 재실행/새 정책은 별도 승인.
+[11/22 복구 실행](admin-run-recovery-execution-20261122.md): 승인1회 제출·응답실패. 새시도0·q0/원장 보존. 추가실행 승인 필요.
 
 [11/20 수시 D-Day](admissions-dday-implementation-20261120.md): 운영 DB 설치·초기12개 연동·보존/권한 PASS. WEB 운영 배포·관리자/MY 확인. APP 출시 별도.
 

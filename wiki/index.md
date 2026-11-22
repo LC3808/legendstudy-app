@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+관리자 복구 실요청1건 실행: [11/22 응답 실패·보존·추가 승인](admin-run-recovery-execution-20261122.md).
+
 관리자 복구 운영 설치·WEB/Worker 배포: [11/22 적용·진단·보존·남은 승인](admin-run-recovery-deployment-20261122.md).
 
 관리자 불확정 복구 / 부분 재생성2+full1·상한: [11/22 후속 구현·검증·승인 패키지](essay-quality-followup-20261122.md).

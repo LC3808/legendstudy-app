@@ -2,6 +2,8 @@
 
 상태: **DB·WEB·Worker·관리자 진단 DONE**. 실제 학생 재실행 및 새 부분 재생성/재시도 상한 활성화는 **NOT TESTED / 승인 제외**.
 
+후속: [Owner 승인1회 실제 제출·응답 실패·보존 확인](admin-run-recovery-execution-20261122.md). 아래 승인 제외는 설치 당시 범위다.
+
 ## 승인과 적용 범위
 
 Owner가 APP/SQL/Worker `5cf2f4ba610fe834c3955dbbfc000f644b3971ed`, WEB `75397907eba9ff1f7c2e68382db0f0714a68bd79`를 기준으로 운영 설치·배포·진단을 명시 승인했다. AGENTS §4 기본 직접 적용 절차의 설치 승인을 이번 지시로 확인하고, 준비된 SQL을 변경 없이 적용했다. 기존 요청 상태·결과·원장 변경, 학생 재실행, 부분 재생성/새 상한 활성화, 결제·환불은 제외했다. [기존 계약과 7개 보존 검토](admin-run-recovery-20261122.md), [후속 구현·검증](essay-quality-followup-20261122.md)을 계승한다.
