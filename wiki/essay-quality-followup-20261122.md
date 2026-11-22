@@ -1,5 +1,7 @@
 # 관리자 불확정 복구·부분 재생성·상한 후보 — 2026-11-22
 
+현재 운영: Owner 승인으로 DB·WEB·Worker 설치 및 실제 관리자 진단 완료. 실제 재실행0, 신규 품질정책 비활성. [배포·검증·추가 승인](admin-run-recovery-deployment-20261122.md). 아래 설치 전 상태는 구현 당시 이력이다.
+
 상태: 코드·격리 검증 DONE, 운영 DB 설치/복구 활성화 PARTIAL(Owner 승인 대기), 새 정책의 실제 품질·완료율·시간·token 효과 NOT TESTED. 기존 [대시보드 운영](lab-dashboard-implementation-20261122.md), [정확 인용 보정](essay-retry-quality-20261122.md)은 재구현하지 않았다. [관리자 복구 계약](admin-run-recovery-20261122.md)의 A/B/C/D를 확장한다.
 
 ## Owner 결정과 보존 검토

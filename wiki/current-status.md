@@ -1,10 +1,10 @@
 # Current Status
 
-[11/22 복구·상한](essay-quality-followup-20261122.md): DB55/Worker166 PASS·설치승인대기. [보정 운영](essay-retry-quality-20261122.md).
+[11/22 복구 운영](admin-run-recovery-deployment-20261122.md): DB·WEB·Worker·진단 PASS. 실제 재실행/새 정책은 별도 승인.
 
 [11/20 수시 D-Day](admissions-dday-implementation-20261120.md): 운영 DB 설치·초기12개 연동·보존/권한 PASS. WEB 운영 배포·관리자/MY 확인. APP 출시 별도.
 
-[11/22 첨삭 복구](admin-run-recovery-20261122.md): 구현·격리PASS·DB승인대기. 실학생복구0.
+[11/22 첨삭 복구](admin-run-recovery-20261122.md): 운영 설치·진단 PASS. 실학생복구0.
 
 [11/13 35대학 브랜드 재점검·운영](essay-university-brand-audit-20261113.md).
 

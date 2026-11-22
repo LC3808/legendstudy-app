@@ -1,5 +1,7 @@
 # 관리자 첨삭 복구·완료 — 2026-11-22
 
+현재 운영: Owner 승인으로 DB·WEB·Worker 설치 및 실제 관리자 진단 완료. 실제 재실행0, 신규 품질정책 비활성. [배포·검증·추가 승인](admin-run-recovery-deployment-20261122.md). 아래 설치 전 상태는 구현 당시 이력이다.
+
 상태: 구현·격리 검증 DONE / 운영 DB 설치·WEB/Worker 배포 BLOCKED(별도 승인 대기), 실제 학생 복구 NOT TESTED. 기존 [안정성 점검](essay-lab-stability-20261122.md)의 분석·최소 패치 운영 배포를 완료한 뒤 이어서 수행한다. [관리자 요청 관리](admin-lab-run-management-20261120.md), [보관의 운영 제외](admin-archived-run-operations-20261120.md), [장기 보존 전략](longitudinal-learning-admissions-data-strategy.md)을 계승한다.
 
 후속: [E 불확정 복구·부분 재생성·상한 구현과 새 설치 hash](essay-quality-followup-20261122.md). 기존45검사는 최초 후보 이력이며 최신 확장 SQL은55검사·별도 승인 대상이다.

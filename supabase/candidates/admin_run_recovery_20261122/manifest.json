@@ -1,5 +1,5 @@
 {
-  "status": "NOT_APPLIED",
+  "status": "APPLIED",
   "project_id": "stlhijzpjfgwwdgunlsd",
   "migration_cli_generated_name": "20261122064411_admin_run_recovery_20261122.sql",
   "install_sha256": "c52fb2c42b8a88264f671b78629a1fc89c4307b0d66e0015c1f62cd32676db50",
@@ -264,5 +264,7 @@
       "owner": "postgres",
       "signature": "essay_exam_recovery_quality_ready()"
     }
-  ]
+  ],
+  "applied_migration_version": "20261122115251",
+  "deployment_evidence": "wiki/admin-run-recovery-deployment-20261122.md"
 }

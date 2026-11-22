@@ -1,3 +1,7 @@
+## 2026-11-22 — 관리자 복구 운영 설치 및 진단
+
+Owner 승인 SQL 설치·권한 PASS, Worker b28790b2/WEB cab719e1 운영. 배포후 9요청/15RPC hash 불변, 관리자 진단 q0보존/q1불확정·원장0 확인. 실제 실행0·새 품질정책 비활성. [운영 증거·추가 승인](admin-run-recovery-deployment-20261122.md).
+
 ## 2026-11-22 — 관리자 불확정 문항 복구·부분 수정 상한 후보
 
 완료 보존·새 attempt/fence·국소2/full1·관리자 검토대기 구현. DB55/배포본후보166/WEB2252 PASS,후속35·build PASS. 운영9요청/15RPC 불변, 실제학생action0. 설치/복구배포 승인대기, 품질 비열등성·실측효과 미확인으로 자동정책 비활성. [상세·새 SQL hash·원복](essay-quality-followup-20261122.md).
