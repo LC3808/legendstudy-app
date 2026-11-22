@@ -2,6 +2,7 @@
 import json
 import math
 import time
+import io
 from uuid import UUID
 from urllib.error import HTTPError
 from .operating_host import OperatingTransport,ORIGIN,RPCS
@@ -26,7 +27,7 @@ def parse_public_exams(raw):
     require(all(isinstance(item,str) and item.strip() for item in items),'PUBLIC_SCOPE_INVALID')
     return [str(UUID(item.strip())) for item in items]
 
-async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
+async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608,error_limit=0):
     from workers import fetch
     from js import AbortController,setTimeout,clearTimeout
     controller=AbortController.new()
@@ -39,7 +40,21 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
         response=await fetch(url,method='POST' if body is not None else 'GET',headers=headers,
                              body=body,redirect='manual',signal=controller.signal)
         status=response.status
-        if status!=200:raise attach_transport_diagnostic(HTTPError(url,status,'HTTP_FAILURE',None,None),diagnostic('http_status'))
+        if status!=200:
+            # Only explicit admin RPC callers retain a bounded error body, never logs.
+            error_body=b''
+            if error_limit:
+                require(type(error_limit) is int and 0<error_limit<=4096,'ERROR_LIMIT_INVALID')
+                reader=response.js_response.body.getReader();parts=[];size=0
+                while True:
+                    chunk=await reader.read()
+                    if chunk.done:break
+                    piece=bytes(chunk.value.to_py());size+=len(piece)
+                    if size>error_limit:
+                        await reader.cancel();parts=[];break
+                    parts.append(piece)
+                error_body=b''.join(parts)
+            raise attach_transport_diagnostic(HTTPError(url,status,'HTTP_FAILURE',None,io.BytesIO(error_body)),diagnostic('http_status'))
         phase='response_body'
         # Reader caps before full allocation; never record response/error content.
         reader=response.js_response.body.getReader()
@@ -66,6 +81,8 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
 class AsyncOperatingTransport(OperatingTransport):
     def __init__(self,public_exams=(),**kwargs):
         super().__init__(**kwargs,open_url=lambda *_:None)
+        # The deployed legacy parent validates origin but does not retain it.
+        self.origin=kwargs['origin']
         require(type(public_exams) in (list,tuple) and len(public_exams)<=256,'PUBLIC_SCOPE_INVALID')
         self.public_exams={str(UUID(exam)) for exam in public_exams}
     async def _request(self,path,token,payload=None):

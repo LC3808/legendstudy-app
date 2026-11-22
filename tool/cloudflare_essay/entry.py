@@ -111,6 +111,7 @@ class Default(WorkerEntrypoint):
 
     async def fetch(self,request):
         headers={'Cache-Control':'no-store'}
+        stage='service_auth'
         try:
             secret=getattr(self.env,'ESSAY_WORKER_SERVICE_TOKEN','')
             require(len(secret)>=32 and hmac.compare_digest(request.headers.get('X-Essay-Service-Token',''),secret),'ACCESS_DENIED')
@@ -118,27 +119,48 @@ class Default(WorkerEntrypoint):
             raw=await request.text();require(len(raw.encode())<=4096,'INVALID_REQUEST')
             payload=json.loads(raw);path=urlparse(request.url).path
             token=request.headers.get('Authorization','').removeprefix('Bearer ')
+            stage='transport_init'
             t=self.transport()
-            if path in ('/admin-exam-retry','/admin-exam-recover'):
+            if path in ('/admin-exam-retry','/admin-exam-recover','/admin-exam-recovery-check'):
                 require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
                 async def admin_rpc(name,args,caller):
+                    nonlocal stage
+                    stage='admin_read' if name in ('admin_lab_run_capabilities','admin_lab_run_recovery') else 'admin_mutation'
                     # Fixed functions, original JWT: SQL require_admin is authoritative.
                     require(name in ('admin_lab_run_capabilities','admin_lab_manage_run','admin_lab_run_recovery','admin_lab_recover_run'),'ACCESS_DENIED')
                     try:
-                        raw=await fetch_bytes(t.origin+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+caller,'Content-Type':'application/json'},json.dumps(args))
+                        raw=await fetch_bytes(t.origin+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+caller,'Content-Type':'application/json'},json.dumps(args),error_limit=4096)
                         return json.loads(raw)
                     except HTTPError as error:
                         allowed={'RUN_ARCHIVED','ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','DIAGNOSIS_CHANGED','RECOVERY_NOT_ALLOWED','BILLING_INCONSISTENT','RECOVERY_INTENT_REQUIRED'}
                         try: code=json.loads(error.read(4096)).get('message')
                         except Exception: code=None
-                        raise Unknown(code if code in allowed else 'ADMIN_REQUEST_REJECTED') from None
+                        raise Unknown(code if code in allowed else 'ADMIN_REQUIRED' if error.code in (401,403) else 'ADMIN_RPC_UNAVAILABLE' if stage=='admin_read' else 'RECOVERY_RESPONSE_UNCERTAIN') from None
+                async def admission(subject,exam):
+                    nonlocal stage
+                    stage='runtime_admission'
+                    return await self.admission(t,subject,exam)
+                async def finish(action):
+                    nonlocal stage
+                    stage='verify_finish'
+                    return await finish_saved_recovery(action,t.rpc,REGISTRY)
                 async def enqueue(value):
+                    nonlocal stage
+                    stage='dispatch'
                     await self.env.ESSAY_QUEUE.send(json.dumps(value))
+                if path=='/admin-exam-recovery-check':
+                    require(type(payload) is dict and set(payload)=={'run_id'},'INVALID_REQUEST')
+                    run=str(UUID(payload['run_id']))
+                    diagnosis=await admin_rpc('admin_lab_run_recovery',{'p_run':run},token)
+                    require(type(diagnosis) is dict and diagnosis.get('version')=='admin-run-recovery-v1' and diagnosis.get('run_id')==run,'ADMIN_CONTRACT_REQUIRED')
+                    await admission(diagnosis['subject_id'],diagnosis['exam_id'])
+                    stage='worker_rpc_read'
+                    require(await t.rpc('essay_exam_recovery_quality_ready',{})=='quality-repair-2-1-v1','ADMIN_CONTRACT_REQUIRED')
+                    return Response.json({'version':'admin-recovery-check-v1','run_id':run,'ready':True,'provider_called':False,'mutation_performed':False},headers=headers)
                 if path=='/admin-exam-recover':
-                    result=await recover_admin_run(payload,token,admin_rpc,lambda subject,exam:self.admission(t,subject,exam),enqueue,
-                        lambda action:finish_saved_recovery(action,t.rpc,REGISTRY))
+                    result=await recover_admin_run(payload,token,admin_rpc,admission,enqueue,finish)
                     return Response.json(result,status=202 if result['state']=='queued' else 409 if result['state']=='blocked' else 200,headers=headers)
-                result=await retry_admin_run(payload,token,admin_rpc,lambda subject,exam:self.admission(t,subject,exam),enqueue)
+                result=await retry_admin_run(payload,token,admin_rpc,admission,enqueue)
                 return Response.json(result,status=202,headers=headers)
             subject=await t.subject(token)
             if path=='/connection-check':
@@ -182,6 +204,12 @@ class Default(WorkerEntrypoint):
         except Exception as error:
             code=str(error)
             safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else type(error).__name__
+            if locals().get('path') in ('/admin-exam-retry','/admin-exam-recover','/admin-exam-recovery-check'):
+                known={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED','DIAGNOSIS_CHANGED','RECOVERY_NOT_ALLOWED','BILLING_INCONSISTENT','RECOVERY_INTENT_REQUIRED','RUN_ARCHIVED','ADMIN_RPC_UNAVAILABLE','RECOVERY_RESPONSE_UNCERTAIN','INVALID_REQUEST'}
+                code=safe if safe in known else ('RECOVERY_RESPONSE_UNCERTAIN' if stage in ('admin_mutation','verify_finish','dispatch') else 'RECOVERY_RUNTIME_INIT_FAILED' if stage in ('transport_init','runtime_admission') else 'ADMIN_RPC_UNAVAILABLE' if stage in ('admin_read','worker_rpc_read') else 'RECOVERY_HANDLER_FAILED')
+                # Fixed stage/code only; never exception text, answers, tokens or IDs.
+                print('ESSAY_ADMIN_FAILURE '+stage+' '+code)
+                return Response.json({'code':code,'stage':stage},status=403 if code in ('ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED') else 422 if code=='INVALID_REQUEST' else 503 if code in ('RECOVERY_RESPONSE_UNCERTAIN','RECOVERY_RUNTIME_INIT_FAILED','ADMIN_RPC_UNAVAILABLE','RECOVERY_HANDLER_FAILED') else 409,headers=headers)
             print('ESSAY_REQUEST_FAILURE '+safe)
             if safe=='RUN_ARCHIVED':return Response.json({'code':safe},status=409,headers=headers)
             admin_codes={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED','DIAGNOSIS_CHANGED','RECOVERY_NOT_ALLOWED','BILLING_INCONSISTENT','RECOVERY_INTENT_REQUIRED'}

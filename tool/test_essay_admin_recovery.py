@@ -324,7 +324,7 @@ class RecoveryHttpTests(unittest.IsolatedAsyncioTestCase):
         events = []
         identity = dict(version='admin-run-recovery-v1', action='recover', action_id=KEY,
                         run_id=RUN, subject_id=OWNER, exam_id=EXAM, recovery_type='B' if retry else 'A')
-        async def rpc_fetch(url, headers, body):
+        async def rpc_fetch(url, headers, body, **kwargs):
             name = url.rsplit('/', 1)[-1]
             events.append((name, json.loads(body), headers['Authorization']))
             self.assertEqual(headers['Authorization'], 'Bearer original-admin')
@@ -382,7 +382,7 @@ class RecoveryHttpTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_real_fetch_student_denial_returns_403_and_never_starts_work(self):
         (status, body, _), events = await self.request(denied=True)
-        self.assertEqual((status, body), (403, {'code': 'ADMIN_REQUIRED'}))
+        self.assertEqual((status, body), (403, {'code': 'ADMIN_REQUIRED', 'stage': 'admin_read'}))
         self.assertEqual(len(events), 1)
 
     async def test_service_auth_and_execution_flag_block_before_admin_rpc(self):
