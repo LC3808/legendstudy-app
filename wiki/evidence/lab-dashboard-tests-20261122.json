@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-22",
+  "tests": {
+    "passed": 2249,
+    "skipped": 5,
+    "typecheck": "PASS",
+    "changed_eslint": "PASS",
+    "build_pages": 171,
+    "wiki_handoff": "PASS"
+  },
+  "local_widths": [
+    320,
+    375,
+    390,
+    430,
+    768,
+    1440
+  ],
+  "production_css_widths": [
+    320,
+    375,
+    391,
+    431,
+    768,
+    1440
+  ],
+  "overflow": false,
+  "production_counts": {
+    "d7": {
+      "requests": 9,
+      "completed": 8,
+      "completion_rate": 88.9,
+      "average_seconds": 535.195205125
+    },
+    "today": {
+      "requests": 5,
+      "completed": 4,
+      "completion_rate": 80
+    }
+  },
+  "phase2": {
+    "observed_at": "2026-11-22T07:13:56.117846Z",
+    "retry_events": 12,
+    "retry_runs": 6,
+    "retried_then_completed": 6,
+    "automatic_recovery_count": null,
+    "causes": {
+      "INDEPENDENT_REVIEW_NOT_ACCEPTED": 8,
+      "EXACT_QUOTE": 4
+    },
+    "cost_usd": null,
+    "source": "essay-stability-20261122-db.json"
+  },
+  "production_student_actions": 0,
+  "db_mutations": 0,
+  "provider_calls": 0,
+  "payment_or_refund": 0,
+  "worker_deployments": 0
+}
