@@ -25,8 +25,22 @@ class Unknown(Exception):
 
 class ProviderFailure(Exception):
     """Definitive unusable response, not a DB/transport retry instruction."""
-    def __init__(self, code='PROVIDER_FAILED', *, usage=None):
-        super().__init__(code);self.usage=usage
+    def __init__(self, code='PROVIDER_FAILED', *, usage=None, http_status=None):
+        super().__init__(code);self.usage=usage;self.http_status=http_status
+
+
+def execution_failure(error, stage):
+    """Only bounded symbolic metadata; no answer, response, request or secret."""
+    from .transport_diagnostics import validate_transport_diagnostic
+    code=str(error)
+    safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else 'UNCLASSIFIED_FAILURE'
+    status=getattr(error,'http_status',None)
+    value=dict(component='execution_failure',stage=stage,code=safe,
+        provider_call='not_started' if stage in ('binding','input') else 'possible',
+        http_status=status if type(status) is int and 400<=status<=599 else None)
+    diagnostic=getattr(error,'transport_diagnostic',None)
+    if diagnostic is not None:value['transport']=validate_transport_diagnostic(diagnostic)
+    return value
 
 
 def encoded(value):
@@ -353,8 +367,11 @@ class OpenAIResponses:
                 require(len(raw)<=524288,'PROVIDER_RESPONSE_SIZE'); data=strict_json(raw)
         except HTTPError as error:
             # 5xx may have processed a request; preserve unknown rather than infer release.
-            if error.code>=500:raise Unknown('PROVIDER_UNAVAILABLE') from None
-            raise ProviderFailure('PROVIDER_REJECTED') from None
+            from .transport_diagnostics import attach_transport_diagnostic
+            failure=Unknown('PROVIDER_UNAVAILABLE') if error.code>=500 else ProviderFailure('PROVIDER_REJECTED',http_status=error.code)
+            diagnostic=getattr(error,'transport_diagnostic',None)
+            if diagnostic is not None:attach_transport_diagnostic(failure,diagnostic)
+            raise failure from None
         except (TimeoutError,URLError):raise Unknown('PROVIDER_NETWORK_UNKNOWN') from None
         require(type(data) is dict, 'PROVIDER_RESPONSE_OBJECT')
         if data.get('status')!='completed':raise ProviderFailure('INCOMPLETE_OR_REFUSED')
@@ -408,13 +425,17 @@ class Worker:
         self.authorize(evaluation)
         claim=(yield ('rpc', ('essay_claim',{'p_evaluation':evaluation},)))
         args={'p_evaluation':evaluation,'p_run':claim['run_id'],'p_token':claim['lease_token']}
-        binding=None
+        binding=None; stage='binding'
         try:
             binding=self.bind_claim(claim)
+            stage='input'
             value=package(claim,self.cache)
+            stage='provider'
             result=(yield ('provider.evaluate', (value,)))
+            stage='identity'
             self.check_result_identity(result)
         except (Unknown,ProviderFailure) as error:
+            (yield ('receipt_sink', (execution_failure(error,stage),)))
             # Usage, if supplied by the adapter, is recorded before terminal/fencing change.
             # A telemetry transport error escapes: do not hide it as provider failure.
             if binding and error.usage is not None:
@@ -422,11 +443,13 @@ class Worker:
             if isinstance(error,Unknown):
                 (yield ('rpc', ('essay_timeout',args,)));return 'reconciling'
             (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
-        except Invalid:
+        except Invalid as error:
+            (yield ('receipt_sink', (execution_failure(error,stage),)))
             (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         try:
             telemetry=telemetry_payload(args,result,binding) if binding else None
-        except Invalid:
+        except Invalid as error:
+            (yield ('receipt_sink', (execution_failure(error,'telemetry'),)))
             (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         if telemetry is not None:
             (yield ('rpc', ('essay_record_provider_telemetry',telemetry,)))

@@ -1,9 +1,12 @@
 """Cloudflare fetch adapter over unchanged Provider request/response rules."""
 import json
+import math
+import time
 from uuid import UUID
 from urllib.error import HTTPError
 from .operating_host import OperatingTransport,ORIGIN,RPCS
 from .live_worker import require,Unknown
+from .transport_diagnostics import FetchFailure,attach_transport_diagnostic
 
 def parse_public_exams(raw):
     """Read legacy JSON or compact UUID CSV without broadening authorization."""
@@ -28,10 +31,16 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
     from js import AbortController,setTimeout,clearTimeout
     controller=AbortController.new()
     timer=setTimeout(controller.abort.bind(controller),timeout*1000)
+    started=time.monotonic();phase='request';status=None
+    def diagnostic(kind):
+        return dict(kind=kind,phase=phase,elapsed_ms=math.ceil(max(0,time.monotonic()-started)*1000),
+                    deadline_ms=math.ceil(timeout*1000),http_status=status)
     try:
         response=await fetch(url,method='POST' if body is not None else 'GET',headers=headers,
                              body=body,redirect='manual',signal=controller.signal)
-        if response.status!=200:raise HTTPError(url,response.status,'HTTP_FAILURE',None,None)
+        status=response.status
+        if status!=200:raise attach_transport_diagnostic(HTTPError(url,status,'HTTP_FAILURE',None,None),diagnostic('http_status'))
+        phase='response_body'
         # Reader caps before full allocation; never record response/error content.
         reader=response.js_response.body.getReader()
         parts=[];size=0
@@ -40,9 +49,18 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
             if chunk.done:break
             piece=bytes(chunk.value.to_py());size+=len(piece)
             if size>limit:
-                await reader.cancel();raise ValueError('RESPONSE_TOO_LARGE')
+                failure=FetchFailure(diagnostic('response_too_large'))
+                try:await reader.cancel()
+                except Exception:pass
+                raise failure
             parts.append(piece)
         return b''.join(parts)
+    except (HTTPError,FetchFailure):raise
+    except Exception:
+        # Only this request's deadline controller proves a timeout. Other aborts
+        # remain network/read ambiguity; no raw exception or response is copied.
+        kind='timeout' if bool(controller.signal.aborted) else 'body_read' if phase=='response_body' else 'network'
+        raise FetchFailure(diagnostic(kind)) from None
     finally:clearTimeout(timer)
 
 class AsyncOperatingTransport(OperatingTransport):
@@ -77,4 +95,8 @@ async def provider_transport(request,timeout):
         raw=await fetch_bytes(request.full_url,dict(request.header_items()),request.data.decode(),timeout,524288)
         return BufferedResponse(raw)
     except HTTPError:raise
+    except FetchFailure as error:
+        code={'timeout':'PROVIDER_TIMEOUT','network':'PROVIDER_NETWORK_UNKNOWN',
+              'body_read':'PROVIDER_BODY_READ_UNKNOWN','response_too_large':'PROVIDER_RESPONSE_TOO_LARGE'}[error.transport_diagnostic['kind']]
+        raise attach_transport_diagnostic(Unknown(code),error.transport_diagnostic) from None
     except Exception:raise Unknown('PROVIDER_NETWORK_UNKNOWN') from None

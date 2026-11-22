@@ -22,6 +22,15 @@ def receipt_checkpoint_key(value):
                 all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code),
                 'INVALID_FAILURE_RECEIPT')
         return 'validation-failure-'+digest(value)
+    if value.get('component')=='execution_failure':
+        from .live_worker import execution_failure, ProviderFailure
+        from .transport_diagnostics import attach_transport_diagnostic
+        require(value.get('stage') in ('binding','input','provider','identity','telemetry'), 'INVALID_FAILURE_RECEIPT')
+        failure=ProviderFailure(value.get('code'),http_status=value.get('http_status'))
+        if 'transport' in value:attach_transport_diagnostic(failure,value['transport'])
+        canonical=execution_failure(failure,value['stage'])
+        require(value==canonical,'INVALID_FAILURE_RECEIPT')
+        return 'execution-failure'
     return 'receipt-'+value['output_sha256']
 
 class CloudflareExamRuntime:
@@ -77,8 +86,12 @@ class CloudflareExamRuntime:
                 try:
                     receipt=await source(evaluation,value,output)
                 except Exception as error:
+                    from .transport_diagnostics import validate_transport_diagnostic
                     await journal.begin(prefix+'independent-review-error')
-                    await journal.write(prefix+'independent-review-error',{'error_type':type(error).__name__})
+                    failure={'error_type':type(error).__name__}
+                    diagnostic=getattr(error,'transport_diagnostic',None)
+                    if diagnostic is not None:failure['transport']=validate_transport_diagnostic(diagnostic)
+                    await journal.write(prefix+'independent-review-error',failure)
                     raise
                 await journal.begin(prefix+'review')
                 await journal.write(prefix+'review',receipt)
