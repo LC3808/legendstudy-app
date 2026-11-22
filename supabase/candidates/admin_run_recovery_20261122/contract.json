@@ -1,0 +1,156 @@
+{
+  "diagnosis": {
+    "version": "admin-run-recovery-v1",
+    "run_id": "10000000-0000-4000-8000-000000000001",
+    "subject_id": "00000000-0000-4000-8000-000000000002",
+    "exam_id": "00000000-0000-4000-8000-000000000003",
+    "as_of": "2026-11-22T07:00:00Z",
+    "created_at": "2026-11-22T00:00:00Z",
+    "last_execution_at": null,
+    "last_state_change_at": null,
+    "state": "reserved",
+    "hidden": false,
+    "active_lease": false,
+    "lease_until": "2026-11-22T00:15:00Z",
+    "retry_count": 0,
+    "diagnosis_token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "counts": {
+      "total": 2,
+      "completed": 1,
+      "failed": 1,
+      "recoverable": 0,
+      "unresolved": 0,
+      "stored_result": 0
+    },
+    "questions": [
+      {
+        "index": 0,
+        "question_id": "00000000-0000-4000-8000-000000000004",
+        "attempt": 0,
+        "key": "q0",
+        "state": "completed",
+        "readiness": "completed",
+        "reason": null
+      },
+      {
+        "index": 1,
+        "question_id": "00000000-0000-4000-8000-000000000005",
+        "attempt": 0,
+        "key": "q1",
+        "state": "failed",
+        "readiness": "retryable",
+        "reason": null
+      }
+    ],
+    "billing": {
+      "status": "reserved",
+      "credits_required": 1,
+      "reserved": 1,
+      "consumed": 0,
+      "released": 0,
+      "refunded": 0,
+      "ledger_count": 1,
+      "consistent": true,
+      "reserved_total": 1,
+      "recovery_eligible": true
+    },
+    "recovery": {
+      "allowed": true,
+      "type": "B",
+      "method": "retry_failed",
+      "reason": null,
+      "target_question_ids": [
+        "00000000-0000-4000-8000-000000000005"
+      ],
+      "additional_credit": 0,
+      "preserve_existing": true,
+      "rerun_question_count": 1
+    },
+    "history": [],
+    "worker_state": "inactive",
+    "recent_error": null,
+    "last_retry_at": null,
+    "error_scope": "One confirmed diagnostic from current question attempts; occurrence time is not recorded."
+  },
+  "execute": {
+    "version": "admin-run-recovery-v1",
+    "run_id": "10000000-0000-4000-8000-000000000001",
+    "subject_id": "00000000-0000-4000-8000-000000000002",
+    "exam_id": "00000000-0000-4000-8000-000000000003",
+    "action": "recover",
+    "action_id": "30000000-0000-4000-8000-000000000001",
+    "operation": "retry",
+    "state": "queued",
+    "recovery_type": "B",
+    "dispatch_required": true,
+    "generation": 1,
+    "reason": null,
+    "success": false
+  },
+  "execute_variants": {
+    "prepared": {
+      "operation": "verify_saved",
+      "state": "verification_required",
+      "dispatch_required": false,
+      "success": false
+    },
+    "completed": {
+      "operation": "completed",
+      "state": "completed",
+      "dispatch_required": false,
+      "success": true
+    },
+    "blocked": {
+      "operation": "blocked",
+      "state": "blocked",
+      "dispatch_required": false,
+      "success": false,
+      "reason": "RECONCILIATION_REQUIRED"
+    },
+    "prepared_retry": {
+      "operation": "verify_then_retry",
+      "state": "verification_required",
+      "dispatch_required": false,
+      "success": false
+    }
+  },
+  "history_item": {
+    "action_id": "30000000-0000-4000-8000-000000000001",
+    "actor": "00000000-0000-4000-8000-000000000001",
+    "recorded_at": "2026-11-22T07:00:00Z",
+    "state": "queued",
+    "operation": "retry",
+    "recovery_type": "B",
+    "reason": null,
+    "before_state": "reserved",
+    "after_state": "reserved"
+  },
+  "dashboard": {
+    "rpc": "admin_lab_recovery_operations(p_from timestamptz,p_to timestamptz)",
+    "response": {
+      "version": "admin-run-recovery-v1",
+      "as_of": "2026-11-22T07:00:00Z",
+      "from": "2026-11-16T00:00:00+09:00",
+      "to": "2026-11-23T00:00:00+09:00",
+      "attention_total": 1,
+      "attention_limit": 25,
+      "attention": [
+        {
+          "run_id": "10000000-0000-4000-8000-000000000001",
+          "state": "reserved",
+          "created_at": "2026-11-22T00:00:00Z",
+          "lease_until": "2026-11-22T00:15:00Z",
+          "reason": "INACTIVE_LEASE",
+          "question_total": 2,
+          "question_completed": 1
+        }
+      ],
+      "recover_success": 0,
+      "recover_success_scope": "Distinct runs completed within [from,to): successful A/D terminal recovery, or B/C accepted retry whose request key and generation still match the final latest retry. Later unrelated retry completion excluded.",
+      "recovery_history": [],
+      "stale_lease_count": 1,
+      "attention_scope": "All-time visible reserved requests with no active run/retry lease; this is not proof a Worker stopped.",
+      "stale_lease_scope": "Visible reserved requests with a recorded run/retry lease expired at least 15 minutes before as_of; unknown lease timestamps excluded."
+    }
+  }
+}

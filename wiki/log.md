@@ -1,3 +1,7 @@
+## 2026-11-22 — 관리자 첨삭 복구·완료 구현
+
+기존 진단·retry/finish 확장, 2단계 검증·멱등 감사·부분 재시도·UI/KPI 구현. DB45/Worker145/WEB2246 PASS(5 SKIP). SQL 승인 패키지 준비, 운영 미적용·실학생action0. [검증·원복·승인](admin-run-recovery-20261122.md).
+
 ## 2026-11-22 — 논술 LAB 운영 안정성 P0
 
 최근9요청/재시도12 read-only 분석: 품질검증 거절8+정확인용4, 6요청 모두완료. 무료재첨삭1건 응답불확정·복구차단. Worker111/WEB15/Finance226/로컬DB18 PASS, Worker bdee88d0·Pages c5348617 운영반영·실제3화면 확인. 기존9요청/checkpoint242/원장14/RPC15 해시보존, LIVE/Automatic 유지, 실학생action0. [상세·비용한계·검증·남은승인](essay-lab-stability-20261122.md).

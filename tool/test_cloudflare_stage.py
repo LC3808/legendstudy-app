@@ -90,10 +90,11 @@ class SessionTransportTests(unittest.IsolatedAsyncioTestCase):
         transport=object.__new__(AsyncOperatingTransport)
         transport.worker='synthetic-worker-token'
         transport._request=AsyncMock(return_value='exam-session-v1')
-        for name in ('essay_exam_session_ready','essay_exam_session_claim','essay_exam_session_checkpoint'):
+        for name in ('essay_exam_session_ready','essay_exam_session_claim','essay_exam_session_checkpoint',
+                     'essay_exam_recovery_context','essay_exam_recovery_finish'):
             await transport.rpc(name,{})
             transport._request.assert_awaited_with('/rest/v1/rpc/'+name,'synthetic-worker-token',{})
         transport._request.reset_mock()
-        for name in ('admin_report','math_session_submit','unlisted_rpc'):
+        for name in ('admin_report','admin_lab_recover_run','admin_lab_run_recovery','math_session_submit','unlisted_rpc'):
             with self.assertRaises(Invalid):await transport.rpc(name,{})
         transport._request.assert_not_awaited()

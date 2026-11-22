@@ -15,7 +15,8 @@ from essay_lab.live_worker import digest
 from essay_lab.evaluation_policy import question_engine, policy_family
 from registry_asset import REGISTRY
 import time
-from essay_lab.admin_run_actions import retry_admin_run
+from essay_lab.admin_run_actions import retry_admin_run,recover_admin_run
+from essay_lab.admin_run_recovery import finish_saved_recovery
 
 class Default(WorkerEntrypoint):
     async def math_child(self,payload):
@@ -109,21 +110,25 @@ class Default(WorkerEntrypoint):
             payload=json.loads(raw);path=urlparse(request.url).path
             token=request.headers.get('Authorization','').removeprefix('Bearer ')
             t=self.transport()
-            if path=='/admin-exam-retry':
+            if path in ('/admin-exam-retry','/admin-exam-recover'):
                 require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
                 async def admin_rpc(name,args,caller):
                     # Fixed functions, original JWT: SQL require_admin is authoritative.
-                    require(name in ('admin_lab_run_capabilities','admin_lab_manage_run'),'ACCESS_DENIED')
+                    require(name in ('admin_lab_run_capabilities','admin_lab_manage_run','admin_lab_run_recovery','admin_lab_recover_run'),'ACCESS_DENIED')
                     try:
                         raw=await fetch_bytes(t.origin+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+caller,'Content-Type':'application/json'},json.dumps(args))
                         return json.loads(raw)
                     except HTTPError as error:
-                        allowed={'RUN_ARCHIVED','ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED'}
+                        allowed={'RUN_ARCHIVED','ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','DIAGNOSIS_CHANGED','RECOVERY_NOT_ALLOWED','BILLING_INCONSISTENT','RECOVERY_INTENT_REQUIRED'}
                         try: code=json.loads(error.read(4096)).get('message')
                         except Exception: code=None
                         raise Unknown(code if code in allowed else 'ADMIN_REQUEST_REJECTED') from None
                 async def enqueue(value):
                     await self.env.ESSAY_QUEUE.send(json.dumps(value))
+                if path=='/admin-exam-recover':
+                    result=await recover_admin_run(payload,token,admin_rpc,lambda subject,exam:self.admission(t,subject,exam),enqueue,
+                        lambda action:finish_saved_recovery(action,t.rpc,REGISTRY))
+                    return Response.json(result,status=202 if result['state']=='queued' else 409 if result['state']=='blocked' else 200,headers=headers)
                 result=await retry_admin_run(payload,token,admin_rpc,lambda subject,exam:self.admission(t,subject,exam),enqueue)
                 return Response.json(result,status=202,headers=headers)
             subject=await t.subject(token)
@@ -170,8 +175,8 @@ class Default(WorkerEntrypoint):
             safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else type(error).__name__
             print('ESSAY_REQUEST_FAILURE '+safe)
             if safe=='RUN_ARCHIVED':return Response.json({'code':safe},status=409,headers=headers)
-            admin_codes={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED'}
-            if locals().get('path')=='/admin-exam-retry' and safe in admin_codes:return Response.json({'code':safe},status=403 if safe in ('ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED') else 409,headers=headers)
+            admin_codes={'ACTIVE_LEASE','FINALIZED_RUN','RECONCILIATION_REQUIRED','BILLING_NOT_RESERVED','NO_FAILED_QUESTIONS','ACTION_SUPERSEDED','ACTION_KEY_CONFLICT','RUN_NOT_FOUND','ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED','DIAGNOSIS_CHANGED','RECOVERY_NOT_ALLOWED','BILLING_INCONSISTENT','RECOVERY_INTENT_REQUIRED'}
+            if locals().get('path') in ('/admin-exam-retry','/admin-exam-recover') and safe in admin_codes:return Response.json({'code':safe},status=403 if safe in ('ADMIN_REQUIRED','ADMIN_REQUEST_REJECTED') else 409,headers=headers)
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
 
     async def queue(self,batch,*_context):

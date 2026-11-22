@@ -2,6 +2,18 @@
 from .live_worker import require
 
 
+def validate_math_child_result(result):
+    """Existing successful child boundary, also reusable for durable restoration."""
+    require(type(result) is dict and type(result.get('evaluation')) is dict and
+            result['evaluation'].get('contract_version') == 'math-eval-v1' and
+            isinstance(result['evaluation'].get('summary'), str) and result['evaluation']['summary'],
+            'INVALID_MATH_CHILD_RESULT')
+    usage = result['usage']
+    require(all(type(usage.get(k)) is int and usage[k] >= 0 for k in
+                ('input_tokens', 'output_tokens', 'total_tokens', 'latency_ms')), 'PROVIDER_TELEMETRY_REQUIRED')
+    return usage
+
+
 class MixedMathWorker:
     def __init__(self, channel, checkpoint, evaluate):
         self.rpc = channel.call_async
@@ -20,13 +32,7 @@ class MixedMathWorker:
                             ('input_tokens','output_tokens','total_tokens','latency_ms')),'PROVIDER_TELEMETRY_REQUIRED')
                 await self.rpc('essay_record_provider_telemetry',args|{'p_'+k:v for k,v in usage.items()})
                 return await self.rpc('essay_finalize_failure',args)
-            require(type(result) is dict and type(result.get('evaluation')) is dict and
-                    result['evaluation'].get('contract_version') == 'math-eval-v1' and
-                    isinstance(result['evaluation'].get('summary'), str) and result['evaluation']['summary'],
-                    'INVALID_MATH_CHILD_RESULT')
-            usage = result['usage']
-            require(all(type(usage.get(k)) is int and usage[k] >= 0 for k in
-                        ('input_tokens', 'output_tokens', 'total_tokens', 'latency_ms')), 'PROVIDER_TELEMETRY_REQUIRED')
+            usage = validate_math_child_result(result)
             await self.rpc('essay_record_provider_telemetry', args | {'p_' + k: v for k, v in usage.items()})
             final = args | {'p_output': result['evaluation']}
             await self.checkpoint(final)

@@ -1,0 +1,9 @@
+{
+  "tests": 45,
+  "failures": 0,
+  "errors": 0,
+  "passed": true,
+  "runtime": "isolated PostgreSQL 17; NOSUPERUSER BYPASSRLS owner and real authenticated/essay_worker/anon roles",
+  "install_sha256": "9187578017e5f4982bd5834800e6fba54f0e089867f3becf70ef3c23d047fb2c",
+  "production_mutations": 0
+}

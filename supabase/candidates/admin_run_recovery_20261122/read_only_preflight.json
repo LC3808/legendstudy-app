@@ -1,0 +1,84 @@
+{
+  "project_id": "stlhijzpjfgwwdgunlsd",
+  "mode": "READ_ONLY",
+  "production_mutations": 0,
+  "as_of": "2026-11-22T07:06:09.679743+00:00",
+  "database": "postgres",
+  "new_rpc_absent": true,
+  "preserved_functions": [
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_private.finish(uuid,jsonb,boolean)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_ops_private.guard_run_action()",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "admin_lab_manage_run(uuid,text,uuid)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "admin_lab_run_capabilities(uuid)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_claim(uuid,uuid,uuid)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_finish(uuid,uuid,uuid,jsonb,boolean)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "owner_equal": true,
+      "source_equal": true
+    },
+    {
+      "acl_equal": true,
+      "signature": "essay_exam_session_claim(uuid,uuid,uuid)",
+      "owner_equal": true,
+      "source_equal": true
+    }
+  ],
+  "checkpoint_constraints": [
+    {
+      "name": "checkpoints_check",
+      "definition": "CHECK (((state = 'checkpoint'::text) = (payload IS NOT NULL)))"
+    },
+    {
+      "name": "checkpoints_payload_check",
+      "definition": "CHECK (((payload IS NULL) OR ((jsonb_typeof(payload) = 'object'::text) AND (octet_length((payload)::text) <= 8388608))))"
+    },
+    {
+      "name": "checkpoints_state_check",
+      "definition": "CHECK ((state = ANY (ARRAY['pending'::text, 'checkpoint'::text])))"
+    }
+  ]
+}

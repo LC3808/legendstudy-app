@@ -1,0 +1,598 @@
+{
+  "tables": [
+    {
+      "type": "uuid",
+      "table": "checkpoints",
+      "column": "run_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "text",
+      "table": "checkpoints",
+      "column": "key",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "checkpoints",
+      "column": "writer",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "text",
+      "table": "checkpoints",
+      "column": "state",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "jsonb",
+      "table": "checkpoints",
+      "column": "payload",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "retry_requests",
+      "column": "run_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "retry_requests",
+      "column": "request_key",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "integer",
+      "table": "retry_requests",
+      "column": "generation",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "jsonb",
+      "table": "retry_requests",
+      "column": "attempts",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "retry_requests",
+      "column": "created_at",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "retry_requests",
+      "column": "lease_until",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "account_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "exam_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "parent_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "decision_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "request_key",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "jsonb",
+      "table": "runs",
+      "column": "snapshot",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "text",
+      "table": "runs",
+      "column": "state",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "jsonb",
+      "table": "runs",
+      "column": "result",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "runs",
+      "column": "created_at",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "runs",
+      "column": "completed_at",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "dispatch_key",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "lease_token",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "runs",
+      "column": "lease_until",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "runs",
+      "column": "previous_paid_run_id",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "integer",
+      "table": "runs",
+      "column": "submission_index",
+      "schema": "essay_exam_private"
+    },
+    {
+      "type": "uuid",
+      "table": "run_actions",
+      "column": "id",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "uuid",
+      "table": "run_actions",
+      "column": "run_id",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "uuid",
+      "table": "run_actions",
+      "column": "actor",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "text",
+      "table": "run_actions",
+      "column": "action",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "run_actions",
+      "column": "recorded_at",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "jsonb",
+      "table": "run_actions",
+      "column": "outcome",
+      "schema": "essay_ops_private"
+    },
+    {
+      "type": "uuid",
+      "table": "credit_transactions",
+      "column": "id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "credit_transactions",
+      "column": "account_id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "credit_transactions",
+      "column": "grant_id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "credit_transactions",
+      "column": "decision_id",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "credit_transactions",
+      "column": "transaction_type",
+      "schema": "public"
+    },
+    {
+      "type": "integer",
+      "table": "credit_transactions",
+      "column": "balance_delta",
+      "schema": "public"
+    },
+    {
+      "type": "integer",
+      "table": "credit_transactions",
+      "column": "reserved_delta",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "credit_transactions",
+      "column": "idempotency_key",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "credit_transactions",
+      "column": "reversal_of",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "credit_transactions",
+      "column": "reason_code",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "credit_transactions",
+      "column": "actor_reference",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "credit_transactions",
+      "column": "created_at",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "essay_billing_decisions",
+      "column": "id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "essay_billing_decisions",
+      "column": "account_id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "essay_billing_decisions",
+      "column": "evaluation_id",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "essay_billing_decisions",
+      "column": "idempotency_key",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "essay_billing_decisions",
+      "column": "policy_key",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "essay_billing_decisions",
+      "column": "policy_version",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "essay_billing_decisions",
+      "column": "reason",
+      "schema": "public"
+    },
+    {
+      "type": "integer",
+      "table": "essay_billing_decisions",
+      "column": "credits_required",
+      "schema": "public"
+    },
+    {
+      "type": "text",
+      "table": "essay_billing_decisions",
+      "column": "status",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "reserved_at",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "settled_at",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "released_at",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "rejected_at",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "table": "essay_billing_decisions",
+      "column": "included_by_decision_id",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "created_at",
+      "schema": "public"
+    },
+    {
+      "type": "timestamp with time zone",
+      "table": "essay_billing_decisions",
+      "column": "updated_at",
+      "schema": "public"
+    }
+  ],
+  "triggers": [
+    {
+      "name": "immutable",
+      "definition": "CREATE TRIGGER immutable BEFORE DELETE OR UPDATE ON essay_ops_private.run_actions FOR EACH ROW EXECUTE FUNCTION essay_ops_private.guard_run_action()"
+    }
+  ],
+  "functions": [
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "d97e32341f90484d1d3523265172d6a3",
+      "owner": "postgres",
+      "signature": "essay_exam_private.finish(uuid,jsonb,boolean)",
+      "definition": "CREATE OR REPLACE FUNCTION essay_exam_private.finish(p_run uuid, p_result jsonb, p_failed boolean DEFAULT false)\n RETURNS text\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; account_key uuid; t public.credit_transactions; target text;\nbegin\n if p_failed is null or (p_failed and p_result is not null) then raise exception 'INVALID_FINALIZATION';end if;\n select account_id into account_key from essay_exam_private.runs where id=p_run;\n perform 1 from public.credit_accounts where id=account_key for update;\n select * into r from essay_exam_private.runs where id=p_run for update;\n if not found then raise exception 'EXAM_NOT_FOUND';end if;\n target=case when p_failed then 'failed' else 'completed' end;\n if r.state<>'reserved' then\n  if r.state=target and r.result is not distinct from p_result then return r.state;end if;\n  raise exception 'FINALIZATION_CONFLICT';end if;\n if not p_failed then\n  if jsonb_typeof(p_result) is distinct from 'object' or jsonb_typeof(p_result->'questions') is distinct from 'array' or\n   jsonb_typeof(p_result->'summary') is distinct from 'string' or length(btrim(p_result->>'summary'))=0 then\n   raise exception 'INCOMPLETE_EXAM_RESULT';end if;\n  if jsonb_array_length(p_result->'questions')<>jsonb_array_length(r.snapshot->'answers') or\n   (select count(distinct x->>'questionId') from jsonb_array_elements(p_result->'questions') x)<>jsonb_array_length(r.snapshot->'answers') or\n   exists(select 1 from jsonb_array_elements(r.snapshot->'answers') a where not exists(\n    select 1 from jsonb_array_elements(p_result->'questions') q where q->>'questionId'=a->>'questionId' and\n     q->>'rubricVersion'=a->>'rubricVersion' and q->>'evidenceVersion'=a->>'evidenceVersion' and\n     jsonb_typeof(q->'evaluation')='object' and q->'evaluation'<>'{}'::jsonb)) then\n   raise exception 'INCOMPLETE_EXAM_RESULT';end if;\n end if;\n for t in select * from public.credit_transactions where decision_id=r.decision_id and transaction_type='reserve' loop\n  insert into public.credit_transactions(account_id,grant_id,decision_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code)\n  values(r.account_id,t.grant_id,r.decision_id,case when p_failed then 'release' else 'consume' end,\n   case when p_failed then 0 else -t.reserved_delta end,-t.reserved_delta,\n   'exam:'||r.decision_id||case when p_failed then ':release' else ':consume' end,'essay_exam_finalization');\n end loop;\n update public.essay_billing_decisions set status=case when p_failed then 'released' else 'settled' end,\n  released_at=case when p_failed then clock_timestamp() end,settled_at=case when not p_failed then clock_timestamp() end where id=r.decision_id;\n update essay_exam_private.runs set state=target,result=p_result,completed_at=case when not p_failed then clock_timestamp() end where id=p_run;\n return target;\nend $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "md5": "a1c345df384e9696a8ed728edc3466bd",
+      "owner": "postgres",
+      "signature": "essay_ops_private.guard_run_action()",
+      "definition": "CREATE OR REPLACE FUNCTION essay_ops_private.guard_run_action()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin raise exception 'ADMIN_AUDIT_IMMUTABLE';end $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "authenticated=X/postgres"
+      ],
+      "md5": "d8292b35fd49688f562a9bf5c90dd77e",
+      "owner": "postgres",
+      "signature": "admin_lab_manage_run(uuid,text,uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.admin_lab_manage_run(p_run uuid, p_action text, p_key uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\n SET statement_timeout TO '8s'\nAS $function$\ndeclare r essay_exam_private.runs; a uuid; subject uuid; caps jsonb; result jsonb; prior essay_ops_private.run_actions;\nbegin\n perform essay_ops_private.require_admin();\n if p_run is null or p_key is null or p_action is null or p_action not in ('retry','delete','archive','restore') then raise invalid_parameter_value;end if;\n -- Same account -> run -> billing lock order as existing Worker/Credit paths.\n select account_id into a from essay_exam_private.runs where id=p_run;\n select user_id into subject from public.credit_accounts where id=a for update;\n select * into r from essay_exam_private.runs where id=p_run for update;\n -- Archived retry intents cannot replay into a queue after an operator pauses the run.\n if p_action='retry' and exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden) then raise sqlstate 'PT409' using message='RUN_ARCHIVED';end if;\n select * into prior from essay_ops_private.run_actions where id=p_key;\n if found then\n  if prior.actor<>auth.uid() or prior.run_id<>p_run or prior.action<>p_action then raise sqlstate 'PT409' using message='ACTION_KEY_CONFLICT';end if;\n  -- An old retry intent must never dispatch a different/latest generation or a finished run.\n  if p_action='retry' and (r.id is null or r.state<>'reserved' or not exists(select 1 from essay_exam_private.retry_requests where run_id=p_run and request_key=p_key and generation=(select max(generation) from essay_exam_private.retry_requests where run_id=p_run))) then raise sqlstate 'PT409' using message='ACTION_SUPERSEDED';end if;\n  return prior.outcome;\n end if;\n if r.id is null then raise sqlstate 'PT404' using message='RUN_NOT_FOUND';end if;\n perform 1 from public.essay_billing_decisions where id=r.decision_id for update;\n caps=public.admin_lab_run_capabilities(p_run);\n if p_action='retry' then\n  if not (caps->>'retry_allowed')::boolean then raise sqlstate 'PT409' using message=caps->>'retry_reason';end if;\n  result=public.essay_exam_retry(subject,p_run,p_key,r.exam_id)||jsonb_build_object('subject_id',subject,'exam_id',r.exam_id);\n elsif p_action='delete' then\n  if not (caps->>'delete_allowed')::boolean then raise sqlstate 'PT409' using message=caps->>'delete_reason';end if;\n  -- Only run/checkpoint/retry data. Billing decisions and ledger remain immutable.\n  delete from essay_ops_private.hidden_runs where run_id=p_run;\n  delete from essay_exam_private.runs where id=p_run;\n  result=jsonb_build_object('deleted',true);\n else\n  result=public.admin_lab_set_run_hidden(p_run,p_action='archive');\n end if;\n result=result||jsonb_build_object('version','admin-run-management-v1','run_id',p_run,'action',p_action,'action_id',p_key);\n insert into essay_ops_private.run_actions(id,run_id,actor,action,outcome) values(p_key,p_run,auth.uid(),p_action,result);\n return result;\nend $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "authenticated=X/postgres"
+      ],
+      "md5": "0b405804182b44684361fad93a189199",
+      "owner": "postgres",
+      "signature": "admin_lab_run_capabilities(uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.admin_lab_run_capabilities(p_run uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\n SET statement_timeout TO '5s'\nAS $function$\ndeclare r essay_exam_private.runs; b public.essay_billing_decisions; attempts jsonb; cp essay_exam_private.checkpoints;\n ledger_count integer; live boolean; verified boolean; retry_reason text; delete_reason text; archived boolean; archive_reason text;\n failures integer=0; i integer; n integer; latest_retry timestamptz; latest_lease timestamptz;\nbegin\n perform essay_ops_private.require_admin();\n select * into r from essay_exam_private.runs where id=p_run;\n if r.id is null then raise sqlstate 'PT404' using message='RUN_NOT_FOUND';end if;\n select * into b from public.essay_billing_decisions where id=r.decision_id;\n select count(*) into ledger_count from public.credit_transactions where decision_id=r.decision_id;\n select t.attempts,t.created_at,t.lease_until into attempts,latest_retry,latest_lease from essay_exam_private.retry_requests t where run_id=p_run order by generation desc limit 1;\n live=coalesce(r.lease_until>clock_timestamp(),false) or exists(select 1 from essay_exam_private.retry_requests where run_id=p_run and lease_until>clock_timestamp());\n verified=exists(select 1 from essay_ops_private.verified_test_runs where run_id=p_run);\n archived=exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden);\n archive_reason=case when archived then 'ALREADY_ARCHIVED' when live then 'ACTIVE_LEASE' when r.state='reserved' and (r.dispatch_key is null or r.lease_token is null or exists(select 1 from essay_exam_private.checkpoints c where c.run_id=p_run and (c.key='final' or c.state='pending' or c.payload->>'state'='reconciling'))) then 'RECONCILIATION_REQUIRED' end;\n if archived then retry_reason='RUN_ARCHIVED';\n elsif live then retry_reason='ACTIVE_LEASE';\n elsif r.state<>'reserved' then retry_reason='FINALIZED_RUN';\n elsif r.lease_token is null or exists(select 1 from essay_exam_private.checkpoints where run_id=p_run and key='final') then retry_reason='RECONCILIATION_REQUIRED';\n elsif b.id is null or b.status<>'reserved' then retry_reason='BILLING_NOT_RESERVED';\n else\n  for i in 0..jsonb_array_length(r.snapshot->'answers')-1 loop\n   n=coalesce((attempts->>i::text)::integer,0);\n   select * into cp from essay_exam_private.checkpoints where run_id=p_run and key='q'||i||case when n=0 then '' else '-retry-'||n end;\n   if cp.run_id is null or cp.state<>'checkpoint' or coalesce(cp.payload->>'state','') not in ('completed','failed') then retry_reason='RECONCILIATION_REQUIRED';exit;end if;\n   if cp.payload->>'state'='failed' then failures=failures+1;end if;\n  end loop;\n  if retry_reason is null and failures=0 then retry_reason='NO_FAILED_QUESTIONS';end if;\n end if;\n if not verified then delete_reason='TEST_NOT_VERIFIED';\n elsif live then delete_reason='ACTIVE_LEASE';\n elsif exists(select 1 from pg_catalog.pg_constraint where contype='f' and confrelid='essay_exam_private.runs'::regclass and conrelid not in ('essay_exam_private.runs'::regclass,'essay_exam_private.checkpoints'::regclass,'essay_exam_private.retry_requests'::regclass,'math_private.mixed_coaching_disclosures'::regclass,'math_private.mixed_coaching_hints'::regclass,'public.human_quality_judgments'::regclass)) then delete_reason='UNREVIEWED_DEPENDENCY';\n elsif r.state='completed' then delete_reason='COMPLETED_RUN';\n elsif b.id is null or ledger_count>0 or b.credits_required>0 or b.status in ('reserved','settled') then delete_reason='CREDIT_LINKED';\n elsif r.parent_id is not null or r.previous_paid_run_id is not null or exists(select 1 from essay_exam_private.runs where parent_id=p_run or previous_paid_run_id=p_run) then delete_reason='RELATED_RUNS';\n elsif exists(select 1 from essay_ops_private.calls where evaluation_id=p_run)\n  or exists(select 1 from public.human_quality_judgments where exam_run_id=p_run)\n  or exists(select 1 from math_private.mixed_coaching_disclosures where run_id=p_run)\n  or exists(select 1 from math_private.mixed_coaching_hints where run_id=p_run)\n  or exists(select 1 from feedback_private.essay_context where run_id=p_run)\n  or exists(select 1 from essay_exam_private.checkpoints where run_id=p_run and (state='pending' or payload->>'state' in ('completed','reconciling'))) then delete_reason='RELATED_EVALUATION';\n end if;\n return jsonb_build_object('version','admin-run-management-v1','run_id',p_run,'state',r.state,'exam_id',r.exam_id,'subject_id',(select user_id from public.credit_accounts where id=r.account_id),\n  'created_at',r.created_at,'completed_at',r.completed_at,'lease_until',r.lease_until,'retry_created_at',latest_retry,'retry_lease_until',latest_lease,\n  'as_of',clock_timestamp(),'active_lease',live,'verified_test',verified,'classification',case when verified then 'verified_test' when ledger_count>0 then 'credit_linked' else 'unverified' end,\n  'billing_status',b.status,'credits_required',b.credits_required,'ledger_count',ledger_count,'decision_id',r.decision_id,\n  'retry_allowed',retry_reason is null,'retry_reason',retry_reason,'delete_allowed',delete_reason is null,'delete_reason',delete_reason,\n  'hidden',archived,'archive_allowed',archive_reason is null,'archive_reason',archive_reason,'restore_allowed',archived);\nend $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "c3bfd5bac836e575beedec18579177f8",
+      "owner": "postgres",
+      "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_checkpoint(p_subject uuid, p_run uuid, p_token uuid, p_key text, p_action text, p_writer uuid DEFAULT NULL::uuid, p_payload jsonb DEFAULT NULL::jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; c essay_exam_private.checkpoints; account uuid; inserted int;\nbegin\n perform math_private.require_active(array[p_subject]);\n select id into account from public.credit_accounts where user_id=p_subject for update;\n select * into r from essay_exam_private.runs where id=p_run and account_id=account for update;\n if r.id is null or p_token is null or r.lease_token is distinct from p_token then raise sqlstate 'PT403';end if;\n -- Preserve reads and the original writer's late evidence; block new execution only.\n if p_action='begin' and exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden) then raise sqlstate 'PT409' using message='RUN_ARCHIVED';end if;\n if p_key is null or p_key !~ '^[a-zA-Z0-9_-]{1,100}$' or p_action is null or p_action not in ('read','begin','write') then raise sqlstate 'PT422';end if;\n select * into c from essay_exam_private.checkpoints where run_id=p_run and key=p_key;\n if p_action='read' then\n  return case when c.run_id is null then null else jsonb_build_object('state',c.state,'payload',c.payload) end;\n end if;\n if r.state<>'reserved' or p_writer is null then raise sqlstate 'PT409';end if;\n if p_action='begin' then\n  if r.lease_until is null or r.lease_until<=clock_timestamp() then raise sqlstate 'PT409' using message='DISPATCH_LEASE_EXPIRED';end if;\n  -- Never renew or steal even the SAME writer: lost begin response is ambiguous.\n  insert into essay_exam_private.checkpoints values(p_run,p_key,p_writer,'pending',null) on conflict do nothing;\n  get diagnostics inserted=row_count;\n  return jsonb_build_object('started',inserted=1);\n end if;\n if c.run_id is null or c.writer<>p_writer or p_payload is null or jsonb_typeof(p_payload)<>'object' or octet_length(p_payload::text)>8388608 then raise sqlstate 'PT409';end if;\n if c.state='checkpoint' and c.payload is distinct from p_payload then raise sqlstate 'PT409' using message='CHECKPOINT_IMMUTABLE';end if;\n -- Original writer may persist after dispatch expiry; no new Provider execution.\n update essay_exam_private.checkpoints set state='checkpoint',payload=p_payload where run_id=p_run and key=p_key;\n return jsonb_build_object('stored',true);\nend$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "c464c30ec66964791641febe4e89eea6",
+      "owner": "postgres",
+      "signature": "essay_exam_claim(uuid,uuid,uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_claim(p_subject uuid, p_run uuid, p_dispatch uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; account uuid;\nbegin\n perform math_private.require_active(array[p_subject]);\n select id into account from public.credit_accounts where user_id=p_subject for update;\n select * into r from essay_exam_private.runs where id=p_run and account_id=account for update;\n if r.id is null or p_dispatch is null then raise sqlstate 'PT403';end if;\n if exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden) then return jsonb_build_object('state','archived','run_id',r.id,'dispatch_allowed',false);end if;\n if r.state<>'reserved' then return jsonb_build_object('state',r.state,'run_id',r.id);end if;\n if r.dispatch_key is null then\n  update essay_exam_private.runs set dispatch_key=p_dispatch,lease_token=gen_random_uuid(),lease_until=clock_timestamp()+interval '15 minutes'\n  where id=r.id returning * into r;\n elsif r.dispatch_key<>p_dispatch then\n  raise sqlstate 'PT409' using message='RECONCILIATION_REQUIRED';\n end if;\n return jsonb_build_object('state','reserved','dispatch_allowed',r.lease_until>clock_timestamp(),'run_id',r.id,'subject_id',p_subject,'exam_id',r.exam_id,\n 'snapshot',r.snapshot,'parent_id',r.parent_id,'parent_result',(select p.result from essay_exam_private.runs p where p.id=r.parent_id and p.account_id=r.account_id),'lease_token',r.lease_token,'lease_until',r.lease_until);\nend$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "b2ff3dce059d8a5d6b3652094c6a757a",
+      "owner": "postgres",
+      "signature": "essay_exam_finish(uuid,uuid,uuid,jsonb,boolean)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_finish(p_subject uuid, p_run uuid, p_token uuid, p_result jsonb, p_failed boolean DEFAULT false)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; account uuid;\nbegin\n perform math_private.require_active(array[p_subject]);\n select id into account from public.credit_accounts where user_id=p_subject for update;\n select * into r from essay_exam_private.runs where id=p_run and account_id=account for update;\n if r.id is null or p_token is null or r.lease_token is distinct from p_token then raise sqlstate 'PT403';end if;\n -- Lease is immutable and can never be reassigned. A reviewed checkpoint may\n -- settle after dispatch expiry using its exact original token, without redispatch.\n return essay_exam_private.finish(p_run,p_result,p_failed);\nend$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "b505a07b40ff3bbb9490705adf426164",
+      "owner": "postgres",
+      "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_retry(p_subject uuid, p_run uuid, p_key uuid, p_exam uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; account uuid; previous essay_exam_private.retry_requests;\n attempts jsonb='{}'; next_attempts jsonb='{}'; cp essay_exam_private.checkpoints;\n i integer; n integer; checkpoint_key text; failures integer=0;\nbegin\n perform math_private.require_active(array[p_subject]);\n select id into account from public.credit_accounts where user_id=p_subject for update;\n select * into r from essay_exam_private.runs where id=p_run and account_id=account for update;\n if r.id is null or p_key is null or p_exam is null or r.exam_id<>p_exam then raise sqlstate 'PT403';end if;\n if exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden) then raise sqlstate 'PT409' using message='RUN_ARCHIVED';end if;\n select * into previous from essay_exam_private.retry_requests where run_id=p_run and request_key=p_key;\n if found then return jsonb_build_object('run_id',r.id,'generation',previous.generation);end if;\n if r.state<>'reserved' or r.lease_token is null or exists(select 1 from essay_exam_private.checkpoints where run_id=p_run and key='final') then\n  raise sqlstate 'PT409' using message='RETRY_NOT_AVAILABLE';end if;\n select * into previous from essay_exam_private.retry_requests where run_id=p_run order by generation desc limit 1;\n attempts=coalesce(previous.attempts,'{}'::jsonb);next_attempts=attempts;\n for i in 0..jsonb_array_length(r.snapshot->'answers')-1 loop\n  n=coalesce((attempts->>i::text)::integer,0);\n  checkpoint_key='q'||i||case when n=0 then '' else '-retry-'||n end;\n  select * into cp from essay_exam_private.checkpoints where run_id=p_run and key=checkpoint_key;\n  if cp.run_id is null or cp.state<>'checkpoint' or coalesce(cp.payload->>'state','') not in ('completed','failed') then\n   raise sqlstate 'PT409' using message='RECONCILIATION_REQUIRED';end if;\n  if cp.payload->>'state'='failed' then\n   failures=failures+1;next_attempts=jsonb_set(next_attempts,array[i::text],to_jsonb(n+1));\n  end if;\n end loop;\n if failures=0 then raise sqlstate 'PT409' using message='RETRY_NOT_AVAILABLE';end if;\n insert into essay_exam_private.retry_requests(run_id,request_key,generation,attempts)\n values(p_run,p_key,coalesce(previous.generation,0)+1,next_attempts) returning * into previous;\n return jsonb_build_object('run_id',r.id,'generation',previous.generation);\nend $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "f91ff6befbf0e476fbf0b2e374630a52",
+      "owner": "postgres",
+      "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_session_checkpoint(p_subject uuid, p_run uuid, p_token uuid, p_key text, p_action text, p_writer uuid DEFAULT NULL::uuid, p_payload jsonb DEFAULT NULL::jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare r essay_exam_private.runs; account uuid; inserted integer;\nbegin\n -- Original read/write authorization and immutable writer checks are unchanged.\n if p_action is distinct from 'begin' then\n  return public.essay_exam_checkpoint(p_subject,p_run,p_token,p_key,p_action,p_writer,p_payload);\n end if;\n perform math_private.require_active(array[p_subject]);\n select id into account from public.credit_accounts where user_id=p_subject for update;\n select * into r from essay_exam_private.runs where id=p_run and account_id=account for update;\n if r.id is null or p_token is null or r.lease_token is distinct from p_token then raise sqlstate 'PT403';end if;\n -- Preserve reads and the original writer's late evidence; block new execution only.\n if p_action='begin' and exists(select 1 from essay_ops_private.hidden_runs h where h.run_id=p_run and h.hidden) then raise sqlstate 'PT409' using message='RUN_ARCHIVED';end if;\n if p_key is null or p_key !~ '^[a-zA-Z0-9_-]{1,100}$' or p_writer is null then raise sqlstate 'PT422';end if;\n if r.state<>'reserved' or not (r.lease_until>clock_timestamp() or exists(\n  select 1 from essay_exam_private.retry_requests t where t.run_id=p_run and t.lease_until>clock_timestamp())) then\n  raise sqlstate 'PT409' using message='DISPATCH_LEASE_EXPIRED';end if;\n -- Append-only keys; never steal a pending or overwrite a completed checkpoint.\n insert into essay_exam_private.checkpoints values(p_run,p_key,p_writer,'pending',null) on conflict do nothing;\n get diagnostics inserted=row_count;\n return jsonb_build_object('started',inserted=1);\nend $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "essay_worker=X/postgres"
+      ],
+      "md5": "a24b1173fbe782846526d228c7b00a64",
+      "owner": "postgres",
+      "signature": "essay_exam_session_claim(uuid,uuid,uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.essay_exam_session_claim(p_subject uuid, p_run uuid, p_dispatch uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare result jsonb; attempts jsonb;\nbegin\n -- Existing claim owns account lock, lifecycle, ownership and immutable lease token.\n result=public.essay_exam_claim(p_subject,p_run,p_dispatch);\n select r.attempts into attempts from essay_exam_private.retry_requests r where run_id=p_run order by generation desc limit 1;\n return result||jsonb_build_object('session_version','exam-session-v1','attempts',coalesce(attempts,'{}'::jsonb));\nend $function$\n"
+    }
+  ],
+  "constraints": [
+    {
+      "name": "essay_billing_decisions_account_id_fkey",
+      "relation": "essay_billing_decisions",
+      "definition": "FOREIGN KEY (account_id) REFERENCES credit_accounts(id) ON DELETE RESTRICT"
+    },
+    {
+      "name": "essay_billing_decisions_check",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK ((included_by_decision_id IS DISTINCT FROM id))"
+    },
+    {
+      "name": "essay_billing_decisions_check1",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK (((status <> 'reserved'::text) OR (reserved_at IS NOT NULL)))"
+    },
+    {
+      "name": "essay_billing_decisions_check2",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK (((status <> 'settled'::text) OR (settled_at IS NOT NULL)))"
+    },
+    {
+      "name": "essay_billing_decisions_check3",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK (((status <> 'released'::text) OR (released_at IS NOT NULL)))"
+    },
+    {
+      "name": "essay_billing_decisions_check4",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK (((status <> 'rejected'::text) OR (rejected_at IS NOT NULL)))"
+    },
+    {
+      "name": "essay_billing_decisions_check5",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK ((num_nonnulls(settled_at, released_at, rejected_at) <= 1))"
+    },
+    {
+      "name": "essay_billing_decisions_credits_required_check",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK ((credits_required >= 0))"
+    },
+    {
+      "name": "essay_billing_decisions_evaluation_id_fkey",
+      "relation": "essay_billing_decisions",
+      "definition": "FOREIGN KEY (evaluation_id) REFERENCES essay_evaluations(id) ON DELETE SET NULL"
+    },
+    {
+      "name": "essay_billing_decisions_evaluation_id_key",
+      "relation": "essay_billing_decisions",
+      "definition": "UNIQUE (evaluation_id)"
+    },
+    {
+      "name": "essay_billing_decisions_id_account_id_key",
+      "relation": "essay_billing_decisions",
+      "definition": "UNIQUE (id, account_id)"
+    },
+    {
+      "name": "essay_billing_decisions_idempotency_key_key",
+      "relation": "essay_billing_decisions",
+      "definition": "UNIQUE (idempotency_key)"
+    },
+    {
+      "name": "essay_billing_decisions_included_by_decision_id_account_id_fkey",
+      "relation": "essay_billing_decisions",
+      "definition": "FOREIGN KEY (included_by_decision_id, account_id) REFERENCES essay_billing_decisions(id, account_id) ON DELETE RESTRICT"
+    },
+    {
+      "name": "essay_billing_decisions_pkey",
+      "relation": "essay_billing_decisions",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "essay_billing_decisions_reason_check",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK ((reason = ANY (ARRAY['paid_cycle'::text, 'additional_revision'::text, 'included_revision'::text, 'promotion'::text, 'subscription'::text, 'institution'::text, 'admin_grant'::text, 'technical_reevaluation'::text])))"
+    },
+    {
+      "name": "essay_billing_decisions_status_check",
+      "relation": "essay_billing_decisions",
+      "definition": "CHECK ((status = ANY (ARRAY['authorized'::text, 'reserved'::text, 'settled'::text, 'released'::text, 'rejected'::text])))"
+    },
+    {
+      "name": "checkpoints_check",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "CHECK (((state = 'checkpoint'::text) = (payload IS NOT NULL)))"
+    },
+    {
+      "name": "checkpoints_key_check",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "CHECK ((key ~ '^[a-zA-Z0-9_-]{1,100}$'::text))"
+    },
+    {
+      "name": "checkpoints_payload_check",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "CHECK (((payload IS NULL) OR ((jsonb_typeof(payload) = 'object'::text) AND (octet_length((payload)::text) <= 8388608))))"
+    },
+    {
+      "name": "checkpoints_pkey",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "PRIMARY KEY (run_id, key)"
+    },
+    {
+      "name": "checkpoints_run_id_fkey",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "FOREIGN KEY (run_id) REFERENCES essay_exam_private.runs(id) ON DELETE CASCADE"
+    },
+    {
+      "name": "checkpoints_state_check",
+      "relation": "essay_exam_private.checkpoints",
+      "definition": "CHECK ((state = ANY (ARRAY['pending'::text, 'checkpoint'::text])))"
+    },
+    {
+      "name": "run_actions_action_check",
+      "relation": "essay_ops_private.run_actions",
+      "definition": "CHECK ((action = ANY (ARRAY['retry'::text, 'delete'::text, 'archive'::text, 'restore'::text])))"
+    },
+    {
+      "name": "run_actions_pkey",
+      "relation": "essay_ops_private.run_actions",
+      "definition": "PRIMARY KEY (id)"
+    }
+  ]
+}

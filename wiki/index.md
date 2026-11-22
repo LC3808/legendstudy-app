@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+관리자 첨삭 복구·완료 / 저장 결과 복원·부분 재시도: [11/22 구현·격리 검증·DB 승인 패키지](admin-run-recovery-20261122.md).
+
 논술 LAB 안정성 / Provider timeout·재시도·중복 비용·중단 요청: [11/22 운영 분석·최소 패치·검증](essay-lab-stability-20261122.md).
 
 관리자 보관 / archived / 활성 KPI·Worker 실행 제외: [11/20 수정·배포·대상 정리](admin-archived-run-operations-20261120.md).

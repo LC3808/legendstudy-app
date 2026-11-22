@@ -1,0 +1,85 @@
+{
+  "task": "admin-run-recovery-web",
+  "date": "2026-11-22",
+  "generated_at": "2026-11-22T07:04:59.669978+00:00",
+  "status": "IMPLEMENTED_NOT_DEPLOYED",
+  "web_base_head": "d6d0107e3fc4b3f64bcc19a0f18c044827eb628d",
+  "files": {
+    "functions/api/admin/essay-run.ts": "42f8c60a2e83c5046c843458a35bdc94c9a9036de97be65b73b075c24c41ca5f",
+    "src/components/admin/admin-lab-operations.tsx": "dbfa5f5725cbab5d3ad0869938b9408ed092e3e1d692f41ee96d08845be1581f",
+    "src/components/admin/admin-lab-warning-strip.tsx": "f62c7fc0341810dd9e2dc68287c57059b5706f8b3198c4c91179b311f99abc92",
+    "src/components/admin/admin-lab-warning-strip.test.tsx": "d7ecd8edde57b5ac0edd71d359ab1cac00fd94688abd944d0c544b559ca833e1",
+    "src/lib/admin/admin-run-gateway.test.ts": "ccce8bf34683ae56a65100991d5dfeb1a2f9f386848ca8dc34a82b6f2c4954b1",
+    "src/components/admin/admin-recovery-operations.tsx": "bb6ba7b1999dbffce8c72064ff5382157d4edb69434b1ffbcfa43245a3a642f6",
+    "src/components/admin/admin-recovery-operations.test.tsx": "c7f988fe2be9b3a7600b74a88cbded607312456c212a6a37c4f7beb56fde7f31",
+    "src/components/admin/admin-run-recovery.tsx": "c844ec4b38db25e3ffe691889e5c6d0819632450fe077a52406969e7f0465635",
+    "src/components/admin/admin-run-recovery.test.tsx": "02bee5a373afe021ae4cbb12a9c9ebdb2f7d3e394482292e7b5dff6c63af1a8e",
+    "src/components/admin/admin-run-recovery.css": "deabb1cd393c5c0fdd27952cadfc02f0dae876c03bbce9650bc836cd10e6d7c7",
+    "src/lib/admin/run-recovery.ts": "ba1b0fa4cf5b592ffc9a0e0e2c8168fee4fa7c35b3a772a2420f5d379392788a",
+    "src/lib/admin/run-recovery.test.ts": "a22d7efd908a8244046609280013a1603bde023f597e4ec3912130bdeadf99b3",
+    "src/lib/admin/run-recovery.test-fixture.ts": "901e0886f682ed16f1a716e61b9f8795f2dbe2bb079ed2286f53178fd434972e"
+  },
+  "checks": {
+    "full_suite": {
+      "passed": 2246,
+      "skipped": 5,
+      "files_passed": 287,
+      "files_skipped": 4,
+      "log_sha256": "0c751e8c0d47f8301693b9d32e415feaf58cbaa509b230cb4d0d25f4f4203afb"
+    },
+    "typescript": "PASS",
+    "changed_files_eslint": "PASS",
+    "next_static_build": {
+      "status": "PASS",
+      "pages": 171,
+      "log_sha256": "4a25e769a95ff6afda620ca9fec20fc29a0f91e46d7193195bb90f1c24e00357"
+    },
+    "git_diff_check": "PASS",
+    "boundary_audit": {
+      "status": "BASELINE_FAILURE",
+      "findings": [
+        "checkout must not narrate the test environment to a buyer",
+        "operations console contains a write call: src/components/admin/admin-members-view.tsx"
+      ],
+      "affected_inputs_unchanged_from_base": true
+    }
+  },
+  "browser": {
+    "environment": "local synthetic component fixture; no production API connection",
+    "url": "http://127.0.0.1:8877/",
+    "confirmation": "request/student/exam/target question 2/rerun question count1/additional credit0/preservation shown",
+    "result": "queued shown as incomplete, active lease blocks another action",
+    "mobile": {
+      "viewport_width": 390,
+      "document_scroll_width": 390,
+      "panel_width": 350,
+      "panel_scroll_width": 348,
+      "viewport_reset": true
+    },
+    "captures": {
+      "mobile.jpg": "8feae0998d13e052a696cc7ce4e89fd6c31f280499394378193cb3a0b5ade667",
+      "desktop.jpg": "efcb5de0125e0508b3449fa5936445123712584838615589e66d1ed814883424"
+    }
+  },
+  "production": {
+    "db_changes": false,
+    "deployments": false,
+    "student_actions": false,
+    "provider_calls": false,
+    "payments_refunds_ledger_writes": false,
+    "actual_admin_recovery_ui": "NOT_TESTED_UNTIL_DB_APPROVAL"
+  },
+  "contract": {
+    "version": "admin-run-recovery-v1",
+    "diagnosis": "admin_lab_run_recovery(p_run)",
+    "execute": "POST /api/admin/essay-run -> original JWT /admin-exam-recover; {run_id,key,diagnosis_token}",
+    "idempotency": "same key/token retained after uncertain response; current capability cannot invalidate replay preflight",
+    "completion": "queued/verification_required not completed; only actual completed response or fresh completed diagnosis shown as complete",
+    "billing": "reserved=current balance; reserved_total=historical; consistent and recovery_eligible separate"
+  },
+  "notes": [
+    "Existing retry/archive/delete paths retained. Student answer/result UI preserved.",
+    "Existing .pnpm-store untracked and unrelated APP files excluded.",
+    "DB and Worker contract integration testing owned by parent/team; this receipt is WEB tests and local synthetic browser evidence only."
+  ]
+}

@@ -4,7 +4,7 @@
 
 [11/20 수시 D-Day](admissions-dday-implementation-20261120.md): 운영 DB 설치·초기12개 연동·보존/권한 PASS. WEB 운영 배포·관리자/MY 확인. APP 출시 별도.
 
-[11/20 관리자 보관](admin-archived-run-operations-20261120.md): 운영 적용. 11/22 대상보관true·예약1 유지.
+[11/22 첨삭 복구](admin-run-recovery-20261122.md): 구현·격리PASS·DB승인대기. 실학생복구0.
 
 [11/13 35대학 브랜드 재점검·운영](essay-university-brand-audit-20261113.md).
 
