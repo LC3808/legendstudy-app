@@ -1,5 +1,7 @@
 # Current Status
 
+[11/25 프로젝트·스토어 교차 검토](project-cross-review-20261125.md): 양OS 1.0.6/build88 출시 확인. main은 출시보다 과거; D-Day APP 미출시. 최근7일12요청/11완료·q1 미완료1, 복구 배포와 실제 완료 구분. 운영 변경0. 최신 상태는 해당 보고서 우선.
+
 [11/22 복구 런타임](admin-recovery-runtime-fix-20261122.md): origin 결함 수정·WEB/Worker 배포·비파괴 진단 PASS. q1 실행0·결과/원장 보존.
 
 [11/20 수시 D-Day](admissions-dday-implementation-20261120.md): 운영 DB 설치·초기12개 연동·보존/권한 PASS. WEB 운영 배포·관리자/MY 확인. APP 출시 별도.

@@ -1,3 +1,7 @@
+## 2026-11-25 — 프로젝트·운영·양 스토어 읽기 전용 교차 검토
+
+실제1.0.6/build88 출시와 main 지연 확인. 운영12요청/11완료·q1미완료, 복구 설치/배포 유지·원장 보존. D-Day APP 미출시와 기존 출시 기능 분리; 후속 우선순위/QA 기록. 운영 쓰기·재실행·배포0. [보고](project-cross-review-20261125.md).
+
 ## 2026-11-22 — 관리자 복구 운영 transport origin 결함 해결
 
 운영 부모 origin 미보관→첫RPC 전 AttributeError 재현. Worker2모듈·WEB최소 배포,166+9/DB55/WEB274 PASS. 운영 비파괴 연결 PASS·9요청/15RPC 불변·실행0. [원인·배포·추가승인](admin-recovery-runtime-fix-20261122.md).

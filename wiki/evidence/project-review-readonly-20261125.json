@@ -1,0 +1,559 @@
+{
+  "observed_at": "2026-11-25T12:23:22.995954+00:00",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "method": "read-only transaction; personal text and auth values excluded",
+  "runs": [
+    {
+      "id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "state": "completed",
+      "created": "2026-11-21T07:44:50.301723+00:00",
+      "seconds": 417.217985,
+      "completed": "2026-11-21T07:51:47.519708+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-21T07:59:53.557703+00:00"
+    },
+    {
+      "id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "state": "completed",
+      "created": "2026-11-22T00:51:22.718756+00:00",
+      "seconds": 183.550513,
+      "completed": "2026-11-22T00:54:26.269269+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-22T01:06:25.143533+00:00"
+    },
+    {
+      "id": "0777eb9b-4be3-47b5-be80-4035989940f9",
+      "state": "completed",
+      "created": "2026-11-22T08:53:44.301624+00:00",
+      "seconds": 161.794015,
+      "completed": "2026-11-22T08:56:26.095639+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-22T09:08:46.767134+00:00"
+    },
+    {
+      "id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "state": "completed",
+      "created": "2026-11-20T05:23:46.144219+00:00",
+      "seconds": 201.437317,
+      "completed": "2026-11-20T05:27:07.581536+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-20T05:38:49.494204+00:00"
+    },
+    {
+      "id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "state": "completed",
+      "created": "2026-11-21T15:14:15.888862+00:00",
+      "seconds": 444.285506,
+      "completed": "2026-11-21T15:21:40.174368+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-21T15:29:18.857347+00:00"
+    },
+    {
+      "id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "state": "completed",
+      "created": "2026-11-22T02:29:29.000669+00:00",
+      "seconds": 2666.249979,
+      "completed": "2026-11-22T03:13:55.250648+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-22T02:44:31.955419+00:00"
+    },
+    {
+      "id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "state": "completed",
+      "created": "2026-11-20T13:19:09.276607+00:00",
+      "seconds": 173.64412,
+      "completed": "2026-11-20T13:22:02.920727+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-20T13:34:22.415794+00:00"
+    },
+    {
+      "id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "state": "reserved",
+      "created": "2026-11-21T16:31:23.877719+00:00",
+      "seconds": null,
+      "completed": null,
+      "has_result": false,
+      "lease_until": "2026-11-21T16:46:26.375685+00:00"
+    },
+    {
+      "id": "789c1739-2e8a-4e97-8657-851ca3937a64",
+      "state": "completed",
+      "created": "2026-11-22T07:32:19.681457+00:00",
+      "seconds": 94.171132,
+      "completed": "2026-11-22T07:33:53.852589+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-22T07:47:21.867659+00:00"
+    },
+    {
+      "id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "state": "completed",
+      "created": "2026-11-20T18:10:27.743235+00:00",
+      "seconds": 100.169846,
+      "completed": "2026-11-20T18:12:07.913081+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-20T18:25:30.770654+00:00"
+    },
+    {
+      "id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "state": "completed",
+      "created": "2026-11-21T17:38:05.982341+00:00",
+      "seconds": 95.006375,
+      "completed": "2026-11-21T17:39:40.988716+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-21T17:53:08.513335+00:00"
+    },
+    {
+      "id": "b609cfcc-eae7-458e-8e6f-97361de45ec8",
+      "state": "completed",
+      "created": "2026-11-22T07:54:01.101665+00:00",
+      "seconds": 49.820649,
+      "completed": "2026-11-22T07:54:50.922314+00:00",
+      "has_result": true,
+      "lease_until": "2026-11-22T08:09:03.90411+00:00"
+    }
+  ],
+  "metrics": {
+    "time": {
+      "avg_seconds": 417.0315851818182,
+      "median_seconds": 173.64412
+    },
+    "retry": {
+      "runs": 6,
+      "events": 12
+    },
+    "ledger": [
+      {
+        "id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+        "state": "reserved",
+        "transactions": 0,
+        "balance_delta": null,
+        "reserved_delta": null,
+        "credits_required": 0
+      },
+      {
+        "id": "0777eb9b-4be3-47b5-be80-4035989940f9",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "789c1739-2e8a-4e97-8657-851ca3937a64",
+        "state": "completed",
+        "transactions": 0,
+        "balance_delta": null,
+        "reserved_delta": null,
+        "credits_required": 0
+      },
+      {
+        "id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+        "state": "completed",
+        "transactions": 0,
+        "balance_delta": null,
+        "reserved_delta": null,
+        "credits_required": 0
+      },
+      {
+        "id": "b609cfcc-eae7-458e-8e6f-97361de45ec8",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      },
+      {
+        "id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+        "state": "completed",
+        "transactions": 2,
+        "balance_delta": -1,
+        "reserved_delta": 0,
+        "credits_required": 1
+      }
+    ]
+  },
+  "completed_question_counts": [
+    {
+      "id": "0777eb9b-4be3-47b5-be80-4035989940f9",
+      "answer_count": 3,
+      "result_count": 3
+    },
+    {
+      "id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "answer_count": 3,
+      "result_count": 3
+    },
+    {
+      "id": "b609cfcc-eae7-458e-8e6f-97361de45ec8",
+      "answer_count": 1,
+      "result_count": 1
+    },
+    {
+      "id": "789c1739-2e8a-4e97-8657-851ca3937a64",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "answer_count": 2,
+      "result_count": 2
+    },
+    {
+      "id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "answer_count": 3,
+      "result_count": 3
+    },
+    {
+      "id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "answer_count": 3,
+      "result_count": 3
+    }
+  ],
+  "target_q1": {
+    "state": "reconciling",
+    "has_output": false
+  },
+  "dday": {
+    "events": [
+      {
+        "count": 10,
+        "is_published": true,
+        "verification_status": "VERIFIED"
+      },
+      {
+        "count": 5,
+        "is_published": false,
+        "verification_status": "PENDING"
+      }
+    ],
+    "links": [
+      {
+        "count": 5,
+        "sync_status": "PENDING"
+      },
+      {
+        "count": 12,
+        "sync_status": "MATCHED"
+      }
+    ],
+    "preferences": [
+      {
+        "count": 12,
+        "status": "ACTIVE"
+      },
+      {
+        "count": 5,
+        "status": "CANCELLED"
+      }
+    ]
+  },
+  "materials": {
+    "db": {
+      "count": 478,
+      "active": 21,
+      "universities": 26
+    },
+    "browse": {
+      "browse": [
+        {
+          "id": "gachon",
+          "exams": 17,
+          "questions": 166
+        },
+        {
+          "id": "catholic",
+          "exams": 1,
+          "questions": 3
+        },
+        {
+          "id": "kangnam",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "konkuk",
+          "exams": 25,
+          "questions": 66
+        },
+        {
+          "id": "kyonggi",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "knu",
+          "exams": 1,
+          "questions": 3
+        },
+        {
+          "id": "kyunghee",
+          "exams": 30,
+          "questions": 89
+        },
+        {
+          "id": "korea",
+          "exams": 10,
+          "questions": 30
+        },
+        {
+          "id": "kwangwoon",
+          "exams": 37,
+          "questions": 74
+        },
+        {
+          "id": "kookmin",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "dankook",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "duksung",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "dongguk",
+          "exams": 16,
+          "questions": 48
+        },
+        {
+          "id": "dongduk",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "pnu",
+          "exams": 2,
+          "questions": 6
+        },
+        {
+          "id": "syu",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "sangmyung",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "sogang",
+          "exams": 32,
+          "questions": 40
+        },
+        {
+          "id": "seokyeong",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "seoultech",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "uos",
+          "exams": 1,
+          "questions": 4
+        },
+        {
+          "id": "swu",
+          "exams": 11,
+          "questions": 23
+        },
+        {
+          "id": "skku",
+          "exams": 21,
+          "questions": 63
+        },
+        {
+          "id": "sungshin",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "sejong",
+          "exams": 3,
+          "questions": 9
+        },
+        {
+          "id": "suwon",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "sookmyung",
+          "exams": 22,
+          "questions": 60
+        },
+        {
+          "id": "soongsil",
+          "exams": 16,
+          "questions": 42
+        },
+        {
+          "id": "shinhan",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "ajou",
+          "exams": 6,
+          "questions": 12
+        },
+        {
+          "id": "yonsei",
+          "exams": 12,
+          "questions": 47
+        },
+        {
+          "id": "eulji",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "ewha",
+          "exams": 29,
+          "questions": 87
+        },
+        {
+          "id": "inha",
+          "exams": 35,
+          "questions": 95
+        },
+        {
+          "id": "cau",
+          "exams": 43,
+          "questions": 149
+        },
+        {
+          "id": "tukorea",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "koreatech",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "hufs",
+          "exams": 20,
+          "questions": 60
+        },
+        {
+          "id": "kau",
+          "exams": 15,
+          "questions": 30
+        },
+        {
+          "id": "hanshin",
+          "exams": 0,
+          "questions": null
+        },
+        {
+          "id": "hanyang",
+          "exams": 42,
+          "questions": 71
+        },
+        {
+          "id": "hongik",
+          "exams": 1,
+          "questions": 7
+        }
+      ],
+      "approved": {
+        "exams": 233,
+        "questions": 562
+      },
+      "hold_mentions": 0
+    },
+    "pages_public_scope": {
+      "universities": 16,
+      "exams": 374,
+      "questions": 956
+    },
+    "worker_registry": {
+      "universities": 24,
+      "exams": 282,
+      "questions": 722
+    },
+    "runtime_policy": {
+      "universities": 16,
+      "exams": 234,
+      "questions": 567
+    }
+  }
+}

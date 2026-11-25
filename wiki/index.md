@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+전체 프로젝트 현황 / 실제 스토어 출시 / Flutter 변경·출시 계획: [11/25 교차 검토](project-cross-review-20261125.md) · [Flutter 전수 비교](project-cross-review-flutter-files-20261125.md).
+
 관리자 복구 RUNTIME_UNAVAILABLE / 운영 transport: [11/22 재현·수정·비파괴 진단 PASS](admin-recovery-runtime-fix-20261122.md).
 
 관리자 복구 WEB 수정 후 q1 승인 실행: [11/22 Worker 응답실패·보존](admin-recovery-q1-execution-20261122.md).
