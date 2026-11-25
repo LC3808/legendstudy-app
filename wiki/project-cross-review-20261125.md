@@ -122,7 +122,7 @@ Owner 로그인 후 실제 App Store Connect 및 Google Play Console에서 확�
 
 공개 iOS: [App Store](https://apps.apple.com/kr/app/id6820826957). ASC 앱6820826957, Play 앱4972317086113621808의 실제 배포 화면을 대조했다. iOS의 정확한 시간은 미확인. Git SHA는 스토어가 직접 제공하지 않으므로 버전/빌드·빌드 문서·소스를 연결한 기준이며 업로드 바이너리의 Git SHA를 스토어에서 독립 증명한 것은 아니다.
 
-마지막 PDF 수정은 **08345b69**의 `pdf_viewer_page.dart` Column `mainAxisSize: MainAxisSize.min`이다. [PDF hotfix 기록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/pdf-white-screen-hotfix-20261117.md), [build87 기록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/app105-build87-release-20261116.md). 당시 테스트2632 PASS/9 SKIP 및 서명 IPA/AAB 기록은 과거 증거이고 이번에 재빌드하지 않았다.
+마지막 PDF 수정은 **08345b69**의 `pdf_download_action.dart` Column `mainAxisSize: MainAxisSize.min`이다. [PDF hotfix 기록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/pdf-white-screen-hotfix-20261117.md), [build87 기록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/app105-build87-release-20261116.md). 당시 테스트2632 PASS/9 SKIP 및 서명 IPA/AAB 기록은 과거 증거이고 이번에 재빌드하지 않았다.
 
 Play Console의 결제 계정 확인 필요 경고도 관측됐다. LegendStudy 실결제 장애를 의미하는지 확인되지 않았으며 Owner가 계정 알림의 적용 범위를 확인해야 한다. 다른 앱의 정책 알림을 LegendStudy 장애로 전용하지 않았다.
 
@@ -212,3 +212,138 @@ Finance 상태조회 주의: 기존 `statusOnly=true` 경로도 alarm/state 갱�
 보존 검토7답: (1) 이번 기록은 조사시점 스냅샷이며 과거 발생일과 분리 (2) Git SHA/배포 ID/쿼리 정의로 근거 재확인 가능하나 운영 데이터는 변할 수 있음 (3) 원본 UPDATE 없음 (4) 학생 식별체계 변경 없음 (5) Learning/Decision/Outcome 원본을 합치지 않고 운영 파생 통계만 기록 (6) 이메일·답안·비밀값 제외, 기존 권한 유지 (7) cohort/시각/집계 범위·미확인 명시. 후속 기능의 새 저장 설계는 별도 보존 검토가 필요하다.
 
 재현 가능한 비식별 집계: [읽기 전용 DB 증거](evidence/project-review-readonly-20261125.json). `python3 tool/check_wiki_handoff.py` PASS(2,420개 내부 링크, current-status 11,372 bytes). 문서만 Commit·Push하며 기존 dirty 작업은 staging에서 제외한다.
+
+## 13. Wiki 및 릴리스 관리 체계 감사 — 2026-11-25
+
+**감사 DONE / 현재 상태 체계 보완 PARTIAL(Owner 검토 전).** 기존 문서를 재사용한다. 신규 canonical 문서 체계, AGENTS 개편, Git 병합, 제품 코드·DB·배포·스토어 변경은 하지 않았다. 이 절은 앞선 11/25 조사와 구별되는 사후 감사다. 기존 기록의 충분성을 판단할 때 이 절과 7ad4be9 이후 문서를 과거 근거로 사용하지 않는다.
+
+### 13.1 조사 범위와 시간 경계
+
+- 현재 조사 checkout `646c5239`, 교차검토 직전 `6bd46f98`(11/22 21:57 KST), 당시 main `02996bed`(11/13 10:56), 출시 연결 source `08345b69`(11/17 09:29)를 비교했다. Git 기록 시각은 author/committer metadata이며 외부 공증 시각은 아니다.
+- 로컬 heads/remotes149개를 대상으로 `git log --all --before=2026-11-25T00:00:00+09:00 -G ... -- wiki`를 검색하고 버전/빌드/출시일/Git/브랜치 키워드를 교차했다. 대표 snapshot Wiki 파일은 main362, 출시381, 조사259개. 해당 파일 수 차이는 삭제 판정이 아니라 서로 다른 branch tree다.
+- 원격 `ls-remote` 확인: main02996bed, APP작업76cc4050, 조사646c5239 일치. force/reset/fetch merge 없음. 삭제되거나 접근 불가한 원격 ref·Git에 없는 사적 기록까지 누락됐다고 단정하지 않는다.
+- [재현용 Git 증거](evidence/wiki-release-audit-20261125.json). 실제 스토어 출시 증거는 앞선 §6의11/25 콘솔 조회를 재사용했으며 이번 감사에서 콘솔 재접속/출시 상태 변경은 하지 않았다.
+- 사후 기록의 시작: `7ad4be9`(11/25 21:43) 교차검토, `61b17c5`(22:39) 통합후속/APP89, `646c5239` 품질V1. 이들은 당시 누락을 보강한 기록이지 과거 체계 정상의 증거가 아니다.
+
+### 13.2 11/25 이전 기록 A–F 전수 대조
+
+아래 접근성은 **그 시점·그 branch**의 index/current-status 기준이다. ‘없음’은 조사한 tracked Wiki 증거에서 찾지 못했다는 뜻이다.
+
+|항목|A 존재 / B 경로 / C 기록 시점|D 당시 실제 내용|E 공식 경로 접근|F 누락·차이|
+|---|---|---|---|---|
+|APP1.0.6|있음: `pdf-white-screen-hotfix-20261117.md`,08345b69,11/17|신규1.0.6 준비·산출물 검증|출시 branch index/current 최상단 직접 링크|조사6bd/main029에는 없음; 실제 RELEASED 표시는 아님|
+|Build88|같은 문서/commit|IPA1.0.6/88,AAB versionCode88,두 SHA256·서명 PASS|동일|빌드 기록은 충분, 배포 결과 미회수|
+|iOS11/18 출시|이전 기록 발견 못함|88문서는 업로드/심사제출0·Owner 업데이트 전 PARTIAL|어느 대표snapshot에서도 복원 불가|11/25 §6에서 처음 실제 출시 확인을 연결|
+|Android11/17 출시|이전 기록 발견 못함|87은100% 확인,88은 빌드/인계|동일|11/25 §6에서 versionCode88·100%·출시시각 확인|
+|출시 기준08345b69|간접 존재: 해당 commit에 코드·Wiki·pubspec 결합|본문은 이전기준077d6654와 ‘본 문서 포함 최종HEAD 참조’|Git을 읽으면 해석 가능; 문서만으로 최종SHA 고정 불가|출시 바이너리→source의 명시적인 사후 연결은7ad4be9|
+|출시된 기능 전체 목록|부분: `operations-commercial-20261113.md`(c0aed176),`app-release-105-readiness-20261115.md`(d0e9a94d),87문서(077d6654),88문서|기능별 변경/보존/QA와85→87→88 delta가 있음|출시 index에서 직접 또는상세1단계. 조사branch에는 최신파일 미포함|누적 ‘88 RELEASED 기능’ 단일목록 없음. 구현 PARTIAL/미배포 문구 잔류|
+|미출시 Flutter 기능|부분: 기능별 문서|부분 QA와 미출시가 같은 PARTIAL에 섞임|branch별로 다름|전체 release대비 inventory 없음;11/25 전체diff에서 보완|
+|자동 입시D-Day 미출시|있음: `admissions-dday-implementation-20261120.md`,6cd4c1a7/13cd1f3a,11/20|Flutter59검사·APP 실기기/스토어 NOT TESTED/NOT DEPLOYED,WEB/DB와 분리|조사branch index/current 직접 연결|이 항목은 누락 아님.88/main에 코드 없음도Git확인|
+|main과 출시branch 관계|부분:105준비문서11/15 main02996be/작업66c3ba7·main변경0;operations PHASE6 통합잔여|task branch 유지·main통합 미실행 명시|출시branch 상세문서에서 접근|최종28차이/88출시 이후통합 책임·완료상태는 미기록|
+|다음 개발 기준branch|부분:105/88은operations-commercial 명시;D-Day는material-service 명시|각 작업 기준은 명확|각branch 내 접근 가능|프로젝트 공통 APP다음기준이 하나로 연결되지 않음|
+|다음 스토어 후보|부분:당시85/87/88 후보·추가 QA 기록,D-Day APP별도|88 이후후보버전/범위 통합표 없음|분산|89 제안은11/25 사후, 기존기록으로 역산하지 않음|
+
+과거 원문은 [88 PDF 기록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/pdf-white-screen-hotfix-20261117.md), [85 통합목록](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/app-release-105-readiness-20261115.md), [87 인계](https://github.com/LC3808/legendstudy-app/blob/08345b69/wiki/app105-build87-release-20261116.md)에 보존되어 있다. 11/25 이후 모든 참조는 별도 시점 증거다.
+
+### 13.3 원인 분류와 책임 범위
+
+|분류|판정·근거|해결책|
+|---|---|---|
+|A 기록 자체 누락|확인:88 실제 출시일/플랫폼별최종상태·누적포함목록·사후source연결 부재|기존88인계에 실제 결과와 확인시각을 추기; 과거 제출0은 당시값으로 보존|
+|B 정보 분산|확인:출시381개/조사259개 Wiki tree와 별도source계보|현재상태에서 플랫폼별 canonical 릴리스문서의 고정Git링크를 안내|
+|C current 갱신|부분갱신:출시branch는88 BUILT까지 갱신, 조사branch는 최신운영만 추가. 실제RELEASED/과거gate폐기 미반영|현재요약은 현재판정만, 과거상태는 기존history에 보존|
+|D index 연결|출시branch내 연결누락 아님(최상단 링크 존재). branch간 최신 릴리스 연결이 빠짐|필수 RELEASE route에 실제 릴리스 인계 연결 추가(제안)|
+|E 빌드/출시 혼동|88원문은 명확히 구분했으므로 원문에서 ‘빌드=출시’ 오류는 없음. 뒤늦은독자가 미출시·QA미완료를동일시할 위험|구현/QA/배포를별도 열로; PARTIAL의 대상 명시|
+|F Git기준|최종source가Git객체로존재하나버전→출시source 명시연결·main차이최신표 없음|release source와docs HEAD 구분, ancestry검사 및양플랫폼receipt|
+|G 에이전트 필수읽기 누락|어느 파일을 실제 읽지 않았는지 입증할실행로그 없음. 단정불가. 다만11/25 전 여러branch 증거를 통합한 상태가 없었고초기계획에반영되지않음|범위판정 전 main/release/task의linked Wiki 교차, 기능을 구현/배포/QA로분리해 재개발여부 결정|
+|H Wiki/운영 불일치|확인:current Store BLOCKED·AI/student/worker OFF vs출시88·실운영요청. 이후WEB배포에도 ‘교차검토가최신’문구 잔류|해당문장 과거표기 및최신배포근거로한정, 무기한최신선언 금지|
+|I 인계 회수절차|관측:Owner가업로드담당,88인계 후최종결과갱신 없음. 누가왜미기록했는지는 미확인|빌드 인계 후 업로드/심사/출시회신을기록하는 종료조건과담당 지정|
+
+스토어 접속 목적은 두 가지였다. **버전·빌드·소스 준비 기록의 검증**과 동시에 **기록에 없던 실제 RELEASED/출시일 복원**이었다. 따라서 콘솔 접속 전체가 불필요한 재조사는 아니다. 반대로, 구현 목록은 기존 Wiki·Git에서 먼저 복원할 수 있었다. 실제 출시 확인을 위한 접속과, 이미 구현된 기능을 재개발 후보로 분류하는 오류는 구분해야 한다.
+
+### 13.4 현재 상태 문서가 충족하는 범위
+
+감사 시작 시 current-status는 11,964 bytes였고 구조 검사는 PASS였다. 11/25 사후 문서 덕분에 아래 정보는 대부분 상세 링크 한 단계로 복원되지만, 본문 모순이 남았다.
+
+|필수항목|현재 복원 결과 / 공백|
+|---|---|
+|APP 버전·빌드·플랫폼·출시source·기능|§6–7에서88양OS·08345b69·기능목록가능. 본문Store BLOCKED와충돌|
+|미출시|[89 준비](app-release-89-preparation-20261125.md):D-Day/무료2문구,실기기QA·정책DB·제출잔여. BUILT≠RELEASED|
+|WEB|[품질V1](quality-console-v1-20261125.md)ecac36e5/Pages6e4b8189가최신확인;본§1의4e865437는앞선시점|
+|Worker|§1 Essay29f4f6cc/Finance d14a757e,11/25확인. 새운영조치전active version재조회|
+|Supabase Migration|D-Day/복구각설치문서로추적가능;모든Migration의단일전수적용목록은없음. 파일존재로APPLIED판정금지|
+|개발기준|APP operations-commercial76cc4050,운영/SQL material-service646c5239,WEB lab-admin-operations c64bfc7. 공통‘하나의최신HEAD’없음|
+|진행·미완료·BLOCKED·승인·다음|통합후속/품질V1링크로가능하나과거‘mid-Oct Store launch’와혼재. q1/Finance/APP89/무료2/Q15 상태별분리필요|
+
+위 운영 버전은 앞선 조사 시점의 증거다. 이번 감사에서 현재 운영을 다시 조회한 것은 아니다. 스토어는 11/25 조회, q1은 11/25 22:22 진단, 품질 모집단은 22:44 집계다. 후속 배포·실행·업로드 직전에 재확인한다. Finance의 11/23 자연 갱신은 성공 미확인 상태다.
+
+### 13.5 기존 릴리스 기록 필드 감사
+
+기존 `app-release-closeout.md`는 10/4 BLOCKED 보고이며 현재 통합 릴리스 대장이 아니다(0570099c). 이를 새 대장으로 대체하기보다 기존 83/84/85/87/88 인계 문서를 각 릴리스의 증거로 재사용한다.
+
+|필드|88 이전 기록|최소 보완|
+|---|---|---|
+|버전·빌드·플랫폼|양OS1.0.6/88 명시|유지|
+|source·branch|branch/이전기준077d6654·최종문서HEAD참조|사후08345b69연결,산출물SHA와별도표시|
+|포함·수정·제외|PDF수정명확;기존기능은85/87/operations에분산|기존포함표+delta링크,대학뉴스홈보류/백분위미활성/D-Day미포함 명시|
+|테스트·산출물·빌드일|2632PASS/9SKIP,서명IPA/AAB SHA,11/17기록|정확빌드완료시각은아티팩트receipt추가확인;commit시각으로대체금지|
+|업로드·심사제출·승인·출시|88문서agent실행0,실제Owner후속날짜미기록|업로드/제출/승인일 UNKNOWN;11/25확인한실제출시일만기입|
+|알려진문제·다음후보|실기기/업데이트/플랫폼QA잔여존재;88이후통합후보없음|현재89준비를후속링크,실기기QA미완료를미출시기능으로바꾸지않음|
+
+기존 표에 상태를 구분하는 방안을 제안한다: IMPLEMENTED(코드), TESTED(시험 범위·결과), BUILT(산출물), UPLOADED(스토어 수락), SUBMITTED(심사 접수), APPROVED(승인), RELEASED(실제 노출), UNRELEASED(미출시). 플랫폼별로 별도 행을 사용하고, 중간 단계 날짜를 모르면 UNKNOWN으로 남긴다. RELEASED라는 사실로 이전 QA가 모두 PASS였다고 역추론하지 않는다.
+
+### 13.6 Git 28 commits의 정확한 의미
+
+`main02996bed...08345b69`는 left0/right28이며 main은 출시 소스의 조상이다. 충돌 28개가 아니라, 11/13 APP84 main 반영 후 11/17 PDF88까지 작업 브랜치에서 추가된 커밋이다. lib45개와 pubspec2개에 차이가 있다. 28개 커밋에는 문서·운영 RPC·검증도 포함되므로 전부 새 기능으로 세면 안 된다. 전체 목록은 증거 JSON에 기록했다.
+
+11/13 APP83/84는 명시적 승인 후 main을 FF/Push했다. 11/15 준비 문서는 작업 브랜치 유지·main 변경0, 11/17은 스토어 업데이트를 Owner 담당으로 구분했다. **작업 브랜치 분리는 의도됐지만, 출시 후 main 정합화와 최종 인계 회수가 완료됐다는 증거는 없다.** 영구적인 release/main 분리 정책도 찾지 못했다. 특정 담당자의 실수로 단정할 수는 없으나, 인계 절차상 미완료가 남았다는 것은 확인된다.
+
+조사 브랜치 6bd46f98와 출시08345b69는 공통 조상8a149835, left39/right322로 main의 28커밋 지연과는 다른 관계다. 조사 브랜치 전체를 APP에 덮어쓰면 회귀 위험이 있다. 11/25 후속 작업에서는 이미 출시88 위에 D-Day를 선택 통합한76cc4050을 만들었다. 다시 구현할 대상이 아니다.
+
+권장: Owner검토후main02996bed→08345b69의정확FF를재확인하고,후보89(무료2안내·D-Day)는별도QA/승인한다. 현재branchHEAD76cc4050전체를88동기화승인으로간주하지않는다. 이전자동승인검토가main push를차단한기록은[통합후속](integrated-followup-20261125.md)에있으며이번에는재시도하지않았다. release ancestry와제품diff/기능보존검사를다음빌드의입구로사용한다. source SHA와빌드후문서커밋을구분한다.
+
+현재기존미커밋: .gitignore,ios project,essay math_gateway/source_catalog/student_pdf_catalog,test/math_gateway,중앙Wiki/과거작업문서및미추적자료. 미완료기능이나출시기능으로승격하지않고보존했다. 다른release checkout은76cc4050의기존상태를사용하며이번감사로reset/삭제/병합하지않았다.
+
+### 13.7 AGENTS와 검사기의 실제 보장
+
+AGENTS는08345b69와 현재 HEAD 간 차이가 없다. §2의 시작 순서·실제 상태 우선·전체 Wiki 검색·종료 시 링크 검사, §6의 current/log 분리, §7의 구현·시험·실제 상태·미완료 기록은 충분한 일반 규칙이다. 같은 규칙을 중복 추가할 필요는 없다. 다만 플랫폼별 스토어 단계·배포 ID·source·branch와 인계 후 결과 회수는 필수 필드로 명시되지 않았다. 대규모 AGENTS 개편 대신 기존 릴리스 인계 표에 해당 필드를 추가하는 안을 제안한다.
+
+`tool/check_wiki_handoff.py`가검사하는것: Markdown링크파일/anchor존재,10도메인라우팅의문자열, current-status12000bytes. RELEASE라우팅은privacy/auth/current/community/research만요구하며실제릴리스문서·version·build·commit·stage·branch는검사하지않는다. 현재PASS는**구조적연결성과크기만PASS**이며기록의진실성/최신성/출시완료를보증하지않는다. 모순문구가존재해도PASS인것을이번직접실행으로재현했다.
+
+|자동화 가능한 보완(제안,미구현)|사람/외부확인 필요|
+|---|---|
+|current의APP/WEB/Worker/DB/branch/다음/승인요약·참조존재|내용이실제운영과맞는지|
+|RELEASED행의플랫폼/version/build/source/확인시각/근거필수|스토어실제공개·단계별시각·업로드binary와source동일성|
+|Git commit실재,release→candidate ancestry,미통합 diff경고|의도한제외기능·회귀QA·개발기준승인|
+|동일platform/version/build의서로다른source·현재상태충돌탐지|과거snapshot인지실제오류인지|
+|미완료의범위/다음행동/승인·BLOCKED사유필수|해소여부·Owner결정|
+
+검사출력도 STRUCTURE_PASS와RELEASE_METADATA_PASS를분리하고‘운영사실미검증’을명시하는안이적절하다. 새대장파일을만들기전에기존인계표를기준으로parser/test를준비한다. 본감사에서는검사코드변경없음.
+
+### 13.8 새 에이전트 재현(이전 채팅 제외)
+
+별도 에이전트에 대화 이력을 전달하지 않고 공식 시작 문서 3개와 그 링크만 읽도록 했다. 파일·운영 변경은 없었다. 현재 10개 질문은 대부분 상세 링크 한 단계에서 답할 수 있지만, 충돌하는 표현을 해석해야 하므로 무조건 PASS로 판정할 수 없다.
+
+|질문|현재Wiki에서의답 / 한계|
+|---|---|
+|1버전·2빌드·3Git|1.0.6/88/08345b69,§6. binary독립SHA증명과구분|
+|4출시기능|§7목록;상세QA잔여분리|
+|5구현미출시|APP89:D-Day/무료2문구,실기기·정책·제출잔여|
+|6WEB/Worker|품질V1ecac36e5/6e4b8189;Worker29f4f6cc. §1만따르면오래된WEB로오답|
+|7미해결|q1미완료,Finance자연갱신미확인/로그차단,서비스조회일시실패진단|
+|8다음|통합후속P0/P1+품질V1미완료. 과거10월우선순위와혼재|
+|9branch|APPoperations-commercial,운영/SQLmaterial-service,WEB lab-admin. 현재로컬HEAD는Git재확인|
+|10승인|q1,무료2DB,정확mainFF,스토어,품질DB/Owner역할등구체범위별|
+
+추가로사후문서를제외한3snapshot을각각재현했다. `6bd46f98`는88정보불가(10/25후보·Store BLOCKED),`02996bed`는84준비/83출시까지만,`08345b69`는88 BUILT/기능후보는가능하나실제RELEASED불가였다. **세snapshot모두양OS88실제출시를Wiki만으로복원하지못했다.** 11/25보완이실제로정보를추가했음을확인했으며이를과거체계정상근거로사용하지않는다.
+
+현재 재현 결과: 읽기 전용 진단과 QA 준비는 조건부로 시작 가능하다. 운영 실행에는 승인과 상태 재확인이 필요하다. 과거 Store BLOCKED/AI OFF와 무기한 ‘최신’ 표현을 정리하면 오독 위험을 줄일 수 있다.
+
+### 13.9 Owner에게 제안하는 최소 수정 순서
+
+1. 기존88인계에양플랫폼RELEASED와11/25확인근거·source·누적기능참조를추기(과거빌드/제출0이력보존). 새릴리스문서증식없음.
+2. current-status의한정된요약을플랫폼/컴포넌트별현재상태+공식상세참조로정리. 오래된StoreBLOCKED/AI OFF/10월다음순서는기존history로옮기되원문보존. index의10/26‘최신마감’·9/25‘Latest’도역사표기.
+3. 기존RELEASE라우팅/검사에위메타데이터와ancestry검증추가. 정상/누락source/상이build/모순RELEASED/구branch후퇴fixture를통과시킨다. 외부사실은마지막확인시각과재확인조건으로남긴다.
+4. Owner검토후정확mainFF와APP89QA는별도개발작업으로수행. Wiki정정이Git병합·스토어출시승인이아님.
+
+1–3은문서/검사보완약2–4시간,Git/릴리스재검증은별도이며작업량추정이다. 이번에는감사와근거기록·발견된오타정정만수행했다. 구조개편/AGENTS수정/새자동검사/실제main갱신은미실행이다.

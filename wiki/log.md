@@ -1,3 +1,7 @@
+## 2026-11-25 — Wiki·릴리스 인수인계 감사
+
+출시 branch의88 빌드 기록은11/17 존재, 실제 RELEASED 회수 기록은11/25 이전 미발견. main0/28·조사branch분산과 현재상태 모순 확인. 새 에이전트3snapshot/현재10질문 재현, 구조검사PASS의 의미 한정. 기존 교차검토 §13에 근거·최소 보완안 기록. AGENTS/검사기/병합/제품/운영 변경0. [감사](project-cross-review-20261125.md).
+
 ## 2026-11-25 — 품질 콘솔 V1 운영 반영 (PARTIAL)
 
 4탭·원본 상세·기존 검수·인증 보고서 구현, WEB ecac36e5/Pages6e4b8189 배포. 2276PASS/5SKIP, 기존 boundary2실패 별도 기록. 70요청118문항 대조·내용20요청38문항, 학생/원장 hash 불변. Q15 저장·Owner 집계·Claude V1 검토 미완료. [보고](quality-console-v1-20261125.md).

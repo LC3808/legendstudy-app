@@ -8,7 +8,7 @@
 [11/25 무료 첨삭권2개](signup-credit-policy-two-20261125.md): 신규 지급만2·기존3/소진 이력 보존. SQL24/G1 84/WEB288·최종101/Flutter21 PASS. 운영 DB 승인 대기·WEB 미배포·APP 다음 출시. 원장 해시 불변.
 
 
-[11/25 프로젝트·스토어 교차 검토](project-cross-review-20261125.md): 양OS 1.0.6/build88 출시 확인. main FF 승인 대기; D-Day APP89 준비. 최근7일12요청/11완료·q1 미완료1, 복구 배포와 실제 완료 구분. 운영 변경0. 최신 상태는 해당 보고서 우선.
+[11/25 교차 검토·릴리스 감사](project-cross-review-20261125.md): 양OS1.0.6/88 출시 확인. §13에 기존 기록·branch 분산·검사 한계·보완안. 운영 상태는 확인 시점별 상세 문서 참조.
 
 [11/22 복구 런타임](admin-recovery-runtime-fix-20261122.md): origin 결함 수정·WEB/Worker 배포·비파괴 진단 PASS. q1 실행0·결과/원장 보존.
 
