@@ -10,15 +10,15 @@
 
 ## 운영 상태와 DB
 
-- WEB: 품질 콘솔 V1 `ecac36e5`/Pages `6e4b8189` 운영 반영. [배포·검증](quality-console-v1-20261125.md). 후속 문서 HEAD를 배포 소스와 혼동하지 않는다.
+- WEB: 진단 패치 `513e641f`/Pages `5fd50a21` 운영 반영, 기존 품질V1 및 정적3207경로 보존. [배포·검증](quality-console-v1-20261125.md). 후속 문서 HEAD를 배포 소스와 혼동하지 않는다.
 - Essay Worker: `29f4f6cc-433f-4e8e-8da4-9ca5710f2e71`,11/22 배포·11/25 확인. 관리자 복구/정확 인용 보정 운영, 부분 재생성·신규 상한은 비활성. [런타임](admin-recovery-runtime-fix-20261122.md).
 - DB: 프로젝트 stlhijzpjfgwwdgunlsd. [D-Day 설치](admissions-dday-implementation-20261120.md)와 [복구 설치](admin-run-recovery-deployment-20261122.md) 확인. [무료2 SQL](signup-credit-policy-two-20261125.md)은 승인 대기. 모든 migration이 적용됐다는 뜻은 아니다.
-- 결제: Toss LIVE 유지. Finance Worker `d14a757e-5b46-448c-8b66-325d181c2a9f` **11/23 10:30:35 자연주기 갱신 성공**,active 만료11/30 10:30:35 KST를 기존 로그에서 확인. [P0 교차검증](finance-auth-renewal-20261117.md). 별도 Pages Registry credential invalid로 WEB/공유 APP 첨삭 진입503,미복구/P0. 만료 여부는 세부 미확인.
+- 결제: Toss LIVE 유지. Finance Worker `d14a757e-5b46-448c-8b66-325d181c2a9f` **11/23 10:30:35 자연주기 갱신 성공**,active 만료11/30 10:30:35 KST를 기존 로그에서 확인. [P0 교차검증](finance-auth-renewal-20261117.md). 별도 Pages Registry credential invalid로 WEB/공유 APP 첨삭 진입503,미복구/P0. **학생 QA에서 EXPIRED 확정**, Owner Registry 갱신 대기.
 
 ## 진행·미완료·승인·다음 작업
 
 1. q1 요청03629605…는 reserved,완료1/2. 복구 연결 수정과 실제 완료는 다르다. Owner 승인 후 직전 잠금·완료문항 해시·이용권0 재확인→기존 복구1회. 이번 실행 없음.
-2. **P0 첨삭 진입503**: Worker binding=true/Registry credentialValid=false. Owner 좁은권한 credential 메타데이터 확인→필요시 교체·배포 범위 확정→비파괴 재검증. Finance 성공 확인으로 로그접근 BLOCKED 해소;학생 재실행 없음.
+2. **P0 첨삭 진입503**: Worker binding=true/Registry credentialIssue=EXPIRED. Owner 동일권한 Registry credential 갱신→설정 보존 배포→학생 비파괴 재검증. Finance 성공 확인으로 로그접근 BLOCKED 해소;학생 재실행 없음.
 3. APP89 실기기 업데이트·PDF/로그인/학습/수동 및 자동 D-Day 회귀. 스토어 제출 별도 승인.
 4. 무료2 신규 지급 정책은 [준비된 SQL/검증/원복](signup-credit-policy-two-20261125.md) Owner 승인·적용 후 확인. 기존 지급분/원장 보존.
 5. [품질V1](quality-console-v1-20261125.md) PARTIAL:70요청118문항 대조,내용20요청38문항 검토. Q15 개별 저장·Owner 집계·나머지 내용/Claude 검토 미완료. 새 DB는 exact SQL 준비 후 별도 승인.
@@ -86,7 +86,7 @@
     "품질 콘솔 Q15/Owner 집계 미완료"
   ],
   "blocked": [
-    "첨삭 진입503: Pages Registry credential invalid;세부 조건/복구 대기"
+    "첨삭 진입503: Pages Registry JWT EXPIRED;Owner 갱신/복구 대기"
   ],
   "approval": [
     "q1 실제 복구",
@@ -96,7 +96,7 @@
     "Q15 DB/Owner 역할 계약"
   ],
   "next": [
-    "P0 Registry credential 확인 및 복구 범위 확정",
+    "P0 Registry credential Owner 갱신 후 비파괴 복구 검증",
     "q1 승인 후 직전 조건 재확인",
     "APP89 실기기 회귀",
     "무료2 DB 승인 패키지 검토"

@@ -1,3 +1,7 @@
+## 2026-11-26 — 학생 첨삭 진입 P0 원인 확정
+
+QA 학생 잔액95 조회 정상/서강 availability503 재현. Registry JWT EXPIRED를 안전한 진단 로그로 확정, Finance와 구분. WEB513e641f/Pages5fd50a21 진단만 배포, 정적3207경로·설정 보존. 관련79검증·타입검사 PASS. 실제 제출/차감0, Owner credential 갱신 대기. [근거 및 복구 절차](finance-auth-renewal-20261117.md).
+
 ## 2026-11-25 — 독립 인수인계 최종 PASS
 
 첫 검토 FAIL의 과거 APP82/HOLD 라우팅을 정정하고14개 회귀검사 PASS. 독립 검토11/11 PASS, 공식main 원격 반영·출시 ancestry·제품88불변 확인. [결과](project-cross-review-20261125.md).

@@ -14,6 +14,8 @@ Worker 운영29f4f6cc-433f-4e8e-8da4-9ca5710f2e71(100%,11/22), WEB Pages f188208
 
 ## P0 Finance
 
+**최신 정정(11/26):** 아래는11/25 조사 당시의 차단 이력이다. 이후 기존 로그에서11/23 자연갱신 성공·11/30 만료를 확인했고, 학생 진입은 별도 Registry JWT EXPIRED로 확정했다. [최신 근거](finance-auth-renewal-20261117.md).
+
 운영 Finance Worker d14a757e-5b46-448c-8b66-325d181c2a9f(100%,11/17) 유지. Pages PAYMENT_MODE=LIVE, PAYMENT_ENABLED/PUBLIC_ENABLED/PAYMENT_FINANCE_AUTO=true 유지. 이 설정만으로 Finance의 실제 API 성공/11월23일 자연갱신을 인증하지 않는다.
 
 기존 로그 telemetry API 재조회403, 같은 로컬 OAuth로 deployment/settings GET은 성공했다. 만료/Worker중단으로 단정할 수 없다. 확인한 OAuth 범위는 workers write/tail read 등을 포함하나 해당 observability API 접근 허용은 증명되지 않았다. 브라우저는 Cloudflare 로그인 화면(Password 단계)에 머물러 있다. **자연갱신 성공·현재 JWT exp·실제 Cron 실행·Finance API 정상은 BLOCKED/미확인**. Cron15분 설정과 런타임 로그는 다른 증거다.
@@ -84,3 +86,11 @@ DAU/WAU·자료검색·열람횟수·재방문율·무료권사용자cohort: **N
 P0:q1명시승인후1회복구,Finance로그접근확보(각0.5일내진단,외부대기별도),대학목록상태조회실패분리진단. P1:main정확한FF승인,89실기기회귀0.5~1일,무료2SQL적용승인,아주·인하부족범위. P2:품질보고서Owner검수후최소개선·Analytics동일기간export. 배지B는Owner정책확정뒤4~6일예상.
 
 승인필요: q1실행,무료2운영DB,main정확한FF push(자동검토차단),스토어업로드/제출,배지정책·후속DB/backfill. 로그인필요:Cloudflare기존로그. 이번미승인작업:부분재생성/새상한/EvidenceID확장/전체대학연결/배지지급/정시예측모두비활성.
+
+
+## 후속 실행 재확인 — 2026-11-26
+
+- q1 00:18 KST read-only diagnosis: reserved,completed1/2,q1 reconciling,stored_result0,active_lease=false,retry0,history0,required/reserved/consumed0,ledger0,consistent=true. 실제 실행0. 별도 Owner 승인 및 실행 직전 조건 재확인 필요.
+- 무료2 기존 precheck의 정의/ACL 검사 PASS. 현재 grants941/ledger1060(과거938/1057 대비 증가),signup_bonus_v1 3개926건,신규helper없음. 과거 총건수를 강제로 맞추지 않는다. Owner 설치 직전 fresh baseline과 원장 보존 postcheck 사용. 운영정책 아직3개,설치0.
+- Build89 AAB/IPA 실제 해시·크기 재확인: 기존 출시89 문서와 정확히 일치. 재빌드0. main...76cc405는4/2로 분기되어 직접FF불가; 후보에 공식main 통합 후 정확한 새SHA를 제시하고 Owner 승인을 받아야 한다. main제품 변경0.
+- boundary 검사 재확인 FAIL2: checkout의 TEST/REVIEW 전용 조건부 안내도 구 문자열 금지 규칙에 걸림; admin-members-view.tsx의 URL.searchParams.delete('member')를 DB delete로 오인(기존 예외는admin-data-table만 해당). 실제 DB삭제 증거가 아니다. 정책 확인 후 정확한 수신객체/분기 검사를 보완할 대상이며 이번 진단API 패치에는 섞지 않았다.

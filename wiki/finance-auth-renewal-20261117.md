@@ -198,3 +198,20 @@ WEB 테스트 소스 `6e6cf2d`: public-service-status/exam-endpoint에 과거exp
 5. 재발방지 제안: 서버 비밀값 없는 credential 오류 세분화(없음/형식/role/만료/nbf),만료 메타데이터 경보 및 배포전 읽기 검사. 구현/배포 승인 범위가 정해지기 전에는 새진단 엔드포인트/자동갱신 시스템을 임의로 추가하지 않는다. DB Migration 필요 근거 없음.
 
 현 단계 Owner 필요사항: **첨삭 전용 credential 메타데이터 확인 및 필요한 경우 동일권한 교체·배포의 실행 범위 확정**. Finance 재발급·실학생 재실행·이용권 보정은 필요하다는 근거가 없으며 요청하지 않는다. 상세 만료시각과 최초 장애시점은 미확인으로 유지한다.
+
+
+## 학생 QA 재현 및 만료 원인 확정 — 2026-11-26 00:18 KST
+
+**원인 확인 DONE / 서비스 복구 BLOCKED(Owner credential 갱신 대기).** 로그인 완료를 알린 QA 학생 화면에서 이용권95(무료0/구매0/기타95) 조회 성공, 관리자 메뉴 없음. 서강2026 수시 경제경영 시험을 선택하면 “일시적으로 첨삭 가능 여부를 확인할 수 없습니다” 재현. 일반권한의 별도 DB role 검증이나 실제 제출 성공으로 확대하지 않는다. 답안 입력·저장·첨삭 제출·차감0.
+
+최소 진단 패치 WEB `513e641fe3bec9f33906ca37a5e828f64702ac09`를 배포한 후 기존 Pages tail로 확인:
+
+- `GET /api/essay/public-service-status` HTTP503, `ESSAY_REGISTRY_PREFLIGHT {credentialIssue:EXPIRED}`.
+- `POST /api/essay/exam` availability HTTP503, `EXAM_WORKER_PREFLIGHT {bindingReady:true,credentialValid:false,credentialIssue:EXPIRED}`.
+- Finance가 아닌 **Pages ESSAY_REGISTRY_WORKER_JWT 만료**로 기존 preflight에서 차단. 정확한 exp 시각·최초 장애시점·주말 이후 요청 감소의 전체 인과는 여전히 미확인. 서강 외 모든 시험을 실제 순회한 것은 아니며 공통 preflight 사용 범위가 잠재 영향 범위다.
+
+수정: registry-credential.ts의 기존 판정 조건을 유지하면서 MISSING/FORMAT/ALGORITHM/ROLE/EXPIRY_INVALID/EXPIRED/EXPIRING/NOT_BEFORE 고정 코드만 반환; exam.ts/public-service-status.ts에서 원문 토큰/claims 없이 사유 기록. 오류 응답의 일반 공개 문구·권한·예약/평가/Finance 경로는 유지. 만료 허용이나 검증 우회 없음. 기존 Finance 격리111 PASS에 더해 이번 관련3파일79 PASS, TypeScript PASS, Pages compile PASS.
+
+배포 `5fd50a21-ef56-42f5-8913-91b0b11e1ad8` 00:14:11 KST success. postflight: 기존 정적3207경로 manifest 동일, deployment_configs 동일. `scripts/deployment/essay-credential-preserved.mjs`로 API 범위만 반영; 무료2 정적 안내는 아직 배포하지 않았다. 진단 배포를 서비스 복구 완료로 표시하지 않는다. Worker/DB 배포0.
+
+Owner 인계: 기존 `tool/cloudflare_essay/OWNER_JWT_RECOVERY.md`의 Essay Registry 절과 기존 helper를 재사용. 기존 서명키를 숨김 입력하고 동일 essay_worker role/검증된30일 후보의 읽기 HTTP200 통과 후 Pages Production 해당secret 하나만 Owner가 입력·저장한다. Math/Service Token/Finance 키를 변경하지 않는다. 비밀값 전달 금지. 저장 완료 후 현재 설정을 유지한 API 배포 및 학생 availability/APP 진입 재검증이 남는다. 인증정보 변경의 브라우저 입력·저장은 Owner handoff 대상이다.
