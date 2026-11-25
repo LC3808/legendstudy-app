@@ -1,0 +1,540 @@
+{
+  "before": {
+    "runs": [
+      {
+        "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+        "ledger_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "result_md5": "539266e114a9814d806d499150990470",
+        "answers_md5": "1eaa7f4b053413ebfc151f0ea13f768e",
+        "run_row_md5": "62c8a9b9dd0d928266bd6cdeb5c93bf1",
+        "answer_count": 2,
+        "snapshot_md5": "07a5595bf30bbd0f0330a520b4a15663",
+        "checkpoints_md5": "7641d07f0a6d5c445c85df3c3f8310e6",
+        "checkpoint_count": 9,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 0,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "b4924e95c393742ab8caec97fa7fea0e",
+        "result_question_count": 0
+      },
+      {
+        "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+        "ledger_md5": "81bbd231251a36809505dc5a72d667ee",
+        "result_md5": "13c07352d91b0a1ae2c08724475ec570",
+        "answers_md5": "03c9c69d98b877ee7b7a8e3587f2efad",
+        "run_row_md5": "6094b37c5776e65df9301f567078952d",
+        "answer_count": 2,
+        "snapshot_md5": "8e4c84d2aad169c8ec92c6b34bfb906e",
+        "checkpoints_md5": "0b402f5abf73a348f3c59c325773f076",
+        "checkpoint_count": 24,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "7ab9660ba9a85ad40030ff06e3489fd7",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3f168098838fdf1fad78e3e77ad7099c",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+        "ledger_md5": "83c5a183a0a8d4c301af310b7621f18b",
+        "result_md5": "6a70ca06ba67367e7544a87fc46a06c0",
+        "answers_md5": "702d79c31a11d83eae965315913482b1",
+        "run_row_md5": "ed396037e16a5b7cbbaf7289ae13dd0a",
+        "answer_count": 3,
+        "snapshot_md5": "88a19c48fc7eec9230384672c20dbfd2",
+        "checkpoints_md5": "428aa1852596eede4a6eb787135fb814",
+        "checkpoint_count": 31,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "75213905f37e5d8c9398c6cbfe1da0d2",
+        "retry_request_count": 1,
+        "billing_decision_md5": "d9613a0e74d29ae35f628db56269c46a",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+        "ledger_md5": "878601aa35c1e0e760f215cf64e22b6f",
+        "result_md5": "1d739cf33b4dd859b8e465aa9a577dbc",
+        "answers_md5": "3625b4a73bfbc0cd0a4606633eb6c5ce",
+        "run_row_md5": "1b111d0bd966930c6ce67d09d41b6b49",
+        "answer_count": 3,
+        "snapshot_md5": "bdf649d6cc6d3d64f34b36987dcd88ac",
+        "checkpoints_md5": "96436a41317b0a207c441c4a4fff0e23",
+        "checkpoint_count": 51,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "34ddb1fa508c47382020d02d1ceaa6b0",
+        "retry_request_count": 5,
+        "billing_decision_md5": "c53111c67b2edbb072d7426743a93725",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+        "ledger_md5": "737628696fcc7bb29fc1168936649bee",
+        "result_md5": "1778e43968f0d3c24257e5decb7eef89",
+        "answers_md5": "bf38f52ae0b30cfe1e46e95d0c5616b9",
+        "run_row_md5": "e0f4d0affe234bb65361efd916897f33",
+        "answer_count": 2,
+        "snapshot_md5": "be3c5029fae6a8d068513806779ecbc4",
+        "checkpoints_md5": "63607076c172a7de4d3e946a4fb3ee9b",
+        "checkpoint_count": 40,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "3b2fa5ac24af270e871551a2f7303d63",
+        "retry_request_count": 3,
+        "billing_decision_md5": "7868d1d4eed68d428aac0ef4ba677d99",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+        "ledger_md5": "7927fca9aca39e1a2286ac297e7d8c59",
+        "result_md5": "0bfb22610e58463a950eb47ef2bcd808",
+        "answers_md5": "242a13f6ca1cd803e5bd79ef73623816",
+        "run_row_md5": "c5bbd7e38ae879bea161d330b12b0d15",
+        "answer_count": 3,
+        "snapshot_md5": "c3cf64fa294c7299f75a549755d19c1a",
+        "checkpoints_md5": "dffcd5aee327142601ec16e62e70d033",
+        "checkpoint_count": 31,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "5a19adc51fec70bb7a360b84e5679ad6",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3c96e39203491fc72fe3605e04e1de5b",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+        "ledger_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "result_md5": "7f9bc8b36f53623721796680144e0597",
+        "answers_md5": "0df5ba48e8fab6f0b071e6508af1bae9",
+        "run_row_md5": "a3bbe577e400e12404af9fd1bee17132",
+        "answer_count": 2,
+        "snapshot_md5": "dcf4e469d4bf5308610cc870fca677d1",
+        "checkpoints_md5": "c89b237f134b6feb8328ea578f7584af",
+        "checkpoint_count": 16,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 0,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "d91d4c0965c298077b7fae660de6c0b9",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+        "ledger_md5": "f3131bbe122c5fa9d88d2a25742d466a",
+        "result_md5": "f757fd1e9e2755d1d4716858d74740d2",
+        "answers_md5": "1bc7c98fb02c92bc392bda00fb2532b9",
+        "run_row_md5": "fe947b2f6d1a4babf1c677ec7ffdb4de",
+        "answer_count": 2,
+        "snapshot_md5": "79a28727fb3b20a60adb06a835f8484f",
+        "checkpoints_md5": "768d8efe694a0a2121403bca83058ffc",
+        "checkpoint_count": 16,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "aea1fb4294793942b4fe0b7024d50957",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+        "ledger_md5": "3a4a2e642dd6353ba412bec1c4a2fde7",
+        "result_md5": "2ef603bc799a2a5b1f2419960b165071",
+        "answers_md5": "592f5114de614870defc9299c9fd1012",
+        "run_row_md5": "72d3f0a44349deed4f3b31180738c5a9",
+        "answer_count": 2,
+        "snapshot_md5": "9bd68be46918bb6623dbac1c014725ad",
+        "checkpoints_md5": "6668d62cb1b4f368234e8d8d698f35a8",
+        "checkpoint_count": 24,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "77e91b5a10600e34cf320860bf5e7a1b",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3d8620d8bf7aa84c7f5a94a5a5dee38d",
+        "result_question_count": 2
+      }
+    ],
+    "scope": "Fixed nine run IDs from 2026-11-16..22 KST audit; hashes only, no answer/result/token/user plaintext",
+    "functions": [
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_essay_operations(integer,text,timestamp with time zone)",
+        "definition_md5": "7984b71bc248dd487326146413e6664a",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)",
+        "definition_md5": "3c5616e0e2bb9a734538c960a57f12d0",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_manage_run(uuid,text,uuid)",
+        "definition_md5": "d8292b35fd49688f562a9bf5c90dd77e",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_operation_stats(timestamp with time zone,timestamp with time zone)",
+        "definition_md5": "0366cf286b54b59ce0415c2d326db8f7",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_run_capabilities(uuid)",
+        "definition_md5": "0b405804182b44684361fad93a189199",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_set_run_hidden(uuid,boolean)",
+        "definition_md5": "cd00866070df6466121023d8e922cd8b",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+        "definition_md5": "c3bfd5bac836e575beedec18579177f8",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_claim(uuid,uuid,uuid)",
+        "definition_md5": "c464c30ec66964791641febe4e89eea6",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_dispatch_guard(uuid,uuid)",
+        "definition_md5": "930f4cb10efcaffc63d8d74754ec7122",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_finish(uuid,uuid,uuid,jsonb,boolean)",
+        "definition_md5": "b2ff3dce059d8a5d6b3652094c6a757a",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "essay_exam_observation(uuid)",
+        "definition_md5": "27e9f3568ec4a2ee85f8d6686d0acd50",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)",
+        "definition_md5": "b505a07b40ff3bbb9490705adf426164",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+        "definition_md5": "f91ff6befbf0e476fbf0b2e374630a52",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_session_claim(uuid,uuid,uuid)",
+        "definition_md5": "a24b1173fbe782846526d228c7b00a64",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "essay_exam_session_status(uuid)",
+        "definition_md5": "9682ead7a6c3ca1faf000f09ea0f1333",
+        "security_definer": true
+      }
+    ],
+    "observed_at": "2026-11-22T12:29:57.100522+00:00",
+    "actual_target_count": 9,
+    "expected_target_count": 9,
+    "transaction_read_only": "on"
+  },
+  "after": {
+    "runs": [
+      {
+        "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+        "ledger_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "result_md5": "539266e114a9814d806d499150990470",
+        "answers_md5": "1eaa7f4b053413ebfc151f0ea13f768e",
+        "run_row_md5": "62c8a9b9dd0d928266bd6cdeb5c93bf1",
+        "answer_count": 2,
+        "snapshot_md5": "07a5595bf30bbd0f0330a520b4a15663",
+        "checkpoints_md5": "7641d07f0a6d5c445c85df3c3f8310e6",
+        "checkpoint_count": 9,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 0,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "b4924e95c393742ab8caec97fa7fea0e",
+        "result_question_count": 0
+      },
+      {
+        "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+        "ledger_md5": "81bbd231251a36809505dc5a72d667ee",
+        "result_md5": "13c07352d91b0a1ae2c08724475ec570",
+        "answers_md5": "03c9c69d98b877ee7b7a8e3587f2efad",
+        "run_row_md5": "6094b37c5776e65df9301f567078952d",
+        "answer_count": 2,
+        "snapshot_md5": "8e4c84d2aad169c8ec92c6b34bfb906e",
+        "checkpoints_md5": "0b402f5abf73a348f3c59c325773f076",
+        "checkpoint_count": 24,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "7ab9660ba9a85ad40030ff06e3489fd7",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3f168098838fdf1fad78e3e77ad7099c",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+        "ledger_md5": "83c5a183a0a8d4c301af310b7621f18b",
+        "result_md5": "6a70ca06ba67367e7544a87fc46a06c0",
+        "answers_md5": "702d79c31a11d83eae965315913482b1",
+        "run_row_md5": "ed396037e16a5b7cbbaf7289ae13dd0a",
+        "answer_count": 3,
+        "snapshot_md5": "88a19c48fc7eec9230384672c20dbfd2",
+        "checkpoints_md5": "428aa1852596eede4a6eb787135fb814",
+        "checkpoint_count": 31,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "75213905f37e5d8c9398c6cbfe1da0d2",
+        "retry_request_count": 1,
+        "billing_decision_md5": "d9613a0e74d29ae35f628db56269c46a",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+        "ledger_md5": "878601aa35c1e0e760f215cf64e22b6f",
+        "result_md5": "1d739cf33b4dd859b8e465aa9a577dbc",
+        "answers_md5": "3625b4a73bfbc0cd0a4606633eb6c5ce",
+        "run_row_md5": "1b111d0bd966930c6ce67d09d41b6b49",
+        "answer_count": 3,
+        "snapshot_md5": "bdf649d6cc6d3d64f34b36987dcd88ac",
+        "checkpoints_md5": "96436a41317b0a207c441c4a4fff0e23",
+        "checkpoint_count": 51,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "34ddb1fa508c47382020d02d1ceaa6b0",
+        "retry_request_count": 5,
+        "billing_decision_md5": "c53111c67b2edbb072d7426743a93725",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+        "ledger_md5": "737628696fcc7bb29fc1168936649bee",
+        "result_md5": "1778e43968f0d3c24257e5decb7eef89",
+        "answers_md5": "bf38f52ae0b30cfe1e46e95d0c5616b9",
+        "run_row_md5": "e0f4d0affe234bb65361efd916897f33",
+        "answer_count": 2,
+        "snapshot_md5": "be3c5029fae6a8d068513806779ecbc4",
+        "checkpoints_md5": "63607076c172a7de4d3e946a4fb3ee9b",
+        "checkpoint_count": 40,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "3b2fa5ac24af270e871551a2f7303d63",
+        "retry_request_count": 3,
+        "billing_decision_md5": "7868d1d4eed68d428aac0ef4ba677d99",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+        "ledger_md5": "7927fca9aca39e1a2286ac297e7d8c59",
+        "result_md5": "0bfb22610e58463a950eb47ef2bcd808",
+        "answers_md5": "242a13f6ca1cd803e5bd79ef73623816",
+        "run_row_md5": "c5bbd7e38ae879bea161d330b12b0d15",
+        "answer_count": 3,
+        "snapshot_md5": "c3cf64fa294c7299f75a549755d19c1a",
+        "checkpoints_md5": "dffcd5aee327142601ec16e62e70d033",
+        "checkpoint_count": 31,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "5a19adc51fec70bb7a360b84e5679ad6",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3c96e39203491fc72fe3605e04e1de5b",
+        "result_question_count": 3
+      },
+      {
+        "run_id": "b0cd5b26-8333-4a62-b16d-0394fd58f50c",
+        "ledger_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "result_md5": "7f9bc8b36f53623721796680144e0597",
+        "answers_md5": "0df5ba48e8fab6f0b071e6508af1bae9",
+        "run_row_md5": "a3bbe577e400e12404af9fd1bee17132",
+        "answer_count": 2,
+        "snapshot_md5": "dcf4e469d4bf5308610cc870fca677d1",
+        "checkpoints_md5": "c89b237f134b6feb8328ea578f7584af",
+        "checkpoint_count": 16,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 0,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "d91d4c0965c298077b7fae660de6c0b9",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "c37166d0-6a21-45d3-beb8-de87ce9c81a1",
+        "ledger_md5": "f3131bbe122c5fa9d88d2a25742d466a",
+        "result_md5": "f757fd1e9e2755d1d4716858d74740d2",
+        "answers_md5": "1bc7c98fb02c92bc392bda00fb2532b9",
+        "run_row_md5": "fe947b2f6d1a4babf1c677ec7ffdb4de",
+        "answer_count": 2,
+        "snapshot_md5": "79a28727fb3b20a60adb06a835f8484f",
+        "checkpoints_md5": "768d8efe694a0a2121403bca83058ffc",
+        "checkpoint_count": 16,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "retry_request_count": 0,
+        "billing_decision_md5": "aea1fb4294793942b4fe0b7024d50957",
+        "result_question_count": 2
+      },
+      {
+        "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+        "ledger_md5": "3a4a2e642dd6353ba412bec1c4a2fde7",
+        "result_md5": "2ef603bc799a2a5b1f2419960b165071",
+        "answers_md5": "592f5114de614870defc9299c9fd1012",
+        "run_row_md5": "72d3f0a44349deed4f3b31180738c5a9",
+        "answer_count": 2,
+        "snapshot_md5": "9bd68be46918bb6623dbac1c014725ad",
+        "checkpoints_md5": "6668d62cb1b4f368234e8d8d698f35a8",
+        "checkpoint_count": 24,
+        "hidden_state_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "ledger_entry_count": 2,
+        "retry_requests_md5": "77e91b5a10600e34cf320860bf5e7a1b",
+        "retry_request_count": 1,
+        "billing_decision_md5": "3d8620d8bf7aa84c7f5a94a5a5dee38d",
+        "result_question_count": 2
+      }
+    ],
+    "scope": "Fixed nine run IDs from 2026-11-16..22 KST audit; hashes only, no answer/result/token/user plaintext",
+    "functions": [
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_essay_operations(integer,text,timestamp with time zone)",
+        "definition_md5": "7984b71bc248dd487326146413e6664a",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_essay_operations(timestamp with time zone,timestamp with time zone,jsonb,integer,uuid)",
+        "definition_md5": "3c5616e0e2bb9a734538c960a57f12d0",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_manage_run(uuid,text,uuid)",
+        "definition_md5": "d8292b35fd49688f562a9bf5c90dd77e",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_operation_stats(timestamp with time zone,timestamp with time zone)",
+        "definition_md5": "0366cf286b54b59ce0415c2d326db8f7",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_run_capabilities(uuid)",
+        "definition_md5": "0b405804182b44684361fad93a189199",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "admin_lab_set_run_hidden(uuid,boolean)",
+        "definition_md5": "cd00866070df6466121023d8e922cd8b",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+        "definition_md5": "c3bfd5bac836e575beedec18579177f8",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_claim(uuid,uuid,uuid)",
+        "definition_md5": "c464c30ec66964791641febe4e89eea6",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_dispatch_guard(uuid,uuid)",
+        "definition_md5": "930f4cb10efcaffc63d8d74754ec7122",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_finish(uuid,uuid,uuid,jsonb,boolean)",
+        "definition_md5": "b2ff3dce059d8a5d6b3652094c6a757a",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "essay_exam_observation(uuid)",
+        "definition_md5": "27e9f3568ec4a2ee85f8d6686d0acd50",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_retry(uuid,uuid,uuid,uuid)",
+        "definition_md5": "b505a07b40ff3bbb9490705adf426164",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_session_checkpoint(uuid,uuid,uuid,text,text,uuid,jsonb)",
+        "definition_md5": "f91ff6befbf0e476fbf0b2e374630a52",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "fe55b959cba67fb539b7603daa131e5e",
+        "signature": "essay_exam_session_claim(uuid,uuid,uuid)",
+        "definition_md5": "a24b1173fbe782846526d228c7b00a64",
+        "security_definer": true
+      },
+      {
+        "owner": "postgres",
+        "acl_md5": "5fc13192159b7c60c3a808895ae2c2c8",
+        "signature": "essay_exam_session_status(uuid)",
+        "definition_md5": "9682ead7a6c3ca1faf000f09ea0f1333",
+        "security_definer": true
+      }
+    ],
+    "observed_at": "2026-11-22T12:30:44.391392+00:00",
+    "actual_target_count": 9,
+    "expected_target_count": 9,
+    "transaction_read_only": "on"
+  }
+}

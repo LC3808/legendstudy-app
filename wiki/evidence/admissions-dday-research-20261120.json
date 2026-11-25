@@ -1,0 +1,167 @@
+{
+  "date_kst": "2026-11-20",
+  "scope": "READ_ONLY_RESEARCH_AND_DESIGN",
+  "project_ref": "stlhijzpjfgwwdgunlsd",
+  "sql_transaction": "BEGIN READ ONLY ... ROLLBACK",
+  "db_write_count": 0,
+  "deployment_count": 0,
+  "table_digest_method": "md5(coalesce(string_agg(to_jsonb(t)::text,'|' order by id),''))",
+  "before": [
+    {
+      "label": "applications",
+      "count": 14,
+      "digest": "3144025af5cecf23dd1827f224489052"
+    },
+    {
+      "label": "application_events",
+      "count": 30,
+      "digest": "a6059a73fb64b8daef3277e5ee7e1471"
+    },
+    {
+      "label": "day_targets",
+      "count": 142,
+      "digest": "0d558e31f66f43bf40fa4110f0d22572"
+    },
+    {
+      "label": "essay_exams",
+      "count": 478,
+      "digest": "836033e5457fe85b1620cc583b658aed"
+    }
+  ],
+  "after": [
+    {
+      "label": "applications",
+      "count": 14,
+      "digest": "3144025af5cecf23dd1827f224489052"
+    },
+    {
+      "label": "application_events",
+      "count": 30,
+      "digest": "a6059a73fb64b8daef3277e5ee7e1471"
+    },
+    {
+      "label": "day_targets",
+      "count": 142,
+      "digest": "0d558e31f66f43bf40fa4110f0d22572"
+    },
+    {
+      "label": "essay_exams",
+      "count": 478,
+      "digest": "836033e5457fe85b1620cc583b658aed"
+    }
+  ],
+  "unchanged": true,
+  "application_summary": {
+    "total": 14,
+    "academic_year": 2027,
+    "susi": 13,
+    "regular_planned": 1,
+    "susi_essay": 6,
+    "susi_non_essay": 6,
+    "susi_ambiguous_planned": 1,
+    "all_university_foreign_keys_valid": 14,
+    "susi_catalog_uuid_join_matches": 13
+  },
+  "matching_scope": {
+    "existing_lab_essay_date_candidates": 4,
+    "existing_lab_conditional_essay_date_candidates": 1,
+    "existing_lab_essay_missing_official_date": 1,
+    "additional_official_result_source_coverage_candidates": 11,
+    "coverage_candidates_are_not_approved_automatic_matches": true,
+    "automatic_sync_currently_implemented": false
+  },
+  "privacy": "No student/application UUID, name, email, answer, application event payload or D-Day title exported.",
+  "source_scope": "Seven official PDFs re-fetched and same SHA256 as 2026-11-13; source stability does not establish absence of later separate notices.",
+  "official_pdf_sources": [
+    {
+      "university": "ajou",
+      "sha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+      "sameAsNov13": true,
+      "pages": 82,
+      "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8"
+    },
+    {
+      "university": "inha",
+      "sha256": "8fe632a3efbba13c0ac32f79ff1bc71792d01820d4517fcffe7b493f79c20b4e",
+      "sameAsNov13": true,
+      "pages": 71,
+      "url": "https://admission.inha.ac.kr/ajaxfile/CMN_SVC/FileView.do?GBN=X04_1&TEMP_CODE=IPSI_A&CONFIG_CD=C1405&CONFIG_SEQ=6&SITE_NO=2&SUB_SEQ=8#page=25"
+    },
+    {
+      "university": "sogang",
+      "sha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+      "sameAsNov13": true,
+      "pages": 68,
+      "url": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf#page=36"
+    },
+    {
+      "university": "korea",
+      "sha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+      "sameAsNov13": true,
+      "pages": 54,
+      "url": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf#page=23"
+    },
+    {
+      "university": "ewha",
+      "sha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+      "sameAsNov13": true,
+      "pages": 50,
+      "url": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf#page=9"
+    },
+    {
+      "university": "cau",
+      "url": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf",
+      "sha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+      "sameAsNov13": true
+    },
+    {
+      "university": "hanyang",
+      "url": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf",
+      "sha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+      "sameAsNov13": true
+    }
+  ],
+  "official_notice_sources": [
+    {
+      "university": "yonsei",
+      "purpose": "past interview date",
+      "url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3541"
+    },
+    {
+      "university": "yonsei",
+      "purpose": "2026-11-20 final result notice publication",
+      "url": "https://admission.yonsei.ac.kr/seoul/admission/html/main/mainnotice.asp"
+    },
+    {
+      "university": "yonsei",
+      "purpose": "public final result notice, no personal lookup",
+      "url": "https://www2.yonsei.ac.kr/entrance/2027/susi/pass_susi_fin_AACCBDBHCJ_J/pass.asp"
+    }
+  ],
+  "repositories": {
+    "app_head": "56a476f91b601902564a44cb203dc28b8497f165",
+    "web_head": "931f4efed1104ac24fd63640ddec01ca88fa413d"
+  },
+  "catalog_files": [
+    {
+      "path": "src/data/essay-university-schedules.json",
+      "sha256": "24b223d4517952fa4335b65db9f61349c16355f4e45f6c81e9b2266f604b41f1"
+    },
+    {
+      "path": "src/data/essay-public-catalog.json",
+      "sha256": "7f9dcac79f7145ee4bdc8f5ba7f882df9a4e86477c15f00b910b8a5dae6b0d23"
+    }
+  ],
+  "reviewed_lab_schedules": {
+    "academic_year": 2027,
+    "university_keys": 25,
+    "rows": 62
+  },
+  "documentation_validation": {
+    "wiki_handoff": "PASS",
+    "current_status_bytes": 11160,
+    "internal_links_checked": 2243,
+    "git_diff_check": "PASS",
+    "new_implementation_tests": "NOT_RUN_NO_IMPLEMENTATION"
+  }
+}

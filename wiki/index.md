@@ -1,8 +1,5 @@
-[PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.
 
-[APP105 빌드87·개인정보 보완·최종 QA](app105-build87-release-20261116.md) — 2026-11-16, 배너 제거·iPhone Owner PASS·제출 HOLD.
 
-[APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.
 
 [2026-11-15 APP 행동 분석 보완](app-usage-analytics-implementation-20261115.md) — 기존 GA4 재사용, 코드54테스트·analyze·iOS simulator build PASS, 신규 이벤트 실기기 수신 NOT TESTED.
 
@@ -31,7 +28,7 @@
 
 [학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) (APP/WEB 결과·기존 데이터 매핑·출력 확장 설계·검수 환경)
 
-최신 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
+2026-10-26 당시 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
 
 
 P0 Claude 최종 인수인계(사용량5% 중단): [현재 배포·37묶음·17후보·재개순서](essay-lab-claude-handoff-20261024.md).
@@ -53,6 +50,10 @@ Newest explicit Owner decisions supersede historical scope; record exact scope,
 not an inferred promotion of a whole roadmap. Current is not historical evidence.
 
 ## Task Routing Map
+
+공식 Wiki는 APP 저장소 origin/main입니다. 작업 브랜치 Wiki는 작업 중 상태이며 공식 반영을 대신하지 않습니다. [현재 상태](current-status.md) → [출시88 기록](pdf-white-screen-hotfix-20261117.md) → [다음 후보89](app-release-89-preparation-20261125.md).
+
+운영 현황·인수인계 정상화: [교차검토 §13 감사·§14 개선](project-cross-review-20261125.md). 최신 WEB: [품질V1](quality-console-v1-20261125.md). DB/복구: [D-Day](admissions-dday-implementation-20261120.md), [복구 설치](admin-run-recovery-deployment-20261122.md), [런타임](admin-recovery-runtime-fix-20261122.md). 정책: [무료2 승인대기](signup-credit-policy-two-20261125.md).
 
 운영 장애 / temp_file_limit / HTTP522: [P0 exporter 추적](supabase-temp-incident-20261113.md). 상용화 순차 실행: [11/13 증거·진단SQL·단계별 상태](operations-commercial-20261113.md).
 
@@ -261,7 +262,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 | SCHOOL HISTORY / 학교 변경 / 쿠폰 / COUPON / VOUCHER / 첨삭권 쿠폰 / B2B 학교 / campaign / redemption | [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md) → [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md), [monetization roadmap](roadmap-monetization-and-in-app-learning.md), [Essay G1 credit](essay-lab-product-v1.md) |
 | ADMISSIONS DATA / ANALYTICS / 입시 데이터 / 합격 가능성 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Owner allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24), [roadmap / research gate](roadmap-academic-analytics.md#research-boundary--2026-09-24), [Manus registry](research-registry.md), [decisions](decisions.md) |
 | DAILY SYNC / INGESTION / Daily Sync 시작하자 / 사이트에 새 글 올렸는데 앱에 안 보여 / Pilot C / quarantine | [Current ingestion handoff](ingestion.md#daily-sync-current-handoff--2026-09-24) → [Phase 1 deterministic delta package](daily-sync-phase-1-deterministic-delta-package.md) → [Research synthesis](research-2026-09-24-product-operations-synthesis.md) → [Current baseline/status](current-status.md#daily-sync-status); [historical pipeline](day-9-ingestion.md), [source provenance and reconciliation](research-registry.md#owner-provided-manus-exports--source-acquired) |
-| COMPLIANCE / RELEASE / App Store 출시 | [Privacy/deletion](account-deletion-privacy.md), [Auth acceptance](auth-native-owner-acceptance.md), [current release gates](current-status.md), [Community safety](product-platform-boundaries.md), [research audit boundary](research-registry.md) |
+| COMPLIANCE / RELEASE / App Store 출시 | [실제 출시88](pdf-white-screen-hotfix-20261117.md), [후보89](app-release-89-preparation-20261125.md), [Privacy/deletion](account-deletion-privacy.md), [Auth acceptance](auth-native-owner-acceptance.md), [current release gates](current-status.md), [Community safety](product-platform-boundaries.md), [research audit boundary](research-registry.md) |
 | PRODUCT STRATEGY / 2026~2027 출시 일정 / Subscription / Essay 가격 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Product architecture](product-architecture.md), [scope](product-scope.md), [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29), [Manus registry](research-registry.md) |
 | COMMUNITY / 커뮤니티 | [monetization/learning roadmap](roadmap-monetization-and-in-app-learning.md), [Community decision](decisions.md#2026-09-19--community-is-a-free-retention-feature-not-a-launch-blocker), [Profile privacy and safety gates](product-platform-boundaries.md), [private profile](database.md), [research/compliance registry](research-registry.md) |
 
@@ -269,7 +270,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 implemented/local-tested/Owner-verified claims. Existing document directory below
 is preserved; historical checkpoints are accessed only when evidence is needed.
 
-## Latest end-of-day handoff
+## Historical end-of-day handoff
 
 - [2026-11-04 APP58 운영 연결·실제 검수 마감](app58-expanded-production-connection-20261104.md) — 15대학202시험 연결, 인하 사진 무료 재첨삭/서강 Essay 결과, APP58 본문 공백·전체 해설·혼합형 P0와 재개 순서. [Owner Store 인계](app58-store-handoff-20261104.md); APP58 원본 보존·Codex Store0.
 

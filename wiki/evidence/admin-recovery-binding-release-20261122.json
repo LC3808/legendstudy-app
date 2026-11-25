@@ -1,0 +1,24 @@
+{
+  "source": "4408c3e6bcba495dc83e310a2ce5380f9599bdd6",
+  "baseline": "cab719e1-aeb1-4639-89cf-85fb5baaa51c",
+  "changedInputs": [
+    "src/lib/essay-runtime/server/worker-binding.ts"
+  ],
+  "checkedInputs": 81,
+  "staticPathsPreserved": 3173,
+  "staticChanges": 0,
+  "workerSha256": "0fd73eb572820c7d24166ee41b36adcf70150491462f7b10c0ac58f7dc4b178f",
+  "settingsChanges": 0,
+  "essayWorkerChanges": 0,
+  "dbChanges": 0,
+  "studentExecutions": 0,
+  "deployment": "2faad0e4-d995-4abe-8106-2557caf38400",
+  "status": "success",
+  "verifiedAt": "2026-11-22T12:30:42.348Z",
+  "manifestMatched": true,
+  "productionHtmlMatched": true,
+  "settingsUnchanged": true,
+  "paymentMode": "LIVE",
+  "financeAutomatic": "true",
+  "anonymousApiStatus": 401
+}

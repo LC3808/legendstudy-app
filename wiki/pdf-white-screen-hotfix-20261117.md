@@ -1,5 +1,73 @@
 # PDF 열람 흰 화면 P0 — 2026-11-17
 
+## 실제 출시 결과 회수 — 2026-11-25
+
+**양 플랫폼 RELEASED.** 아래 11/17 본문은 빌드 당시 인계 기록이며 현재 제출 대기를 뜻하지 않는다. 11/25 실제 App Store Connect/Play Console와 공개 스토어 기록을 대조한 [교차검토 §6](project-cross-review-20261125.md)을 근거로 사후 결과를 기록한다. 스토어가 Git SHA를 직접 제공한 것은 아니며 버전·빌드·산출물·소스를 연결한 기준이다.
+
+<!-- release-record -->
+```json
+{
+  "version": "1.0.6",
+  "build": 88,
+  "source": "08345b69b1d71c9038be50767bd849a7354d2b8e",
+  "branch": "codex/operations-commercial-20261113",
+  "last_verified": "2026-11-25",
+  "evidence": "project-cross-review-20261125.md",
+  "platforms": [
+    {
+      "platform": "ios",
+      "version": "1.0.6",
+      "build": 88,
+      "source": "08345b69b1d71c9038be50767bd849a7354d2b8e",
+      "state": "RELEASED",
+      "released_on": "2026-11-18"
+    },
+    {
+      "platform": "android",
+      "version": "1.0.6",
+      "build": 88,
+      "source": "08345b69b1d71c9038be50767bd849a7354d2b8e",
+      "state": "RELEASED",
+      "released_on": "2026-11-17"
+    }
+  ]
+}
+```
+
+|단계|iOS|Android|
+|---|---|---|
+|IMPLEMENTED / TESTED / BUILT|11/17 기록,2632 PASS/9 SKIP,서명 IPA|동일,서명 AAB|
+|UPLOADED / SUBMITTED / APPROVED|실제 단계별 날짜 미확인|실제 단계별 날짜 미확인|
+|RELEASED|1.0.6(88),11/18|1.0.6/versionCode88,11/17 10:17 콘솔 표시|
+
+출시 결과를 확인했다고 미실시 QA를 PASS로 바꾸지 않는다. 이후 스토어 변경 가능성은 새 업로드·출시 준비 직전에 재확인한다.
+
+### Build88 최종 포함 기능
+
+기존 [85 포함표](app-release-105-readiness-20261115.md), [87 변경](app105-build87-release-20261116.md), [운영 기능](operations-commercial-20261113.md), [전체 Flutter 비교](project-cross-review-flutter-files-20261125.md)를 교차했다. 다음은 출시 소스에 포함된 기능이며 모든 실기기 흐름의 검증 완료를 의미하지 않는다.
+
+|포함 기능/수정|Git 근거|
+|---|---|
+|PDF 빈 화면 수정: 다운로드 하단 Column 최소 높이|08345b69|
+|PDF 다운로드·MY 다운로드 이력·학년도 검색|4e433f47/c0aed176|
+|학습 과목·목표·주간/월간 요약|c0aed176|
+|기존 학교 순위 TOP10|APP83 이전,main84와88 공통|
+|수시 지원 수정·삭제·MY 요약 갱신|66ff682f|
+|앱 행동 계측 코드|103c35db;전 이벤트 수신 QA와 구분|
+|닉네임20graphemes·기존 공백 보존|d2d142e7/8910ae31|
+|자료·저장·최근·MY·LAB 오류 안내/재시도·계정 전환 보완|d0e9a94d 및 비교 목록|
+|LAB BETA 표시/만료 배너 숨김·홈 대학뉴스 보류|d0e9a94d/077d6654/a89e4863|
+
+### 제외·미출시·알려진 문제
+
+- 자동 입시 D-Day와 무료2 안내는88 미포함. [1.0.7+89](app-release-89-preparation-20261125.md)에 구현·빌드됐으나 실기기 QA/정책 적용/스토어 제출이 남았다.
+- 학교 추가 순위 페이지·백분위는 미활성. 홈 대학뉴스는 의도적으로 숨김. 기존 수동 D-Day는 유지한다.
+- 부분 재생성/신규 재시도 상한은 Backend 구현·비활성 상태이며 APP 출시 기능으로 세지 않는다.
+- Android 실제 파일 저장·88→89 업데이트·세션/타이머 복구·OS별 전체 계측 수신은 미검증 범위가 남는다. 현재 진행 상태는 current-status를 따른다.
+
+### 11/17 빌드 당시 원문 (역사)
+
+
 ## 범위·Owner 지시
 
 1.0.5(87) 출시 후 다운로드 가능 자료의 앱 내 PDF가 흰 화면이고 다운로드는 성공한다는 보고. Owner 지정 자료는 **2026학년도 수능**이다. 11/17 후속 지시로 QuickTime/실기기 화면 확인을 중단하고 수정·테스트·빌드를 우선한다. 스토어 업로드/업데이트는 Owner 담당. 결제 PAUSED, Finance, Credit Ledger, 회원 권한, 학습·이용권·평가 기록 변경 없음.

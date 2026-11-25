@@ -1,0 +1,65 @@
+{
+  "tests": 117,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "modules": [
+    "tool.test_essay_session_retry",
+    "tool.test_essay_async_runtime",
+    "tool.test_essay_exam_runtime",
+    "tool.test_essay_durable_exam",
+    "tool.test_essay_durable_journal",
+    "tool.test_essay_provider_binding",
+    "tool.test_essay_reviewed_runtime",
+    "tool.test_essay_live_worker",
+    "tool.test_essay_material_execution",
+    "tool.test_essay_long_criteria",
+    "tool.test_essay_transport_diagnostics",
+    "tool.test_essay_queue_continuation",
+    "tool.test_essay_archived_dispatch",
+    "tool.test_mixed_math_checkpoint",
+    "tool.test_essay_quote_alignment"
+  ],
+  "runtime_imports": {
+    "tool.essay_lab.scaffolding_adapter": "essay_lab/scaffolding_adapter.py",
+    "tool.essay_lab.live_worker": "essay_lab/live_worker.py",
+    "tool.essay_lab.positive_learning": "essay_lab/positive_learning.py",
+    "tool.essay_lab.reviewed_runtime": "essay_lab/reviewed_runtime.py",
+    "tool.essay_lab.exam_runtime": "essay_lab/exam_runtime.py",
+    "tool.essay_lab.mixed_math_runtime": "essay_lab/mixed_math_runtime.py",
+    "tool.essay_lab.async_exam": "essay_lab/async_exam.py",
+    "tool.essay_lab.durable_exam": "essay_lab/durable_exam.py",
+    "tool.essay_lab.durable_journal": "essay_lab/durable_journal.py",
+    "tool.essay_lab.evidence_preview": "essay_lab/evidence_preview.py",
+    "tool.essay_lab.evidence_package": "essay_lab/evidence_package.py",
+    "tool.essay_lab.service_content": "essay_lab/service_content.py",
+    "tool.essay_lab.runtime_host": "essay_lab/runtime_host.py",
+    "tool.essay_lab.package_registry": "essay_lab/package_registry.py",
+    "tool.essay_lab.material_runtime": "essay_lab/material_runtime.py",
+    "tool.essay_lab.operating_host": "essay_lab/operating_host.py",
+    "tool.essay_lab.transport_diagnostics": "essay_lab/transport_diagnostics.py",
+    "tool.essay_lab.cloudflare_http": "essay_lab/cloudflare_http.py",
+    "tool.essay_lab.db_checkpoint": "essay_lab/db_checkpoint.py",
+    "tool.essay_lab.retry_feedback": "essay_lab/retry_feedback.py",
+    "tool.essay_lab.evaluation_policy": "essay_lab/evaluation_policy.py",
+    "tool.essay_lab.cloudflare_runtime": "essay_lab/cloudflare_runtime.py",
+    "tool.essay_lab.runtime_effects": "essay_lab/runtime_effects.py"
+  },
+  "candidate_changes": [
+    {
+      "module": "essay_lab/live_worker.py",
+      "sha256_before": "d4f3f1f969f255cf170e38522da9e5e8215a09f1cc6a6427ae55a598c78b9682",
+      "sha256_after": "94c5adf49181381f162ac803e8f603801f4b644ad94111755a93300d0777f15c"
+    },
+    {
+      "module": "essay_lab/cloudflare_runtime.py",
+      "sha256_before": "a34b560e07ceab531fed7e9a36694bbcdc871ef315eaaff9cb5b38e118949b9b",
+      "sha256_after": "4da5564d525f63ec57e3a60094c4ff6531b09f5eca5c183c47f7cb07ff635bb1"
+    }
+  ],
+  "preserved_source_files": 74,
+  "external_provider_calls": 0,
+  "production_db_mutations": 0,
+  "deployment_performed": false,
+  "test_adjustment": "Only existing sync/async parity test uses a fixed monotonic clock to prevent 1ms assertion flake."
+}

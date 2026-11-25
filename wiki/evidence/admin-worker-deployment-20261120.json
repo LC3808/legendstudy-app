@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-11-20T11:34:46.641Z",
+  "deployment": "7e9d20c0-12cd-4a65-a612-fac071fcfc16",
+  "versions": [
+    {
+      "version_id": "9ac3b91c-dad4-4f2e-bc92-3428a2c8720e",
+      "percentage": 100
+    }
+  ],
+  "activeExpected": true,
+  "unchangedModules": 73,
+  "totalModules": 75,
+  "settingsUnchanged": true,
+  "baseline": "ada0ca3e-9dc3-43cf-a935-d3d1f6c77db3",
+  "rollbackVersion": "27c67e48-5526-46a6-a7e8-1aab3218016e",
+  "changed": [
+    "entry.py"
+  ],
+  "added": [
+    "essay_lab/admin_run_actions.py"
+  ],
+  "beforeEntry": "547e4d707c9aab9ffd1537c90a8f0988fd8141efec8a903bbbe15fead652e8fc",
+  "afterEntry": "3a89cd07d7420e04caec74330bc2571cbc732926bc0fb9fa3d7e59da3ec587ec",
+  "helper": "2d26728273bdee2b89520f5a03ee6f27d393593d0bb665d303af491cc7f7d16d",
+  "settingsChanges": 0
+}

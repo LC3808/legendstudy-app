@@ -1,0 +1,17 @@
+{
+  "deployment": "e6c7e088-1bed-459d-bdc9-3c1cd7c56751",
+  "source": "042be2b83b3b5b6d4d743898b2db2f888c5561d7",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-13T03:25:34.067269Z",
+    "status": "success"
+  },
+  "configsEqual": true,
+  "functionRoutingEqual": true,
+  "manifestEqual": true,
+  "unchangedExistingAssets": 2255,
+  "evaluatorDeploymentEqual": true,
+  "workerVersion": "27c67e48-5526-46a6-a7e8-1aab3218016e",
+  "apiBundleSha256": "f33d805f421d5142d6cbf99ab74491417f3ab5b5880e632b3eafffc3c765960d"
+}

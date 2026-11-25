@@ -1,0 +1,110 @@
+{
+  "sha": "84c3f84ac0a054ce16795f85dd7bd7e142364cd2",
+  "baseline": "c5348617-8676-45c0-92d6-4efdf9bafd42",
+  "scope": [
+    "/admin/",
+    "/admin/lab-dashboard/"
+  ],
+  "changedPages": [
+    "/admin/__next._full.txt",
+    "/admin/__next._tree.txt",
+    "/admin/__next.admin.__PAGE__.txt",
+    "/admin/index.html",
+    "/admin/index.txt",
+    "/admin/lab-dashboard/__next._full.txt",
+    "/admin/lab-dashboard/__next._tree.txt",
+    "/admin/lab-dashboard/__next.admin.lab-dashboard.__PAGE__.txt",
+    "/admin/lab-dashboard/index.html",
+    "/admin/lab-dashboard/index.txt"
+  ],
+  "addedAssets": 16,
+  "preservedPaths": 3134,
+  "workerSha256": "9361f8a2a030b889d47c5421c20a51ac584c26da9054cc9bb94199a1b55a2862",
+  "priorWorkerSha256": "9361f8a2a030b889d47c5421c20a51ac584c26da9054cc9bb94199a1b55a2862",
+  "runtimeSource": "Preserved exact compiled API from c5348617; no current recovery API code deployed",
+  "runtimeSourceChanges": 0,
+  "dependencyLockChanges": 0,
+  "settingsChanges": 0,
+  "rollbackDeployment": "c5348617-8676-45c0-92d6-4efdf9bafd42",
+  "deployment": "e55b4622-d23a-4c56-9dcd-90d7a66a4e59",
+  "verifiedAt": "2026-11-22T07:18:44.833Z",
+  "canonical": true,
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-22T07:18:26.419701Z",
+    "status": "success"
+  },
+  "settingsUnchanged": true,
+  "sourceConfigurationUnchanged": true,
+  "functionRoutingUnchanged": true,
+  "functionBindingsUnchanged": true,
+  "manifestMatched": true,
+  "liveMode": "LIVE",
+  "financeAutomatic": "true",
+  "smoke": [
+    {
+      "path": "/admin/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/admin/essay-runs/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/admin/lab-dashboard/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/account/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/pricing/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/essay-run",
+      "method": "POST",
+      "auth": "none",
+      "status": 401,
+      "result": {
+        "code": "LOGIN_REQUIRED"
+      }
+    },
+    {
+      "path": "/api/admin/essay-run",
+      "method": "POST",
+      "auth": "none",
+      "status": 403,
+      "result": {
+        "code": "ACCESS_DENIED"
+      }
+    },
+    {
+      "path": "/api/payments/finance-auth-status",
+      "method": "POST",
+      "auth": "none",
+      "status": 401,
+      "result": {
+        "error": "AUTH_REQUIRED"
+      }
+    },
+    {
+      "path": "/api/payments/runtime",
+      "method": "POST",
+      "auth": "none",
+      "status": 200,
+      "result": {
+        "state": "LIVE",
+        "mode": "LIVE",
+        "consumer_purchase": false
+      }
+    }
+  ]
+}

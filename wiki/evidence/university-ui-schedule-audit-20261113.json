@@ -1,0 +1,2916 @@
+{
+  "checkedAt": "2026-11-13",
+  "universities": [
+    {
+      "id": "a9e38cdc-9593-4c60-b8a6-698133f48518",
+      "slug": "gachon",
+      "name": "가천대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "gachon",
+        "asset": "/university-logos/gachon.png",
+        "sha256": "f5d9c19a140a41116616a6998cb01da7f339d689fe32ff9638478a294c6286cd",
+        "source": "https://search.gachon.ac.kr/search/front/Search.jsp",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          167,
+          41
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.073
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "gachon",
+          "url": "https://admission.gachon.ac.kr/upload/BBS0021/20260522154511HBZYTW.PDF",
+          "checkedAt": "2026-11-13T02:38:10.291353+00:00",
+          "error": "SSLError"
+        }
+      ]
+    },
+    {
+      "id": "c5850ef5-616e-4ebb-aeac-3f6a3e7c4d0a",
+      "slug": "catholic",
+      "name": "가톨릭대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#0C2E86",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "catholic",
+        "asset": "/university-logos/catholic.png",
+        "sha256": "08239cae91f487a4d9a08c53b4c86c4dac4f5176afdb5a83f6a5122b029c9d50",
+        "source": "https://www.catholic.ac.kr/ko/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          208,
+          48
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.333
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "catholic",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:10.291597+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "sha256": "3006d7c7e661c0ca537229338bd3dec801e6ac9a66901fd8f3a882dae67228d6",
+          "pages": 36,
+          "file": "catholic-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "kangnam",
+      "name": "강남대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "kangnam",
+        "asset": "/university-logos/kangnam.png",
+        "sha256": "16b76444eb2b95e44df110efd902db6bd4e8d51e53973f4f84c2bda32a18f020",
+        "source": "https://www.kangnam.ac.kr",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "size": [
+          176,
+          49
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.592
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "kangnam",
+          "url": "http://admission.kangnam.ac.kr/bbs/filedown.php?bbsid=notice&file_seq=4156",
+          "checkedAt": "2026-11-13T02:38:10.291725+00:00",
+          "status": 200,
+          "finalUrl": "http://admission.kangnam.ac.kr/bbs/filedown.php?bbsid=notice&file_seq=4156",
+          "sha256": "2034716ce1c76d11145a75a78487b55faa11fb7ca2195719e0aadf480af6eeb0",
+          "pages": 60,
+          "file": "kangnam-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
+      "slug": "konkuk",
+      "name": "건국대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#006239",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "konkuk",
+        "asset": "/university-logos/konkuk-symbol.png",
+        "sha256": "b027225a930a041c279969b9b01770f4125820873edbd9d96e7f87a74df0a01c",
+        "source": "https://admission.konkuk.ac.kr/admission/37981/subview.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "konkuk-2027-1",
+          "academicYear": 2027,
+          "track": "인문·통합",
+          "campus": "서울",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "09:20 ~ 11:00",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://www.konkuk.ac.kr/bbs/admission/6282/1221044/download.do#page=12",
+          "verifiedAt": "2026-11-13T02:39:30.944312+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 12쪽",
+          "sourceSha256": "547e71c8d0242b34984e4a418a5d8b95699d4db839415e5f26fdd9d4080a2bcf",
+          "sourcePage": 12,
+          "note": ""
+        },
+        {
+          "id": "konkuk-2027-2",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "14:00 ~ 15:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://www.konkuk.ac.kr/bbs/admission/6282/1221044/download.do#page=12",
+          "verifiedAt": "2026-11-13T02:39:30.944312+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 12쪽",
+          "sourceSha256": "547e71c8d0242b34984e4a418a5d8b95699d4db839415e5f26fdd9d4080a2bcf",
+          "sourcePage": 12,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "konkuk",
+          "url": "https://www.konkuk.ac.kr/nctgrBbs/admission/3/6282/1195210/artclView.do",
+          "checkedAt": "2026-11-13T02:38:10.291861+00:00",
+          "status": 200,
+          "finalUrl": "https://www.konkuk.ac.kr/nctgrBbs/admission/3/6282/1195210/artclView.do",
+          "sha256": "ab5c57c29c03c01508222ba9fb12e3480c01f8ddac2428948fe92025067c525c",
+          "file": "konkuk-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "295f71b3-12da-4122-b743-f0c2c8bebe44",
+      "slug": "kyonggi",
+      "name": "경기대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "kyonggi",
+        "asset": "/university-logos/kyonggi.png",
+        "sha256": "93b49a1028cc7a0545bb33c15a94a445c569bf93a9c5b5719d46f63b47b6e4b1",
+        "source": "https://www.kyonggi.ac.kr/www/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          185,
+          55
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.364
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "kyonggi",
+          "url": "https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDownload.do?FILE_ORG_NM=%EA%B2%BD%EA%B8%B0%EB%8C%80_2027%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95%28%EA%B3%B5%EC%A7%80%EC%9A%A9%29.pdf&FILE_NM=202606/1781506250597_0.pdf",
+          "checkedAt": "2026-11-13T02:38:10.291986+00:00",
+          "status": 200,
+          "finalUrl": "https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDownload.do?FILE_ORG_NM=%EA%B2%BD%EA%B8%B0%EB%8C%80_2027%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95%28%EA%B3%B5%EC%A7%80%EC%9A%A9%29.pdf&FILE_NM=202606/1781506250597_0.pdf",
+          "sha256": "c025fb6e6351da97c29ee8638ebbdd1a2705759fbd70b9f2893804aa48ebf3ce",
+          "pages": 96,
+          "file": "kyonggi-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "72bc4be0-6e72-4c72-adc5-8ee54279f3bd",
+      "slug": "knu",
+      "name": "경북대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-11-28(토) — FINAL 2027 OFFICIAL PROSPECTUS"
+      ],
+      "reviewedRows": 0,
+      "dateStatus": "기존 기록 유지·이번 재검증 미완료",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "knu",
+        "asset": "/university-logos/knu.png",
+        "sha256": "47d1a89fdfebb601a8760a87a8488873e1be44b2d57a00c318d4ff36e6d0e9f7",
+        "source": "https://www.knu.ac.kr/wbbs/wbbs/main/main.action",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "size": [
+          123,
+          32
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 3.844
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "knu",
+          "url": "https://ipsi1.knu.ac.kr/upload_data/mojib/20260904091056_32.pdf",
+          "checkedAt": "2026-11-13T02:38:10.292113+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi1.knu.ac.kr/upload_data/mojib/20260904091056_32.pdf",
+          "sha256": "e8bdf91045aaa7281aef479b82854953358c139d3125de51ee77dac33d9d4c20",
+          "pages": 108,
+          "file": "knu-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "slug": "kyunghee",
+      "name": "경희대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-11-21 to 2026-11-22"
+      ],
+      "reviewedRows": 4,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#A40F16",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "kyunghee",
+        "asset": "/university-logos/kyunghee-symbol.png",
+        "sha256": "cf08f27f27a0d5e220100e22d7b56d108dd10cf2a1559a4e2f3e9be4fcbe311c",
+        "source": "https://www.khu.ac.kr/kor/user/main/view.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          130
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.154
+      },
+      "scheduleSources": [
+        {
+          "id": "kyunghee-2027-1",
+          "academicYear": 2027,
+          "track": "인문·체육",
+          "campus": "서울 또는 국제",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "09:00 ~ 11:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf#page=67",
+          "verifiedAt": "2026-11-13T02:38:10.292217+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 67쪽",
+          "sourceSha256": "d98775ff2ffddcec329e480849f556dc81338bae197562b67f3ccc9b7c57e90a",
+          "sourcePage": 67,
+          "note": "지원 모집단위 소속 캠퍼스와 관계없이 고사장이 배정될 수 있습니다."
+        },
+        {
+          "id": "kyunghee-2027-2",
+          "academicYear": 2027,
+          "track": "의·약학",
+          "campus": "서울 또는 국제",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "15:00 ~ 17:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf#page=67",
+          "verifiedAt": "2026-11-13T02:38:10.292217+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 67쪽",
+          "sourceSha256": "d98775ff2ffddcec329e480849f556dc81338bae197562b67f3ccc9b7c57e90a",
+          "sourcePage": 67,
+          "note": "지원 모집단위 소속 캠퍼스와 관계없이 고사장이 배정될 수 있습니다."
+        },
+        {
+          "id": "kyunghee-2027-3",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울 또는 국제",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "09:00 ~ 11:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf#page=67",
+          "verifiedAt": "2026-11-13T02:38:10.292217+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 67쪽",
+          "sourceSha256": "d98775ff2ffddcec329e480849f556dc81338bae197562b67f3ccc9b7c57e90a",
+          "sourcePage": 67,
+          "note": "지원 모집단위 소속 캠퍼스와 관계없이 고사장이 배정될 수 있습니다."
+        },
+        {
+          "id": "kyunghee-2027-4",
+          "academicYear": 2027,
+          "track": "사회",
+          "campus": "서울 또는 국제",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "15:00 ~ 17:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf#page=67",
+          "verifiedAt": "2026-11-13T02:38:10.292217+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 67쪽",
+          "sourceSha256": "d98775ff2ffddcec329e480849f556dc81338bae197562b67f3ccc9b7c57e90a",
+          "sourcePage": 67,
+          "note": "지원 모집단위 소속 캠퍼스와 관계없이 고사장이 배정될 수 있습니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "kyunghee",
+          "url": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf",
+          "checkedAt": "2026-11-13T02:38:10.292217+00:00",
+          "status": 200,
+          "finalUrl": "https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ED%95%99%EB%85%84%EB%8F%84+%EA%B2%BD%ED%9D%AC%EB%8C%80%ED%95%99%EA%B5%90+%EC%88%98%EC%8B%9C+%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95-%EC%B5%9C%EC%A2%85_20260811%28%EA%B3%B5%EC%A7%80%29.pdf&ofn=2027%ED%95%99%EB%85%84%EB%8F%84+%EA%B2%BD%ED%9D%AC%EB%8C%80%ED%95%99%EA%B5%90+%EC%88%98%EC%8B%9C+%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95-%EC%B5%9C%EC%A2%85_20260811%28%EA%B3%B5%EC%A7%80%29.pdf",
+          "sha256": "d98775ff2ffddcec329e480849f556dc81338bae197562b67f3ccc9b7c57e90a",
+          "pages": 136,
+          "file": "kyunghee-0",
+          "pdf": true
+        },
+        {
+          "id": "kyunghee",
+          "url": "https://iphak.khu.ac.kr/submenu.do?menuurl=RnNfVbLHUGrJz9kJgEyRDQ%3D%3D&board_seq=2234&categoryid=",
+          "checkedAt": "2026-11-13T02:38:32.654471+00:00",
+          "status": 200,
+          "finalUrl": "https://iphak.khu.ac.kr/submenu.do?menuurl=RnNfVbLHUGrJz9kJgEyRDQ%3D%3D&board_seq=2234&categoryid=",
+          "sha256": "031b04c9387be1c442d05cd9f962b06146eeb1dc64aa694fbd9ccd4a31d4cf36",
+          "file": "kyunghee-1",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "a93ec9df-2096-4550-801f-07a25b9a437b",
+      "slug": "korea",
+      "name": "고려대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 2,
+      "previousDates": [
+        "2026-11-28",
+        "2026-11-28"
+      ],
+      "reviewedRows": 4,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#862633",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "korea",
+        "asset": "/university-logos/korea-symbol.png",
+        "sha256": "b2729ed67128efd431299e17f0c568bcdd65ca4c519b1707d667517347b3d8cd",
+        "source": "https://www.korea.ac.kr/sites/ko/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          111,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 0.74
+      },
+      "scheduleSources": [
+        {
+          "id": "korea-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": null,
+          "duration": "80분",
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-09 17:00",
+          "sourceUrl": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf#page=23",
+          "verifiedAt": "2026-11-13T02:38:10.292309+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 23쪽",
+          "sourceSha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+          "sourcePage": 23,
+          "note": "모집단위별 입실완료 시각은 08:30 또는 12:30입니다. 시험 시작시각과 구분해 확인해 주세요."
+        },
+        {
+          "id": "korea-2027-2",
+          "academicYear": 2027,
+          "track": "인문",
+          "campus": "서울",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": null,
+          "duration": "80분",
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-09 17:00",
+          "sourceUrl": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf#page=23",
+          "verifiedAt": "2026-11-13T02:38:10.292309+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 23쪽",
+          "sourceSha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+          "sourcePage": 23,
+          "note": "모집단위별 입실완료 시각은 08:30 또는 12:30입니다. 시험 시작시각과 구분해 확인해 주세요."
+        },
+        {
+          "id": "korea-2027-3",
+          "academicYear": 2027,
+          "track": "전 모집단위(약학과 제외)",
+          "campus": "세종",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": null,
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://oku.korea.ac.kr/attach/202605/1780045234886_0.pdf#page=17",
+          "verifiedAt": "2026-11-13T02:38:12.937159+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 17쪽",
+          "sourceSha256": "fc2817f0160158d69b7bf46f7d4b843b11d23d455791b4f583c9ed2d0dc394be",
+          "sourcePage": 17,
+          "note": "09:40까지 입실. 시험 시작시각이 아닙니다."
+        },
+        {
+          "id": "korea-2027-4",
+          "academicYear": 2027,
+          "track": "약학과",
+          "campus": "세종",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": null,
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://oku.korea.ac.kr/attach/202605/1780045234886_0.pdf#page=17",
+          "verifiedAt": "2026-11-13T02:38:12.937159+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 17쪽",
+          "sourceSha256": "fc2817f0160158d69b7bf46f7d4b843b11d23d455791b4f583c9ed2d0dc394be",
+          "sourcePage": 17,
+          "note": "14:30까지 입실. 시험 시작시각이 아닙니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "korea",
+          "url": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf",
+          "checkedAt": "2026-11-13T02:38:10.292309+00:00",
+          "status": 200,
+          "finalUrl": "https://oku.korea.ac.kr/attach/202605/1780023076409_0.pdf",
+          "sha256": "75952e9293923cced9d8c47b353f3894166cd0115b770d8088c478f18f9e8e45",
+          "pages": 54,
+          "file": "korea-0",
+          "pdf": true
+        },
+        {
+          "id": "korea",
+          "url": "https://oku.korea.ac.kr/attach/202605/1780045234886_0.pdf",
+          "checkedAt": "2026-11-13T02:38:12.937159+00:00",
+          "status": 200,
+          "finalUrl": "https://oku.korea.ac.kr/attach/202605/1780045234886_0.pdf",
+          "sha256": "fc2817f0160158d69b7bf46f7d4b843b11d23d455791b4f583c9ed2d0dc394be",
+          "pages": 72,
+          "file": "korea-1",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "3d35489f-2e90-47b8-af1b-48928ee2269a",
+      "slug": "kwangwoon",
+      "name": "광운대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "자연 2026-11-28; 인문 2026-11-29"
+      ],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#7D192D",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "kwangwoon",
+        "asset": "/university-logos/kwangwoon-symbol.png",
+        "sha256": "54a127acc840c0583a6ef87e2338328ee6a068eb8f774b3313116d27d2b3e17c",
+        "source": "https://www.kw.ac.kr/ko/",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "kwangwoon-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://iphak.kw.ac.kr/upload_data/mojib/20260526155135_27.pdf#page=18",
+          "verifiedAt": "2026-11-13T02:38:10.360296+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 18쪽",
+          "sourceSha256": "cd606f328f76fcbe64608892e53743ffe3d1477bfccfd0bfde986f145e771796",
+          "sourcePage": 18,
+          "note": "고사 3일 전 개인별 장소와 시간을 입학처에서 확인해 주세요."
+        },
+        {
+          "id": "kwangwoon-2027-2",
+          "academicYear": 2027,
+          "track": "인문",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://iphak.kw.ac.kr/upload_data/mojib/20260526155135_27.pdf#page=18",
+          "verifiedAt": "2026-11-13T02:38:10.360296+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 18쪽",
+          "sourceSha256": "cd606f328f76fcbe64608892e53743ffe3d1477bfccfd0bfde986f145e771796",
+          "sourcePage": 18,
+          "note": "고사 3일 전 개인별 장소와 시간을 입학처에서 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "kwangwoon",
+          "url": "https://iphak.kw.ac.kr/upload_data/mojib/20260526155135_27.pdf",
+          "checkedAt": "2026-11-13T02:38:10.360296+00:00",
+          "status": 200,
+          "finalUrl": "https://iphak.kw.ac.kr/upload_data/mojib/20260526155135_27.pdf",
+          "sha256": "cd606f328f76fcbe64608892e53743ffe3d1477bfccfd0bfde986f145e771796",
+          "pages": 64,
+          "file": "kwangwoon-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "88aa2231-6a1c-47ee-a063-b168cdaf85ad",
+      "slug": "kookmin",
+      "name": "국민대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "모집단위별 시간 2026-07-23 공지 예정"
+      ],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#004F9F",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "kookmin",
+        "asset": "/university-logos/kookmin.png",
+        "sha256": "312cebfaf74498a363c15c2caf78fc4f230e282e97f1f1373a84fd4c32d4eb53",
+        "source": "https://www.kookmin.ac.kr/user/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          156,
+          47
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.319
+      },
+      "scheduleSources": [
+        {
+          "id": "kookmin-2027-1",
+          "academicYear": 2027,
+          "track": "인문계",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-05",
+          "endDate": null,
+          "time": null,
+          "duration": "90분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.kookmin.ac.kr/common/file_download.php?id=contents&no=180&col=1#page=14",
+          "verifiedAt": "2026-11-13T02:38:10.607836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 14쪽",
+          "sourceSha256": "d1bb1fb58e2090f3691085327f022946835b2822292a95b34e99cfd57fea1d03",
+          "sourcePage": 14,
+          "note": "모집단위별 지정시간을 확인해 주세요. 7월 23일은 시간 안내일이며 시험일이 아닙니다."
+        },
+        {
+          "id": "kookmin-2027-2",
+          "academicYear": 2027,
+          "track": "자연계",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-06",
+          "endDate": null,
+          "time": null,
+          "duration": "90분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.kookmin.ac.kr/common/file_download.php?id=contents&no=180&col=1#page=14",
+          "verifiedAt": "2026-11-13T02:38:10.607836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 14쪽",
+          "sourceSha256": "d1bb1fb58e2090f3691085327f022946835b2822292a95b34e99cfd57fea1d03",
+          "sourcePage": 14,
+          "note": "모집단위별 지정시간을 확인해 주세요. 7월 23일은 시간 안내일이며 시험일이 아닙니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "kookmin",
+          "url": "https://admission.kookmin.ac.kr/common/file_download.php?id=contents&no=180&col=1",
+          "checkedAt": "2026-11-13T02:38:10.607836+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.kookmin.ac.kr/common/file_download.php?id=contents&no=180&col=1",
+          "sha256": "d1bb1fb58e2090f3691085327f022946835b2822292a95b34e99cfd57fea1d03",
+          "pages": 84,
+          "file": "kookmin-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "bdae801b-e46e-449f-9211-0a440f8eb78d",
+      "slug": "dankook",
+      "name": "단국대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "dankook",
+        "asset": "/university-logos/dankook.png",
+        "sha256": "0651b4c1d7390872cdf3a3412133154eea10d8336ef9e754791d9dfe52d1949c",
+        "source": "https://www.dankook.ac.kr/web/kor/home",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "size": [
+          500,
+          88
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 5.682
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "dankook",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EB%8B%A8%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90/%EB%8B%A8%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:10.798896+00:00",
+          "status": 404,
+          "finalUrl": "http://59.25.184.45/dgsmidc/omr/seoul/web/univ_info2025/%B4%DC%B1%B9%B4%EB%C7%D0%B1%B3/%B4%DC%B1%B9%B4%EB%C7%D0%B1%B3_2027%C7%D0%B3%E2%B5%B5_%B4%EB%C7%D0%C0%D4%C7%D0%C0%FC%C7%FC%B0%E8%C8%B9.pdf"
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "duksung",
+      "name": "덕성여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 1,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "duksung",
+        "asset": "/university-logos/duksung.png",
+        "sha256": "0303a209c7d6ad994b9a70ea1d76e12b84099dd45cd2abdad500a4687f9a2783",
+        "source": "https://www.duksung.ac.kr/main.do?isMaster=N&isLogined=N&viewPrefix=%2FWEB-INF%2Fjsp%2Fcms&urlRootPath=&siteResourcePath=%2Fsite%2Fduksung",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          223,
+          51
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.373
+      },
+      "scheduleSources": [
+        {
+          "id": "duksung-2027-1",
+          "academicYear": 2027,
+          "track": "논술전형",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 14:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://enter.duksung.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=971#page=36",
+          "verifiedAt": "2026-11-13T02:38:10.916092+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 36쪽",
+          "sourceSha256": "9c2725ec5cfac66928a5ba993bf8ac508cbddb5245e2572285e7c63068b3f47e",
+          "sourcePage": 36,
+          "note": "고사장·고사시간은 11월 24일 안내 예정입니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "duksung",
+          "url": "https://enter.duksung.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=971",
+          "checkedAt": "2026-11-13T02:38:10.916092+00:00",
+          "status": 200,
+          "finalUrl": "https://enter.duksung.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=971",
+          "sha256": "9c2725ec5cfac66928a5ba993bf8ac508cbddb5245e2572285e7c63068b3f47e",
+          "pages": 100,
+          "file": "duksung-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+      "slug": "dongguk",
+      "name": "동국대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-11-22"
+      ],
+      "reviewedRows": 3,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#EA5514",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "dongguk",
+        "asset": "/university-logos/dongguk-symbol.png",
+        "sha256": "022855e512dc2ea86a6314c3f2affd84f33847e2d8cdf91997131f50190b4563",
+        "source": "https://www.dongguk.edu/main",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          53
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 2.83
+      },
+      "scheduleSources": [
+        {
+          "id": "dongguk-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "09:30 ~ 11:00",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-09 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF#page=50",
+          "verifiedAt": "2026-11-13T02:38:13.516132+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 50쪽",
+          "sourceSha256": "db79a5d44c345acc96c733a6c01bd8457f7bd25d86a38390b47cc9ddaee4e1c7",
+          "sourcePage": 50,
+          "note": ""
+        },
+        {
+          "id": "dongguk-2027-2",
+          "academicYear": 2027,
+          "track": "인문 I",
+          "campus": "서울",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "13:00 ~ 14:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-09 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF#page=50",
+          "verifiedAt": "2026-11-13T02:38:13.516132+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 50쪽",
+          "sourceSha256": "db79a5d44c345acc96c733a6c01bd8457f7bd25d86a38390b47cc9ddaee4e1c7",
+          "sourcePage": 50,
+          "note": ""
+        },
+        {
+          "id": "dongguk-2027-3",
+          "academicYear": 2027,
+          "track": "인문 II",
+          "campus": "서울",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "16:30 ~ 18:10",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-09 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF#page=50",
+          "verifiedAt": "2026-11-13T02:38:13.516132+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 50쪽",
+          "sourceSha256": "db79a5d44c345acc96c733a6c01bd8457f7bd25d86a38390b47cc9ddaee4e1c7",
+          "sourcePage": 50,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "dongguk",
+          "url": "https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF",
+          "checkedAt": "2026-11-13T02:38:13.516132+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF",
+          "sha256": "db79a5d44c345acc96c733a6c01bd8457f7bd25d86a38390b47cc9ddaee4e1c7",
+          "pages": 130,
+          "file": "dongguk-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "dongduk",
+      "name": "동덕여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "dongduk",
+        "asset": "/university-logos/dongduk.png",
+        "sha256": "cb663b44a3668b7a09d444aca955b443d41b578f0486fd2519582d1c9c8e79c2",
+        "source": "https://www.dongduk.ac.kr/www/main/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          134,
+          131
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.023
+      },
+      "scheduleSources": [
+        {
+          "id": "dongduk-2027-1",
+          "academicYear": 2027,
+          "track": "인문사회",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "10:00 ~ 11:00",
+          "duration": "60분",
+          "applicationPeriod": "2026-09-07 11:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://ipsi.dongduk.ac.kr/afile/fileDownload/jxrmn#page=9",
+          "verifiedAt": "2026-11-13T02:39:30.944473+00:00",
+          "basis": "2027학년도 논술가이드북 · PDF 9쪽",
+          "sourceSha256": "83bf67e8f55e07c3f327e0151f13e13327013debed87fe342fc5bb4441effbd1",
+          "sourcePage": 9,
+          "note": "논술가이드북 기준입니다. 최종 고사장·시간 안내를 확인해 주세요."
+        },
+        {
+          "id": "dongduk-2027-2",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "14:30 ~ 15:30",
+          "duration": "60분",
+          "applicationPeriod": "2026-09-07 11:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://ipsi.dongduk.ac.kr/afile/fileDownload/jxrmn#page=9",
+          "verifiedAt": "2026-11-13T02:39:30.944473+00:00",
+          "basis": "2027학년도 논술가이드북 · PDF 9쪽",
+          "sourceSha256": "83bf67e8f55e07c3f327e0151f13e13327013debed87fe342fc5bb4441effbd1",
+          "sourcePage": 9,
+          "note": "논술가이드북 기준입니다. 최종 고사장·시간 안내를 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "dongduk",
+          "url": "https://ipsi.dongduk.ac.kr/ipsi/contents/nontime-doc.do?schM=view&page=1&viewCount=10&id=91947&schBdcode=_ipsi_admdoc01&schGroupCode=&etc1=78",
+          "checkedAt": "2026-11-13T02:38:13.878872+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.dongduk.ac.kr/ipsi/contents/nontime-doc.do?schM=view&page=1&viewCount=10&id=91947&schBdcode=_ipsi_admdoc01&schGroupCode=&etc1=78",
+          "sha256": "7a621ef2de861453f53f2d0869f657a9e4b1ed4f44a4628be7cf3611ccd81c6f",
+          "file": "dongduk-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "08303fd3-ec87-4976-a9a9-547a1d52f996",
+      "slug": "pnu",
+      "name": "부산대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 2,
+      "previousDates": [
+        "2026-11-28 (토)",
+        "2026-11-28 (토)"
+      ],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#005BAA",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "pnu",
+        "asset": "/university-logos/pnu.png",
+        "sha256": "86c2f4f0043e1abab7047b73ea3b0596743f79d77dd6adc1df0dab7e773af8fd",
+        "source": "https://www.pusan.ac.kr/kor/intro.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          203,
+          51
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.98
+      },
+      "scheduleSources": [
+        {
+          "id": "pnu-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "09:30 ~ 11:10",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://go.pusan.ac.kr/down/mojib/RF%280%29_260831172054.pdf#page=51",
+          "verifiedAt": "2026-11-13T02:38:13.882434+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 51쪽",
+          "sourceSha256": "e68314acbd7df1d640c593e22637905c5c595c802b9c34df3d44a884ac39a818",
+          "sourcePage": 51,
+          "note": ""
+        },
+        {
+          "id": "pnu-2027-2",
+          "academicYear": 2027,
+          "track": "인문·사회",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "15:30 ~ 17:10",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://go.pusan.ac.kr/down/mojib/RF%280%29_260831172054.pdf#page=51",
+          "verifiedAt": "2026-11-13T02:38:13.882434+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 51쪽",
+          "sourceSha256": "e68314acbd7df1d640c593e22637905c5c595c802b9c34df3d44a884ac39a818",
+          "sourcePage": 51,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "pnu",
+          "url": "https://go.pusan.ac.kr/down/mojib/RF%280%29_260831172054.pdf",
+          "checkedAt": "2026-11-13T02:38:13.882434+00:00",
+          "status": 200,
+          "finalUrl": "https://go.pusan.ac.kr/down/mojib/RF%280%29_260831172054.pdf",
+          "sha256": "e68314acbd7df1d640c593e22637905c5c595c802b9c34df3d44a884ac39a818",
+          "pages": 83,
+          "file": "pnu-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "syu",
+      "name": "삼육대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 1,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "syu",
+        "asset": "/university-logos/syu.png",
+        "sha256": "442e0b8ae220b734958a076a6a0f7d201f8525068cb8a1da1cde31f275222bfc",
+        "source": "https://www.syu.ac.kr",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          500,
+          121
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.132
+      },
+      "scheduleSources": [
+        {
+          "id": "syu-2027-1",
+          "academicYear": 2027,
+          "track": "논술우수자",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-23",
+          "endDate": "2026-11-24",
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://ipsi.syu.ac.kr/upload_data/mojib/RF(0)_260828113341.pdf#page=18",
+          "verifiedAt": "2026-11-13T02:38:14.262675+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 18쪽",
+          "sourceSha256": "cf93820dfe7456366cf7329a1172f5273f7693a3a6bc097714eb0fc7823b0d9c",
+          "sourcePage": 18,
+          "note": "개인별 고사시간·고사장은 11월 18일 14:00 안내 예정입니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "syu",
+          "url": "https://ipsi.syu.ac.kr/upload_data/mojib/RF(0)_260828113341.pdf",
+          "checkedAt": "2026-11-13T02:38:14.262675+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.syu.ac.kr/upload_data/mojib/RF(0)_260828113341.pdf",
+          "sha256": "cf93820dfe7456366cf7329a1172f5273f7693a3a6bc097714eb0fc7823b0d9c",
+          "pages": 76,
+          "file": "syu-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "sangmyung",
+      "name": "상명대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "sangmyung",
+        "asset": "/university-logos/sangmyung.png",
+        "sha256": "b1089e3849ba2719976261ef1f549dc1a1226df680702edca18a7766aca60e5b",
+        "source": "https://www.smu.ac.kr/kor/intro/uiLogo.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          99,
+          133
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 0.744
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "sangmyung",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "checkedAt": "2026-11-13T02:38:15.000639+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "sha256": "0d2b494786e65c0b355a3a822688da546257db49e0100ecdd814e1fc9a2c6bc8",
+          "file": "sangmyung-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
+      "slug": "sogang",
+      "name": "서강대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#A6192E",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "sogang",
+        "asset": "/university-logos/sogang-symbol.png",
+        "sha256": "26144061b5728590df26f0d6b45503ced749d5d66be1194a7c4bde8b40c53a15",
+        "source": null,
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          126
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.19
+      },
+      "scheduleSources": [
+        {
+          "id": "sogang-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "16:00 ~ 17:40 / 19:00 ~ 20:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf#page=36",
+          "verifiedAt": "2026-11-13T02:45:00.525125+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 36쪽",
+          "sourceSha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+          "sourcePage": 36,
+          "note": "모집단위별 교시와 입실완료 시각을 공식 표에서 확인해 주세요."
+        },
+        {
+          "id": "sogang-2027-2",
+          "academicYear": 2027,
+          "track": "인문",
+          "campus": "서울",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "16:00 ~ 17:40 / 19:00 ~ 20:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "http://admission.sogang.ac.kr/upload/GUIDES/20260609163807KP38K2.pdf#page=36",
+          "verifiedAt": "2026-11-13T02:45:00.525125+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 36쪽",
+          "sourceSha256": "509b3962c465ec5d2f88c7e3cccbe3f36196eaa40a0fc5a25309283e83058d55",
+          "sourcePage": 36,
+          "note": "모집단위별 교시와 입실완료 시각을 공식 표에서 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "sogang",
+          "url": "http://admission.sogang.ac.kr/upload/GUIDES/20250430181056FTR2FK.pdf",
+          "checkedAt": "2026-11-13T02:38:16.269764+00:00",
+          "status": 200,
+          "finalUrl": "http://admission.sogang.ac.kr/upload/GUIDES/20250430181056FTR2FK.pdf",
+          "sha256": "8f10ec4e7df9c477dbad5fea6bd6a9d5b0689e3cff13cb7fde3b7706db7da852",
+          "pages": 30,
+          "file": "sogang-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "seokyeong",
+      "name": "서경대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 1,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "seokyeong",
+        "asset": "/university-logos/seokyeong.png",
+        "sha256": "58889554bdcaa218098e71f5a9378ce4ad3c3ad07a73e745cb953b843f640a47",
+        "source": "https://www.skuniv.ac.kr/intro",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "size": [
+          460,
+          115
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 4.0
+      },
+      "scheduleSources": [
+        {
+          "id": "seokyeong-2027-1",
+          "academicYear": 2027,
+          "track": "논술우수자",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-01",
+          "endDate": null,
+          "time": null,
+          "duration": "60분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf#page=14",
+          "verifiedAt": "2026-11-13T02:38:17.506301+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 14쪽",
+          "sourceSha256": "a1a729435eeeaf16b6545dbc501ed8fc45381e7a8337a3f9aa722556c3a2ea6e",
+          "sourcePage": 14,
+          "note": "지원인원에 따라 오전·오후로 나뉩니다. 개인별 시간을 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "seokyeong",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "checkedAt": "2026-11-13T02:38:17.506301+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "sha256": "a1a729435eeeaf16b6545dbc501ed8fc45381e7a8337a3f9aa722556c3a2ea6e",
+          "pages": 66,
+          "file": "seokyeong-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2",
+      "slug": "seoultech",
+      "name": "서울과학기술대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "seoultech",
+        "asset": "/university-logos/seoultech.svg",
+        "sha256": "511d5d9ad9fd060641f8510bd43c18210479e0044c237cb15e0e4c14742c663e",
+        "source": "https://www.seoultech.ac.kr",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "format": "SVG",
+        "viewBox": "0 0 566.48 90.5"
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "seoultech",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:17.544346+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "sha256": "7e39942626be908bb450ad43e3e64623ddc6bd6ae5ce10153db0afc445c1bd18",
+          "pages": 4,
+          "file": "seoultech-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "0598e08a-20d6-4814-9511-6abe22814355",
+      "slug": "uos",
+      "name": "서울시립대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-10-03 10:00"
+      ],
+      "reviewedRows": 1,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "uos",
+        "asset": "/university-logos/uos.png",
+        "sha256": "31f56bfdff41a2510eb1922eb1a6232267d577ce8669eccdf1827672a98a9714",
+        "source": "https://admission.uos.ac.kr/admissionNew/main.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          270,
+          36
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 7.5
+      },
+      "scheduleSources": [
+        {
+          "id": "uos-2027-1",
+          "academicYear": 2027,
+          "track": "논술전형",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-10-03",
+          "endDate": null,
+          "time": "10:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-10 18:00",
+          "sourceUrl": "https://file.uos.ac.kr/upload/admission/2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%20%EC%8B%A0%EC%9E%85%EC%83%9D%20%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf#page=5",
+          "verifiedAt": "2026-11-13T02:38:17.759126+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 5쪽",
+          "sourceSha256": "62bdad9fb77b9adf979f6c2f5d0d99e11b41807a15e6d87760b4b79f71ab93fd",
+          "sourcePage": 5,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "uos",
+          "url": "https://file.uos.ac.kr/upload/admission/2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%20%EC%8B%A0%EC%9E%85%EC%83%9D%20%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "checkedAt": "2026-11-13T02:38:17.759126+00:00",
+          "status": 200,
+          "finalUrl": "https://file.uos.ac.kr/upload/admission/2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%20%EC%8B%A0%EC%9E%85%EC%83%9D%20%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "sha256": "62bdad9fb77b9adf979f6c2f5d0d99e11b41807a15e6d87760b4b79f71ab93fd",
+          "pages": 55,
+          "file": "uos-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+      "slug": "swu",
+      "name": "서울여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#9E1A20",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "swu",
+        "asset": "/university-logos/swu-symbol.png",
+        "sha256": "dfdeaae76d93de7bd26a9bbfe2fae6080be9a8f771b9e9b5bef671d26b1c0dea",
+        "source": "https://www.swu.ac.kr/swu/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 1.0
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "swu",
+          "url": "https://www.swu.ac.kr/bbs/swu/157/138473/artclView.do?layout=unknown",
+          "checkedAt": "2026-11-13T02:38:18.017240+00:00",
+          "status": 200,
+          "finalUrl": "https://www.swu.ac.kr/swu/2109/subview.do;jsessionid=EEC4782F1163973B15F218B5D36C2CD0.node1?enc=Zm5jdDF8QEB8JTJGYmJzJTJGc3d1JTJGMTU3JTJGMTM4NDczJTJGYXJ0Y2xWaWV3LmRvJTNG",
+          "sha256": "c5032d2c92885cb84b32c0faf63a2ccbf127f4edd0781ee5af4fabe96f435ee0",
+          "file": "swu-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "slug": "skku",
+      "name": "성균관대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 2,
+      "previousDates": [
+        "2026-11-22",
+        "2026-11-21~22"
+      ],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#072A60",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "skku",
+        "asset": "/university-logos/skku-symbol.png",
+        "sha256": "42e61f881a72b5aacd4c2943936d033af8c72089da4f12f3e5ee8b845d5636cb",
+        "source": "https://www.skku.edu/skku/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "skku-2027-1",
+          "academicYear": 2027,
+          "track": "언어논술",
+          "campus": "서울 또는 수원",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "08:30 ~ 10:10 / 13:00 ~ 14:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.skku.edu/upload/guide/20260813104526BBPE44.pdf#page=44",
+          "verifiedAt": "2026-11-13T02:39:30.944574+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 44쪽",
+          "sourceSha256": "aff51aaccbb5eea408c2a854702f4e8e2b8f98fa49cf734c2f56dc21a3894486",
+          "sourcePage": 44,
+          "note": "지원 모집단위와 관계없이 고사장이 배정됩니다. 모집단위별 교시·개인별 고사장을 확인해 주세요."
+        },
+        {
+          "id": "skku-2027-2",
+          "academicYear": 2027,
+          "track": "수리논술",
+          "campus": "서울 또는 수원",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": "08:30 ~ 10:10 / 13:00 ~ 14:40 / 17:00 ~ 18:40",
+          "duration": "100분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.skku.edu/upload/guide/20260813104526BBPE44.pdf#page=46",
+          "verifiedAt": "2026-11-13T02:39:30.944574+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "aff51aaccbb5eea408c2a854702f4e8e2b8f98fa49cf734c2f56dc21a3894486",
+          "sourcePage": 46,
+          "note": "지원 모집단위와 관계없이 고사장이 배정됩니다. 모집단위별 교시·개인별 고사장을 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "skku",
+          "url": "https://admission.skku.edu/admission/html/rolling/guide.html",
+          "checkedAt": "2026-11-13T02:38:19.781218+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.skku.edu/admission/html/rolling/guide.html",
+          "sha256": "af5c73f4cfc4288de87a032a96f4c120dac65126e7d5b29b0edffc7249c44128",
+          "file": "skku-0",
+          "pdf": false
+        },
+        {
+          "id": "skku",
+          "url": "https://admission.skku.edu/upload/guide/20260813104526BBPE44.pdf",
+          "checkedAt": "2026-11-13T02:38:20.122037+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.skku.edu/upload/guide/20260813104526BBPE44.pdf",
+          "sha256": "aff51aaccbb5eea408c2a854702f4e8e2b8f98fa49cf734c2f56dc21a3894486",
+          "pages": 77,
+          "file": "skku-1",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "sungshin",
+      "name": "성신여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "sungshin",
+        "asset": "/university-logos/sungshin.jpg",
+        "sha256": "02f230821d8468b6c386854323404b313445e8bf42c7ba247ef68eca97edc105",
+        "source": "https://www.sungshin.ac.kr/sites/main_kor/main.jsp",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          220,
+          55
+        ],
+        "format": "JPEG",
+        "alpha": false,
+        "aspect": 4.0
+      },
+      "scheduleSources": [
+        {
+          "id": "sungshin-2027-1",
+          "academicYear": 2027,
+          "track": "자연계",
+          "campus": "돈암 수정캠퍼스",
+          "date": "2026-10-03",
+          "endDate": null,
+          "time": null,
+          "duration": "100분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ipsi.sungshin.ac.kr/bbs/fileview.php?bbsid=guideline&file_seq=2920#page=46",
+          "verifiedAt": "2026-11-13T02:41:04.010667+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "a365f916d5cb2f8e19d8b830dba2a3dd34898390d1ede376b8c3ace14ac3e0d8",
+          "sourcePage": 46,
+          "note": "모집단위별 고사시간은 별도 고사장 발표에서 확인해 주세요."
+        },
+        {
+          "id": "sungshin-2027-2",
+          "academicYear": 2027,
+          "track": "인문계",
+          "campus": "돈암 수정캠퍼스",
+          "date": "2026-10-04",
+          "endDate": null,
+          "time": null,
+          "duration": "100분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ipsi.sungshin.ac.kr/bbs/fileview.php?bbsid=guideline&file_seq=2920#page=46",
+          "verifiedAt": "2026-11-13T02:41:04.010667+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "a365f916d5cb2f8e19d8b830dba2a3dd34898390d1ede376b8c3ace14ac3e0d8",
+          "sourcePage": 46,
+          "note": "모집단위별 고사시간은 별도 고사장 발표에서 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "sungshin",
+          "url": "https://ipsi.sungshin.ac.kr/guide/recruit.htm?ctg_cd=susi",
+          "checkedAt": "2026-11-13T02:38:19.787494+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.sungshin.ac.kr/guide/recruit.htm?ctg_cd=susi",
+          "sha256": "8dfc138a47d396cc0d74a2ad8c653d767759bd57eff9845c007ff14060d84718",
+          "file": "sungshin-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "447d2f79-fb0a-4a02-bce6-d214244b683d",
+      "slug": "sejong",
+      "name": "세종대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "인문·자유전공 2026-11-28; 자연 2026-11-29"
+      ],
+      "reviewedRows": 0,
+      "dateStatus": "기존 기록 유지·이번 재검증 미완료",
+      "color": "#C3002F",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "sejong",
+        "asset": "/university-logos/sejong.png",
+        "sha256": "018c6cce1111bb6108429badf1be14ac1a517f2b346a4e95303c4e9a51253032",
+        "source": "https://www.sejong.ac.kr/kor/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          390,
+          94
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.149
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "sejong",
+          "url": "https://ipsi.sejong.ac.kr/ipsi/early/notice.do?mode=view&articleNo=2785",
+          "checkedAt": "2026-11-13T02:38:20.072126+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.sejong.ac.kr/ipsi/early/notice.do?mode=view&articleNo=2785",
+          "sha256": "e638c92017ba166d29f6812995333520c8f1ee28037fa229ff13a28be9468df9",
+          "file": "sejong-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "suwon",
+      "name": "수원대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "자연 2026-11-21; 인문/디지털콘텐츠 2026-11-22"
+      ],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "suwon",
+        "asset": "/university-logos/suwon.png",
+        "sha256": "23e2cc3c3dd783d3be68f12b3e4e721cd735bbc826a6e4a94354e4567d496d17",
+        "source": "https://www.suwon.ac.kr",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          184,
+          78
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 2.359
+      },
+      "scheduleSources": [
+        {
+          "id": "suwon-2027-1",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": null,
+          "duration": "80분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ipsi.suwon.ac.kr/upload_data/guide/1787878393_6045.pdf#page=30",
+          "verifiedAt": "2026-11-13T02:38:20.526486+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 30쪽",
+          "sourceSha256": "9157985f1a4c9bd4bc8f9898cab084d8c2f560f7923487131a363e2acbc3df33",
+          "sourcePage": 30,
+          "note": "개인별 시간과 장소는 고사 일주일 전 입학처 공지 예정입니다."
+        },
+        {
+          "id": "suwon-2027-2",
+          "academicYear": 2027,
+          "track": "인문·디지털콘텐츠",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": null,
+          "duration": "80분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ipsi.suwon.ac.kr/upload_data/guide/1787878393_6045.pdf#page=30",
+          "verifiedAt": "2026-11-13T02:38:20.526486+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 30쪽",
+          "sourceSha256": "9157985f1a4c9bd4bc8f9898cab084d8c2f560f7923487131a363e2acbc3df33",
+          "sourcePage": 30,
+          "note": "개인별 시간과 장소는 고사 일주일 전 입학처 공지 예정입니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "suwon",
+          "url": "https://ipsi.suwon.ac.kr/upload_data/guide/1787878393_6045.pdf",
+          "checkedAt": "2026-11-13T02:38:20.526486+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.suwon.ac.kr/upload_data/guide/1787878393_6045.pdf",
+          "sha256": "9157985f1a4c9bd4bc8f9898cab084d8c2f560f7923487131a363e2acbc3df33",
+          "pages": 88,
+          "file": "suwon-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b",
+      "slug": "sookmyung",
+      "name": "숙명여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#003087",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "sookmyung",
+        "asset": "/university-logos/sookmyung-symbol.png",
+        "sha256": "62dbd88d48116768576ef670dc3010990b17bc13042ba89949a008bd2977dd38",
+        "source": "https://www.sookmyung.ac.kr:443/kr/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "sookmyung-2027-1",
+          "academicYear": 2027,
+          "track": "인문계·의류학과",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-21",
+          "endDate": "2026-11-22",
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://admission.sookmyung.ac.kr/upload/BBS0021/20260907095555QDLVUJ.PDF#page=28",
+          "verifiedAt": "2026-11-13T02:41:04.009590+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 28쪽",
+          "sourceSha256": "ec8b0e67063593429effb27e9d2f2093b8382e5ae161c5a903dc53f45a4d0bca",
+          "sourcePage": 28,
+          "note": "모집요강의 이틀 범위입니다. 모집단위별 최종 시험일시를 입학처에서 확인해 주세요."
+        },
+        {
+          "id": "sookmyung-2027-2",
+          "academicYear": 2027,
+          "track": "자연계(의류학과 제외)",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://admission.sookmyung.ac.kr/upload/BBS0021/20260907095555QDLVUJ.PDF#page=28",
+          "verifiedAt": "2026-11-13T02:41:04.009590+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 28쪽",
+          "sourceSha256": "ec8b0e67063593429effb27e9d2f2093b8382e5ae161c5a903dc53f45a4d0bca",
+          "sourcePage": 28,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "sookmyung",
+          "url": "https://admission.sookmyung.ac.kr/admission/html/counsel/noticeView.asp?p_board_idx=54119",
+          "checkedAt": "2026-11-13T02:38:20.528690+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.sookmyung.ac.kr/admission/html/counsel/noticeView.asp?p_board_idx=54119",
+          "sha256": "8ff65de4651b6aa6f7ce58bcb470608c30f5cecccf3d75ea68e5a0d80c5603ce",
+          "file": "sookmyung-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "6ae1fd3f-22da-43f4-a796-1cfe960c5fcb",
+      "slug": "soongsil",
+      "name": "숭실대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#00587C",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "soongsil",
+        "asset": "/university-logos/soongsil-symbol.png",
+        "sha256": "68a2c57f8a470b43274c28fd3c679ba32971ceac10a341e45138bc404dda04fc",
+        "source": "https://ssu.ac.kr/%ea%b8%b0%ed%83%80%ec%84%9c%eb%b9%84%ec%8a%a4/total_search/",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          121
+        ],
+        "format": "PNG",
+        "alpha": false,
+        "aspect": 1.24
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "soongsil",
+          "url": "https://iphak.ssu.ac.kr/upload/2027_plan.pdf",
+          "checkedAt": "2026-11-13T02:38:20.762410+00:00",
+          "status": 200,
+          "finalUrl": "https://iphak.ssu.ac.kr/upload/2027_plan.pdf",
+          "sha256": "c7830378ed819a17a35185ad9a305f75660b6e8eed63b6dc1b4f331f6f01fd29",
+          "pages": 41,
+          "file": "soongsil-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "shinhan",
+      "name": "신한대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "shinhan",
+        "asset": "/university-logos/shinhan.png",
+        "sha256": "c52cc6c4ecb320432cf2f90b5786ecb19580d842b21e6acbb620c6014932d87e",
+        "source": "https://www.shinhan.ac.kr/sites/kr/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          148,
+          36
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.111
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "shinhan",
+          "url": "https://ipsi.shinhan.ac.kr/sjmain.do",
+          "checkedAt": "2026-11-13T02:38:21.736199+00:00",
+          "status": 200,
+          "finalUrl": "https://ipsi.shinhan.ac.kr/sjmain.do",
+          "sha256": "9c873381b5a5ad4a76ab426c7adde7fb9640f410220cd501d1846c25e64ab29a",
+          "file": "shinhan-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
+      "slug": "ajou",
+      "name": "아주대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-12-05 (official schedule table; unit/time slot applies)"
+      ],
+      "reviewedRows": 5,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "ajou",
+        "asset": "/university-logos/ajou.png",
+        "sha256": "1f6f63016e1b6620682ec54704794ce724d118bcfd99bb5c0c95f875449677b7",
+        "source": "https://www.ajou.ac.kr/kr/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          218,
+          56
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.893
+      },
+      "scheduleSources": [
+        {
+          "id": "ajou-2027-1",
+          "academicYear": 2027,
+          "track": "공과·자연과학·자유전공(자연)",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-05",
+          "endDate": null,
+          "time": "09:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8",
+          "verifiedAt": "2026-11-13T02:38:21.785456+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 8쪽",
+          "sourceSha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "sourcePage": 8,
+          "note": ""
+        },
+        {
+          "id": "ajou-2027-2",
+          "academicYear": 2027,
+          "track": "첨단ICT·소프트웨어",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-05",
+          "endDate": null,
+          "time": "14:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8",
+          "verifiedAt": "2026-11-13T02:38:21.785456+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 8쪽",
+          "sourceSha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "sourcePage": 8,
+          "note": ""
+        },
+        {
+          "id": "ajou-2027-3",
+          "academicYear": 2027,
+          "track": "의과",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-05",
+          "endDate": null,
+          "time": "19:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8",
+          "verifiedAt": "2026-11-13T02:38:21.785456+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 8쪽",
+          "sourceSha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "sourcePage": 8,
+          "note": ""
+        },
+        {
+          "id": "ajou-2027-4",
+          "academicYear": 2027,
+          "track": "경영·인문·사회·자유전공(인문)",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-06",
+          "endDate": null,
+          "time": "09:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8",
+          "verifiedAt": "2026-11-13T02:38:21.785456+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 8쪽",
+          "sourceSha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "sourcePage": 8,
+          "note": ""
+        },
+        {
+          "id": "ajou-2027-5",
+          "academicYear": 2027,
+          "track": "약학",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-06",
+          "endDate": null,
+          "time": "14:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601#page=8",
+          "verifiedAt": "2026-11-13T02:38:21.785456+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 8쪽",
+          "sourceSha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "sourcePage": 8,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "ajou",
+          "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601",
+          "checkedAt": "2026-11-13T02:38:21.785456+00:00",
+          "status": 200,
+          "finalUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601",
+          "sha256": "0645b7cd032753bb1629cc2eb6375ad92f6eb18cc0a639cebfa2ade1812a5bfb",
+          "pages": 82,
+          "file": "ajou-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "slug": "yonsei",
+      "name": "연세대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-10-16"
+      ],
+      "reviewedRows": 0,
+      "dateStatus": "기존 기록 유지·이번 재검증 미완료",
+      "color": "#003876",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "yonsei",
+        "asset": "/university-logos/yonsei.png",
+        "sha256": "fa035eaca2fb89e1cba785f3049693d415827458a85e7f6c1ab3a9de78bd28a8",
+        "source": "https://www.yonsei.ac.kr/sc/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          200,
+          60
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.333
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "yonsei",
+          "url": "https://admission.yonsei.ac.kr/mirae/upload/guide/202609091128343AZAWL.PDF",
+          "checkedAt": "2026-11-13T02:38:22.266452+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.yonsei.ac.kr/mirae/upload/guide/202609091128343AZAWL.PDF",
+          "sha256": "12de52c1feb83fb2ebe928551b7e104f999363b23e1019c30ad66f3aeb7bbffc",
+          "pages": 106,
+          "file": "yonsei-0",
+          "pdf": true
+        },
+        {
+          "id": "yonsei",
+          "url": "https://www2.yonsei.ac.kr/entrance/plan/2027_plan.pdf",
+          "checkedAt": "2026-11-13T02:38:26.995900+00:00",
+          "status": 200,
+          "finalUrl": "https://www2.yonsei.ac.kr/entrance/plan/2027_plan.pdf",
+          "sha256": "15ae904b5165dfe42f05518dcc3d1cbacd8b623b58a0bade40f76b287fd557b1",
+          "pages": 36,
+          "file": "yonsei-1",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "eulji",
+      "name": "을지대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 2,
+      "previousDates": [
+        "2026-10-16 to 2026-10-17 (unit/session-specific)",
+        "2026-10-16 to 2026-10-17 (unit/session-specific)"
+      ],
+      "reviewedRows": 0,
+      "dateStatus": "기존 기록 유지·이번 재검증 미완료",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "eulji",
+        "asset": "/university-logos/eulji.png",
+        "sha256": "2c482505f0a894388a00cfb9c9561f98eedc5a3cf7c74b696a152945a63f4926",
+        "source": "https://www.eulji.ac.kr",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "size": [
+          219,
+          50
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 4.38
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "eulji",
+          "url": "https://admission.eulji.ac.kr/",
+          "checkedAt": "2026-11-13T02:38:22.755520+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.eulji.ac.kr/",
+          "sha256": "d07ffb9e0be296d86d3702bf2b7c6f88d58fe5d2df8aef85beb6ee3529e6b74f",
+          "file": "eulji-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
+      "slug": "ewha",
+      "name": "이화여자대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 4,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#00462A",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "ewha",
+        "asset": "/university-logos/ewha.svg",
+        "sha256": "ec8e477d0f2b5963d3d914fa287eeb3d2fd5d8e5e773bb58801de854f446c6ee",
+        "source": "https://www.ewha.ac.kr/ewha/index.do",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "format": "SVG",
+        "viewBox": "0 0 500 494"
+      },
+      "scheduleSources": [
+        {
+          "id": "ewha-2027-1",
+          "academicYear": 2027,
+          "track": "인문 I",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "08:30 ~ 12:10 (모집요강 시간대)",
+          "duration": null,
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf#page=9",
+          "verifiedAt": "2026-11-13T02:41:04.010244+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 9쪽",
+          "sourceSha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+          "sourcePage": 9,
+          "note": "표의 시간대는 실제 답안 작성시간과 다릅니다. 11월 24일 공지 예정인 논술고사 유의사항에서 입실·시험시간을 확인해 주세요."
+        },
+        {
+          "id": "ewha-2027-2",
+          "academicYear": 2027,
+          "track": "인문 II",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "14:20 ~ 18:00 (모집요강 시간대)",
+          "duration": null,
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf#page=9",
+          "verifiedAt": "2026-11-13T02:41:04.010244+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 9쪽",
+          "sourceSha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+          "sourcePage": 9,
+          "note": "표의 시간대는 실제 답안 작성시간과 다릅니다. 11월 24일 공지 예정인 논술고사 유의사항에서 입실·시험시간을 확인해 주세요."
+        },
+        {
+          "id": "ewha-2027-3",
+          "academicYear": 2027,
+          "track": "자연 I",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "08:30 ~ 12:10 (모집요강 시간대)",
+          "duration": null,
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf#page=9",
+          "verifiedAt": "2026-11-13T02:41:04.010244+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 9쪽",
+          "sourceSha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+          "sourcePage": 9,
+          "note": "표의 시간대는 실제 답안 작성시간과 다릅니다. 11월 24일 공지 예정인 논술고사 유의사항에서 입실·시험시간을 확인해 주세요."
+        },
+        {
+          "id": "ewha-2027-4",
+          "academicYear": 2027,
+          "track": "자연 II",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "14:20 ~ 18:00 (모집요강 시간대)",
+          "duration": null,
+          "applicationPeriod": null,
+          "sourceUrl": "https://admission.ewha.ac.kr/upload/GUIDES/20260907134642BHLTER.pdf#page=9",
+          "verifiedAt": "2026-11-13T02:41:04.010244+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 9쪽",
+          "sourceSha256": "7f0fa26d9d0bf39141f7e1387197bd4a9af1843873db559aef0f6b2800914e83",
+          "sourcePage": 9,
+          "note": "표의 시간대는 실제 답안 작성시간과 다릅니다. 11월 24일 공지 예정인 논술고사 유의사항에서 입실·시험시간을 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "ewha",
+          "url": "https://admission.ewha.ac.kr/admission/html/ewharo/noticeView.asp?idx=14986",
+          "checkedAt": "2026-11-13T02:38:23.368565+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.ewha.ac.kr/admission/html/ewharo/noticeView.asp?idx=14986",
+          "sha256": "c2e44deba6805c5ed2acc258c1e22cf2d14350e889c07f92a12b55becc544ad6",
+          "file": "ewha-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
+      "slug": "inha",
+      "name": "인하대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#005BAC",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "inha",
+        "asset": "/university-logos/inha-symbol.png",
+        "sha256": "817631d58189085aa2619f16d0c3850b918b67c3dc24c4c61f36f1b399dd54cf",
+        "source": "https://www.inha.ac.kr/kr/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "inha-2027-1",
+          "academicYear": 2027,
+          "track": "인문계열",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-05",
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.inha.ac.kr/ajaxfile/CMN_SVC/FileView.do?GBN=X04_1&TEMP_CODE=IPSI_A&CONFIG_CD=C1405&CONFIG_SEQ=6&SITE_NO=2&SUB_SEQ=8#page=25",
+          "verifiedAt": "2026-11-13T02:49:03.873321+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 25쪽",
+          "sourceSha256": "8fe632a3efbba13c0ac32f79ff1bc71792d01820d4517fcffe7b493f79c20b4e",
+          "sourcePage": 25,
+          "note": "고사시간·장소·준비물은 11월 18일 입학처 공지 예정입니다."
+        },
+        {
+          "id": "inha-2027-2",
+          "academicYear": 2027,
+          "track": "자연계열",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-12-06",
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 09:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.inha.ac.kr/ajaxfile/CMN_SVC/FileView.do?GBN=X04_1&TEMP_CODE=IPSI_A&CONFIG_CD=C1405&CONFIG_SEQ=6&SITE_NO=2&SUB_SEQ=8#page=25",
+          "verifiedAt": "2026-11-13T02:49:03.873321+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 25쪽",
+          "sourceSha256": "8fe632a3efbba13c0ac32f79ff1bc71792d01820d4517fcffe7b493f79c20b4e",
+          "sourcePage": 25,
+          "note": "고사시간·장소·준비물은 11월 18일 입학처 공지 예정입니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "inha",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:24.122084+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "sha256": "2aa1134e41a6383ffd258937de9363140f800a03d612b91dff12d6e6fdb00004",
+          "pages": 44,
+          "file": "inha-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "ffad67a6-107f-47b7-a1cb-ab61687ffb9f",
+      "slug": "cau",
+      "name": "중앙대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 4,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#2155A4",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "cau",
+        "asset": "/university-logos/cau-symbol.png",
+        "sha256": "c3e7553c38d762882a27d2351a6fa948811e8032e7c093506d6c21d08946b77b",
+        "source": "https://newchn.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=220",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "cau-2027-1",
+          "academicYear": 2027,
+          "track": "일반형 · 자연",
+          "campus": "서울",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "10:00 ~ 12:00 / 14:00 ~ 16:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf#page=61",
+          "verifiedAt": "2026-11-13T02:39:31.188836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 61쪽",
+          "sourceSha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+          "sourcePage": 61,
+          "note": "지원 모집단위에 배정된 교시를 공식 표에서 확인해 주세요."
+        },
+        {
+          "id": "cau-2027-2",
+          "academicYear": 2027,
+          "track": "일반형 · 인문",
+          "campus": "서울",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "10:00 ~ 12:00 / 14:00 ~ 16:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf#page=61",
+          "verifiedAt": "2026-11-13T02:39:31.188836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 61쪽",
+          "sourceSha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+          "sourcePage": 61,
+          "note": "지원 모집단위에 배정된 교시를 공식 표에서 확인해 주세요."
+        },
+        {
+          "id": "cau-2027-3",
+          "academicYear": 2027,
+          "track": "창의형 · 인문",
+          "campus": "서울",
+          "date": "2026-10-11",
+          "endDate": null,
+          "time": "10:00 ~ 12:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf#page=65",
+          "verifiedAt": "2026-11-13T02:39:31.188836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 65쪽",
+          "sourceSha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+          "sourcePage": 65,
+          "note": "지원 모집단위에 배정된 교시를 공식 표에서 확인해 주세요."
+        },
+        {
+          "id": "cau-2027-4",
+          "academicYear": 2027,
+          "track": "창의형 · 자연",
+          "campus": "서울",
+          "date": "2026-10-11",
+          "endDate": null,
+          "time": "14:00 ~ 16:00",
+          "duration": "120분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://admission.cau.ac.kr/file/pdfDown.pdf?ofn=2027.pdf&sfn=20260609111455769_c6144e06ef38475d8ce9563f87b7f3b4.pdf#page=65",
+          "verifiedAt": "2026-11-13T02:39:31.188836+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 65쪽",
+          "sourceSha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+          "sourcePage": 65,
+          "note": "지원 모집단위에 배정된 교시를 공식 표에서 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "cau",
+          "url": "https://admission.cau.ac.kr/",
+          "checkedAt": "2026-11-13T02:38:25.393284+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.cau.ac.kr/",
+          "sha256": "e74bd42741dbd2169058f6d41998635818cfa1be251595a192318f31d25139de",
+          "file": "cau-0",
+          "pdf": false
+        },
+        {
+          "id": "cau",
+          "url": "https://admission.cau.ac.kr/file/download.do?sfn=20260529044343378_04da5c8413c64789bc81c456915f222a.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ec%a4%91%ec%95%99%eb%8c%80%ed%95%99%ea%b5%90+%ec%9e%85%ed%95%99%ec%a0%84%ed%98%95%ec%8b%9c%ed%96%89%ea%b3%84%ed%9a%8d",
+          "checkedAt": "2026-11-13T02:38:25.825971+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.cau.ac.kr/file/download.do?sfn=20260529044343378_04da5c8413c64789bc81c456915f222a.pdf&ofn=2027%ED%95%99%EB%85%84%EB%8F%84+%EC%A4%91%EC%95%99%EB%8C%80%ED%95%99%EA%B5%90+%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EC%8B%9C%ED%96%89%EA%B3%84%ED%9A%8D",
+          "sha256": "fc131cedd3212f1816f758140a9f7eb61e9d62c95ecbe4723a31db4c08988073",
+          "pages": 44,
+          "file": "cau-1",
+          "pdf": true
+        },
+        {
+          "id": "cau",
+          "url": "https://admission.cau.ac.kr/file/download.do?sfn=20260727012327971_2151656fa5b541bd87edea17a6755f39.pdf&ofn=%EC%A4%91%EC%95%99%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "checkedAt": "2026-11-13T02:38:34.217231+00:00",
+          "status": 200,
+          "finalUrl": "https://admission.cau.ac.kr/file/download.do?sfn=20260727012327971_2151656fa5b541bd87edea17a6755f39.pdf&ofn=%EC%A4%91%EC%95%99%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf",
+          "sha256": "366c3313805617d4d8dd45d748f640f06d3b3734aa3d563be289a01bc25c81d5",
+          "pages": 124,
+          "file": "cau-2",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "tukorea",
+      "name": "한국공학대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "2026-11-22"
+      ],
+      "reviewedRows": 0,
+      "dateStatus": "기존 기록 유지·이번 재검증 미완료",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "tukorea",
+        "asset": "/university-logos/tukorea.svg",
+        "sha256": "bd0541e77b7e92f95229f14c4f3df883c4f766457371e70b855a7819101c6b87",
+        "source": "https://www.tukorea.ac.kr/intro/index.html",
+        "darkSurface": true,
+        "ownerMarketingReference": false,
+        "format": "SVG",
+        "viewBox": "0 0 400 57"
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "tukorea",
+          "url": "https://iphak.tukorea.ac.kr/",
+          "checkedAt": "2026-11-13T02:38:25.707988+00:00",
+          "status": 200,
+          "finalUrl": "https://iphak.tukorea.ac.kr/",
+          "sha256": "bba29c9557c2ce7efc026f6f9d4153d05a6382af7d9bfb273b19a90c008d641c",
+          "file": "tukorea-0",
+          "pdf": false
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "koreatech",
+      "name": "한국기술교육대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "koreatech",
+        "asset": "/university-logos/koreatech.png",
+        "sha256": "15c776002e45b50f0f9373e8a4dcb9bc2dace49eb4fae073e5c8c0fab7a10c03",
+        "source": "https://www.koreatech.ac.kr/sitemap.es?mid=a10901000000",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          177,
+          58
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 3.052
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "koreatech",
+          "url": "https://www.koreatech.ac.kr/boardDownload.es?mid=a40601000000&bid=0036&list_no=53638&seq=1",
+          "checkedAt": "2026-11-13T02:38:25.861938+00:00",
+          "status": 200,
+          "finalUrl": "https://www.koreatech.ac.kr/boardDownload.es?mid=a40601000000&bid=0036&list_no=53638&seq=1",
+          "sha256": "be8b43d518ec8b378386d1124e07c1661be61c1874e2cf90d25b009841917afb",
+          "pages": 15,
+          "file": "koreatech-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "1fd29b0d-1141-4ff0-b1b3-c4f201854476",
+      "slug": "hufs",
+      "name": "한국외국어대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 4,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#146E7A",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "hufs",
+        "asset": "/university-logos/hufs-symbol.png",
+        "sha256": "f4d9d7f1819b3b96a1a3bf121b00927e806a611a6d29d554d1be434adc98dbfa",
+        "source": "https://www.hufs.ac.kr/hufs/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "hufs-2027-1",
+          "academicYear": 2027,
+          "track": "T1 · 인문계",
+          "campus": "서울 (서울·글로벌 지원자 공통)",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "10:00 ~ 11:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://adms.hufs.ac.kr/ajaxfile/FileCpnt/fileView.do?gbn=b02&requestId=1780378686455_0.7244544560643216&SITE_NO=2&BOARD_SEQ=6&BBS_SEQ=83#page=37",
+          "verifiedAt": "2026-11-13T02:46:16.545518+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 37쪽",
+          "sourceSha256": "c3b56a49803e115b4948964b06ff7ab0815e4ba42bae51d4ecbd4e8b7a588cd1",
+          "sourcePage": 37,
+          "note": "같은 문항유형도 모집단위별 날짜가 다릅니다. 공식 표의 모집단위와 교시를 반드시 확인해 주세요."
+        },
+        {
+          "id": "hufs-2027-2",
+          "academicYear": 2027,
+          "track": "T2 · 사회계",
+          "campus": "서울 (서울·글로벌 지원자 공통)",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "15:00 ~ 16:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://adms.hufs.ac.kr/ajaxfile/FileCpnt/fileView.do?gbn=b02&requestId=1780378686455_0.7244544560643216&SITE_NO=2&BOARD_SEQ=6&BBS_SEQ=83#page=37",
+          "verifiedAt": "2026-11-13T02:46:16.545518+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 37쪽",
+          "sourceSha256": "c3b56a49803e115b4948964b06ff7ab0815e4ba42bae51d4ecbd4e8b7a588cd1",
+          "sourcePage": 37,
+          "note": "같은 문항유형도 모집단위별 날짜가 다릅니다. 공식 표의 모집단위와 교시를 반드시 확인해 주세요."
+        },
+        {
+          "id": "hufs-2027-3",
+          "academicYear": 2027,
+          "track": "T3 · 인문계",
+          "campus": "서울 (서울·글로벌 지원자 공통)",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "10:00 ~ 11:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://adms.hufs.ac.kr/ajaxfile/FileCpnt/fileView.do?gbn=b02&requestId=1780378686455_0.7244544560643216&SITE_NO=2&BOARD_SEQ=6&BBS_SEQ=83#page=37",
+          "verifiedAt": "2026-11-13T02:46:16.545518+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 37쪽",
+          "sourceSha256": "c3b56a49803e115b4948964b06ff7ab0815e4ba42bae51d4ecbd4e8b7a588cd1",
+          "sourcePage": 37,
+          "note": "같은 문항유형도 모집단위별 날짜가 다릅니다. 공식 표의 모집단위와 교시를 반드시 확인해 주세요."
+        },
+        {
+          "id": "hufs-2027-4",
+          "academicYear": 2027,
+          "track": "T4 · 사회계·자연계",
+          "campus": "서울 (서울·글로벌 지원자 공통)",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "15:00 ~ 16:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 17:00",
+          "sourceUrl": "https://adms.hufs.ac.kr/ajaxfile/FileCpnt/fileView.do?gbn=b02&requestId=1780378686455_0.7244544560643216&SITE_NO=2&BOARD_SEQ=6&BBS_SEQ=83#page=37",
+          "verifiedAt": "2026-11-13T02:46:16.545518+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 37쪽",
+          "sourceSha256": "c3b56a49803e115b4948964b06ff7ab0815e4ba42bae51d4ecbd4e8b7a588cd1",
+          "sourcePage": 37,
+          "note": "같은 문항유형도 모집단위별 날짜가 다릅니다. 공식 표의 모집단위와 교시를 반드시 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "hufs",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:25.906980+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "sha256": "50147a7408ee5dfbaa8d45b436a8a989fd3407784724fa5f0a9fcaab5216c80a",
+          "pages": 24,
+          "file": "hufs-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "881976e7-8e3d-53e3-8bd8-4ebe5d3a0445",
+      "slug": "kau",
+      "name": "한국항공대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 2,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#002870",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "kau",
+        "asset": "/university-logos/kau-symbol.png",
+        "sha256": "c228b9619214fa1a38bd362cd08609008175c2142e3342dc63b3b2a7551984f9",
+        "source": "https://kau.ac.kr/index/main.php",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "kau-2027-1",
+          "academicYear": 2027,
+          "track": "공과·AI융합·자유전공학부(공학적성)",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "10:00 ~ 11:30",
+          "duration": "90분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ibhak.kau.ac.kr/upload/GUIDES/20260813105041001.pdf#page=41",
+          "verifiedAt": "2026-11-13T02:41:04.010437+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 41쪽",
+          "sourceSha256": "ea712cc65b3317b3c5dd5bc99cc2131c941378cff3e4e379e2d5123da8c6d883",
+          "sourcePage": 41,
+          "note": ""
+        },
+        {
+          "id": "kau-2027-2",
+          "academicYear": 2027,
+          "track": "항공·경영·항공운항·자유전공학부(이학·사회적성)",
+          "campus": "공식 고사장 안내 확인",
+          "date": "2026-11-21",
+          "endDate": null,
+          "time": "15:00 ~ 16:30",
+          "duration": "90분",
+          "applicationPeriod": null,
+          "sourceUrl": "https://ibhak.kau.ac.kr/upload/GUIDES/20260813105041001.pdf#page=41",
+          "verifiedAt": "2026-11-13T02:41:04.010437+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 41쪽",
+          "sourceSha256": "ea712cc65b3317b3c5dd5bc99cc2131c941378cff3e4e379e2d5123da8c6d883",
+          "sourcePage": 41,
+          "note": ""
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "kau",
+          "url": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "checkedAt": "2026-11-13T02:38:26.072814+00:00",
+          "status": 200,
+          "finalUrl": "https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf",
+          "sha256": "279598fac228e6e9f471eb9c1b116db921c02cbf987a594bbc64096aeb121c61",
+          "pages": 25,
+          "file": "kau-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": null,
+      "slug": "hanshin",
+      "name": "한신대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 0,
+      "dateStatus": "공식 일정 미확인",
+      "color": "#244A6A",
+      "colorBasis": "공통 임시색·공식 수치 미확인",
+      "logo": {
+        "id": "hanshin",
+        "asset": "/university-logos/hanshin.jpg",
+        "sha256": "77e5ff23cacdaf68bc62f9b75fe3a4ae87216acd7f56072603fe26546982c46b",
+        "source": "https://www.hs.ac.kr/kor/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "size": [
+          218,
+          43
+        ],
+        "format": "JPEG",
+        "alpha": false,
+        "aspect": 5.07
+      },
+      "scheduleSources": [],
+      "fetchAttempts": [
+        {
+          "id": "hanshin",
+          "url": "https://ent.hs.ac.kr/upload_data/mojib/RF(0)_26052893427.pdf",
+          "checkedAt": "2026-11-13T02:38:26.484353+00:00",
+          "status": 200,
+          "finalUrl": "https://ent.hs.ac.kr/upload_data/mojib/RF(0)_26052893427.pdf",
+          "sha256": "a9f963637a6df9a28f9b14688817c72fb81ca3c27892d04facd0457a4d89ec91",
+          "pages": 52,
+          "file": "hanshin-0",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "slug": "hanyang",
+      "name": "한양대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 0,
+      "previousDates": [],
+      "reviewedRows": 3,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#1D2475",
+      "colorBasis": "Owner 마케팅 참조",
+      "logo": {
+        "id": "hanyang",
+        "asset": "/university-logos/hanyang-symbol.png",
+        "sha256": "a4fb2280fe56901b8f840bdde544e466781fcf2c238f377674fb8d6568090546",
+        "source": "https://www.hanyang.ac.kr/home",
+        "darkSurface": false,
+        "ownerMarketingReference": true,
+        "size": [
+          150,
+          150
+        ],
+        "format": "PNG",
+        "alpha": true,
+        "aspect": 1.0
+      },
+      "scheduleSources": [
+        {
+          "id": "hanyang-2027-1",
+          "academicYear": 2027,
+          "track": "상경",
+          "campus": "서울",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "09:30 ~ 11:00",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf#page=46",
+          "verifiedAt": "2026-11-13T02:38:26.995600+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+          "sourcePage": 46,
+          "note": "모집단위별 배정 시간은 공식 표를 확인해 주세요. 정책학과·한양인터칼리지(인문)는 상경계열 시험에 응시합니다."
+        },
+        {
+          "id": "hanyang-2027-2",
+          "academicYear": 2027,
+          "track": "인문",
+          "campus": "서울",
+          "date": "2026-11-28",
+          "endDate": null,
+          "time": "13:30 ~ 15:00 / 17:00 ~ 18:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf#page=46",
+          "verifiedAt": "2026-11-13T02:38:26.995600+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+          "sourcePage": 46,
+          "note": "모집단위별 배정 시간은 공식 표를 확인해 주세요. 정책학과·한양인터칼리지(인문)는 상경계열 시험에 응시합니다."
+        },
+        {
+          "id": "hanyang-2027-3",
+          "academicYear": 2027,
+          "track": "자연",
+          "campus": "서울",
+          "date": "2026-11-29",
+          "endDate": null,
+          "time": "09:30 ~ 11:00 / 13:30 ~ 15:00 / 17:00 ~ 18:30",
+          "duration": "90분",
+          "applicationPeriod": "2026-09-08 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf#page=46",
+          "verifiedAt": "2026-11-13T02:38:26.995600+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 46쪽",
+          "sourceSha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+          "sourcePage": 46,
+          "note": "모집단위별 배정 시간은 공식 표를 확인해 주세요. 정책학과·한양인터칼리지(인문)는 상경계열 시험에 응시합니다."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "hanyang",
+          "url": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf",
+          "checkedAt": "2026-11-13T02:38:26.995600+00:00",
+          "status": 200,
+          "finalUrl": "https://go.hanyang.ac.kr/resources/upload_data/mojib/20260818042807559_.pdf",
+          "sha256": "3be6649b73d597a6502950e17e0871943ce7c12a45cbd6194a6ec3ecad40a230",
+          "pages": 97,
+          "file": "hanyang-0",
+          "pdf": true
+        },
+        {
+          "id": "hanyang",
+          "url": "https://site.hanyang.ac.kr/documents/11081467/141054756/2027%ED%95%99%EB%85%84%EB%8F%84+%ED%95%9C%EC%96%91%EB%8C%80%ED%95%99%EA%B5%90+%EC%8B%A0%EC%9E%85%ED%95%99+%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf/027468c2-d69a-e7b4-9437-1e66d12f76f4?t=1745975250171",
+          "checkedAt": "2026-11-13T02:38:31.338401+00:00",
+          "status": 200,
+          "finalUrl": "https://site.hanyang.ac.kr/documents/11081467/141054756/2027%ED%95%99%EB%85%84%EB%8F%84+%ED%95%9C%EC%96%91%EB%8C%80%ED%95%99%EA%B5%90+%EC%8B%A0%EC%9E%85%ED%95%99+%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf/027468c2-d69a-e7b4-9437-1e66d12f76f4?t=1745975250171",
+          "sha256": "a5cc87872e86e27ff3121b7447fe3b0c69ed240b48c0e781b5978292fd8481c3",
+          "pages": 37,
+          "file": "hanyang-1",
+          "pdf": true
+        }
+      ]
+    },
+    {
+      "id": "15f50d54-001d-49b9-836b-a5d9c76b9c0a",
+      "slug": "hongik",
+      "name": "홍익대학교",
+      "academicYear": 2027,
+      "catalogOffering": true,
+      "previousDateRows": 1,
+      "previousDates": [
+        "인문 2026-10-03 (서울-인문); 전체 일정은 최종 요강 참조"
+      ],
+      "reviewedRows": 3,
+      "dateStatus": "2026-11-13 공식 재검증",
+      "color": "#1833DB",
+      "colorBasis": "공식 수치",
+      "logo": {
+        "id": "hongik",
+        "asset": "/university-logos/hongik.svg",
+        "sha256": "5bf980564f9b9f39d09f2057c6521a94eea165b8082266fc10b8923188d2d775",
+        "source": "https://www.hongik.ac.kr/kr/index.do",
+        "darkSurface": false,
+        "ownerMarketingReference": false,
+        "format": "SVG",
+        "viewBox": "0 0 256 32"
+      },
+      "scheduleSources": [
+        {
+          "id": "hongik-2027-1",
+          "academicYear": 2027,
+          "track": "자연계열·캠퍼스자율전공(자연·예능)",
+          "campus": "서울",
+          "date": "2026-10-03",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150#page=25",
+          "verifiedAt": "2026-11-13T02:38:27.003009+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 25쪽",
+          "sourceSha256": "f7f564f32c23b4f2e3f0268ffa255cab2303ae4c8ecf60ff14417995228a02e0",
+          "sourcePage": 25,
+          "note": "개인별 일시와 장소는 고사 3일 전 수험표에서 확인해 주세요."
+        },
+        {
+          "id": "hongik-2027-2",
+          "academicYear": 2027,
+          "track": "인문계열·예술학과·캠퍼스자율전공(인문·예능)",
+          "campus": "서울",
+          "date": "2026-10-04",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150#page=25",
+          "verifiedAt": "2026-11-13T02:38:27.003009+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 25쪽",
+          "sourceSha256": "f7f564f32c23b4f2e3f0268ffa255cab2303ae4c8ecf60ff14417995228a02e0",
+          "sourcePage": 25,
+          "note": "개인별 일시와 장소는 고사 3일 전 수험표에서 확인해 주세요."
+        },
+        {
+          "id": "hongik-2027-3",
+          "academicYear": 2027,
+          "track": "인문·자연·캠퍼스자율전공",
+          "campus": "세종",
+          "date": "2026-11-22",
+          "endDate": null,
+          "time": null,
+          "duration": null,
+          "applicationPeriod": "2026-09-07 10:00 ~ 2026-09-11 18:00",
+          "sourceUrl": "https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150#page=104",
+          "verifiedAt": "2026-11-13T02:38:27.003009+00:00",
+          "basis": "2027학년도 수시 모집요강 · PDF 104쪽",
+          "sourceSha256": "f7f564f32c23b4f2e3f0268ffa255cab2303ae4c8ecf60ff14417995228a02e0",
+          "sourcePage": 104,
+          "note": "개인별 일시와 장소는 고사 3일 전 수험표에서 확인해 주세요."
+        }
+      ],
+      "fetchAttempts": [
+        {
+          "id": "hongik",
+          "url": "https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150",
+          "checkedAt": "2026-11-13T02:38:27.003009+00:00",
+          "status": 200,
+          "finalUrl": "https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150",
+          "sha256": "f7f564f32c23b4f2e3f0268ffa255cab2303ae4c8ecf60ff14417995228a02e0",
+          "pages": 142,
+          "file": "hongik-0",
+          "pdf": true
+        }
+      ]
+    }
+  ]
+}

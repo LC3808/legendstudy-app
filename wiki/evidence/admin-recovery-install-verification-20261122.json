@@ -1,0 +1,26 @@
+{
+  "project": "stlhijzpjfgwwdgunlsd",
+  "migration": "20261122115251_admin_run_recovery_20261122",
+  "install_sha256": "c52fb2c42b8a88264f671b78629a1fc89c4307b0d66e0015c1f62cd32676db50",
+  "postcheck": "PASS: 18 new functions, ACL/owner, 3 enabled triggers; original RPCs unchanged",
+  "anonymous_diagnosis_execute": false,
+  "authenticated_worker_finish_execute": false,
+  "authenticated_private_schema_usage": false,
+  "authenticated_without_admin_diagnosis": "42501 ADMIN_REQUIRED",
+  "recovery_actions": 0,
+  "quality_policy_checkpoints": 0,
+  "browser": {
+    "url": "https://lab.legendstudy.com/admin/essay-runs/?state=reserved&visibility=visible",
+    "diagnosis_loaded": true,
+    "completed_questions": 1,
+    "uncertain_questions": 1,
+    "required_credits": 0,
+    "ledger_entries": 0,
+    "uncertain_button_enabled": true,
+    "ordinary_recovery_button_enabled": false,
+    "execution_buttons_clicked": false,
+    "parent_completed_result_rendered": true
+  },
+  "live_student_session_test": "NOT TESTED; SQL ACL/admin gate and isolated tests verified",
+  "live_reexecution": "NOT TESTED; explicitly excluded"
+}

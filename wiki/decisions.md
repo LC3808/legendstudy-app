@@ -1,3 +1,7 @@
+# 공식 Wiki 기준 — 2026-11-25 Owner 승인
+
+APP 저장소 origin/main:wiki가 프로젝트의 단일 공식 상태다. 작업branch는 작업중 결과이며 종료시 선택적으로 공식main에 반영한다. Build88 소스까지 main FF, 미출시89 분리. 실제 스토어 결과 확인 전 RELEASE_CONFIRMATION_PENDING, 확인 후 플랫폼별 출시기록 회수. [감사 및 정상화](project-cross-review-20261125.md).
+
 # Durable Decisions
 
 

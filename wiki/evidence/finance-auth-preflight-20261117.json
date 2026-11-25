@@ -1,0 +1,19 @@
+{
+  "baseline_deployment": "fb94f1da-0603-4a45-9d65-d387edb730b7",
+  "mode": "LIVE",
+  "enabled": "true",
+  "auto_enabled": false,
+  "finance_secret_registered": true,
+  "algorithm": "ES256",
+  "role": "essay_finance",
+  "issuer": "https://stlhijzpjfgwwdgunlsd.supabase.co/auth/v1",
+  "audience": "authenticated",
+  "claims_unchanged": true,
+  "ttl_seconds": 604800,
+  "old_expires": "2026-11-24T09:03:34.000Z",
+  "old_read": "PT404",
+  "candidate_read": "PT404",
+  "anonymous_denied": 401,
+  "secrets_uploaded": false,
+  "production_mutations": 0
+}

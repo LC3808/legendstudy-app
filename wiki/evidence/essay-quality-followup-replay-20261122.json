@@ -1,0 +1,51 @@
+{
+  "mode": "offline replay of recorded metadata; no Student or Provider execution",
+  "runs": 9,
+  "completed": 8,
+  "mean_seconds": 535.195205125,
+  "median_seconds": 192.49391500000002,
+  "retry_events": 12,
+  "retry_experienced_runs": 6,
+  "receipts": {
+    "receipts": 60,
+    "input_tokens": 1114395,
+    "output_tokens": 153581,
+    "summed_latency_seconds": 1416.297
+  },
+  "historical_question_retry_depths": [
+    {
+      "run_id": "79e4168f-a018-4f45-96ca-b41b727a61fe",
+      "question_index": 2,
+      "max_retry": 1
+    },
+    {
+      "run_id": "d9714b6f-c8ac-4cd6-b4e4-553c1898c6ce",
+      "question_index": 1,
+      "max_retry": 1
+    },
+    {
+      "run_id": "56e42287-8150-455b-b534-1fdbeaeeafc1",
+      "question_index": 0,
+      "max_retry": 1
+    },
+    {
+      "run_id": "79788b36-3081-4e10-a408-c3ee6c0dbb2b",
+      "question_index": 0,
+      "max_retry": 3
+    },
+    {
+      "run_id": "4dcb49e5-789d-4e5b-9989-61a116f47e18",
+      "question_index": 1,
+      "max_retry": 1
+    },
+    {
+      "run_id": "741c72ae-fafb-44d9-8d95-9a4de35cffa6",
+      "question_index": 1,
+      "max_retry": 5
+    }
+  ],
+  "postchange_seconds": null,
+  "postchange_tokens": null,
+  "noninferiority": "NOT_TESTED: rejected candidates and alternative repair outputs unavailable; bounded synthetic success cannot prove live completion noninferiority",
+  "activation": "HOLD: candidate policy needs quality/completion validation; historical full regeneration count is not a prediction of partial repair success"
+}

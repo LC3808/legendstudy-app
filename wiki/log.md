@@ -1,3 +1,7 @@
+## 2026-11-25 — 공식 main Wiki·릴리스 정상화
+
+출시88 main FF, 기존88 기록에 양OS 실제출시 회수, current 모순 정리·역사 보존, 누락 Wiki83개 통합. 검사13테스트 PASS·운영변경0. [구현·검사·독립 인계](project-cross-review-20261125.md).
+
 2026-11-17: [PDF P0](pdf-white-screen-hotfix-20261117.md) 다운로드 가능 자료 본문 높이0을 위젯/Android에서 재현. 운영 파일 A/B 정상 바이트 확인, Column 최소 높이 수정. Owner 화면 확인 중단·직접 스토어 업데이트 지시.1.0.6(88) IPA/AAB서명·2632 PASS/9 SKIP/0 FAIL·analyze·Android네이티브2 PASS.실기기 NOT TESTED,제출0.
 
 2026-11-16: [APP105(87)](app105-build87-release-20261116.md) 종료 배너 제거·signed IPA/AAB·2629 PASS/analyze PASS·iPhone 업데이트 및 Owner PASS. Apple 개인정보9종 게시·Play 초안 저장. GA4 PDF 수신. PAUSED/제출 HOLD 유지.

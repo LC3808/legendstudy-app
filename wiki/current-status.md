@@ -1,95 +1,105 @@
-[PDF P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): ALLOWED 하단 Column이 본문 높이0 유발, 한 줄 수정·Android 재현/수정 검증. 전체2632 PASS·analyze PASS·IPA/AAB서명 PASS, 스토어 Owner 담당·실기기 NOT TESTED. 이전87 QA는 조건별 PDF 검증 누락.
-
-2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
-
-2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.
-
-[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter93/analyze PASS; 원본 보존.
-
 # Current Status
 
-[11/14 LAB 관리자 조회](admin-lab-operations-20261114.md): SQL·WEB 운영/E2E PASS, 요청58·완료47·실패10·진행1·베타1. 원본 보존.
+공식 기준은 **LC3808/legendstudy-app origin/main의 wiki/**다. 작업 브랜치의 사본은 공식 상태를 대신하지 않는다. 아래는 **2026-11-25 마지막 확인 상태**이며 외부 운영을 실시간 보증하지 않는다. [index](index.md) · [정상화 절차/검사 한계](project-cross-review-20261125.md).
 
-[11/13 운영 작업](operations-commercial-20261113.md): PDF845 운영허용 확인,실기기 대기. 학교3/1 유지. [exporter 장애 추적](supabase-temp-incident-20261113.md):522 인과 미확정. 전체2609 PASS/8 SKIP,양OS debug PASS; LIVE/Store 완료 아님.
+## APP 실제 출시와 다음 후보
 
-[로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당.
+**iOS/Android 1.0.6, Build88 RELEASED.** iOS11/18,Android11/17 출시. 출시 소스 `08345b69b1d71c9038be50767bd849a7354d2b8e`. 최종 포함 기능·제외·QA 한계의 단일 참조는 [88 릴리스 기록](pdf-white-screen-hotfix-20261117.md)이다. PDF/학습/기존 학교TOP10/MY 개선을 재개발 대상으로 등록하지 않는다.
 
-[APP83 최종 빌드·스토어 제출](app83-store-handoff-20261112.md): 스플래시6962c0f 포함, main fast-forward/Push 완료. 1.0.3(83) IPA/AAB·서명/설정 PASS. 전체2580 PASS/8 SKIP/0 FAIL·Analyze·Python33·격리SQL71/42·Android JVM2 PASS. Owner IPA/AAB 업로드 보고. Android83 서버 수락 확인·심사 전송 요청 완료: Google 자동 검사 중, 승인 후 기존100% 자동 출시 설정. iOS 심사 신청 완료 Owner 확인. 최종산출물 실기기·심사 승인·실제 공개 NOT TESTED. 신규RPC2 미적용: 기존TOP10 유지, 추가순위/백분위 미활성. 운영DB/Auth/회원/Provider 변경0. 기존 설치 앱·APP82 보존. [후속UX·이전 iPhone 검증](app82-post-rc-ux-20261112.md).
+[1.0.7+89](app-release-89-preparation-20261125.md)는 출시88을 포함한 `76cc4050` 후보로 D-Day 및 무료2 안내가 BUILT/UNRELEASED다. 양OS 빌드·자동검증 완료와 실기기88→89 업데이트·스토어 출시를 구분한다. 업로드·제출은 아직0이며 승인 필요. 무료2 DB 미적용 상태에서 정책 적용 완료로 안내하지 않는다.
 
-[APP82 승인·빌드 이력](app82-store-handoff-20261113.md): 과거 검증 근거 보존; 최신 릴리스는 APP84 인계 참조.
+## 운영 상태와 DB
 
-[대학 검색 Catalog 확장 CLOSED](university-catalog-closure-20261112.md): Owner 완료 승인. 신규78·전체131·활성128, 관심/실제 지원 검색 PASS. 기존 ID·사용자·논술 LAB 보존. 보류7 정체성 검토 제외, iPhone 검색·WEB 배포본 E2E NOT TESTED. 추가 운영 변경 없이 마감, APP 릴리스 HOLD 유지.
+- WEB: 품질 콘솔 V1 `ecac36e5`/Pages `6e4b8189` 운영 반영. [배포·검증](quality-console-v1-20261125.md). 후속 문서 HEAD를 배포 소스와 혼동하지 않는다.
+- Essay Worker: `29f4f6cc-433f-4e8e-8da4-9ca5710f2e71`,11/22 배포·11/25 확인. 관리자 복구/정확 인용 보정 운영, 부분 재생성·신규 상한은 비활성. [런타임](admin-recovery-runtime-fix-20261122.md).
+- DB: 프로젝트 stlhijzpjfgwwdgunlsd. [D-Day 설치](admissions-dday-implementation-20261120.md)와 [복구 설치](admin-run-recovery-deployment-20261122.md) 확인. [무료2 SQL](signup-credit-policy-two-20261125.md)은 승인 대기. 모든 migration이 적용됐다는 뜻은 아니다.
+- 결제: Toss LIVE 유지. Finance Worker `d14a757e-5b46-448c-8b66-325d181c2a9f` 자동 갱신 배포는 확인했으나 **11/23 자연 갱신 성공은 미확인/BLOCKED**. [설정·읽기 전용 주의](project-cross-review-20261125.md). 상태조회도 갱신을 유발할 수 있어 기존 로그부터 확인한다.
 
-[온보딩 P0 UX](onboarding-p0-ux-20261112.md): 제목/설명 가운데 정렬·전체 카피, 지원 입력 중 다음 숨김/저장 우선, 건너뛰기는 현재 단계만 이동(중간 전체 완료 오류 수정). 집중80/렌더6/analyze PASS. Catalog78개 Owner 승인 운영 추가 완료(53→131/활성128), 기존53행·사용자 데이터 보존/보류7 제외. 공개78개·양쪽 Flutter 검색 PASS(실기기 재검색 미검증). 전체2552 PASS·8 SKIP·기존5 FAIL, iPhone17 APP81 설치·실행/MY 폼·이탈확인 PASS, 기존 완료계정이라 신규온보딩 실기기 NOT TESTED. Owner HOLD.
+## 진행·미완료·승인·다음 작업
 
-[지원 대학 카피·컴팩트 폼](onboarding-compact-layout-20261111.md): Owner 지정 따뜻한 문구, 검색 아이콘 통합, 학년도/모집 시기2열(큰 글자 세로), 카드·간격 축소. 기존 저장/진행 복원·Backend 유지. 집중66 PASS/렌더3 PASS/analyze PASS, 전체2551 PASS·8 SKIP·기존5 FAIL. iPhone17 APP80 삭제 없는 설치·실행/버전 확인 PASS, iPhone12 APP75 보존. 미러링 사용 중으로 실기기 UI 검수 NOT TESTED; Owner UX 확인 전 HOLD.
+1. q1 요청03629605…는 reserved,완료1/2. 복구 연결 수정과 실제 완료는 다르다. Owner 승인 후 직전 잠금·완료문항 해시·이용권0 재확인→기존 복구1회. 이번 실행 없음.
+2. Finance 기존 로그 접근 확보 및 자연 갱신 확인. 실패 증거 전 설정을 바꾸지 않는다.
+3. APP89 실기기 업데이트·PDF/로그인/학습/수동 및 자동 D-Day 회귀. 스토어 제출 별도 승인.
+4. 무료2 신규 지급 정책은 [준비된 SQL/검증/원복](signup-credit-policy-two-20261125.md) Owner 승인·적용 후 확인. 기존 지급분/원장 보존.
+5. [품질V1](quality-console-v1-20261125.md) PARTIAL:70요청118문항 대조,내용20요청38문항 검토. Q15 개별 저장·Owner 집계·나머지 내용/Claude 검토 미완료. 새 DB는 exact SQL 준비 후 별도 승인.
+6. 아주·인하 자료의 부족 범위와 [통합 후속](integrated-followup-20261125.md) QA. 배지·OCR·수리 확장·Evidence ID는 구현/설계/활성화를 각각 구분한다.
 
-[APP78 Native UX 후속](onboarding-inline-applications-20261111.md): N수·기타 학교 단계 자동 생략, 온보딩 내부 실제 지원 추가/수정/삭제, MY 공통 카드 폼·외부 라벨·미저장 이탈 확인. 기존 repository/운영 데이터 변경0. 계정별 단계 복원 유지. 집중62 PASS/전체2548 PASS·8 SKIP·기존5 FAIL,analyze PASS. iPhone17 APP79 설치 확인/iPhone12 APP75 보존. 기기 잠금·미러링 사용 중으로 화면 검증 NOT TESTED; Owner 최종 UX 검수 대기,릴리스 HOLD.
+## 개발 기준과 인수인계
 
-[이메일 인증 후 온보딩 P0](onboarding-auth-routing-fix-20261111.md): Owner Resend 수신·인증·로그인 성공 보고. Owner 재현 iPhone17 Pro Max 일반 배포 앱1.0.2(67) 확인, 빌드 기록 소스2fa70bf. 이전 iPhone12/APP75 연결 보고 정정. profile 존재를 완료로 오판하는 gate 수정; 완료/skip marker로 판별. 집중212 PASS/analyze PASS. Owner 승인으로 iPhone17에77 삭제 없는 업데이트·실행 PASS. APP77 온보딩 노출 Owner PASS. N수 실제 지원 선택 단계·계정별 단계 복원 구현. iPhone17 APP78 업데이트/실행 PASS, iPhone12 APP75 재확인. 최종전체2540 PASS/8 SKIP/기존5 FAIL,analyze PASS. 최종 실기기 연속 흐름과 기존 회원46개 재노출 검토 대기; 임시 draft 완전 복원은 후속. 운영 변경0.
-
-[작업04-C 실제 계정·기기 검수](task04c-device-verification-20261111.md): A SQL 운영 적용 DONE(재적용0), iPhone 기존 계정 저장·재실행/재로그인·A/B 격리·기본 복원 DONE. Android360dp guest 터치/저장/진입 PASS. 기존 iPhone APP75/Android67 설치본 보존. 신규 온보딩은 이메일 인증 장애로 NOT TESTED. 04-A/B DONE,04-C 전체 검수 PARTIAL,C/D HOLD. [운영 영수증](task04c-home-production-20261111.md).
-
-[알림 무한 로딩 수정](notification-loading-fix-20261111.md): 운영 개인 알림 table/RPC4개 부재·404 확인. 자동 재시도 해제·단계별8초 제한·Empty/Error 분리·수동 재시도. 관련46 PASS, 전체2532 PASS/8 SKIP/기존5 FAIL, analyze·iOS/Android build PASS. Android 오류/재시도/공지 이동 확인, iPhone 회신 대기. 운영 DB/배포 변경0.
-
-[이메일 인증 안정화](email-verification-audit-20261111.md#독립-안정화-조사--2026-11-11): 독립 브랜치에서 기본 SMTP·2통/시간·만료3600초 실제 확인. 오류21건=가입18/매직링크3, 이메일 식별값4개(사람 수 아님). 미인증5명 E 원인 미확인/전달 로그 NOT TESTED. 재발송·60초 대기·오류 안내·가입 이메일 보존 수정, 인증/온보딩143 PASS. 운영 설정/메일/DB 변경0. 전용 SMTP 도입 준비/조사는 Owner 승인. [공급자 비교·DNS·비용·전환안](email-smtp-provider-plan-20261111.md): Resend 우선 추천, 공급자 최종 선택·운영 설정/발송 승인 대기. 실제 신규 가입 E2E·릴리스 통합 전 전체 안정화 BLOCKED.
-
-## APP67 학습 기능 통합 — 2026-11-11
-
-Owner 작업02 후속 승인에 따라 누적·지원 중복 두 함수를 운영 적용했다. WEB·스토어 변경 없음.
-기준 APP67 1.0.2+67의 타이머/복구/오프라인/outbox/모의고사와 APP67 출시 산출물은 보존한다.
-
-[구현·검증·후속 작업](app67-learning-integration-20261111.md) ·
-[SQL 후보·검증·원복](../supabase/candidates/app67_learning_20261111/README.md).
-
-- 학습 홈: 서버 확정 오늘/누적/이번 주, 최근7일 차트·타이머, 학교 순위·초대 진입.
-- 학교 순위: 서버 RPC all/participation 기본, 네 기간·세 지표, 공동 순위/TOP10/주변,
-  비공개 인원 **, 기존 NEIS 학교명 조회·등록 연결. APP 별도 집계 없음.
-- 초대: 기존 Backend 생성/복사/OS공유/토큰 보관/로그인 후 귀속/학교 확인.
-  기존 Auth URL 교환은 변경하지 않는다. HTTPS 링크는 기존 WEB 랜딩이며 앱 내 직접
-  전용 custom scheme 수신을 구현했다. 수동 받은 초대 페이지는 제거하고 학습 초대하기에서 바로 OS 공유한다. Universal/App Links 운영 도메인 검증,
-  설치 후 토큰 복원 및 실기기 E2E는 별도 미완료다.
-- 누적 표시 연결 완료. 두 함수 운영 적용 및 기존 데이터/ACL/요약 보존 검사 PASS.
-  학습·초대·Auth 집중49 PASS, analyze PASS. iPhone12 Pro Max에 Owner UX·Scene 공유 오류 반영 빌드70 설치·실행 완료, Owner 확인 회신. 학교 순위 제목/시간 강조 후속 UI28검사 PASS, 빌드71 서명 빌드·iPhone 설치/실행 PASS, 학교 순위 UI Owner 검수 완료(“이대로 진행”).
-
-## 다음 작업
-
-1. 기능 문서의 최종 테스트·플랫폼 컴파일 결과와 제한을 확인한다.
-2. Owner가 앱 내부 검수 범위를 결정한 뒤 실기기 초대 공유·수신·학교 변경·학습 동기화를 확인한다.
-3. SQL 적용 완료. 도메인 링크 검증·미설치→설치 귀속·실기기 E2E는 미완료다.
-4. APP67 다음 릴리스 번호/서명/스토어 업로드는 이번 작업에 포함되지 않는다.
-
-## 기존 기능·릴리스 이력
-
-[작업 전 상태 전문](history/app67-learning-input-20261111.md)에 기존 증거를 보존했다.
-[APP67 출시 검수 이력](app67-essay-admission-20261106.md),
-[APP66 최종 검증](app66-final-release-20261106.md),
-[TASK20 자연 연결](task20-priority-natural-connection-20261106.md)을 참조한다.
-과거 HOLD/PASS 문구는 당시 범위이며 최신 운영 상태를 자동 의미하지 않는다.
-WEB 운영/인수인계는 WEB 저장소가 소유하며 이 APP 브랜치에서 배포하지 않는다.
+- 공식 문서와 출시된 APP 기준: `origin/main`. main은 출시88을 포함한다. 이후 Wiki 커밋은 버전 증가나 운영 배포가 아니다.
+- APP 후보89: `codex/operations-commercial-20261113`; 운영/SQL/Worker: `codex/material-service-app-20261022`; WEB 별도 저장소: `codex/lab-admin-operations-20261114`.
+- 작업 전 원격 main의 AGENTS/index/current를 읽고 실제 branch/HEAD와 출시 ancestry를 확인한다. 오래된 작업 branch 전체를 APP에 덮어쓰지 않는다.
+- 종료 시 작업 결과를 공식 main Wiki에 선택 통합하고 원격 일치 검사를 한다. 다른 기능의 미커밋 변경을 섞지 않는다.
 
 ## Daily Sync status
 
-이번 APP 통합은 자료 수집을 변경하지 않는다. 이 브랜치의 과거 수집 증거는
-[작업 전 기록](history/app67-learning-input-20261111.md#daily-sync-status)에 보존했다.
-11/8 이후 수집 운영 변경은 APP main의 별도 자료 동기화 작업이 소유하며 이 브랜치로 덮어쓰지 않는다.
+기존 자료 운영/자동 동기화 범위는 [Materials closeout](materials-final-closeout-2026-09-27.md)과 [Daily Sync 이력](history/status-checkpoints.md)을 참조한다. 이번 작업에서 재수집·운영 실행 없음.
 
-## 작업03-C — 자동채점 운영 적용 완료 · 실기기 검수 진행
+## 과거 상태
 
-[운영 결과·검증·남은 일](task03c-production-rollout-20261111.md) ·
-[검수 원본](task03b-ready-candidate-20261111.md) ·
-[SQL·원복](../supabase/candidates/task03b_ready_20261111/README.md).
+과거 Store BLOCKED/AI OFF/10월 우선순위는 [정상화 전 상태 원문](history/status-checkpoints.md#pre-normalization-release-branch-status--2026-11-25)에 보존했다. 현재 판정으로 사용하지 않는다. 제품 정책은 [decisions](decisions.md), 실제 과거 작업은 [log](log.md)를 따른다.
 
-- Owner 승인 범위 적용: migration20261111041154,443정답표/11,170문항/396READY과목/17시험 공개.
-  PARTIAL12·NOT_READY9 제외. 기존372READY 검수자료/417Registry 유지.
-- 참고1,029행 추가, 총3,486. 기존2,457행 전체행해시 동일. 자동등급키0, 저장된 공식 grade 필드 불변. 앱 참고 등급은 아래 후속 참조.
-- 실제 운영1,329RPC 점수·저장·재조회 검사 후ROLLBACK. review검수11건 별도보존,
-  동시중복1건·새ID재제출·다른계정DBrole 접근차단 PASS. 실제JWT E2E와 구분.
-- 실제 Flutter Repository 운영조회443표/과목396/시험17 + Guest MCQ/단답/전원정답 PASS.
-  기존 학습회귀100 PASS. 기존RLS정책동일·새security advisory0. Auth/원장/평가 변경없음.
-- APP67/71 보존. 내부APP72(1.0.2/72) 서명·iPhone 삭제 없는 설치/실행 PASS.
-  Owner 화면 검수 회신 대기, authenticated JWT 제출 E2E 미확인, 스토어제출0.
-- 다음: iOS 로그인 TEST 저장·재조회 실기기 확인, Android 별도검수. 미검증 과목 공개금지.
+## 검사 입력 (동일 문서의 구조화된 요약)
 
-## 모의고사 결과 UI 후속 — 2026-11-11
-[검증 및 APP75 인계](task03-result-ux-20261111.md). APP74 Owner 확인 완료, APP75 과목명 후속·Android 검수 대기. 원본·기존 빌드 보존. 상세 과거 상태는 [로그](log.md) 참조.
+자동 검사는 필수값·Git·구조화된 충돌만 검사한다. 스토어/DB/운영 사실 자체는 보증하지 않는다. 외부 상태는 실행·배포·업로드 직전에 재확인한다.
+
+<!-- handoff-status -->
+```json
+{
+  "wiki_branch": "main",
+  "last_verified": "2026-11-25",
+  "release_record": "pdf-white-screen-hotfix-20261117.md",
+  "candidate": {
+    "version": "1.0.7",
+    "build": 89,
+    "source": "76cc405028308ceddcc76dca77285e6795346640",
+    "branch": "codex/operations-commercial-20261113",
+    "state": "BUILT",
+    "release_state": "UNRELEASED",
+    "evidence": "app-release-89-preparation-20261125.md"
+  },
+  "unreleased": [
+    "자동 입시 D-Day APP",
+    "무료2 안내 APP/운영 DB 정책 승인 대기"
+  ],
+  "web": {
+    "source": "ecac36e5b31dbf980ee0eebbb433626bb33c477e",
+    "deployment": "6e4b8189-5a6c-4f28-8d16-e15bf4508500",
+    "state": "DEPLOYED",
+    "evidence": "quality-console-v1-20261125.md"
+  },
+  "worker": {
+    "essay_version": "29f4f6cc-433f-4e8e-8da4-9ca5710f2e71",
+    "finance_version": "d14a757e-5b46-448c-8b66-325d181c2a9f",
+    "evidence": "project-cross-review-20261125.md"
+  },
+  "db": "D-Day/관리자 복구 APPLIED; 무료2 APPROVAL_PENDING; 전체 migration 전수 인증 아님",
+  "payment": "Toss LIVE 유지,이번 변경0",
+  "finance": "자동 갱신 배포됨;11/23 자연 갱신 성공 미확인",
+  "development": {
+    "app": "codex/operations-commercial-20261113",
+    "backend": "codex/material-service-app-20261022",
+    "web": "codex/lab-admin-operations-20261114"
+  },
+  "work": [
+    "APP89 QA",
+    "품질 콘솔 Q15/Owner 집계 미완료"
+  ],
+  "blocked": [
+    "Finance 로그403/로그인 필요"
+  ],
+  "approval": [
+    "q1 실제 복구",
+    "무료2 운영DB",
+    "스토어 제출",
+    "부분 재생성/상한 활성화",
+    "Q15 DB/Owner 역할 계약"
+  ],
+  "next": [
+    "기존 Finance 로그 확인",
+    "q1 승인 후 직전 조건 재확인",
+    "APP89 실기기 회귀",
+    "무료2 DB 승인 패키지 검토"
+  ]
+}
+```

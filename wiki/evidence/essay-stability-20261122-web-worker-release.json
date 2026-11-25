@@ -1,0 +1,237 @@
+{
+  "recorded_at": "2026-11-22T06:33:57.354108+00:00",
+  "worker": {
+    "source": "9bffbc0",
+    "baselineVersion": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+    "changed": [
+      {
+        "module": "essay_lab/live_worker.py",
+        "sha256_before": "3124f460c19875c9254238eb91ffdb7bd33c7c6af602621dd44d765af63adf2a",
+        "sha256_after": "d4f3f1f969f255cf170e38522da9e5e8215a09f1cc6a6427ae55a598c78b9682"
+      },
+      {
+        "module": "essay_lab/transport_diagnostics.py",
+        "sha256_before": null,
+        "sha256_after": "c20ac1f7b0106ab94b091d1b0b4880e3790b512f200e43e4eedbb5dc40eb2ca0"
+      },
+      {
+        "module": "essay_lab/cloudflare_http.py",
+        "sha256_before": "77dbfccea085fa86190a6d557eb742fcab9bcbdaea045b0f4dcd9d220bd37d53",
+        "sha256_after": "5c43f018c353ab7ead53fe2ad64c293b736ba9b1f4bd0693dfdd55257001e878"
+      },
+      {
+        "module": "essay_lab/cloudflare_runtime.py",
+        "sha256_before": "d640aa8b438f6465a0a4e163f22e494b8855e065410fc8c5b1f26abc31c0c764",
+        "sha256_after": "a34b560e07ceab531fed7e9a36694bbcdc871ef315eaaff9cb5b38e118949b9b"
+      }
+    ],
+    "unchangedModules": 72,
+    "totalModules": 76,
+    "settingsChanges": 0,
+    "qualityPolicyChanges": 0,
+    "providerCalls": 0,
+    "verifiedAt": "2026-11-22T06:26:15.830Z",
+    "deployment": "6a4966b6-e5d1-4df8-ad26-ba2c7623c3b2",
+    "version": "bdee88d0-d23f-4e92-abef-3c009c92efb8",
+    "percentage": 100,
+    "settingsUnchanged": true,
+    "allModuleHashesMatched": true
+  },
+  "web": {
+    "sha": "d6d0107e3fc4b3f64bcc19a0f18c044827eb628d",
+    "baseline": "6e153e0f-0e52-43b2-abac-a039f284d84f",
+    "scope": [
+      "/admin/",
+      "/admin/essay-runs/",
+      "/admin/lab-dashboard/"
+    ],
+    "changedPages": [
+      "/admin/lab-dashboard/__next._full.txt",
+      "/admin/lab-dashboard/__next._tree.txt",
+      "/admin/lab-dashboard/__next.admin.lab-dashboard.__PAGE__.txt",
+      "/admin/lab-dashboard/index.html",
+      "/admin/lab-dashboard/index.txt"
+    ],
+    "addedAssets": 0,
+    "preservedPaths": 3129,
+    "workerSha256": "9361f8a2a030b889d47c5421c20a51ac584c26da9054cc9bb94199a1b55a2862",
+    "priorWorkerSha256": "9361f8a2a030b889d47c5421c20a51ac584c26da9054cc9bb94199a1b55a2862",
+    "runtimeSourceInputsUnchangedFrom": "1f345807",
+    "runtimeSourceInputsChecked": 81,
+    "runtimeSourceChanges": 0,
+    "dependencyLockChanges": 0,
+    "settingsChanges": 0,
+    "normalizedRepeatBuildSha256": "3f7ec334da20fb236b5ba7dd572533c3fb9f72d38f877f15b72d1bafea9a3a96",
+    "repeatBuildDifference": "One random source-path comment line only; executable bytes identical",
+    "originalRuntimeBinaryEquality": "NOT VERIFIED: original managed Pages source unavailable; old temporary artifact removed. Recompile authorized by root after source/config/dependency preservation review.",
+    "rollbackDeployment": "6e153e0f-0e52-43b2-abac-a039f284d84f",
+    "deployment": "c5348617-8676-45c0-92d6-4efdf9bafd42",
+    "verifiedAt": "2026-11-22T06:33:27.210Z",
+    "canonical": true,
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-11-22T06:33:10.912258Z",
+      "status": "success"
+    },
+    "settingsUnchanged": true,
+    "sourceConfigurationUnchanged": true,
+    "functionRoutingUnchanged": true,
+    "functionBindingsUnchanged": true,
+    "manifestMatched": true,
+    "liveMode": "LIVE",
+    "financeAutomatic": "true",
+    "smoke": [
+      {
+        "path": "/admin/",
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "path": "/admin/essay-runs/",
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "path": "/admin/lab-dashboard/",
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "path": "/account/",
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "path": "/pricing/",
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "path": "/api/admin/essay-run",
+        "method": "POST",
+        "auth": "none",
+        "status": 401,
+        "result": {
+          "code": "LOGIN_REQUIRED"
+        }
+      },
+      {
+        "path": "/api/admin/essay-run",
+        "method": "POST",
+        "auth": "none",
+        "status": 403,
+        "result": {
+          "code": "ACCESS_DENIED"
+        }
+      },
+      {
+        "path": "/api/payments/finance-auth-status",
+        "method": "POST",
+        "auth": "none",
+        "status": 401,
+        "result": {
+          "error": "AUTH_REQUIRED"
+        }
+      },
+      {
+        "path": "/api/payments/runtime",
+        "method": "POST",
+        "auth": "none",
+        "status": 200,
+        "result": {
+          "state": "LIVE",
+          "mode": "LIVE",
+          "consumer_purchase": false
+        }
+      }
+    ],
+    "initialBaseline": "842dccfe-570c-458a-a23e-a0c5220bb766",
+    "intermediateDeployment": "6e153e0f-0e52-43b2-abac-a039f284d84f",
+    "originalWorkerSha256": "a753222551b0ce9a46e98733d002077bdfbff3311c462fc5e5508ec26cb55413",
+    "followupRuntimeBytesIdentical": true,
+    "cumulativeChangedPages": [
+      "/admin/__next._full.txt",
+      "/admin/__next._tree.txt",
+      "/admin/__next.admin.__PAGE__.txt",
+      "/admin/essay-runs/__next._full.txt",
+      "/admin/essay-runs/__next._tree.txt",
+      "/admin/essay-runs/__next.admin.essay-runs.__PAGE__.txt",
+      "/admin/essay-runs/index.html",
+      "/admin/essay-runs/index.txt",
+      "/admin/index.html",
+      "/admin/index.txt",
+      "/admin/lab-dashboard/__next._full.txt",
+      "/admin/lab-dashboard/__next._tree.txt",
+      "/admin/lab-dashboard/__next.admin.lab-dashboard.__PAGE__.txt",
+      "/admin/lab-dashboard/index.html",
+      "/admin/lab-dashboard/index.txt"
+    ],
+    "cumulativeAddedAssets": 4,
+    "cumulativePreservedOriginalPaths": 3125,
+    "originalRollbackDeployment": "842dccfe-570c-458a-a23e-a0c5220bb766"
+  },
+  "tests": {
+    "web_related": {
+      "files": 2,
+      "passed": 15
+    },
+    "finance_payment_auth_regressions": {
+      "files": 11,
+      "passed": 226
+    },
+    "web_eslint": "PASS",
+    "web_typescript": "PASS",
+    "web_build": {
+      "status": "PASS",
+      "generated_routes": 171
+    },
+    "actual_candidate_synthetic": {
+      "passed": 111,
+      "source": "essay-stability-20261122-tests.json"
+    },
+    "real_provider_calls": 0,
+    "real_request_mutations": []
+  },
+  "ui": {
+    "mode": "Existing Owner/admin session; read-only navigation and capability lookup",
+    "checked_at_kst": "2026-11-22 15:30",
+    "urls": [
+      "https://lab.legendstudy.com/admin/",
+      "https://lab.legendstudy.com/admin/essay-runs/?state=reserved",
+      "https://lab.legendstudy.com/admin/lab-dashboard/"
+    ],
+    "requests": 9,
+    "completed": 8,
+    "failed": 0,
+    "retries": 12,
+    "active_processing": 1,
+    "retry_pending": 0,
+    "archived": 1,
+    "processing_not_currently_executing_explanation_visible": true,
+    "failure_zero_not_proof_of_normal_pending_explanation_visible": true,
+    "active_request_id_from_separate_db_correlation": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+    "active_request_label": "응답 확인 필요 · 자동 재진행 불가",
+    "lease_expiry_display_kst": "2026-11-22 01:46",
+    "credit_reservation_display": 0,
+    "ledger_rows_display": 0,
+    "retry_enabled": false,
+    "delete_enabled": false,
+    "archive_enabled": false,
+    "action_executed": false,
+    "interpretation": "Current request remains unresolved and reserved; this diagnostic/UI release does not recover or rerun it. Active KPI remains 1. No student answers, email, tokens or raw provider content retained in this receipt.",
+    "normal_member_browser": "NOT TESTED: no separate authorized normal-member session; synthetic/server authorization checks recorded separately.",
+    "lab_dashboard": {
+      "checked_at_kst": "2026-11-22 15:33",
+      "requests": 9,
+      "completed": 8,
+      "failed": 0,
+      "retries": 12,
+      "active_processing": 1,
+      "retry_pending": 0,
+      "archived": 1,
+      "processing_not_currently_executing_explanation_visible": true,
+      "failure_zero_not_proof_of_normal_pending_explanation_visible": true
+    }
+  }
+}
