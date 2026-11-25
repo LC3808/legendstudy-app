@@ -26,6 +26,9 @@ class HandoffTest(unittest.TestCase):
     def check(self,official=False,fn=None):
         self.write()
         with patch('check_release_handoff.git',side_effect=fn or self.fakegit):return validate(self.root,official)
+    def test_known_stale_index(self):
+        (self.w/'index.md').write_text('[Release](release.md) APP 릴리스 HOLD 유지.')
+        self.assertTrue(self.check()['RELEASE_CONSISTENCY'])
     def test_valid(self):self.assertFalse(any(self.check(True).values()))
     def test_missing_required(self):del self.s['next'];self.assertTrue(self.check()['RELEASE_CONSISTENCY'])
     def test_conflicting_build(self):self.r['platforms'][1]['build']=87;self.assertTrue(self.check()['RELEASE_CONSISTENCY'])

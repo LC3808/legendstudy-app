@@ -24,6 +24,8 @@ def validate(root, official=False):
     groups = {'RELEASE_CONSISTENCY': [], 'GIT_BASELINE': [], 'OFFICIAL_WIKI': []}
     errors = groups['RELEASE_CONSISTENCY']
     wiki = root / 'wiki'
+    for stale in ('APP 릴리스 HOLD 유지.', '최신 APP 릴리스 판단은 아래 APP82'):
+        if stale in (wiki/'index.md').read_text(): errors.append('Known stale current-state label: '+stale)
     try:
         status = record(wiki/'current-status.md', 'handoff-status')
         missing = REQUIRED - status.keys()
