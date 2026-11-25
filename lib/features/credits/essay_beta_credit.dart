@@ -78,7 +78,7 @@ String betaPolicyText(DateTime end, [int limit = 1]) =>
     '베타 기간에는 매일 무료 첨삭 $limit회를 제공합니다.\n\n'
     '무료 이용 횟수는 매일 00시(자정, 한국 시간)에 갱신되며, 사용하지 않은 횟수는 이월되지 않습니다.\n\n'
     '베타 서비스는 ${betaEndDate(end)}까지 운영됩니다.\n\n'
-    '가입 축하 무료 이용권 3개와 구매 이용권은 기존 정책에 따라 이용할 수 있습니다.';
+    '신규 가입 시 무료 첨삭권 2개를 받을 수 있습니다. 이미 지급받은 이용권과 잔여 수량은 그대로 유지되며, 구매 이용권과 무료 재첨삭은 기존 정책에 따라 이용할 수 있습니다.';
 
 final essayBetaCreditProvider = FutureProvider.autoDispose<EssayBetaCredit?>((
   ref,

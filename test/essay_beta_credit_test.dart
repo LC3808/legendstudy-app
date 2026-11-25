@@ -172,7 +172,7 @@ void main() {
     expect(value.ended, true);
     expect(betaEndDate(value.endsAt!), '2026년 11월 11일 00:00 KST');
     expect(betaPolicyText(value.endsAt!), contains('인문·사회·상경·자연·수리논술'));
-    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 이용권 3개'));
+    expect(betaPolicyText(value.endsAt!), contains('신규 가입 시 무료 첨삭권 2개'));
   });
   test('invalid balance and expiry never displayed', () {
     for (final count in [-1, 2, 3, 1.5, '1']) {

@@ -1,3 +1,5 @@
+2026-11-25: [신규 무료 첨삭권2개 준비](signup-credit-policy-two-20261125.md) — APP 안내·기존 잔액 보존 검증 PASS. 운영 DB 승인 대기, WEB 미배포/APP 다음 출시.
+
 [PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.
 
 [APP105 빌드87·개인정보 보완·최종 QA](app105-build87-release-20261116.md) — 2026-11-16, 배너 제거·iPhone Owner PASS·제출 HOLD.

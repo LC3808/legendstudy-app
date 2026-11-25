@@ -1,3 +1,5 @@
+[무료권2개 APP 준비·DB 승인 대기](signup-credit-policy-two-20261125.md).
+
 [PDF P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): ALLOWED 하단 Column이 본문 높이0 유발, 한 줄 수정·Android 재현/수정 검증. 전체2632 PASS·analyze PASS·IPA/AAB서명 PASS, 스토어 Owner 담당·실기기 NOT TESTED. 이전87 QA는 조건별 PDF 검증 누락.
 
 2026-11-15: [APP 행동 계측](app-usage-analytics-implementation-20261115.md) — 기존 Firebase에 클릭/검색/PDF/저장/타이머 성공 경계 추가.54테스트·analyze·simulator build PASS. 스토어 제출 없음·신규 운영 수신 NOT TESTED.
