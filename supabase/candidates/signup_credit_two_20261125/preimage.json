@@ -1,0 +1,56 @@
+[
+  {
+    "nspname": "account_private",
+    "proname": "enabled",
+    "args": "",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,essay_executor=X/postgres}",
+    "hash": "1c03946e278438c47838876f4f4c4ef1",
+    "definition": "CREATE OR REPLACE FUNCTION account_private.enabled()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$select coalesce((select enabled from account_private.dispatch_health where singleton),false)$function$\n"
+  },
+  {
+    "nspname": "essay_private",
+    "proname": "credit_post_grant",
+    "args": "p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone",
+    "owner": "essay_executor",
+    "acl": "{essay_executor=X/essay_executor,postgres=X/essay_executor}",
+    "hash": "0df3300b46a557380e30867e061594bf",
+    "definition": "CREATE OR REPLACE FUNCTION essay_private.credit_post_grant(p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare account uuid; g public.credit_grants; t public.credit_transactions;\nbegin\n if p_user is null or p_quantity is null or p_quantity<=0 or p_quantity>100000\n or p_origin is null or p_origin not in ('purchase','signup_bonus','promotion','admin_grant','compensation','b2b_program')\n or nullif(btrim(p_key),'') is null or length(p_key)>200 or nullif(btrim(p_reason),'') is null or nullif(btrim(p_actor),'') is null\n or not exists(select 1 from public.profiles where id=p_user) then raise sqlstate 'PT422' using message='INVALID_GRANT';end if;\n perform account_private.lock_subject(p_user);\n if not account_private.allowed(p_user) then raise insufficient_privilege using message='ACCOUNT_RESTRICTED';end if;\n insert into public.credit_accounts(user_id) values(p_user) on conflict(user_id) do nothing;\n select id into account from public.credit_accounts where user_id=p_user for update;\n select * into g from public.credit_grants where external_reference=p_key;\n if g.id is not null then\n  select * into t from public.credit_transactions where idempotency_key='grant/'||p_key;\n  if g.account_id is distinct from account or g.origin is distinct from p_origin or g.expires_at is distinct from p_expires\n  or t.balance_delta is distinct from p_quantity or t.reason_code is distinct from p_reason or t.actor_reference is distinct from p_actor\n  then raise sqlstate 'PT409' using message='CONFLICT';end if;return g.id;\n end if;\n if p_expires is not null and p_expires<=essay_private.clock() then raise sqlstate 'PT422' using message='INVALID_EXPIRY';end if;\n insert into public.credit_grants(account_id,origin,external_reference,expires_at) values(account,p_origin,p_key,p_expires) returning * into g;\n insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference)\n values(account,g.id,p_origin,p_quantity,0,'grant/'||p_key,p_reason,p_actor);\n return g.id;\nexception when unique_violation then raise sqlstate 'PT409' using message='CONFLICT';\nend$function$\n"
+  },
+  {
+    "nspname": "essay_private",
+    "proname": "credit_profile_signup",
+    "args": "",
+    "owner": "essay_executor",
+    "acl": "{essay_executor=X/essay_executor}",
+    "hash": "55587b0a508e70cbc1592273c74a7762",
+    "definition": "CREATE OR REPLACE FUNCTION essay_private.credit_profile_signup()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$begin\n if not account_private.enabled() and essay_private.credit_signup_eligible(new.id) then perform essay_private.credit_post_grant(new.id,3,'signup_bonus','signup_bonus/'||new.id::text,'signup_bonus_v1','system/signup_bonus',null);end if;\n return new;end$function$\n"
+  },
+  {
+    "nspname": "essay_private",
+    "proname": "credit_signup_eligible",
+    "args": "p_user uuid",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,essay_executor=X/postgres}",
+    "hash": "fb370d5a56eefdf93bef77f0b7f002b1",
+    "definition": "CREATE OR REPLACE FUNCTION essay_private.credit_signup_eligible(p_user uuid)\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select exists(select 1 from auth.users where id=p_user and email_confirmed_at is not null and created_at >= '2026-09-29 07:37:12.236317+00'::timestamptz)\n $function$\n"
+  },
+  {
+    "nspname": "public",
+    "proname": "essay_claim_signup_credit",
+    "args": "",
+    "owner": "essay_executor",
+    "acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}",
+    "hash": "9e6634e02768178541e20c4b13fecbe7",
+    "definition": "CREATE OR REPLACE FUNCTION public.essay_claim_signup_credit()\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid=essay_private.uid();g uuid;begin\n if u is null then raise insufficient_privilege;end if;\n if not account_private.enabled() then\n if not essay_private.credit_signup_eligible(u) then raise sqlstate 'PT403' using message='SIGNUP_NOT_ELIGIBLE';end if;\n return essay_private.credit_post_grant(u,3,'signup_bonus','signup_bonus/'||u::text,'signup_bonus_v1','system/signup_bonus',null);end if;\n select grant_id into g from account_private.benefit_delivery where subject_id=u;\n return g; -- null = eligibility not established, never a second grant\nend$function$\n"
+  },
+  {
+    "nspname": "public",
+    "proname": "account_benefit_claim",
+    "args": "p_subject uuid, p_markers jsonb",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres,service_role=X/postgres}",
+    "hash": "28d435421c39957e5546c9e99ee3764f",
+    "definition": "CREATE OR REPLACE FUNCTION public.account_benefit_claim(p_subject uuid, p_markers jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare m jsonb;known boolean=false;g uuid;begin\n perform account_private.lock_subject(p_subject);\n if not account_private.allowed(p_subject) or not exists(select 1 from auth.users where id=p_subject) then raise insufficient_privilege;end if;\n if jsonb_typeof(p_markers) is distinct from 'array' or jsonb_array_length(p_markers) not between 1 and 16 then raise invalid_parameter_value;end if;\n for m in select value from jsonb_array_elements(p_markers) order by value->>'version',value->>'marker' loop\n if m-array['version','marker']<>'{}' or m->>'version' !~ '^[a-zA-Z0-9_-]{1,32}$' or m->>'marker' !~ '^[a-f0-9]{64}$' or not(m ?& array['version','marker']) then raise invalid_parameter_value;end if;\n perform pg_advisory_xact_lock(hashtextextended(m->>'version'||'/'||(m->>'marker'),91571));\n known=known or exists(select 1 from account_private.benefit_claims where benefit_type='essay_signup_3_v1' and key_version=m->>'version' and marker=m->>'marker');\n end loop;\n select grant_id into g from account_private.benefit_delivery where subject_id=p_subject;\n -- Existing live-account grant seeds coverage; never re-grant on migration.\n if g is null then select cg.id into g from public.credit_grants cg join public.credit_accounts ca on ca.id=cg.account_id where ca.user_id=p_subject and cg.origin='signup_bonus';end if;\n if not known and g is null then\n if not essay_private.credit_signup_eligible(p_subject) then return jsonb_build_object('state','NOT_ELIGIBLE');end if;\n g=essay_private.credit_post_grant(p_subject,3,'signup_bonus','signup/'||gen_random_uuid()::text,'signup_bonus_v1','system/signup_bonus',null);\n end if;\n for m in select value from jsonb_array_elements(p_markers) loop\n insert into account_private.benefit_claims(benefit_type,key_version,marker) values('essay_signup_3_v1',m->>'version',m->>'marker') on conflict do nothing;\n end loop;\n insert into account_private.benefit_delivery values(p_subject,g) on conflict(subject_id) do nothing;\n return jsonb_build_object('state',case when g is null then 'PREVIOUSLY_CLAIMED' else 'GRANTED' end);\nend$function$\n"
+  }
+]

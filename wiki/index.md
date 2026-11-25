@@ -1,5 +1,8 @@
 # LegendStudy Wiki Index
 
+신규 무료 지급 수량/신규 가입/이용권 변경: [2개 정책·SQL 승인 패키지·구버전 호환](signup-credit-policy-two-20261125.md).
+
+
 최신 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
 
 

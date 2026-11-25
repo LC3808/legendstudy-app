@@ -1,3 +1,7 @@
+## 2026-11-25 — 무료 첨삭권 신규2개 준비
+
+서버 helper에 신규 수량 집중·기존 grant 반환, APP/WEB 안내 정리. SQL24/G1 84/WEB288·최종101/Flutter21 PASS, WEB build PASS. 원장938/1057 전체 hash 불변. 운영 DB 승인 대기·WEB 미배포·APP 다음 출시. [근거·Owner 적용 순서](signup-credit-policy-two-20261125.md).
+
 ## 2026-11-25 — 프로젝트·운영·양 스토어 읽기 전용 교차 검토
 
 실제1.0.6/build88 출시와 main 지연 확인. 운영12요청/11완료·q1미완료, 복구 설치/배포 유지·원장 보존. D-Day APP 미출시와 기존 출시 기능 분리; 후속 우선순위/QA 기록. 운영 쓰기·재실행·배포0. [보고](project-cross-review-20261125.md).

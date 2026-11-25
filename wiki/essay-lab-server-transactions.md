@@ -1,5 +1,8 @@
 # Essay LAB Phase 2B — server transactions and Supabase integration
 
+2026-11-25 후속 정책: 신규 무료 지급3→2 구현·격리 검증 완료, **운영은 아직3/DB 승인 대기**. 기존3·잔액·소진·재가입 방지 보존. 아래 G1 최초 계약/검증 이력은 역사로 유지한다. [현재 정책과 승인 패키지](signup-credit-policy-two-20261125.md).
+
+
 **Subsequent Owner acceptance:** shared identity PASS; KEEP19+4/RPCs approved and
 [migrations promoted](essay-lab-migration-promotion.md), NOT APPLIED. The execution record below preserves
 Phase2B findings; its earlier identity/promotion pending gates are historical, not current blockers.

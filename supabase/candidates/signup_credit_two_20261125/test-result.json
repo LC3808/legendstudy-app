@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checks": [
+    "old_three_baseline",
+    "exhausted_baseline",
+    "migration_preserves_all_existing_facts",
+    "new_lifecycle_two",
+    "duplicate_no_topup",
+    "existing_three_and_exhausted_preserved",
+    "same_marker_new_uuid_no_second_grant",
+    "concurrent_lifecycle_once",
+    "legacy_profile_trigger_two",
+    "legacy_own_claim",
+    "legacy_claim_old_quantity_no_conflict",
+    "concurrent_legacy_once",
+    "unverified_denied",
+    "preactivation_denied",
+    "anon_denied",
+    "anon_private_mint_denied",
+    "authenticated_private_mint_denied",
+    "service_role_private_mint_denied",
+    "lifecycle_rpc_denied_to_student",
+    "restricted_account_denied",
+    "paid_grant_quantity_unchanged",
+    "rollback_preserves_two_and_three_history",
+    "rollback_future_three_only",
+    "rollback_claim_two_no_conflict"
+  ],
+  "count": 24
+}

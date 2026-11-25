@@ -1,0 +1,18 @@
+{
+  "grants": {
+    "hash": "b4f0010f36008c4fc9ebd90c8581ac15",
+    "count": 938
+  },
+  "signup": [
+    {
+      "count": 923,
+      "reason_code": "signup_bonus_v1",
+      "balance_delta": 3
+    }
+  ],
+  "observed_at": "2026-11-25T12:58:13.878075+00:00",
+  "transactions": {
+    "hash": "a95f8dfc9f0572664c18748efbc5a88d",
+    "count": 1057
+  }
+}
