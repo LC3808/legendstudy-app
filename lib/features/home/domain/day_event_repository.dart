@@ -1,4 +1,5 @@
 import 'day_event.dart';
+import 'admission_day_event.dart';
 
 /// Owner-scoped D-Day event collection. All operations act only on the
 /// authenticated user's own events (enforced again by RLS in the database).
@@ -6,7 +7,11 @@ abstract interface class DayEventRepository {
   Future<List<DayEvent>> fetchEvents();
 
   /// Add one event. When [primary] is true it becomes the sole representative.
-  Future<DayEvent> addEvent(DateTime date, String label, {bool primary = false});
+  Future<DayEvent> addEvent(
+    DateTime date,
+    String label, {
+    bool primary = false,
+  });
 
   Future<DayEvent> updateEvent(String id, DateTime date, String label);
 
@@ -16,4 +21,25 @@ abstract interface class DayEventRepository {
 
   /// Make [id] the sole primary, clearing any previous primary first.
   Future<void> setPrimary(String id);
+}
+
+class AdmissionDayEventSnapshot {
+  const AdmissionDayEventSnapshot({
+    required this.events,
+    required this.admissions,
+    this.syncAvailable = true,
+  });
+
+  final List<DayEvent> events;
+  final List<AdmissionDayEvent> admissions;
+  final bool syncAvailable;
+}
+
+/// Optional capability, so manual and guest repositories keep their contract.
+abstract interface class AdmissionDayEventRepository {
+  Future<AdmissionDayEventSnapshot> fetchAdmissionSnapshot();
+  Future<void> changeAdmissionVisibility(
+    AdmissionDayEvent event, {
+    required bool restore,
+  });
 }

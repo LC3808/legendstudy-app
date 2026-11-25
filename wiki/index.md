@@ -1,3 +1,5 @@
+2026-11-25: [APP89 D-Day 통합·양OS QA·출시 준비](app-release-89-preparation-20261125.md). 전체2655PASS/9SKIP, iOS/Android Native각23PASS, signed IPA/AAB. 운영/스토어 변경0.
+
 2026-11-25: [신규 무료 첨삭권2개 준비](signup-credit-policy-two-20261125.md) — APP 안내·기존 잔액 보존 검증 PASS. 운영 DB 승인 대기, WEB 미배포/APP 다음 출시.
 
 [PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.
