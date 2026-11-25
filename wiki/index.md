@@ -19,6 +19,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+P0 운영 진입 장애(11/26): [Finance 갱신 성공·첨삭 전용 인증 실패·격리111검증·복구안](finance-auth-renewal-20261117.md).
+
 공식 Wiki는 APP 저장소 origin/main입니다. 작업 브랜치 Wiki는 작업 중 상태이며 공식 반영을 대신하지 않습니다. [현재 상태](current-status.md) → [출시88 기록](pdf-white-screen-hotfix-20261117.md) → [다음 후보89](app-release-89-preparation-20261125.md).
 
 운영 현황·인수인계 정상화: [교차검토 §13 감사·§14 개선](project-cross-review-20261125.md). 최신 WEB: [품질V1](quality-console-v1-20261125.md). DB/복구: [D-Day](admissions-dday-implementation-20261120.md), [복구 설치](admin-run-recovery-deployment-20261122.md), [런타임](admin-recovery-runtime-fix-20261122.md). 정책: [무료2 승인대기](signup-credit-policy-two-20261125.md).

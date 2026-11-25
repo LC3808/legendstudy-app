@@ -6061,3 +6061,7 @@ APP75(1.0.2/75, source c9b4830) 서명·iPhone 설치/실행 PASS, 과목명 후
 관련55/렌더4·analyze PASS. APP74/73/72/71/67 보존, Android 검수 미실행.
 
 2026-11-15: Owner iPhone12 85 사용자 데이터 보존/LAB 정상 확인. 대학 소식 UX 보류 요청으로 홈/편집/온보딩 비노출·저장 설정 보존, 86 재빌드. [QA](app-release-105-readiness-20261115.md).
+
+
+## 2026-11-26 — P0 Finance/첨삭 인증 분리 검증
+Finance11/23 갱신 성공·11/30 만료를 기존 로그로 확인. WEB discovery/exam availability503와 EXAM_WORKER_PREFLIGHT binding=true/credential=false 확인;Pages 첨삭 전용 credential 사전검사 실패,세부 만료 사유 미확인. APP88 공유API 영향,실기기 NOT TESTED. 격리5파일111 PASS,WEB test commit6e6cf2d. 학생 실행·원장·설정·배포 변경0. [근거/복구안](finance-auth-renewal-20261117.md).

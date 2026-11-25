@@ -1,6 +1,6 @@
 # Finance 인증 자동 갱신 — 2026-11-17
 
-상태 **DONE — 단계적 운영 적용 완료. Shadow 통과 후 Automatic 활성화·운영 읽기·재시작 복원 확인**. 자연 만료20% 도달에 따른 미래 주기 갱신은 아직 NOT TESTED이며 합성 경계 테스트와 구분한다.
+상태 **DONE — 단계적 운영 적용 완료. Shadow 통과 후 Automatic 활성화·운영 읽기·재시작 복원 확인**. 11/23 자연주기 갱신은 아래 11/25~26 P0 운영 로그 조사로 확인했다. 학생 첨삭 진입 장애는 별도 Registry 자격증명 사전검사 실패로 확인했으며 미복구/PARTIAL이다.
 기존 [LIVE 승인·환불 기록](toss-live-owner-qa-preflight-20261115.md)과 [인증 수명 검토](essay-jwt-lifecycle-review-20261023.md)를 계승한다. Owner가 WEB `923f87a` 기준 Worker/DO/Secret/private binding/Shadow 및 Shadow 통과 후 Automatic 전환을 명시 승인했다. 아래 승인 전 준비 기록은 역사적 근거이며 최신 실제 상태는 후속 영수증을 따른다. 실제 결제·환불 시험은 금지되어 수행하지 않았다.
 
 ## 기존 계약 및 실제 확인
@@ -148,3 +148,53 @@ Owner가 Worker/암호화DO/기존키 Secret/Production private binding을 승�
 남은 위험: Cloudflare 공통 장애·프로젝트 서명키 침해 영향·외부 push/독립heartbeat 부재는 기존 보안 검토대로 남는다. 이번 승인 범위의 추가 승인 대기사항은 없다. 외부알림·새 알림탭·실제 거래 재시험은 이번 적용 범위 밖이다.
 
 Automatic 전환 뒤 **20:15:35 KST 실제 cron**도 outcome=ok로 실행됐고 해당 호출의 Finance 경고0을 확인했다. 이것은 스케줄러 기동 증거이며 아직 도래하지 않은20% 만료 경계의 운영 갱신 증거로 확대하지 않는다.
+
+
+## P0 Finance JWT와 학생 첨삭 진입 장애 교차검증 — 2026-11-25~26 KST
+
+**PARTIAL: Finance 갱신 확인 DONE, 학생 진입 장애 확인 DONE, Registry 세부 거절 사유/복구 NOT TESTED.** 신규 제품 구현·배포·운영 설정 변경 없이 읽기 조사와 합성 테스트만 수행했다. 기존 11/23 갱신 미확인 기록은 당시의 상태이며 이 절이 최신 증거다.
+
+### 운영 증거
+
+- Finance Cloudflare 기존 Observability `finance_vault_restore`,11/25 18:00:35.500 KST: `credentialPresent=true`, `lastSuccess=1795397435`(11/23 10:30:35 KST), `expiresAt=1796002235`(11/30 10:30:35 KST). 버전 `d14a757e-5b46-448c-8b66-325d181c2a9f`. 기존 갱신 임계11/23 10:26:52 이후 다음15분cron 시각과 일치한다. 저장된 성공은 서명·claims·읽기 probe 통과 뒤에만 기록된다. 원래 수동 fallback11/24 만료와 새 active를 혼동하지 않는다.
+- 기존 최근1시간 cron4건(11/25 23:00/15/30/45) 성공, 해당 화면12 Success/0 Errors. 최근7일 `finance_auth_warning` 검색0건이나 UI에 high volume/incomplete 경고가 있어 전체 무오류 보증은 아니다. 로그API403은 관리 관측 권한 오류이며 Finance JWT401이 아니다.
+- Supabase `edge_logs`를 KST11/22,23,24,25 하루씩 조회: `payment_process` HTTP404 각각90/89/83/84회. 11/25 마지막23:45:35.834. 고정 없는주문 get 프로브의 기대값은404/PT404이다. 로그404 집계만으로 결제 승인 E2E를 보증하지 않는다. 이번 조사에서 token/status endpoint나 인증 상태 버튼을 호출하지 않았다.
+- 운영 Pages `6e4b8189-5a6c-4f28-8d16-e15bf4508500`,소스 `ecac36e5b31dbf980ee0eebbb433626bb33c477e`,11/25 23:08 배포 확인. `ESSAY_REGISTRY_WORKER_JWT` secret 이름 존재. API의 마스킹된 value 공란을 실제 미설정으로 해석하지 않는다.
+- 기존 로그인 브라우저 WEB 대학목록 및 서강2026수시 경제경영에서 조회 오류 재현. 잔액92(무료0/구매0/기타92) 표시는 성공. Owner 계정 관찰이며 전체 학생 잔액 검증으로 확대하지 않는다.
+- 읽기 전용 Pages tail: `GET /api/essay/public-service-status` HTTP503/outcome ok, `POST /api/essay/exam`(action=availability,답안 입력/제출 없음) HTTP503/outcome ok. 후자의 실제 로그 `EXAM_WORKER_PREFLIGHT {bindingReady:true,credentialValid:false}`. `exam.ts`40~41행의 이 분기는 응답 `WORKER_UNAVAILABLE`이며 DB 예약/Worker dispatch 이전이다. public discovery 실패 응답은 `PUBLIC_STATUS_UNAVAILABLE`(내부 원인을 catch로 숨김). 무인증 GET401도 별도로 확인했으며 로그인된503과 구분한다.
+- 확인된 직접 원인은 **Pages의 첨삭 전용 Registry credential 사전검사 실패**다. Finance credential 실패가 아니다. `registry-credential.ts`의 누락/형식/alg/role/exp/nbf 검사 중 구체적으로 어느 조건인지는 현재 로그가 구분하지 않는다. **만료로 단정 금지.** 운영 Secret 원문을 추출하거나 로그로 노출하지 않았다. bindingReady는 어댑터 구성 확인이지 downstream Worker 정상 보증이 아니다.
+- 운영 DB `essay_exam_private.runs`11/16 이후12건: completed11/reserved1. 최신 생성11/22 17:53:44.301624 KST. session_ready 마지막 관측200=11/22 22:37:48.414,submit_source 마지막200=11/22 17:53:44.171. 11/23~25 해당 RPC 관측0. 이는 실제 요청 부재와 현재 장애가 양립함을 보일 뿐 최초 장애 발생 시각·모든 학생 이탈의 인과 증거는 아니다.
+
+### 인증 의존성 및 APP 영향
+
+|기능|실제 경로/인증|Finance JWT 의존|
+|---|---|---|
+|무료/유료 잔액|학생 Auth→credit_summary/기존 원장 조회|없음. 운영 Owner 잔액/HTTP200 확인|
+|대학별 첨삭 가능 여부|학생 Auth→WEB public-service-status→essay_worker Registry/session_ready/preflight|없음. 현재 공통 진입503|
+|무료 재첨삭 견적|학생 Auth→exam quote→essay_exam_quote(_source),부모/기간/이용권 검사|없음|
+|생성/예약/차감|학생 Auth→WEB admission→essay_exam_submit(_source/cycle)→private reserve/finalize/원장|없음. 같은 credit 테이블을 공유하지만 Finance JWT 호출과 다름|
+|Worker/Provider/결과|별도 service binding/token,essay_worker DB JWT,Provider API key→checkpoint/finalize|없음. 이번 운영 Provider 호출/실행 없음|
+|수리 회차 billing|math_private authorize/settle/release→session_finance|이름의 finance는 DB 내부 회차 원장 함수. 실제 함수 확인 결과 HTTP/JWT broker 의존 없음|
+|이용권 구매/결제 승인|학생 payment_order 후 서버 financeFetch→payment_process/support/compensate|있음. Finance 장애 시 신규 구매·승인/정산 영향 가능,보유권 첨삭과 구분|
+
+공통 middleware는 test-preview-access이며 Finance broker를 사용하지 않는다. serverTransport는 MATH 설정/학생 Auth/별도 worker credential을 사용한다. 실제 운영 essay_exam_preflight/quote/submit 및 math require_active/authorize_billing/settle_billing/release_billing/session_finance 정의를 조회했다. 호출되는 계정 lifecycle 검사는 Finance JWT 검사가 아니다. Worker entry.py/runtime은 essay_worker·Provider 별도 자격증명을 사용한다. DB 함수명 검색만으로 의존성 부재를 판정하지 않았다.
+
+출시 APP88 `08345b69`의 `lib/features/essay/math_gateway.dart`는 동일 public-service-status, `exam_submission.dart`는 동일 WEB exam gateway를 사용한다. 따라서 WEB만의 UI 문제로 격리할 수 없고 해당 APP 경로도 영향 대상이다. **iOS/Android 실기기 재현 NOT TESTED**, 실제 신규 제출 가능 DONE 선언 금지. 무료/유료 개별 학생 계정을 바꾸거나 impersonation하지 않았다.
+
+### 격리 테스트와 보존
+
+WEB 테스트 소스 `6e6cf2d`: public-service-status/exam-endpoint에 과거exp=1인 합성 essay_finance JWT와 호출하면 실패하는 Finance binding을 주입. discovery200,무료 재첨삭quote200,submit202,예약RPC1회/기존Worker admission+evaluate2회,Finance 호출0을 확인. 모두 mock transport/Worker이며 실제 예약·차감/Provider 실행이 아니다.
+
+5파일 **111/111 PASS**: public-service-status,exam-endpoint,registry-credential,finance-auth/core,finance-client. 기존 검사는 credential 만료/near expiry/role/형식 거절,정상 계약,Finance갱신/backoff/실패 보존을 포함한다. 실제 격리 DB 원장차감·Provider/Worker 전체 E2E는 NOT TESTED이며 테스트 통과를 운영 복구로 해석하지 않는다.
+
+이번 실행은 SQL read-only transaction,로그GET/UI열람,availability 조회만 사용했다. 실제 학생 요청 재실행·신규 제출·예약/차감·환불·원장 수정·JWT 강제만료·설정 변경·배포 모두0. 기존 q1 요청03629605…를 재실행하지 않았다. 전후 전역 원장 해시를 측정한 것은 아니므로 다른 정상운영의 변경까지 불변으로 주장하지 않는다.
+
+### 즉시 복구안 / 남은 확인
+
+1. P0 학생 진입 장애로 유지. Finance 설정은 변경하지 않는다. 현재 인증 검사 우회·role 확대·임의 완료 금지.
+2. Owner 관리 환경에서 Pages `ESSAY_REGISTRY_WORKER_JWT`의 존재/role/exp/nbf/형식을 **메타데이터만** 확인. 비밀값을 채팅/로그에 붙이지 않는다. 기존 `tool/cloudflare_essay/issue_worker_jwt.py` Owner 터미널 도구는 동일 좁은role의 발급→Registry 읽기 검증→클립보드 전달을 지원한다. 정확한 키 종류/서명 방식이 기존 운영 계약과 같은지 먼저 확인하고 필요할 때만 교체한다. 자동 발급/설정 변경은 이번 조사에서 실행하지 않았다.
+3. 교체가 필요하면 Pages 해당secret만 변경하고 기존 배포 절차로 적용. Worker의 별도credential까지 같은 문제인지 비파괴 진단 후 필요한 범위만 처리. 정상 Finance·Toss·원장·학생 결과는 그대로 보존. 마스킹된 전체 설정을 덮어쓰지 않는다.
+4. 사후 discovery/시험별availability/quote→학생 APP88 양OS를 비파괴 재검증. 운영 submit 없이 정상 표시와 읽기 RPC 권한을 확인하고, 실제 생성/완료 보증은 별도 승인된 테스트 요청으로 구분한다.
+5. 재발방지 제안: 서버 비밀값 없는 credential 오류 세분화(없음/형식/role/만료/nbf),만료 메타데이터 경보 및 배포전 읽기 검사. 구현/배포 승인 범위가 정해지기 전에는 새진단 엔드포인트/자동갱신 시스템을 임의로 추가하지 않는다. DB Migration 필요 근거 없음.
+
+현 단계 Owner 필요사항: **첨삭 전용 credential 메타데이터 확인 및 필요한 경우 동일권한 교체·배포의 실행 범위 확정**. Finance 재발급·실학생 재실행·이용권 보정은 필요하다는 근거가 없으며 요청하지 않는다. 상세 만료시각과 최초 장애시점은 미확인으로 유지한다.
