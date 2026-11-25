@@ -1,5 +1,7 @@
 # LegendStudy Wiki Index
 
+11/25 통합: [운영·이용률·자료](integrated-followup-20261125.md) · [첨삭 품질/UX](essay-lab-student-experience-review-20261125.md) · [APP89 QA](app-release-89-preparation-20261125.md) · [배지 PHASE A](study-badge-system-v1-design.md).
+
 신규 무료 지급 수량/신규 가입/이용권 변경: [2개 정책·SQL 승인 패키지·구버전 호환](signup-credit-policy-two-20261125.md).
 
 
@@ -151,7 +153,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 | AUTH / 로그인 / logout / account / Kakao | [Decisions — login philosophy](decisions.md#2026-09-12--login-philosophy), [native acceptance](auth-native-owner-acceptance.md), [recovery](auth-recovery.md), [deletion/privacy](account-deletion-privacy.md), [current account UX](core-app-improvements.md) |
 | STUDY / TIMER / 공부 추이 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Study v1 and current chart overrides](study-v1.md), [Study UI and Owner overrides](day-8-study-ui-review.md), [Study storage](day-8-study-storage-proposal.md), [current UI convention](ui-ux-v1.md) |
 | MOCK EXAM / SCORING / 모의고사 / 모의고사 완성하자 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Mock Exam](day-8-mock-exam.md), [Current foundation and Phase2 gaps](day-8-d2-answer-scoring.md#end-of-day-foundation-and-phase2-gaps--2026-09-24), [Official/free dual modes](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes), [scoring](mock-exam-scoring-v1.md), [current exam→subject→key→result workflow and gaps](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24), [grade result](day-8-d3-grade-result.md), [scoring storage](day-8-scoring-storage-proposal.md) |
-| ACHIEVEMENT / BADGE / 배지 / Level | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Achievement decision](decisions.md#2026-09-19--achievements-record-behaviour-and-confirmed-growth-never-prediction), [Achievement / Badge Engine](roadmap-academic-analytics.md#9-achievement--badge-engine), [current product scope](product-scope.md) |
+| ACHIEVEMENT / BADGE / 배지 / Level | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Achievement decision](decisions.md#2026-09-19--achievements-record-behaviour-and-confirmed-growth-never-prediction), [Achievement / Badge Engine](roadmap-academic-analytics.md#9-achievement--badge-engine), [current product scope](product-scope.md) → [11/25 PHASE A 후보·서버 계약](study-badge-system-v1-design.md) |
 | MEAL / SCHOOL / NEIS / 급식 다음 제공일 | [NEIS](day-7-neis.md), [current time/fallback/Home expanded policy](day-10-b-home-polish.md), [school storage](day-7-school-storage-proposal.md), [school/profile UX](core-app-improvements.md) |
 | MY / PROFILE / SETTINGS / 프로필 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [UI conventions](ui-ux-v1.md), [design system](design-system.md), [database/private avatar](database.md), [current profile/account UX](core-app-improvements.md), [personal ownership](day-9-c-personal-state.md), [Design System v2 — IMPLEMENTED](design-system-v2-proposed.md) |
 | PERSONALIZATION / ONBOARDING / 개인화 / 최초 설정 / 재학생 N수생 / academic status / 첫 로그인 | [Personalization Foundation & first-login onboarding — IMPLEMENTED / migration PASS](personalization-onboarding.md) → [canonical profile](database.md), [profile/account UX](core-app-improvements.md) |

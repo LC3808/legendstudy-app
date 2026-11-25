@@ -1,3 +1,7 @@
+## 2026-11-25 — 통합 후속 및 출시89 준비
+
+출시88에 기존 D-Day 통합, 1.0.7+89 양OS 서명빌드·Flutter2655PASS/9SKIP. 학생후보20완료38문항 검토, 인용20/20·공식기준50/50, 배지25후보 설계. q1 복구 RPC/ACL 재검증 PASS·실행0; Finance 로그403/로그인 대기. main FF 자동검토 차단·Owner 승인 요청. DB/배포/스토어 변경0. [통합보고](integrated-followup-20261125.md).
+
 ## 2026-11-25 — 무료 첨삭권 신규2개 준비
 
 서버 helper에 신규 수량 집중·기존 grant 반환, APP/WEB 안내 정리. SQL24/G1 84/WEB288·최종101/Flutter21 PASS, WEB build PASS. 원장938/1057 전체 hash 불변. 운영 DB 승인 대기·WEB 미배포·APP 다음 출시. [근거·Owner 적용 순서](signup-credit-policy-two-20261125.md).
