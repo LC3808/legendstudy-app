@@ -1,5 +1,10 @@
 # Durable Decisions
 
+## 2026-11-25 — 품질 콘솔과 최종 품질 판정 분리
+
+기존 HQP snapshot·멱등키·수정 이력을 유지한다. 완료 상태/검수 기록 유무를 품질 적합이나 Owner 승인으로 환산하지 않는다. 테스트 증빙이 없으면 미확정, Q01–Q15 미검증은 PASS로 대체하지 않는다. Claude UI/UX, Codex 분석·구현·배포, Owner 승인 역할을 유지한다. [V1](quality-console-v1-20261125.md), [기존 HQP](human-quality-persistence-implementation.md).
+
+
 ## 2026-11-25 — 배지 PHASE A와 출시89 범위
 
 기존 행동/확인된 성장 Achievement 결정을 유지하며 배지25개는 설계 후보로만 검토한다. 운영 지급·DB 설치는 승인되지 않았다. 기존 D-Day를 출시88 기준에 통합하고89를 준비하되 실학생 복구·무료2 DB·스토어 제출은 별도 승인한다. [후속 범위](integrated-followup-20261125.md), [후보와 보존 계약](study-badge-system-v1-design.md).

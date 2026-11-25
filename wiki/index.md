@@ -1,5 +1,8 @@
 # LegendStudy Wiki Index
 
+품질 콘솔 V1 / Q01–Q15 / 검증 보고서: [구현·배포·30항목 보고](quality-console-v1-20261125.md) → [학생 경험 검토](essay-lab-student-experience-review-20261125.md).
+
+
 11/25 통합: [운영·이용률·자료](integrated-followup-20261125.md) · [첨삭 품질/UX](essay-lab-student-experience-review-20261125.md) · [APP89 QA](app-release-89-preparation-20261125.md) · [배지 PHASE A](study-badge-system-v1-design.md).
 
 신규 무료 지급 수량/신규 가입/이용권 변경: [2개 정책·SQL 승인 패키지·구버전 호환](signup-credit-policy-two-20261125.md).

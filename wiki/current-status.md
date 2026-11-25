@@ -1,5 +1,8 @@
 # Current Status
 
+[품질 V1](quality-console-v1-20261125.md): WEB 배포.70요청118문항 대조·내용20요청38문항 검토(PARTIAL). Q15·Owner 집계·Claude 검토 미완료.
+
+
 [11/25 통합 후속](integrated-followup-20261125.md): APP89 D-Day 통합·양OS 빌드 PASS. 품질38문항·배지설계 기록. q1/DB/스토어 승인·Finance 로그인 대기.
 
 [11/25 무료 첨삭권2개](signup-credit-policy-two-20261125.md): 신규 지급만2·기존3/소진 이력 보존. SQL24/G1 84/WEB288·최종101/Flutter21 PASS. 운영 DB 승인 대기·WEB 미배포·APP 다음 출시. 원장 해시 불변.

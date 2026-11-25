@@ -1,3 +1,7 @@
+## 2026-11-25 — 품질 콘솔 V1 운영 반영 (PARTIAL)
+
+4탭·원본 상세·기존 검수·인증 보고서 구현, WEB ecac36e5/Pages6e4b8189 배포. 2276PASS/5SKIP, 기존 boundary2실패 별도 기록. 70요청118문항 대조·내용20요청38문항, 학생/원장 hash 불변. Q15 저장·Owner 집계·Claude V1 검토 미완료. [보고](quality-console-v1-20261125.md).
+
 ## 2026-11-25 — 통합 후속 및 출시89 준비
 
 출시88에 기존 D-Day 통합, 1.0.7+89 양OS 서명빌드·Flutter2655PASS/9SKIP. 학생후보20완료38문항 검토, 인용20/20·공식기준50/50, 배지25후보 설계. q1 복구 RPC/ACL 재검증 PASS·실행0; Finance 로그403/로그인 대기. main FF 자동검토 차단·Owner 승인 요청. DB/배포/스토어 변경0. [통합보고](integrated-followup-20261125.md).
