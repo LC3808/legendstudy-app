@@ -8,6 +8,14 @@ LegendStudy is a standalone project. It must remain completely separate from Mus
 
 A simple WebView wrapper is not allowed. The app must be implemented as a real native mobile application experience.
 
+## Official Wiki and release handoff
+
+The canonical Wiki is `LC3808/legendstudy-app` **origin/main:wiki/**. Before using a task-branch copy, refresh/read the official main AGENTS, index and current-status (for example `git fetch origin main` then `git show origin/main:wiki/current-status.md`). Check the actual work branch/HEAD, last released source and unreleased candidate. If remote access fails, report freshness as NOT_TESTED; do not silently treat the task copy as official. Historical branches are not independent canonical Wikis. WEB agents read the same APP repository authority.
+
+At closeout, selectively publish the task's implementation/test/source/deployment evidence, remaining work and next actions into official main Wiki, preserving other work. Run `python3 tool/check_wiki_handoff.py --official` after push; a task-branch commit alone is not official handoff completion. Official publication is not authorization to merge unreleased product code or deploy.
+
+For APP releases distinguish IMPLEMENTED, TESTED, BUILT, UPLOADED, SUBMITTED, APPROVED and RELEASED per platform. Owner-handled uploads still require result confirmation: use RELEASE_CONFIRMATION_PENDING until verified. Record version/build, release date, source SHA, included features, evidence and last verification date in the existing release document. Use DEPLOYMENT_PENDING, APPROVAL_PENDING and NOT_TESTED for their specific unfinished scopes; keep existing DONE/PARTIAL/BLOCKED vocabulary for the overall task.
+
 ## 2. Canonical reading order
 
 Before changing code, database schema, ingestion, build configuration, or product behavior, read in this order:
