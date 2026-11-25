@@ -21,7 +21,7 @@ def anchors(path):
     return result
 
 
-def main():
+def structure():
     errors, links = [], 0
     for path in sorted(WIKI.rglob('*.md')) + [ROOT / 'AGENTS.md']:
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', prose(path.read_text())):
@@ -61,8 +61,27 @@ def main():
     print(f'CURRENT_STATUS_BYTES: {current_size}; INTERNAL_LINKS: {links}')
     for error in errors:
         print(error)
-    print(f'WIKI_CHECK: {"FAIL" if errors else "PASS"}')
+    print(f'WIKI_STRUCTURE: {"FAIL" if errors else "PASS"}')
     return bool(errors)
+
+
+def main():
+    import argparse
+    from check_release_handoff import validate
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--official', action='store_true', help='Compare with current origin/main on server (read-only)')
+    args = parser.parse_args()
+    failed = structure()
+    groups = validate(ROOT, args.official)
+    for name, errors in groups.items():
+        state = 'FAIL' if errors else ('NOT_TESTED' if name == 'OFFICIAL_WIKI' and not args.official else 'PASS')
+        print(f'{name}: {state}')
+        for error in errors: print(error)
+        failed = failed or bool(errors)
+    ready = not failed and args.official
+    print('HANDOFF_READINESS: ' + ('PASS' if ready else 'FAIL' if failed else 'PUBLICATION_PENDING'))
+    print('LIMIT: metadata/Git consistency only; live Store/DB/deployment facts require dated evidence and human verification.')
+    return failed
 
 
 if __name__ == '__main__':

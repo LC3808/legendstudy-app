@@ -1,6 +1,14 @@
-2026-11-25: [APP89 D-Day 통합·양OS QA·출시 준비](app-release-89-preparation-20261125.md). 전체2655PASS/9SKIP, iOS/Android Native각23PASS, signed IPA/AAB. 운영/스토어 변경0.
+## 2026-11-26 — 학생 첨삭 진입 P0 원인 확정
 
-2026-11-25: [신규 무료 첨삭권2개 준비](signup-credit-policy-two-20261125.md) — APP 안내·기존 잔액 보존 검증 PASS. 운영 DB 승인 대기, WEB 미배포/APP 다음 출시.
+QA 학생 잔액95 조회 정상/서강 availability503 재현. Registry JWT EXPIRED를 안전한 진단 로그로 확정, Finance와 구분. WEB513e641f/Pages5fd50a21 진단만 배포, 정적3207경로·설정 보존. 관련79검증·타입검사 PASS. 실제 제출/차감0, Owner credential 갱신 대기. [근거 및 복구 절차](finance-auth-renewal-20261117.md).
+
+## 2026-11-25 — 독립 인수인계 최종 PASS
+
+첫 검토 FAIL의 과거 APP82/HOLD 라우팅을 정정하고14개 회귀검사 PASS. 독립 검토11/11 PASS, 공식main 원격 반영·출시 ancestry·제품88불변 확인. [결과](project-cross-review-20261125.md).
+
+## 2026-11-25 — 공식 main Wiki·릴리스 정상화
+
+출시88 main FF, 기존88 기록에 양OS 실제출시 회수, current 모순 정리·역사 보존, 누락 Wiki83개 통합. 검사13테스트 PASS·운영변경0. [구현·검사·독립 인계](project-cross-review-20261125.md).
 
 2026-11-17: [PDF P0](pdf-white-screen-hotfix-20261117.md) 다운로드 가능 자료 본문 높이0을 위젯/Android에서 재현. 운영 파일 A/B 정상 바이트 확인, Column 최소 높이 수정. Owner 화면 확인 중단·직접 스토어 업데이트 지시.1.0.6(88) IPA/AAB서명·2632 PASS/9 SKIP/0 FAIL·analyze·Android네이티브2 PASS.실기기 NOT TESTED,제출0.
 
@@ -6057,3 +6065,7 @@ APP75(1.0.2/75, source c9b4830) 서명·iPhone 설치/실행 PASS, 과목명 후
 관련55/렌더4·analyze PASS. APP74/73/72/71/67 보존, Android 검수 미실행.
 
 2026-11-15: Owner iPhone12 85 사용자 데이터 보존/LAB 정상 확인. 대학 소식 UX 보류 요청으로 홈/편집/온보딩 비노출·저장 설정 보존, 86 재빌드. [QA](app-release-105-readiness-20261115.md).
+
+
+## 2026-11-26 — P0 Finance/첨삭 인증 분리 검증
+Finance11/23 갱신 성공·11/30 만료를 기존 로그로 확인. WEB discovery/exam availability503와 EXAM_WORKER_PREFLIGHT binding=true/credential=false 확인;Pages 첨삭 전용 credential 사전검사 실패,세부 만료 사유 미확인. APP88 공유API 영향,실기기 NOT TESTED. 격리5파일111 PASS,WEB test commit6e6cf2d. 학생 실행·원장·설정·배포 변경0. [근거/복구안](finance-auth-renewal-20261117.md).

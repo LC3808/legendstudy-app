@@ -1,0 +1,59 @@
+{
+  "sha": "1f34580706c5ff254170ba9d4a1822ba21424052",
+  "baseline": "969afe59-8bf4-4940-b0a9-d32b2ac9a9ba",
+  "baseSha": "d559b9b58ef6b419b500e3f7a5333b65d9849230",
+  "scope": [
+    "/admin/ (root files only)",
+    "/admin/lab-dashboard/",
+    "/admin/essay-runs/ (root files only)"
+  ],
+  "changedPages": [
+    "/admin/__next._full.txt",
+    "/admin/__next._tree.txt",
+    "/admin/__next.admin.__PAGE__.txt",
+    "/admin/essay-runs/__next._full.txt",
+    "/admin/essay-runs/__next._tree.txt",
+    "/admin/essay-runs/__next.admin.essay-runs.__PAGE__.txt",
+    "/admin/essay-runs/index.html",
+    "/admin/essay-runs/index.txt",
+    "/admin/index.html",
+    "/admin/index.txt",
+    "/admin/lab-dashboard/__next._full.txt",
+    "/admin/lab-dashboard/__next._tree.txt",
+    "/admin/lab-dashboard/__next.admin.lab-dashboard.__PAGE__.txt",
+    "/admin/lab-dashboard/index.html",
+    "/admin/lab-dashboard/index.txt"
+  ],
+  "addedAssets": 26,
+  "preservedPaths": 3088,
+  "apiSourceChanges": [
+    "functions/api/admin/essay-run.ts",
+    "public/_routes.json",
+    "src/lib/admin/admin-run-gateway.test.ts",
+    "src/lib/admin/lab-dashboard.test.ts",
+    "src/lib/admin/lab-dashboard.ts",
+    "src/lib/admin/lab-operations.ts",
+    "src/lib/admin/period.test.ts",
+    "src/lib/admin/period.ts",
+    "src/lib/essay-runtime/production-routes.test.ts",
+    "src/lib/essay-runtime/server/worker-binding.ts"
+  ],
+  "routingChange": "/api/admin/essay-run only",
+  "settingsChanges": 0,
+  "workerSha256": "a753222551b0ce9a46e98733d002077bdfbff3311c462fc5e5508ec26cb55413",
+  "deployment": "e84b1232-4991-49ef-81e0-32cdefc137ec",
+  "verifiedAt": "2026-11-20T11:34:18.286Z",
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-20T11:34:07.281183Z",
+    "status": "success"
+  },
+  "canonical": true,
+  "settingsUnchanged": true,
+  "functionRoutingUnchanged": true,
+  "existingUnrelatedFilesUnchanged": true,
+  "preservedExistingFiles": 3088,
+  "liveMode": "LIVE",
+  "financeAutomatic": "true"
+}

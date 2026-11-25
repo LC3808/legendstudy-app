@@ -1,45 +1,6 @@
-2026-11-25: [APP89 D-Day 통합·양OS QA·출시 준비](app-release-89-preparation-20261125.md). 전체2655PASS/9SKIP, iOS/Android Native각23PASS, signed IPA/AAB. 운영/스토어 변경0.
-
-2026-11-25: [신규 무료 첨삭권2개 준비](signup-credit-policy-two-20261125.md) — APP 안내·기존 잔액 보존 검증 PASS. 운영 DB 승인 대기, WEB 미배포/APP 다음 출시.
-
-[PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.
-
-[APP105 빌드87·개인정보 보완·최종 QA](app105-build87-release-20261116.md) — 2026-11-16, 배너 제거·iPhone Owner PASS·제출 HOLD.
-
-[APP105 통합·QA·출시 준비](app-release-105-readiness-20261115.md): 2629 PASS/9 SKIP, 실기기·신고 보완 대기, 제출 없음.
-
-[2026-11-15 APP 행동 분석 보완](app-usage-analytics-implementation-20261115.md) — 기존 GA4 재사용, 코드54테스트·analyze·iOS simulator build PASS, 신규 이벤트 실기기 수신 NOT TESTED.
-
-2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.
-
-[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter93/analyze PASS, 기존 긴 이름·학교/학년 저장 보존. 스토어 제출 없음.
-
 # LegendStudy Wiki Index
 
-[논술 LAB 관리자 조회·답안/결과·베타 조사·Claude 계약](admin-lab-operations-20261114.md).
-
-[APP84 로그인 인증 안내 P0·iPhone UI 검증·1.0.4(84) IPA/AAB](auth-verification-ux-hotfix-20261113.md).
-
-[APP83 최종 릴리스·main Push·IPA/AAB·Android 심사 전송 / iOS 신청 완료 Owner 확인](app83-store-handoff-20261112.md).
-
-[과거 APP67 검수·당시 출시 보류 이력](app67-essay-admission-20261106.md) — 최신 APP 릴리스 판단은 아래 APP82 인계 문서를 따른다.
-
-[APP82 Owner 승인·main 통합·스토어 빌드 인계](app82-store-handoff-20261113.md) · 업로드/심사 제출 전 결과 확인.
-
-[TASK08 통합·격리 검수·Analytics 계약·Owner 대기/HOLD](essay-beta-integration-task08-20261101.md).
-[2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
-
-[10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.
-
-## 학생 결과 표시·작성 가이드 라우팅
-
-[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) (APP/WEB 결과·기존 데이터 매핑·출력 확장 설계·검수 환경)
-
-최신 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
-
-
-P0 Claude 최종 인수인계(사용량5% 중단): [현재 배포·37묶음·17후보·재개순서](essay-lab-claude-handoff-20261024.md).
-
+공식 상태는 APP 저장소 **origin/main**의 [current-status](current-status.md)입니다. 실제 출시·다음 후보는 [Build88](pdf-white-screen-hotfix-20261117.md) 및 [Build89](app-release-89-preparation-20261125.md)를 읽습니다. 아래 기능 문서는 날짜별 설계·구현·시험 근거이며, 과거 HOLD/OFF를 현재 상태로 사용하지 않습니다.
 
 This directory is the canonical long-term development knowledge base for LegendStudy.
 
@@ -58,6 +19,12 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+P0 운영 진입 장애(11/26): [Finance 갱신 성공·학생 Registry JWT 만료 확정·진단 배포·복구안](finance-auth-renewal-20261117.md).
+
+공식 Wiki는 APP 저장소 origin/main입니다. 작업 브랜치 Wiki는 작업 중 상태이며 공식 반영을 대신하지 않습니다. [현재 상태](current-status.md) → [출시88 기록](pdf-white-screen-hotfix-20261117.md) → [다음 후보89](app-release-89-preparation-20261125.md).
+
+운영 현황·인수인계 정상화: [교차검토 §13 감사·§14 개선](project-cross-review-20261125.md). 최신 WEB: [품질V1](quality-console-v1-20261125.md). DB/복구: [D-Day](admissions-dday-implementation-20261120.md), [복구 설치](admin-run-recovery-deployment-20261122.md), [런타임](admin-recovery-runtime-fix-20261122.md). 정책: [무료2 승인대기](signup-credit-policy-two-20261125.md).
+
 운영 장애 / temp_file_limit / HTTP522: [P0 exporter 추적](supabase-temp-incident-20261113.md). 상용화 순차 실행: [11/13 증거·진단SQL·단계별 상태](operations-commercial-20261113.md).
 
 APP83 / 최종 빌드 / 1.0.3(83) / 스토어 업데이트: [소스·검증·서명·Android 제출 상태·iOS 신청 완료 Owner 확인·RPC 미활성](app83-store-handoff-20261112.md).
@@ -66,7 +33,7 @@ APP82 Post-RC / 학교 순위·개인 백분위·중앙 스플래시·첫 홈 �
 
 APP82 / 2026-11-13 릴리스 / 인증·온보딩·홈·Catalog 통합: [RC 소스·실기기 근거](app-release-rc-20261113.md) → [Owner 승인·main·IPA/AAB·서명·제출 전 인계](app82-store-handoff-20261113.md).
 
-대학 검색 / Catalog / 한국교원대 / 관심·실제 지원 대학: [main 통합 의존성·대안](university-catalog-main-integration-20261112.md) · [78개 확장 CLOSED·운영 근거·보류7·잔여 검증](university-catalog-closure-20261112.md). APP 릴리스 HOLD 유지.
+대학 검색 / Catalog / 한국교원대 / 관심·실제 지원 대학: [main 통합 의존성·대안](university-catalog-main-integration-20261112.md) · [78개 확장 CLOSED·운영 근거·보류7·잔여 검증](university-catalog-closure-20261112.md). 당시 APP 출시 HOLD였으며 현재 출시 상태는88 기록을 따른다.
 
 작업04 / 고3·N수 실제 지원 대학 / 합격 발표 일정: [04-C 실계정·기기 검수](task04c-device-verification-20261111.md) · [APP75 기반 지원 관리](task04-applications-20261111.md) · [홈 커스터마이징·나의 대학 소식·후보 SQL·검증](task04-home-university-news-20261111.md) · [작업04-B 운영 사전 검토](task04b-production-preflight-20261111.md) · [작업04-C 홈 A 운영 적용·UI 후속/C·D HOLD](task04c-home-production-20261111.md).
 
@@ -183,9 +150,9 @@ WEB 작성·사진·회차 제출·진행 모달·History/시험 재진입·독�
 
 한양2027모의 상경 혼합형 장애: [사진 확인 복원·예약 상태·Owner 다음 단계](hanyang-mixed-incident-20261026.md).
 
-논술 전체 대학 최신 기준: [STANDBY / OWNER QA PENDING — 실제 평가 호출 없이 연결](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책). 이전 평가 검수 선행 지시보다 우선.
+논술 전체 대학 2026-10-25 당시 정책: [STANDBY / OWNER QA PENDING — 실제 평가 호출 없이 연결](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책). 이전 평가 검수 선행 지시보다 우선.
 
-논술 최종 성균PDF·한양 STANDBY 및 1-A(중앙·성균·경희), APP 중단: [시험 회차 전체 연결·보류·원본 명세](essay-group-1a-20261025.md).
+2026-10-25 당시 성균PDF·한양 STANDBY 및 1-A·APP 중단 이력: [시험 회차 전체 연결·보류·원본 명세](essay-group-1a-20261025.md).
 
 2026-10-25 Native APP 통합 업데이트: [Owner 범위·현재 검증·실기기·스토어 승인 경계](app-release-20261025.md).
 
@@ -209,7 +176,7 @@ PHASE3 Essay connection: [current local integration / execution gates](phase3-se
 
 Essay service implementation: [Oct11 contract-verified partial result](essay-full-service-implementation-20261011.md).
 
-Current APP branch integration: [Oct10 local closeout](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10); historical Production/IAP: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.
+Historical APP branch integration (Oct10): [Oct10 local closeout](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10); historical Production/IAP: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.
 
 Admin Credit: [목록](admin-credit-directory-20261026.md) → [만료일 지급·회수](admin-credit-operations-20261027.md). Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
 
@@ -253,7 +220,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 | MY / PROFILE / SETTINGS / 프로필 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [UI conventions](ui-ux-v1.md), [design system](design-system.md), [database/private avatar](database.md), [current profile/account UX](core-app-improvements.md), [personal ownership](day-9-c-personal-state.md), [Design System v2 — IMPLEMENTED](design-system-v2-proposed.md) |
 | PERSONALIZATION / ONBOARDING / 개인화 / 최초 설정 / 재학생 N수생 / academic status / 첫 로그인 | [온보딩 P0 UX·Catalog 적용 기록](onboarding-p0-ux-20261112.md) → [지원 대학 컴팩트 카피·폼](onboarding-compact-layout-20261111.md) → [온보딩 내부 지원 UI](onboarding-inline-applications-20261111.md) → [Personalization Foundation & first-login onboarding — IMPLEMENTED / migration PASS](personalization-onboarding.md) → [canonical profile](database.md), [profile/account UX](core-app-improvements.md) |
 | ESSAY LAB DATA FOUNDATION / OFFICIAL EVIDENCE / OWNER PDF ARCHIVE / 논술 canonical / 2025 Pilot schema | [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) → [Essay LAB foundation — APPLIED; Pilot mapped](essay-lab-data-foundation.md) → [Database](database.md), [Personalization](personalization-onboarding.md); [3-university Pilot](essay-lab-pilot-2025.md); [Evaluation Pilot](essay-lab-evaluation-pilot-2025.md):5/21/134 preserved; Sookmyung Run A execution PASS/benchmark PARTIAL, Owner review; Hanyang PARTIAL/SKKU v1 preserved |
-| ESSAY PRODUCTIZATION / CREDIT G1 / SCAFFOLDING / 문장 첨삭 / STUDENT ANALYTICS / 회차권 / 재작성 | [Essay v1 Product Spec / G1 Credit](essay-lab-product-v1.md) → [Student architecture / ERD / 15 cases / SQL review](student-analytics-data-architecture.md) → [Final history review / KEEP19](essay-lab-final-schema-review.md) → [Phase2A runtime](essay-lab-runtime-validation.md) → [Phase2B RPC / actual JWT PASS](essay-lab-server-transactions.md) → [Identity2C Owner PASS](essay-lab-shared-identity.md) → [Migration promotion history](essay-lab-migration-promotion.md) → [Production preflight](essay-lab-production-preflight.md) → [Baseline ADOPTED](production-migration-baseline-reconciliation.md) → [Product apply history](essay-lab-production-apply.md) → [Security PASS / DEPLOYED](essay-lab-security-resolution.md); [L2-C3 original + calibration Owner quality PASS](essay-lab-model-bakeoff-l2-b.md#l2-c3-hanyang-investigation-and-sequential-gate--2026-09-30) → [L2-B3 Owner review / GPT candidate only](essay-lab-model-bakeoff-l2-b.md) → [L2-B4 Option A / offline prompt / UI gap](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30) → [L2-A3 reviewer design / next Pilot gates](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture) → [L2-A2 binding/telemetry — isolated PASS, NOT_APPLIED](essay-lab-provider-provenance-l2-a2.md); [Workspace / L1 live client, rollout OFF](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29), [문장 다듬기](essay-lab-sentence-review.md), [Scaffolding/submit Production apply](essay-lab-scaffolding-production-apply.md): PASS; [private AI Pilot1.3 Run A](essay-lab-scaffolding-ai-pilot-1-3-run-a.md):2 frozen runs, quality PARTIAL; Production student/AI/payment NOT_ENABLED |
+| ESSAY PRODUCTIZATION / CREDIT G1 / SCAFFOLDING / 문장 첨삭 / STUDENT ANALYTICS / 회차권 / 재작성 | [Essay v1 Product Spec / G1 Credit](essay-lab-product-v1.md) → [Student architecture / ERD / 15 cases / SQL review](student-analytics-data-architecture.md) → [Final history review / KEEP19](essay-lab-final-schema-review.md) → [Phase2A runtime](essay-lab-runtime-validation.md) → [Phase2B RPC / actual JWT PASS](essay-lab-server-transactions.md) → [Identity2C Owner PASS](essay-lab-shared-identity.md) → [Migration promotion history](essay-lab-migration-promotion.md) → [Production preflight](essay-lab-production-preflight.md) → [Baseline ADOPTED](production-migration-baseline-reconciliation.md) → [Product apply history](essay-lab-production-apply.md) → [Security PASS / DEPLOYED](essay-lab-security-resolution.md); [L2-C3 original + calibration Owner quality PASS](essay-lab-model-bakeoff-l2-b.md#l2-c3-hanyang-investigation-and-sequential-gate--2026-09-30) → [L2-B3 Owner review / GPT candidate only](essay-lab-model-bakeoff-l2-b.md) → [L2-B4 Option A / offline prompt / UI gap](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30) → [L2-A3 reviewer design / next Pilot gates](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture) → [L2-A2 binding/telemetry — isolated PASS, NOT_APPLIED](essay-lab-provider-provenance-l2-a2.md); [Workspace / L1 live client, rollout OFF](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29), [문장 다듬기](essay-lab-sentence-review.md), [Scaffolding/submit Production apply](essay-lab-scaffolding-production-apply.md): PASS; [private AI Pilot1.3 Run A](essay-lab-scaffolding-ai-pilot-1-3-run-a.md):2 frozen runs, quality PARTIAL; historical Pilot scope NOT_ENABLED; current operations: [current-status](current-status.md) |
 | LAB / ACADEMIC ANALYTICS | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [platform boundaries](product-platform-boundaries.md), [product architecture](product-architecture.md), [academic roadmap](roadmap-academic-analytics.md), [Essay roadmap](roadmap-essay-lab.md), [App LAB details](core-app-improvements.md) |
 | MATERIALS ROLLOUT / 최신 글 업데이트 / HISTORICAL BACKFILL / 2020 자료 / 과거 자료 / 논술 자료 연결 | [Materials final closeout](materials-final-closeout-2026-09-27.md) → [Owner source rule / Essay LAB P0](materials-closeout-essay-lab-handoff.md) → [Exam full-set policy](exam-full-set-canonical-policy.md) → [Materials rollout and historical backfill](materials-data-rollout.md) → [Current ingestion handoff](ingestion.md#daily-sync-current-handoff--2026-09-24) → [Current status](current-status.md#daily-sync-status); current closeout supersedes historical wave/audit holds; device QA then STOP |
 | MATERIALS / 자료 | [search](day-9-search-explore.md), [resources](day-9-c-resource-detail.md), [personal state](day-9-c-personal-state.md), [saved/recent](day-9-c-personal-lists.md); [Resolver parser correction and diagnostics](day-9-c-resource-detail.md#scoped-duplicate-attribute-correction--2026-09-25) |
@@ -265,7 +232,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 | SCHOOL HISTORY / 학교 변경 / 쿠폰 / COUPON / VOUCHER / 첨삭권 쿠폰 / B2B 학교 / campaign / redemption | [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md) → [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md), [monetization roadmap](roadmap-monetization-and-in-app-learning.md), [Essay G1 credit](essay-lab-product-v1.md) |
 | ADMISSIONS DATA / ANALYTICS / 입시 데이터 / 합격 가능성 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Owner allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24), [roadmap / research gate](roadmap-academic-analytics.md#research-boundary--2026-09-24), [Manus registry](research-registry.md), [decisions](decisions.md) |
 | DAILY SYNC / INGESTION / Daily Sync 시작하자 / 사이트에 새 글 올렸는데 앱에 안 보여 / Pilot C / quarantine | [Current ingestion handoff](ingestion.md#daily-sync-current-handoff--2026-09-24) → [Phase 1 deterministic delta package](daily-sync-phase-1-deterministic-delta-package.md) → [Research synthesis](research-2026-09-24-product-operations-synthesis.md) → [Current baseline/status](current-status.md#daily-sync-status); [historical pipeline](day-9-ingestion.md), [source provenance and reconciliation](research-registry.md#owner-provided-manus-exports--source-acquired) |
-| COMPLIANCE / RELEASE / App Store 출시 | [Privacy/deletion](account-deletion-privacy.md), [Auth acceptance](auth-native-owner-acceptance.md), [current release gates](current-status.md), [Community safety](product-platform-boundaries.md), [research audit boundary](research-registry.md) |
+| COMPLIANCE / RELEASE / App Store 출시 | [실제 출시88](pdf-white-screen-hotfix-20261117.md), [후보89](app-release-89-preparation-20261125.md), [Privacy/deletion](account-deletion-privacy.md), [Auth acceptance](auth-native-owner-acceptance.md), [current release gates](current-status.md), [Community safety](product-platform-boundaries.md), [research audit boundary](research-registry.md) |
 | PRODUCT STRATEGY / 2026~2027 출시 일정 / Subscription / Essay 가격 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Product architecture](product-architecture.md), [scope](product-scope.md), [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29), [Manus registry](research-registry.md) |
 | COMMUNITY / 커뮤니티 | [monetization/learning roadmap](roadmap-monetization-and-in-app-learning.md), [Community decision](decisions.md#2026-09-19--community-is-a-free-retention-feature-not-a-launch-blocker), [Profile privacy and safety gates](product-platform-boundaries.md), [private profile](database.md), [research/compliance registry](research-registry.md) |
 
@@ -273,7 +240,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 implemented/local-tested/Owner-verified claims. Existing document directory below
 is preserved; historical checkpoints are accessed only when evidence is needed.
 
-## Latest end-of-day handoff
+## Historical end-of-day handoff
 
 - [2026-11-04 APP58 운영 연결·실제 검수 마감](app58-expanded-production-connection-20261104.md) — 15대학202시험 연결, 인하 사진 무료 재첨삭/서강 Essay 결과, APP58 본문 공백·전체 해설·혼합형 P0와 재개 순서. [Owner Store 인계](app58-store-handoff-20261104.md); APP58 원본 보존·Codex Store0.
 
@@ -383,7 +350,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MATH-2D — Runtime consumer contract; isolated verified, Production NOT_APPLIED](math-essay-runtime-consumer.md)
 - [MATH-2E — Learning runtime and MATH-5B/6B physical handoff; isolated, NOT_APPLIED](math-essay-learning-runtime.md)
 
-- [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.
+- [APP release closeout / Store handoff](app-release-closeout.md) — historical Oct04 local evidence and RC gates; current release is Build88.
 
 - [Essay runtime completion follow-up](essay-runtime-completion.md) — PARTIAL / gated.
 
@@ -418,3 +385,44 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 [작업03-A 공식 정답·배점·등급컷 검수/READY 후보/미완료](task03a-official-ready-20261111.md).
 
 [작업03-B 2025수능 검수·별칭/코드·원점수/백분위·승인용 SQL](task03b-ready-candidate-20261111.md).
+
+
+## Historical quick links before normalization
+
+아래는 당시 작업 인계이며 현재 출시 상태가 아닙니다.
+
+
+
+[2026-11-15 APP 행동 분석 보완](app-usage-analytics-implementation-20261115.md) — 기존 GA4 재사용, 코드54테스트·analyze·iOS simulator build PASS, 신규 이벤트 실기기 수신 NOT TESTED.
+
+2026-11-15: [운영 정합성·지원 삭제·요약 캐시](operations-integrity-20261115.md). 지원 목록 파생 요약으로 갱신 누락 수정, 기존 기록 접근·삭제 UX 개선. Flutter20 PASS. 운영 데이터 직접 변경·스토어 제출 없음. 단말 검증 NOT TESTED.
+
+[PHASE3 닉네임20](nickname-grapheme-phase3-20261114.md): Flutter93/analyze PASS, 기존 긴 이름·학교/학년 저장 보존. 스토어 제출 없음.
+
+
+
+[논술 LAB 관리자 조회·답안/결과·베타 조사·Claude 계약](admin-lab-operations-20261114.md).
+
+[APP84 로그인 인증 안내 P0·iPhone UI 검증·1.0.4(84) IPA/AAB](auth-verification-ux-hotfix-20261113.md).
+
+[APP83 최종 릴리스·main Push·IPA/AAB·Android 심사 전송 / iOS 신청 완료 Owner 확인](app83-store-handoff-20261112.md).
+
+[과거 APP67 검수·당시 출시 보류 이력](app67-essay-admission-20261106.md) — 당시 APP82 인계 참조이며 현재 릴리스는88 기록을 따른다.
+
+[APP82 Owner 승인·main 통합·스토어 빌드 인계](app82-store-handoff-20261113.md) · 업로드/심사 제출 전 결과 확인.
+
+[TASK08 통합·격리 검수·Analytics 계약·Owner 대기/HOLD](essay-beta-integration-task08-20261101.md).
+[2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
+
+[10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.
+
+## 학생 결과 표시·작성 가이드 라우팅
+
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) (APP/WEB 결과·기존 데이터 매핑·출력 확장 설계·검수 환경)
+
+2026-10-26 당시 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
+
+
+P0 Claude 최종 인수인계(사용량5% 중단): [현재 배포·37묶음·17후보·재개순서](essay-lab-claude-handoff-20261024.md).
+
+

@@ -1,0 +1,62 @@
+{
+  "source": "5cf2f4ba610fe834c3955dbbfc000f644b3971ed",
+  "baselineVersion": "204cfb37-0b73-4f33-9f6c-86efc178539c",
+  "changed": [
+    {
+      "module": "entry.py",
+      "sha256_before": "e2ee2dfaa7f911f84958e538f90332b62fd5837b492f039037b10bca7eaeaf26",
+      "sha256_after": "80f40b2cd9dfa899c286ce458ae72cd8361023067ea89675750be908a7e887ab"
+    },
+    {
+      "module": "essay_lab/live_worker.py",
+      "sha256_before": "94c5adf49181381f162ac803e8f603801f4b644ad94111755a93300d0777f15c",
+      "sha256_after": "841697eb7b9a4e2324b15de45ea46acd1f122b22ce519fba6bcaf6ca84b98d88"
+    },
+    {
+      "module": "essay_lab/semantic_review.py",
+      "sha256_before": "4a94453d0aaab7350a5f62b4a533b581ace2a6d2a9dac9c23b2dffb8815f9d67",
+      "sha256_after": "176d412eaf9f4a927c8b760110755b9e9359ebd5e9397d63cd03f86f07cbbe21"
+    },
+    {
+      "module": "essay_lab/mixed_math_runtime.py",
+      "sha256_before": "04f924c7dfab7dad4bf2d58834a7b9b52f26fb8212aa578b8d3c81ece595d92c",
+      "sha256_after": "837dac83d002fabac8bbd43d469a5894182960069c01da65833f72bdfb3a6fcb"
+    },
+    {
+      "module": "essay_lab/cloudflare_http.py",
+      "sha256_before": "5c43f018c353ab7ead53fe2ad64c293b736ba9b1f4bd0693dfdd55257001e878",
+      "sha256_after": "7426a393f493bce4784f9d36ba1baa493ce5d4f242db49fc0c712227c9fcb741"
+    },
+    {
+      "module": "essay_lab/cloudflare_runtime.py",
+      "sha256_before": "4da5564d525f63ec57e3a60094c4ff6531b09f5eca5c183c47f7cb07ff635bb1",
+      "sha256_after": "1ff171a1be0e5d0b39f5671f2a37b80f21cc668a4e10a1fc02796e1c0fca3d6b"
+    },
+    {
+      "module": "essay_lab/admin_run_actions.py",
+      "sha256_before": "5f7f9c32fc104140b15ceda58d1285d6f1cda1f5ba40795776a547d6d7faf3ca",
+      "sha256_after": "db18f4a24c62feeed9d5803aca8e53cd63fe7e21a06daec7a7bbb56be8dbdbad"
+    },
+    {
+      "module": "essay_lab/admin_run_recovery.py",
+      "sha256_before": null,
+      "sha256_after": "aff7fa062b65951c7c393fd0969db04bc76874c4e7cad5da3e1886c1e78cd039"
+    },
+    {
+      "module": "essay_lab/quality_repair.py",
+      "sha256_before": null,
+      "sha256_after": "d5dea0075b262045d0ab084a946866ca183241f5bc54f8d1ac87df452daef07c"
+    }
+  ],
+  "unchangedModules": 69,
+  "totalModules": 78,
+  "settingsChanges": 0,
+  "qualityPolicyChanges": 0,
+  "providerCalls": 0,
+  "verifiedAt": "2026-11-22T11:54:04.402Z",
+  "deployment": "cff622d9-53da-4480-b7d8-0b34c2b8f8c2",
+  "version": "b28790b2-3949-4ee3-ae59-96d3a9712bf4",
+  "percentage": 100,
+  "settingsUnchanged": true,
+  "allModuleHashesMatched": true
+}

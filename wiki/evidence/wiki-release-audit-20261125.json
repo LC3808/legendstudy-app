@@ -1,0 +1,108 @@
+{
+  "scope": "Read-only tracked local Git history; branch refs checked against origin for main, operations-commercial and material-service. No assertion about unreachable/uncommitted/private external records. Dates are Git recorded metadata.",
+  "refs_scanned": 149,
+  "snapshots": {
+    "02996bed": {
+      "commit": "02996bed2234104e0904ec698db06cc5a8c8649c",
+      "commit_record": "2026-11-13T10:56:58+09:00 | 2026-11-13T10:56:58+09:00 | docs(release): finalize APP84 main handoff within restore budget",
+      "wiki_files": 362,
+      "pdf_hotfix_present": false,
+      "readiness_present": false,
+      "wiki/current-status.md": [
+        "[로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당."
+      ],
+      "wiki/index.md": [
+        "[APP84 로그인 인증 안내 P0·iPhone UI 검증·1.0.4(84) IPA/AAB](auth-verification-ux-hotfix-20261113.md)."
+      ]
+    },
+    "08345b69": {
+      "commit": "08345b69b1d71c9038be50767bd849a7354d2b8e",
+      "commit_record": "2026-11-17T09:29:56+09:00 | 2026-11-17T09:29:56+09:00 | fix: preserve PDF viewport with download action in 1.0.6+88",
+      "wiki_files": 381,
+      "pdf_hotfix_present": true,
+      "readiness_present": true,
+      "wiki/current-status.md": [
+        "[PDF P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): ALLOWED 하단 Column이 본문 높이0 유발, 한 줄 수정·Android 재현/수정 검증. 전체2632 PASS·analyze PASS·IPA/AAB서명 PASS, 스토어 Owner 담당·실기기 NOT TESTED. 이전87 QA는 조건별 PDF 검증 누락.",
+        "[로그인 인증 안내 P0 hotfix](auth-verification-ux-hotfix-20261113.md): 일반 로그인 안내 제거, 가입/미인증만 재발송. 오류 유형 분리·20초 대기 제한, 기존 세션/온보딩/운영 데이터 보존. 전체2601 PASS/8 SKIP/0 FAIL·Analyze PASS. 1.0.4(84) IPA/AAB 서명 PASS·hotfix Push. iPhone17 삭제 없는 업데이트/일반 로그인 안내 숨김 PASS. 실제 로그인/Android 기기/스토어 NOT TESTED. Owner 화면 확인·main Push 완료. 업로드 Owner 담당.",
+        "[APP82 승인·빌드 이력](app82-store-handoff-20261113.md): 과거 검증 근거 보존; 최신 릴리스는 APP84 인계 참조."
+      ],
+      "wiki/index.md": [
+        "[PDF 흰 화면 P0·1.0.6(88)](pdf-white-screen-hotfix-20261117.md): 다운로드 하단 영역 높이 결함 재현·최소 수정·긴급 빌드.",
+        "[APP84 로그인 인증 안내 P0·iPhone UI 검증·1.0.4(84) IPA/AAB](auth-verification-ux-hotfix-20261113.md)."
+      ]
+    },
+    "6bd46f98": {
+      "commit": "6bd46f98cd36a3147be9f7f7bd41ed16e9349ed1",
+      "commit_record": "2026-11-22T21:57:30+09:00 | 2026-11-22T21:57:30+09:00 | docs: record recovery runtime root cause deployment and preserved data",
+      "wiki_files": 259,
+      "pdf_hotfix_present": false,
+      "readiness_present": false,
+      "wiki/current-status.md": [],
+      "wiki/index.md": []
+    },
+    "7ad4be9": {
+      "commit": "7ad4be956d742a6933cafc781e91fcc052960013",
+      "commit_record": "2026-11-25T21:43:11+09:00 | 2026-11-25T21:43:11+09:00 | docs: audit production status and reconcile store release baseline",
+      "wiki_files": 262,
+      "pdf_hotfix_present": false,
+      "readiness_present": false,
+      "wiki/current-status.md": [
+        "[11/25 프로젝트·스토어 교차 검토](project-cross-review-20261125.md): 양OS 1.0.6/build88 출시 확인. main은 출시보다 과거; D-Day APP 미출시. 최근7일12요청/11완료·q1 미완료1, 복구 배포와 실제 완료 구분. 운영 변경0. 최신 상태는 해당 보고서 우선."
+      ],
+      "wiki/index.md": [
+        "전체 프로젝트 현황 / 실제 스토어 출시 / Flutter 변경·출시 계획: [11/25 교차 검토](project-cross-review-20261125.md) · [Flutter 전수 비교](project-cross-review-flutter-files-20261125.md)."
+      ]
+    },
+    "646c5239": {
+      "commit": "646c5239d936ba81fcf7277412e8a4e3022f6f82",
+      "commit_record": "2026-11-25T23:15:52+09:00 | 2026-11-25T23:15:52+09:00 | docs: record quality console V1 deployment and census limits",
+      "wiki_files": 270,
+      "pdf_hotfix_present": false,
+      "readiness_present": false,
+      "wiki/current-status.md": [
+        "[품질 V1](quality-console-v1-20261125.md): WEB 배포.70요청118문항 대조·내용20요청38문항 검토(PARTIAL). Q15·Owner 집계·Claude 검토 미완료.",
+        "[11/25 프로젝트·스토어 교차 검토](project-cross-review-20261125.md): 양OS 1.0.6/build88 출시 확인. main FF 승인 대기; D-Day APP89 준비. 최근7일12요청/11완료·q1 미완료1, 복구 배포와 실제 완료 구분. 운영 변경0. 최신 상태는 해당 보고서 우선."
+      ],
+      "wiki/index.md": [
+        "전체 프로젝트 현황 / 실제 스토어 출시 / Flutter 변경·출시 계획: [11/25 교차 검토](project-cross-review-20261125.md) · [Flutter 전수 비교](project-cross-review-flutter-files-20261125.md)."
+      ]
+    }
+  },
+  "main_release_left_right": "0\t28",
+  "investigation_release_left_right": "39\t322",
+  "merge_base": "8a1498359bbcd0899f8321e5589028d40440b632",
+  "release_commits": [
+    "08345b6 2026-11-17T09:29:56+09:00 fix: preserve PDF viewport with download action in 1.0.6+88",
+    "077d665 2026-11-16T21:52:23+09:00 fix: hide expired beta banner and prepare release 1.0.5+87",
+    "45ba3a1 2026-11-16T21:25:39+09:00 docs: distinguish retained beta-end banner from removed badge",
+    "32af458 2026-11-16T21:25:06+09:00 docs: verify build 86 and prepare store privacy declarations",
+    "a89e486 2026-11-15T22:13:46+09:00 fix: hold university news home card for release UX review",
+    "2272e29 2026-11-15T21:48:08+09:00 Record iPhone 84 to 85 update and correct store app inventory",
+    "d0e9a94 2026-11-15T21:10:26+09:00 Prepare app 1.0.5 with catalog personalization and LAB recovery UX",
+    "66c3ba7 2026-11-15T20:42:17+09:00 docs: record live app analytics report verification",
+    "103c35d 2026-11-15T20:33:15+09:00 feat: record app usage at successful user action boundaries",
+    "66ff682 2026-11-15T20:00:39+09:00 fix: refresh application summary and preserve access to existing records",
+    "8910ae3 2026-11-15T00:12:36+09:00 Preserve unchanged whitespace in legacy onboarding nicknames",
+    "e314fb7 2026-11-15T00:06:26+09:00 Shorten nickname status summary to pass Wiki handoff check",
+    "e412b2d 2026-11-15T00:06:08+09:00 Keep PHASE3 handoff within status size budget",
+    "d2d142e 2026-11-15T00:05:29+09:00 Limit changed nicknames to 20 graphemes while preserving legacy profiles",
+    "f5ed0e9 2026-11-14T22:02:16+09:00 docs: record deployed LAB RPC and production verification",
+    "747b6e4 2026-11-14T21:54:00+09:00 feat(admin): add guarded LAB read RPCs and investigation record",
+    "83ae7d5 2026-11-13T21:44:37+09:00 Investigate exporter temp file failures and reduce diagnostic text loading",
+    "73c1cf6 2026-11-13T15:38:27+09:00 docs: verify 845 PDF permissions activated in production",
+    "60ab377 2026-11-13T14:44:02+09:00 docs: identify comment-only SQL execution and resend complete package",
+    "6d85728 2026-11-13T14:35:23+09:00 docs: record zero PDF permissions after reported SQL success",
+    "d5834ad 2026-11-13T14:26:39+09:00 fix: identify PDF activation package and report exact preflight counts",
+    "d205b31 2026-11-13T14:21:41+09:00 docs: hand off phased verification and production gates",
+    "c0aed17 2026-11-13T14:16:02+09:00 feat: preserve study subjects and add personal time goals and summaries",
+    "6fc39b8 2026-11-13T14:15:09+09:00 fix: preserve exact PDF identifiers and hashes in reduced scope",
+    "f653f0b 2026-11-13T14:14:41+09:00 fix: exclude retired PDF from verified activation scope",
+    "4e433f4 2026-11-13T14:07:42+09:00 feat: connect PDF viewer downloads and owner-scoped MY receipts",
+    "91cc9d8 2026-11-13T13:56:55+09:00 docs: record payment regression and live activation blockers",
+    "6e9ce31 2026-11-13T13:54:11+09:00 ops: preserve incident evidence and bounded read-only diagnostics"
+  ],
+  "pre_review_version_history": [
+    "6e7146a 2026-11-22T15:35:17+09:00 docs(essay): record production stability audit and verified release",
+    "08345b6 2026-11-17T09:29:56+09:00 fix: preserve PDF viewport with download action in 1.0.6+88"
+  ]
+}

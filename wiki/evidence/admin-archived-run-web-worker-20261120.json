@@ -1,0 +1,177 @@
+{
+  "recorded_at": "2026-11-20T13:12:51.741653+00:00",
+  "web": {
+    "sha": "fe1bae128efe00a975c88d8a3d0d0d7656b56069",
+    "baseline": "624664a1-c22b-49a3-9c47-9d656dd95449",
+    "scope": [
+      "/admin/ root",
+      "/admin/lab-dashboard/ root",
+      "/admin/essay-runs/ root",
+      "/admin/operations/ root"
+    ],
+    "changedPages": [
+      "/admin/__next._full.txt",
+      "/admin/__next._tree.txt",
+      "/admin/__next.admin.__PAGE__.txt",
+      "/admin/essay-runs/__next._full.txt",
+      "/admin/essay-runs/__next._tree.txt",
+      "/admin/essay-runs/__next.admin.essay-runs.__PAGE__.txt",
+      "/admin/essay-runs/index.html",
+      "/admin/essay-runs/index.txt",
+      "/admin/index.html",
+      "/admin/index.txt",
+      "/admin/lab-dashboard/__next._full.txt",
+      "/admin/lab-dashboard/__next._tree.txt",
+      "/admin/lab-dashboard/__next.admin.lab-dashboard.__PAGE__.txt",
+      "/admin/lab-dashboard/index.html",
+      "/admin/lab-dashboard/index.txt",
+      "/admin/operations/__next._full.txt",
+      "/admin/operations/__next._tree.txt",
+      "/admin/operations/__next.admin.operations.__PAGE__.txt",
+      "/admin/operations/index.html",
+      "/admin/operations/index.txt"
+    ],
+    "addedAssets": 21,
+    "preservedPaths": 3115,
+    "workerSha256": "a753222551b0ce9a46e98733d002077bdfbff3311c462fc5e5508ec26cb55413",
+    "runtimeChanges": 0,
+    "settingsChanges": 0,
+    "deployment": "842dccfe-570c-458a-a23e-a0c5220bb766",
+    "verifiedAt": "2026-11-20T13:10:37.580Z",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-11-20T13:10:27.760659Z",
+      "status": "success"
+    },
+    "canonical": true,
+    "settingsUnchanged": true,
+    "sourceConfigurationUnchanged": true,
+    "functionRoutingUnchanged": true,
+    "functionBindingsUnchanged": true,
+    "existingUnrelatedFilesUnchanged": true,
+    "preservedExistingFiles": 3115,
+    "liveMode": "LIVE",
+    "financeAutomatic": "true"
+  },
+  "worker": {
+    "sha": "f0e4594637eaa76a9cb5b790cb0940311a40e329",
+    "baseline": "7e9d20c0-12cd-4a65-a612-fac071fcfc16",
+    "rollbackVersion": "9ac3b91c-dad4-4f2e-bc92-3428a2c8720e",
+    "changed": [
+      {
+        "module": "entry.py",
+        "sha256_before": "3a89cd07d7420e04caec74330bc2571cbc732926bc0fb9fa3d7e59da3ec587ec",
+        "sha256_after": "e2ee2dfaa7f911f84958e538f90332b62fd5837b492f039037b10bca7eaeaf26",
+        "matched_reviewed_hunks": 4
+      },
+      {
+        "module": "essay_lab/admin_run_actions.py",
+        "sha256_before": "2d26728273bdee2b89520f5a03ee6f27d393593d0bb665d303af491cc7f7d16d",
+        "sha256_after": "5f7f9c32fc104140b15ceda58d1285d6f1cda1f5ba40795776a547d6d7faf3ca",
+        "matched_reviewed_hunks": 1
+      },
+      {
+        "module": "essay_lab/cloudflare_runtime.py",
+        "sha256_before": "28fc7a16c57bb9b5c5ca1dee54bf0bad73dafbf5d09ccb4518443153d69662f2",
+        "sha256_after": "d640aa8b438f6465a0a4e163f22e494b8855e065410fc8c5b1f26abc31c0c764",
+        "matched_reviewed_hunks": 1
+      },
+      {
+        "module": "essay_lab/cloudflare_http.py",
+        "sha256_before": "5049023ea2bdc7c82d65fb1a1760814bfd7ad999b268fb8bdd3e474dddbea469",
+        "sha256_after": "77dbfccea085fa86190a6d557eb742fcab9bcbdaea045b0f4dcd9d220bd37d53",
+        "matched_reviewed_hunks": 1
+      }
+    ],
+    "unchangedModules": 71,
+    "totalModules": 75,
+    "settingsChanges": 0,
+    "verifiedAt": "2026-11-20T13:10:06.242Z",
+    "deployment": "57ea595e-7ee7-454b-994f-ac14d5641016",
+    "versions": [
+      {
+        "version_id": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+        "percentage": 100
+      }
+    ],
+    "activeExpected": true,
+    "settingsUnchanged": true
+  },
+  "validation": {
+    "web_full_suite_before_monitoring_label_followup": {
+      "passed": 2215,
+      "skipped": 5,
+      "passed_files": 284,
+      "skipped_files": 4
+    },
+    "web_final_related_suite_including_monitoring_label": {
+      "passed": 21,
+      "files": 3
+    },
+    "web_eslint": "PASS",
+    "web_typescript": "PASS",
+    "web_production_build": {
+      "status": "PASS",
+      "generated_routes": 171
+    },
+    "worker_source_focused_tests": {
+      "passed": 15
+    },
+    "patched_actual_worker_ast_tests": {
+      "passed": 8
+    },
+    "production_request_mutation_tests": "NOT TESTED: existing request actions excluded by Owner",
+    "normal_member_browser": "NOT TESTED: no separate authorized member session; server authorization evidence is in DB postflight"
+  },
+  "ui": {
+    "mode": "existing Owner/admin session, read-only navigation and capabilities lookup",
+    "pages_checked": [
+      "/admin/",
+      "/admin/lab-dashboard/",
+      "/admin/essay-runs/?state=reserved",
+      "/admin/essay-runs/?state=reserved&visibility=hidden",
+      "/admin/operations/"
+    ],
+    "dashboard": {
+      "processing": 1,
+      "retry_pending": 1,
+      "archived": 0,
+      "active_scope_excludes_archived": true,
+      "historical_scope_includes_archived": true
+    },
+    "lab_dashboard": {
+      "processing": 1,
+      "retry_pending": 1,
+      "archived": 0
+    },
+    "operations_monitoring": {
+      "archived": 0,
+      "archived_label_korean": true,
+      "aggregation_scope_explained": true
+    },
+    "target": {
+      "run_id": "e7af7e52-eba9-46c3-aba4-0961ea516b48",
+      "visible_in_active_list": true,
+      "state_label": "진행 중",
+      "credits_required": 1,
+      "billing_label": "예약됨",
+      "ledger_rows": 1,
+      "retry_button_enabled": true,
+      "archive_button_enabled": true,
+      "delete_button_enabled": false,
+      "delete_reason": "검증된 테스트 요청이 아닙니다. 보관을 이용하세요.",
+      "restore_not_triggered": true
+    },
+    "archived_reserved_list": "empty",
+    "request_actions_executed": [],
+    "interpretation": "The target is currently restored (hidden=false, confirmed separately by DB). Active KPI 1/1 and archived 0 are expected; the agent did not archive it to force KPI 0."
+  },
+  "screenshots_local_only": [
+    "/private/tmp/legendstudy-archive-release/admin-kpi.jpg",
+    "/private/tmp/legendstudy-archive-release/target-capabilities.jpg",
+    "/private/tmp/legendstudy-archive-release/operations-live.jpg",
+    "/private/tmp/legendstudy-archive-release/lab-dashboard-live.jpg"
+  ],
+  "preservation": "WEB old files/runtime/bindings/settings and 71 unmodified Worker modules verified by exact bytes; protected DB data verification is recorded in the separate DB receipt."
+}

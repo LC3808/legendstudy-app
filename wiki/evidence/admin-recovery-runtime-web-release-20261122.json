@@ -1,0 +1,36 @@
+{
+  "sha": "4e8654378abc0b181ff0f902947b72af0c6c127f",
+  "baseline": "2faad0e4-d995-4abe-8106-2557caf38400",
+  "scope": [
+    "/admin/essay-runs/"
+  ],
+  "changedPages": [
+    "/admin/essay-runs/__next._full.txt",
+    "/admin/essay-runs/__next._tree.txt",
+    "/admin/essay-runs/__next.admin.essay-runs.__PAGE__.txt",
+    "/admin/essay-runs/index.html",
+    "/admin/essay-runs/index.txt"
+  ],
+  "addedAssets": 4,
+  "preservedPaths": 3168,
+  "workerSha256": "9dfe471ad682e1b0a2664370f09077d5efa1e9ff9633109674fc035db39f5cac",
+  "runtimeSource": "4408c3e6 preserved except recovery readiness API and binding path",
+  "runtimeSourceInputsChecked": 81,
+  "changedInputs": [
+    "src/lib/essay-runtime/server/worker-binding.ts",
+    "functions/api/admin/essay-run.ts"
+  ],
+  "runtimeSourceChanges": 2,
+  "dependencyLockChanges": 0,
+  "settingsChanges": 0,
+  "rollbackDeployment": "2faad0e4-d995-4abe-8106-2557caf38400",
+  "deployment": "f1882082-9950-46cc-9f2c-fd35a17e9d4d",
+  "status": "success",
+  "verifiedAt": "2026-11-22T12:52:40.221Z",
+  "manifestMatched": true,
+  "productionHtmlMatched": true,
+  "settingsUnchanged": true,
+  "paymentMode": "LIVE",
+  "financeAutomatic": "true",
+  "anonymousApiStatus": 401
+}

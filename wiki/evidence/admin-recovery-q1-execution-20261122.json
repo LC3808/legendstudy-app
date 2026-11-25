@@ -1,0 +1,346 @@
+{
+  "before": {
+    "diagnosis": {
+      "as_of": "2026-11-22T12:33:22.048061+00:00",
+      "state": "reserved",
+      "counts": {
+        "total": 2,
+        "failed": 0,
+        "completed": 1,
+        "unresolved": 1,
+        "recoverable": 0,
+        "stored_result": 0
+      },
+      "hidden": false,
+      "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "billing": {
+        "status": "reserved",
+        "consumed": 0,
+        "refunded": 0,
+        "released": 0,
+        "reserved": 0,
+        "consistent": true,
+        "ledger_count": 0,
+        "reserved_total": 0,
+        "credits_required": 0,
+        "recovery_eligible": true
+      },
+      "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+      "history": [],
+      "version": "admin-run-recovery-v1",
+      "recovery": {
+        "type": "D",
+        "method": "restore_reviewed",
+        "reason": "RECONCILIATION_REQUIRED",
+        "allowed": false,
+        "additional_credit": 0,
+        "preserve_existing": true,
+        "target_question_ids": [],
+        "rerun_question_count": 0
+      },
+      "questions": [
+        {
+          "key": "q0",
+          "index": 0,
+          "state": "completed",
+          "reason": null,
+          "attempt": 0,
+          "readiness": "completed",
+          "question_id": "2a4aa832-c6f1-541f-9f65-4c429368a324",
+          "review_failures": []
+        },
+        {
+          "key": "q1",
+          "index": 1,
+          "state": "reconciling",
+          "reason": "OWNER_EXECUTION_APPROVAL_REQUIRED",
+          "attempt": 0,
+          "readiness": "uncertain",
+          "question_id": "c4146263-4505-5629-b7f4-66123c0306d4",
+          "review_failures": []
+        }
+      ],
+      "created_at": "2026-11-21T16:31:23.877719+00:00",
+      "error_scope": "One confirmed diagnostic from current question attempts; occurrence time is not recorded.",
+      "lease_until": "2026-11-21T16:46:26.375685+00:00",
+      "retry_count": 0,
+      "active_lease": false,
+      "recent_error": {
+        "code": "PROVIDER_NETWORK_UNKNOWN",
+        "stage": "provider"
+      },
+      "worker_state": "response_uncertain",
+      "last_retry_at": null,
+      "quality_review": {
+        "waiting": false,
+        "full_calls": 0,
+        "partial_calls": 0,
+        "recommendation": "Review failed checks and preserved candidates; no automatic completion or extra retry.",
+        "last_execution_at": null
+      },
+      "last_execution_at": null,
+      "uncertain_recovery": {
+        "reason": "OWNER_EXECUTION_APPROVAL_REQUIRED",
+        "allowed": true
+      },
+      "last_state_change_at": null
+    },
+    "ledger_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "billing_reason": "included_revision",
+    "q0_checkpoints": [
+      {
+        "key": "q0",
+        "hash": "18da60ecf6c80ead27ca16b33454db41",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-independent-review-started",
+        "hash": "44e0a1bdc5421ec1117443b938408819",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-119d1845020ccd29b9fc6e6559e88fe411ca9b973040b6c7f6716d68dd54e229",
+        "hash": "657907900a607b5be7ae8e042e17ffb2",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-21486dbde5dcbe427f2b6142f54685bb9c5dd8d839e4cf1fb48bf1c6ddd148f1",
+        "hash": "dda43ab0e47ca40431c248e7abef01af",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-review",
+        "hash": "edcd08e563e5736027c27720cf4939f9",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-reviewed",
+        "hash": "a325f515dbb9c7b0157d7b1fa2781ca5",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-usage",
+        "hash": "19a761b548c9378ac61f9186426aa7af",
+        "state": "checkpoint"
+      }
+    ],
+    "checkpoint_inventory": [
+      {
+        "key": "q0",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-independent-review-started",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-119d1845020ccd29b9fc6e6559e88fe411ca9b973040b6c7f6716d68dd54e229",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-21486dbde5dcbe427f2b6142f54685bb9c5dd8d839e4cf1fb48bf1c6ddd148f1",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-review",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-reviewed",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-usage",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q1",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q1-a0-execution-failure",
+        "state": "checkpoint"
+      }
+    ]
+  },
+  "after": {
+    "diagnosis": {
+      "as_of": "2026-11-22T12:38:20.150744+00:00",
+      "state": "reserved",
+      "counts": {
+        "total": 2,
+        "failed": 0,
+        "completed": 1,
+        "unresolved": 1,
+        "recoverable": 0,
+        "stored_result": 0
+      },
+      "hidden": false,
+      "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+      "billing": {
+        "status": "reserved",
+        "consumed": 0,
+        "refunded": 0,
+        "released": 0,
+        "reserved": 0,
+        "consistent": true,
+        "ledger_count": 0,
+        "reserved_total": 0,
+        "credits_required": 0,
+        "recovery_eligible": true
+      },
+      "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+      "history": [],
+      "version": "admin-run-recovery-v1",
+      "recovery": {
+        "type": "D",
+        "method": "restore_reviewed",
+        "reason": "RECONCILIATION_REQUIRED",
+        "allowed": false,
+        "additional_credit": 0,
+        "preserve_existing": true,
+        "target_question_ids": [],
+        "rerun_question_count": 0
+      },
+      "questions": [
+        {
+          "key": "q0",
+          "index": 0,
+          "state": "completed",
+          "reason": null,
+          "attempt": 0,
+          "readiness": "completed",
+          "question_id": "2a4aa832-c6f1-541f-9f65-4c429368a324",
+          "review_failures": []
+        },
+        {
+          "key": "q1",
+          "index": 1,
+          "state": "reconciling",
+          "reason": "OWNER_EXECUTION_APPROVAL_REQUIRED",
+          "attempt": 0,
+          "readiness": "uncertain",
+          "question_id": "c4146263-4505-5629-b7f4-66123c0306d4",
+          "review_failures": []
+        }
+      ],
+      "created_at": "2026-11-21T16:31:23.877719+00:00",
+      "error_scope": "One confirmed diagnostic from current question attempts; occurrence time is not recorded.",
+      "lease_until": "2026-11-21T16:46:26.375685+00:00",
+      "retry_count": 0,
+      "active_lease": false,
+      "recent_error": {
+        "code": "PROVIDER_NETWORK_UNKNOWN",
+        "stage": "provider"
+      },
+      "worker_state": "response_uncertain",
+      "last_retry_at": null,
+      "quality_review": {
+        "waiting": false,
+        "full_calls": 0,
+        "partial_calls": 0,
+        "recommendation": "Review failed checks and preserved candidates; no automatic completion or extra retry.",
+        "last_execution_at": null
+      },
+      "last_execution_at": null,
+      "uncertain_recovery": {
+        "reason": "OWNER_EXECUTION_APPROVAL_REQUIRED",
+        "allowed": true
+      },
+      "last_state_change_at": null
+    },
+    "ledger_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "billing_reason": "included_revision",
+    "q0_checkpoints": [
+      {
+        "key": "q0",
+        "hash": "18da60ecf6c80ead27ca16b33454db41",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-independent-review-started",
+        "hash": "44e0a1bdc5421ec1117443b938408819",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-119d1845020ccd29b9fc6e6559e88fe411ca9b973040b6c7f6716d68dd54e229",
+        "hash": "657907900a607b5be7ae8e042e17ffb2",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-21486dbde5dcbe427f2b6142f54685bb9c5dd8d839e4cf1fb48bf1c6ddd148f1",
+        "hash": "dda43ab0e47ca40431c248e7abef01af",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-review",
+        "hash": "edcd08e563e5736027c27720cf4939f9",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-reviewed",
+        "hash": "a325f515dbb9c7b0157d7b1fa2781ca5",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-usage",
+        "hash": "19a761b548c9378ac61f9186426aa7af",
+        "state": "checkpoint"
+      }
+    ],
+    "checkpoint_inventory": [
+      {
+        "key": "q0",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-independent-review-started",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-119d1845020ccd29b9fc6e6559e88fe411ca9b973040b6c7f6716d68dd54e229",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-receipt-21486dbde5dcbe427f2b6142f54685bb9c5dd8d839e4cf1fb48bf1c6ddd148f1",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-a0-review",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-reviewed",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q0-usage",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q1",
+        "state": "checkpoint"
+      },
+      {
+        "key": "q1-a0-execution-failure",
+        "state": "checkpoint"
+      }
+    ]
+  },
+  "outcome": {
+    "submission_count": 1,
+    "additional_submission_count": 0,
+    "ui_code": "RUNTIME_UNAVAILABLE",
+    "new_attempt": 0,
+    "new_receipts": 0,
+    "new_audit": 0,
+    "kpi": {
+      "processing": 1,
+      "retry_waiting": 0,
+      "archived": 1
+    },
+    "provider_calls": "No new persisted evidence; exact upstream count unavailable",
+    "q0_unchanged": true,
+    "ledger_unchanged": true
+  }
+}

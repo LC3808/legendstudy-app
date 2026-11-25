@@ -1,0 +1,104 @@
+{
+  "verified_at": "2026-11-22T06:28:06.473431+00:00",
+  "worker_baseline": {
+    "version": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+    "modules": 75,
+    "compatibility_date": "2026-10-13",
+    "compatibility_flags": [
+      "python_workers",
+      "global_fetch_strictly_public"
+    ],
+    "cpu_limit_ms": 30000
+  },
+  "configured_provider": {
+    "generation": {
+      "model": "gpt-5.6-sol",
+      "provider": "openai",
+      "model_version": "gpt-5.6-sol"
+    },
+    "independent_review": {
+      "model": "gpt-5.6-sol",
+      "model_version": "gpt-5.6-sol"
+    },
+    "review_mode": "independent_model",
+    "review_provider_from_source": "openai",
+    "receipt_limitation": "28 nested independent-review usage receipts do not store model/provider. These are runtime configuration values, not proof of every historical actual model."
+  },
+  "transport": {
+    "generation_and_review_timeout_seconds": 75,
+    "database_timeout_seconds": 25,
+    "math_child_timeout_seconds": 110,
+    "automatic_provider_retries": 0,
+    "response_store": false,
+    "max_output_tokens": 12000,
+    "oversize_response_limit_bytes": 524288,
+    "unknown_state": "reconciling; no new Provider call on replay"
+  },
+  "queue": {
+    "name": "legendstudy-essay-exams",
+    "batch_size": 1,
+    "max_retries": 3,
+    "max_wait_time_ms": 5000,
+    "retry_delay": 0,
+    "message_retention_seconds": 86400,
+    "dead_letter_queue": "legendstudy-essay-exams-dlq",
+    "dead_letter_consumers": 0,
+    "gap": "No automatic terminal failure/settlement/release or DLQ recovery consumer. Unknown processing may remain reserved after delivery exhaustion."
+  },
+  "historical_logs": {
+    "cloudflare_read_query_status": 403,
+    "existing_settings_observability_field_present": false,
+    "logpush": false,
+    "tail_consumers": 0,
+    "limitation": "Cannot prove exact incident network error or 75s deadline from current checkpoint fields or inaccessible historical Worker logs."
+  },
+  "active_incident": {
+    "run_id": "03629605-9a58-4b78-8465-c5331ac1b1c7",
+    "state": "reserved",
+    "active_lease": false,
+    "retry_reason": "RECONCILIATION_REQUIRED",
+    "q0": "completed",
+    "q1": "reconciling",
+    "legacy_code": "PROVIDER_NETWORK_UNKNOWN",
+    "diagnostic_is_prospective_only": true
+  },
+  "release": {
+    "source": "9bffbc0",
+    "baselineVersion": "5095226c-82b8-4b64-bf14-9d3f16c4fbcf",
+    "changed": [
+      {
+        "module": "essay_lab/live_worker.py",
+        "sha256_before": "3124f460c19875c9254238eb91ffdb7bd33c7c6af602621dd44d765af63adf2a",
+        "sha256_after": "d4f3f1f969f255cf170e38522da9e5e8215a09f1cc6a6427ae55a598c78b9682"
+      },
+      {
+        "module": "essay_lab/transport_diagnostics.py",
+        "sha256_before": null,
+        "sha256_after": "c20ac1f7b0106ab94b091d1b0b4880e3790b512f200e43e4eedbb5dc40eb2ca0"
+      },
+      {
+        "module": "essay_lab/cloudflare_http.py",
+        "sha256_before": "77dbfccea085fa86190a6d557eb742fcab9bcbdaea045b0f4dcd9d220bd37d53",
+        "sha256_after": "5c43f018c353ab7ead53fe2ad64c293b736ba9b1f4bd0693dfdd55257001e878"
+      },
+      {
+        "module": "essay_lab/cloudflare_runtime.py",
+        "sha256_before": "d640aa8b438f6465a0a4e163f22e494b8855e065410fc8c5b1f26abc31c0c764",
+        "sha256_after": "a34b560e07ceab531fed7e9a36694bbcdc871ef315eaaff9cb5b38e118949b9b"
+      }
+    ],
+    "unchangedModules": 72,
+    "totalModules": 76,
+    "settingsChanges": 0,
+    "qualityPolicyChanges": 0,
+    "providerCalls": 0,
+    "verifiedAt": "2026-11-22T06:26:15.830Z",
+    "deployment": "6a4966b6-e5d1-4df8-ad26-ba2c7623c3b2",
+    "version": "bdee88d0-d23f-4e92-abef-3c009c92efb8",
+    "percentage": 100,
+    "settingsUnchanged": true,
+    "allModuleHashesMatched": true
+  },
+  "real_request_mutations": [],
+  "provider_test_calls": 0
+}

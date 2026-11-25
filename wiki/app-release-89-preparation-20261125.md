@@ -7,7 +7,7 @@
 - 출시 브랜치 `codex/operations-commercial-20261113`, 시작34d2ee9(무료2안내). 기존D-Day6cd4c1a7의lib/test7파일만적용: SupabaseDayEventRepository,providers,AdmissionDayEvent,DayEvent,repository계약,DayTargetCard,테스트. 새동기화시스템없음.
 - pubspec1.0.7+89. 자동일정배지·숨김·복원·KST·기존수동일정·대표1/가까운2 UI 재사용.
 - `integration_test/admission_day_event_smoke_test.dart`는기존MockClient/fake저장소테스트를native런타임에재사용. 실제학생계정/운영DB연결없음.
-- 다른출시후Flutter개선은[기존 전체diff](https://github.com/LC3808/legendstudy-app/blob/codex/material-service-app-20261022/wiki/project-cross-review-flutter-files-20261125.md)에따라구분하며이번에미검증대규모변경을끼워넣지않았다. 논술결과UI/엔진은검토만수행.
+- 다른출시후Flutter개선은[기존 전체diff](project-cross-review-flutter-files-20261125.md)에따라구분하며이번에미검증대규모변경을끼워넣지않았다. 논술결과UI/엔진은검토만수행.
 
 ## 이번 검증
 

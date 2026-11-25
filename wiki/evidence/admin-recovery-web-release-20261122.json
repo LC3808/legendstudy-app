@@ -1,0 +1,36 @@
+{
+  "sha": "75397907eba9ff1f7c2e68382db0f0714a68bd79",
+  "baseline": "e55b4622-d23a-4c56-9dcd-90d7a66a4e59",
+  "scope": [
+    "/admin/essay-runs/"
+  ],
+  "changedPages": [
+    "/admin/essay-runs/__next._full.txt",
+    "/admin/essay-runs/__next._tree.txt",
+    "/admin/essay-runs/__next.admin.essay-runs.__PAGE__.txt",
+    "/admin/essay-runs/index.html",
+    "/admin/essay-runs/index.txt"
+  ],
+  "addedAssets": 13,
+  "preservedPaths": 3155,
+  "workerSha256": "4729665ce5f151a4db0996d8d9521d6b4ed0c2e66e902c2314e2ad4228c9b676",
+  "priorWorkerSha256": "9361f8a2a030b889d47c5421c20a51ac584c26da9054cc9bb94199a1b55a2862",
+  "runtimeSource": "d6d0107 API inputs preserved except approved admin essay-run recovery adapter",
+  "runtimeSourceInputsChecked": 81,
+  "changedInputs": [
+    "functions/api/admin/essay-run.ts"
+  ],
+  "runtimeSourceChanges": 1,
+  "dependencyLockChanges": 0,
+  "settingsChanges": 0,
+  "rollbackDeployment": "e55b4622-d23a-4c56-9dcd-90d7a66a4e59",
+  "deployment": "cab719e1-aeb1-4639-89cf-85fb5baaa51c",
+  "status": "success",
+  "verifiedAt": "2026-11-22T11:56:30.483Z",
+  "manifestMatched": true,
+  "productionHtmlMatched": true,
+  "settingsUnchanged": true,
+  "paymentMode": "LIVE",
+  "financeAutomatic": "true",
+  "anonymousApiStatus": 401
+}

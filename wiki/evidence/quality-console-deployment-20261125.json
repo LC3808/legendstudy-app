@@ -1,0 +1,20 @@
+{
+  "deployment": "6e4b8189-5a6c-4f28-8d16-e15bf4508500",
+  "status": "success",
+  "source": "ecac36e5b31dbf980ee0eebbb433626bb33c477e",
+  "settings_unchanged": true,
+  "preserved_paths": 3167,
+  "unchanged_paths": true,
+  "/ql/": {
+    "status": 200,
+    "report_leak": false
+  },
+  "/api/admin/quality-report": {
+    "status": 401,
+    "body": "{\"code\":\"LOGIN_REQUIRED\"}"
+  },
+  "/pricing/": {
+    "status": 200,
+    "report_leak": false
+  }
+}
