@@ -373,6 +373,16 @@ AGENTS는08345b69와 현재 HEAD 간 차이가 없다. §2의 시작 순서·실
 
 `python3 tool/check_wiki_handoff.py --official`: 추가로 원격main을읽고 추적ref 최신성,공식 Wiki/AGENTS/검사기와working tree 동일성,미게시Wiki 파일 유무를 확인한다. 원격 접근 실패나미게시 상태를PASS로바꾸지 않는다. 모든항목과공식반영이통과해야HANDOFF_READINESS PASS다.
 
-13개격리테스트: 정상,필수항목누락,상이build,중복platform,근거누락,BUILT를RELEASED로사용,후보branch누락,pubspec불일치,commit부재,ancestry실패,미게시변경,오래된remote,중복구조화record. `python3 tool/test_release_handoff.py` PASS. 실제Git commit/ancestry도 별도로 검사했다.
+14개 격리 테스트: 정상,필수항목누락,상이build,중복platform,근거누락,BUILT를RELEASED로사용,후보branch누락,pubspec불일치,commit부재,ancestry실패,미게시변경,오래된remote,중복구조화record, 과거 APP82/HOLD 현재형 라우팅 재발. `python3 tool/test_release_handoff.py` PASS. 실제Git commit/ancestry도 별도로 검사했다.
 
 PASS는 구조·기록 일관성·Git·공식게시의 판정이며 외부 Store/DB/운영의 진실성을 자동 보증하지 않는다. 기록된 마지막 확인상태는 콘솔 재접속 없이 복원할 수 있다. 새 릴리스/복구/DB/배포 실행 직전에는 외부 최신성을 재확인한다. 독립 인수인계 결과와 최종 공식게시 확인은 아래에 기록한다.
+
+### 최종 독립 인수인계 및 게시 검증
+
+독립 검토자는 대화 이력 없이 작업branch AGENTS에서 공식main으로 이동했다. 첫 검토에서 index의 ‘최신 APP82’와 현재형‘APP 릴리스 HOLD’가 발견돼 FAIL이었다. a1cc96b에서 역사 링크로 분리하고 회귀 검사를 추가했다. 수정본을 다시 읽은 결과 **11/11 엄격 PASS**: 실제 버전/양OS빌드/source/출시기능/미출시/WEB·Worker/DB/장애/다음/branch/승인을 콘솔 재접속 없이 복원했다.
+
+공식main의 `--official` 검사는 WIKI_STRUCTURE / RELEASE_CONSISTENCY / GIT_BASELINE / OFFICIAL_WIKI / HANDOFF_READINESS 모두 PASS. current6650bytes,내부링크3824개(최종기록 추가 전). 14테스트 PASS. 이 결과는 운영 상태를 새로 검증했다는 뜻이 아니다. 마지막 확인시점과 재확인조건을 함께 복원했다.
+
+활동branch 안내도 게시: 운영cf9cfc6,APP후보ef956bf,WEB683085a의 AGENTS에 공식main 참조를 반영했다(후속 명료화 문서commit은 각HEAD참조). 임의의 과거branch 전체를 강제로 수정하지 않으며, 보관branch 재개 시 공식main AGENTS부터 읽는다.
+
+남은 운영문제는 정상화 작업의 미완료가 아닌 기존 후속 과제다: q1 실제복구 승인,Finance 로그 접근,APP89 기기QA/스토어승인,무료2DB승인,품질Q15후속. 새로운 문서체계나 제품배포 없이 정상화를 마쳤다.
