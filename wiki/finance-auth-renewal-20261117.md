@@ -215,3 +215,24 @@ WEB 테스트 소스 `6e6cf2d`: public-service-status/exam-endpoint에 과거exp
 배포 `5fd50a21-ef56-42f5-8913-91b0b11e1ad8` 00:14:11 KST success. postflight: 기존 정적3207경로 manifest 동일, deployment_configs 동일. `scripts/deployment/essay-credential-preserved.mjs`로 API 범위만 반영; 무료2 정적 안내는 아직 배포하지 않았다. 진단 배포를 서비스 복구 완료로 표시하지 않는다. Worker/DB 배포0.
 
 Owner 인계: 기존 `tool/cloudflare_essay/OWNER_JWT_RECOVERY.md`의 Essay Registry 절과 기존 helper를 재사용. 기존 서명키를 숨김 입력하고 동일 essay_worker role/검증된30일 후보의 읽기 HTTP200 통과 후 Pages Production 해당secret 하나만 Owner가 입력·저장한다. Math/Service Token/Finance 키를 변경하지 않는다. 비밀값 전달 금지. 저장 완료 후 현재 설정을 유지한 API 배포 및 학생 availability/APP 진입 재검증이 남는다. 인증정보 변경의 브라우저 입력·저장은 Owner handoff 대상이다.
+
+## 2026-11-26 22:43 KST P0 운영 장애 대응
+
+[현재 상태](current-status.md#p0-논술-lab-운영-장애--2026-11-26-2243-kst-owner-보고). Owner가 출시 iOS 및 모바일 WEB에서 장애를 재확인했다. 00:18 KST 학생 QA의 만료 판정 및 두 진입 API의 HTTP 503이 현재 확보된 직접 증거다. Owner 터미널 사용 가능 시점은 회신 기준 최소 한 시간 뒤다. 운영 Secret 교체와 재배포는 대기 중이다.
+
+- 등록 대상은 [Cloudflare Pages legendstudy-lab Production 설정](https://dash.cloudflare.com/b9d221b20fdf8b9a9a8df0971a6b2347/pages/view/legendstudy-lab/settings)의 Variables and Secrets에 있는 `ESSAY_REGISTRY_WORKER_JWT` 하나다. 동일 `essay_worker` 30일 후보의 읽기 200 확인 후 저장한다.
+- 저장 확인 후 WEB 운영 브랜치에서 실제 canonical 배포와 설정의 새 private 스냅샷을 확보한다. 기존 `scripts/deployment/essay-credential-preserved.mjs`에서 plan을 실행해 런타임 번들·라우팅·정적 manifest 보존을 확인하고 production 모드로 배포한다. 완료 후 canonical deployment ID와 설정 및 노출 경로를 대조한다. 이전 배포를 그대로 되돌리면 JWT 만료 상태도 되돌아갈 수 있다.
+- 학생 QA는 운영 WEB 및 출시 1.0.6 (Build 88)에서 대학 상태와 서비스 가능 대학 표시, 시험·문항, availability와 이용권, 답안 작성 및 제출 직전까지 확인한다. discovery와 availability의 503 해소를 확인하고 Owner iOS 결과를 기록한다. 실제 제출·기존 요청 재실행·이용권 및 원장 변경 0.
+- Supabase edge logs에서 11/22~26 구간을 나눠 조회했으나 이 장애는 Pages 사전검사에서 응답하므로 최초 503·사용자 수의 근거는 Pages 요청 로그다. 만료 시각은 기존 자격증명 exp 메타데이터로만 확인한다. Pages에서는 두 API별 최초 인증 오류·최초 503과 실패 요청을 집계하고, 보관된 구조화 필드가 있는 범위에서 대학·채널·고유 사용자 수를 확인한다. 마지막 정상 요청 11/22 17:53 KST는 Owner 보고이며 시작 시각과 규모는 미확인이다.
+
+### 재발 방지 설계 초안
+
+|인증 경로|확인된 근거|복구 후 확인할 사항|
+|---|---|---|
+|Pages Registry JWT|HS256 / essay_worker, 만료 확인, 30일 수동 후보|운영 exp, 승인된 자동 발급·전환 방식|
+|Essay Worker 인증|별도 Worker Registry JWT와 Pages→Worker Service Token|각 소비자의 role·실제 exp·발급/교체 절차, Service Token 회전 지원|
+|Finance JWT|private Worker/DO 자동 갱신, 11/23 성공, 당시 active 11/30 10:30:35 KST까지|관측 로그로 현재 메타데이터 재확인. 설정 변경 없음|
+|기타 서비스 간 인증|Math evaluation/extraction 별도 역할, 과거 수동 30일 후보|현재 사용 경로·실제 exp·소유자·자동 갱신 지원|
+|Provider 인증|Worker/Math 별도 Provider API key|활성 키 메타데이터, 만료 정책과 교체 지원. 읽기 인증 검사만 사용|
+
+Finance의 private binding, 단일 DO 직렬화, 검증 후 원자적 교체를 참고한다. Registry 서명 권한을 격리하고 role·TTL·대상 RPC를 고정한다. 기존 키의 프로젝트 범위 영향과 두 소비자 전환 방식을 검토한 뒤 적용 여부를 승인받는다. 30일 토큰은 D-7 갱신을 시작하고 새 후보의 서명·읽기 검증 성공 후 교체한다. 실패 시 남은 유효 토큰을 유지하고 재시도한다. 첫 실패와 D-3/D-1/6시간에 승인된 Owner 채널로 알린다. 독립 HTTPS 감시에서 운영 discovery와 승인 학생 권한 availability를 읽기 검사하고 실행 누락과 503을 탐지한다. 관리자 화면에는 소비자별 만료 시각·마지막 갱신·마지막 API 검사와 안전한 오류 코드만 제공한다. 운영 변경·알림 활성화는 별도 승인을 받는다.
