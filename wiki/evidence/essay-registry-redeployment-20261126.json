@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-11-26T14:40:18.174101+00:00",
+  "baseline": "5fd50a21-ef56-42f5-8913-91b0b11e1ad8",
+  "deployment": "6ac93a1b-15a8-488a-99c0-b306213683f1",
+  "canonical_matches": true,
+  "stage": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-26T14:39:58.393774Z",
+    "status": "success"
+  },
+  "source": "513e641fe3bec9f33906ca37a5e828f64702ac09",
+  "static_paths": 3207,
+  "static_manifest_identical": true,
+  "all_deployment_configs_identical": true,
+  "function_routing_identical": true,
+  "web_qa": "Owner browser: credit92 and Sogang exam list visible; availability/discovery success not confirmed. Authenticated student and APP88 QA NOT_TESTED.",
+  "direct_http_probe": "Local urllib returned HTTP403 for root/runtime/discovery; not evidence of authenticated API recovery."
+}

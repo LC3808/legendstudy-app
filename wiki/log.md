@@ -6069,3 +6069,7 @@ APP75(1.0.2/75, source c9b4830) 서명·iPhone 설치/실행 PASS, 과목명 후
 
 ## 2026-11-26 — P0 Finance/첨삭 인증 분리 검증
 Finance11/23 갱신 성공·11/30 만료를 기존 로그로 확인. WEB discovery/exam availability503와 EXAM_WORKER_PREFLIGHT binding=true/credential=false 확인;Pages 첨삭 전용 credential 사전검사 실패,세부 만료 사유 미확인. APP88 공유API 영향,실기기 NOT TESTED. 격리5파일111 PASS,WEB test commit6e6cf2d. 학생 실행·원장·설정·배포 변경0. [근거/복구안](finance-auth-renewal-20261117.md).
+
+
+## 2026-11-26 — Registry 설정 보존 Production 재배포
+Owner 승인으로 기준5fd50a21의 기존 plan 검증 및 동일소스513e641f 재배포6ac93a1b success. 정적3207·라우팅·Production/Preview 설정 동일. 학생 인증 discovery/availability 및 APP88 복구 확인 NOT_TESTED. 실제 제출/DB/Worker 변경0. [상세](finance-auth-renewal-20261117.md#registry-secret-저장-후-보존-재배포--2026-11-26-2340-kst).

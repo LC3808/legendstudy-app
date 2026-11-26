@@ -236,3 +236,14 @@ Owner 인계: 기존 `tool/cloudflare_essay/OWNER_JWT_RECOVERY.md`의 Essay Regi
 |Provider 인증|Worker/Math 별도 Provider API key|활성 키 메타데이터, 만료 정책과 교체 지원. 읽기 인증 검사만 사용|
 
 Finance의 private binding, 단일 DO 직렬화, 검증 후 원자적 교체를 참고한다. Registry 서명 권한을 격리하고 role·TTL·대상 RPC를 고정한다. 기존 키의 프로젝트 범위 영향과 두 소비자 전환 방식을 검토한 뒤 적용 여부를 승인받는다. 30일 토큰은 D-7 갱신을 시작하고 새 후보의 서명·읽기 검증 성공 후 교체한다. 실패 시 남은 유효 토큰을 유지하고 재시도한다. 첫 실패와 D-3/D-1/6시간에 승인된 Owner 채널로 알린다. 독립 HTTPS 감시에서 운영 discovery와 승인 학생 권한 availability를 읽기 검사하고 실행 누락과 503을 탐지한다. 관리자 화면에는 소비자별 만료 시각·마지막 갱신·마지막 API 검사와 안전한 오류 코드만 제공한다. 운영 변경·알림 활성화는 별도 승인을 받는다.
+
+
+## Registry Secret 저장 후 보존 재배포 — 2026-11-26 23:40 KST
+
+**배포 DONE / 서비스 복구 확인 PARTIAL.** Owner의 Secret 저장 완료 및 보존 검증 후 Production 배포 지시에 따라 기존 `essay-credential-preserved.mjs`를 실행했다. 원격 main 최신화 후 실제 WEB HEAD와 기준 배포 소스가 모두 `513e641fe3bec9f33906ca37a5e828f64702ac09`임을 확인했다. 제품 코드 변경0.
+
+- 기준 `5fd50a21-ef56-42f5-8913-91b0b11e1ad8`의 최신 프로젝트 설정·파일 manifest·Functions 라우팅을 private 임시 백업. 기존 Wrangler OAuth 정상 갱신 후 관리 API 읽기 성공. Secret 값 출력/교체0.
+- Pages Functions compile PASS. 기존 script plan PASS: 정적3207경로 보존, 변경0; API·cloudflare·lockfile 및 `_headers`/`_redirects`/`_routes.json` 소스 차이0. 함수 라우팅 동일. Toss LIVE, Finance automatic=true 및 두 service binding 유지.
+- Production `6ac93a1b-15a8-488a-99c0-b306213683f1`, 23:39:58 KST success. canonical 전환 확인. 사후 정적3207 manifest·Functions 라우팅·전체 deployment_configs(Production/Preview) 동일. 배포가 저장된 Production Secret을 소비하도록 동일 소스를 재배포했으며 설정 PATCH 없음.
+- [비밀 없는 사후 영수증](evidence/essay-registry-redeployment-20261126.json). 현재 로그인된 Chrome Owner 화면에서 이용권92 및 서강 시험목록 확인. 대학 상태는 확인 중, 2026수시 계열은 비활성 상태여서 discovery/availability 정상 복구를 확정하지 않았다. 별도 urllib HTTP 검사는 세 경로 모두403이어서 학생 인증 API 판정 근거로 사용하지 않는다.
+- 학생 권한 discovery/availability HTTP200 및 출시 APP88 iOS/Android 진입은 **NOT_TESTED**, 후속 확인 필요. 실제 제출·기존 요청 재실행·예약/차감·결제/환불·DB/Worker 변경0. 이전 배포 롤백은 만료 Secret 상태로 돌아갈 수 있으므로 단순 원복 금지, 현재 저장된 Secret을 보존하는 재배포 기준으로 검토한다.
