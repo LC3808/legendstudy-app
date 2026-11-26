@@ -19,7 +19,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-P0 운영 진입 장애(11/26): [Finance 갱신 성공·학생 Registry JWT 만료 확정·진단 배포·복구안](finance-auth-renewal-20261117.md).
+P0 운영 진입 장애 복구 DONE(11/26 Owner 확인): [Registry JWT 갱신·보존 재배포·정상 작동 확인·재발 방지 후속](finance-auth-renewal-20261117.md).
 
 공식 Wiki는 APP 저장소 origin/main입니다. 작업 브랜치 Wiki는 작업 중 상태이며 공식 반영을 대신하지 않습니다. [현재 상태](current-status.md) → [출시88 기록](pdf-white-screen-hotfix-20261117.md) → [다음 후보89](app-release-89-preparation-20261125.md).
 

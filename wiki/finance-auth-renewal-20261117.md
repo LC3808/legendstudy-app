@@ -1,6 +1,6 @@
 # Finance 인증 자동 갱신 — 2026-11-17
 
-상태 **DONE — 단계적 운영 적용 완료. Shadow 통과 후 Automatic 활성화·운영 읽기·재시작 복원 확인**. 11/23 자연주기 갱신은 아래 11/25~26 P0 운영 로그 조사로 확인했다. 학생 첨삭 진입 장애는 별도 Registry 자격증명 사전검사 실패로 확인했으며 미복구/PARTIAL이다.
+상태 **DONE — 단계적 운영 적용 완료. Shadow 통과 후 Automatic 활성화·운영 읽기·재시작 복원 확인**. 11/23 자연주기 갱신은 아래 11/25~26 P0 운영 로그 조사로 확인했다. 학생 첨삭 진입 장애는 별도 Registry JWT 만료로 확인했고, 11/26 Secret 저장·보존 재배포 후 Owner 정상 작동 확인으로 복구 DONE이다. 아래 과거 PARTIAL/BLOCKED는 당시 기록이다.
 기존 [LIVE 승인·환불 기록](toss-live-owner-qa-preflight-20261115.md)과 [인증 수명 검토](essay-jwt-lifecycle-review-20261023.md)를 계승한다. Owner가 WEB `923f87a` 기준 Worker/DO/Secret/private binding/Shadow 및 Shadow 통과 후 Automatic 전환을 명시 승인했다. 아래 승인 전 준비 기록은 역사적 근거이며 최신 실제 상태는 후속 영수증을 따른다. 실제 결제·환불 시험은 금지되어 수행하지 않았다.
 
 ## 기존 계약 및 실제 확인
@@ -247,3 +247,10 @@ Finance의 private binding, 단일 DO 직렬화, 검증 후 원자적 교체를 
 - Production `6ac93a1b-15a8-488a-99c0-b306213683f1`, 23:39:58 KST success. canonical 전환 확인. 사후 정적3207 manifest·Functions 라우팅·전체 deployment_configs(Production/Preview) 동일. 배포가 저장된 Production Secret을 소비하도록 동일 소스를 재배포했으며 설정 PATCH 없음.
 - [비밀 없는 사후 영수증](evidence/essay-registry-redeployment-20261126.json). 현재 로그인된 Chrome Owner 화면에서 이용권92 및 서강 시험목록 확인. 대학 상태는 확인 중, 2026수시 계열은 비활성 상태여서 discovery/availability 정상 복구를 확정하지 않았다. 별도 urllib HTTP 검사는 세 경로 모두403이어서 학생 인증 API 판정 근거로 사용하지 않는다.
 - 학생 권한 discovery/availability HTTP200 및 출시 APP88 iOS/Android 진입은 **NOT_TESTED**, 후속 확인 필요. 실제 제출·기존 요청 재실행·예약/차감·결제/환불·DB/Worker 변경0. 이전 배포 롤백은 만료 Secret 상태로 돌아갈 수 있으므로 단순 원복 금지, 현재 저장된 Secret을 보존하는 재배포 기준으로 검토한다.
+
+
+## Owner 정상 작동 확인 — 2026-11-26
+
+**DONE — 복구 확인 수령.** Production `6ac93a1b-15a8-488a-99c0-b306213683f1` 재배포 보고 후 Owner가 “확인 완료, 정상 작동.”이라고 확인했다. 배포 직후 서비스 복구 확인 PARTIAL을 이 Owner 결과로 마감한다. 앞선 에이전트의 독립 API/기기 검증 한계는 역사적 증거로 보존한다.
+
+Owner가 기기·계정·실제 제출 여부를 개별 명시하지 않았으므로 학생 API HTTP200 계측·iOS/Android 각각의 실기기 PASS·실제 첨삭 완료로 확대 기록하지 않는다. 이번 후속은 Wiki 기록만 변경했으며 추가 배포·Secret/설정·DB·원장·학생 요청 실행0. Registry 자동 갱신/만료 감시 및 영향 로그 분석은 기존 후속 과제로 유지한다.

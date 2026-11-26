@@ -4,11 +4,10 @@
 
 ## P0 논술 LAB 운영 장애 — 2026-11-26 22:43 KST Owner 보고
 
-- **운영 배포 DONE / 서비스 복구 확인 PARTIAL.** Owner가 `ESSAY_REGISTRY_WORKER_JWT` 저장 완료를 보고했다. 23:39:58 KST `6ac93a1b` 재배포 성공, 정적3207·라우팅·전체 설정 보존 확인. 학생 인증 503 해소 및 출시 APP 검증은 남았다. Owner가 실제 출시 iOS 앱과 모바일 WEB에서 서비스 상태 조회 실패를 확인했다. 이번 주 신규 첨삭 요청 0건 및 마지막 정상 요청 11/22 17:53 KST는 Owner 보고다. 장애 시작이나 영향 건수는 이 시각으로 산정하지 않는다.
-- 11/26 00:18 KST 학생 QA에서 Pages Production `ESSAY_REGISTRY_WORKER_JWT` 만료 및 discovery/availability HTTP 503이 확인됐다. 최신 Owner 증상은 기존 장애와 일치한다. 최신 preflight 및 HTTP 응답은 독립 재확인 대기. [기존 조사](finance-auth-renewal-20261117.md).
-- Owner는 [터미널 절차](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md)의 Essay Registry 항목으로 동일 `essay_worker` 권한의 30일 JWT를 발급하고 읽기 HTTP 200 확인 후 `legendstudy-lab` Pages Production의 해당 Secret을 저장하는 절차를 수행했다는 보고를 받았다. 현 운영 설정과 아티팩트를 보존하는 Production 재배포 완료. [사후 증거](finance-auth-renewal-20261117.md#registry-secret-저장-후-보존-재배포--2026-11-26-2340-kst). Finance 설정 변경 없음.
-- 배포 후 승인된 학생 권한 계정으로 WEB 및 출시 APP에서 대학 상태·표시, 시험·문항, 첨삭 가능 여부, 이용권과 답안 작성 및 제출 직전까지 확인한다. Owner iOS 확인과 503 해소 확인이 남았다. 기존 학생 요청 재실행 및 이용권·원장 변경 없음.
-- APP 출시 준비, 무료 첨삭권 정책, 배지, 품질 콘솔 및 신규 기능 작업은 복구 우선으로 보류한다. 로그 기반 영향 분석과 Registry 자동 갱신·감시 설계는 후속으로 추적한다. 운영 자동화 적용은 별도 승인 대상이다.
+- **DONE — Owner 정상 작동 확인.** `ESSAY_REGISTRY_WORKER_JWT` 저장 후 23:39:58 KST Production `6ac93a1b` 재배포 성공. 정적3207경로·Functions 라우팅·Production/Preview 설정 동일. 이후 Owner가 “확인 완료, 정상 작동.”으로 복구를 확인했다. [배포·Owner 확인](finance-auth-renewal-20261117.md#owner-정상-작동-확인--2026-11-26).
+- 기존 원인은 Pages Registry JWT 만료에 따른 discovery/availability503이다. Finance 설정 변경 없음. 이번 주 신규 요청0·마지막 정상 요청11/22 17:53 KST는 당시 Owner 보고이며 장애 시작/영향 건수 산정 근거로 확대하지 않는다.
+- Owner 확인에 기기·계정·실제 제출 여부의 개별 명시는 없다. 별도 학생 API HTTP200 계측, 양OS 실기기 전수 검증, 실제 첨삭 제출/완료까지 PASS로 확대하지 않는다. 에이전트의 실제 제출·기존 요청 재실행·이용권/원장 변경0.
+- 로그 기반 영향 분석과 Registry 자동 갱신·감시는 후속 과제다. 이번 정상 복구 확인은 신규 기능·운영 자동화·기존 학생 요청 재실행의 추가 승인이 아니다.
 
 ## APP 실제 출시와 다음 후보
 
@@ -21,12 +20,12 @@
 - WEB: 동일 소스 `513e641f`/Pages `6ac93a1b` Secret 저장 후 재배포, 기존 품질V1 및 정적3207경로 보존. [배포·검증](quality-console-v1-20261125.md). 후속 문서 HEAD를 배포 소스와 혼동하지 않는다.
 - Essay Worker: `29f4f6cc-433f-4e8e-8da4-9ca5710f2e71`,11/22 배포·11/25 확인. 관리자 복구/정확 인용 보정 운영, 부분 재생성·신규 상한은 비활성. [런타임](admin-recovery-runtime-fix-20261122.md).
 - DB: 프로젝트 stlhijzpjfgwwdgunlsd. [D-Day 설치](admissions-dday-implementation-20261120.md)와 [복구 설치](admin-run-recovery-deployment-20261122.md) 확인. [무료2 SQL](signup-credit-policy-two-20261125.md)은 승인 대기. 모든 migration이 적용됐다는 뜻은 아니다.
-- 결제: Toss LIVE 유지. Finance Worker `d14a757e-5b46-448c-8b66-325d181c2a9f` **11/23 10:30:35 자연주기 갱신 성공**,active 만료11/30 10:30:35 KST를 기존 로그에서 확인. [P0 교차검증](finance-auth-renewal-20261117.md). 별도 Pages Registry credential invalid로 WEB/공유 APP 첨삭 진입503,미복구/P0. **학생 QA에서 EXPIRED 확정**, Owner Secret 저장 후 재배포 완료 / 학생 복구 검증 대기.
+- 결제: Toss LIVE 유지. Finance Worker `d14a757e-5b46-448c-8b66-325d181c2a9f` **11/23 10:30:35 자연주기 갱신 성공**,active 만료11/30 10:30:35 KST를 기존 로그에서 확인. [P0 교차검증](finance-auth-renewal-20261117.md). 별도 Pages Registry JWT 만료 장애는 Secret 저장·보존 재배포 후 **Owner 정상 작동 확인으로 복구 DONE**.
 
 ## 진행·미완료·승인·다음 작업
 
 1. q1 요청03629605…는 reserved,완료1/2. 복구 연결 수정과 실제 완료는 다르다. Owner 승인 후 직전 잠금·완료문항 해시·이용권0 재확인→기존 복구1회. 이번 실행 없음.
-2. **P0 첨삭 진입503**: Worker binding=true/Registry credentialIssue=EXPIRED. Owner Registry Secret 저장 및 설정 보존 배포 완료→학생 비파괴 재검증. Finance 성공 확인으로 로그접근 BLOCKED 해소;학생 재실행 없음.
+2. **Registry 장애 복구 DONE(Owner 확인)**. 후속: 영향 로그 분석·자격증명 만료 감시/자동 갱신 검토. 운영 적용은 별도 승인.
 3. APP89 실기기 업데이트·PDF/로그인/학습/수동 및 자동 D-Day 회귀. 스토어 제출 별도 승인.
 4. 무료2 신규 지급 정책은 [준비된 SQL/검증/원복](signup-credit-policy-two-20261125.md) Owner 승인·적용 후 확인. 기존 지급분/원장 보존.
 5. [품질V1](quality-console-v1-20261125.md) PARTIAL:70요청118문항 대조,내용20요청38문항 검토. Q15 개별 저장·Owner 집계·나머지 내용/Claude 검토 미완료. 새 DB는 exact SQL 준비 후 별도 승인.
@@ -74,7 +73,7 @@
     "source": "513e641fe3bec9f33906ca37a5e828f64702ac09",
     "deployment": "6ac93a1b-15a8-488a-99c0-b306213683f1",
     "state": "DEPLOYED",
-    "evidence": "quality-console-v1-20261125.md"
+    "evidence": "finance-auth-renewal-20261117.md"
   },
   "worker": {
     "essay_version": "29f4f6cc-433f-4e8e-8da4-9ca5710f2e71",
@@ -94,7 +93,7 @@
     "품질 콘솔 Q15/Owner 집계 미완료"
   ],
   "blocked": [
-    "첨삭 진입503: Pages Registry JWT EXPIRED;Secret 저장/재배포 완료;학생 복구 확인 대기"
+    "None"
   ],
   "approval": [
     "q1 실제 복구",
@@ -104,7 +103,7 @@
     "Q15 DB/Owner 역할 계약"
   ],
   "next": [
-    "P0 Registry 재배포 후 학생 인증 WEB/APP 비파괴 복구 검증",
+    "Registry 재발 방지 및 영향 분석 후속 검토(운영 적용 별도 승인)",
     "q1 승인 후 직전 조건 재확인",
     "APP89 실기기 회귀",
     "무료2 DB 승인 패키지 검토"

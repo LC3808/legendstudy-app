@@ -6073,3 +6073,7 @@ Finance11/23 갱신 성공·11/30 만료를 기존 로그로 확인. WEB discove
 
 ## 2026-11-26 — Registry 설정 보존 Production 재배포
 Owner 승인으로 기준5fd50a21의 기존 plan 검증 및 동일소스513e641f 재배포6ac93a1b success. 정적3207·라우팅·Production/Preview 설정 동일. 학생 인증 discovery/availability 및 APP88 복구 확인 NOT_TESTED. 실제 제출/DB/Worker 변경0. [상세](finance-auth-renewal-20261117.md#registry-secret-저장-후-보존-재배포--2026-11-26-2340-kst).
+
+
+## 2026-11-26 — Registry 복구 Owner 확인
+Owner가 배포6ac93a1b 후 “확인 완료, 정상 작동.” 확인. 장애 복구 DONE으로 마감; 개별 기기/API 계측/실제 첨삭 제출 PASS로 확대하지 않음. 추가 운영 변경0. [확인 기록](finance-auth-renewal-20261117.md#owner-정상-작동-확인--2026-11-26).
