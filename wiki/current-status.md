@@ -2,6 +2,14 @@
 
 공식 기준은 **LC3808/legendstudy-app origin/main의 wiki/**다. 작업 브랜치의 사본은 공식 상태를 대신하지 않는다. 아래는 **2026-11-26 마지막 확인 상태**이며 외부 운영을 실시간 보증하지 않는다. [index](index.md) · [정상화 절차/검사 한계](project-cross-review-20261125.md).
 
+## P0 논술 LAB 운영 장애 — 2026-11-26 22:43 KST Owner 보고
+
+- **복구 대기.** Owner가 실제 출시 iOS 앱과 모바일 WEB에서 서비스 상태 조회 실패를 확인했다. 이번 주 신규 첨삭 요청 0건 및 마지막 정상 요청 11/22 17:53 KST는 Owner 보고다. 장애 시작이나 영향 건수는 이 시각으로 산정하지 않는다.
+- 11/26 00:18 KST 학생 QA에서 Pages Production `ESSAY_REGISTRY_WORKER_JWT` 만료 및 discovery/availability HTTP 503이 확인됐다. 최신 Owner 증상은 기존 장애와 일치한다. 최신 preflight 및 HTTP 응답은 독립 재확인 대기. [기존 조사](finance-auth-renewal-20261117.md).
+- Owner는 [터미널 절차](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md)의 Essay Registry 항목으로 동일 `essay_worker` 권한의 30일 JWT를 발급하고 읽기 HTTP 200 확인 후 `legendstudy-lab` Pages Production의 해당 Secret을 저장한다. 저장 확인 후 운영 설정과 아티팩트를 보존해 배포한다. Finance 설정 변경 없음.
+- 배포 후 승인된 학생 권한 계정으로 WEB 및 출시 APP에서 대학 상태·표시, 시험·문항, 첨삭 가능 여부, 이용권과 답안 작성 및 제출 직전까지 확인한다. Owner iOS 확인과 503 해소 확인이 남았다. 기존 학생 요청 재실행 및 이용권·원장 변경 없음.
+- APP 출시 준비, 무료 첨삭권 정책, 배지, 품질 콘솔 및 신규 기능 작업은 복구 우선으로 보류한다. 로그 기반 영향 분석과 Registry 자동 갱신·감시 설계는 후속으로 추적한다. 운영 자동화 적용은 별도 승인 대상이다.
+
 ## APP 실제 출시와 다음 후보
 
 **iOS/Android 1.0.6, Build88 RELEASED.** iOS11/18,Android11/17 출시. 출시 소스 `08345b69b1d71c9038be50767bd849a7354d2b8e`. 최종 포함 기능·제외·QA 한계의 단일 참조는 [88 릴리스 기록](pdf-white-screen-hotfix-20261117.md)이다. PDF/학습/기존 학교TOP10/MY 개선을 재개발 대상으로 등록하지 않는다.
