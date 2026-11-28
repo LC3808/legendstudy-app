@@ -33,7 +33,7 @@
 
 ## 개발 기준과 인수인계
 
-- 로컬 환경 정리11/28 종료: Phase2~4 APFS 누적+178.09GB, 여유192.21GB. 보존 검증PASS; SDK5/Simulator5/Runtime2 유지. 고유 SDK파일6개 보존·200GB 목표PARTIAL. [결과·보류·다음 로컬DB 기동 확인](development-storage-cleanup-20261128.md). 제품/운영 변경0; 추가 대규모 정리 없음.
+- 로컬 환경 정리11/28 CLOSED: 최종 APFS 누적+180.95GB, 여유194.81GB. SDK4/Simulator5/Runtime2 유지. 3.32중복 통합·고유 이력/설정 보존·경로 검증PASS. [결과·다음 정상 빌드/로컬DB 기동 확인](development-storage-cleanup-20261128.md). 제품/운영 변경0; 추가 대규모 정리 없음.
 
 - 공식 문서와 출시된 APP 기준: `origin/main`. main은 출시88을 포함한다. 이후 Wiki 커밋은 버전 증가나 운영 배포가 아니다.
 - APP 후보89: `codex/operations-commercial-20261113`; 운영/SQL/Worker: `codex/material-service-app-20261022`; WEB 별도 저장소: `codex/lab-admin-operations-20261114`.

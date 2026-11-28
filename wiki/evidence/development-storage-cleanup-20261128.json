@@ -5272,5 +5272,52 @@
       "Docker DB startup/logical checks"
     ],
     "closure": "No further large cleanup to chase capacity target"
+  },
+  "flutter332_final": {
+    "status": "CLOSED",
+    "start": {
+      "time": 1795875086.0847812,
+      "capacity": 994662584320,
+      "free": 191955271680
+    },
+    "end": {
+      "time": 1795875297.3274398,
+      "capacity": 994662584320,
+      "free": 194808897536
+    },
+    "gain_bytes": 2853625856,
+    "cumulative_gain_bytes": 180948439040,
+    "verification": {
+      "issues": [],
+      "reference_files": 40,
+      "sdk_refs_checked": 36,
+      "personal_checkout_unchanged": true,
+      "symlink": "/Users/woojinchang/fvm/versions/3.32.0",
+      "fvm_default": "/Users/woojinchang/fvm/versions/3.32.0",
+      "end": {
+        "time": 1795875297.3274398,
+        "capacity": 994662584320,
+        "free": 194808897536
+      },
+      "gain_bytes": 2853625856,
+      "cumulative_gain_bytes": 180948439040
+    },
+    "source": "~/development/flutter",
+    "target": "~/fvm/versions/3.32.0",
+    "preserved_git_commits": {
+      "count": 25,
+      "destination": "/Users/woojinchang/fvm/versions/3.47.7",
+      "prefix": "refs/sdk-preservation/development-flutter-20261128/",
+      "head_unchanged": true
+    },
+    "preserved_platform_files": 757,
+    "preserved_ide_files": 64,
+    "untracked_files_recoverable": 2005,
+    "tracked_source_changed": false,
+    "path_changed": false,
+    "personal_checkout_changed": false,
+    "sdk_instances": 4,
+    "full_build": "NOT_TESTED",
+    "docker_started": false
   }
 }

@@ -245,3 +245,42 @@ APFS disk3 CapacityFree의 단계별 차이를 합산했다. 단계 사이 시�
 Phase4 실행 전 판단 자료 단계에서 관련 로컬 작업/클라이언트 연결이 없어 자동 시작8컨테이너를 정지하고 Docker 앱·backend·VM 종료를 확인했다. 컨테이너9개/Volume30개 보존. **Kong은60초 대기 후 exit137, PostgreSQL 정상 종료 완료 메시지는 확인하지 못했음**을 유지한다. DB 자체 종료 요청을 했으나 정상 종료 완료·데이터 논리 상태는 NOT_TESTED. 다음 로컬 Supabase 개발 재개 시 DB 기동·복구 로그·기존 데이터 상태를 확인한다. 이 기록을 정상 종료 PASS로 정정하지 않는다.
 
 이번 Phase4에서는 Docker 재실행0, 컨테이너/Volume/DB 삭제0, Claude VM·sessiondata.img 변경0. Owner가 확인한 실기기OS는 기록 완료이며 추가 기기 질문 없음. 대규모 정리는 여기서 종료한다. 별도 중복 관리 문서 생성0.
+
+
+## Flutter3.32.0 중복 SDK 최종 통합 — 2026-11-28 (CLOSED)
+
+Owner의 해당 항목 한정 추가 승인에 따라 `~/development/flutter` 실체만 제거하고 `~/fvm/versions/3.32.0`으로 연결하는 호환 symlink를 유지했다. PATH·개인 Documents checkout·제품 코드·tracked 설정 변경0. 이 항목 완료 후 CLOSED를 유지하며 추가 전수 조사·삭제는 하지 않는다.
+
+| 실제 APFS 측정 | GB | bytes |
+| --- | ---: | ---: |
+| 이번 시작 여유 | 191.955 | 191955271680 |
+| 이번 종료 여유 | 194.809 | 194808897536 |
+| 실제 추가 확보 | 2.854 | 2853625856 |
+| 전체 누적 확보 | 180.948 | 180948439040 |
+
+SDK 실체 삭제 전 용량4.709GB와 APFS 확보량은 다르다. 필요한 지원 파일을 보존했고 APFS 공유 블록·시스템 쓰기가 반영된다. 누적치는 기존178.094813184GB에 이번 실제 차이를 더했다.
+
+### 사전 검증 및 보존
+
+- 두 SDK HEAD `be698c48a6750c8cb8e61c740ca9991bb947aba2` 일치, tracked 소스 수정0, 실제3.32.0/Dart3.8.0/engine18818009 확인.
+- 기존 보류6파일은 모두 과거Flutter3.47.0~3.47.3(일부3.47.4) 소스와 동일하며 보존3.47.7 Git blob에서 바이트 일치 확인. 별도 로컬 패치가 아님. 전체 미추적2,005개도 보존SDK 파일 또는 Git 객체에서 복원 가능함을 재검증했다.
+- 추가로 다른 보존SDK에 없는 Git commit25개를 발견해 로컬 fetch로 `fvm/versions/3.47.7`의 `refs/sdk-preservation/development-flutter-20261128/` 아래 보존했다. 대상 HEAD/제품 소스 변경 없음. source refs와 파일별 복원 위치는 기존 로컬 작업 evidence에 보존했다.
+- 기준3.32.0에 부족한 동일엔진 플랫폼 지원757파일 및 SDK 자체 IDE 설정64파일을 APFS clone-copy로 보존하고 해시 대조PASS. 기존 파일 덮어쓰기0. 나머지 ignored 차이는 버전조회stamp·도구snapshot·Dart/Gradle 생성 metadata·coverage·Finder metadata로 고유 패치/설정 아님. 추가 미보존 고유 파일0.
+- 기준 SDK 실행을 먼저 확인한 뒤 원본을 임시 이름으로 rename하고 기존 경로에 symlink 생성. **기존 경로 및 PATH 실행·버전·참조 해시 확인에 성공한 후에만 원본 실체를 삭제**했다. 임시 디렉터리 잔여0. FVM 채널 경로에 임의 링크 생성0.
+
+### 최종 유지 SDK 실체4개
+
+| 경로 | 버전 |
+| --- | --- |
+| `~/fvm/versions/3.32.0` | 3.32.0 |
+| `~/development/flutter-3.47` | 3.47.5 |
+| `~/fvm/versions/3.47.6` | 3.47.6 |
+| `~/fvm/versions/3.47.7` | 3.47.7 |
+
+호환 링크2개: `development/flutter`→FVM3.32.0, 기존 `development/flutter-muselry`→FVM3.47.7. 기존 PATH는 전자 경로 그대로이며 `fvm/default`도3.32.0 유지.
+
+### 검증·종료
+
+기존 경로 `flutter --version --machine` 및 PATH 실행3.32.0 PASS. FVM4.1.0 및 현재 service-app의 `fvm flutter --version --machine`3.47.7 PASS. 참조·설정40파일 해시, 기존SDK참조36개, 개인Documents checkout HEAD/dirty 상태 불일치0. 기준 SDK tracked 변경0, 추가 untracked0. 지원/IDE 파일821개 해시 대조PASS. 이번에는 승인 SDK 범위와 기존 참조만 검증했으며 제품 전체 재조사를 수행했다고 주장하지 않는다.
+
+전체 앱 재빌드·실기기 검증은 NOT_TESTED. 다음 정상 APP 개발에서 통합 후 빌드를 확인한다. Docker 재실행0; 다음 로컬 Supabase 개발에서 PostgreSQL 정상 기동·데이터 상태 확인이라는 기존 잔여 조건을 유지한다. 본 항목의 추가 Owner 판단 사항 없음. CLOSED 유지.
