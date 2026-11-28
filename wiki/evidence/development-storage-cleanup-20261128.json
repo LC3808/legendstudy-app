@@ -1,0 +1,3243 @@
+{
+  "date": "2026-11-28",
+  "status": "PARTIAL",
+  "reason": "Safe cleanup completed; 150 GB minimum gain and 200 GB target not reached; protected/uncertain state retained",
+  "before": {
+    "time": 1795869388.7934961,
+    "capacity": 994662584320,
+    "free": 15117053952
+  },
+  "after": {
+    "time": 1795870840.005237,
+    "capacity": 994662584320,
+    "free": 152163135488
+  },
+  "actual_gain_bytes": 137046081536,
+  "phase_intervals": {
+    "A": {
+      "count": 68,
+      "allocated_bytes": 73411104768,
+      "observed_interval_gain": 73387712512
+    },
+    "B": {
+      "count": 49,
+      "allocated_bytes": 6298800128,
+      "observed_interval_gain": 6225129472,
+      "additional_system_cache_allocated_bytes": 7044743168
+    },
+    "C": {
+      "count": 13,
+      "allocated_bytes": 4790255616,
+      "observed_interval_gain": 4855840768
+    },
+    "D": {
+      "count": 1,
+      "allocated_bytes": 1553543168,
+      "observed_interval_gain": 1562198016
+    },
+    "E": {
+      "count": 26,
+      "allocated_bytes": 19698192384,
+      "observed_interval_gain": 19771904000
+    },
+    "F": {
+      "count": 42,
+      "allocated_bytes": 9494257664,
+      "observed_interval_gain": 1029468160
+    },
+    "G": {
+      "count": 6,
+      "allocated_bytes": 895791104,
+      "observed_interval_gain": 929316864
+    },
+    "I": {
+      "count": 37,
+      "allocated_bytes": 20141838336,
+      "observed_interval_gain": 21407891456,
+      "conda_reported_logical_bytes": 726617681
+    }
+  },
+  "verification": {
+    "pre_wiki_issues": [],
+    "protected_hash_entries": 11569,
+    "archive_symbol_inventory_entries": 7909,
+    "remaining_repositories": 57,
+    "build_and_app_execution": "NOT_TESTED"
+  },
+  "removed_repositories": [
+    "~/development/flutter-latest",
+    "~/development/legendstudy-analytics-claude-20261030",
+    "~/development/legendstudy-app-ux-beta-20261028",
+    "~/development/legendstudy-admin-ui-20261023"
+  ],
+  "retained_repositories": [
+    {
+      "path": "~/.codex/worktrees/admin-analytics-phase2-web/legendstudy-service-lab-20261022",
+      "head": "03bdf8f07172d767d67c2a3225e5e6eabd3794fc",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/admin-withdrawal-management-20261111/legendstudy-lab",
+      "head": "35edbe9b3dde5a7d2e59c798b5f94774d444454b",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022",
+      "head": "ba2039e54c319439e670985c03bf5a681ec2bd7d",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app",
+      "head": "d748abb3ce4ce7123f4d5b11ddeccc4f1b434e42",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/ce2a/레전드스터디 앱",
+      "head": "aeb8be2dade4dfd39ea6c98eba2d738a83fb7a85",
+      "common_git": "~/Documents/ChatGPT/레전드스터디 앱/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app",
+      "head": "1eb8e1ffc7375b3518ad6666a521ccc3f82f0058",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/essay-public-natural/legendstudy-service-lab-20261022",
+      "head": "62a3296f88857db97b600356e760644eeb16e470",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱",
+      "head": "2c3ce78d7c799eb251e7c660ed8373523696cd56",
+      "common_git": "~/Documents/ChatGPT/레전드스터디 앱/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/feedback-admin-audit-20261104/legendstudy-service-app-20261022",
+      "head": "f3cb366a773dc84100437817c2df33400a09976d",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/kau-owner-review-20261112/legendstudy-app",
+      "head": "e7af464291a9c8d625868c5eb61ce6237841c2b9",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/lab-admin-operations-20261114/legendstudy-release-20261024",
+      "head": "513e641fe3bec9f33906ca37a5e828f64702ac09",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/materials-daily-sync-20261108/legendstudy-service-app-20261022",
+      "head": "6fb848f66c6565384343d37d50d90641a1cab28a",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022",
+      "head": "b894ffb4e224cbc5def68e0c9920a8999649660f",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/task20-priority-release/legendstudy-service-lab-20261022",
+      "head": "6093e84be6b5c5be37faff95a9a56ad5d86c3a46",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/.codex/worktrees/task20-web-availability/legendstudy-service-lab-20261022",
+      "head": "745fbf325719288d9227cbfd13ccb493fc762ff4",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/Documents/ChatGPT/레전드스터디 앱",
+      "head": "d07671e985929ad1aa4ba2c811919cc592a37b34",
+      "common_git": "~/Documents/ChatGPT/레전드스터디 앱/.git"
+    },
+    {
+      "path": "~/development/copacabana-homepage",
+      "head": "3f0c355728800ddf46505d796d3c7d54d386baaa",
+      "common_git": "~/development/copacabana-homepage/.git"
+    },
+    {
+      "path": "~/development/flutter",
+      "head": "be698c48a6750c8cb8e61c740ca9991bb947aba2",
+      "common_git": "~/development/flutter/.git"
+    },
+    {
+      "path": "~/development/flutter-3.47",
+      "head": "6a19cca56475dbfba1478ee68d7bd0c2ef891da1",
+      "common_git": "~/development/flutter-3.47/.git"
+    },
+    {
+      "path": "~/development/flutter-muselry",
+      "head": "abaf9c523780a608bd46686fd5e53740a07077f8",
+      "common_git": "~/development/flutter-muselry/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app",
+      "head": "b34b14196a14a8d709f515644a9d1d7c59ec5ec0",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app-claude-20261028",
+      "head": "eedd28f63be9214ad2803bb66999911969d13829",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636",
+      "head": "b34b14196a14a8d709f515644a9d1d7c59ec5ec0",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-ux-beta-20261028-aafff5",
+      "head": "d07671e985929ad1aa4ba2c811919cc592a37b34",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app/.claude/worktrees/legendstudy-analytics-v1-9a315b",
+      "head": "0047186e28f670c87c4ea2c4142dab1819b6b7bb",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-app/.claude/worktrees/relaxed-stonebraker-027081",
+      "head": "f3d62bd9b02087fe5044fe30aa0ec242715ae922",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-docs",
+      "head": "f3ee5cf969da3a3413ec20137312e83079e25fdc",
+      "common_git": "~/development/legendstudy-docs/.git"
+    },
+    {
+      "path": "~/development/legendstudy-docs/.claude/worktrees/legendstudy-lab-pre-launch-review-512841",
+      "head": "2652cbed10ed9d6908f5c08c0a5999483225354a",
+      "common_git": "~/development/legendstudy-docs/.git"
+    },
+    {
+      "path": "~/development/legendstudy-iap-fix",
+      "head": "1f65ca7e090f8f515d652d4d39f9ce20de5f9705",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-iap-fix/tool/iap_recovery/docs-work",
+      "head": "ce5fcaa07788e68f52fe5bf2e96f078f5957b6cf",
+      "common_git": "~/development/legendstudy-iap-fix/tool/iap_recovery/docs-work/.git"
+    },
+    {
+      "path": "~/development/legendstudy-ios-test",
+      "head": "70726d0cdb846e9e3d214381d7004432b0e4f84c",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab",
+      "head": "d9c856b063219621b33785ebc5b38b6ad4937c99",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/admin-console-redesign-1a594d",
+      "head": "d3140dfcd957f9b5222af255d93bc3541245ecd1",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/ecstatic-goldstine-1c7a1b",
+      "head": "f496c20e4553651d15b91176d2cdc6138e39fa8f",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/legendstudy-branch-prep-a33b69",
+      "head": "54f40e18ec3811cd5d9db23a8fb68db1a57a5876",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/legendstudy-credit-terminology-db87eb",
+      "head": "8991b510d2c9702ecfb05315fe21363ab6df7012",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/school-essay-submission-page-694c7d",
+      "head": "8991b510d2c9702ecfb05315fe21363ab6df7012",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/university-symbol-logo-colors-846ee6",
+      "head": "8991b510d2c9702ecfb05315fe21363ab6df7012",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-essay-ui-redesign-20261024-81e3c9",
+      "head": "aa6bb58130f8558c619e067e6a3fc0853c60b93b",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-my-redesign-20261023-00d88e",
+      "head": "1bae5407813aa65217cbc8c59309c5d3206c8b98",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-production-integration-20261024-fa40d8",
+      "head": "258749149914c956c191a3035f3cd73841241f33",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-material-ui-release-20261022",
+      "head": "f1a9e27a7d1e8d9882339398b4c0cbc86aa43616",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-payment-recovery-20261023",
+      "head": "c6030598844eeae66d337dd2f25b4d96bba5bb8c",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-payment-recovery-20261023/tool/iap_recovery/docs-work",
+      "head": "ea2befa277ae9933dde356f062633825c9e28404",
+      "common_git": "~/development/legendstudy-payment-recovery-20261023/tool/iap_recovery/docs-work/.git"
+    },
+    {
+      "path": "~/development/legendstudy-release",
+      "head": "2e3219573ba884e1f08a427834f97d60262d49b4",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-release-20261024",
+      "head": "fcd25e010e0c269311e683ab7a8a61c3e3a67b75",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-release-docs-20261024",
+      "head": "b00ebd326c8651493f2cc9c6b65cb3a040f1ff6e",
+      "common_git": "~/development/legendstudy-docs/.git"
+    },
+    {
+      "path": "~/development/legendstudy-service-app-20261022",
+      "head": "64460758af9a70be5c84e93006113aef6ea29345",
+      "common_git": "~/development/legendstudy-app/.git"
+    },
+    {
+      "path": "~/development/legendstudy-service-docs-20261022",
+      "head": "186f422856c3d9af8788835b0967bc3da744be4c",
+      "common_git": "~/development/legendstudy-docs/.git"
+    },
+    {
+      "path": "~/development/legendstudy-service-lab-20261022",
+      "head": "fb32127d55661e59c375b8cd769275b8712e805d",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/legendstudy-toss-test-task17",
+      "head": "a901568fa7b0acc752061d6fd7361ad5772875c8",
+      "common_git": "~/development/legendstudy-lab/.git"
+    },
+    {
+      "path": "~/development/muselry-app",
+      "head": "a96f58aecffa2ca17de94ff91f9dd07443a994d4",
+      "common_git": "~/development/muselry-app/.git"
+    },
+    {
+      "path": "~/development/muselry-app-qa-1011",
+      "head": "75f5bb52530720a18140ef6a775c807f6b8922a8",
+      "common_git": "~/development/muselry-app/.git"
+    },
+    {
+      "path": "~/development/muselry-app-release",
+      "head": "f7f6b1337a578d39a73c5947cacd6d2a46a2fb16",
+      "common_git": "~/development/muselry-app/.git"
+    },
+    {
+      "path": "~/development/muselry-app/.claude/worktrees/muselry-local-dev-setup-ab1244",
+      "head": "0b51f8d9c33f4ad1dfc03cbba0b16ade7c070d86",
+      "common_git": "~/development/muselry-app/.git"
+    },
+    {
+      "path": "~/development/muselry-web",
+      "head": "8506a76a57b72a9fc410b6a43cd4921c7f948b15",
+      "common_git": "~/development/muselry-web/.git"
+    },
+    {
+      "path": "~/development/school-essay-submission",
+      "head": "fc2645450fca4930e8684fd9a0d154343aac87c3",
+      "common_git": "~/development/school-essay-submission/.git"
+    }
+  ],
+  "deletions": [
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/admin-analytics-phase2-web/legendstudy-service-lab-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 307134464,
+      "pre_delete_bytes": 307134464,
+      "deleted_at": 1795869417.038372
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/admin-withdrawal-management-20261111/legendstudy-lab/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 511479808,
+      "pre_delete_bytes": 511479808,
+      "deleted_at": 1795869417.143648
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 3264561152,
+      "pre_delete_bytes": 3264561152,
+      "deleted_at": 1795869419.7626722
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 4012728320,
+      "pre_delete_bytes": 4012728320,
+      "deleted_at": 1795869423.295416
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 297209856,
+      "pre_delete_bytes": 297209856,
+      "deleted_at": 1795869423.451062
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 1938440192,
+      "pre_delete_bytes": 1938440192,
+      "deleted_at": 1795869424.470004
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 2929856512,
+      "pre_delete_bytes": 2929856512,
+      "deleted_at": 1795869425.269203
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 310800384,
+      "pre_delete_bytes": 310800384,
+      "deleted_at": 1795869425.3212512
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 807657472,
+      "pre_delete_bytes": 807657472,
+      "deleted_at": 1795869425.996803
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 203796480,
+      "pre_delete_bytes": 203796480,
+      "deleted_at": 1795869426.3019578
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/essay-public-natural/legendstudy-service-lab-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 438947840,
+      "pre_delete_bytes": 438947840,
+      "deleted_at": 1795869426.339523
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 505491456,
+      "pre_delete_bytes": 505491456,
+      "deleted_at": 1795869426.61158
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 4096,
+      "pre_delete_bytes": 4096,
+      "deleted_at": 1795869426.6211479
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 298942464,
+      "pre_delete_bytes": 298942464,
+      "deleted_at": 1795869426.936904
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/feedback-admin-audit-20261104/legendstudy-service-app-20261022/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 32669696,
+      "pre_delete_bytes": 32669696,
+      "deleted_at": 1795869426.989742
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/kau-owner-review-20261112/legendstudy-app/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 32669696,
+      "pre_delete_bytes": 32669696,
+      "deleted_at": 1795869427.020056
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/kau-owner-review-20261112/legendstudy-app/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 102682624,
+      "pre_delete_bytes": 102682624,
+      "deleted_at": 1795869427.1277518
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/lab-admin-operations-20261114/legendstudy-release-20261024/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 541601792,
+      "pre_delete_bytes": 541601792,
+      "deleted_at": 1795869427.25608
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 2696933376,
+      "pre_delete_bytes": 2696933376,
+      "deleted_at": 1795869427.920577
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 3069493248,
+      "pre_delete_bytes": 3069493248,
+      "deleted_at": 1795869429.082425
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 638902272,
+      "pre_delete_bytes": 638902272,
+      "deleted_at": 1795869429.279583
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/task20-priority-release/legendstudy-service-lab-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 502419456,
+      "pre_delete_bytes": 502419456,
+      "deleted_at": 1795869429.410296
+    },
+    {
+      "phase": "A",
+      "path": "~/.codex/worktrees/task20-web-availability/legendstudy-service-lab-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 413696,
+      "pre_delete_bytes": 413696,
+      "deleted_at": 1795869429.429475
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 4371587072,
+      "pre_delete_bytes": 4371587072,
+      "deleted_at": 1795869430.1502342
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 3592069120,
+      "pre_delete_bytes": 3592069120,
+      "deleted_at": 1795869430.718196
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 1063481344,
+      "pre_delete_bytes": 1063481344,
+      "deleted_at": 1795869430.859766
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app-claude-20261028/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 302256128,
+      "pre_delete_bytes": 302256128,
+      "deleted_at": 1795869430.958291
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app-claude-20261028/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 99184640,
+      "pre_delete_bytes": 99184640,
+      "deleted_at": 1795869431.0205
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 1102663680,
+      "pre_delete_bytes": 1102663680,
+      "deleted_at": 1795869431.2159948
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 3623899136,
+      "pre_delete_bytes": 3623899136,
+      "deleted_at": 1795869431.6788769
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 97128448,
+      "pre_delete_bytes": 97128448,
+      "deleted_at": 1795869431.720416
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.claude/worktrees/legendstudy-analytics-v1-9a315b/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 32665600,
+      "pre_delete_bytes": 32665600,
+      "deleted_at": 1795869431.743479
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-app/.claude/worktrees/legendstudy-analytics-v1-9a315b/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 99581952,
+      "pre_delete_bytes": 99581952,
+      "deleted_at": 1795869431.760122
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-iap-fix/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 571858944,
+      "pre_delete_bytes": 571858944,
+      "deleted_at": 1795869431.8408818
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-iap-fix/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 1028866048,
+      "pre_delete_bytes": 1028866048,
+      "deleted_at": 1795869432.187685
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-iap-fix/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 98623488,
+      "pre_delete_bytes": 98623488,
+      "deleted_at": 1795869432.200605
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-ios-test/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 662994944,
+      "pre_delete_bytes": 662994944,
+      "deleted_at": 1795869432.266289
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-lab/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 89329664,
+      "pre_delete_bytes": 89329664,
+      "deleted_at": 1795869432.286696
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/admin-console-redesign-1a594d/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 61796352,
+      "pre_delete_bytes": 61796352,
+      "deleted_at": 1795869432.314036
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-essay-ui-redesign-20261024-81e3c9/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 62709760,
+      "pre_delete_bytes": 62709760,
+      "deleted_at": 1795869432.328852
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-my-redesign-20261023-00d88e/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 61366272,
+      "pre_delete_bytes": 61366272,
+      "deleted_at": 1795869432.377532
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-production-integration-20261024-fa40d8/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 155648,
+      "pre_delete_bytes": 155648,
+      "deleted_at": 1795869432.395985
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-material-ui-release-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 167882752,
+      "pre_delete_bytes": 167882752,
+      "deleted_at": 1795869432.575735
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-release/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 264298496,
+      "pre_delete_bytes": 264298496,
+      "deleted_at": 1795869432.639101
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-release/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 1309351936,
+      "pre_delete_bytes": 1309351936,
+      "deleted_at": 1795869433.063157
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-release-20261024/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 232226816,
+      "pre_delete_bytes": 232226816,
+      "deleted_at": 1795869433.292951
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-service-app-20261022/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 3441139712,
+      "pre_delete_bytes": 3441139712,
+      "deleted_at": 1795869434.147309
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-service-app-20261022/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 3425361920,
+      "pre_delete_bytes": 3425361920,
+      "deleted_at": 1795869435.037975
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-service-app-20261022/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 304345088,
+      "pre_delete_bytes": 304345088,
+      "deleted_at": 1795869435.0628
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-service-lab-20261022/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 235114496,
+      "pre_delete_bytes": 235114496,
+      "deleted_at": 1795869435.623958
+    },
+    {
+      "phase": "A",
+      "path": "~/development/legendstudy-toss-test-task17/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 389939200,
+      "pre_delete_bytes": 389939200,
+      "deleted_at": 1795869436.061887
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 967548928,
+      "pre_delete_bytes": 967548928,
+      "deleted_at": 1795869436.1984088
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 1183944704,
+      "pre_delete_bytes": 1183944704,
+      "deleted_at": 1795869436.744739
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 72110080,
+      "pre_delete_bytes": 72110080,
+      "deleted_at": 1795869436.754896
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app-release/.dart_tool",
+      "reason": ".dart_tool",
+      "bytes": 1138110464,
+      "pre_delete_bytes": 1138110464,
+      "deleted_at": 1795869436.881983
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app-release/build/app/intermediates",
+      "reason": "build/app/intermediates",
+      "bytes": 1452277760,
+      "pre_delete_bytes": 1452277760,
+      "deleted_at": 1795869437.285579
+    },
+    {
+      "phase": "A",
+      "path": "~/development/muselry-app-release/build/test_cache",
+      "reason": "build/test_cache",
+      "bytes": 154402816,
+      "pre_delete_bytes": 154402816,
+      "deleted_at": 1795869437.295594
+    },
+    {
+      "phase": "A",
+      "path": "~/development/school-essay-submission/.next/cache",
+      "reason": ".next/cache",
+      "bytes": 45645824,
+      "pre_delete_bytes": 45645824,
+      "deleted_at": 1795869437.3265998
+    },
+    {
+      "phase": "A",
+      "path": "~/.gradle/caches/8.14/transforms",
+      "reason": "approved cache",
+      "bytes": 4715298816,
+      "pre_delete_bytes": 4715298816,
+      "deleted_at": 1795869450.8817909
+    },
+    {
+      "phase": "A",
+      "path": "~/.gradle/caches/8.14.3/transforms",
+      "reason": "approved cache",
+      "bytes": 3715399680,
+      "pre_delete_bytes": 3715399680,
+      "deleted_at": 1795869461.876876
+    },
+    {
+      "phase": "A",
+      "path": "~/.npm/_cacache",
+      "reason": "approved cache",
+      "bytes": 3590098944,
+      "pre_delete_bytes": 3590098944,
+      "deleted_at": 1795869470.445914
+    },
+    {
+      "phase": "A",
+      "path": "~/.npm/_npx",
+      "reason": "approved cache",
+      "bytes": 950644736,
+      "pre_delete_bytes": 950644736,
+      "deleted_at": 1795869471.635657
+    },
+    {
+      "phase": "A",
+      "path": "~/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex",
+      "reason": "approved compiler cache",
+      "bytes": 3207168,
+      "pre_delete_bytes": 3207168,
+      "deleted_at": 1795869471.6758752
+    },
+    {
+      "phase": "A",
+      "path": "~/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules",
+      "reason": "approved compiler cache",
+      "bytes": 373641216,
+      "pre_delete_bytes": 373641216,
+      "deleted_at": 1795869473.021826
+    },
+    {
+      "phase": "A",
+      "path": "~/Library/Developer/Xcode/DerivedData/ModuleCache.noindex",
+      "reason": "approved compiler cache",
+      "bytes": 544514048,
+      "pre_delete_bytes": 544514048,
+      "deleted_at": 1795869473.931565
+    },
+    {
+      "phase": "A",
+      "path": "~/Library/Developer/Xcode/DerivedData/CompilationCache.noindex",
+      "reason": "approved compiler cache",
+      "bytes": 28672,
+      "pre_delete_bytes": 28672,
+      "deleted_at": 1795869473.943285
+    },
+    {
+      "phase": "A-duplicates",
+      "path": "~/.codex/legendstudy-backups/task14b-onboarding-dialog/api-source",
+      "reason": "complete tree content match; keep ~/.codex/legendstudy-backups/task14b-onboarding/api-source",
+      "bytes": 2133757952,
+      "pre_delete_bytes": 2133757952,
+      "deleted_at": 1795869535.764647
+    },
+    {
+      "phase": "A-duplicates",
+      "path": "~/.codex/legendstudy-backups/task14b-onboarding-final/api-source",
+      "reason": "complete tree content match; keep ~/.codex/legendstudy-backups/task14b-onboarding/api-source",
+      "bytes": 2133757952,
+      "pre_delete_bytes": 2133757952,
+      "deleted_at": 1795869548.972061
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-cqyceakpmcdxxgfayvmfimveyevr/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5926912,
+      "pre_delete_bytes": 5926912,
+      "deleted_at": 1795869564.184146
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-drcuveebhfaapkdhrbuxviqpofqa/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 420634624,
+      "pre_delete_bytes": 420634624,
+      "deleted_at": 1795869564.850092
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-erhctepddbmgslasiwvenpzogwxf/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5836800,
+      "pre_delete_bytes": 5836800,
+      "deleted_at": 1795869564.922681
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-diiizjihvxkcmsbbupmzzdebnalk/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 1176391680,
+      "pre_delete_bytes": 1176391680,
+      "deleted_at": 1795869567.406085
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-agpyqtjxcgycvhdtuarwqkmglese/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5496832,
+      "pre_delete_bytes": 5496832,
+      "deleted_at": 1795869567.477144
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-hfsfccikexpttmengghkibbqrksk/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5754880,
+      "pre_delete_bytes": 5754880,
+      "deleted_at": 1795869567.61621
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-cfhpnosmyhaggleghqppnttfqjts/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5869568,
+      "pre_delete_bytes": 5869568,
+      "deleted_at": 1795869567.7337449
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-gimskvibnuphklftiscrsovuahmm/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 397697024,
+      "pre_delete_bytes": 397697024,
+      "deleted_at": 1795869568.9424021
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-blspticvshyzzpcaaxviffnxgyrc/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5804032,
+      "pre_delete_bytes": 5804032,
+      "deleted_at": 1795869568.995449
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-diokthsdvqflrfaxycwulduewmil/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5545984,
+      "pre_delete_bytes": 5545984,
+      "deleted_at": 1795869569.0450392
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-abliquxizpsntbepjozbflkeygdu/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 472076288,
+      "pre_delete_bytes": 472076288,
+      "deleted_at": 1795869570.183795
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-eayrvbgsoexgyphbeqgrifkmdfev/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 430858240,
+      "pre_delete_bytes": 430858240,
+      "deleted_at": 1795869571.0808692
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-gfqakqdxetypcrgiupaecbqzvxhr/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 1479192576,
+      "pre_delete_bytes": 1479192576,
+      "deleted_at": 1795869575.265782
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-afuievyconmoyeaewjyddfmfqoth/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 5443584,
+      "pre_delete_bytes": 5443584,
+      "deleted_at": 1795869575.3408
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-eenfnaujizcwjgdawsgdfecaecbx/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 843993088,
+      "pre_delete_bytes": 843993088,
+      "deleted_at": 1795869576.407458
+    },
+    {
+      "phase": "B-cache",
+      "path": "~/Library/Developer/Xcode/DerivedData/Runner-crcdsablcebemmfgafalxllmemvw/Build/Intermediates.noindex",
+      "reason": "generated Xcode cache, retain products, logs, archives",
+      "bytes": 467582976,
+      "pre_delete_bytes": 467582976,
+      "deleted_at": 1795869578.377596
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/EAA09964-A789-41C7-866D-B4B1507D8F40",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "EAA09964-A789-41C7-866D-B4B1507D8F40"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/3A08DF4D-5E60-4473-BA85-AB9127603EB6",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "3A08DF4D-5E60-4473-BA85-AB9127603EB6"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/133434FA-15B3-4A71-8E10-6BC8C3245B41",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "133434FA-15B3-4A71-8E10-6BC8C3245B41"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/D1D32228-AC7D-4A09-A8AB-8CCF88D4A357",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "D1D32228-AC7D-4A09-A8AB-8CCF88D4A357"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/9421D0B3-66AD-497C-94BB-A31709972223",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "9421D0B3-66AD-497C-94BB-A31709972223"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/94B8493E-20DC-4771-A13F-B1B2BE5CCA1A",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "94B8493E-20DC-4771-A13F-B1B2BE5CCA1A"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/AA5EEBA1-4CB2-4C19-B62C-3491F9D9E1CE",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "AA5EEBA1-4CB2-4C19-B62C-3491F9D9E1CE"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/8942AE3C-3D86-4CB5-BAB4-F76C2296CD3F",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "8942AE3C-3D86-4CB5-BAB4-F76C2296CD3F"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/64248B6A-486F-4056-85FA-42D5BA43D705",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "64248B6A-486F-4056-85FA-42D5BA43D705"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/1F5413F5-113F-4BF8-A4CE-0A195E530987",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "1F5413F5-113F-4BF8-A4CE-0A195E530987"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/C6C01432-3DDA-4B62-8842-1CFE996EC9DA",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "C6C01432-3DDA-4B62-8842-1CFE996EC9DA"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/F88EF5F9-3261-499E-A98A-3B56EA8B274B",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "F88EF5F9-3261-499E-A98A-3B56EA8B274B"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/5FDFB6EF-8E0D-4364-AA00-70DFD9F0C2C5",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "5FDFB6EF-8E0D-4364-AA00-70DFD9F0C2C5"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/F7E50F41-1125-4091-849C-05F9880CC789",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "F7E50F41-1125-4091-849C-05F9880CC789"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/68527716-EB16-463B-AE2E-3446A4C3E5A4",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "68527716-EB16-463B-AE2E-3446A4C3E5A4"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/BBF24544-5684-47DE-AE63-46A236BD9C6B",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "BBF24544-5684-47DE-AE63-46A236BD9C6B"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/EEC9B780-E091-4713-8DB9-7BA05137B3B9",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "EEC9B780-E091-4713-8DB9-7BA05137B3B9"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/570843F8-13F5-4325-91F4-D0E4CF794D64",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "570843F8-13F5-4325-91F4-D0E4CF794D64"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/ECE2B706-DF79-4CA9-8D27-4A98F115A1D7",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "ECE2B706-DF79-4CA9-8D27-4A98F115A1D7"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/7B9A2C7A-4281-4F97-9D21-57A41DDC8F0F",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "7B9A2C7A-4281-4F97-9D21-57A41DDC8F0F"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/0011A5CA-F2C0-4244-9DA1-200D550019BD",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "0011A5CA-F2C0-4244-9DA1-200D550019BD"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/4EAD82ED-A6B7-419B-86F9-D78460FF6213",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "4EAD82ED-A6B7-419B-86F9-D78460FF6213"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/9495891C-D663-44EB-9519-9C4E36277A9E",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "9495891C-D663-44EB-9519-9C4E36277A9E"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/976BF3F6-46B2-4C47-BF87-B9A8C3B9423E",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "976BF3F6-46B2-4C47-BF87-B9A8C3B9423E"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/D7C2A6D3-3C47-4F81-A923-F20002560166",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "D7C2A6D3-3C47-4F81-A923-F20002560166"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/DC60BEE0-8011-4C03-90A1-33AED9252AF9",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "DC60BEE0-8011-4C03-90A1-33AED9252AF9"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/E0E8B3C5-A650-4453-851B-106743C22420",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "E0E8B3C5-A650-4453-851B-106743C22420"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/CBAEE630-1CC0-48BD-9C9D-7DF7AC3F84D0",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "CBAEE630-1CC0-48BD-9C9D-7DF7AC3F84D0"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/27583878-4146-469E-96B1-3005A00214F7",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "27583878-4146-469E-96B1-3005A00214F7"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/8647AB36-1F04-404A-A526-2EA3ED74E250",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "8647AB36-1F04-404A-A526-2EA3ED74E250"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/D22FEA77-A78C-46E1-9A71-9C0341BF0B95",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "D22FEA77-A78C-46E1-9A71-9C0341BF0B95"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/09271958-D2AB-43E7-B1B5-29F64DD4BDED",
+      "pre_delete_bytes": 13832192,
+      "method": "xcrun simctl delete",
+      "udid": "09271958-D2AB-43E7-B1B5-29F64DD4BDED"
+    },
+    {
+      "phase": "B-sim",
+      "path": "~/Library/Developer/CoreSimulator/Devices/261C8DCC-5EF1-453F-9AEE-734B5405479E",
+      "pre_delete_bytes": 18341888,
+      "method": "xcrun simctl delete",
+      "udid": "261C8DCC-5EF1-453F-9AEE-734B5405479E"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "sources;android-37.0",
+      "path": "~/Library/Android/sdk/sources/android-37.0",
+      "bytes": 256454656,
+      "pre_delete_bytes": 256454656,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "sources;android-35",
+      "path": "~/Library/Android/sdk/sources/android-35",
+      "bytes": 235192320,
+      "pre_delete_bytes": 235192320,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "sources;android-36.1",
+      "path": "~/Library/Android/sdk/sources/android-36.1",
+      "bytes": 251195392,
+      "pre_delete_bytes": 251195392,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "sources;android-34",
+      "path": "~/Library/Android/sdk/sources/android-34",
+      "bytes": 220045312,
+      "pre_delete_bytes": 220045312,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "platforms;android-33",
+      "path": "~/Library/Android/sdk/platforms/android-33",
+      "bytes": 135139328,
+      "pre_delete_bytes": 135139328,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "platforms;android-34",
+      "path": "~/Library/Android/sdk/platforms/android-34",
+      "bytes": 132575232,
+      "pre_delete_bytes": 132575232,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "platforms;android-36.1",
+      "path": "~/Library/Android/sdk/platforms/android-36.1",
+      "bytes": 141754368,
+      "pre_delete_bytes": 141754368,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-sdk",
+      "package": "platforms;android-37.0",
+      "path": "~/Library/Android/sdk/platforms/android-37.0",
+      "bytes": 159281152,
+      "pre_delete_bytes": 159281152,
+      "method": "sdkmanager --uninstall"
+    },
+    {
+      "phase": "C-cache",
+      "path": "~/.gradle/caches/modules-2",
+      "reason": "regenerable Gradle dependency/compiler caches; no Gradle daemon",
+      "bytes": 2809286656,
+      "pre_delete_bytes": 2809286656,
+      "deleted_at": 1795870260.852764
+    },
+    {
+      "phase": "C-cache",
+      "path": "~/.gradle/caches/jars-9",
+      "reason": "regenerable Gradle dependency/compiler caches; no Gradle daemon",
+      "bytes": 966656,
+      "pre_delete_bytes": 966656,
+      "deleted_at": 1795870260.887629
+    },
+    {
+      "phase": "C-cache",
+      "path": "~/.gradle/caches/journal-1",
+      "reason": "regenerable Gradle dependency/compiler caches; no Gradle daemon",
+      "bytes": 1712128,
+      "pre_delete_bytes": 1712128,
+      "deleted_at": 1795870260.9092329
+    },
+    {
+      "phase": "C-cache",
+      "path": "~/.gradle/caches/8.14",
+      "reason": "regenerable Gradle dependency/compiler caches; no Gradle daemon",
+      "bytes": 240435200,
+      "pre_delete_bytes": 240435200,
+      "deleted_at": 1795870261.7235
+    },
+    {
+      "phase": "C-cache",
+      "path": "~/.gradle/caches/8.14.3",
+      "reason": "regenerable Gradle dependency/compiler caches; no Gradle daemon",
+      "bytes": 206217216,
+      "pre_delete_bytes": 206217216,
+      "deleted_at": 1795870261.968768
+    },
+    {
+      "phase": "D-sdk",
+      "path": "~/development/flutter-latest",
+      "pre_delete_bytes": 1553543168,
+      "reason": "unreferenced clean SDK; identical framework HEAD/tree retained in FVM 3.47.6"
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/task19c-20261105/test61/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 401268736,
+      "pre_delete_bytes": 401268736,
+      "deleted_at": 1795870326.8077812
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/task19c-20261105/test60/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 401416192,
+      "pre_delete_bytes": 401416192,
+      "deleted_at": 1795870327.453896
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/task19c-20261105/test62/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 401321984,
+      "pre_delete_bytes": 401321984,
+      "deleted_at": 1795870328.286293
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test50/DerivedData/SourcePackages/artifacts",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 936632320,
+      "pre_delete_bytes": 936632320,
+      "deleted_at": 1795870331.426189
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test50/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403169280,
+      "pre_delete_bytes": 403169280,
+      "deleted_at": 1795870332.101194
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test51/DerivedData/SourcePackages/artifacts",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 936632320,
+      "pre_delete_bytes": 936632320,
+      "deleted_at": 1795870335.107231
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test51/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403181568,
+      "pre_delete_bytes": 403181568,
+      "deleted_at": 1795870335.890402
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test56/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403116032,
+      "pre_delete_bytes": 403116032,
+      "deleted_at": 1795870336.542887
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test49/DerivedData/SourcePackages/artifacts",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 936632320,
+      "pre_delete_bytes": 936632320,
+      "deleted_at": 1795870339.731272
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test49/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403177472,
+      "pre_delete_bytes": 403177472,
+      "deleted_at": 1795870340.240685
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test53/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403169280,
+      "pre_delete_bytes": 403169280,
+      "deleted_at": 1795870341.161914
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test54/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403103744,
+      "pre_delete_bytes": 403103744,
+      "deleted_at": 1795870341.808518
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test55/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 428822528,
+      "pre_delete_bytes": 428822528,
+      "deleted_at": 1795870342.714175
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test52/DerivedData/SourcePackages/artifacts",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 936632320,
+      "pre_delete_bytes": 936632320,
+      "deleted_at": 1795870345.634121
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/test52/DerivedData/Build/Intermediates.noindex",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 403111936,
+      "pre_delete_bytes": 403111936,
+      "deleted_at": 1795870346.3465931
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/.codex/legendstudy-backups/task11h-12b-13/table-followup/legendstudy-lab/api-source/node_modules",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 2122358784,
+      "pre_delete_bytes": 2122358784,
+      "deleted_at": 1795870359.5585501
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/.codex/legendstudy-backups/task11h-12b-13/legendstudy-lab/api-source/node_modules",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 2122358784,
+      "pre_delete_bytes": 2122358784,
+      "deleted_at": 1795870373.281413
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/.codex/legendstudy-backups/task14b-onboarding/api-source/node_modules",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 2122358784,
+      "pre_delete_bytes": 2122358784,
+      "deleted_at": 1795870386.048105
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/.codex/legendstudy-backups/task14c-refund-navigation/api-source/node_modules",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 2122735616,
+      "pre_delete_bytes": 2122735616,
+      "deleted_at": 1795870400.078683
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/merge-candidate/.dart_tool",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 459919360,
+      "pre_delete_bytes": 459919360,
+      "deleted_at": 1795870400.1777542
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/merge-candidate/build/test_cache",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 57802752,
+      "pre_delete_bytes": 57802752,
+      "deleted_at": 1795870400.193242
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/merge-candidate/build/app/intermediates",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 1016680448,
+      "pre_delete_bytes": 1016680448,
+      "deleted_at": 1795870400.73203
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/merge-candidate/build/ios/SourcePackages/artifacts",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870400.760684
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/latest-app-credit-candidate/.dart_tool",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 297775104,
+      "pre_delete_bytes": 297775104,
+      "deleted_at": 1795870400.913541
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/latest-app-credit-candidate/build/test_cache",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 94515200,
+      "pre_delete_bytes": 94515200,
+      "deleted_at": 1795870400.931118
+    },
+    {
+      "phase": "E-cache",
+      "path": "~/development/legendstudy-iap-fix/build/device-validation/latest-app-credit-candidate/build/app/intermediates",
+      "reason": "generated historical test/dependency cache; preserve source, DB, metadata, archives and symbols",
+      "bytes": 1028939776,
+      "pre_delete_bytes": 1028939776,
+      "deleted_at": 1795870401.3423219
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/admin-withdrawal-management-20261111/legendstudy-lab/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 619352064,
+      "pre_delete_bytes": 619352064,
+      "deleted_at": 1795870417.585814
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 35864576,
+      "pre_delete_bytes": 35864576,
+      "deleted_at": 1795870417.748576
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 49152,
+      "pre_delete_bytes": 49152,
+      "deleted_at": 1795870417.758377
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 19607552,
+      "pre_delete_bytes": 19607552,
+      "deleted_at": 1795870417.834382
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870417.843785
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 180224,
+      "pre_delete_bytes": 180224,
+      "deleted_at": 1795870417.859217
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 18362368,
+      "pre_delete_bytes": 18362368,
+      "deleted_at": 1795870417.8934069
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870417.904286
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/.codex/worktrees/task20-priority-release/legendstudy-service-lab-20261022/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 619274240,
+      "pre_delete_bytes": 619274240,
+      "deleted_at": 1795870420.747566
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/Documents/ChatGPT/레전드스터디 앱/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 651264,
+      "pre_delete_bytes": 651264,
+      "deleted_at": 1795870420.765523
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/Documents/ChatGPT/레전드스터디 앱/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870420.774334
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-app/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 31846400,
+      "pre_delete_bytes": 31846400,
+      "deleted_at": 1795870420.8257542
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-app/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870420.835212
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 15540224,
+      "pre_delete_bytes": 15540224,
+      "deleted_at": 1795870420.8523679
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870420.861181
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-iap-fix/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 14938112,
+      "pre_delete_bytes": 14938112,
+      "deleted_at": 1795870420.878243
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-iap-fix/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870420.886438
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 619347968,
+      "pre_delete_bytes": 619347968,
+      "deleted_at": 1795870423.810226
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/admin-console-redesign-1a594d/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540995584,
+      "pre_delete_bytes": 540995584,
+      "deleted_at": 1795870426.269542
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/ecstatic-goldstine-1c7a1b/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540999680,
+      "pre_delete_bytes": 540999680,
+      "deleted_at": 1795870428.884495
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/legendstudy-branch-prep-a33b69/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540999680,
+      "pre_delete_bytes": 540999680,
+      "deleted_at": 1795870431.380494
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/legendstudy-credit-terminology-db87eb/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540999680,
+      "pre_delete_bytes": 540999680,
+      "deleted_at": 1795870434.2152991
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/school-essay-submission-page-694c7d/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540999680,
+      "pre_delete_bytes": 540999680,
+      "deleted_at": 1795870436.6434581
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/university-symbol-logo-colors-846ee6/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540999680,
+      "pre_delete_bytes": 540999680,
+      "deleted_at": 1795870439.586688
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-essay-ui-redesign-20261024-81e3c9/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540995584,
+      "pre_delete_bytes": 540995584,
+      "deleted_at": 1795870442.542752
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-lab/.claude/worktrees/web-my-redesign-20261023-00d88e/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 540995584,
+      "pre_delete_bytes": 540995584,
+      "deleted_at": 1795870445.228259
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-material-ui-release-20261022/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 606552064,
+      "pre_delete_bytes": 606552064,
+      "deleted_at": 1795870448.214721
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-release/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 8249344,
+      "pre_delete_bytes": 8249344,
+      "deleted_at": 1795870448.238275
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-release/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870448.247503
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-release-20261024/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 607113216,
+      "pre_delete_bytes": 607113216,
+      "deleted_at": 1795870451.309141
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-service-app-20261022/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 29233152,
+      "pre_delete_bytes": 29233152,
+      "deleted_at": 1795870451.373764
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-service-app-20261022/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870451.3840482
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-service-lab-20261022/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 616648704,
+      "pre_delete_bytes": 616648704,
+      "deleted_at": 1795870454.561048
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/legendstudy-toss-test-task17/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 614440960,
+      "pre_delete_bytes": 614440960,
+      "deleted_at": 1795870457.292715
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/muselry-app/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 66396160,
+      "pre_delete_bytes": 66396160,
+      "deleted_at": 1795870457.3441432
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/muselry-app/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870457.3540952
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/muselry-app-release/android/.gradle",
+      "reason": "generated project Gradle cache",
+      "bytes": 22016000,
+      "pre_delete_bytes": 22016000,
+      "deleted_at": 1795870457.3740668
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/muselry-app-release/android/.kotlin",
+      "reason": "generated project Gradle cache",
+      "bytes": 0,
+      "pre_delete_bytes": 0,
+      "deleted_at": 1795870457.383369
+    },
+    {
+      "phase": "F-cache",
+      "path": "~/development/school-essay-submission/node_modules",
+      "reason": "generated ignored dependencies; source and lockfiles retained",
+      "bytes": 532721664,
+      "pre_delete_bytes": 532721664,
+      "deleted_at": 1795870461.956918
+    },
+    {
+      "phase": "F-worktree",
+      "path": "~/development/legendstudy-analytics-claude-20261030",
+      "pre_delete_bytes": 30642176,
+      "head": "21f156950a67038e3d89516ca251b3de6baf91ad",
+      "reason": "merged in verified remote main; no unique tracked/untracked/ignored data; no active process cwd"
+    },
+    {
+      "phase": "F-worktree",
+      "path": "~/development/legendstudy-app-ux-beta-20261028",
+      "pre_delete_bytes": 29925376,
+      "head": "733bad70ed93de32b51739894044c11e983cd667",
+      "reason": "merged in verified remote main; no unique tracked/untracked/ignored data; no active process cwd"
+    },
+    {
+      "phase": "F-worktree",
+      "path": "~/development/legendstudy-admin-ui-20261023",
+      "pre_delete_bytes": 7319552,
+      "head": "8991b510d2c9702ecfb05315fe21363ab6df7012",
+      "reason": "merged in verified remote main; no unique tracked/untracked/ignored data; no active process cwd"
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/Cache/Cache_Data",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 875794432,
+      "pre_delete_bytes": 875794432,
+      "deleted_at": 1795870523.3543239
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/Code Cache",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 1130496,
+      "pre_delete_bytes": 1130496,
+      "deleted_at": 1795870523.3726962
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/GPUCache",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 3842048,
+      "pre_delete_bytes": 3842048,
+      "deleted_at": 1795870523.385476
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/DawnGraphiteCache",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 561152,
+      "pre_delete_bytes": 561152,
+      "deleted_at": 1795870523.3962162
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/GraphiteDawnCache",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 12816384,
+      "pre_delete_bytes": 12816384,
+      "deleted_at": 1795870523.418153
+    },
+    {
+      "phase": "G-cache",
+      "path": "~/Library/Application Support/Claude/DawnWebGPUCache",
+      "reason": "Claude not running; generated browser/compiler cache only",
+      "bytes": 1646592,
+      "pre_delete_bytes": 1646592,
+      "deleted_at": 1795870523.42871
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/.dartServer/.analysis-driver",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 1946992640,
+      "pre_delete_bytes": 1946992640,
+      "deleted_at": 1795870694.201638
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Adobe/Common/Media Cache Files",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 5975506944,
+      "pre_delete_bytes": 5975506944,
+      "deleted_at": 1795870698.539923
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Adobe/Common/Peak Files",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 1086390272,
+      "pre_delete_bytes": 1086390272,
+      "deleted_at": 1795870699.069698
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/pip",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 741498880,
+      "pre_delete_bytes": 741498880,
+      "deleted_at": 1795870699.749492
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/Homebrew/downloads",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 412319744,
+      "pre_delete_bytes": 412319744,
+      "deleted_at": 1795870699.86815
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/CocoaPods",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 44400640,
+      "pre_delete_bytes": 44400640,
+      "deleted_at": 1795870699.968454
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/org.swift.swiftpm/artifacts",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 241115136,
+      "pre_delete_bytes": 241115136,
+      "deleted_at": 1795870700.090017
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/org.swift.swiftpm/manifests",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 86310912,
+      "pre_delete_bytes": 86310912,
+      "deleted_at": 1795870700.271821
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/im.manus.desktop.ShipIt/update.qvz3o3Y",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 888696832,
+      "pre_delete_bytes": 888696832,
+      "deleted_at": 1795870700.617109
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/manus-updater",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 756183040,
+      "pre_delete_bytes": 756183040,
+      "deleted_at": 1795870700.89343
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/pnpm",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 392192000,
+      "pre_delete_bytes": 392192000,
+      "deleted_at": 1795870701.1139798
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Caches/node-gyp",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 120918016,
+      "pre_delete_bytes": 120918016,
+      "deleted_at": 1795870701.828139
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Code/Cache/Cache_Data",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 321642496,
+      "pre_delete_bytes": 321642496,
+      "deleted_at": 1795870702.343633
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Code/CachedData",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 57192448,
+      "pre_delete_bytes": 57192448,
+      "deleted_at": 1795870702.3815958
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Code/Code Cache",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 24576,
+      "pre_delete_bytes": 24576,
+      "deleted_at": 1795870702.3928099
+    },
+    {
+      "phase": "I-cache",
+      "path": "~/Library/Application Support/Code/GPUCache",
+      "reason": "regenerable analysis/media/download/compiler cache; no active corresponding work",
+      "bytes": 561152,
+      "pre_delete_bytes": 561152,
+      "deleted_at": 1795870702.402622
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870749.225364
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022/build/ios/Debug-iphonesimulator/Runner.app",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 200540160,
+      "pre_delete_bytes": 200540160,
+      "deleted_at": 1795870749.3648179
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870752.25855
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/build/ios/Debug-iphonesimulator/Runner.app",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 192004096,
+      "pre_delete_bytes": 192004096,
+      "deleted_at": 1795870752.366461
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/.local/post-rc-physical-qa/.dart_tool",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 268959744,
+      "pre_delete_bytes": 268959744,
+      "deleted_at": 1795870752.451434
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/app-release-rc-20261113/legendstudy-app/.local/post-rc-physical-qa/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870755.3606021
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870759.048519
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870764.186352
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/f850/레전드스터디 앱/build/ios/Debug-iphonesimulator/Runner.app",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 193466368,
+      "pre_delete_bytes": 193466368,
+      "deleted_at": 1795870764.645183
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 936574976,
+      "pre_delete_bytes": 936574976,
+      "deleted_at": 1795870767.680574
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022/build/ios/Debug-iphonesimulator/Runner.app",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 151486464,
+      "pre_delete_bytes": 151486464,
+      "deleted_at": 1795870767.78843
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/Documents/ChatGPT/레전드스터디 앱/build/test_cache",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51392512,
+      "pre_delete_bytes": 51392512,
+      "deleted_at": 1795870767.799916
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-app/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870767.826705
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-app-claude-20261028/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870767.902658
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870767.932417
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-iap-fix/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870767.960628
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-ios-test/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870767.986109
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/legendstudy-service-app-20261022/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 51359744,
+      "pre_delete_bytes": 51359744,
+      "deleted_at": 1795870768.010198
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/muselry-app/build/ios/XCBuildData",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 2670592,
+      "pre_delete_bytes": 2670592,
+      "deleted_at": 1795870768.03881
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/muselry-app/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 40882176,
+      "pre_delete_bytes": 40882176,
+      "deleted_at": 1795870768.10193
+    },
+    {
+      "phase": "I-build-cache",
+      "path": "~/development/muselry-app-release/build/ios/SourcePackages/artifacts",
+      "reason": "remaining generated simulator/build cache; retain archives, symbols, evidence and source",
+      "bytes": 40882176,
+      "pre_delete_bytes": 40882176,
+      "deleted_at": 1795870768.160377
+    }
+  ],
+  "official_commands": {
+    "dyld": {
+      "code": 0,
+      "stdout": "Removed dyld shared caches for all runtimes\n",
+      "stderr": ""
+    },
+    "conda": {
+      "index_cache": {
+        "files": [
+          "/Users/woojinchang/opt/anaconda3/pkgs/cache"
+        ]
+      },
+      "packages": {
+        "pkg_sizes": {
+          "/Users/woojinchang/opt/anaconda3/pkgs": {
+            "anaconda-2022.10-py39_0": 103066,
+            "blas-1.0-mkl": 14579,
+            "cctools-949.0.1-h9abeeb2_25": 55507,
+            "conda-22.9.0-py39hecd8cb5_0": 4001958,
+            "conda-env-2.6.0-1": 6982,
+            "dask-2022.7.0-py39hecd8cb5_0": 15176,
+            "dataclasses-0.8-pyh6d0b6a4_7": 20695,
+            "importlib_metadata-4.11.3-hd3eb1b0_0": 41998,
+            "ld64-530-h20443b4_25": 47244,
+            "libgfortran-5.0.0-11_2_0_h246ff09_26": 73264,
+            "libgfortran5-11.2.0-h246ff09_26": 7096567,
+            "matplotlib-3.5.2-py39hecd8cb5_0": 21331,
+            "mpi-1.0-mpich": 38687,
+            "mpich-3.3.2-external_0": 45895,
+            "numpy-1.21.5-py39h2e5f0a9_3": 29682,
+            "prompt_toolkit-3.0.20-hd3eb1b0_0": 51328,
+            "python_abi-3.9-2_cp39": 10725,
+            "qt-5.15.9-hecd8cb5_0": 27231,
+            "typing-extensions-4.3.0-py39hecd8cb5_0": 26311
+          }
+        },
+        "pkgs_dirs": {
+          "/Users/woojinchang/opt/anaconda3/pkgs": [
+            "typing-extensions-4.3.0-py39hecd8cb5_0",
+            "blas-1.0-mkl",
+            "conda-env-2.6.0-1",
+            "cctools-949.0.1-h9abeeb2_25",
+            "mpi-1.0-mpich",
+            "libgfortran-5.0.0-11_2_0_h246ff09_26",
+            "python_abi-3.9-2_cp39",
+            "dask-2022.7.0-py39hecd8cb5_0",
+            "ld64-530-h20443b4_25",
+            "libgfortran5-11.2.0-h246ff09_26",
+            "prompt_toolkit-3.0.20-hd3eb1b0_0",
+            "anaconda-2022.10-py39_0",
+            "importlib_metadata-4.11.3-hd3eb1b0_0",
+            "dataclasses-0.8-pyh6d0b6a4_7",
+            "matplotlib-3.5.2-py39hecd8cb5_0",
+            "conda-22.9.0-py39hecd8cb5_0",
+            "qt-5.15.9-hecd8cb5_0",
+            "numpy-1.21.5-py39h2e5f0a9_3",
+            "mpich-3.3.2-external_0"
+          ]
+        },
+        "total_size": 11728226,
+        "warnings": []
+      },
+      "success": true,
+      "tarballs": {
+        "pkg_sizes": {
+          "/Users/woojinchang/opt/anaconda3/pkgs": {
+            "_ipyw_jlab_nb_ext_conf-0.1.0-py39hecd8cb5_1.conda": 5508,
+            "alabaster-0.7.12-pyhd3eb1b0_0.tar.bz2": 15931,
+            "anaconda-2022.10-py39_0.tar.bz2": 16639,
+            "anaconda-client-1.11.0-py39hecd8cb5_0.conda": 152468,
+            "anaconda-navigator-2.3.1-py39hecd8cb5_0.conda": 6860815,
+            "anaconda-project-0.11.1-py39hecd8cb5_0.conda": 500778,
+            "anyio-3.5.0-py39hecd8cb5_0.conda": 171109,
+            "appdirs-1.4.4-pyhd3eb1b0_0.conda": 12155,
+            "applaunchservices-0.3.0-py39hecd8cb5_0.conda": 11713,
+            "appnope-0.1.2-py39hecd8cb5_1001.conda": 10151,
+            "appscript-1.1.2-py39h9ed2024_0.conda": 131626,
+            "apscheduler-3.6.3-py39h6e9494a_3.tar.bz2": 82958,
+            "argon2-cffi-21.3.0-pyhd3eb1b0_0.conda": 15834,
+            "argon2-cffi-bindings-21.2.0-py39hca72f7f_0.conda": 31521,
+            "arrow-1.2.2-pyhd3eb1b0_0.conda": 94005,
+            "astroid-2.11.7-py39hecd8cb5_0.conda": 354067,
+            "astropy-5.1-py39h67323c0_0.conda": 7010568,
+            "atomicwrites-1.4.0-py_0.conda": 11675,
+            "attrs-21.4.0-pyhd3eb1b0_0.conda": 51753,
+            "automat-20.2.0-py_0.conda": 32017,
+            "autopep8-1.6.0-pyhd3eb1b0_1.conda": 43591,
+            "babel-2.9.1-pyhd3eb1b0_0.conda": 5726771,
+            "backcall-0.2.0-pyhd3eb1b0_0.tar.bz2": 13636,
+            "backports-1.1-pyhd3eb1b0_0.conda": 4119,
+            "backports.functools_lru_cache-1.6.4-pyhd3eb1b0_0.conda": 9618,
+            "backports.tempfile-1.0-pyhd3eb1b0_1.tar.bz2": 11068,
+            "backports.weakref-1.0.post1-py_1.conda": 7777,
+            "bcrypt-3.2.0-py39hca72f7f_1.conda": 40291,
+            "beautifulsoup4-4.11.1-py39hecd8cb5_0.conda": 193088,
+            "binaryornot-0.4.4-pyhd3eb1b0_1.conda": 359191,
+            "bitarray-2.5.1-py39hca72f7f_0.conda": 155588,
+            "bkcharts-0.2-py39hecd8cb5_1.conda": 135574,
+            "black-22.6.0-py39hecd8cb5_0.conda": 233084,
+            "blas-1.0-mkl.conda": 5747,
+            "bleach-4.1.0-pyhd3eb1b0_0.conda": 125533,
+            "blosc-1.21.0-h8346a28_1.conda": 53709,
+            "bokeh-2.4.3-py39hecd8cb5_0.conda": 7977138,
+            "boto3-1.24.28-py39hecd8cb5_0.conda": 118815,
+            "botocore-1.27.28-py39hecd8cb5_0.conda": 4848709,
+            "bottleneck-1.3.5-py39h67323c0_0.conda": 123540,
+            "brotli-1.0.9-hca72f7f_7.conda": 19012,
+            "brotli-bin-1.0.9-hca72f7f_7.conda": 17336,
+            "brotlipy-0.7.0-py39h9ed2024_1003.conda": 340753,
+            "brunsli-0.1-h23ab428_0.conda": 145363,
+            "bzip2-1.0.8-h1de35cc_0.conda": 76593,
+            "c-ares-1.18.1-hca72f7f_0.conda": 101973,
+            "ca-certificates-2022.07.19-hecd8cb5_0.conda": 126854,
+            "ca-certificates-2022.10.11-hecd8cb5_0.conda": 128479,
+            "cachetools-4.2.2-pyhd8ed1ab_0.tar.bz2": 12761,
+            "cctools-949.0.1-h9abeeb2_25.conda": 18825,
+            "cctools_osx-64-949.0.1-hc7db93f_25.conda": 1363771,
+            "certifi-2022.9.24-py39hecd8cb5_0.conda": 158672,
+            "cffi-1.15.1-py39hc55c11b_0.conda": 224209,
+            "cfitsio-3.470-hbd21bf8_7.conda": 828712,
+            "chardet-4.0.0-py39hecd8cb5_1003.conda": 199262,
+            "charls-2.2.0-h23ab428_0.conda": 83878,
+            "charset-normalizer-2.0.4-pyhd3eb1b0_0.conda": 35372,
+            "click-8.0.4-py39hecd8cb5_0.conda": 155691,
+            "cloudpickle-2.0.0-pyhd3eb1b0_0.conda": 32510,
+            "clyent-1.2.2-py39hecd8cb5_1.conda": 21144,
+            "colorama-0.4.5-py39hecd8cb5_0.conda": 28750,
+            "colorcet-3.0.0-py39hecd8cb5_0.conda": 1864278,
+            "conda-22.9.0-py39h6e9494a_2.tar.bz2": 985546,
+            "conda-22.9.0-py39hecd8cb5_0.conda": 905486,
+            "conda-build-3.22.0-py39hecd8cb5_0.conda": 554063,
+            "conda-content-trust-0.1.3-py39hecd8cb5_0.conda": 72321,
+            "conda-env-2.6.0-1.conda": 3364,
+            "conda-pack-0.6.0-pyhd3eb1b0_0.conda": 29786,
+            "conda-package-handling-1.9.0-py39hca72f7f_0.conda": 1566569,
+            "conda-repo-cli-1.0.20-py39hecd8cb5_0.conda": 110321,
+            "conda-token-0.4.0-pyhd3eb1b0_0.conda": 13011,
+            "conda-verify-3.4.2-py_1.conda": 27229,
+            "constantly-15.1.0-pyh2b92418_0.conda": 10286,
+            "cookiecutter-1.7.3-pyhd3eb1b0_0.conda": 80769,
+            "cryptography-37.0.1-py39hf6deb26_0.conda": 1116321,
+            "cssselect-1.1.0-pyhd3eb1b0_0.conda": 18010,
+            "curl-7.84.0-hca72f7f_0.conda": 75114,
+            "cycler-0.11.0-pyhd3eb1b0_0.conda": 12570,
+            "cython-0.29.32-py39he9d5cce_0.conda": 1961192,
+            "cytoolz-0.11.0-py39h9ed2024_0.conda": 316594,
+            "daal4py-2021.6.0-py39h01d92e1_1.conda": 9025380,
+            "dal-2021.6.0-haf03e11_929.conda": 59482311,
+            "dask-2022.7.0-py39hecd8cb5_0.conda": 5984,
+            "dask-core-2022.7.0-py39hecd8cb5_0.conda": 1761962,
+            "dataclasses-0.8-pyh6d0b6a4_7.conda": 7808,
+            "datashader-0.14.1-py39hecd8cb5_0.conda": 17306320,
+            "datashape-0.5.4-py39hecd8cb5_1.conda": 105075,
+            "debugpy-1.5.1-py39he9d5cce_0.conda": 1807010,
+            "decorator-5.1.1-pyhd3eb1b0_0.conda": 12194,
+            "defusedxml-0.7.1-pyhd3eb1b0_0.conda": 23826,
+            "diff-match-patch-20200713-pyhd3eb1b0_0.conda": 35614,
+            "dill-0.3.4-pyhd3eb1b0_0.conda": 62287,
+            "distributed-2022.7.0-py39hecd8cb5_0.conda": 1125811,
+            "docutils-0.18.1-py39hecd8cb5_3.conda": 683304,
+            "entrypoints-0.4-py39hecd8cb5_0.conda": 16840,
+            "et_xmlfile-1.1.0-py39hecd8cb5_0.conda": 9965,
+            "fftw-3.3.9-h9ed2024_1.conda": 2136524,
+            "filelock-3.6.0-pyhd3eb1b0_0.conda": 12473,
+            "flake8-4.0.1-pyhd3eb1b0_1.conda": 120663,
+            "flask-1.1.2-pyhd3eb1b0_0.tar.bz2": 72032,
+            "fonttools-4.25.0-pyhd3eb1b0_0.conda": 647555,
+            "freetype-2.11.0-hd8bbffd_0.conda": 603352,
+            "fsspec-2022.7.1-py39hecd8cb5_0.conda": 213305,
+            "future-0.18.2-py39hecd8cb5_1.conda": 647816,
+            "gensim-4.1.2-py39he9d5cce_0.conda": 19145455,
+            "gettext-0.21.0-h7535e17_0.conda": 2721203,
+            "giflib-5.2.1-haf1e3a3_0.conda": 71944,
+            "glib-2.69.1-h8346a28_1.conda": 2881904,
+            "glob2-0.7-pyhd3eb1b0_0.tar.bz2": 11944,
+            "gmp-6.2.1-he9d5cce_3.conda": 537285,
+            "gmpy2-2.1.2-py39hd5de756_0.conda": 154304,
+            "greenlet-1.1.1-py39h23ab428_0.conda": 80088,
+            "gst-plugins-base-1.14.0-h4180768_2.conda": 1529069,
+            "gstreamer-1.14.0-h0fc69c2_2.conda": 1139315,
+            "h5py-3.7.0-py39h4a1dd59_0.conda": 992356,
+            "hdf5-1.10.6-h10fe05b_1.conda": 3689210,
+            "heapdict-1.0.1-pyhd3eb1b0_0.conda": 8167,
+            "holoviews-1.15.0-py39hecd8cb5_0.conda": 4220723,
+            "hvplot-0.8.0-py39hecd8cb5_0.conda": 3152268,
+            "hyperlink-21.0.0-pyhd3eb1b0_0.conda": 71627,
+            "icu-58.2-h0a44026_3.conda": 10640549,
+            "idna-3.3-pyhd3eb1b0_0.conda": 50318,
+            "imagecodecs-2021.8.26-py39h0f85e6e_1.conda": 6163535,
+            "imageio-2.19.3-py39hecd8cb5_0.conda": 3401374,
+            "imagesize-1.4.1-py39hecd8cb5_0.conda": 14312,
+            "importlib-metadata-4.11.3-py39hecd8cb5_0.conda": 41033,
+            "importlib_metadata-4.11.3-hd3eb1b0_0.conda": 12527,
+            "incremental-21.3.0-pyhd3eb1b0_0.conda": 17863,
+            "inflection-0.5.1-py39hecd8cb5_0.conda": 12077,
+            "iniconfig-1.1.1-pyhd3eb1b0_0.tar.bz2": 7815,
+            "intake-0.6.5-pyhd3eb1b0_0.conda": 182007,
+            "intel-openmp-2021.4.0-hecd8cb5_3538.conda": 984316,
+            "intervaltree-3.1.0-pyhd3eb1b0_0.conda": 25694,
+            "ipykernel-6.15.2-py39hecd8cb5_0.conda": 197579,
+            "ipython-7.31.1-py39hecd8cb5_1.conda": 1018770,
+            "ipython_genutils-0.2.0-pyhd3eb1b0_1.conda": 27534,
+            "ipywidgets-7.6.5-pyhd3eb1b0_1.conda": 107402,
+            "isort-5.9.3-pyhd3eb1b0_0.conda": 84814,
+            "itemadapter-0.3.0-pyhd3eb1b0_0.conda": 13023,
+            "itemloaders-1.0.4-pyhd3eb1b0_1.conda": 14117,
+            "itsdangerous-2.0.1-pyhd3eb1b0_0.conda": 18562,
+            "jdcal-1.4.1-pyhd3eb1b0_0.conda": 10367,
+            "jedi-0.18.1-py39hecd8cb5_1.conda": 1003361,
+            "jellyfish-0.9.0-py39hca72f7f_0.conda": 42855,
+            "jinja2-2.11.3-pyhd3eb1b0_0.conda": 103502,
+            "jinja2-time-0.2.0-pyhd3eb1b0_3.conda": 9520,
+            "jmespath-0.10.0-pyhd3eb1b0_0.conda": 22501,
+            "joblib-1.1.0-pyhd3eb1b0_0.conda": 215601,
+            "jpeg-9e-hca72f7f_0.conda": 230596,
+            "jq-1.6-h9ed2024_1000.conda": 250704,
+            "json5-0.9.6-pyhd3eb1b0_0.conda": 21787,
+            "jsonschema-4.16.0-py39hecd8cb5_0.conda": 132490,
+            "jupyter-1.0.0-py39hecd8cb5_8.conda": 7835,
+            "jupyter_client-7.3.4-py39hecd8cb5_0.conda": 198153,
+            "jupyter_console-6.4.3-pyhd3eb1b0_0.conda": 23655,
+            "jupyter_core-4.11.1-py39hecd8cb5_0.conda": 78861,
+            "jupyter_server-1.18.1-py39hecd8cb5_0.conda": 364289,
+            "jupyterlab-3.4.4-py39hecd8cb5_0.conda": 3925350,
+            "jupyterlab_pygments-0.1.2-py_0.conda": 8254,
+            "jupyterlab_server-2.10.3-pyhd3eb1b0_1.conda": 48822,
+            "jupyterlab_widgets-1.0.0-pyhd3eb1b0_1.conda": 111963,
+            "jxrlib-1.1-haf1e3a3_2.conda": 210552,
+            "keyring-23.4.0-py39hecd8cb5_0.conda": 56209,
+            "kiwisolver-1.4.2-py39he9d5cce_0.conda": 57779,
+            "krb5-1.19.2-hcd88c3b_0.conda": 1110233,
+            "lazy-object-proxy-1.6.0-py39h9ed2024_0.conda": 29062,
+            "lcms2-2.12-hf1fd2bf_0.conda": 290539,
+            "ld64-530-h20443b4_25.conda": 16227,
+            "ld64_osx-64-530-h70f3046_25.conda": 942033,
+            "ldid-2.1.2-h2d21305_2.conda": 55259,
+            "lerc-3.0-he9d5cce_0.conda": 172482,
+            "libaec-1.0.4-hb1e8313_1.conda": 26512,
+            "libarchive-3.6.1-he336d3b_0.conda": 735287,
+            "libbrotlicommon-1.0.9-hca72f7f_7.conda": 70262,
+            "libbrotlidec-1.0.9-hca72f7f_7.conda": 31844,
+            "libbrotlienc-1.0.9-hca72f7f_7.conda": 299649,
+            "libclang-12.0.0-default_hbc2896b_2.conda": 6357965,
+            "libcurl-7.84.0-h6dfd666_0.conda": 316499,
+            "libcxx-14.0.6-h9765a3e_0.conda": 990864,
+            "libdeflate-1.8-h9ed2024_5.conda": 50842,
+            "libedit-3.1.20210910-hca72f7f_0.conda": 142809,
+            "libev-4.33-h9ed2024_1.conda": 108306,
+            "libffi-3.3-hb1e8313_2.conda": 44693,
+            "libgfortran-5.0.0-11_2_0_h246ff09_26.conda": 21976,
+            "libgfortran5-11.2.0-h246ff09_26.conda": 1355806,
+            "libiconv-1.16-hca72f7f_2.conda": 711297,
+            "libidn2-2.3.2-h9ed2024_0.conda": 86698,
+            "liblief-0.11.5-he9d5cce_1.conda": 1687729,
+            "libllvm11-11.1.0-h46f1229_5.conda": 18517951,
+            "libllvm12-12.0.0-h9b2ccf5_3.conda": 20154922,
+            "libllvm14-14.0.6-he552d86_0.conda": 22334654,
+            "libnghttp2-1.46.0-ha29bfda_0.conda": 703640,
+            "libpng-1.6.37-ha441bb4_0.conda": 268154,
+            "libpq-12.9-h1c9f633_3.conda": 2119011,
+            "libsodium-1.0.18-h1de35cc_0.conda": 242133,
+            "libspatialindex-1.9.3-h23ab428_0.conda": 329609,
+            "libssh2-1.10.0-h0a4fc7d_0.conda": 263877,
+            "libtiff-4.4.0-h2ef1027_0.conda": 451463,
+            "libunistring-0.9.10-h9ed2024_0.conda": 531090,
+            "libwebp-1.2.2-h56c3ce4_0.conda": 74202,
+            "libwebp-base-1.2.2-hca72f7f_0.conda": 402513,
+            "libxml2-2.9.14-hbf8cd5e_0.conda": 656379,
+            "libxslt-1.1.35-h5b33f42_0.conda": 429931,
+            "libzopfli-1.0.3-hb1e8313_0.conda": 152011,
+            "llvm-openmp-14.0.6-h0dcd299_0.conda": 294608,
+            "llvmlite-0.38.0-py39h8346a28_0.conda": 242145,
+            "locket-1.0.0-py39hecd8cb5_0.conda": 12152,
+            "lxml-4.9.1-py39h65b224f_0.conda": 1231378,
+            "lz4-3.1.3-py39h9ed2024_0.conda": 38651,
+            "lz4-c-1.9.3-h23ab428_1.conda": 143139,
+            "lzo-2.10-haf1e3a3_2.conda": 144271,
+            "markdown-3.3.4-py39hecd8cb5_0.conda": 130201,
+            "markupsafe-2.0.1-py39h9ed2024_0.conda": 20489,
+            "matplotlib-3.5.2-py39hecd8cb5_0.conda": 7446,
+            "matplotlib-base-3.5.2-py39hfb0c5b7_0.conda": 5957258,
+            "matplotlib-inline-0.1.6-py39hecd8cb5_0.conda": 17120,
+            "mccabe-0.7.0-pyhd3eb1b0_0.conda": 11005,
+            "mistune-0.8.4-py39h9ed2024_1000.conda": 58284,
+            "mkl-2021.4.0-hecd8cb5_637.conda": 105893901,
+            "mkl-service-2.4.0-py39h9ed2024_0.conda": 46398,
+            "mkl_fft-1.3.1-py39h4ab4a9b_0.conda": 172587,
+            "mkl_random-1.2.2-py39hb2f4e1b_0.conda": 291884,
+            "mock-4.0.3-pyhd3eb1b0_0.conda": 29427,
+            "mpc-1.1.0-h6ef4df4_1.conda": 85790,
+            "mpfr-4.0.2-h9066e36_1.conda": 443215,
+            "mpi-1.0-mpich.conda": 13467,
+            "mpich-3.3.2-external_0.conda": 15459,
+            "mpmath-1.2.1-py39hecd8cb5_0.conda": 781130,
+            "msgpack-python-1.0.3-py39haf03e11_0.conda": 78686,
+            "multipledispatch-0.6.0-py39hecd8cb5_0.conda": 24304,
+            "munkres-1.1.4-py_0.conda": 13573,
+            "mypy_extensions-0.4.3-py39hecd8cb5_1.conda": 10167,
+            "navigator-updater-0.3.0-py39hecd8cb5_0.conda": 2277401,
+            "nbclassic-0.3.5-pyhd3eb1b0_0.conda": 22365,
+            "nbclient-0.5.13-py39hecd8cb5_0.conda": 93873,
+            "nbconvert-6.4.4-py39hecd8cb5_0.conda": 509247,
+            "nbformat-5.5.0-py39hecd8cb5_0.conda": 131957,
+            "ncurses-6.3-hca72f7f_3.conda": 877423,
+            "nest-asyncio-1.5.5-py39hecd8cb5_0.conda": 16422,
+            "networkx-2.8.4-py39hecd8cb5_0.conda": 2253270,
+            "nltk-3.7-pyhd3eb1b0_0.conda": 1033806,
+            "nose-1.3.7-pyhd3eb1b0_1008.conda": 145151,
+            "notebook-6.4.12-py39hecd8cb5_0.conda": 4408379,
+            "nspr-4.33-he9d5cce_0.conda": 233973,
+            "nss-3.74-h47edf6a_0.conda": 1880648,
+            "numba-0.55.1-py39hae1ba45_0.conda": 3554666,
+            "numexpr-2.8.3-py39h2e5f0a9_0.conda": 122909,
+            "numpy-1.21.5-py39h2e5f0a9_3.conda": 10877,
+            "numpy-base-1.21.5-py39h3b1a694_3.conda": 4888904,
+            "numpydoc-1.4.0-py39hecd8cb5_0.conda": 87361,
+            "olefile-0.46-pyhd3eb1b0_0.conda": 34431,
+            "oniguruma-6.9.7.1-h9ed2024_0.conda": 221233,
+            "openjpeg-2.4.0-h66ea3da_0.conda": 308207,
+            "openpyxl-3.0.10-py39hca72f7f_0.conda": 517392,
+            "openssl-1.1.1q-hca72f7f_0.conda": 2344252,
+            "openssl-1.1.1s-hca72f7f_0.conda": 2956609,
+            "packaging-21.3-pyhd3eb1b0_0.conda": 37332,
+            "pandas-1.4.4-py39he9d5cce_0.conda": 9944697,
+            "pandocfilters-1.5.0-pyhd3eb1b0_0.conda": 11729,
+            "panel-0.13.1-py39hecd8cb5_0.conda": 11521174,
+            "param-1.12.0-pyhd3eb1b0_0.conda": 76731,
+            "parsel-1.6.0-py39hecd8cb5_0.conda": 358927,
+            "parso-0.8.3-pyhd3eb1b0_0.conda": 71964,
+            "partd-1.2.0-pyhd3eb1b0_1.conda": 18887,
+            "patch-2.7.6-h1de35cc_1001.conda": 130583,
+            "pathlib-1.0.1-pyhd3eb1b0_1.conda": 17633,
+            "pathspec-0.9.0-py39hecd8cb5_0.conda": 47804,
+            "patsy-0.5.2-py39hecd8cb5_1.conda": 282659,
+            "pcre-8.45-h23ab428_0.conda": 185319,
+            "pep8-1.7.1-py39hecd8cb5_1.conda": 54479,
+            "pexpect-4.8.0-pyhd3eb1b0_3.conda": 53770,
+            "pickleshare-0.7.5-pyhd3eb1b0_1003.conda": 13463,
+            "pillow-9.2.0-py39hde71d04_1.conda": 639192,
+            "pip-22.2.2-py39hecd8cb5_0.conda": 2421438,
+            "pkginfo-1.8.2-pyhd3eb1b0_0.conda": 27834,
+            "platformdirs-2.5.2-py39hecd8cb5_0.conda": 24668,
+            "plotly-5.9.0-py39hecd8cb5_0.conda": 4316020,
+            "pluggy-1.0.0-py39hecd8cb5_1.conda": 29461,
+            "ply-3.11-py39hecd8cb5_0.conda": 82847,
+            "poyo-0.5.0-pyhd3eb1b0_0.conda": 17703,
+            "prometheus_client-0.14.1-py39hecd8cb5_0.conda": 91810,
+            "prompt-toolkit-3.0.20-pyhd3eb1b0_0.conda": 264741,
+            "prompt_toolkit-3.0.20-hd3eb1b0_0.conda": 12707,
+            "protego-0.1.16-py_0.conda": 2312936,
+            "psutil-5.9.0-py39hca72f7f_0.conda": 347095,
+            "ptyprocess-0.7.0-pyhd3eb1b0_2.conda": 17499,
+            "py-1.11.0-pyhd3eb1b0_0.conda": 78097,
+            "py-lief-0.11.5-py39he9d5cce_1.conda": 1020262,
+            "pyasn1-0.4.8-pyhd3eb1b0_0.conda": 55287,
+            "pyasn1-modules-0.2.8-py_0.conda": 73368,
+            "pycodestyle-2.8.0-pyhd3eb1b0_0.conda": 41656,
+            "pycosat-0.6.3-py39h9ed2024_0.conda": 88428,
+            "pycparser-2.21-pyhd3eb1b0_0.conda": 96617,
+            "pyct-0.4.8-py39hecd8cb5_1.conda": 29896,
+            "pycurl-7.45.1-py39h0a4fc7d_0.conda": 125982,
+            "pydispatcher-2.0.5-py39hecd8cb5_2.conda": 20262,
+            "pydocstyle-6.1.1-pyhd3eb1b0_0.conda": 36852,
+            "pyerfa-2.0.0-py39h9ed2024_0.conda": 330620,
+            "pyflakes-2.4.0-pyhd3eb1b0_0.conda": 61153,
+            "pygments-2.11.2-pyhd3eb1b0_0.conda": 776825,
+            "pyhamcrest-2.0.2-pyhd3eb1b0_2.conda": 31425,
+            "pyjwt-2.4.0-py39hecd8cb5_0.conda": 35963,
+            "pylint-2.14.5-py39hecd8cb5_0.conda": 652347,
+            "pyls-spyder-0.4.0-pyhd3eb1b0_0.conda": 10771,
+            "pyobjc-core-8.5-py39hc55c11b_0.conda": 338974,
+            "pyobjc-framework-cocoa-8.5-py39hca72f7f_0.conda": 309608,
+            "pyobjc-framework-coreservices-8.5-py39hca72f7f_0.conda": 38723,
+            "pyobjc-framework-fsevents-8.5-py39hecd8cb5_0.conda": 14295,
+            "pyodbc-4.0.34-py39he9d5cce_0.conda": 67109,
+            "pyopenssl-22.0.0-pyhd3eb1b0_0.conda": 51144,
+            "pyparsing-3.0.9-py39hecd8cb5_0.conda": 152580,
+            "pyqt-5.15.7-py39he9d5cce_0.conda": 4141049,
+            "pyqt5-sip-12.11.0-py39he9d5cce_0.conda": 75232,
+            "pyqtwebengine-5.15.7-py39he9d5cce_0.conda": 127421,
+            "pyrsistent-0.18.0-py39hca72f7f_0.conda": 95787,
+            "pysocks-1.7.1-py39hecd8cb5_0.conda": 31649,
+            "pytables-3.6.1-py39h648f197_1.conda": 1225723,
+            "pytest-7.1.2-py39hecd8cb5_0.conda": 453763,
+            "python-3.9.12-hdfd78df_1.conda": 10803504,
+            "python-3.9.13-hdfd78df_1.conda": 10807176,
+            "python-dateutil-2.8.2-pyhd3eb1b0_0.conda": 238135,
+            "python-fastjsonschema-2.16.2-py39hecd8cb5_0.conda": 237030,
+            "python-libarchive-c-2.9-pyhd3eb1b0_1.conda": 47905,
+            "python-lsp-black-1.2.1-py39hecd8cb5_0.conda": 14304,
+            "python-lsp-jsonrpc-1.0.0-pyhd3eb1b0_0.conda": 10689,
+            "python-lsp-server-1.5.0-py39hecd8cb5_0.conda": 92211,
+            "python-slugify-5.0.2-pyhd3eb1b0_0.conda": 13101,
+            "python-snappy-0.6.0-py39h23ab428_3.conda": 28275,
+            "python-telegram-bot-13.15-pyhd8ed1ab_1.conda": 270103,
+            "python.app-3-py39hca72f7f_0.conda": 20771,
+            "python_abi-3.9-2_cp39.tar.bz2": 4046,
+            "pytz-2022.1-py39hecd8cb5_0.conda": 199584,
+            "pyviz_comms-2.0.2-pyhd3eb1b0_0.conda": 23365,
+            "pywavelets-1.3.0-py39hca72f7f_0.conda": 3624130,
+            "pyyaml-6.0-py39hca72f7f_1.conda": 167757,
+            "pyzmq-23.2.0-py39he9d5cce_0.conda": 426786,
+            "qdarkstyle-3.0.2-pyhd3eb1b0_0.conda": 344639,
+            "qstylizer-0.1.10-pyhd3eb1b0_0.conda": 17200,
+            "qt-5.15.9-hecd8cb5_0.conda": 9889,
+            "qt-main-5.15.2-h719ae48_7.conda": 39873385,
+            "qt-webengine-5.15.9-h90a370e_4.conda": 50564778,
+            "qtawesome-1.0.3-pyhd3eb1b0_0.conda": 779425,
+            "qtconsole-5.3.2-py39hecd8cb5_0.conda": 181565,
+            "qtpy-2.2.0-py39hecd8cb5_0.conda": 88414,
+            "qtwebkit-5.212-h24dc246_4.conda": 10299190,
+            "queuelib-1.5.0-py39hecd8cb5_0.conda": 264173,
+            "readline-8.1.2-hca72f7f_1.conda": 329111,
+            "readline-8.2-hca72f7f_0.conda": 335698,
+            "regex-2022.7.9-py39hca72f7f_0.conda": 321003,
+            "requests-2.28.1-py39hecd8cb5_0.conda": 95163,
+            "requests-file-1.5.1-pyhd3eb1b0_0.conda": 7763,
+            "ripgrep-13.0.0-hc2228c6_0.conda": 1117330,
+            "rope-0.22.0-pyhd3eb1b0_0.conda": 132251,
+            "rtree-0.9.7-py39hecd8cb5_1.conda": 49533,
+            "ruamel_yaml-0.15.100-py39h9ed2024_0.conda": 258280,
+            "s3transfer-0.6.0-py39hecd8cb5_0.conda": 108023,
+            "scikit-image-0.19.2-py39hae1ba45_0.conda": 9944943,
+            "scikit-learn-1.0.2-py39hae1ba45_1.conda": 5505310,
+            "scikit-learn-intelex-2021.6.0-py39hecd8cb5_0.conda": 77483,
+            "scipy-1.9.1-py39h3d31255_0.conda": 18716900,
+            "scrapy-2.6.2-py39hecd8cb5_0.conda": 374775,
+            "seaborn-0.11.2-pyhd3eb1b0_0.conda": 223313,
+            "send2trash-1.8.0-pyhd3eb1b0_1.conda": 19295,
+            "service_identity-18.1.0-pyhd3eb1b0_1.conda": 13563,
+            "setuptools-63.4.1-py39hecd8cb5_0.conda": 1110103,
+            "setuptools-65.5.0-py39hecd8cb5_0.conda": 1199917,
+            "sip-6.6.2-py39he9d5cce_0.conda": 427257,
+            "six-1.16.0-pyhd3eb1b0_1.conda": 18894,
+            "smart_open-5.2.1-py39hecd8cb5_0.conda": 78939,
+            "snappy-1.1.9-he9d5cce_0.conda": 1001748,
+            "sniffio-1.2.0-py39hecd8cb5_1.conda": 14878,
+            "snowballstemmer-2.2.0-pyhd3eb1b0_0.conda": 62692,
+            "sortedcollections-2.1.0-pyhd3eb1b0_0.conda": 11933,
+            "sortedcontainers-2.4.0-pyhd3eb1b0_0.conda": 26444,
+            "soupsieve-2.3.1-pyhd3eb1b0_0.conda": 35010,
+            "sphinx-5.0.2-py39hecd8cb5_0.conda": 1813661,
+            "sphinxcontrib-applehelp-1.0.2-pyhd3eb1b0_0.tar.bz2": 29488,
+            "sphinxcontrib-devhelp-1.0.2-pyhd3eb1b0_0.tar.bz2": 23620,
+            "sphinxcontrib-htmlhelp-2.0.0-pyhd3eb1b0_0.conda": 32536,
+            "sphinxcontrib-jsmath-1.0.1-pyhd3eb1b0_0.tar.bz2": 8217,
+            "sphinxcontrib-qthelp-1.0.3-pyhd3eb1b0_0.tar.bz2": 26262,
+            "sphinxcontrib-serializinghtml-1.1.5-pyhd3eb1b0_0.conda": 25910,
+            "spyder-5.3.3-py39hecd8cb5_0.conda": 9814738,
+            "spyder-kernels-2.3.3-py39hecd8cb5_0.conda": 115344,
+            "sqlalchemy-1.4.39-py39hca72f7f_0.conda": 1986261,
+            "sqlite-3.39.3-h707629a_0.conda": 1233632,
+            "sqlite-3.40.0-h880c91c_0.conda": 1238907,
+            "statsmodels-0.13.2-py39hca72f7f_0.conda": 8773886,
+            "sympy-1.10.1-py39hecd8cb5_0.conda": 9918400,
+            "tabulate-0.8.10-py39hecd8cb5_0.conda": 46533,
+            "tapi-1000.10.8-ha1b3eb9_0.conda": 4428864,
+            "tbb-2021.6.0-haf03e11_0.conda": 156162,
+            "tbb4py-2021.6.0-py39haf03e11_0.conda": 51412,
+            "tblib-1.7.0-pyhd3eb1b0_0.conda": 15686,
+            "tenacity-8.0.1-py39hecd8cb5_1.conda": 35236,
+            "terminado-0.13.1-py39hecd8cb5_0.conda": 31171,
+            "testpath-0.6.0-py39hecd8cb5_0.conda": 87666,
+            "text-unidecode-1.3-pyhd3eb1b0_0.conda": 66500,
+            "textdistance-4.2.1-pyhd3eb1b0_0.conda": 29303,
+            "threadpoolctl-2.2.0-pyh0d69192_0.conda": 16731,
+            "three-merge-0.1.1-pyhd3eb1b0_0.conda": 9907,
+            "tifffile-2021.7.2-pyhd3eb1b0_2.conda": 137839,
+            "tinycss-0.4-pyhd3eb1b0_1002.conda": 39680,
+            "tk-8.6.12-h5d9f67b_0.conda": 3204354,
+            "tldextract-3.2.0-pyhd3eb1b0_0.conda": 83236,
+            "toml-0.10.2-pyhd3eb1b0_0.conda": 20302,
+            "tomli-2.0.1-py39hecd8cb5_0.conda": 25778,
+            "tomlkit-0.11.1-py39hecd8cb5_0.conda": 74169,
+            "toolz-0.11.2-pyhd3eb1b0_0.conda": 49793,
+            "tornado-6.1-py39h9ed2024_0.conda": 600914,
+            "tqdm-4.64.1-py39hecd8cb5_0.conda": 130777,
+            "traitlets-5.1.1-pyhd3eb1b0_0.conda": 86331,
+            "twisted-22.2.0-py39hca72f7f_1.conda": 4375872,
+            "typing-extensions-4.3.0-py39hecd8cb5_0.conda": 9029,
+            "typing_extensions-4.3.0-py39hecd8cb5_0.conda": 42755,
+            "tzdata-2022c-h04d1e81_0.conda": 109395,
+            "tzdata-2022f-h04d1e81_0.conda": 117447,
+            "tzlocal-5.0.1-py39h6e9494a_1.conda": 35355,
+            "ujson-5.4.0-py39he9d5cce_0.conda": 49079,
+            "unidecode-1.2.0-pyhd3eb1b0_0.conda": 159191,
+            "unixodbc-2.3.11-hb456775_0.conda": 260510,
+            "urllib3-1.26.11-py39hecd8cb5_0.conda": 189046,
+            "w3lib-1.21.0-pyhd3eb1b0_0.conda": 22074,
+            "watchdog-2.1.6-py39h999c104_0.conda": 105047,
+            "wcwidth-0.2.5-pyhd3eb1b0_0.conda": 26717,
+            "webencodings-0.5.1-py39hecd8cb5_1.conda": 20505,
+            "websocket-client-0.58.0-py39hecd8cb5_4.conda": 68423,
+            "werkzeug-2.0.3-pyhd3eb1b0_0.conda": 226131,
+            "wget-1.21.3-h6dfd666_0.conda": 346923,
+            "whatthepatch-1.0.2-py39hecd8cb5_0.conda": 23499,
+            "wheel-0.37.1-pyhd3eb1b0_0.conda": 33329,
+            "widgetsnbextension-3.5.2-py39hecd8cb5_0.conda": 666148,
+            "wrapt-1.14.1-py39hca72f7f_0.conda": 47896,
+            "wurlitzer-3.0.2-py39hecd8cb5_0.conda": 15532,
+            "xarray-0.20.1-pyhd3eb1b0_1.conda": 576806,
+            "xlrd-2.0.1-pyhd3eb1b0_0.conda": 92286,
+            "xlsxwriter-3.0.3-pyhd3eb1b0_0.conda": 115808,
+            "xlwings-0.27.15-py39hecd8cb5_0.conda": 812251,
+            "xz-5.2.6-hca72f7f_0.conda": 249071,
+            "yaml-0.2.5-haf1e3a3_0.conda": 73357,
+            "yapf-0.31.0-pyhd3eb1b0_0.conda": 128805,
+            "zeromq-4.3.4-h23ab428_0.conda": 296044,
+            "zfp-0.5.5-he9d5cce_6.conda": 156344,
+            "zict-2.1.0-py39hecd8cb5_0.conda": 20948,
+            "zipp-3.8.0-py39hecd8cb5_0.conda": 16212,
+            "zlib-1.2.12-h4dc903c_3.conda": 97224,
+            "zlib-1.2.13-h4dc903c_0.conda": 98178,
+            "zope-1.0-py39hecd8cb5_1.conda": 222649,
+            "zope.interface-5.4.0-py39h9ed2024_0.conda": 308754,
+            "zstd-1.5.2-hcb37349_0.conda": 484125
+          }
+        },
+        "pkgs_dirs": {
+          "/Users/woojinchang/opt/anaconda3/pkgs": [
+            "conda-verify-3.4.2-py_1.conda",
+            "jupyter_client-7.3.4-py39hecd8cb5_0.conda",
+            "anaconda-navigator-2.3.1-py39hecd8cb5_0.conda",
+            "xz-5.2.6-hca72f7f_0.conda",
+            "oniguruma-6.9.7.1-h9ed2024_0.conda",
+            "cffi-1.15.1-py39hc55c11b_0.conda",
+            "openjpeg-2.4.0-h66ea3da_0.conda",
+            "pyerfa-2.0.0-py39h9ed2024_0.conda",
+            "numpy-base-1.21.5-py39h3b1a694_3.conda",
+            "ipywidgets-7.6.5-pyhd3eb1b0_1.conda",
+            "python_abi-3.9-2_cp39.tar.bz2",
+            "gmp-6.2.1-he9d5cce_3.conda",
+            "libllvm12-12.0.0-h9b2ccf5_3.conda",
+            "mpich-3.3.2-external_0.conda",
+            "libxslt-1.1.35-h5b33f42_0.conda",
+            "tzlocal-5.0.1-py39h6e9494a_1.conda",
+            "qtwebkit-5.212-h24dc246_4.conda",
+            "parso-0.8.3-pyhd3eb1b0_0.conda",
+            "daal4py-2021.6.0-py39h01d92e1_1.conda",
+            "libpng-1.6.37-ha441bb4_0.conda",
+            "ipython-7.31.1-py39hecd8cb5_1.conda",
+            "zict-2.1.0-py39hecd8cb5_0.conda",
+            "argon2-cffi-bindings-21.2.0-py39hca72f7f_0.conda",
+            "automat-20.2.0-py_0.conda",
+            "three-merge-0.1.1-pyhd3eb1b0_0.conda",
+            "protego-0.1.16-py_0.conda",
+            "conda-content-trust-0.1.3-py39hecd8cb5_0.conda",
+            "entrypoints-0.4-py39hecd8cb5_0.conda",
+            "openssl-1.1.1q-hca72f7f_0.conda",
+            "prompt_toolkit-3.0.20-hd3eb1b0_0.conda",
+            "libarchive-3.6.1-he336d3b_0.conda",
+            "libbrotlidec-1.0.9-hca72f7f_7.conda",
+            "libllvm14-14.0.6-he552d86_0.conda",
+            "libffi-3.3-hb1e8313_2.conda",
+            "spyder-5.3.3-py39hecd8cb5_0.conda",
+            "sphinxcontrib-jsmath-1.0.1-pyhd3eb1b0_0.tar.bz2",
+            "textdistance-4.2.1-pyhd3eb1b0_0.conda",
+            "nest-asyncio-1.5.5-py39hecd8cb5_0.conda",
+            "gstreamer-1.14.0-h0fc69c2_2.conda",
+            "ruamel_yaml-0.15.100-py39h9ed2024_0.conda",
+            "sphinxcontrib-applehelp-1.0.2-pyhd3eb1b0_0.tar.bz2",
+            "dask-2022.7.0-py39hecd8cb5_0.conda",
+            "setuptools-63.4.1-py39hecd8cb5_0.conda",
+            "tzdata-2022f-h04d1e81_0.conda",
+            "plotly-5.9.0-py39hecd8cb5_0.conda",
+            "pathlib-1.0.1-pyhd3eb1b0_1.conda",
+            "mpmath-1.2.1-py39hecd8cb5_0.conda",
+            "jmespath-0.10.0-pyhd3eb1b0_0.conda",
+            "sympy-1.10.1-py39hecd8cb5_0.conda",
+            "constantly-15.1.0-pyh2b92418_0.conda",
+            "snappy-1.1.9-he9d5cce_0.conda",
+            "libdeflate-1.8-h9ed2024_5.conda",
+            "libidn2-2.3.2-h9ed2024_0.conda",
+            "munkres-1.1.4-py_0.conda",
+            "sphinxcontrib-devhelp-1.0.2-pyhd3eb1b0_0.tar.bz2",
+            "nbformat-5.5.0-py39hecd8cb5_0.conda",
+            "pytest-7.1.2-py39hecd8cb5_0.conda",
+            "locket-1.0.0-py39hecd8cb5_0.conda",
+            "jq-1.6-h9ed2024_1000.conda",
+            "py-lief-0.11.5-py39he9d5cce_1.conda",
+            "json5-0.9.6-pyhd3eb1b0_0.conda",
+            "jupyter_server-1.18.1-py39hecd8cb5_0.conda",
+            "yapf-0.31.0-pyhd3eb1b0_0.conda",
+            "pyjwt-2.4.0-py39hecd8cb5_0.conda",
+            "urllib3-1.26.11-py39hecd8cb5_0.conda",
+            "wcwidth-0.2.5-pyhd3eb1b0_0.conda",
+            "spyder-kernels-2.3.3-py39hecd8cb5_0.conda",
+            "pyqtwebengine-5.15.7-py39he9d5cce_0.conda",
+            "libsodium-1.0.18-h1de35cc_0.conda",
+            "lazy-object-proxy-1.6.0-py39h9ed2024_0.conda",
+            "numpy-1.21.5-py39h2e5f0a9_3.conda",
+            "werkzeug-2.0.3-pyhd3eb1b0_0.conda",
+            "jdcal-1.4.1-pyhd3eb1b0_0.conda",
+            "jupyterlab_pygments-0.1.2-py_0.conda",
+            "pep8-1.7.1-py39hecd8cb5_1.conda",
+            "babel-2.9.1-pyhd3eb1b0_0.conda",
+            "pysocks-1.7.1-py39hecd8cb5_0.conda",
+            "_ipyw_jlab_nb_ext_conf-0.1.0-py39hecd8cb5_1.conda",
+            "libspatialindex-1.9.3-h23ab428_0.conda",
+            "sortedcontainers-2.4.0-pyhd3eb1b0_0.conda",
+            "ld64_osx-64-530-h70f3046_25.conda",
+            "brotli-bin-1.0.9-hca72f7f_7.conda",
+            "fftw-3.3.9-h9ed2024_1.conda",
+            "python-lsp-server-1.5.0-py39hecd8cb5_0.conda",
+            "pyct-0.4.8-py39hecd8cb5_1.conda",
+            "lz4-c-1.9.3-h23ab428_1.conda",
+            "future-0.18.2-py39hecd8cb5_1.conda",
+            "libbrotlicommon-1.0.9-hca72f7f_7.conda",
+            "libzopfli-1.0.3-hb1e8313_0.conda",
+            "cloudpickle-2.0.0-pyhd3eb1b0_0.conda",
+            "pillow-9.2.0-py39hde71d04_1.conda",
+            "importlib-metadata-4.11.3-py39hecd8cb5_0.conda",
+            "ncurses-6.3-hca72f7f_3.conda",
+            "qtpy-2.2.0-py39hecd8cb5_0.conda",
+            "whatthepatch-1.0.2-py39hecd8cb5_0.conda",
+            "conda-package-handling-1.9.0-py39hca72f7f_0.conda",
+            "mpi-1.0-mpich.conda",
+            "pyqt5-sip-12.11.0-py39he9d5cce_0.conda",
+            "sqlite-3.39.3-h707629a_0.conda",
+            "bokeh-2.4.3-py39hecd8cb5_0.conda",
+            "typing_extensions-4.3.0-py39hecd8cb5_0.conda",
+            "readline-8.2-hca72f7f_0.conda",
+            "giflib-5.2.1-haf1e3a3_0.conda",
+            "flake8-4.0.1-pyhd3eb1b0_1.conda",
+            "pcre-8.45-h23ab428_0.conda",
+            "blas-1.0-mkl.conda",
+            "unidecode-1.2.0-pyhd3eb1b0_0.conda",
+            "python-slugify-5.0.2-pyhd3eb1b0_0.conda",
+            "zlib-1.2.13-h4dc903c_0.conda",
+            "seaborn-0.11.2-pyhd3eb1b0_0.conda",
+            "backports-1.1-pyhd3eb1b0_0.conda",
+            "pywavelets-1.3.0-py39hca72f7f_0.conda",
+            "dask-core-2022.7.0-py39hecd8cb5_0.conda",
+            "gettext-0.21.0-h7535e17_0.conda",
+            "tbb-2021.6.0-haf03e11_0.conda",
+            "zlib-1.2.12-h4dc903c_3.conda",
+            "traitlets-5.1.1-pyhd3eb1b0_0.conda",
+            "sphinxcontrib-qthelp-1.0.3-pyhd3eb1b0_0.tar.bz2",
+            "zfp-0.5.5-he9d5cce_6.conda",
+            "itemloaders-1.0.4-pyhd3eb1b0_1.conda",
+            "libgfortran5-11.2.0-h246ff09_26.conda",
+            "ca-certificates-2022.07.19-hecd8cb5_0.conda",
+            "toolz-0.11.2-pyhd3eb1b0_0.conda",
+            "numexpr-2.8.3-py39h2e5f0a9_0.conda",
+            "pydocstyle-6.1.1-pyhd3eb1b0_0.conda",
+            "py-1.11.0-pyhd3eb1b0_0.conda",
+            "datashader-0.14.1-py39hecd8cb5_0.conda",
+            "webencodings-0.5.1-py39hecd8cb5_1.conda",
+            "libaec-1.0.4-hb1e8313_1.conda",
+            "zope-1.0-py39hecd8cb5_1.conda",
+            "xarray-0.20.1-pyhd3eb1b0_1.conda",
+            "python-telegram-bot-13.15-pyhd8ed1ab_1.conda",
+            "msgpack-python-1.0.3-py39haf03e11_0.conda",
+            "click-8.0.4-py39hecd8cb5_0.conda",
+            "pyrsistent-0.18.0-py39hca72f7f_0.conda",
+            "ldid-2.1.2-h2d21305_2.conda",
+            "scikit-image-0.19.2-py39hae1ba45_0.conda",
+            "fonttools-4.25.0-pyhd3eb1b0_0.conda",
+            "nbclassic-0.3.5-pyhd3eb1b0_0.conda",
+            "pyobjc-core-8.5-py39hc55c11b_0.conda",
+            "conda-repo-cli-1.0.20-py39hecd8cb5_0.conda",
+            "regex-2022.7.9-py39hca72f7f_0.conda",
+            "libcxx-14.0.6-h9765a3e_0.conda",
+            "sniffio-1.2.0-py39hecd8cb5_1.conda",
+            "ripgrep-13.0.0-hc2228c6_0.conda",
+            "platformdirs-2.5.2-py39hecd8cb5_0.conda",
+            "unixodbc-2.3.11-hb456775_0.conda",
+            "python-dateutil-2.8.2-pyhd3eb1b0_0.conda",
+            "appdirs-1.4.4-pyhd3eb1b0_0.conda",
+            "atomicwrites-1.4.0-py_0.conda",
+            "flask-1.1.2-pyhd3eb1b0_0.tar.bz2",
+            "libssh2-1.10.0-h0a4fc7d_0.conda",
+            "pandas-1.4.4-py39he9d5cce_0.conda",
+            "scikit-learn-1.0.2-py39hae1ba45_1.conda",
+            "widgetsnbextension-3.5.2-py39hecd8cb5_0.conda",
+            "conda-token-0.4.0-pyhd3eb1b0_0.conda",
+            "pathspec-0.9.0-py39hecd8cb5_0.conda",
+            "python-lsp-jsonrpc-1.0.0-pyhd3eb1b0_0.conda",
+            "jinja2-time-0.2.0-pyhd3eb1b0_3.conda",
+            "libbrotlienc-1.0.9-hca72f7f_7.conda",
+            "llvmlite-0.38.0-py39h8346a28_0.conda",
+            "chardet-4.0.0-py39hecd8cb5_1003.conda",
+            "tblib-1.7.0-pyhd3eb1b0_0.conda",
+            "scrapy-2.6.2-py39hecd8cb5_0.conda",
+            "lz4-3.1.3-py39h9ed2024_0.conda",
+            "glob2-0.7-pyhd3eb1b0_0.tar.bz2",
+            "tabulate-0.8.10-py39hecd8cb5_0.conda",
+            "tinycss-0.4-pyhd3eb1b0_1002.conda",
+            "greenlet-1.1.1-py39h23ab428_0.conda",
+            "appnope-0.1.2-py39hecd8cb5_1001.conda",
+            "pyobjc-framework-coreservices-8.5-py39hca72f7f_0.conda",
+            "alabaster-0.7.12-pyhd3eb1b0_0.tar.bz2",
+            "six-1.16.0-pyhd3eb1b0_1.conda",
+            "backports.functools_lru_cache-1.6.4-pyhd3eb1b0_0.conda",
+            "nltk-3.7-pyhd3eb1b0_0.conda",
+            "w3lib-1.21.0-pyhd3eb1b0_0.conda",
+            "poyo-0.5.0-pyhd3eb1b0_0.conda",
+            "krb5-1.19.2-hcd88c3b_0.conda",
+            "backports.tempfile-1.0-pyhd3eb1b0_1.tar.bz2",
+            "jupyter_console-6.4.3-pyhd3eb1b0_0.conda",
+            "patsy-0.5.2-py39hecd8cb5_1.conda",
+            "c-ares-1.18.1-hca72f7f_0.conda",
+            "psutil-5.9.0-py39hca72f7f_0.conda",
+            "lzo-2.10-haf1e3a3_2.conda",
+            "zope.interface-5.4.0-py39h9ed2024_0.conda",
+            "mypy_extensions-0.4.3-py39hecd8cb5_1.conda",
+            "ujson-5.4.0-py39he9d5cce_0.conda",
+            "diff-match-patch-20200713-pyhd3eb1b0_0.conda",
+            "cycler-0.11.0-pyhd3eb1b0_0.conda",
+            "pickleshare-0.7.5-pyhd3eb1b0_1003.conda",
+            "zeromq-4.3.4-h23ab428_0.conda",
+            "pyls-spyder-0.4.0-pyhd3eb1b0_0.conda",
+            "isort-5.9.3-pyhd3eb1b0_0.conda",
+            "nbconvert-6.4.4-py39hecd8cb5_0.conda",
+            "testpath-0.6.0-py39hecd8cb5_0.conda",
+            "nose-1.3.7-pyhd3eb1b0_1008.conda",
+            "backcall-0.2.0-pyhd3eb1b0_0.tar.bz2",
+            "tzdata-2022c-h04d1e81_0.conda",
+            "statsmodels-0.13.2-py39hca72f7f_0.conda",
+            "pkginfo-1.8.2-pyhd3eb1b0_0.conda",
+            "pandocfilters-1.5.0-pyhd3eb1b0_0.conda",
+            "python-snappy-0.6.0-py39h23ab428_3.conda",
+            "fsspec-2022.7.1-py39hecd8cb5_0.conda",
+            "argon2-cffi-21.3.0-pyhd3eb1b0_0.conda",
+            "patch-2.7.6-h1de35cc_1001.conda",
+            "mpfr-4.0.2-h9066e36_1.conda",
+            "gmpy2-2.1.2-py39hd5de756_0.conda",
+            "sortedcollections-2.1.0-pyhd3eb1b0_0.conda",
+            "openpyxl-3.0.10-py39hca72f7f_0.conda",
+            "wheel-0.37.1-pyhd3eb1b0_0.conda",
+            "brotlipy-0.7.0-py39h9ed2024_1003.conda",
+            "datashape-0.5.4-py39hecd8cb5_1.conda",
+            "libgfortran-5.0.0-11_2_0_h246ff09_26.conda",
+            "ipython_genutils-0.2.0-pyhd3eb1b0_1.conda",
+            "certifi-2022.9.24-py39hecd8cb5_0.conda",
+            "charset-normalizer-2.0.4-pyhd3eb1b0_0.conda",
+            "requests-2.28.1-py39hecd8cb5_0.conda",
+            "pexpect-4.8.0-pyhd3eb1b0_3.conda",
+            "matplotlib-base-3.5.2-py39hfb0c5b7_0.conda",
+            "cytoolz-0.11.0-py39h9ed2024_0.conda",
+            "anaconda-project-0.11.1-py39hecd8cb5_0.conda",
+            "liblief-0.11.5-he9d5cce_1.conda",
+            "black-22.6.0-py39hecd8cb5_0.conda",
+            "pyparsing-3.0.9-py39hecd8cb5_0.conda",
+            "python-lsp-black-1.2.1-py39hecd8cb5_0.conda",
+            "tapi-1000.10.8-ha1b3eb9_0.conda",
+            "apscheduler-3.6.3-py39h6e9494a_3.tar.bz2",
+            "qt-webengine-5.15.9-h90a370e_4.conda",
+            "sip-6.6.2-py39he9d5cce_0.conda",
+            "tomli-2.0.1-py39hecd8cb5_0.conda",
+            "pycosat-0.6.3-py39h9ed2024_0.conda",
+            "cachetools-4.2.2-pyhd8ed1ab_0.tar.bz2",
+            "service_identity-18.1.0-pyhd3eb1b0_1.conda",
+            "holoviews-1.15.0-py39hecd8cb5_0.conda",
+            "mccabe-0.7.0-pyhd3eb1b0_0.conda",
+            "ipykernel-6.15.2-py39hecd8cb5_0.conda",
+            "libwebp-base-1.2.2-hca72f7f_0.conda",
+            "libedit-3.1.20210910-hca72f7f_0.conda",
+            "hvplot-0.8.0-py39hecd8cb5_0.conda",
+            "markdown-3.3.4-py39hecd8cb5_0.conda",
+            "blosc-1.21.0-h8346a28_1.conda",
+            "lxml-4.9.1-py39h65b224f_0.conda",
+            "intake-0.6.5-pyhd3eb1b0_0.conda",
+            "dataclasses-0.8-pyh6d0b6a4_7.conda",
+            "jupyterlab_server-2.10.3-pyhd3eb1b0_1.conda",
+            "mkl-2021.4.0-hecd8cb5_637.conda",
+            "et_xmlfile-1.1.0-py39hecd8cb5_0.conda",
+            "xlwings-0.27.15-py39hecd8cb5_0.conda",
+            "heapdict-1.0.1-pyhd3eb1b0_0.conda",
+            "pyqt-5.15.7-py39he9d5cce_0.conda",
+            "importlib_metadata-4.11.3-hd3eb1b0_0.conda",
+            "libnghttp2-1.46.0-ha29bfda_0.conda",
+            "mpc-1.1.0-h6ef4df4_1.conda",
+            "twisted-22.2.0-py39hca72f7f_1.conda",
+            "openssl-1.1.1s-hca72f7f_0.conda",
+            "s3transfer-0.6.0-py39hecd8cb5_0.conda",
+            "sphinxcontrib-serializinghtml-1.1.5-pyhd3eb1b0_0.conda",
+            "llvm-openmp-14.0.6-h0dcd299_0.conda",
+            "prometheus_client-0.14.1-py39hecd8cb5_0.conda",
+            "autopep8-1.6.0-pyhd3eb1b0_1.conda",
+            "iniconfig-1.1.1-pyhd3eb1b0_0.tar.bz2",
+            "jxrlib-1.1-haf1e3a3_2.conda",
+            "jupyterlab_widgets-1.0.0-pyhd3eb1b0_1.conda",
+            "partd-1.2.0-pyhd3eb1b0_1.conda",
+            "bzip2-1.0.8-h1de35cc_0.conda",
+            "cssselect-1.1.0-pyhd3eb1b0_0.conda",
+            "debugpy-1.5.1-py39he9d5cce_0.conda",
+            "keyring-23.4.0-py39hecd8cb5_0.conda",
+            "olefile-0.46-pyhd3eb1b0_0.conda",
+            "watchdog-2.1.6-py39h999c104_0.conda",
+            "cookiecutter-1.7.3-pyhd3eb1b0_0.conda",
+            "jsonschema-4.16.0-py39hecd8cb5_0.conda",
+            "pyzmq-23.2.0-py39he9d5cce_0.conda",
+            "text-unidecode-1.3-pyhd3eb1b0_0.conda",
+            "pytables-3.6.1-py39h648f197_1.conda",
+            "conda-22.9.0-py39hecd8cb5_0.conda",
+            "conda-pack-0.6.0-pyhd3eb1b0_0.conda",
+            "readline-8.1.2-hca72f7f_1.conda",
+            "zipp-3.8.0-py39hecd8cb5_0.conda",
+            "tk-8.6.12-h5d9f67b_0.conda",
+            "pycparser-2.21-pyhd3eb1b0_0.conda",
+            "pyobjc-framework-cocoa-8.5-py39hca72f7f_0.conda",
+            "conda-build-3.22.0-py39hecd8cb5_0.conda",
+            "anyio-3.5.0-py39hecd8cb5_0.conda",
+            "mkl-service-2.4.0-py39h9ed2024_0.conda",
+            "astropy-5.1-py39h67323c0_0.conda",
+            "mock-4.0.3-pyhd3eb1b0_0.conda",
+            "scipy-1.9.1-py39h3d31255_0.conda",
+            "cctools_osx-64-949.0.1-hc7db93f_25.conda",
+            "bcrypt-3.2.0-py39hca72f7f_1.conda",
+            "networkx-2.8.4-py39hecd8cb5_0.conda",
+            "send2trash-1.8.0-pyhd3eb1b0_1.conda",
+            "gst-plugins-base-1.14.0-h4180768_2.conda",
+            "applaunchservices-0.3.0-py39hecd8cb5_0.conda",
+            "tldextract-3.2.0-pyhd3eb1b0_0.conda",
+            "navigator-updater-0.3.0-py39hecd8cb5_0.conda",
+            "libunistring-0.9.10-h9ed2024_0.conda",
+            "imagesize-1.4.1-py39hecd8cb5_0.conda",
+            "pyodbc-4.0.34-py39he9d5cce_0.conda",
+            "brunsli-0.1-h23ab428_0.conda",
+            "appscript-1.1.2-py39h9ed2024_0.conda",
+            "cython-0.29.32-py39he9d5cce_0.conda",
+            "markupsafe-2.0.1-py39h9ed2024_0.conda",
+            "libtiff-4.4.0-h2ef1027_0.conda",
+            "queuelib-1.5.0-py39hecd8cb5_0.conda",
+            "wget-1.21.3-h6dfd666_0.conda",
+            "xlsxwriter-3.0.3-pyhd3eb1b0_0.conda",
+            "icu-58.2-h0a44026_3.conda",
+            "anaconda-client-1.11.0-py39hecd8cb5_0.conda",
+            "pyopenssl-22.0.0-pyhd3eb1b0_0.conda",
+            "notebook-6.4.12-py39hecd8cb5_0.conda",
+            "python-3.9.13-hdfd78df_1.conda",
+            "tenacity-8.0.1-py39hecd8cb5_1.conda",
+            "docutils-0.18.1-py39hecd8cb5_3.conda",
+            "tbb4py-2021.6.0-py39haf03e11_0.conda",
+            "anaconda-2022.10-py39_0.tar.bz2",
+            "qt-main-5.15.2-h719ae48_7.conda",
+            "tifffile-2021.7.2-pyhd3eb1b0_2.conda",
+            "prompt-toolkit-3.0.20-pyhd3eb1b0_0.conda",
+            "qdarkstyle-3.0.2-pyhd3eb1b0_0.conda",
+            "multipledispatch-0.6.0-py39hecd8cb5_0.conda",
+            "astroid-2.11.7-py39hecd8cb5_0.conda",
+            "h5py-3.7.0-py39h4a1dd59_0.conda",
+            "bottleneck-1.3.5-py39h67323c0_0.conda",
+            "zstd-1.5.2-hcb37349_0.conda",
+            "websocket-client-0.58.0-py39hecd8cb5_4.conda",
+            "libwebp-1.2.2-h56c3ce4_0.conda",
+            "sqlite-3.40.0-h880c91c_0.conda",
+            "ply-3.11-py39hecd8cb5_0.conda",
+            "python-libarchive-c-2.9-pyhd3eb1b0_1.conda",
+            "conda-env-2.6.0-1.conda",
+            "pluggy-1.0.0-py39hecd8cb5_1.conda",
+            "typing-extensions-4.3.0-py39hecd8cb5_0.conda",
+            "distributed-2022.7.0-py39hecd8cb5_0.conda",
+            "tomlkit-0.11.1-py39hecd8cb5_0.conda",
+            "qtconsole-5.3.2-py39hecd8cb5_0.conda",
+            "requests-file-1.5.1-pyhd3eb1b0_0.conda",
+            "rope-0.22.0-pyhd3eb1b0_0.conda",
+            "jedi-0.18.1-py39hecd8cb5_1.conda",
+            "jellyfish-0.9.0-py39hca72f7f_0.conda",
+            "bkcharts-0.2-py39hecd8cb5_1.conda",
+            "nspr-4.33-he9d5cce_0.conda",
+            "cfitsio-3.470-hbd21bf8_7.conda",
+            "ptyprocess-0.7.0-pyhd3eb1b0_2.conda",
+            "wrapt-1.14.1-py39hca72f7f_0.conda",
+            "mistune-0.8.4-py39h9ed2024_1000.conda",
+            "backports.weakref-1.0.post1-py_1.conda",
+            "sphinxcontrib-htmlhelp-2.0.0-pyhd3eb1b0_0.conda",
+            "bleach-4.1.0-pyhd3eb1b0_0.conda",
+            "smart_open-5.2.1-py39hecd8cb5_0.conda",
+            "brotli-1.0.9-hca72f7f_7.conda",
+            "scikit-learn-intelex-2021.6.0-py39hecd8cb5_0.conda",
+            "binaryornot-0.4.4-pyhd3eb1b0_1.conda",
+            "ld64-530-h20443b4_25.conda",
+            "mkl_fft-1.3.1-py39h4ab4a9b_0.conda",
+            "glib-2.69.1-h8346a28_1.conda",
+            "libiconv-1.16-hca72f7f_2.conda",
+            "pydispatcher-2.0.5-py39hecd8cb5_2.conda",
+            "botocore-1.27.28-py39hecd8cb5_0.conda",
+            "libxml2-2.9.14-hbf8cd5e_0.conda",
+            "terminado-0.13.1-py39hecd8cb5_0.conda",
+            "panel-0.13.1-py39hecd8cb5_0.conda",
+            "joblib-1.1.0-pyhd3eb1b0_0.conda",
+            "threadpoolctl-2.2.0-pyh0d69192_0.conda",
+            "libclang-12.0.0-default_hbc2896b_2.conda",
+            "qt-5.15.9-hecd8cb5_0.conda",
+            "pycurl-7.45.1-py39h0a4fc7d_0.conda",
+            "rtree-0.9.7-py39hecd8cb5_1.conda",
+            "gensim-4.1.2-py39he9d5cce_0.conda",
+            "python.app-3-py39hca72f7f_0.conda",
+            "pyasn1-modules-0.2.8-py_0.conda",
+            "jpeg-9e-hca72f7f_0.conda",
+            "nbclient-0.5.13-py39hecd8cb5_0.conda",
+            "libcurl-7.84.0-h6dfd666_0.conda",
+            "param-1.12.0-pyhd3eb1b0_0.conda",
+            "packaging-21.3-pyhd3eb1b0_0.conda",
+            "matplotlib-inline-0.1.6-py39hecd8cb5_0.conda",
+            "libev-4.33-h9ed2024_1.conda",
+            "libllvm11-11.1.0-h46f1229_5.conda",
+            "bitarray-2.5.1-py39hca72f7f_0.conda",
+            "dal-2021.6.0-haf03e11_929.conda",
+            "toml-0.10.2-pyhd3eb1b0_0.conda",
+            "incremental-21.3.0-pyhd3eb1b0_0.conda",
+            "idna-3.3-pyhd3eb1b0_0.conda",
+            "imageio-2.19.3-py39hecd8cb5_0.conda",
+            "wurlitzer-3.0.2-py39hecd8cb5_0.conda",
+            "lerc-3.0-he9d5cce_0.conda",
+            "qstylizer-0.1.10-pyhd3eb1b0_0.conda",
+            "parsel-1.6.0-py39hecd8cb5_0.conda",
+            "tqdm-4.64.1-py39hecd8cb5_0.conda",
+            "pyflakes-2.4.0-pyhd3eb1b0_0.conda",
+            "charls-2.2.0-h23ab428_0.conda",
+            "libpq-12.9-h1c9f633_3.conda",
+            "clyent-1.2.2-py39hecd8cb5_1.conda",
+            "curl-7.84.0-hca72f7f_0.conda",
+            "numpydoc-1.4.0-py39hecd8cb5_0.conda",
+            "jupyterlab-3.4.4-py39hecd8cb5_0.conda",
+            "jinja2-2.11.3-pyhd3eb1b0_0.conda",
+            "setuptools-65.5.0-py39hecd8cb5_0.conda",
+            "colorama-0.4.5-py39hecd8cb5_0.conda",
+            "pyasn1-0.4.8-pyhd3eb1b0_0.conda",
+            "jupyter-1.0.0-py39hecd8cb5_8.conda",
+            "inflection-0.5.1-py39hecd8cb5_0.conda",
+            "python-fastjsonschema-2.16.2-py39hecd8cb5_0.conda",
+            "itemadapter-0.3.0-pyhd3eb1b0_0.conda",
+            "ca-certificates-2022.10.11-hecd8cb5_0.conda",
+            "matplotlib-3.5.2-py39hecd8cb5_0.conda",
+            "dill-0.3.4-pyhd3eb1b0_0.conda",
+            "pyyaml-6.0-py39hca72f7f_1.conda",
+            "tornado-6.1-py39h9ed2024_0.conda",
+            "soupsieve-2.3.1-pyhd3eb1b0_0.conda",
+            "filelock-3.6.0-pyhd3eb1b0_0.conda",
+            "sphinx-5.0.2-py39hecd8cb5_0.conda",
+            "pytz-2022.1-py39hecd8cb5_0.conda",
+            "lcms2-2.12-hf1fd2bf_0.conda",
+            "mkl_random-1.2.2-py39hb2f4e1b_0.conda",
+            "pyviz_comms-2.0.2-pyhd3eb1b0_0.conda",
+            "pygments-2.11.2-pyhd3eb1b0_0.conda",
+            "hdf5-1.10.6-h10fe05b_1.conda",
+            "snowballstemmer-2.2.0-pyhd3eb1b0_0.conda",
+            "imagecodecs-2021.8.26-py39h0f85e6e_1.conda",
+            "pip-22.2.2-py39hecd8cb5_0.conda",
+            "decorator-5.1.1-pyhd3eb1b0_0.conda",
+            "beautifulsoup4-4.11.1-py39hecd8cb5_0.conda",
+            "pycodestyle-2.8.0-pyhd3eb1b0_0.conda",
+            "intervaltree-3.1.0-pyhd3eb1b0_0.conda",
+            "cctools-949.0.1-h9abeeb2_25.conda",
+            "hyperlink-21.0.0-pyhd3eb1b0_0.conda",
+            "kiwisolver-1.4.2-py39he9d5cce_0.conda",
+            "freetype-2.11.0-hd8bbffd_0.conda",
+            "conda-22.9.0-py39h6e9494a_2.tar.bz2",
+            "numba-0.55.1-py39hae1ba45_0.conda",
+            "pyhamcrest-2.0.2-pyhd3eb1b0_2.conda",
+            "yaml-0.2.5-haf1e3a3_0.conda",
+            "intel-openmp-2021.4.0-hecd8cb5_3538.conda",
+            "qtawesome-1.0.3-pyhd3eb1b0_0.conda",
+            "cryptography-37.0.1-py39hf6deb26_0.conda",
+            "itsdangerous-2.0.1-pyhd3eb1b0_0.conda",
+            "jupyter_core-4.11.1-py39hecd8cb5_0.conda",
+            "pyobjc-framework-fsevents-8.5-py39hecd8cb5_0.conda",
+            "sqlalchemy-1.4.39-py39hca72f7f_0.conda",
+            "colorcet-3.0.0-py39hecd8cb5_0.conda",
+            "xlrd-2.0.1-pyhd3eb1b0_0.conda",
+            "pylint-2.14.5-py39hecd8cb5_0.conda",
+            "nss-3.74-h47edf6a_0.conda",
+            "attrs-21.4.0-pyhd3eb1b0_0.conda",
+            "python-3.9.12-hdfd78df_1.conda",
+            "boto3-1.24.28-py39hecd8cb5_0.conda",
+            "arrow-1.2.2-pyhd3eb1b0_0.conda",
+            "defusedxml-0.7.1-pyhd3eb1b0_0.conda"
+          ]
+        },
+        "total_size": 714889455,
+        "warnings": []
+      }
+    },
+    "docker": {
+      "daemon": "STOPPED",
+      "mutation": false,
+      "virtual_disk_allocated_bytes": 11866423296
+    }
+  },
+  "note": "du allocation is not APFS reclaim. Phase observations include asynchronous system reclaim and concurrent activity; use whole-operation APFS delta, not sum of du or interval deltas."
+}

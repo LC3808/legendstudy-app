@@ -33,6 +33,8 @@
 
 ## 개발 기준과 인수인계
 
+- 로컬 환경 정리11/28: 실제 APFS +137.05GB, 여유152.16GB. 보존 검증PASS, 150GB 확보/200GB 목표는 PARTIAL. [삭제 근거·보류·관리 정책](development-storage-cleanup-20261128.md). 제품/운영 변경0; 다음 빌드 시 캐시·의존성 복원 필요.
+
 - 공식 문서와 출시된 APP 기준: `origin/main`. main은 출시88을 포함한다. 이후 Wiki 커밋은 버전 증가나 운영 배포가 아니다.
 - APP 후보89: `codex/operations-commercial-20261113`; 운영/SQL/Worker: `codex/material-service-app-20261022`; WEB 별도 저장소: `codex/lab-admin-operations-20261114`.
 - 작업 전 원격 main의 AGENTS/index/current를 읽고 실제 branch/HEAD와 출시 ancestry를 확인한다. 오래된 작업 branch 전체를 APP에 덮어쓰지 않는다.

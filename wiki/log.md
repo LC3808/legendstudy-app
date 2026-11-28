@@ -6077,3 +6077,7 @@ Owner 승인으로 기준5fd50a21의 기존 plan 검증 및 동일소스513e641f
 
 ## 2026-11-26 — Registry 복구 Owner 확인
 Owner가 배포6ac93a1b 후 “확인 완료, 정상 작동.” 확인. 장애 복구 DONE으로 마감; 개별 기기/API 계측/실제 첨삭 제출 PASS로 확대하지 않음. 추가 운영 변경0. [확인 기록](finance-auth-renewal-20261117.md#owner-정상-작동-확인--2026-11-26).
+
+
+## 2026-11-28 — Mac 개발 환경 정리
+Owner 승인 Phase A–I 실행. APFS 여유15.12→152.16GB(+137.05GB), 사용률84.70%. 캐시·중복 사본·미참조 SDK1개·종료 worktree3개·초기 동일 Simulator33개 정리. Git/고유 파일·APP89/DB/원본/Archive 보존 대조 불일치0. 최소150GB 확보 및 기본200GB 목표 PARTIAL; DeviceSupport·QA 상태·Claude VM·Docker 보류. 제품/운영 변경·재빌드0. [결과·삭제 목록·운영 정책](development-storage-cleanup-20261128.md).

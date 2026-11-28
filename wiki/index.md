@@ -19,6 +19,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Mac 개발 환경·디스크 정리: [11/28 실제 확보137.05GB·보존 검증·보류·관리 정책](development-storage-cleanup-20261128.md). 운영/제품 소스 변경 없음.
+
 P0 운영 진입 장애 복구 DONE(11/26 Owner 확인): [Registry JWT 갱신·보존 재배포·정상 작동 확인·재발 방지 후속](finance-auth-renewal-20261117.md).
 
 공식 Wiki는 APP 저장소 origin/main입니다. 작업 브랜치 Wiki는 작업 중 상태이며 공식 반영을 대신하지 않습니다. [현재 상태](current-status.md) → [출시88 기록](pdf-white-screen-hotfix-20261117.md) → [다음 후보89](app-release-89-preparation-20261125.md).
