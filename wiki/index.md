@@ -19,7 +19,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-Mac 개발 환경·디스크 정리: [11/28 Phase2+3 누적 확보139.84GB·보존 검증·보류·관리 정책](development-storage-cleanup-20261128.md). 운영/제품 소스 변경 없음.
+Mac 개발 환경·디스크 정리: [11/28 최종 누적 확보178.09GB·보존 검증·정리 종료](development-storage-cleanup-20261128.md). 운영/제품 소스 변경 없음.
 
 P0 운영 진입 장애 복구 DONE(11/26 Owner 확인): [Registry JWT 갱신·보존 재배포·정상 작동 확인·재발 방지 후속](finance-auth-renewal-20261117.md).
 

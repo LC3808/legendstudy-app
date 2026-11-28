@@ -6084,3 +6084,6 @@ Owner 승인 Phase A–I 실행. APFS 여유15.12→152.16GB(+137.05GB), 사용�
 
 ## 2026-11-28 — Mac 환경 Phase 3
 NDK26.3·초기 Simulator2개·미참조 Docker 공식 이미지4개 제거. Phase3 APFS +2.790GB, 누적+139.836GB. Git/보호파일/Archive/SDK 대조 불일치0, Docker9컨테이너·30볼륨 보존. SDK7/Simulator10/Runtime3 유지; 실기기OS·기기별 QA·런타임·SDK 참조 통합 판단 대기, 목표PARTIAL. [기존 보고서 Phase3](development-storage-cleanup-20261128.md#phase-3--잔여-환경-최적화-2026-11-28-partial).
+
+## 2026-11-28 — Phase4 최종 통합·대규모 정리 종료
+Simulator5·iOS27·구 DeviceSupport2 정리, Flutter3.47.7 중복2개 통합(플랫폼658파일 보존·FVM공식전환·로컬참조11파일). 고유 미추적SDK파일6개로3.32중복1개 보존. SDK5/Simulator5/Runtime2 유지. APFS 추가38.26GB·누적178.09GB·여유192.21GB, 보호대조 불일치0·제품/운영변경0. Docker재실행0, 이전PostgreSQL정상종료미확인 유지/다음기동검증. 목표PARTIAL이나 추가삭제 없이 종료. [최종 결과](development-storage-cleanup-20261128.md#phase-4--최종-통합-및-대규모-정리-종료-2026-11-28).
