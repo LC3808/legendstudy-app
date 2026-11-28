@@ -6081,3 +6081,6 @@ Owner가 배포6ac93a1b 후 “확인 완료, 정상 작동.” 확인. 장애 �
 
 ## 2026-11-28 — Mac 개발 환경 정리
 Owner 승인 Phase A–I 실행. APFS 여유15.12→152.16GB(+137.05GB), 사용률84.70%. 캐시·중복 사본·미참조 SDK1개·종료 worktree3개·초기 동일 Simulator33개 정리. Git/고유 파일·APP89/DB/원본/Archive 보존 대조 불일치0. 최소150GB 확보 및 기본200GB 목표 PARTIAL; DeviceSupport·QA 상태·Claude VM·Docker 보류. 제품/운영 변경·재빌드0. [결과·삭제 목록·운영 정책](development-storage-cleanup-20261128.md).
+
+## 2026-11-28 — Mac 환경 Phase 3
+NDK26.3·초기 Simulator2개·미참조 Docker 공식 이미지4개 제거. Phase3 APFS +2.790GB, 누적+139.836GB. Git/보호파일/Archive/SDK 대조 불일치0, Docker9컨테이너·30볼륨 보존. SDK7/Simulator10/Runtime3 유지; 실기기OS·기기별 QA·런타임·SDK 참조 통합 판단 대기, 목표PARTIAL. [기존 보고서 Phase3](development-storage-cleanup-20261128.md#phase-3--잔여-환경-최적화-2026-11-28-partial).

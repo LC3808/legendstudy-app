@@ -3239,5 +3239,829 @@
       "virtual_disk_allocated_bytes": 11866423296
     }
   },
-  "note": "du allocation is not APFS reclaim. Phase observations include asynchronous system reclaim and concurrent activity; use whole-operation APFS delta, not sum of du or interval deltas."
+  "note": "du allocation is not APFS reclaim. Phase observations include asynchronous system reclaim and concurrent activity; use whole-operation APFS delta, not sum of du or interval deltas.",
+  "phase3": {
+    "date": "2026-11-28",
+    "status": "PARTIAL",
+    "start": {
+      "time": 1795871588.423628,
+      "capacity": 994662584320,
+      "free": 151809454080
+    },
+    "end": {
+      "time": 1795872105.847296,
+      "capacity": 994662584320,
+      "free": 154599690240
+    },
+    "actual_gain_bytes": 2790236160,
+    "cumulative_gain_bytes": 139836317696,
+    "verification": {
+      "issues": [],
+      "repos": 57,
+      "protected_files": 11569,
+      "archive_files": 7909,
+      "sdk_refs": 36,
+      "docker_volumes": 30,
+      "docker_containers": 9,
+      "docker_raw_allocated": 11869569024,
+      "disk": {
+        "time": 1795871978.922933,
+        "capacity": 994662584320,
+        "free": 154731315200
+      }
+    },
+    "sdk_references": [
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/development/flutter-3.47",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/app-ga4-usage-20261105/legendstudy-service-app-20261022",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/app-release-rc-20261113/legendstudy-app",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/app-release-rc-20261113/legendstudy-app",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/email-auth-stabilization-20261111/legendstudy-app",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/f850/레전드스터디 앱",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/f850/레전드스터디 앱",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/feedback-admin-audit-20261104/legendstudy-service-app-20261022",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/development/flutter-3.47",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/feedback-admin-audit-20261104/legendstudy-service-app-20261022",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/development/flutter-3.47",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/kau-owner-review-20261112/legendstudy-app",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/kau-owner-review-20261112/legendstudy-app",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/.codex/worktrees/operations-commercial-20261113/legendstudy-service-app-20261022",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/Documents/ChatGPT/레전드스터디 앱",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/development/flutter",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/Documents/ChatGPT/레전드스터디 앱",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/development/flutter",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app-claude-20261028",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app-claude-20261028",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app/.claude/worktrees/app-release-readiness-eab636",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app/.claude/worktrees/legendstudy-analytics-v1-9a315b",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-app/.claude/worktrees/legendstudy-analytics-v1-9a315b",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-iap-fix",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/stable",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-iap-fix",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/stable",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-ios-test",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-ios-test",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-release",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-release",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.6",
+        "category": "C",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-service-app-20261022",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.7",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/legendstudy-service-app-20261022",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/fvm/versions/3.47.7",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/muselry-app",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/development/flutter-muselry",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/muselry-app",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/development/flutter-muselry",
+        "category": "B",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/muselry-app-release",
+        "file": "android/local.properties",
+        "sdk": "/Users/woojinchang/development/flutter-muselry",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      },
+      {
+        "repo": "/Users/woojinchang/development/muselry-app-release",
+        "file": "ios/Flutter/Generated.xcconfig",
+        "sdk": "/Users/woojinchang/development/flutter-muselry",
+        "category": "A",
+        "note": "B는 미병합 작업 보존을 포함한 보수적 분류; C는 과거 checkout 재현용으로 현재 필요 여부 미확정. 종료 확인 없는 D 전환 금지."
+      }
+    ],
+    "simulators_before": [
+      {
+        "name": "iPhone 18 Pro",
+        "udid": "C38F2E2C-EA13-45CC-8CA0-B3FDD5CFB5FB",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "bytes": 18341888,
+        "last_log": null,
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/C38F2E2C-EA13-45CC-8CA0-B3FDD5CFB5FB/data",
+          "dataPathSize": 18337792,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/C38F2E2C-EA13-45CC-8CA0-B3FDD5CFB5FB",
+          "udid": "C38F2E2C-EA13-45CC-8CA0-B3FDD5CFB5FB",
+          "lastUsedAt": "2026-10-19T01:30:27Z",
+          "isAvailable": true,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro",
+          "state": "Shutdown",
+          "name": "iPhone 18 Pro"
+        }
+      },
+      {
+        "name": "LegendStudy-Intro-QA-20261019",
+        "udid": "304FA839-7086-474E-8F62-A6A409CB4A16",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "bytes": 3689508864,
+        "last_log": "2026-10-19T23:53:28.136787",
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/304FA839-7086-474E-8F62-A6A409CB4A16/data",
+          "dataPathSize": 3459223552,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/304FA839-7086-474E-8F62-A6A409CB4A16",
+          "udid": "304FA839-7086-474E-8F62-A6A409CB4A16",
+          "lastUsedAt": "2026-11-25T13:32:33Z",
+          "isAvailable": true,
+          "logPathSize": 376832,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro",
+          "state": "Shutdown",
+          "name": "LegendStudy-Intro-QA-20261019"
+        }
+      },
+      {
+        "name": "iPad Pro 13-inch (M5)",
+        "udid": "9086E133-896A-42C2-8A6A-9E40D20E1439",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "bytes": 2778431488,
+        "last_log": "2026-10-19T19:17:05.255082",
+        "apps": [
+          {
+            "id": "com.legendstudy.app",
+            "version": "1.0.0",
+            "build": "19"
+          }
+        ],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/9086E133-896A-42C2-8A6A-9E40D20E1439/data",
+          "dataPathSize": 2719154176,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/9086E133-896A-42C2-8A6A-9E40D20E1439",
+          "udid": "9086E133-896A-42C2-8A6A-9E40D20E1439",
+          "lastUsedAt": "2026-10-19T10:05:54Z",
+          "isAvailable": true,
+          "logPathSize": 237568,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M5-12GB",
+          "state": "Shutdown",
+          "name": "iPad Pro 13-inch (M5)"
+        }
+      },
+      {
+        "name": "iPhone 14 Pro Max",
+        "udid": "23463D3C-134E-4CDF-A98F-D8AC8B2DF98D",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-16-0",
+        "bytes": 13832192,
+        "last_log": null,
+        "apps": [],
+        "simctl": {
+          "availabilityError": "runtime profile not found using “System” match policy",
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/23463D3C-134E-4CDF-A98F-D8AC8B2DF98D/data",
+          "dataPathSize": 13316096,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/23463D3C-134E-4CDF-A98F-D8AC8B2DF98D",
+          "udid": "23463D3C-134E-4CDF-A98F-D8AC8B2DF98D",
+          "isAvailable": false,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max",
+          "state": "Shutdown",
+          "name": "iPhone 14 Pro Max"
+        }
+      },
+      {
+        "name": "iPhone 17 Pro",
+        "udid": "AEC17AF7-4950-4B41-9520-45A60BB7C918",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "bytes": 4467429376,
+        "last_log": "2026-10-14T23:29:15.559513",
+        "apps": [
+          {
+            "id": "dev.legendstudy.scaffold",
+            "version": "0.1.0",
+            "build": "1"
+          },
+          {
+            "id": "com.legendstudy.app",
+            "version": "0.1.0",
+            "build": "1"
+          }
+        ],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/AEC17AF7-4950-4B41-9520-45A60BB7C918/data",
+          "dataPathSize": 4180021248,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/AEC17AF7-4950-4B41-9520-45A60BB7C918",
+          "udid": "AEC17AF7-4950-4B41-9520-45A60BB7C918",
+          "lastUsedAt": "2026-10-14T08:37:29Z",
+          "isAvailable": true,
+          "logPathSize": 430080,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro",
+          "state": "Shutdown",
+          "name": "iPhone 17 Pro"
+        }
+      },
+      {
+        "name": "LegendStudy First Run QA",
+        "udid": "565DF269-4828-4C36-BBEA-E1AA8E90F539",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "bytes": 3800756224,
+        "last_log": "2026-11-12T12:09:23.935599",
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/565DF269-4828-4C36-BBEA-E1AA8E90F539/data",
+          "dataPathSize": 3513348096,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/565DF269-4828-4C36-BBEA-E1AA8E90F539",
+          "udid": "565DF269-4828-4C36-BBEA-E1AA8E90F539",
+          "lastUsedAt": "2026-11-12T02:40:31Z",
+          "isAvailable": true,
+          "logPathSize": 430080,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro",
+          "state": "Shutdown",
+          "name": "LegendStudy First Run QA"
+        }
+      },
+      {
+        "name": "iPhone 17 Pro Max",
+        "udid": "0DF19D83-475B-48E0-91F8-288ED45BC7CF",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "bytes": 3383648256,
+        "last_log": "2026-11-12T00:05:20.024162",
+        "apps": [
+          {
+            "id": "com.legendstudy.app",
+            "version": "0.1.0",
+            "build": "1"
+          }
+        ],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/0DF19D83-475B-48E0-91F8-288ED45BC7CF/data",
+          "dataPathSize": 3096240128,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/0DF19D83-475B-48E0-91F8-288ED45BC7CF",
+          "udid": "0DF19D83-475B-48E0-91F8-288ED45BC7CF",
+          "lastUsedAt": "2026-11-11T13:32:47Z",
+          "isAvailable": true,
+          "logPathSize": 188416,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro-Max",
+          "state": "Shutdown",
+          "name": "iPhone 17 Pro Max"
+        }
+      },
+      {
+        "name": "iPhone 17e",
+        "udid": "2CDF0FCD-79B9-4227-B4EC-0DAE0BB9FB8D",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "bytes": 2799177728,
+        "last_log": "2026-10-09T09:37:27.784540",
+        "apps": [
+          {
+            "id": "com.legendstudy.app",
+            "version": "0.1.0",
+            "build": "1"
+          }
+        ],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/2CDF0FCD-79B9-4227-B4EC-0DAE0BB9FB8D/data",
+          "dataPathSize": 2740240384,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/2CDF0FCD-79B9-4227-B4EC-0DAE0BB9FB8D",
+          "udid": "2CDF0FCD-79B9-4227-B4EC-0DAE0BB9FB8D",
+          "lastUsedAt": "2026-10-09T00:05:14Z",
+          "isAvailable": true,
+          "logPathSize": 172032,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-17e",
+          "state": "Shutdown",
+          "name": "iPhone 17e"
+        }
+      },
+      {
+        "name": "iPhone 17",
+        "udid": "E6311A43-D5F5-41F3-9BC5-ED752B334D5F",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "bytes": 3377930240,
+        "last_log": "2026-10-09T01:03:10.094502",
+        "apps": [
+          {
+            "id": "com.legendstudy.app",
+            "version": "0.1.0",
+            "build": "1"
+          }
+        ],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/E6311A43-D5F5-41F3-9BC5-ED752B334D5F/data",
+          "dataPathSize": 3090522112,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/E6311A43-D5F5-41F3-9BC5-ED752B334D5F",
+          "udid": "E6311A43-D5F5-41F3-9BC5-ED752B334D5F",
+          "lastUsedAt": "2026-10-08T14:29:30Z",
+          "isAvailable": true,
+          "logPathSize": 385024,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-17",
+          "state": "Shutdown",
+          "name": "iPhone 17"
+        }
+      },
+      {
+        "name": "iPhone 16 Pro",
+        "udid": "24F2615D-0FBE-41D2-91E2-59A66EA54B07",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-18-6",
+        "bytes": 2534899712,
+        "last_log": "2026-11-26T00:52:38.706574",
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/24F2615D-0FBE-41D2-91E2-59A66EA54B07/data",
+          "dataPathSize": 1925267456,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/24F2615D-0FBE-41D2-91E2-59A66EA54B07",
+          "udid": "24F2615D-0FBE-41D2-91E2-59A66EA54B07",
+          "lastUsedAt": "2026-11-25T13:24:44Z",
+          "isAvailable": true,
+          "logPathSize": 622592,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-16-Pro",
+          "state": "Shutdown",
+          "name": "iPhone 16 Pro"
+        }
+      },
+      {
+        "name": "iPhone 16e",
+        "udid": "03926D8E-AAFF-4689-80B3-48FBA68B3B0A",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-18-6",
+        "bytes": 1167704064,
+        "last_log": "2026-10-09T20:26:18.117985",
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/03926D8E-AAFF-4689-80B3-48FBA68B3B0A/data",
+          "dataPathSize": 861073408,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/03926D8E-AAFF-4689-80B3-48FBA68B3B0A",
+          "udid": "03926D8E-AAFF-4689-80B3-48FBA68B3B0A",
+          "lastUsedAt": "2026-10-09T00:02:26Z",
+          "isAvailable": true,
+          "logPathSize": 94208,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPhone-16e",
+          "state": "Shutdown",
+          "name": "iPhone 16e"
+        }
+      },
+      {
+        "name": "iPad (A16)",
+        "udid": "6FDB6A0C-494B-4FFF-A5AB-0A52677580C0",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-18-6",
+        "bytes": 1184309248,
+        "last_log": "2026-10-09T09:54:29.291115",
+        "apps": [],
+        "simctl": {
+          "dataPath": "/Users/woojinchang/Library/Developer/CoreSimulator/Devices/6FDB6A0C-494B-4FFF-A5AB-0A52677580C0/data",
+          "dataPathSize": 877678592,
+          "logPath": "/Users/woojinchang/Library/Logs/CoreSimulator/6FDB6A0C-494B-4FFF-A5AB-0A52677580C0",
+          "udid": "6FDB6A0C-494B-4FFF-A5AB-0A52677580C0",
+          "lastUsedAt": "2026-10-09T00:02:23Z",
+          "isAvailable": true,
+          "logPathSize": 90112,
+          "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPad-A16",
+          "state": "Shutdown",
+          "name": "iPad (A16)"
+        }
+      }
+    ],
+    "simulator_data_metadata": [
+      {
+        "udid": "304FA839-7086-474E-8F62-A6A409CB4A16",
+        "apps": []
+      },
+      {
+        "udid": "9086E133-896A-42C2-8A6A-9E40D20E1439",
+        "apps": [
+          {
+            "bundle_id": "com.legendstudy.app",
+            "file_count": 15,
+            "database_count": 0,
+            "bytes": 892928,
+            "draft_named_files": 0
+          }
+        ]
+      },
+      {
+        "udid": "AEC17AF7-4950-4B41-9520-45A60BB7C918",
+        "apps": [
+          {
+            "bundle_id": "dev.legendstudy.scaffold",
+            "file_count": 17,
+            "database_count": 0,
+            "bytes": 929792,
+            "draft_named_files": 0
+          },
+          {
+            "bundle_id": "com.legendstudy.app",
+            "file_count": 13,
+            "database_count": 0,
+            "bytes": 1638400,
+            "draft_named_files": 0
+          }
+        ]
+      },
+      {
+        "udid": "565DF269-4828-4C36-BBEA-E1AA8E90F539",
+        "apps": []
+      },
+      {
+        "udid": "0DF19D83-475B-48E0-91F8-288ED45BC7CF",
+        "apps": [
+          {
+            "bundle_id": "com.legendstudy.app",
+            "file_count": 13,
+            "database_count": 0,
+            "bytes": 1015808,
+            "draft_named_files": 0
+          }
+        ]
+      },
+      {
+        "udid": "2CDF0FCD-79B9-4227-B4EC-0DAE0BB9FB8D",
+        "apps": [
+          {
+            "bundle_id": "com.legendstudy.app",
+            "file_count": 10,
+            "database_count": 0,
+            "bytes": 913408,
+            "draft_named_files": 0
+          }
+        ]
+      },
+      {
+        "udid": "E6311A43-D5F5-41F3-9BC5-ED752B334D5F",
+        "apps": [
+          {
+            "bundle_id": "com.legendstudy.app",
+            "file_count": 13,
+            "database_count": 0,
+            "bytes": 1007616,
+            "draft_named_files": 0
+          }
+        ]
+      },
+      {
+        "udid": "24F2615D-0FBE-41D2-91E2-59A66EA54B07",
+        "apps": []
+      },
+      {
+        "udid": "03926D8E-AAFF-4689-80B3-48FBA68B3B0A",
+        "apps": []
+      },
+      {
+        "udid": "6FDB6A0C-494B-4FFF-A5AB-0A52677580C0",
+        "apps": []
+      }
+    ],
+    "simulators_deleted": {
+      "deleted": [
+        {
+          "udid": "C38F2E2C-EA13-45CC-8CA0-B3FDD5CFB5FB",
+          "bytes": 18341888
+        },
+        {
+          "udid": "23463D3C-134E-4CDF-A98F-D8AC8B2DF98D",
+          "bytes": 13832192
+        }
+      ],
+      "disk": {
+        "time": 1795871905.064223,
+        "capacity": 994662584320,
+        "free": 154781024256
+      }
+    },
+    "runtimes": {
+      "9BC81877-A9B8-43F4-B23E-7E0482627AE2": {
+        "build": "22G86",
+        "deletable": true,
+        "identifier": "9BC81877-A9B8-43F4-B23E-7E0482627AE2",
+        "kind": "Cryptex Disk Image",
+        "lastUsedAt": "2026-11-25T13:24:45Z",
+        "mountPath": "/Library/Developer/CoreSimulator/Volumes/iOS_22G86",
+        "parentIdentifier": "9F95C7A4-6AFF-4E7B-B6E4-E90509E10EAC",
+        "parentImagePath": "/System/Library/AssetsV2/com_apple_MobileAsset_iOSSimulatorRuntime/7fd8477b73d7b67a321fff7d87723eed3c628424.asset/AssetData/043-18670-100.dmg",
+        "parentMountPath": "/Library/Developer/CoreSimulator/Cryptex/Images/bundle/SimRuntimeBundle-9F95C7A4-6AFF-4E7B-B6E4-E90509E10EAC",
+        "path": "/Library/Developer/CoreSimulator/Cryptex/Images/bundle/SimRuntimeBundle-9F95C7A4-6AFF-4E7B-B6E4-E90509E10EAC/Restore/043-19278-100.dmg",
+        "platformIdentifier": "com.apple.platform.iphonesimulator",
+        "runtimeBundlePath": "/Library/Developer/CoreSimulator/Volumes/iOS_22G86/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 18.6.simruntime",
+        "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-18-6",
+        "signatureState": "Verified",
+        "sizeBytes": 8838255185,
+        "state": "Ready",
+        "supportedArchitectures": [
+          "x86_64",
+          "arm64"
+        ],
+        "version": "18.6"
+      },
+      "57C01475-65C3-40BB-9B46-3D1F4ABF8088": {
+        "build": "24A434",
+        "deletable": true,
+        "identifier": "57C01475-65C3-40BB-9B46-3D1F4ABF8088",
+        "kind": "Patchable Cryptex Disk Image",
+        "lastUsedAt": "2026-10-19T10:05:54Z",
+        "mountPath": "/private/var/run/com.apple.security.cryptexd/mnt/com.apple.iPhoneOS.SimulatorRuntime-v24.1.434.0.PJbM3X",
+        "parentMountPath": "/System/Library/AssetsV2/com_apple_MobileAsset_iOSSimulatorRuntime/3e800c38767f9f2c5fc86acdad7adf44565e051a.asset/AssetData",
+        "path": "/System/Library/AssetsV2/com_apple_MobileAsset_iOSSimulatorRuntime/3e800c38767f9f2c5fc86acdad7adf44565e051a.asset/AssetData",
+        "platformIdentifier": "com.apple.platform.iphonesimulator",
+        "runtimeBundlePath": "/private/var/run/com.apple.security.cryptexd/mnt/com.apple.iPhoneOS.SimulatorRuntime-v24.1.434.0.PJbM3X/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 27.0.simruntime",
+        "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-27-0",
+        "signatureState": "Unknown",
+        "sizeBytes": 8067000161,
+        "state": "Ready",
+        "supportedArchitectures": [
+          "arm64"
+        ],
+        "version": "27.0"
+      },
+      "C63ADAFE-7CFE-4202-A475-7710448B5E97": {
+        "build": "23F77",
+        "deletable": true,
+        "identifier": "C63ADAFE-7CFE-4202-A475-7710448B5E97",
+        "kind": "Patchable Cryptex Disk Image",
+        "lastUsedAt": "2026-11-12T02:40:33Z",
+        "mountPath": "/Library/Developer/CoreSimulator/Volumes/iOS_23F77",
+        "parentMountPath": "/System/Library/AssetsV2/com_apple_MobileAsset_iOSSimulatorRuntime/26c9174130fa5962f3e60f2a49963194dadbae4c.asset/AssetData",
+        "path": "/System/Library/AssetsV2/com_apple_MobileAsset_iOSSimulatorRuntime/26c9174130fa5962f3e60f2a49963194dadbae4c.asset/AssetData/Restore/094-56039-099.dmg",
+        "platformIdentifier": "com.apple.platform.iphonesimulator",
+        "runtimeBundlePath": "/Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime",
+        "runtimeIdentifier": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "signatureState": "Verified",
+        "sizeBytes": 8494282293,
+        "state": "Ready",
+        "supportedArchitectures": [
+          "arm64"
+        ],
+        "version": "26.5"
+      }
+    },
+    "ndk": {
+      "before": {
+        "time": 1795871865.020682,
+        "capacity": 994662584320,
+        "free": 151574847488
+      },
+      "bytes": 3176443904,
+      "returncode": 0,
+      "stdout": "\n",
+      "stderr": "Warning: This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.\n",
+      "absent": true,
+      "after": {
+        "time": 1795871867.579515,
+        "capacity": 994662584320,
+        "free": 154757472256
+      }
+    },
+    "docker_deleted_tags": [
+      "public.ecr.aws/supabase/logflare:1.50.2",
+      "public.ecr.aws/supabase/studio:2026.08.10-sha-5b68af1",
+      "public.ecr.aws/supabase/edge-runtime:v1.74.3",
+      "public.ecr.aws/supabase/vector:0.53.0-alpine"
+    ],
+    "docker_prestart": {
+      "time": 1795871719.225701,
+      "capacity": 994662584320,
+      "free": 151750328320
+    },
+    "docker_poststart": {
+      "time": 1795871737.016753,
+      "capacity": 994662584320,
+      "free": 151657152512
+    },
+    "docker_preserved_containers": 9,
+    "docker_preserved_volumes": 30,
+    "docker_reclaim": "NOT_TESTED: helper pull stalled and interrupted",
+    "avds": [
+      {
+        "path": "/Users/woojinchang/.android/avd/LS_tablet.avd",
+        "bytes": 1883041792,
+        "config": {
+          "PlayStore.enabled": "no",
+          "hw.device.name": "medium_tablet",
+          "image.sysdir.1": "system-images/android-36/google_apis/arm64-v8a/",
+          "tag.id": "google_apis"
+        },
+        "userdata": [
+          {
+            "name": "userdata-qemu.img",
+            "bytes": 6356992,
+            "modified": "2026-10-09T09:18:06.359598"
+          },
+          {
+            "name": "userdata-qemu.img.qcow2",
+            "bytes": 1843003392,
+            "modified": "2026-10-09T13:31:12.825143"
+          }
+        ]
+      },
+      {
+        "path": "/Users/woojinchang/.android/avd/LS_phone.avd",
+        "bytes": 6603239424,
+        "config": {
+          "PlayStore.enabled": "no",
+          "hw.device.name": "medium_phone",
+          "image.sysdir.1": "system-images/android-36/google_apis/arm64-v8a/",
+          "tag.id": "google_apis"
+        },
+        "userdata": [
+          {
+            "name": "userdata-qemu.img",
+            "bytes": 6356992,
+            "modified": "2026-10-09T09:07:37.734632"
+          },
+          {
+            "name": "userdata-qemu.img.qcow2",
+            "bytes": 4345954304,
+            "modified": "2026-11-26T00:12:54.115565"
+          }
+        ]
+      }
+    ],
+    "pending": [
+      "DeviceSupport device OS confirmation",
+      "per-device QA and unique test state",
+      "runtime selection",
+      "active SDK reference consolidation"
+    ],
+    "not_tested": [
+      "large rebuild",
+      "physical-device QA",
+      "Docker DB logical verification"
+    ]
+  }
 }

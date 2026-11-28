@@ -77,3 +77,96 @@ Desktop·Documents/Downloads 개인 자료·클라우드 동기화 자료·Time 
 3. 동일 목적 시뮬레이터/SDK를 추가하기 전에 기존 설치를 재사용한다. 활성 버전/PATH/FVM 변경은 별도 검증 계획을 따른다.
 4. 대형 빌드 전후 APFS 실제 여유를 기록한다. **정상≥200GB, 주의<150GB, 경고<100GB, 긴급<50GB**. 150~200GB는 정상 목표 미달 구간이다.
 5. 용량 부족 시 개인 자료·고유 상태·출시 복구 자료를 임의 삭제하지 않는다. 삭제량 합계 대신 APFS 전후 차이와 보류 목록을 공식 Wiki에 남긴다.
+
+
+## Phase 3 — 잔여 환경 최적화 (2026-11-28, PARTIAL)
+
+Phase 2 결과와 evidence를 재사용했다. 시작 공식 main/원격 main은 `d222c1e`. 아래 수치는 10진 GB이며 APFS disk3의 CapacityFree 차이로 평가했다. Phase 2 이후 환경 쓰기로 시작 여유가 달라졌으므로 단계별 증가량을 합산한다.
+
+| 측정 | GB | bytes |
+| --- | ---: | ---: |
+| Phase 3 시작 | 151.809 | 151809454080 |
+| Phase 3 종료 측정 | 154.600 | 154599690240 |
+| Phase 3 실제 확보 | 2.790 | 2790236160 |
+| Phase 2+3 누적 확보 | 139.836 | 139836317696 |
+| 누적 200GB까지 부족 | 60.164 | 60163682304 |
+
+추가62.95GB·권장80GB와 누적200GB 목표는 미달이다. 고유 데이터 기준은 완화하지 않았다. Owner 질문은 실기기/OS, 기기별 QA 상태, 런타임 유지 조합으로 분리하여 전달했으며 응답 전 관련 항목을 보류했다.
+
+### 실행 항목
+
+| 경로/대상 | 삭제 전 용량 | 용도·분류 | 판단 근거 | 삭제 방법·복구 |
+| --- | ---: | --- | --- | --- |
+| `~/Library/Android/sdk/ndk/26.3.11579264` | 3.176GB | 과거 NDK / SAFE_DELETE | 현재 APP28.2, Muselry27.0 명시. 26.3은 구 Flutter3.32 기본값의 과거 환경용이며 현재 공식 빌드 요구 아님 | sdkmanager `--uninstall ndk;26.3.11579264`, exit0·부재 확인. 필요 시 같은 버전 재설치 |
+| 초기 iPhone18Pro/iOS27 `C38F2E2C…` | 0.018GB | 초기 seed / SAFE_DELETE | 이전 seed 해시 대조 + 현재 앱 bundle/data container 없음·25MB 미만 | `simctl delete` 해당 UUID. 같은 기기 재생성 |
+| 초기 iPhone14ProMax/iOS16 `23463D3C…` | 0.014GB | unavailable 초기 seed / SAFE_DELETE | 같은 검증, 설치 런타임 없음 | `simctl delete` 해당 UUID. 필요 시 런타임·기기 재설치 |
+| Docker logflare1.50.2 / studio2026.08.10-sha-5b68af1 / edge-runtime1.74.3 / vector0.53.0-alpine | 이미지 약2.67GB, 공유 layer 제외 추정 약2.42GB | 공식 재다운로드 이미지 / SAFE_DELETE | 전체9컨테이너의 Image ID와 대조하여 참조0 확인 | 4개 명시 tag `docker image rm`, force 없음. 동일 tag 재다운로드 |
+
+파일/이미지 합계를 APFS 확보량으로 간주하지 않는다. Docker 내부 삭제가 가상 디스크 반환으로 즉시 연결되지 않았으며, 실행 중 시스템 쓰기도 차이에 포함된다.
+
+### DeviceSupport
+
+4개 모두 OWNER_REVIEW로 유지: iPhone13,4/iOS26.6 약5.965GB,26.6.1 약5.965GB; iPhone18,2/iOS26.4.2 약6.074GB,27.0.1 약7.087GB. `devicectl list devices`에서 iPhone12ProMax unavailable, 다른 연결 실기기 없음. 현재 기기·OS 확인은 NOT_TESTED이며 Owner에게 필요한 조합을 질문했다. DeviceSupport 경로는 실제 release Archive/dSYM 경로와 별개다. 삭제 전 OS 확인 조건이 충족되지 않아 이번 실행에서는 삭제하지 않았다. Archive/dSYM 보존 대조 PASS.
+
+### 시뮬레이터 12→10개
+
+| 기기 (UUID 앞부분) | iOS | 실제 GB | 최근 로그 날짜 | 설치 테스트 앱 | 판단 |
+| --- | --- | ---: | --- | --- | --- |
+| LegendStudy-Intro-QA-20261019 (`304FA839`) | 27.0 | 3.690 | 2026-10-19 | 설치 bundle 없음 | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPad Pro 13-inch (M5) (`9086E133`) | 27.0 | 2.778 | 2026-10-19 | com.legendstudy.app 1.0.0(19) | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPhone 17 Pro (`AEC17AF7`) | 26.5 | 4.467 | 2026-10-14 | dev.legendstudy.scaffold 0.1.0(1), com.legendstudy.app 0.1.0(1) | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| LegendStudy First Run QA (`565DF269`) | 26.5 | 3.801 | 2026-11-12 | 설치 bundle 없음 | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPhone 17 Pro Max (`0DF19D83`) | 26.5 | 3.384 | 2026-11-12 | com.legendstudy.app 0.1.0(1) | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPhone 17e (`2CDF0FCD`) | 26.5 | 2.799 | 2026-10-09 | com.legendstudy.app 0.1.0(1) | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPhone 17 (`E6311A43`) | 26.5 | 3.378 | 2026-10-09 | com.legendstudy.app 0.1.0(1) | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPhone 16 Pro (`24F2615D`) | 18.6 | 2.535 | 2026-11-26 | 설치 bundle 없음 | KEEP: 최근 인증 QA |
+| iPhone 16e (`03926D8E`) | 18.6 | 1.168 | 2026-10-09 | 설치 bundle 없음 | OWNER_REVIEW: 미완료 QA·Draft 확인 대기 |
+| iPad (A16) (`6FDB6A0C`) | 18.6 | 1.184 | 2026-10-09 | 설치 bundle 없음 | KEEP: 태블릿 QA |
+
+최근 로그는 최종 사용 시각의 증명은 아니다. 제3자 앱 data metadata 조사에서 iPadM5·iPhone17Pro·17ProMax·17e·17에 0.89~1.64MB 앱 상태가 남아 있었다. DB 확장자 파일·draft라는 파일명은 없었지만 preferences/keychain 등에 고유 상태가 없다는 증명이 아니므로 폐기하지 않았다. 설치 bundle 없음도 QA 상태 없음으로 단정하지 않았다. First Run QA는 한국항공대 운영 검증 기록, iPhone17Pro는 기존 scaffold/학습 QA, iPhone16Pro는 최근 인증 렌더 QA와 연결된다. Muselry 현재 앱은 남은 simulator bundle에서 확인되지 않았다. 유지3~5개는 Owner가 종료 상태를 지정한 뒤 진행한다.
+
+### 런타임
+
+| 런타임 | 관리 도구 sizeBytes 기준 GB | 마지막 runtime 사용(UTC) | 판단 |
+| --- | ---: | --- | --- |
+| iOS18.6 | 8.838 | 11/25 13:24 | KEEP: 최근 인증 QA |
+| iOS26.5 | 8.494 | 11/12 02:40 | OWNER_REVIEW: First Run 및 여러 QA 상태 연결 |
+| iOS27.0 | 8.067 | 10/19 10:05 | OWNER_REVIEW: Intro QA·iPad 상태 연결 |
+
+현재 코드의 최소 iOS는 양 앱15.0. Muselry 과거 build47의13.0 기록은 현재15.0 설정과 구분했다. 최소OS 자체가 3개 런타임 모두 설치해야 한다는 근거는 아니며, 현재18.6 + Owner가 필요한26.5/27.0 중1개로 2개 유지가 가능하다. iOS15 실기기 호환성 검증은 NOT_TESTED. Owner 응답 전 현재 런타임 제거0. 실행 시 Xcode 관리/`simctl runtime delete`를 사용하고 마운트/APFS 컨테이너를 직접 삭제하지 않는다.
+
+### Flutter 7개 및 참조36개 재분류
+
+참조 단위 집계 A=6, B=10, C=20, D=0, E=0. 전체36개의 경로·파일·분류는 기존 evidence JSON의 `phase3.sdk_references`에 포함했다. A는 공식 출시·후보, B는 현재 개발 또는 미병합 작업 보존, C는 과거 checkout 재현용(필요성 미확정), D는 종료가 입증된 생성 설정, E는 완전 미참조 중복을 뜻한다. 중복 버전이어도 활성 alias가 있으면 E로 단정하지 않는다.
+
+| SDK | 버전 | 기존 실사용량 GB | 생성 설정 참조 수 | 추가 근거·판단 |
+| --- | --- | ---: | ---: | --- |
+| `~/development/flutter` | 3.32.0 | 4.71 | 2 | PATH 기본, 개인 Documents checkout 참조 유지 |
+| `~/fvm/versions/3.32.0` | 3.32.0 | 2.04 | 0 | `fvm/default` 참조 있음. 위와 HEAD 동일 |
+| `~/development/flutter-3.47` | 3.47.5 | 4.23 | 3 | ga4·feedback checkout 참조. main 밖 커밋51/10으로 종료 판정 불가 |
+| `~/fvm/versions/3.47.6` | 3.47.6 | 3.11 | 23 | 공식 main·APP89 및 기존 작업, KEEP |
+| `~/development/flutter-muselry` | 3.47.7 | 2.80 | 4 | Muselry 개발·출시 참조, KEEP |
+| `~/fvm/versions/3.47.7` | 3.47.7 | 2.20 | 2 | 현재 service-app generated config 참조, KEEP |
+| `~/fvm/versions/stable` | 3.47.7 | 6.09 | 2 | iap-fix 참조 + 현재 service-app `.fvm/flutter_sdk`가 직접 가리킴, KEEP |
+
+같은 버전들의 tracked HEAD는 동일하고 tracked 변경0이었다. 전체 SDK 고유 ignored 파일 삭제 검증은 진행하지 않았으므로 삭제 승인 근거로 사용하지 않는다. 36개 generated 참조 외 PATH/FVM alias를 포함하니 **현재 참조 변경 없이 제거할 수 있다고 검증된 SDK는0개**다.
+
+통합 계획: 3.32.0은 `development/flutter`,3.47.6은 FVM,3.47.7은 FVM으로 3개 유지한다. 이를 위해 (1) fvm/default를 같은3.32.0 보존 경로로 변경, (2) Muselry 두 checkout의 local.properties/Generated.xcconfig를 동일3.47.7 FVM 경로로 변경, (3) stable 설치를 동일3.47.7 alias로 통합하되 current service-app/iap-fix 참조를 검증해야 한다. 약10.93GB의 동일버전 중복이 후보지만 APFS 실회수량은 별도다. 3.47.5는 두 작업의 종료·재현 필요 확인 후 같은 버전 다운로드 재현으로 전환할 때 추가 약4.23GB 후보가 된다. 유지 SDK3개 달성에는 이 판단이 선행한다. 공식 버전 변경·제품 소스 변경은 계획에 포함하지 않는다. 활성 참조 변경은 별도 승인 전 실행0. 기존 SDK 크기는 Phase2 조사값이며 Phase3에는 HEAD·참조를 재검증했다.
+
+### Android
+
+NDK27.0(Muselry)·28.2(APP), 플랫폼35/36, 기존 Build Tools는 유지. Build Tools 개별 사용 여부는 추가 확정하지 못해 삭제하지 않았다. LS_phone6.603GB는 userdata11/26 기록으로 현재 QA 연관, LS_tablet1.883GB는 태블릿 UI 검증 환경으로 KEEP. 두 AVD는 Android36 google_apis arm64 공용 system image를 사용하므로 해당 image도 유지한다. Android 빌드 프로세스 없는 상태에서 NDK26.3만 공식 제거했다. 과거3.32 기반 Android 재현에는26.3 재설치가 필요할 수 있다. 현재 빌드 실제 재실행은 NOT_TESTED.
+
+### Docker
+
+Docker Desktop 시작 전/후 APFS를 별도 evidence로 기록했다. 설치 버전의 desktop CLI가 지원되지 않아 `open -a Docker`로 시작했다. 기존 restart policy에 따라 로컬 Supabase8컨테이너 자동 시작됨; 별도 DB 질의·마이그레이션·Supabase start 명령0. 전체 컨테이너9개(restore-test 포함), 볼륨30개(약1.534GB)를 보존했다. 고유 writable layer도 삭제0. 삭제 후 이미지8개 모두 기존 컨테이너가 참조한다. Build cache0B, prune 불필요.
+
+Docker.raw 논리64GB/실할당 약11.87GB. 공식 [Mac 공간 회수 안내](https://docs.docker.com/desktop/troubleshoot-and-support/faqs/macfaqs/)를 확인하고 `docker run --rm --privileged --pid=host docker/desktop-reclaim-space`를 시도했으나 이미지 다운로드 단계에서 응답 없이 대기하여 해당 요청만 중단했다. helper 실행/공간 반환 완료는 NOT_TESTED. 가상 디스크 크기 축소·reset·전체삭제는 수행하지 않았다. 기존 컨테이너는 실행 상태로 유지했다. `system prune`/volume prune/컨테이너 삭제0.
+
+### 보존 검증·추가 승인
+
+Phase2 보호 기준 대조: 기존57 Git 저장소 HEAD/refs/전체 dirty 상태 불일치0; 보호 파일 기준11,569개 중 승인된 Phase2 삭제 경로 제외 나머지 해시 불일치0; Archive·dSYM7,909개 metadata 불일치0; SDK 참조36개 유효. APP89 IPA SHA256 `28bf4601491e0f5f0f35785e2240960a9fd10f970b1d643cc13e80cbe0c68e5d`, AAB `ec01a477de470036da208352dfd0b140b324c1d442ed6c06148bfb6a05c87567` 유지. DB·논술 원본·환경설정·서명 보호 해시 유지. 문서 게시만 official main의 허용 변경이며 별도 사후 검증한다.
+
+Claude VM·sessiondata.img, Desktop·개인 파일, 제품 소스·운영 DB·배포·서명 설정은 변경0. 대규모 재빌드·신규 백업0. 앱 실행/실기기/전체 테스트·Docker DB 내용 논리검증은 NOT_TESTED. 기존 정리 보고서와 evidence에 추가했으며 별도 관리 문서는 생성하지 않았다.
+
+보류 순서: 실기기 OS 답변 후 구 DeviceSupport → 기기별 종료QA 답변 후 simulator → 필요한 런타임2개 확정 → 동일버전 SDK 참조 통합 승인. 각 단계 후 APFS 차이·기존 보존 기준을 다시 검증한다. 현재 승인 전 확보 가능량을 확정 수치로 더하지 않는다.
